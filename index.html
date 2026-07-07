@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Civic Kernel — a thin architecture for an evolving democracy</title>
+<style>
+  :root {
+    --paper: #f6f7f9;
+    --card: #ffffff;
+    --ink: #1c2333;
+    --muted: #5a6376;
+    --accent: #2e5eaa;
+    --accent-soft: #e6edf8;
+    --threat: #a33d2e;
+    --threat-soft: #f6e9e6;
+    --line: #d8dce4;
+    --line-strong: #b9c0cd;
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', 'URW Palladio L', 'P052', Georgia, serif;
+    --mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #151a26;
+      --card: #1d2432;
+      --ink: #e3e7ee;
+      --muted: #9aa3b5;
+      --accent: #7da3e8;
+      --accent-soft: #24314a;
+      --threat: #d4796a;
+      --threat-soft: #3a2723;
+      --line: #313a4e;
+      --line-strong: #46516b;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #f6f7f9;
+    --card: #ffffff;
+    --ink: #1c2333;
+    --muted: #5a6376;
+    --accent: #2e5eaa;
+    --accent-soft: #e6edf8;
+    --threat: #a33d2e;
+    --threat-soft: #f6e9e6;
+    --line: #d8dce4;
+    --line-strong: #b9c0cd;
+  }
+  :root[data-theme="dark"] {
+    --paper: #151a26;
+    --card: #1d2432;
+    --ink: #e3e7ee;
+    --muted: #9aa3b5;
+    --accent: #7da3e8;
+    --accent-soft: #24314a;
+    --threat: #d4796a;
+    --threat-soft: #3a2723;
+    --line: #313a4e;
+    --line-strong: #46516b;
+  }
+
+  html { background: var(--paper); }
+  body {
+    font-family: var(--serif);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-size: 1.0625rem;
+  }
+  .page {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 4rem 1.25rem 6rem;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ---------- masthead ---------- */
+  header.masthead {
+    border-top: 3px double var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    padding: 2.25rem 0 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .eyebrow .accent { color: var(--accent); }
+  h1 {
+    font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+    line-height: 1.12;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin-bottom: 1rem;
+  }
+  .standfirst {
+    font-size: 1.1875rem;
+    color: var(--muted);
+    text-wrap: balance;
+    max-width: 40rem;
+  }
+
+  /* ---------- table of contents ---------- */
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.3rem 1.6rem 1.5rem;
+    margin-bottom: 3rem;
+    font-size: 0.95rem;
+  }
+  nav.toc .toc-part {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 1rem 0 0.35rem;
+  }
+  nav.toc .toc-part:first-child { margin-top: 0; }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; }
+  nav.toc li { padding: 0.14rem 0; }
+  nav.toc .n {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: inline-block;
+    min-width: 2.2rem;
+  }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  /* ---------- sections ---------- */
+  section { margin-bottom: 3.25rem; }
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .part-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--line-strong);
+    padding-top: 0.8rem;
+    margin: 3.5rem 0 2rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-wrap: balance;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-size: 1.17rem;
+    font-weight: 600;
+    margin: 1.9rem 0 0.6rem;
+    text-wrap: balance;
+  }
+  h3 .svc-id {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-right: 0.45rem;
+    vertical-align: 0.12em;
+  }
+  p { margin-bottom: 1rem; max-width: 42rem; }
+  section > p:last-child { margin-bottom: 0; }
+  em { font-style: italic; }
+  strong { font-weight: 600; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--accent-soft);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+
+  ul.goals { margin: 0 0 1rem; padding: 0; list-style: none; max-width: 42rem; }
+  ul.goals li {
+    padding: 0.55rem 0 0.55rem 1.4rem;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  ul.goals li::before {
+    content: "§";
+    position: absolute; left: 0; top: 0.55rem;
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 0.8em;
+  }
+  ul.goals li:first-child { border-top: 1px solid var(--line); }
+  ul.goals b { font-weight: 600; }
+
+  /* ---------- threat register ---------- */
+  .table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+  table.threats {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 40rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  table.threats caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 0.6rem;
+  }
+  table.threats th {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.5rem 0.9rem 0.5rem 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  table.threats td {
+    padding: 0.65rem 0.9rem 0.65rem 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.threats td.tid {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--threat);
+    white-space: nowrap;
+  }
+  table.threats td.ref { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
+  .threat-name { font-weight: 600; }
+
+  /* ---------- kernel service blocks ---------- */
+  .service {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.15rem;
+    margin: 1.6rem 0 2rem;
+  }
+  .service h3 { margin-top: 0; }
+  .stack {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.55rem 0.8rem;
+    margin: 0.9rem 0 0;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .stack b { color: var(--accent); font-weight: 500; }
+
+  /* ---------- callouts ---------- */
+  .aside {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .aside .aside-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.45rem;
+  }
+  .aside.caution .aside-label { color: var(--threat); }
+  .aside p:last-child { margin-bottom: 0; }
+
+  /* ---------- diagram ---------- */
+  figure.diagram { margin: 2rem 0; }
+  figure.diagram .diagram-scroll { overflow-x: auto; }
+  figure.diagram svg { display: block; min-width: 34rem; width: 100%; height: auto; }
+  figure.diagram figcaption {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+  .d-band { fill: var(--card); stroke: var(--line-strong); }
+  .d-band-kernel { fill: var(--accent-soft); stroke: var(--accent); }
+  .d-box { fill: var(--paper); stroke: var(--line-strong); }
+  .d-box-kernel { fill: var(--card); stroke: var(--accent); }
+  .d-label {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+    fill: var(--muted); text-transform: uppercase;
+  }
+  .d-label-kernel { fill: var(--accent); }
+  .d-text { font-family: var(--serif); font-size: 13px; fill: var(--ink); }
+  .d-small { font-family: var(--serif); font-size: 11.5px; fill: var(--muted); }
+  .d-arrow { stroke: var(--line-strong); stroke-width: 1.2; fill: none; }
+  .d-arrowhead { fill: var(--line-strong); }
+
+  /* ---------- open problems ---------- */
+  ol.open-problems { margin: 1rem 0; padding-left: 1.4rem; max-width: 42rem; }
+  ol.open-problems li { margin-bottom: 0.8rem; }
+  ol.open-problems b { font-weight: 600; }
+
+  footer.colophon {
+    border-top: 3px double var(--line-strong);
+    margin-top: 4rem;
+    padding-top: 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<header class="masthead">
+  <div class="eyebrow">
+    <span>Architecture proposal</span>
+    <span class="accent">Constraint: shipped technology only</span>
+    <span>Rev. 2 · July 2026</span>
+  </div>
+  <h1>The Civic Kernel</h1>
+  <p class="standfirst">A thin distributed service for a democracy that can evolve — verifiable on the phone in your pocket, joinable one person at a time, constrained by the rights of every person it serves, and too small for anyone to capture.</p>
+</header>
+
+<nav class="toc" aria-label="Contents">
+  <div class="toc-part">Part I · Architecture</div>
+  <ol>
+    <li><span class="n">§1</span><a href="#s1">Democracy, restated as an engineering problem</a></li>
+    <li><span class="n">§2</span><a href="#s2">Threat model — design from the attacks backwards</a></li>
+    <li><span class="n">§3</span><a href="#s3">The kernel: four services, and deliberately no fifth</a></li>
+    <li><span class="n">§4</span><a href="#s4">The citizen endpoint</a></li>
+    <li><span class="n">§5</span><a href="#s5">Evolvability — the constitution as versioned code</a></li>
+    <li><span class="n">§6</span><a href="#s6">Fractal adoption — subscription, not sovereignty</a></li>
+    <li><span class="n">§7</span><a href="#s7">Capacity — the epistemics of the click</a></li>
+    <li><span class="n">§8</span><a href="#s8">Simplicity — complexity is a policy choice</a></li>
+    <li><span class="n">§9</span><a href="#s9">Immunity — defense that cannot become a sovereign</a></li>
+    <li><span class="n">§10</span><a href="#s10">Enrolment — the ceremony is the perimeter</a></li>
+    <li><span class="n">§11</span><a href="#s11">Worked example — a benefit claim, end to end</a></li>
+    <li><span class="n">§12</span><a href="#s12">Boundaries — what is left out, and what is not solved</a></li>
+  </ol>
+  <div class="toc-part">Part II · Evidence</div>
+  <ol>
+    <li><span class="n">§13</span><a href="#s13">The landscape — who else is building this</a></li>
+  </ol>
+  <div class="toc-part">Part III · Adoption</div>
+  <ol>
+    <li><span class="n">§14</span><a href="#s14">Stewardship — where this should live</a></li>
+  </ol>
+</nav>
+
+<div class="part-label">Part I · Architecture</div>
+
+<section id="s1">
+  <span class="sec-label">§1 · Problem statement</span>
+  <h2>Democracy, restated as an engineering problem</h2>
+  <p>Strip the institutions away and a democracy is a system that must produce one output — <strong>decisions that losers accept as legitimate</strong> — under permanently adversarial conditions. Every participant has an incentive to cheat, the operators are among the threat actors, and the system must keep working for decades while its own rules change underneath it. That is a distributed-systems problem with a hostile threat model, and it deserves the same discipline we apply to one.</p>
+  <p>The design goals, in priority order:</p>
+  <ul class="goals">
+    <li><b>Freedom by default.</b> The system knows as little as possible about each person. Participation must never require surrendering privacy, running approved software, or being profiled. Maximum freedom is a security property here, not a feature.</li>
+    <li><b>Capture resistance.</b> No single party — state, vendor, or majority faction — can seize the machinery. This is the argument for thinness: every feature added to the core is new attack surface for capture.</li>
+    <li><b>Rights as invariants.</b> The UN Universal Declaration of Human Rights is not a preamble; it is the type system. A decision that violates it must fail to type-check, whatever its majority.</li>
+    <li><b>Evolvability.</b> The rules must be amendable through the system itself, safely, the way good software migrates schemas: versioned, staged, reversible.</li>
+    <li><b>Inclusion.</b> A citizen with no smartphone, no sight, or no trust in computers gets first-class participation, not a degraded fallback.</li>
+  </ul>
+  <p><strong>Non-goals</strong>, stated to keep the kernel thin: the kernel does not decide what is true, does not host debate, does not rank arguments, does not moderate speech, and does not pick outcomes. It guarantees the <em>integrity of the process</em> and nothing else. Everything opinionated lives above it (<a href="#s12">§12</a>).</p>
+  <p>The central thesis is <strong>protocol, not platform</strong>. A thick civic platform — one app where citizens debate, vote, and get informed — is a single point of capture, however well-intentioned its builders. The alternative is a kernel the size of DNS-plus-TLS: four small services that guarantee only what markets and communities cannot provide for themselves — personhood, verifiable decisions, rights invariants, and a record nobody can rewrite. Everything else stays competitive and replaceable.</p>
+</section>
+
+<section id="s2">
+  <span class="sec-label">§2 · Threat model</span>
+  <h2>Design from the attacks backwards</h2>
+  <p>InfoSec practice says the threat model comes before the architecture. Each threat below names the section that answers it. T1–T9 attack the machinery; T10–T12 attack the terms of participation; T13 attacks the defense itself.</p>
+  <div class="table-scroll">
+    <table class="threats">
+      <caption>Threat register</caption>
+      <thead>
+        <tr><th>ID</th><th>Threat</th><th>Kernel answer</th><th>Where</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tid">T1</td>
+          <td><span class="threat-name">State capture.</span> A government turns the civic infrastructure into an instrument of control.</td>
+          <td>Thin kernel with nothing worth capturing; operators distributed across independent institutions; the whole system forkable by a jurisdiction that walks away.</td>
+          <td class="ref"><a href="#s3">§3</a>, <a href="#s5">§5</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T2</td>
+          <td><span class="threat-name">Vendor capture.</span> One company's app becomes the de facto ballot box.</td>
+          <td>Open protocol, open reference clients, and no remote-attestation requirement — anyone may build or audit a client.</td>
+          <td class="ref"><a href="#s1">§1</a>, <a href="#s4">§4</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T3</td>
+          <td><span class="threat-name">Sybil attack.</span> Fake or duplicate persons inflate a faction's voice.</td>
+          <td>Credentials issued only at a physical enrolment ceremony; cryptographic uniqueness per decision without identity disclosure.</td>
+          <td class="ref"><a href="#s3-1">§3.1</a>, <a href="#s10">§10</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T4</td>
+          <td><span class="threat-name">Coercion &amp; vote buying.</span> A boss, spouse, or buyer demands proof of how you voted.</td>
+          <td>Receipt-free end-to-end verifiable ballots: you can prove your vote was counted, never what it said.</td>
+          <td class="ref"><a href="#s3-2">§3.2</a>, <a href="#s12">§12</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T5</td>
+          <td><span class="threat-name">Device compromise.</span> Malware on the phone alters the ballot before encryption.</td>
+          <td>Keys in hardware enclaves; cast-or-audit challenges; verification through a second channel; paper path always available.</td>
+          <td class="ref"><a href="#s3-2">§3.2</a>, <a href="#s4">§4</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T6</td>
+          <td><span class="threat-name">Surveillance chill.</span> Participation is tracked, so people self-censor.</td>
+          <td>Zero-knowledge eligibility proofs; unlinkable per-decision pseudonyms; citizen data local-first on the citizen's device.</td>
+          <td class="ref"><a href="#s3-1">§3.1</a>, <a href="#s4">§4</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T7</td>
+          <td><span class="threat-name">Majoritarian rights-stripping.</span> 51% vote to strip rights from a minority.</td>
+          <td>Rights guard: such decisions fail validation on the ordinary path and divert to supermajority plus adversarial review.</td>
+          <td class="ref"><a href="#s3-3">§3.3</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T8</td>
+          <td><span class="threat-name">Record tampering.</span> Results, laws, or their history quietly rewritten after the fact.</td>
+          <td>Append-only Merkle transparency logs, cross-witnessed; any phone can prove inclusion and detect a rewritten past.</td>
+          <td class="ref"><a href="#s3-4">§3.4</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T9</td>
+          <td><span class="threat-name">Digital exclusion.</span> The system quietly disenfranchises whoever lacks a device, connectivity, or trust in either.</td>
+          <td>Paper, kiosk, and assisted channels defined in the same protocol with the same verifiability — not a legacy annex.</td>
+          <td class="ref"><a href="#s4">§4</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T10</td>
+          <td><span class="threat-name">Dilution &amp; standards capture.</span> Rivals ship weakened look-alikes (“kernel-compatible, minus the rights guard”) or committees water invariants down until the name means nothing.</td>
+          <td>Person-level adoption plus signed conformance manifests: variants are free to exist, but every deployment's subtractions are machine-readable and rendered on the citizen's client — dilution becomes legible, not lethal.</td>
+          <td class="ref"><a href="#s6">§6</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T11</td>
+          <td><span class="threat-name">Epistemic gating.</span> “Verify understanding before the vote counts” — competence tests that become disenfranchisement, where whoever writes the test owns the electorate.</td>
+          <td>The kernel never assesses understanding; it guarantees the opportunity for it — deliberation windows, decision metadata, private self-assessment, delegation, sortition — and keeps every gate off the ballot path.</td>
+          <td class="ref"><a href="#s7">§7</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T12</td>
+          <td><span class="threat-name">Complexity as policy (“sludge”).</span> Deliberate procedural burden — obfuscated processes, redundant demands, deterrence by paperwork — as covert, deniable disenfranchisement that taxes those with least slack.</td>
+          <td>A four-verb kernel surface with nowhere to hide burden; computable eligibility that flips discovery onto the system; every demanded field must cite its authorizing rule; interaction cost published as an auditable number.</td>
+          <td class="ref"><a href="#s8">§8</a></td>
+        </tr>
+        <tr>
+          <td class="tid">T13</td>
+          <td><span class="threat-name">Autoimmune defense.</span> A self-hardening system whose automated (or AI-driven) protective response becomes an unaccountable sovereign — emergency powers that never expire, defenses that attack the body politic.</td>
+          <td>Sense at machine speed, respond at constitutional speed: AI holds a microscope, never a pen; break-glass powers are pre-legislated, witnessed, and self-expiring; diversity and the §6 lattice bound any blast radius.</td>
+          <td class="ref"><a href="#s9">§9</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Two threats the kernel deliberately does <em>not</em> answer — disinformation and bad judgment — because answering them centrally would create a ministry of truth, a worse failure than the disease. The kernel's contribution is indirect: verified personhood (<a href="#s3-1">§3.1</a>) lets communities build spaces where every voice is a real human, which removes the bot amplification that makes industrial disinformation cheap.</p>
+</section>
+
+<section id="s3">
+  <span class="sec-label">§3 · The kernel</span>
+  <h2>Four services, and deliberately no fifth</h2>
+  <p>Everything in this section exists as shipped, audited technology today. The engineering novelty is the composition and the restraint, not the cryptography.</p>
+
+  <figure class="diagram">
+    <div class="diagram-scroll">
+    <svg viewBox="0 0 720 470" role="img" aria-label="Layered architecture: a competitive ecosystem of apps on top, the four kernel services and the log-plus-manifest waist in the middle, and a distributed trust substrate underneath including permissionless anchors">
+      <!-- ecosystem band -->
+      <rect class="d-band" x="10" y="10" width="700" height="110" rx="6"/>
+      <text class="d-label" x="28" y="34">Ecosystem — thick, competitive, replaceable</text>
+      <rect class="d-box" x="28"  y="48" width="122" height="52" rx="4"/>
+      <text class="d-text" x="89"  y="70" text-anchor="middle">Deliberation</text>
+      <text class="d-small" x="89"  y="87" text-anchor="middle">forums, assemblies</text>
+      <rect class="d-box" x="162" y="48" width="122" height="52" rx="4"/>
+      <text class="d-text" x="223" y="70" text-anchor="middle">Delegation</text>
+      <text class="d-small" x="223" y="87" text-anchor="middle">parties, proxies</text>
+      <rect class="d-box" x="296" y="48" width="122" height="52" rx="4"/>
+      <text class="d-text" x="357" y="70" text-anchor="middle">Journalism</text>
+      <text class="d-small" x="357" y="87" text-anchor="middle">analysis, scrutiny</text>
+      <rect class="d-box" x="430" y="48" width="122" height="52" rx="4"/>
+      <text class="d-text" x="491" y="70" text-anchor="middle">Drafting tools</text>
+      <text class="d-small" x="491" y="87" text-anchor="middle">proposals, amendments</text>
+      <rect class="d-box" x="564" y="48" width="122" height="52" rx="4"/>
+      <text class="d-text" x="625" y="70" text-anchor="middle">Civic apps</text>
+      <text class="d-small" x="625" y="87" text-anchor="middle">any builder, any client</text>
+
+      <!-- arrows down -->
+      <line class="d-arrow" x1="360" y1="120" x2="360" y2="148"/>
+      <polygon class="d-arrowhead" points="355,146 365,146 360,156"/>
+      <text class="d-small" x="374" y="141">four citizen verbs: prove · cast/challenge · verify · read</text>
+
+      <!-- kernel band -->
+      <rect class="d-band-kernel" x="10" y="158" width="700" height="150" rx="6"/>
+      <text class="d-label d-label-kernel" x="28" y="182">The Civic Kernel — thin, boring, constitutional</text>
+      <rect class="d-box-kernel" x="28"  y="196" width="156" height="62" rx="4"/>
+      <text class="d-text" x="106" y="220" text-anchor="middle">3.1 Personhood</text>
+      <text class="d-small" x="106" y="238" text-anchor="middle">one human, one voice</text>
+      <rect class="d-box-kernel" x="196" y="196" width="156" height="62" rx="4"/>
+      <text class="d-text" x="274" y="220" text-anchor="middle">3.2 Decisions</text>
+      <text class="d-small" x="274" y="238" text-anchor="middle">verifiable ballots</text>
+      <rect class="d-box-kernel" x="364" y="196" width="156" height="62" rx="4"/>
+      <text class="d-text" x="442" y="220" text-anchor="middle">3.3 Rights guard</text>
+      <text class="d-small" x="442" y="238" text-anchor="middle">UDHR as invariants</text>
+      <rect class="d-box-kernel" x="532" y="196" width="156" height="62" rx="4"/>
+      <text class="d-text" x="610" y="220" text-anchor="middle">3.4 Transparency</text>
+      <text class="d-small" x="610" y="238" text-anchor="middle">append-only record</text>
+      <!-- waist -->
+      <rect class="d-box-kernel" x="28" y="266" width="660" height="30" rx="4"/>
+      <text class="d-small" x="358" y="285" text-anchor="middle">The universal waist: log format + conformance manifest — each community subscribes to a subset of everything above (§6)</text>
+
+      <!-- arrows down -->
+      <line class="d-arrow" x1="360" y1="308" x2="360" y2="336"/>
+      <polygon class="d-arrowhead" points="355,334 365,334 360,344"/>
+      <text class="d-small" x="374" y="329">no single operator</text>
+
+      <!-- substrate band -->
+      <rect class="d-band" x="10" y="346" width="700" height="104" rx="6"/>
+      <text class="d-label" x="28" y="370">Trust substrate — distributed, independently operated</text>
+      <rect class="d-box" x="28"  y="384" width="122" height="52" rx="4"/>
+      <text class="d-text" x="89" y="406" text-anchor="middle">Citizen enclaves</text>
+      <text class="d-small" x="89" y="423" text-anchor="middle">keys stay on phones</text>
+      <rect class="d-box" x="162" y="384" width="122" height="52" rx="4"/>
+      <text class="d-text" x="223" y="406" text-anchor="middle">Threshold trustees</text>
+      <text class="d-small" x="223" y="423" text-anchor="middle">no lone key-holder</text>
+      <rect class="d-box" x="296" y="384" width="122" height="52" rx="4"/>
+      <text class="d-text" x="357" y="406" text-anchor="middle">Log witnesses</text>
+      <text class="d-small" x="357" y="423" text-anchor="middle">independent operators</text>
+      <rect class="d-box" x="430" y="384" width="122" height="52" rx="4"/>
+      <text class="d-text" x="491" y="406" text-anchor="middle">Paper channel</text>
+      <text class="d-small" x="491" y="423" text-anchor="middle">same protocol, offline</text>
+      <rect class="d-box" x="564" y="384" width="122" height="52" rx="4"/>
+      <text class="d-text" x="625" y="406" text-anchor="middle">Anchors</text>
+      <text class="d-small" x="625" y="423" text-anchor="middle">notary of last resort</text>
+    </svg>
+    </div>
+    <figcaption>Fig. 1 — The kernel guarantees process integrity; opinion lives above it, trust is spread beneath it, and every community's subscription is declared at the waist.</figcaption>
+  </figure>
+
+  <div class="service" id="s3-1">
+    <h3><span class="svc-id">SVC-1</span>Personhood — one human, one voice, no dossier</h3>
+    <p>The foundational primitive is proving <em>“I am an eligible person, and I have not already spoken in this decision”</em> without revealing <em>which</em> person. Identity systems that solve uniqueness by building a population database solve T3 by creating T6. The kernel refuses that trade.</p>
+    <p>Each citizen holds a decentralized identifier whose private key is generated inside their phone's hardware enclave and never leaves it. At a one-time physical enrolment — the same civic ceremony as voter registration today, hardened in <a href="#s10">§10</a> — an issuing authority signs an eligibility credential against that key. The credential uses anonymous-credential signatures, so the citizen can later derive unlinkable, per-decision proofs: each ballot carries a pseudonym valid for that decision only, mathematically preventing double participation while making cross-decision tracking impossible even for the issuer.</p>
+    <p>Losing a phone must not mean losing citizenship: the credential is recoverable through social guardianship — a threshold of self-chosen guardians (family, a bank, a municipal office) can co-sign a re-issuance, with a public revocation of the old key in the transparency log (<a href="#s3-4">§3.4</a>).</p>
+    <p class="stack"><b>Shipped tech:</b> W3C DID Core &amp; Verifiable Credentials 2.0 · BBS signatures (IRTF/W3C standards-track; unlinkable pseudonyms pre-final — see §13) · Secure Enclave / StrongBox · Shamir-based social recovery (SLIP-39/SSKR; continuity caveat in §12)</p>
+  </div>
+
+  <div class="service" id="s3-2">
+    <h3><span class="svc-id">SVC-2</span>Decisions — ballots you can verify, not just trust</h3>
+    <p>Every collective decision — a national referendum, a municipal budget line, the selection of a citizens' assembly — runs through one primitive: the end-to-end verifiable ballot. The citizen's device encrypts the choice; homomorphic tallying lets anyone combine the encrypted ballots and verify the announced total against them without any ballot being individually opened. The election key is split among mutually distrusting trustees — courts, universities, opposition parties — so decryption of the tally requires a quorum and decryption of an individual ballot requires collusion across institutions built to distrust each other.</p>
+    <p>Two properties are non-negotiable and in tension, and the protocol holds both: <strong>cast-as-intended</strong> against a compromised device (T5) via cast-or-audit — at any moment the voter may challenge the device to open an encrypted ballot and prove it encrypted what was asked, then re-encrypt afresh — and <strong>receipt-freeness</strong> against coercion (T4): the tracker a voter keeps proves their ballot is <em>in</em> the tally, but cannot prove to anyone else what it says.</p>
+    <p>Sortition — random selection of citizens' assemblies, a load-bearing component of a modern deliberative democracy — uses the same machinery with a verifiable random function in place of a question, so that “randomly chosen” is itself a publicly checkable claim rather than an official's assurance.</p>
+    <p class="stack"><b>Shipped tech:</b> ElectionGuard 2.0 (homomorphic tally, threshold ElGamal, Benaloh cast-or-audit) · verifiable random functions (RFC 9381) · risk-limiting audits for the paper channel</p>
+  </div>
+
+  <div class="service" id="s3-3">
+    <h3><span class="svc-id">SVC-3</span>Rights guard — the UDHR as the type system of law</h3>
+    <p>Pure majoritarianism is a well-understood failure mode (T7); every mature democracy already wraps the majority in a constitution. The kernel makes that wrapper <em>executable</em>. Each of the thirty articles of the Universal Declaration of Human Rights is encoded as a machine-checkable invariant over a decision's metadata: a schema every proposal must satisfy before it may enter a ballot. Does this decision restrict expression (Art. 19)? Does it treat a protected class of persons differently (Art. 2, 7)? Does it touch privacy (Art. 12), movement (Art. 13), assembly (Art. 20)?</p>
+    <p>A proposal that trips an invariant is not censored — that would hand the guard's operator exactly the power the kernel exists to deny. It is <em>re-routed</em>: off the simple-majority path and onto a constitutional path requiring a supermajority, a mandatory deliberation period, and adversarial review by a randomly selected citizens' panel (chosen by SVC-2's sortition) alongside professional judicial review. The guard is a static analyser that escalates, never a veto that silences.</p>
+    <p>The honest limitation: classifying whether a proposal “restricts expression” is a judgment call, and any classifier — human or machine — can be gamed. The design accepts this. The guard's job is to make rights-stripping <em>expensive, slow, and loud</em>, not impossible; the classification itself is appealable through the same constitutional path, and every classification decision lands in the transparency log with reasons attached.</p>
+    <p class="stack"><b>Shipped tech:</b> policy-as-code engines (OPA/Rego-class) · structured legislative schemas (Akoma Ntoso) · sortition via SVC-2 · human review as the escalation path, by design</p>
+  </div>
+
+  <div class="service" id="s3-4">
+    <h3><span class="svc-id">SVC-4</span>Transparency log — a past that cannot be quietly rewritten</h3>
+    <p>Every kernel event — a decision opened, a tally proof published, a credential authority's key rotated, a rights-guard escalation, an amendment to the kernel's own rules — is appended to a Merkle-tree transparency log, the construction that already guards the web's certificate infrastructure. Append-only is enforced cryptographically: independent witnesses (universities, newspapers, foreign peers, NGOs) continuously co-sign the log head, so rewriting history requires corrupting institutions that watch each other across borders. Any phone can verify in milliseconds that a record is included and that today's log is a strict extension of yesterday's.</p>
+    <p>This is deliberately <em>not</em> a blockchain. There is no token, no mining, no global consensus problem — the ordering authority per log is known and accountable; what the cryptography removes is its ability to lie about the past or show different histories to different citizens (T8). Multiple logs federate: a municipality runs its own, witnessed by its neighbours, so the architecture scales down to a parish council as gracefully as up to a nation. (One narrow exception, argued in <a href="#s6">§6</a>: where the witness recursion bottoms out, a permissionless chain earns its keep as an anchor — never as the database.)</p>
+    <p class="stack"><b>Shipped tech:</b> Certificate Transparency (RFC 9162) · Sigstore-class witnessing &amp; gossip · Merkle inclusion/consistency proofs verifiable on-device</p>
+  </div>
+
+  <p>Why no fifth service? Every candidate — reputation, deliberation, fact-checking, delegation registries — was excluded because it embeds an opinion about how politics <em>should</em> work, and opinions belong in the replaceable layer where citizens can abandon them. The kernel's power comes from what it refuses to do. The test for admission is strict: <em>a function enters the kernel only if the ecosystem cannot provide it competitively and its absence breaks a §1 goal.</em> Four functions pass.</p>
+</section>
+
+<section id="s4">
+  <span class="sec-label">§4 · The citizen endpoint</span>
+  <h2>The phone is the polling booth — and the auditor</h2>
+  <p>Five billion people carry a hardware security module with a screen. The architecture leans on three properties of the modern phone: an enclave that generates and holds keys no app or thief can extract; a personal, always-carried display for casting and challenging ballots; and enough compute to <em>verify</em> — inclusion proofs, tally proofs, log consistency — rather than trust. Verification is the deeper role. Casting happens a few times a year; auditing is continuous. A civic client that checks the log's consistency in the background turns millions of phones into a passive, unbribeable audit fleet: tampering anywhere raises alarms everywhere.</p>
+  <p>Citizen data is local-first: the credential, participation history, and drafts live on the device, not in a cloud account. The kernel's services see only what protocols require — an unlinkable proof, an encrypted ballot — never a profile (T6).</p>
+  <p>And deliberately, <strong>no remote attestation</strong>. The temptation is to demand phones prove they run approved software; it would help against T5 and it is refused, because it hands a platform vendor a veto over civic participation (T2) and outlaws the independently built clients that keep the reference implementation honest. Ballot integrity comes from the protocol — cast-or-audit works <em>because</em> the device can't tell a real ballot from a challenge — not from trusting the endpoint.</p>
+  <div class="aside caution">
+    <span class="aside-label">Inclusion is a protocol requirement, not a UI concern</span>
+    <p>The paper channel is specified in the same protocol documents as the digital one: a paper ballot is a pre-printed encrypted ballot, cast in person, entering the same homomorphic tally, checkable by the same risk-limiting audit. Kiosks and assisted enrolment serve citizens without devices; a human-witnessed process serves those who distrust all of it (T9). A democracy whose availability target excludes the elderly, the poor, or the offline has failed its own §1 goals — this is an availability requirement, engineered like one.</p>
+  </div>
+</section>
+
+<section id="s5">
+  <span class="sec-label">§5 · Evolvability</span>
+  <h2>The constitution as versioned code</h2>
+  <p>Democracies fail slowly by rigidity or quickly by coup; both are change-management failures. The kernel therefore treats its own rules — ballot formats, eligibility criteria, the rights-guard invariants, trustee composition — as versioned artifacts amended <em>through the kernel itself</em>: an amendment is a decision (SVC-2), automatically on the constitutional path (SVC-3) since it touches the rules of the game, recorded with full provenance (SVC-4).</p>
+  <p>Software discipline applies. Amendments roll out <strong>staged</strong> — piloted in volunteer municipalities before national adoption, so constitutional change gets a canary deployment. Experimental rules carry <strong>sunset clauses</strong>, expiring unless renewed, which inverts the default: institutional drift requires active consent rather than mere inertia. And <strong>forkability</strong> is a right, not a bug: because the protocol and data are open, a jurisdiction can leave with its history intact. Exit is the ultimate check on capture of the whole (T1) — the kernel stays honest for the same reason open-source projects do.</p>
+  <p>One thing is pinned beneath the amendment process itself: the §1 goals and the UDHR invariants sit at the deepest layer, changeable only by near-consensus. A democracy may evolve everything about how it decides — except its members' standing as free and equal persons. That asymmetry, cheap to change mechanisms and nearly impossible to change personhood, is the whole design in one sentence. The pin binds <em>within a community that has subscribed to the full profile</em>; across communities it is the reference posture that adoption pressure pushes toward, not an imposition — <a href="#s6">§6</a> shows how partial subscription works without dissolving the guarantee.</p>
+</section>
+
+<section id="s6">
+  <span class="sec-label">§6 · Fractal adoption</span>
+  <h2>Subscription, not sovereignty</h2>
+  <p>No proposal like this gets defeated in open argument; it gets <em>diluted</em> (T10). Rivals ship weakened look-alikes — kernel-compatible minus the rights guard, verifiable minus receipt-freeness, open minus the independent clients — until the name certifies nothing; standards committees water MUSTs down to SHOULDs one meeting at a time. A monolithic “Civic Kernel compliant” brand is precisely what this attack eats, and pretending a trademark or a foundation could police it would repeat the platform mistake §1 rejects.</p>
+  <p>The answer is to invert the unit of adoption. Jurisdictions and cultures do not adopt the kernel; <strong>persons couple into democratic protocols</strong>, and communities at any scale — a household, a co-op, a parish, a city, a nation — compose the services they choose. The same four interfaces recur at every scale, and communities nest: fractal, in the precise sense that the protocol looks identical whichever granularity you zoom to. Because one person holds unlinkable per-context pseudonyms (§3.1), the same individual couples into many overlapping communities at different levels simultaneously, with no community able to see the others.</p>
+  <p>Partial subscription is then a first-class state, not a defect. The service profiles form a <strong>lattice</strong>: the full profile — all four services, all thirty UDHR invariants — is the reference point at the top, and a community may legitimately sit anywhere below it. Some cultures will subscribe to verifiable decisions but not the rights guard; some to personhood and the log only; some to nothing at all. The kernel does not enforce universality — it has no army, and the design refuses to want one. What it enforces is <em>legibility</em>: every deployment publishes a signed, machine-readable <strong>conformance manifest</strong> in its transparency log stating exactly which services and which invariants it upholds, and the citizen's verifier client (<a href="#s13">§13</a>, Form B) renders it plainly: <em>this community upholds 24 of 30 invariants; absent: Art. 12, 19; ballots verifiable but not receipt-free.</em></p>
+  <p>This converts the dilution attack from lethal to visible. A weakened variant is free to exist — but its own log testifies to what it subtracted, in a format anyone's phone can check. The universal core shrinks to the minimum that makes comparison possible at all: <strong>the log format and the manifest schema</strong> — a waist even thinner than §3's, and the hardest layer to dilute because a manifest that lies is a consistency-proof failure, not a marketing dispute. Everything above that waist competes on the lattice, and movement along the lattice is the evolutionary mechanism §5 described: exit, forking, and visible comparison pull communities toward fuller profiles the way working code pulls forks back toward the trunk. Universality, if it comes, comes by accretion — not decree.</p>
+
+  <div class="service">
+    <h3><span class="svc-id">ANCHOR</span>Where the witness recursion bottoms out</h3>
+    <p>The subscription model exposes the one place §3.4's anti-blockchain stance runs out of road. Witnessing works because institutions watch each other — but <em>who witnesses the witnesses?</em> That recursion ends in one of two places: social trust (cross-border institutions, which holds until a sufficiently correlated capture event) or economic trust (a permissionless, widely-replicated ledger that no coalition of governments can quietly rewrite). And the lattice has no natural root operator: the global registry of conformance manifests — the reference a citizen's client consults to interpret any community's declared profile — is the single component with no accountable home. Whoever hosts it is a capture target (T1, T2, T10).</p>
+    <p>So the kernel's position, stated precisely: <strong>a permissionless chain as notary of last resort — never as database, never as gatekeeper.</strong> The efficient form is anchoring, not storage: no ballot, credential, or civic record ever goes on-chain; communities periodically checkpoint log-head hashes and manifest digests — kilobytes a day — buying the property that even total collusion of a community's local witnesses cannot rewrite its history, at negligible cost and zero privacy exposure. The anchor is a spec profile (“checkpoint to at least two independent anchors”), chain-agnostic and migratable, keeping the kernel out of any chain's governance wars. And one line that must stay inviolable: <strong>no token in the citizen's path</strong>. The moment participation costs gas, or governance weighs by holdings, plutocracy re-enters through the door capture was shown out of. Buy-in remains what this section made it — generate a key, couple in — an onboarding pattern the permissionless world proved, minus the financialisation it usually arrives wrapped in.</p>
+  </div>
+
+  <p>The honest cost: this weakens what §3.3 can promise globally. The rights guard binds where it is subscribed; elsewhere the kernel can only make its absence impossible to hide — a citizen inside a two-service community can always see, on their own device, exactly what protections their community declined. That is less than a guarantee and more than the status quo, where such subtractions are invisible. The architecture's wager is that legible difference plus free coupling beats enforced uniformity that would never have held anyway.</p>
+</section>
+
+<section id="s7">
+  <span class="sec-label">§7 · Capacity</span>
+  <h2>The epistemics of the click</h2>
+  <p>Humans are limited agents with varying capacity, and a vote is meaningful only if something happened in the voter before the click. So the obvious engineering question arrives sooner or later: <em>how do we know a person has actually engaged with and understood the issue?</em> The kernel's answer is deliberate and final: <strong>we cannot know, and the system must refuse to try</strong> (T11). Four reasons, in descending order of principle. Any comprehension gate is unenforceable without the remote attestation §4 refuses — a custom client skips it, so the gate would punish only the honest. Every deployed competence test in democratic history — literacy tests are the canonical case — became a disenfranchisement weapon within a generation. Whoever writes the comprehension test owns the electorate: it is a more elegant capture vector than ballot fraud because it arrives dressed as civic virtue. And Article 21 says <em>universal and equal</em> suffrage — equal means the professor and the exhausted night-shift worker weigh the same, with no epistemic means test between them.</p>
+  <p>What the kernel can guarantee is the <em>opportunity</em> for understanding, sized to the decision's stakes, and honest alternatives to the uninformed click. Time first: deliberation windows between proposal and ballot are the one epistemic resource distributable exactly equally, and the rights-guard path (§3.3) already scales them with constitutional weight. Substance second: a <strong>decision-metadata standard</strong> — every ballot carries a machine-readable plain-language summary, structured arguments for and against, and provenance for both — so that every client, whoever builds it, can render engagement affordances; whether a community provides this is a line in its §6 manifest. Reflection third: the citizen's client may hold up a mirror — <em>you haven't opened the summary; cast anyway?</em> — but the mirror is private, optional, and nothing about it ever leaves the device. A self-assessment that is transmitted is a test; one that stays local is a conscience.</p>
+  <p>For the person who knows their capacity is elsewhere this week, the honest instruments are structural. <strong>Delegation</strong>: a revocable proxy to someone whose judgment you trust — self-assessed capacity routing, living at the ecosystem layer where delegation registries compete. <strong>Sortition</strong> (§3.2): the citizens' assembly is how a society purchases concentrated understanding — a statistically representative sample, paid, briefed, and given weeks where everyone else has minutes, engaging deeply <em>on behalf of</em> the rest. That is division of epistemic labour, the same move an economy makes with every other scarce capacity, and it is the principled answer to the fact that no polity of millions will ever have millions of experts per question.</p>
+  <p>Finally, measure the process, never the person. Anonymous aggregates — what fraction of participants opened the summary, how long the median engagement ran — can tell a community that its deliberation window was too short or its summary unreadable, and trigger process amendment through §5. The same datum that is tyranny as an individual gate is hygiene as a population signal. The kernel's position on capacity, compressed: <em>scaffold everything, assess nothing, and keep every gate off the ballot path.</em></p>
+</section>
+
+<section id="s8">
+  <span class="sec-label">§8 · Simplicity</span>
+  <h2>Complexity is a policy choice</h2>
+  <p>Interaction with the kernel, in every form, must have maximal simplicity — not as user-experience polish but as a security property. The evidence for why sits in any modern state: the same government that makes renewing a driving licence a two-minute, many-channel pleasure makes claiming benefits a gauntlet. Public-administration research calls this <em>administrative burden</em>, or sludge: learning costs, compliance costs, and psychological costs deployed as deterrence — regressive (it taxes exactly the people with the least slack), deniable (nobody voted for it; it accreted), and selective (streamlined where the state wants uptake, obfuscated where it wants refusal). It is the mirror image of T11: epistemic gating <em>tests</em> capacity; sludge <em>taxes</em> it (T12). A system whose complexity can be tuned per-process is a system whose franchise can be tuned per-process.</p>
+  <p>The first defence is architectural poverty. The kernel exposes <strong>four citizen verbs</strong> — <em>prove eligibility, cast or challenge, verify, read the record</em> — and nothing else. A surface that small has nowhere to hide burden: there is no step to add, no supporting document to demand, no queue to route through. Any interaction that takes more than those verbs is ecosystem by definition, where §6 makes it comparable and abandonable rather than compulsory.</p>
+  <p>The second defence is already verified as buildable (<a href="#s13">§13</a>): <strong>computable eligibility flips the burden of discovery</strong>. Obfuscated benefits systems depend on eligibility being opaque — the citizen must guess they qualify, then survive a process shaped to exhaust them. Rules-as-code inverts this: when the statute is executable, the system can compute <em>“you appear to qualify”</em> and say so proactively. Opacity does not survive encoding. Two corollaries with teeth: <strong>every demand must cite its rule</strong> — a form field that cannot point to the machine-readable provision requiring it cannot be asked, which kills fishing and deterrence-by-paperwork at the schema level; and the <strong>once-only principle</strong> comes without its usual privacy price, because citizen data is local-first (§4) — the wallet re-presents what it already holds, effortless for the person, with no server-side database joins between contexts.</p>
+  <p>The third defence is §7's discipline applied to burden: <strong>measure the process, never the person</strong>. Interaction cost — steps, fields demanded, median completion time, abandonment rate — is published in the community's §6 manifest and witnessed in the log, in anonymous aggregate. Sludge asymmetry inside one polity then stops being an anecdote and becomes two numbers on the same public dashboard: the licence renewal that takes two minutes and the benefit claim that takes eleven hours are, for the first time, the <em>same measured quantity</em>, and the gap is a finding a press or an assembly can act on. Simplicity that is declared, measured, and witnessed cannot be quietly withdrawn from one class of citizen while being lavished on another — which is the whole attack.</p>
+</section>
+
+<section id="s9">
+  <span class="sec-label">§9 · Immunity</span>
+  <h2>An immune system that cannot become a sovereign</h2>
+  <p>A kernel this load-bearing must be stable and immune — continuously self-tested, hardened against an adversarial world that now includes machine-speed attackers. But the immune metaphor carries its own warning: biology calls an over-empowered defense <em>autoimmune disease</em>, and constitutional history calls it <em>emergency powers that never expire</em>. A defense system able to act autonomously on the kernel — auto-patching, auto-revoking, auto-quarantining — is an unaccountable sovereign inside the walls, and an AI-driven one is a tireless sovereign whose threat model nobody voted on (T13). The design resolves strength against flexibility with one strict split: <strong>sense at machine speed; respond at constitutional speed.</strong></p>
+  <p><strong>Sensing is unlimited.</strong> Continuous fuzzing, public intrusion tests with bounties (Swiss Post's practice, verified in <a href="#s13">§13</a>), independent red teams, anomaly detection over the logs, and the §4 audit fleet — millions of phones checking consistency proofs in the background, which is the innate immune system this architecture already had: alarms everywhere, actuators nowhere. AI belongs here without restriction, reviewing code, probing protocols, hunting anomalies — under one structural rule that makes runaway defense impossible rather than merely forbidden: <strong>AI holds a microscope, never a pen.</strong> Its findings are entries in the transparency log; keys, actuators, and authority never leave constitutional hands. Machine intelligence proposes; the polity disposes.</p>
+  <p><strong>Response is governed, with a pre-legislated fast path.</strong> Ordinary hardening — patches, rule updates, credential rotations — travels §5's amendment road: staged, canaried, witnessed. For genuine emergencies, <em>break-glass constitutionalism</em>: a threshold of trustees may suspend a component under a procedure that was itself enacted in advance through the rights-guard path, executes in public (logged, witnessed), <strong>auto-expires by sunset</strong> unless actively renewed, and obliges a public post-mortem. Speed without sovereignty — the emergency power dies on its own, inverting the historical default in which emergencies outlive their causes.</p>
+  <p><strong>Immunity comes from diversity and smallness, not armor.</strong> Monoculture is the systemic risk: plural client implementations, plural log operators, and the §6 lattice mean any exploit — and equally any runaway defense — has a blast radius of one community, never the species; the fragmentation adopted against dilution turns out to be the containment vessel here too. And the kernel's waist — four verbs, two formats — is deliberately small enough for formal verification and reproducible builds, which is where immunity is <em>real</em> rather than aspirational. Against AI-empowered attackers this is also the scaling answer: a forged inclusion proof fails no matter how brilliant the intelligence that forged it. Verification is the one immune mechanism that cannot be out-argued.</p>
+  <p><strong>And the system remembers.</strong> Every incident becomes a permanent, public test case in the regression suite — immunological memory as institutional memory, so that each attack survived leaves the kernel measurably, witnessably harder. Growth in an adversarial world is then not an arms race of cleverness but an accretion of proofs: the adversary must be original every time; the kernel only has to remember.</p>
+</section>
+
+<section id="s10">
+  <span class="sec-label">§10 · Enrolment</span>
+  <h2>The ceremony is the perimeter</h2>
+  <p>The enrolment ceremony is the root of trust for everything above it, and every classical attack on voter registration has a kernel-era equivalent: phantom voters (a corrupt issuer minting citizens), the midnight batch (insider bulk fraud), ghost rolls (the dead who keep voting), credential mules (enrol, then sell), and the historically largest one — suppression at the desk. The answer is to apply the kernel's own medicine to its bootstrap: <strong>issuance must be as witnessed, distributed, and auditable as the decisions it enables.</strong></p>
+  <p><strong>Issuance is a logged public event — anonymously.</strong> Every credential mint lands in the transparency log: ceremony time, place, and officiant, never identity. Membership stays private; the <em>count</em> is public. Phantom-minting then fights arithmetic: issued totals must reconcile with demographic anchors (births, deaths, census), and anomalies localize — a rural office “enrolling” ten thousand people in a day is visible to any phone. This is Certificate Transparency's exact lesson: mis-issuance cannot be prevented, but it can be made undeniable and attributable. <strong>No single hand mints:</strong> a credential requires threshold co-signature — registrar plus observers selected by VRF sortition (jury duty for the franchise), rotated unpredictably so corruption cannot be pre-arranged — and neighbouring communities witness each other's issuance logs, §6's lattice doing oversight duty. <strong>Exit is as witnessed as entry:</strong> ghost rolls and purge attacks are the same defect — unwitnessed revocation — so revocations carry machine-readable reasons in the log, and a purge spike is as visible as a minting spike.</p>
+  <p><strong>Duplicate detection, honestly.</strong> Deduplication requires comparing something persistent across enrolments, and every option costs: documents forge; social-graph vouching is weak and community-capturable; biometrics work and are dangerous. The defensible middle is biometric dedup at the ceremony against a <em>secret-shared</em> gallery: the template split across independent custodians via multi-party computation, protocol-limited to 1:N uniqueness queries (“is this person already enrolled?”), structurally incapable of N:1 identification because no party ever holds the gallery. Per §6 this is a declared choice, not an imposition — a community may run document-only enrolment and wear the weaker-sybil-resistance label in its manifest. <strong>The suppression mirror gets equal weight:</strong> enrolment is itself a §8-governed process — every demanded document must cite its authorizing rule, denial produces an appealable computation trace (<a href="#s11">§11</a>), and denial counts are published aggregates. Disenfranchisement becomes a number someone has to explain.</p>
+  <p><strong>Who is the tribe is governance, not engineering — permanently.</strong> Eligibility criteria (age, residency, diaspora, capacity, and eventually stranger questions) are versioned rules-as-code, amendable only through the constitutional path — membership rules are rights-touching by definition — and declared in the manifest, so every community's answer to <em>who counts</em> is machine-readable and every change to it is witnessed. The kernel enforces whatever boundary its polity legislated; it never decides one. The reference profile remains <em>one human, one voice</em> — and in an era of machine-scale sybils, the ceremony's physical presence quietly becomes its most valuable property: it is the one gate an AI cannot walk through, which is why the bootstrap that looked like the design's embarrassing analogue residue is, in 2026, its firmest ground.</p>
+</section>
+
+<section id="s11">
+  <span class="sec-label">§11 · Worked example</span>
+  <h2>A benefit claim, end to end</h2>
+  <p>Abstract architecture earns its keep on the ugliest concrete case, and §8 already named it: means-tested benefits, the process where sludge lives. Walking one claim — and one later variation — through the kernel also surfaces something the document had not yet said plainly: <strong>the same primitives that run collective decisions run individual entitlements.</strong> The eligibility pseudonym that prevents double-voting prevents double-claiming; the versioned rules that constrain a ballot constrain an award; the log that witnesses a tally witnesses a refusal.</p>
+
+  <ol class="open-problems">
+    <li><b>The rules exist as code before any claim exists.</b> The benefit statute is executable (Catala/OpenFisca-class, <a href="#s13">§13</a>), each rule signed, versioned, and witnessed in the log (SVC-4), with provenance linking every clause to the enabling legislation. There is no secret internal decision tree: the rule code <em>is</em> the administrative policy, and any client can run it.</li>
+    <li><b>Discovery happens on the citizen's device.</b> The wallet already holds attested facts — income attestations, tenancy, household composition, disability status. The rules execute locally against them: <em>“you appear to qualify, ≈ £Y/week.”</em> Nothing leaves the phone; the state never sees a speculative query. §8's burden-flip, realised: the system tells the citizen, not the reverse.</li>
+    <li><b>The application is proofs, not paperwork.</b> Predicates, selectively disclosed: <em>income below threshold</em> (a range proof — the amount itself stays private), <em>rent above X</em>, <em>resident in the district</em>. The form is <em>generated from the rule code</em>, so its fields are exactly the free variables the rules require — a fishing field cannot exist without appearing in the logged schema's diff (T12). One SVC-1 pseudonym, contexted to <em>this benefit, this period</em>, makes double-claiming cryptographically impossible — the voting nullifier doing its second job.</li>
+    <li><b>The decision is a computation trace.</b> Award or refusal = logged rule version + committed inputs + the trace of which rules fired and which threshold bound. The citizen holds a machine-verifiable <em>why</em>. Appeals split cleanly: a <em>fact</em> error means correcting an attestation; an <em>encoding</em> error — the code misreads the statute — escalates through the §3.3 path and is fixed once, for everyone, as a logged public finding rather than buried in one person's reconsideration letter.</li>
+    <li><b>The award is itself a credential.</b> Entitlement, rate, and period land in the wallet and passport to downstream entitlements — school meals, fee waivers — by re-presentation: once-only convenience with no databases joined behind the citizen's back (§8).</li>
+    <li><b>Variation is the same loop, plus private simulation.</b> A change of circumstances is a new attestation; the rules re-run; a delta and a new award version follow. The quietly radical part: the citizen simulates <em>before</em> reporting — <em>“if I take this job, my award becomes…”</em> — on-device, invisible to the state, ending the poverty-trap terror of opaque marginal deduction rates. Reporting duties must themselves cite the rule that imposes them, and clawback turns legible because award history and rule history live in the same log.</li>
+    <li><b>Rule variation is just §5.</b> When the <em>policy</em> changes, that is a versioned amendment through the kernel's own decision path — canaried, sunset-claused — and the log shows the population-level delta (how many households lose eligibility, by how much) in anonymous aggregate, feeding the §7 deliberation on whether the change should survive.</li>
+  </ol>
+
+  <p>The honest limit: payment needs a bank route, so this process cannot be anonymous the way a ballot is. The design goal here is <strong>data minimisation, not anonymity</strong> — the agency learns that an entitlement exists and where to pay it, not the shape of a life. And one dependency named plainly: everything above leans on an attestation ecosystem (employers, landlords, clinicians issuing verifiable credentials) that §13's research did not find shipped at population scale. The rule engines exist; the wallet rails are coming; the attestation habit is the unbuilt part.</p>
+</section>
+
+<section id="s12">
+  <span class="sec-label">§12 · Boundaries</span>
+  <h2>What is left out, and what is not solved</h2>
+  <p><strong>Left out on purpose.</strong> Deliberation platforms, media, parties, delegation registries, AI summarisation of public opinion — all excluded from the kernel, all welcome above it. Each is a place where power concentrates; keeping them plural and abandonable is the mitigation. The kernel gives them the primitives — real persons (SVC-1), binding decisions (SVC-2), public records (SVC-4) — and no privileged seat.</p>
+
+  <div class="service">
+    <h3><span class="svc-id">PRESS</span>The fourth estate — empowered, never housed</h3>
+    <p>A functioning press and the means to discover news are not optional extras to a democracy; they are how the governed find out what power did. Which is exactly why a kernel-run news or discovery service would be the worst component in this design — a single point where a state or vendor captures what everyone learns (T1, T2), the ministry-of-truth failure §2 refuses. Journalism and discovery stay in the plural, abandonable layer, and the kernel supplies three primitives a free press cannot build for itself.</p>
+    <p><em>A record of power that cannot be rewritten</em> (SVC-4). Every decision, tally proof, rights-guard escalation, and rule change is already in the transparency log — so freedom of information becomes an always-on API rather than a request process, and a journalist's quotation of the record is verifiable by any reader's phone. <em>Anonymous but real speech</em> (SVC-1). Credential predicates let a source prove <em>“I am an employee of that ministry”</em> or <em>“I am a resident of that district”</em> without revealing which one — whistleblowing and citizen journalism that is sybil-resistant yet cryptographically source-protecting, a stronger shield than any statute's promise. <em>Expression as a guarded invariant</em> (SVC-3). Article 19 sits in the rights guard: a decision restricting publication cannot pass on the ordinary path; it is forced onto the slow, loud, supermajority route while the press it targets reports on it.</p>
+    <p>Discovery itself must stay plural — many outlets, many rankers, many feeds — but every one of them can consume the kernel's signals: verified personhood strips bot amplification of its cheap power, and content provenance (C2PA, already shipped in cameras and newsroom tooling) travels alongside. Per §6, a discovery service can publish its own conformance manifest — ranking criteria disclosed, audit log kept — so that <em>how you are shown the news</em> becomes as legible as how you are governed.</p>
+  </div>
+
+  <p><strong>Not solved, and named as such:</strong></p>
+  <ol class="open-problems">
+    <li><b>Enrolment still needs a ceremony.</b> Cryptography can prove uniqueness after issuance; it cannot bootstrap “this is a distinct living human” without a physical act. §10 hardens the ceremony — witnessed issuance, threshold minting, MPC-custodied dedup — but a sufficiently corrupt issuing quorum remains the sharpest residual risk to T3.</li>
+    <li><b>Remote voting and coercion resistance genuinely conflict.</b> Receipt-freeness stops a voter <em>proving</em> their vote; it cannot stop someone standing behind them at home. Mitigations exist — re-voting where the last ballot counts, supervised booths for high-stakes decisions — but this is a live research problem, and pretending otherwise would be malpractice.</li>
+    <li><b>Rights classification is judgment, not computation.</b> §3.3's invariants make evasion costly and visible; a sufficiently clever drafter can still word a proposal to slip the schema. The backstop is the constitutional path's human review, which is the correct place for judgment to live.</li>
+    <li><b>The digital divide is a fact, not a variable.</b> The paper channel keeps the system legitimate, but equal <em>convenience</em> of participation across the divide is unachieved here and everywhere.</li>
+    <li><b>Recovery breaks pseudonym continuity.</b> §3.1's social-recovery answer to a lost phone quietly conflicts with one-person-one-voice: a re-issued credential carries a new pseudonym secret, so without revocation-aware nullifier design a recovered citizen either loses standing in open decisions or — worse — could speak twice. No shipped system solves this (World ID 4.0 claims recoverability without published mechanics; EUDI key loss and passport renewal both reset the identifier). This is a genuine open design problem for the eligibility interface.</li>
+    <li><b>Post-quantum migration is pending.</b> The ballot cryptography relies on discrete-log assumptions. NIST-standardised replacements exist and the log structure (SVC-4) is already hash-based, but a full PQ ballot protocol with these properties is not yet shipped — the one place the “buildable today” constraint visibly bites.</li>
+  </ol>
+  <p>The claim being made is correspondingly modest and precise: every component named here ships today; the composition — thin kernel, rights as invariants, phones as auditors, opinion kept out of the core — is the design contribution. What it buys is a democracy whose legitimacy is <em>checkable</em> by the governed, on hardware they already own, under rules they can change but not weaponise. That is the engineering floor under an expansive humanism; the humanism itself is built above, by people, where it belongs.</p>
+</section>
+
+<div class="part-label">Part II · Evidence</div>
+
+<section id="s13">
+  <span class="sec-label">§13 · The landscape</span>
+  <h2>Who else is building this — and how the kernel should metamorphose</h2>
+  <p>Findings from two systematic research passes (July 2026: ten search angles, 49 sources fetched, 239 claims extracted, the top 50 each verified by three adversarial reviewers — 46 confirmed, 4 refuted). The headline: <strong>every kernel service has active, well-funded specialists; nobody is attempting the integrated thin kernel; and the citizen-side verification surface is unoccupied.</strong></p>
+
+  <div class="table-scroll">
+    <table class="threats">
+      <caption>Cluster status, verified July 2026</caption>
+      <thead>
+        <tr><th>Cluster</th><th>State</th><th>Verified detail</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tid">SVC-1</td>
+          <td><span class="threat-name">Personhood: the primitive exists; every foundation is compromised somewhere.</span></td>
+          <td><a href="https://eur-lex.europa.eu/eli/reg/2024/1183/oj">eIDAS 2.0</a> legally obliges every EU state to ship a certified EUDI wallet by 24 Dec 2026 and mandates unlinkability in binding language (Art. 5a(16)) — but <a href="https://hpi.de/oldsite/fileadmin/user_upload/fachgebiete/lehmann/Publications/cryptographers-feedback.pdf">16 academic cryptographers concluded</a> the reference architecture's salted-hash design cannot deliver it against colluding issuers and verifiers, is unfixable as designed, and should be rebuilt on the BBS credential family. The exact primitive §3.1 needs — a per-decision pseudonym from <code>nym_secret × context_id</code> — is on the standards track twice (<a href="https://datatracker.ietf.org/doc/draft-irtf-cfrg-bbs-per-verifier-linkability/">IRTF CFRG draft</a>, June 2026; <a href="https://www.w3.org/TR/vc-di-bbs/">W3C vc-di-bbs</a> Candidate Recommendation Draft, April 2026) but finished in neither. <a href="https://world.org/blog/announcements/world-id-full-stack-proof-of-human">World ID 4.0</a> (April 2026) is the only production consumable eligibility API today: action-scoped one-time nullifiers, open-source SDK, ~18M self-reported Orb verifications — with partial decentralization (threshold OPRF network), biometric enrolment, and regulatory-ban exposure as the price. <a href="https://zkpassport.id/">ZKPassport</a> ships per-document (not per-person) nullifiers, currently unsalted, so the issuing government could deanonymize them.</td>
+        </tr>
+        <tr>
+          <td class="tid">SVC-2</td>
+          <td><span class="threat-name">Verifiable voting: active but fragmented.</span></td>
+          <td><a href="https://freeandfair.us/electionguard/">ElectionGuard</a> is in caretaker mode — Microsoft handed stewardship to CSG's Election Technology Initiative in 2023, Free &amp; Fair “no longer actively working on it”, only housekeeping commits since Aug 2024, and three small pilots in four years. Meanwhile <a href="https://www.voting.works/">VotingWorks</a> is a live open-source vendor (GPL-3.0, commits through July 2026, in federal VVSG 2.0 certification, deployed in Mississippi and New Hampshire); <a href="https://gitlab.com/swisspost-evoting">Swiss Post</a> is the institutional benchmark (source published since 2021, four cantons authorized, five public intrusion tests, the 2025 one targeting the version for 2026 use); <a href="https://www.belenios.org/">Belenios</a> is an active Inria/CNRS academic system with commits this month.</td>
+        </tr>
+        <tr>
+          <td class="tid">SVC-3</td>
+          <td><span class="threat-name">Rules-as-code: active, statutory not constitutional.</span></td>
+          <td><a href="https://openfisca.org/en/conference/2026/">OpenFisca</a> held its 2nd international conference in Canberra (March 2026) with the Australian Department of Finance as programme partner; <a href="https://catala-lang.org/">Catala</a> (release v1.2.1 this month) has re-implemented French housing-benefit law from the legislative corpus. Both encode <em>statutes</em>. Nobody encodes <em>rights invariants over decisions</em> — §3.3's niche is empty. (Refuted 0–3: the claim that Catala positions itself as a universal computational-law standard — it is a language, not an interop effort.)</td>
+        </tr>
+        <tr>
+          <td class="tid">SVC-4</td>
+          <td><span class="threat-name">Transparency logs: substrate ready, civic use greenfield.</span></td>
+          <td><a href="https://blog.transparency.dev/introducing-trillian-tessera">Trillian Tessera</a> (Google's transparency.dev successor to Trillian) declared production-ready May 2025, v1.0.0 September 2025 — tile-based CT-style logs are off-the-shelf. No verified evidence of any government using them for public records: §3.4's application is unbuilt.</td>
+        </tr>
+        <tr>
+          <td class="tid">DPI</td>
+          <td><span class="threat-name">Interop &amp; infrastructure: partially occupied, by partners.</span></td>
+          <td><a href="https://metagov.org/projects/interop">Metagov's Interoperable Deliberative Tools</a> initiative coordinates 21 deliberation-tool teams (Mina Foundation grant; 2025 Scottish Government commitment to adopt the standards) — deliberation only, none of the four kernel services. <a href="https://govstack.global/">GovStack</a> (BMZ/GIZ/Estonia/ITU) publishes government building-block specs with country engagement in Kenya, Ukraine, Mozambique; <a href="https://x-road.global/development-roadmap">X-Road 8</a> beta shipped Oct 2025, pivoting to data-space protocols. Both are government-side plumbing, not citizen-facing.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What the foundation layer means for §3.1</h3>
+  <p>The personhood cluster is in a strange, useful state: <strong>the law demands what the deployed cryptography cannot yet deliver, while the cryptography that can deliver it lacks a trustworthy issuer.</strong> The EU has legislated unlinkability with a hard deadline; its reference architecture fails the requirement by its own experts' assessment. World ID has shipped the right primitive with the wrong trust model (a proprietary biometric enroller). The BBS pseudonym drafts specify precisely the kernel's eligibility semantics but are pre-standard, and secure-element support — long the blocker — is falling (BBS# runs against ordinary ECDSA hardware; 2024–25 results prove ZKPs at practical speed on existing phone enclaves).</p>
+  <p>Three build consequences. <strong>First</strong>, the kernel's eligibility interface should be written against the abstraction, not any issuer: <code>prove(eligible, decision_id) → pseudonym + proof</code>, issuer-agnostic, exactly the <code>nym_secret × context_id</code> construction both standards tracks converge on. <strong>Second</strong>, issuers become conformance-manifest entries on §6's lattice rather than architectural commitments — a community using World ID declares <em>personhood: biometric, proprietary issuer, unlinkable</em>; one using an EUDI wallet today would have to declare <em>linkable presentations</em>, which is precisely the legible degradation §6 exists to express; the physical-ceremony issuance of §3.1 remains the reference profile. <strong>Third</strong>, EUDI wallets should be treated as a 2027+ eligibility source and avoided for anonymous participation until unlinkable presentations actually land. What is genuinely missing in the world — per-person sybil resistance plus standardized unlinkable presentation from a non-proprietary issuer — is §3.1 itself; nothing shipped occupies it.</p>
+
+  <h3>The verdict: metamorphose, twice</h3>
+  <p>A standalone kernel is the weakest of the options examined: it would compete simultaneously with state-funded incumbents on every layer — Swiss Post and VotingWorks on ballots, OpenFisca and Catala on rules, GovStack and X-Road on infrastructure — each backed by a funding model (state contracts, public research, development aid) that a newcomer cannot match. The architecture survives; the delivery vehicle should change. Two reshapings fit the verified landscape, and they compose:</p>
+
+  <div class="service">
+    <h3><span class="svc-id">FORM A</span>The kernel as interoperability spec</h3>
+    <p>Nobody bridges the clusters: Metagov's interop covers deliberation tools, GovStack's specs cover government back-office blocks, and the four kernel services do not speak to each other anywhere. §3 becomes a <em>specification</em> for how personhood proofs, verifiable ballots, rights-guard escalations, and transparency-log entries interoperate — the thin waist between existing projects rather than a reimplementation of them. Metagov is the natural host (reinforcing <a href="#s14">§14</a>'s recommendation, with verified evidence: it already runs exactly this play one layer down, with government uptake); GovStack and X-Road are the government-side channel; OpenFisca, Catala, Tessera, Belenios and VotingWorks become named profile targets rather than competitors.</p>
+  </div>
+
+  <div class="service">
+    <h3><span class="svc-id">FORM B</span>The citizen-side verification client</h3>
+    <p>The one genuinely unoccupied niche in the verified evidence — and it is §4's thesis wearing product clothes. Every incumbent builds for institutions; nothing citizen-facing composes the verifiable primitives that now exist (ElectionGuard-style ballot confirmation, Catala/OpenFisca rule engines, Tessera log proofs) into a single surface on the phone: <em>was my vote counted, is this decision on the lawful path, has the record changed?</em> This is buildable now, needs no institution's permission to start, exercises the whole spec from Form A, and turns the “millions of phones as a passive audit fleet” argument into the project's first artifact rather than its distant goal.</p>
+  </div>
+
+  <p><strong>Confidence and gaps.</strong> The “nobody is attempting the integrated kernel” conclusion is an absence-of-evidence inference over the surveyed set, not a proven negative — International IDEA has <a href="https://www.idea.int/publications/catalogue/html/case-democracy-stack-rethinking-digital-public-infrastructure">argued for a “democracy stack”</a> in similar terms (advocacy, not implementation, and not adversarially verified here). Several confirmed claims rest on projects' own self-descriptions, independently corroborated in substance but promotional in framing; World's ~18M figure is an unaudited self-report. Still unmapped: the smaller proof-of-personhood projects (Holonym/human.tech, BrightID, Idena), MOSIP's privacy properties, deliberation-platform eID integrations, credential-recovery mechanics (flagged as an open problem in §12), and the attestation ecosystem §11 depends on. Time-sensitive facts — X-Road 8's Q4 2026 target, ElectionGuard's caretaker status, Swiss Post's canton licences, the pre-final BBS drafts — can move.</p>
+</section>
+
+<div class="part-label">Part III · Adoption</div>
+
+<section id="s14">
+  <span class="sec-label">§14 · Stewardship</span>
+  <h2>Where this should live</h2>
+  <p>A proposal like this survives on institutional hosting, not servers. The recommendation is staged — one home for traction, one for standards stewardship, one milestone for legitimacy — because no single existing organisation covers all three. (Organisational facts below checked July 2026.)</p>
+
+  <div class="service">
+    <h3><span class="svc-id">NOW</span>Traction — Metagov</h3>
+    <p>The <a href="https://metagov.org/">Metagovernance Project</a> is an interdisciplinary research collective building “standards and infrastructure for digital self-governance” — this document's exact register. It hosts member projects, runs a weekly seminar reaching the researchers and civic-tech builders who would engage with a constitution-as-code kernel, and offers fiscal hosting via <a href="https://opencollective.com/metagov">Open Collective</a>. Cost of entry: a seminar presentation. The spec itself stays in a public repository from day one — CC-BY-4.0 for the document, Apache-2.0 or AGPL for code — since every candidate host expects that anyway.</p>
+  </div>
+
+  <div class="service">
+    <h3><span class="svc-id">NEXT</span>Standards home — LF Decentralized Trust / Trust over IP</h3>
+    <p>The <a href="https://www.trustoverip.org/">Trust over IP Foundation</a>, a standards project under <a href="https://www.lfdecentralizedtrust.org/">Linux Foundation Decentralized Trust</a> since September 2024, is the one venue whose architecture already speaks the kernel's language: a dual stack of technical specifications plus governance frameworks that are “human-readable and machine-verifiable” — §3.3 almost verbatim. The personhood service's building blocks (DIDs, verifiable credentials, BBS+) are LFDT projects already, with working government wallet deployments in that orbit. Entry point: a ToIP task force or an LFDT lab — low-barrier incubation with neutral IP ownership, which is what lets a project outlive its founders. A lighter alternative for the personhood piece alone is a W3C Credentials Community Group work item, but it would not host the whole kernel.</p>
+  </div>
+
+  <div class="service">
+    <h3><span class="svc-id">LATER</span>Legitimacy — Digital Public Goods registration</h3>
+    <p>The <a href="https://www.digitalpublicgoods.net/standard">Digital Public Goods Alliance</a> registry (UN-endorsed, ~222 entries as of late 2025) reviews against a nine-indicator standard including privacy and do-no-harm — a natural fit for a UDHR-invariant system, and DPG status is what earns attention from UNDP and government procurement. It requires working software, so it is the milestone after a reference implementation, not the first move.</p>
+  </div>
+
+  <p><strong>Funding, honestly assessed.</strong> The timing is awkward: NLnet's <a href="https://nlnet.nl/commonsfund/">NGI Zero Commons Fund</a> — the natural first grant for this kind of work — closed its final call on 1 June 2026 and <a href="https://www.apc.org/en/news/nlnet-foundation-temporarily-pauses-open-technologies-funding-submissions-take-stock-and">paused new submissions</a> while reorganising around the European Commission's Tech Sovereignty package. So: watch for NLnet's successor programmes, use Metagov's grant rounds and Open Collective for the research phase, and target Germany's Sovereign Tech Agency once there is deployed code to maintain.</p>
+  <p><strong>Ruled out</strong>: OASIS and IETF are too heavy or too narrow for the whole kernel (individual wire protocols could go to IETF later); an academic centre produces papers, not maintainers; and participation platforms such as Decidim or CONSUL are ecosystem-layer projects in this document's own terms — best courted as first <em>integrators</em>, not hosts. <strong>Unverified</strong>: whether ToIP/LFDT currently has appetite for a civic-governance work item (its 2026 activity skews toward enterprise and AI-agent identity), and the shape of NLnet's post-pause programmes — both need a direct conversation.</p>
+</section>
+
+<footer class="colophon">
+  THE CIVIC KERNEL · architecture proposal · rev. 2, July 2026<br>
+  four services, no fifth — personhood · decisions · rights guard · transparency log<br>
+  thirteen threats answered · subscription by lattice · the waist: one log format, one manifest schema<br>
+  constraint: shipped technology only · status: draft for argument
+</footer>
+
+</div>
+
+</body>
+</html>
