@@ -4,15 +4,20 @@
 machine-checked stress-test suite and a comparative-law corpus that hold the design
 against real situations and real legal systems.
 
+**Start with [`KERNEL.md`](KERNEL.md)** — the whole kernel distilled to one page:
+four services, four verbs, two formats, one floor, twelve refusals, and what is measured.
+
 ### Read it live
 
 - **[The architecture →](https://glassontin.github.io/civic-kernel/)**  the proposal: a thin waist, four services, rights as invariants
-- **[The protocol against real life →](https://glassontin.github.io/civic-kernel/scenarios.html)**  17 stress-test stories, each machine-validated against the schemas
+- **[The protocol against real life →](https://glassontin.github.io/civic-kernel/scenarios.html)**  19 stress-test stories, each machine-validated against the schemas
 - **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**  the same 30 rights across the UK, Germany, the US, and the EU Charter
 
 ## Layout
 
+- **`KERNEL.md`** — the distilled normative core: goals, services, verbs, waist, refusals, measured status.
 - **`index.html`** — the architecture document.
+- **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
 - **`schema/`** — the "waist": the two universal formats, as JSON Schema (Draft 2020-12).
   - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act` type,
     whose body must cite its authorizing rule).
@@ -23,6 +28,8 @@ against real situations and real legal systems.
 - **`corpus/`** — real legal systems captured under the same schema, sharing the 30-invariant spine:
   - `uk/` — Human Rights Act 1998 (via legislation.gov.uk) + real Commons divisions as `decision.closed` entries.
   - `de/` — Grundgesetz (via gesetze-im-internet.de).
+  - `us/` — US Constitution and Bill of Rights.
+  - `eu/` — EU Charter of Fundamental Rights (scope conditional under Art 51).
 - **`scenarios.html`** — a self-contained browsable site rendering the scenarios and the comparative
   corpus. Data is inlined, so it serves as static files (GitHub Pages-ready); no runtime network calls.
 - **`tools/`** — validators that also rebuild the inlined data in `scenarios.html`.

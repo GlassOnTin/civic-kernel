@@ -1,8 +1,8 @@
 # The Civic Kernel as a Functional Operator
 
-**Status: v0, exploratory — on the `dynamic-kernel-model` branch, not the deployed
-thesis.** The deployed argument is [`index.html`](../index.html); this is a separate,
-speculative model kept off `master` on purpose. It writes down, as precisely as honesty
+**Status: v0, exploratory — a speculative companion to the deployed thesis.** The
+deployed argument is [`index.html`](../index.html); the distilled statement of both is
+[`KERNEL.md`](../KERNEL.md). This document writes down, as precisely as honesty
 allows, what it would mean to treat the Civic Kernel not only as a thin service core but
 as a *mathematical operator* that maps a starting democracy toward an empirically
 more-likely-better one — and, just as important, exactly where that model is solid and
