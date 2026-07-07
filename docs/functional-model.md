@@ -182,6 +182,18 @@ which is to say it stays §6 of the architecture. The operator's job is not to c
 heading but to **make the local field visible and the uphill moves cheap, reversible, and
 local**, so exit, comparison, and adoption do the moving. Gardener, not pilot.
 
+**Floor, not telos.** The sharp objection is: *but the UDHR is already in the model — isn't
+that an objective?* The distinction has to be exact. The UDHR enters as two legitimate things
+— the **coordinate frame** (the 30-axis spine every state is measured against) and the
+**floor** (the invariant never decreased, Part 6) — and never as a **telos**, a target to be
+maximized. "Maximise match to the charter" fails twice over: it re-flattens the per-domain
+partial order (Part 2) back into a scalar, and it is empirically wrong — the UK backs the
+right at issue and still `breaks`; the win was remedy, not coverage. Above the floor there is
+no summit to climb toward: "an agreed optimal human state" is the contested political object
+itself, and asserting one hands whoever asserted it the capture-power the design exists to
+distribute. The operator measures distance in this frame and holds the floor; it does not
+optimise toward a maximum.
+
 ## 8 · Empirical status — solid specification, underdetermined predictor
 
 Elegance blurs two claims that must stay separate.
