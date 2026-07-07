@@ -1,0 +1,1000 @@
+{
+ "decision_id": "2026-agm-treasurer",
+ "ballots": [
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 1,
+   "nullifier": "sha256:df87af9ddacfb92cd2a7df15fa16a06cf1627658a4656777d4e07f73a102c781",
+   "choice": "Sandra Okafor",
+   "voter_pub": "7tqib4pqdJSd8YSFGpBMs-B068PNbPjf5N5zmP85_Tw",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "fHWaAuu6Yvn-KA2DCN-H3K6vuBiwoEqxh8CxZlZD6mZ0wCey3QV65ggjdDAh2IWdZmXsklH8rFDZw0OtwXtpBw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:7tqib4pqdJSd8YSFGpBMs-B068PNbPjf5N5zmP85_Tw",
+    "alg": "ed25519",
+    "value": "viTqQvZ1lfO09zAL5RMoNh1y6b1DGngc5uRFtTtd2qbH-5O21w0XbncL6kjCalq8NtR6qwe5DPNBxjzfe_gsBA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 2,
+   "nullifier": "sha256:88d9fe1859d6b741edee10d30ba84355cb68b4876c8d6f12153656714403a383",
+   "choice": "Sandra Okafor",
+   "voter_pub": "sfXGsYz3OrGS7eeK4aywO190kCL9pjAAAd7HeWACTFg",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "kecXW2c1IFLSEXYQxAQ0KhaZw0TjjXl1yWYYmLUtEMFOJdaofGGR1UrMLk-xrvPMZqyEH4bE1wPlCWDOycG_Ag"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:sfXGsYz3OrGS7eeK4aywO190kCL9pjAAAd7HeWACTFg",
+    "alg": "ed25519",
+    "value": "LklEvV1iWJ2TmQrlZIMtbUkLy3n7g7mKNjM5_3FQ3Hi1zvFfZzK9XYYmihLHSQmmtQi0nNZcRrMCnY4u8D8kDQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 3,
+   "nullifier": "sha256:7ba49b93123c79a95774975304426ffb16c19b658c807f557bee8cf3997c4cd6",
+   "choice": "Sandra Okafor",
+   "voter_pub": "jB4UT4dRlW1gDaRHS_gGTQARZ3WPZgyD7gcBylzbdZY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "cfnmcmpNgRxYbuER4x2N5v8enE40YBwtygDCvoEX9JnqA6CnuCUF6eLOJHkivDStGAZyXwD4qff0VcPozM8ECg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:jB4UT4dRlW1gDaRHS_gGTQARZ3WPZgyD7gcBylzbdZY",
+    "alg": "ed25519",
+    "value": "mlD7SIaoSyyMrbfCj3z_RldJiAOaL1VVwMgS7ezlNl60fMGb-ttbH5pzEN8yfl5KwUMSq3F-Raue3BVha15RCw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 4,
+   "nullifier": "sha256:f3dae51f3f77c9fd5a2c359167b458d4029341de5e45c6a3969e1a666e1329c5",
+   "choice": "Sandra Okafor",
+   "voter_pub": "HSiU2Ww4ymu7vRNohNJupuYz-P8mHIsUVWK9CrxAKBo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "nNAQwDG0eNTktL8PNvFuEJbuCbRzqSRR9P-izM1QcswdwLcrWq8HE47gujmM5LdSj3djfNslnGQdjeRyC1JDBw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:HSiU2Ww4ymu7vRNohNJupuYz-P8mHIsUVWK9CrxAKBo",
+    "alg": "ed25519",
+    "value": "rpj4JrPOY_P8Xtmbw6UDHusVb4rv-q1Xfr3nIW5uw921ksx6Zb812zO2H48omdVioiZfWyyZYuXlFS7Q0f1HCA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 5,
+   "nullifier": "sha256:f7498ca18a53a767940d9a7f6ab5ed881106ce0d1e0ea094e01d86754dbc899e",
+   "choice": "Keith Bramall",
+   "voter_pub": "bvN0c0GxSufflP7fSuY8l2NApFGFv_baVMxWYgsjvV4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "ddD9iVVAkp9CUjytTHQGGSK1ZT7Hcx6rNAh4W7wqpgEFRv57QL-67Gt5ebJLzGYsmTAx9bAHvngKmoFlDx6-Cg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:bvN0c0GxSufflP7fSuY8l2NApFGFv_baVMxWYgsjvV4",
+    "alg": "ed25519",
+    "value": "t7vj8rO-VUrXUzz-daTTWQWWLJSwheKIjJo3MwXQgPSPRyfRvLk8AbZ4bFyXA5UQV96fLxEQWzHZcGZPB7yOCQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 6,
+   "nullifier": "sha256:e223105693e5a61289605970bb222d9e3c0251db0b396f4deda369356c71f4fc",
+   "choice": "Keith Bramall",
+   "voter_pub": "sP7XsynW3zYkMwYmnc8ifvh9d4UpY6CeLCfGpKkT2Pw",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "wIeKnC1RKiHDYivJTTFUPgvfxOnTDrX66AFxg9raXc9Q9j_U8g9rzEBAL8YSIxHI1bGEYfMVKu1_4R1ZoAsKCA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:sP7XsynW3zYkMwYmnc8ifvh9d4UpY6CeLCfGpKkT2Pw",
+    "alg": "ed25519",
+    "value": "1mL2zNAWYvHRx4UFN1lkhH0-42SdDC_1LV4vYtgZGUvsw7j_ijQBYGixnb1YV8RU7qgT_D1KgcaccmV_lWa8DA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 7,
+   "nullifier": "sha256:836ce0fb3f32e279c263b47c9268dd6ddb141c74e60dda362fb1d7c1f9e6bed3",
+   "choice": "Keith Bramall",
+   "voter_pub": "PqfSeWlZN2tFopaEKlMiL7_8FEEzga0B54FpHzpOu1k",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "8Q-zKXO1jEkGPgDc-VwdlOh-fwCoAI-QgfZhlQFhZSN0X_seaiGGPB_gZDfguhZIUzVbpzRBVD9Ifxyx2JGJAw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:PqfSeWlZN2tFopaEKlMiL7_8FEEzga0B54FpHzpOu1k",
+    "alg": "ed25519",
+    "value": "_3OXIREOY-yIFeANyh9ATJhSfD5XVYny14Hk8xJYCFcEaVEQ09LexToFOQJA3Fa3ltHa8oXDdFT6yfbFSd8vBw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 8,
+   "nullifier": "sha256:477c782ef48c597196f56f17a5b1147da160195c5c11a25a3755c06c3162d7cd",
+   "choice": "Sandra Okafor",
+   "voter_pub": "W649jq1SUuCXUiydV3lChG0V6u5E8xmq3Qu6s71oFyk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "_v6Y9nOmwpY-nGJyF85W-U65kXjkjNWkZE1Z65Ntbnf5chnbUVKbaFfd76BSEMoJWd3gAcqXss19HL6qR7DYDA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:W649jq1SUuCXUiydV3lChG0V6u5E8xmq3Qu6s71oFyk",
+    "alg": "ed25519",
+    "value": "eKOytF7xkdkE7Q15G2Ma6OC9a-W677OI72IFJV9TwFK6G3ZKIjSuHlIA0_-RXBvNztOecKxuKiSOU0tsQXzOAg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 9,
+   "nullifier": "sha256:6ccf9be79c490d8d1b74db3856435801f6674d155fc2cc70ee3854e5d3e8f27a",
+   "choice": "Sandra Okafor",
+   "voter_pub": "_FbHdPULdwANUDsKcMMU0Phs70QpmrlPH9tOG12rGxM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "PgmAk5LuDjvzdtl-reaEiZjuffFMgY4Fgp4oM3lxXEC1dchkTQdNjz2ZC-Th0ZbAdOfW7pv0tQMWjelnV0FFBQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:_FbHdPULdwANUDsKcMMU0Phs70QpmrlPH9tOG12rGxM",
+    "alg": "ed25519",
+    "value": "yq1gDWx8UnscaCVuQLQpCC29D2WopyEFeizPvhAVA3MVBCyDrAVN9iw2HDs3BsQ1K1fwaoC3LXiSbnJtmJReCw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 10,
+   "nullifier": "sha256:316065ca4d537de09170508c22264c3103f40df757d4beed487cc7f61e57ddf5",
+   "choice": "Sandra Okafor",
+   "voter_pub": "Eeu6S7tcUd3TaPPLHH_c49OmG2RxEUZKoeR3KlSyxvo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "2B6pF-NmFJo59nEns9A9VqHuLV9aWqkZtqwRk4QXNuNBm6bBgS1yez-FLuN3SXowhB0zNOuMgAEfphYaXhw6CQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:Eeu6S7tcUd3TaPPLHH_c49OmG2RxEUZKoeR3KlSyxvo",
+    "alg": "ed25519",
+    "value": "dqZ8rwxBSUzGpJjy1JreksZnbY2qovtNZ9RI6JmoUqAJ7X9H8Z-o6ZOo73wSdAgBBZfVv6tPX9BalYrj0HsBDg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 11,
+   "nullifier": "sha256:94bd88949596d30f9a22df236d3880cc5a0b7abe4775bdf0f2660b018f2df2d2",
+   "choice": "Keith Bramall",
+   "voter_pub": "dU7sAHFrcXHKUj6Cp9RE4KFQiStyeBGcie7KqgMeQV0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "3sBpbAWazlGPqolXKH9Q-DuPk8ivHib4h_lEW_TwVRI0KuNQOg0rCJthMsNM6gvnsPXemQ1HsRQznjTnL0oTCw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:dU7sAHFrcXHKUj6Cp9RE4KFQiStyeBGcie7KqgMeQV0",
+    "alg": "ed25519",
+    "value": "k-f61yPDk9f6VgwcUNSO5dxNhSb2xLuhedoHHtNdi-d_CLn91TaXuNkFxZy78kXtRCjSMxuZtNRgD5aCZbGcCw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 12,
+   "nullifier": "sha256:02fec0fa61dc6637b6b909b4a0e6b3a6536009982a01062d7e716f512d38f4b8",
+   "choice": "Keith Bramall",
+   "voter_pub": "kfGMmxpYPYpznmcoVxXZdfmuAVfjDsDpg_L802p538Y",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "EMGYByUil5QXcHKWjo4zdcC_gnMVqdqsdU7o6sua21ukAFMaYS_67PWkh6dbIKfRMcM-mAaF9dTNxYMQZKXsBA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:kfGMmxpYPYpznmcoVxXZdfmuAVfjDsDpg_L802p538Y",
+    "alg": "ed25519",
+    "value": "X0ImeuIF-leYroWTo2X1OxNq6lqtqTiypM_FHK7QKKDhQY-SY6R7v_ELc4e4Vy1-xRwLa4Xn7vVgZDX7dxexAQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 13,
+   "nullifier": "sha256:7bec89782309d04adfd16e8f7140c8d7e693cd6308bd9708e6b813df319482dc",
+   "choice": "Keith Bramall",
+   "voter_pub": "MGF8y8EbKRCgTLAyq6H11IfX62C3C4wjhdCNv4w0zU0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Qr85CVCX72oxPNaWw-fMWXiJR2KYa-pFLU0On0GZK6WSxE7rozy4Vr9gSTrA7CZbPYM7J4YnQjtLlYufnz1jAw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:MGF8y8EbKRCgTLAyq6H11IfX62C3C4wjhdCNv4w0zU0",
+    "alg": "ed25519",
+    "value": "i5mEv0EDTi7vt2g965iz70rqZwReRxnWlltPwCXWgd9jcfstTaX_6te33_tnSnLvDm-xLtgkhT5sMargaWeeBg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 14,
+   "nullifier": "sha256:197696908fb5e4c2e5926d725f7d1f51a28e1191ebb42f9d79e2da28d62914e8",
+   "choice": "Sandra Okafor",
+   "voter_pub": "jPGAdfxLi7BE9iXSn9A6ddRtmIl-IoQ0lub1ZaUWNg0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "DhdS_yzFqSAiSI7TsCyN1jCD3R-pbj0lD7QT-1MMeObVguXIZ8xo_uvGSC_ZUSF_zxRnsZJqr7JUMcV2vXXuAw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:jPGAdfxLi7BE9iXSn9A6ddRtmIl-IoQ0lub1ZaUWNg0",
+    "alg": "ed25519",
+    "value": "tvt9fvHUi2tn79sgr2mEuKjOEZ4OoYKkDfzHmu8dpC0v56kC_daAvwKaYg-yJAoI5cociNacIThS91nN4Aw4Dg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 15,
+   "nullifier": "sha256:669c2abc2051acf77504cee488401b6efdc517acfd973bac62f7cd44b5e72be4",
+   "choice": "Sandra Okafor",
+   "voter_pub": "xUhfxWo1v6bWGGD38tJHkLNWxCl-Qo7r1zzDLVHtIPA",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "FnP2V8NOOadc2TbQfO5rUUnxN6sfJsKOcSlq9ZpOuhJuF0nQXKoRCWw5vPXysFToiwQsY2HxH5FkZdQI_etBDA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:xUhfxWo1v6bWGGD38tJHkLNWxCl-Qo7r1zzDLVHtIPA",
+    "alg": "ed25519",
+    "value": "bUyZPaAElb-KhOa6KeTfRBQZosGy2vUbjEX6tHeS8g3e7SYVFWVSiQfwAuahg6cLuOfw6XrwYt5ZdTP2ZCwWBQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 16,
+   "nullifier": "sha256:799a38730090d51576e72cd7b4f7dc838d47acaa398d33641fd92524939fdda8",
+   "choice": "Sandra Okafor",
+   "voter_pub": "D6BgM1FgzZcN0kq4TtAZYMHRpw-Bh1mmMPICg3yiE7o",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "AUcFfxyF51z0YnqXY12zIvGRD2VV6FH1nEncOdBMx6m2Rx0bvj3y_WyJ5c6hEy481aoVpnPjVCcc24BbuRL9Bg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:D6BgM1FgzZcN0kq4TtAZYMHRpw-Bh1mmMPICg3yiE7o",
+    "alg": "ed25519",
+    "value": "9GwwxSvPUyRJre2AOcayl20S0mGv4R4D7kouNbxAaomuCNKe8M-Mbw7L168MGxIpHtGA_U0LVR9ARBUVXoyFCg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 17,
+   "nullifier": "sha256:0967b0fc98e81a442f23d1e32e37e0dbe7bff2a76392ae7dd5bdb2e5c9265d65",
+   "choice": "Keith Bramall",
+   "voter_pub": "hlQzz_uwLyEv-2HSOzhYqkvP9jVof0sCNMkKCbPwkz4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "YncYIr9BsEwBnNZAkm_0RXxh6oAYbiinjOUu65P_niQ2vD_gNsIosPrGDvc6HHZXguPFtHHZcWY7f1W3qQTTDQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:hlQzz_uwLyEv-2HSOzhYqkvP9jVof0sCNMkKCbPwkz4",
+    "alg": "ed25519",
+    "value": "W0Vf4XhPUOTEN-gi6taA3SfJ-xbqOU6lyXr1JMu644-z_F2fjmKPsdyuNKw7MFhKByITHo6e9aH5Iwc_Ig-sBw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 18,
+   "nullifier": "sha256:ef07fadb473f4d6e2f21856d9ec7ea3822d3bd5616fe8e7e6843687e5d3a95d4",
+   "choice": "Keith Bramall",
+   "voter_pub": "ZpS7EcIsSyzfV-SAc4bfzaE5gn6Wlc6g3sQTn4iixmA",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Px8iAhcr_1vrFD0qoO2mv3RXpX0epfvOAEhAD8-MNHEjd-rleX4PztG2ea8xo39fSPq1JuGpJODy9nn-HQIEDw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:ZpS7EcIsSyzfV-SAc4bfzaE5gn6Wlc6g3sQTn4iixmA",
+    "alg": "ed25519",
+    "value": "43hm1t-fS3SusljR1xv_tuWIGXoQq-yPhHaMmXSVi45o9p9P5bjurgHb1gL0WnTHR7C092pPlk5vH1R1yPDPCA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 19,
+   "nullifier": "sha256:854a8641c365210aab4c857d23a4d65918a9959262c118e096f1ea1a4bd23522",
+   "choice": "Keith Bramall",
+   "voter_pub": "J01Q2d8j6mJDPr3ii4uaTGcARM66mC6QS7mrfQ15zjo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "idERi58gdvKJs6qx1ay22OmB8OKRNi0hBaQj09uWMX6yzJkGMBPDh6DGkIZyyxv43sG2H_OZ7RHRSUa6TbpZDQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:J01Q2d8j6mJDPr3ii4uaTGcARM66mC6QS7mrfQ15zjo",
+    "alg": "ed25519",
+    "value": "9Sj9MdDqC_aNmOKo9HE2uKARjuN0zHArwfd3-lcLqxzbJ3G8ZgwDHCdd8yGpLAw65c9ryw2sbB66_6_puHl_Bw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 20,
+   "nullifier": "sha256:b25c52683aa0e55e45f383f5d797f40a9c31f5f2393dab0390bd43dfd4ea1980",
+   "choice": "Sandra Okafor",
+   "voter_pub": "1BENGeJrpmYurN0bNnsST2OEFUurdbgzMXLcffUvlcY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "WDahY1q3X79VKyfsv3iC98bJbS8fhYlhYBMKVZa8DMKDT6x0eheKt61AL1K2VlEt23ue3XrKE5-IhqyFeAEmBg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:1BENGeJrpmYurN0bNnsST2OEFUurdbgzMXLcffUvlcY",
+    "alg": "ed25519",
+    "value": "5nGV0TvncyW-nAuxPPl3Hs7W6dvoJdTpQFlhH5umQTkbSzZYYD_RB-799kafbvudOkiVcb6JnM_HWsOgW2qICw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 21,
+   "nullifier": "sha256:34f3d80cfb24b6db18d616016c9cf8f6335d30e1976e00528933ff8d9dc31542",
+   "choice": "Sandra Okafor",
+   "voter_pub": "KBGgIcKRt3ggvNE6Qt0OocSng6d95K8JgKU6LAUvtd4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "igH3FvTeO5g1r6jGbAYUpunQnl5j_Os8BlrZCU7_r-Wsv11miyC5vZ40mIp8GwCZ5_daJECIvNZAVdA7qs4sBA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:KBGgIcKRt3ggvNE6Qt0OocSng6d95K8JgKU6LAUvtd4",
+    "alg": "ed25519",
+    "value": "LpbZtKsydw2S3wn0Xe_PH6zNCVBgAqhgllmQmXPsKAYcIzpye4Tgg85GL8aMl6NT6ps63AGbcWOOqzdOHNWKCQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 22,
+   "nullifier": "sha256:04e90639bcccc2724b483cb98247049f67e4094ed637efdd2b9f29d0ba2e6d26",
+   "choice": "Sandra Okafor",
+   "voter_pub": "_4vpOcQtfbVv0_dQkdx9oDOlhW3irQh_SD3eJM5DfpE",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "POIEW3xI7pKPOfRQhsnXkrjzDyLNBcC1UL3VvxiGTVv07Gmdd6cQl-Sv8_9DaKannYMp_IJXmrIhxP_yF2O2Cg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:_4vpOcQtfbVv0_dQkdx9oDOlhW3irQh_SD3eJM5DfpE",
+    "alg": "ed25519",
+    "value": "105qbE_grhwKTL0YGr6tWH-M8905QiqDfmbiplokqAw9HtG_Lg4OebCVyyaT6A-KSvjzEDUbq8JorYDhpH5cAQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 23,
+   "nullifier": "sha256:b7d746e34f6c63c4604fc061b0518109e623a64cdd56856d11a7c69fc6f1c8aa",
+   "choice": "Keith Bramall",
+   "voter_pub": "F-9-V4lwH5pyvZ7kKTdrh0OhFqKQTWXM79TG5n0WZMg",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "_UKWX8S4Hb07c1UFA-rYTPCJ0CfQ-rT3zes9WP3Ynf1BS7z3MbklxcBaDpA2Mz9FyeEHq_6sWIPMIBOX94TKAg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:F-9-V4lwH5pyvZ7kKTdrh0OhFqKQTWXM79TG5n0WZMg",
+    "alg": "ed25519",
+    "value": "wcR_sYx6Rr-HHMtmhjoOemr8A-8CmF2Dtw3OsyVp6Iip7YXHsJI7iFH_cwV7lOK6kyH_21-tgrPoRjZ-f3voCw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 24,
+   "nullifier": "sha256:47f332fda467fba65231544e07cd44fd3cb570113e7ecf72010a9fec7e44eb63",
+   "choice": "Keith Bramall",
+   "voter_pub": "j7ANAzmEBQVoqsSSnW7L0aqOTnw2_izCB63VkxtBNkU",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "8wa-6dee8lEiwldka5O1X7qzz5WZFEFIIcdwExsE_ykYR8-xwPcWhyCIbSg6nNr6uZiFvxkCRBe6Hr-_3FoFCQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:j7ANAzmEBQVoqsSSnW7L0aqOTnw2_izCB63VkxtBNkU",
+    "alg": "ed25519",
+    "value": "iSw4CEzEzAOVuaG0o3vhG8V9n-EFW8PZmXFgqqzVsdup__qX6hoewgxKSltRLnhaLxHDi-INfW2hO9LVFF7nAw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 25,
+   "nullifier": "sha256:d3be2a0bdf2e2f2d0feefcec83406f30ac02a847f6552f030e0f35cf1cf69711",
+   "choice": "Keith Bramall",
+   "voter_pub": "SBSFT6-YRR2JC4peVYhml_LUtC0j_9QIY1Wb8I0Yrd4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "fELGyF0inHxU9EbNOenODXliIPn7w7MhUEGAdh84IcEOGQaL16tRMSpD6gZzapEY_8o-iFr25a71VCleXFJ9Dw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:SBSFT6-YRR2JC4peVYhml_LUtC0j_9QIY1Wb8I0Yrd4",
+    "alg": "ed25519",
+    "value": "M0dCS_YF0HoKbXkZnlKny1W5g8OIq8l5bEvT2w_vRdrk2qB92x4TkSOSY4u9F4wiW7TPu0DTvj8TeH46S3VXBA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 26,
+   "nullifier": "sha256:0e4c687c45b19b6adeda0ea4cbbe8d08670a7d3e9ddb9750bd9cb69942f4baf5",
+   "choice": "Sandra Okafor",
+   "voter_pub": "jgRxCP6K29dRBLFm_UlBtDV0Hb5962BhWTJXR3IoRkM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "_lzs_bvFc977mdpT39RWOkKZ_FxWIOtvRzI8ZdKy_11ZoeXr41K0NLv_1H30S8IhP9LVyIBwjLbbGFUtGvQZDg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:jgRxCP6K29dRBLFm_UlBtDV0Hb5962BhWTJXR3IoRkM",
+    "alg": "ed25519",
+    "value": "W3LgUOscVqfmtKutAafFjXfBSBowLzbdUedQ4vSJMD715zUKfjIjFfvQcOT1BKQxQFVGRUh8iy6g2gSZGYtgDg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 27,
+   "nullifier": "sha256:769ee82585d5f7ba70c6b85028f3cae711a7c2432ea2537666cb0c429e5f49b9",
+   "choice": "Sandra Okafor",
+   "voter_pub": "DXHlxJxmJP-qjqqQljz11XucAX3i18IBha8KcGAEVSk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "MW0njEYqAPiiBYsdJZt6M5gz7VFlC89QM3UfWzXdFdNmFnaOv4VWdDqaoh4ex2MVsCW2c6pHW_gSxY58YAVBDA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:DXHlxJxmJP-qjqqQljz11XucAX3i18IBha8KcGAEVSk",
+    "alg": "ed25519",
+    "value": "uJ-t5emlOTJsTtJblohQYJNWnsGXm5LiLk39DmMdFfLoRi1P0BShq1TLsq-SpzZrWGzYGgYMfEJnLa9t7MUjBg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 28,
+   "nullifier": "sha256:05f27c2ff9cb57a72499e85be198accd335a1d953d0d281aae1b36db0a1d9f8a",
+   "choice": "Sandra Okafor",
+   "voter_pub": "f9-dwLvtH9o_3c2EfAMRTLdi3f9KNTwRiIShKk-kVbY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "eGbGkhmvh8Yu5mlDj7T6FbL1x6Kca5g4vRBSI7SWF424JMOEUwGUiT_eWsu_kdQk65f4-7ro6EcIc5uI8xlPBA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:f9-dwLvtH9o_3c2EfAMRTLdi3f9KNTwRiIShKk-kVbY",
+    "alg": "ed25519",
+    "value": "wSkK88DeYVsYCiMTbyE3hHvKs5pjHBccTSIKbcfYx9iRvSEr_5Xu3jsDVTipWJabq7EJ0-RqFjSW1dZz1CRrAw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 29,
+   "nullifier": "sha256:82c28f7387b51aa963d87f0ba37ad287873275e7d5884b0de31e40d89204a6b0",
+   "choice": "Keith Bramall",
+   "voter_pub": "YbFRaHLg8Rd6C46WrBNP6vvg6rvxG3IKnT_raDX1o7I",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "bL9NKA91BiQPwcVUkkeJNjeadMFxaA7WQGxe9N48YcKcaBIPHscjU6Nu2GD5SmwV1puIqfaoU4qn43HHDz9ZCw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:YbFRaHLg8Rd6C46WrBNP6vvg6rvxG3IKnT_raDX1o7I",
+    "alg": "ed25519",
+    "value": "2MZGMZgmda--2jfbswXksp-s8W-m21kqxsqJ2LdHTgBMnuY4YBxGy2jD9ylQvq2384kbb95jIAQX-MPSUJYBAg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 30,
+   "nullifier": "sha256:dac44c380c1f246fda0e272d526d2bd057c9d6da3acaba733fa3c82ab9ff4111",
+   "choice": "Keith Bramall",
+   "voter_pub": "D6FWM35UDPV0eHjwv9WPK7hpAxIVf6DtdIjdzhqUY8E",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "7WjFSjgDLBX852Agwq9uPNyNzk70watb2OIPbq114kCyvRIhRljy6Na4BQVnScR7OA3recwgBCrSLt5XljO9Dw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:D6FWM35UDPV0eHjwv9WPK7hpAxIVf6DtdIjdzhqUY8E",
+    "alg": "ed25519",
+    "value": "oPGnFSeXfOuca6kf5Y6cqpdajeEb7_7Nd52JfL-w2wijd7GDOAlb0FdYa4jaxt5RKmpBRwuzBvIGAriargZ0BQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 31,
+   "nullifier": "sha256:7bda84d7f50d417f3515d7c9008f4eb726f3c58fcb0c4ab4ecfb1973cf1bdd0d",
+   "choice": "Keith Bramall",
+   "voter_pub": "0wByl09DlpjHDoe8OEHhAXbYKoWXCxCWXn39D9-qJoo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "nR2gBjBFXGCfct-b1K1jTlN3DNNIOx85AQMlkYjP5Znb8Dqn55u4dF0DeamqJwXBzaLD2LuEoOzIJ2kIbHGiBg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:0wByl09DlpjHDoe8OEHhAXbYKoWXCxCWXn39D9-qJoo",
+    "alg": "ed25519",
+    "value": "_3RwVYfgOiHmThq98-RwKQbnGRym6ZOtr2Ejfarn_D9iRN7SHgq4CsqUHqkaSoLPHwH14IPaBxCTF--KB6fwDQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 32,
+   "nullifier": "sha256:684fd52158d033cfcc1b642fbe27fdbb7cbeb23f7305ff2d4d6cd745622967be",
+   "choice": "Sandra Okafor",
+   "voter_pub": "WCsxKB0Sz67rKIcB9lwN1XlmXF9h_Cg-Bditsn3HcDo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "0_0BZy2G6uB6ZUbVw38ZFgG-p_eSaHMSmWKwQfwu9Xup3FCcidsAKKJwWNIh5Yr2833fzjKFZDzRy23-JYVfDw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:WCsxKB0Sz67rKIcB9lwN1XlmXF9h_Cg-Bditsn3HcDo",
+    "alg": "ed25519",
+    "value": "BsIetUw1zAmVKM7_D-86SoD53YfelnwzPOohQ5euLBg9OO2cMmLdefxWnlNyA2b1SXWlEVDGRe-lxUAL2xyABQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 33,
+   "nullifier": "sha256:1113cae46cfdbb0017d26ac297e84cf43399345ddc1b5aff2c2094453761cc12",
+   "choice": "Sandra Okafor",
+   "voter_pub": "Ooq6t2XkqboBdFyJbAaNUkD_Vk-094DCl9TTWsRGHGQ",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "hjKJf0i6GjpNMAKh4MIgp3Ffa-bmEnOYaPq2Ar6pXL9rIiqcyEjrR7VI1stYX2LIzC0JK4TS4naNXqSG4WqdBg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:Ooq6t2XkqboBdFyJbAaNUkD_Vk-094DCl9TTWsRGHGQ",
+    "alg": "ed25519",
+    "value": "PAWT7lduRfEKa7L8BvELqUpP0j74_d3Ka3zNRlAs419_1CQzzPER94_nDdLTIt_pi2vPGxsHrIL8vHDtI1WkBg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 34,
+   "nullifier": "sha256:d15dea3d2fbe7bb1346a51e0f8cd4b90d1974edb46667f0ea440afa4024491d7",
+   "choice": "Sandra Okafor",
+   "voter_pub": "tbNkS4pnqJ0Wf7-Nv3z9OkGrIZArV519EfHrS-bTTYM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "sn1iCkMwaRcxuPwa33FnEIP6Wpq4LENbN3j4MNIpSTh6oowqZGwARINjNaqD8cnY85TcBtB83Fuy6OcBGxLJCA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:tbNkS4pnqJ0Wf7-Nv3z9OkGrIZArV519EfHrS-bTTYM",
+    "alg": "ed25519",
+    "value": "y1wYbwcZuREdnVXycumc2SYvGidTS5V_NQ5TCsZ28a8JbZZYY5WnBX_8UcQIevVOQckvMducZpnSHG6olKo2Dw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 35,
+   "nullifier": "sha256:2fcfded7df4e6d30b7b484f46c76381ed9511d4def5bf2aeba17075f8ac3aa78",
+   "choice": "Sandra Okafor",
+   "voter_pub": "L3rsy8yIsShuOrEIDtWtxVl2EhydMdOvU3qON2VqC_I",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "NzO6IYnGu1wIF9oNO1rhBwVJqH8Beae7EF9Z05qsTMufXSbFhZXZtzVhyT1FSixW4hYlUEfKa1GrE3TsewX5BQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:L3rsy8yIsShuOrEIDtWtxVl2EhydMdOvU3qON2VqC_I",
+    "alg": "ed25519",
+    "value": "qMCRhr3fiEnbbEqzAGaq0Ojvvye9X6MNpr1c5FAWSIcf2sEciNCytA_73-bfzDA9g61PGKNiNuZ0VRuQqU7nCA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 36,
+   "nullifier": "sha256:221b87c20274ecbc71a3edaf4590977f64e4264950f92c27becbe5f60bdc6a23",
+   "choice": "Keith Bramall",
+   "voter_pub": "p3uLMUxOTuPb2xR6jIr75xHGGiUky6fqDHkX6spkAQM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Myo4DFjkOppi0ggUymdiC48Pj5oJI3ZXEK0r87Tl4pm4JUZRj9aF_bmbFKBzhAL7N52Eloq-vf1FZ5ngUocCBg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:p3uLMUxOTuPb2xR6jIr75xHGGiUky6fqDHkX6spkAQM",
+    "alg": "ed25519",
+    "value": "S2BokhU5Q4S4LmEzDJPcHbVUWX_apYGZT0MhaWy19HsQn5MeSBEN7ozXFo6TjtDUEtw2xeGfbpssrd26Q8j9BQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 37,
+   "nullifier": "sha256:573c608906f89a5dcff78c9ca97f295e3f282611c9694c92bbd20cb4badea239",
+   "choice": "Keith Bramall",
+   "voter_pub": "lJ9WnrNaBph8Zlw3ZCb-Dzf2NMTTw7A15Z_kzBnn2b0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Vrgg8Pl1jN8llaGLRCjjsYsmER91PwGTycGDAG79jR4dYFKzifp-Yt_mUUTe9ePVgfZk_pvCeswgWxgcs_cUDQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:lJ9WnrNaBph8Zlw3ZCb-Dzf2NMTTw7A15Z_kzBnn2b0",
+    "alg": "ed25519",
+    "value": "7no5qghh-T1f6O3F3G0MCJOFds3kesjU2lLcbC0tnBeBMr1VCqC0DdU9RpOXO3judLadeo5-t_1eNUPDBzn7CQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 38,
+   "nullifier": "sha256:07fcbfc899a5c4b7321db5a2a8a50f569da4dbfd60757797423f30554e8eca4f",
+   "choice": "Sandra Okafor",
+   "voter_pub": "hmmmXtvdbBsGAGXVCGZwvQtJVW9Qe64JR44vnf-ZCU0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "zh9QyhnuNfbvePHekEarYA1y64r6smzlWdm4DNxFgw2wX7-3Vrx37nlBR2f-nlFjKRui6BmDZgh44ylr15Y_Dw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:hmmmXtvdbBsGAGXVCGZwvQtJVW9Qe64JR44vnf-ZCU0",
+    "alg": "ed25519",
+    "value": "P0vRjpARTAOSkJTq5lTEt02rWzkz3K0C_ur9k0FgqA0EvcGfnJzWCY2mcG5kN_bUxjO9_bBr5VSSjeXn1layDA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 39,
+   "nullifier": "sha256:956aba514840a4479e08e8b8f006fdb26e2cb520a20e1c161cba0899258d5645",
+   "choice": "Sandra Okafor",
+   "voter_pub": "ypDxk4_qixYjqttqq1IU2ZrAYWnEcpulHZfrb7A2_NM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "HR-zponLxO655_zL5bvPpRfLD42lZ49VBBBsj97ryxldAnwzO7_fdIbbK3plPqQbVjFR5GbbIJ8aqx_O3LicDg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:ypDxk4_qixYjqttqq1IU2ZrAYWnEcpulHZfrb7A2_NM",
+    "alg": "ed25519",
+    "value": "uS8TXvyZZgZKyjy7DkC6vodPE1-5uq1fTioQ6i_MpSuJ5GPY2amHQ9_igmuq7dAht04wdz-I6JkXeP9XgzzoDg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 40,
+   "nullifier": "sha256:239b8260704705a6c2e2bcb1a2b1c70deabb06c8ad2d1cd7eaed1f427cb0da97",
+   "choice": "Sandra Okafor",
+   "voter_pub": "qNQ4a4n2SO52tfMvEYtLNkadrLuKsMVsJQTJR7wh9rk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "CeFwJk4TOf6Uo0Q-4nSc-oWq7pB9x0qBcW05aCIKlePCFiJBnfFLaVvz92c-zuDWdof7CyU11dFarQ6H7BEBCw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:qNQ4a4n2SO52tfMvEYtLNkadrLuKsMVsJQTJR7wh9rk",
+    "alg": "ed25519",
+    "value": "cjomQwNz8wYKKqa5CkTotY1SLE-m3PaIayJe0rZ13RHMMQzueRqmwuv1VmRRqy5-d5B38TD83d6i4x-Ed5LlAA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 41,
+   "nullifier": "sha256:0eba9218bd60107d2fc091b915f7c3c59dd00cb4770c482e78926c72ee4de1c4",
+   "choice": "Sandra Okafor",
+   "voter_pub": "9nhzY3-Mu2fxBzFwgWLfDOKDgHtNbNcOgCSEpDw7_8w",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "qbpWKDJ0Pr1kSTN0r17E-K_bPX6yAefTP1qVfuBa_6s6s7aaS31giyKU4HUKc_4jNQN7cIxJN-Ohw8cOtleADA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:9nhzY3-Mu2fxBzFwgWLfDOKDgHtNbNcOgCSEpDw7_8w",
+    "alg": "ed25519",
+    "value": "kH-X815KDCZLoZkze6Tve-fXdni5IqLguVxQ7v9HmlcOkejhFVD9sdymdueFVfMDlSXU05R5Sl9KusEOfB0UAw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 42,
+   "nullifier": "sha256:58434ab3d9f6cd00d9aaced93d83fda10d87110a6828e0c213c077ab06dc9f9d",
+   "choice": "Keith Bramall",
+   "voter_pub": "47yM7L6uTWhnl0KuA47C4cP7ZbYiNSDbxmOPaY7_QFo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "9lEg7dIaSTs2R8qvaKByAQG-K34maH2gfeB-ZNj5oYTVAE6rS-1Bz-DXXFvJ9gb0OL3aHqjHRWNSiJmQ6OisCg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:47yM7L6uTWhnl0KuA47C4cP7ZbYiNSDbxmOPaY7_QFo",
+    "alg": "ed25519",
+    "value": "k4A-MPBSXe-s-5HHtFUp3lUUCzYMDRRo0TrzGEWPHOcaeYX7OFleDhdHyyG_cUlr78qVjyqUdzBh1Mi8mRPBDw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 43,
+   "nullifier": "sha256:f968bf03c38c442f48242bb39227830fb4bb713f598f0ec062bd069adfeadf76",
+   "choice": "Keith Bramall",
+   "voter_pub": "oHhYURXAGLIfKy-w0qu1Wjh5n7owyAls4d2F12a0irY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Zf6Ed8OdUiwRYCPxguv1Q5cNQKqmGf2TZFbc4z1nfvSrcPhS5yd4RRciGZr2fDjpLw5uj_Ggs434r6qxK_IrAg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:oHhYURXAGLIfKy-w0qu1Wjh5n7owyAls4d2F12a0irY",
+    "alg": "ed25519",
+    "value": "rG21PJ08DLGIm_zaVjCnRQMv-jaOKHBB4Hf0hdB6bfimWz2UOJqJeaWfbA3bXEGOFEclb6QRnErj0L09OI8wBw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 44,
+   "nullifier": "sha256:a0b085b4cba4b3a128d1cf6fd506f79a810be415f29ab935c62c7432226538e6",
+   "choice": "Sandra Okafor",
+   "voter_pub": "S5LOxWlD8_qo9xgy3QhkT0uPcgmtrPGLc2r5RSXHNag",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "kleWBln3LaGlG6s_t0kpRJrHfNhfGZQoQIm_GhNi7q1Qimqp3BU3mIQr6l0qmwkFXkXJETqrXCL6Yc8vXLO9DA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:S5LOxWlD8_qo9xgy3QhkT0uPcgmtrPGLc2r5RSXHNag",
+    "alg": "ed25519",
+    "value": "y0ZrZ0rnztJ2-G0XWdV9AHU32i56IMRyxLQyBIVXOfLjfFKNkXVerMDJZ0lFFl2E6M-bAwJURMtHmN69c0cDAQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 45,
+   "nullifier": "sha256:51e407adece72ec136ed16ad8213ef5a061d9843445b410ccdfc2640be97ed09",
+   "choice": "Sandra Okafor",
+   "voter_pub": "A8ssVfNpOFTINlzHP9i3IccsKez5QPKe7tmv7iIn90Q",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "0kMYWN4KvFNbHkSjDc1fgemkiJpetKxiSRx8eXPuzIWIwE-j5wvDvSKUQbPEr2Vk62LMFKSwmV4p30vOvVALDA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:A8ssVfNpOFTINlzHP9i3IccsKez5QPKe7tmv7iIn90Q",
+    "alg": "ed25519",
+    "value": "Kg8mlYwoXT7cna928qcYU7LNTqsV82rfUbnzG5pR7gYlanz_wOCIZoOvEk770IuaqbPvmdLImFCawX6kwgblDw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 46,
+   "nullifier": "sha256:180e016318127af5fa4b2b118692703f26a288316a6a8c42cf99676fa71b653a",
+   "choice": "Sandra Okafor",
+   "voter_pub": "WCTsJ2pRMy68RmNY4r7u6kR6LffVZHb2jS2eaIFivOw",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "PnN-701lYH4yrRm6hAnD49uR8AIeovX45dKgX8dXvpapAs8DZSlO8mBu_dGXeS2C6PUuHsyH_A7eh5Xoz1DMDw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:WCTsJ2pRMy68RmNY4r7u6kR6LffVZHb2jS2eaIFivOw",
+    "alg": "ed25519",
+    "value": "Fhx-uQYw0lzlLrzT-Zf6xyyZx1l2LzpVJh588ommcENpK0eCBt6hup0CCns8j0V7oEUEsuErH8yUm3Y-2tP_AA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 47,
+   "nullifier": "sha256:67b83febbe0dde6dd75ccdd992379ec4a36ec225df448b5cecb1a35e0cc0e203",
+   "choice": "Sandra Okafor",
+   "voter_pub": "Fl9U51ETcB7S6h0RV5LIGj-_wCwym0b1KOEvSdYE7pg",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Q3GkgJEbt4sRNOnzGBnsos_Uui4nyPRd_IeuNLBKcqFiQOVxPRwIBzpAtZWK-RZgpoflQfVqLlMhcOPLqd8pAQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:Fl9U51ETcB7S6h0RV5LIGj-_wCwym0b1KOEvSdYE7pg",
+    "alg": "ed25519",
+    "value": "tOkZyfv8lf6jKZCJ9aJ96DWieJ_mP-p1AqHwC4POq27c6yMPoBHhc6JnElp0jVlaeYxN60T9_4g4E9zste7ODw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 48,
+   "nullifier": "sha256:0caab47ed6c760601138b80068b3c63537428ed04c808e420e50fed46cb4a472",
+   "choice": "Keith Bramall",
+   "voter_pub": "PGs56XBoDAx3ASxpujPDNRE923T126feTan_7DR6_Wc",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "oJDzTJiqqs7qOqnNF1p8jgTOOX_-WyGLSuoUoYSa2DLVLLEgME1XAHvthfF0fmhzUsHL-nNL70D0BxqYMJjdAg"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:PGs56XBoDAx3ASxpujPDNRE923T126feTan_7DR6_Wc",
+    "alg": "ed25519",
+    "value": "UI5CXWqEcJwvaJP995ZPedVGJKztWY3T8eogCMzp1XaRL60pgwj_Y8u5kQMNU3GrRTIcMteWof8VoO7yzEWfAA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 49,
+   "nullifier": "sha256:7107992669acb561b3bf47dcf46ec3a40ac62f0885420e76422b3d94fa66147a",
+   "choice": "Keith Bramall",
+   "voter_pub": "wMLVG7_pf47T1MD2fSWLuez8Y17BmGFDFeXAkBevtqk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "fTb14RU0ufoNrszIhBfuLoupfawYXqAoxvx3H59pgT48pB2n_mNt1v2U8juSvJSJuW1rnn_mO4V84jYqRiYKAA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:wMLVG7_pf47T1MD2fSWLuez8Y17BmGFDFeXAkBevtqk",
+    "alg": "ed25519",
+    "value": "ydQ0PuqghEJ7omcrfNeLNWee4LWv7_VTwqTA4uLPqRffNPI9Z6Kjh-ubQsqNzBfCP-tgdO3yKuK3Ji1smwAqAQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 50,
+   "nullifier": "sha256:f13e5bca7a0595e219c4a30084170fdef21294abc523e404ecf2b937362e5e6d",
+   "choice": "Sandra Okafor",
+   "voter_pub": "HGuWBzlfhEaVElyM2ZtGlaaFxSOTDN2VxzXw33V-PmY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "QjxGanHmCjd8-dV6KB3YPcayYhVdV8CMrXw1iDGxu9blyGceqGcsRGpBlSiswHvRoPmmaD0GC01ZSgNGe2KkAA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:HGuWBzlfhEaVElyM2ZtGlaaFxSOTDN2VxzXw33V-PmY",
+    "alg": "ed25519",
+    "value": "wXOQvxvd1z2hrWaNooYdEDrSedOPfurhC9DzqdB9gQ6PnntJVPibF9dyVYR-Zpy9Okq5VTouN5EC1kYAdbt8Bg"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 51,
+   "nullifier": "sha256:3a047f274ce072486fd111707d15dd9b60afe51895869076d4adf3afbdf18795",
+   "choice": "Keith Bramall",
+   "voter_pub": "-Vnmzk6FhEew2BxQP6MIdhIatHjRxlyWbprzvzmoHfo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "1DB2F-U4j1AcyxlUTFMqLxNLHxYmqWcwYphxiR22jQ9gmG5EVOPA110siDdnDzGKj1YxrEZONAYTgZJ8B_lXBw"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:-Vnmzk6FhEew2BxQP6MIdhIatHjRxlyWbprzvzmoHfo",
+    "alg": "ed25519",
+    "value": "5Ymfejzj7lKu7uw3MTboGn95o1TZETp3YuEMmNgIr3e8_E_3aIUIxWlq2nu6KhFQe5B_BG7KI5j7VKrrWy2FBQ"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 52,
+   "nullifier": "sha256:394c3f0ee2baa037291d21c0cccffadefdfc868f8df31aa7feb928220c6514ca",
+   "choice": "Keith Bramall",
+   "voter_pub": "F4TfXWdnbfAcSoLQQhB_IRcLLtwKux1nQuXHcebFQiE",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "8c-PwWL9z1vRJk986-7tnVePnsaOfv8iKnMai4zt5CwGIicEBkJncmwpWdZuIprFNByKuQUrGNH-EDikg-87AQ"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:F4TfXWdnbfAcSoLQQhB_IRcLLtwKux1nQuXHcebFQiE",
+    "alg": "ed25519",
+    "value": "_VB6HicwU4RoptDAZBmp2Jh1NzzoiObZvpN5X4nYN7UWp2p68J5FI6oxqwcDiXQZutaOFoL2_k8gYgALErTpBw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 53,
+   "nullifier": "sha256:f3d961634ce8364f3526965c12b9e47fbf5cc25e048bfaf774cf71ea98282114",
+   "choice": "Keith Bramall",
+   "voter_pub": "wYExIUZ83OJcOqnaIoEuEUOWT42zHvffiWXdGGt3tfE",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "CblqW91JQMF4xbsg7x-fKpwBqv0FphGZ1MOAePl-___PEWGdkqhzEgHNQZX-pNyW5kDg7BVHgBYfSdZojzXlAA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:wYExIUZ83OJcOqnaIoEuEUOWT42zHvffiWXdGGt3tfE",
+    "alg": "ed25519",
+    "value": "sI9il-hiQ8VqGHEUNIyuGEomO48EjTkQyKP0x7wtPq6pMxHcNrUyyBEkWc4pc7edxrtxPQ2FpD1Wn8Li1ifABw"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 54,
+   "nullifier": "sha256:f3d961634ce8364f3526965c12b9e47fbf5cc25e048bfaf774cf71ea98282114",
+   "choice": "Sandra Okafor",
+   "voter_pub": "wYExIUZ83OJcOqnaIoEuEUOWT42zHvffiWXdGGt3tfE",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "CblqW91JQMF4xbsg7x-fKpwBqv0FphGZ1MOAePl-___PEWGdkqhzEgHNQZX-pNyW5kDg7BVHgBYfSdZojzXlAA"
+   },
+   "channel": "app",
+   "voter_sig": {
+    "key_id": "voter:wYExIUZ83OJcOqnaIoEuEUOWT42zHvffiWXdGGt3tfE",
+    "alg": "ed25519",
+    "value": "OOVokf-c0dfli5VdfiQ9v1tBV1Ouxp_-87IGyJqw0cFpvckjf7i4WHeD-NR_aNzLrpfnXCzigJjRfL50ZKftBA"
+   }
+  },
+  {
+   "decision_id": "2026-agm-treasurer",
+   "seq": 55,
+   "nullifier": "sha256:b9b900514ae5d9bf55fe21a202b9048babf611be5957cd61e510e0965c05c66e",
+   "choice": "Keith Bramall",
+   "voter_pub": "AED9ylfwQywgJ2cwWA89wGjCSNZuMr5F3gllyYjt8FM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Pi4dsOrdfEHObvfVB4y-UB9fwrqsIPm5Etsc0AKxqEI3WT4lv8xZVyoqPgPmQGbDEaDdsw0acCx9wOXL-3YDDw"
+   },
+   "channel": "assisted",
+   "witness_sig": {
+    "key_id": "assisted-witness:Plot-holder 12",
+    "alg": "ed25519",
+    "value": "GwtzMssNe9nAPsAcdIvDjKMqgjLs8vg0m5meA8SGtFQXIgS__kzFe3H26H0F5bjDxwJTZPW7imzrw--P77gRBA"
+   },
+   "voter_sig": {
+    "key_id": "voter:AED9ylfwQywgJ2cwWA89wGjCSNZuMr5F3gllyYjt8FM",
+    "alg": "ed25519",
+    "value": "dZxdRHDaoxvspD7uwpBsfgeCgfMUpvgQQPTjCAQBAaVUWwEIjIgv5qBPu4YNWLyIk1o4-OYA_GF54ierYKoKCw"
+   }
+  }
+ ]
+}

@@ -165,5 +165,7 @@ cryptography is not yet shipped.
 
 ---
 
-*Every component named ships today; the composition is the contribution. Nothing here is
-running software yet — see the [README](README.md) for what the artifacts are.*
+*Every component named ships today; the composition is the contribution. The first running
+code is [`proto/`](proto/): the club vote end to end — all four verbs, waist-valid artifacts,
+an independent verifier, and a manifest that declares its own subtractions. The rest is
+specification, harness, and corpus — see the [README](README.md).*

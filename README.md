@@ -15,8 +15,10 @@ four services, four verbs, two formats, one floor, twelve refusals, and what is 
 
 ## Layout
 
-- **`KERNEL.md`** — the distilled normative core: goals, services, verbs, waist, refusals, measured status.
+- **`KERNEL.md`** — the distilled normative core: goals, threats, services, verbs, waist, refusals, measured status.
 - **`index.html`** — the architecture document.
+- **`proto/`** — the first running code: the club-vote election end to end (all four verbs, real
+  signatures, real Merkle log, independent verifier, committed reference transcript). `proto/test.sh` is the success test.
 - **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
 - **`schema/`** — the "waist": the two universal formats, as JSON Schema (Draft 2020-12).
   - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act` type,
@@ -59,8 +61,10 @@ deploys without running these — running them is how you regenerate it after ed
 - The comparative rights-map is a **coarse** mapping of UDHR articles to domestic constitutional
   provisions from public legal sources. It points to where systems differ; it is not legal advice
   or authoritative comparative-law scholarship, and some cells are debatable.
-- Nothing here is running software: it is a specification, a test suite, and a corpus. No cryptography
-  is implemented — signatures in the artifacts are placeholders.
+- `proto/` is the first and only running code: a deliberately minimal four-verb loop whose manifest
+  declares its own subtractions (pseudonymous plaintext ballots, no receipt-freeness — see
+  `proto/README.md`). Everything else is specification, test suite, and corpus; signatures inside
+  the *scenarios'* embedded artifacts remain placeholders.
 
 ## License
 

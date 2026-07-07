@@ -1,0 +1,546 @@
+{
+ "community": "did:web:heeley-bank-allotments.example",
+ "eligibility": "plot-register/2026: one vote per named plot-holder",
+ "members": [
+  {
+   "member": "Sandra Okafor",
+   "voter_pub": "HGuWBzlfhEaVElyM2ZtGlaaFxSOTDN2VxzXw33V-PmY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "QjxGanHmCjd8-dV6KB3YPcayYhVdV8CMrXw1iDGxu9blyGceqGcsRGpBlSiswHvRoPmmaD0GC01ZSgNGe2KkAA"
+   }
+  },
+  {
+   "member": "Keith Bramall",
+   "voter_pub": "-Vnmzk6FhEew2BxQP6MIdhIatHjRxlyWbprzvzmoHfo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "1DB2F-U4j1AcyxlUTFMqLxNLHxYmqWcwYphxiR22jQ9gmG5EVOPA110siDdnDzGKj1YxrEZONAYTgZJ8B_lXBw"
+   }
+  },
+  {
+   "member": "Nalini Mistry",
+   "voter_pub": "wYExIUZ83OJcOqnaIoEuEUOWT42zHvffiWXdGGt3tfE",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "CblqW91JQMF4xbsg7x-fKpwBqv0FphGZ1MOAePl-___PEWGdkqhzEgHNQZX-pNyW5kDg7BVHgBYfSdZojzXlAA"
+   }
+  },
+  {
+   "member": "Ernest Toft",
+   "voter_pub": "AED9ylfwQywgJ2cwWA89wGjCSNZuMr5F3gllyYjt8FM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Pi4dsOrdfEHObvfVB4y-UB9fwrqsIPm5Etsc0AKxqEI3WT4lv8xZVyoqPgPmQGbDEaDdsw0acCx9wOXL-3YDDw"
+   }
+  },
+  {
+   "member": "Derek Wainwright",
+   "voter_pub": "F4TfXWdnbfAcSoLQQhB_IRcLLtwKux1nQuXHcebFQiE",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "8c-PwWL9z1vRJk986-7tnVePnsaOfv8iKnMai4zt5CwGIicEBkJncmwpWdZuIprFNByKuQUrGNH-EDikg-87AQ"
+   }
+  },
+  {
+   "member": "Plot-holder 06",
+   "voter_pub": "7tqib4pqdJSd8YSFGpBMs-B068PNbPjf5N5zmP85_Tw",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "fHWaAuu6Yvn-KA2DCN-H3K6vuBiwoEqxh8CxZlZD6mZ0wCey3QV65ggjdDAh2IWdZmXsklH8rFDZw0OtwXtpBw"
+   }
+  },
+  {
+   "member": "Plot-holder 07",
+   "voter_pub": "sfXGsYz3OrGS7eeK4aywO190kCL9pjAAAd7HeWACTFg",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "kecXW2c1IFLSEXYQxAQ0KhaZw0TjjXl1yWYYmLUtEMFOJdaofGGR1UrMLk-xrvPMZqyEH4bE1wPlCWDOycG_Ag"
+   }
+  },
+  {
+   "member": "Plot-holder 08",
+   "voter_pub": "jB4UT4dRlW1gDaRHS_gGTQARZ3WPZgyD7gcBylzbdZY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "cfnmcmpNgRxYbuER4x2N5v8enE40YBwtygDCvoEX9JnqA6CnuCUF6eLOJHkivDStGAZyXwD4qff0VcPozM8ECg"
+   }
+  },
+  {
+   "member": "Plot-holder 09",
+   "voter_pub": "HSiU2Ww4ymu7vRNohNJupuYz-P8mHIsUVWK9CrxAKBo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "nNAQwDG0eNTktL8PNvFuEJbuCbRzqSRR9P-izM1QcswdwLcrWq8HE47gujmM5LdSj3djfNslnGQdjeRyC1JDBw"
+   }
+  },
+  {
+   "member": "Plot-holder 10",
+   "voter_pub": "bvN0c0GxSufflP7fSuY8l2NApFGFv_baVMxWYgsjvV4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "ddD9iVVAkp9CUjytTHQGGSK1ZT7Hcx6rNAh4W7wqpgEFRv57QL-67Gt5ebJLzGYsmTAx9bAHvngKmoFlDx6-Cg"
+   }
+  },
+  {
+   "member": "Plot-holder 11",
+   "voter_pub": "sP7XsynW3zYkMwYmnc8ifvh9d4UpY6CeLCfGpKkT2Pw",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "wIeKnC1RKiHDYivJTTFUPgvfxOnTDrX66AFxg9raXc9Q9j_U8g9rzEBAL8YSIxHI1bGEYfMVKu1_4R1ZoAsKCA"
+   }
+  },
+  {
+   "member": "Plot-holder 12",
+   "voter_pub": "PqfSeWlZN2tFopaEKlMiL7_8FEEzga0B54FpHzpOu1k",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "8Q-zKXO1jEkGPgDc-VwdlOh-fwCoAI-QgfZhlQFhZSN0X_seaiGGPB_gZDfguhZIUzVbpzRBVD9Ifxyx2JGJAw"
+   }
+  },
+  {
+   "member": "Plot-holder 13",
+   "voter_pub": "RwbH5nIA8BbN2rhcUkdKXjh2RQhWSJlM-o1J-VbZwZU",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "uqmsy3e7bUHXdnqH7DNRwfKufh0qakZ0tVJratru2IzgQD_mzuyRYBr4bgc_sSA3IZQSfJIVSgy54AyDJO-iDg"
+   }
+  },
+  {
+   "member": "Plot-holder 14",
+   "voter_pub": "W649jq1SUuCXUiydV3lChG0V6u5E8xmq3Qu6s71oFyk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "_v6Y9nOmwpY-nGJyF85W-U65kXjkjNWkZE1Z65Ntbnf5chnbUVKbaFfd76BSEMoJWd3gAcqXss19HL6qR7DYDA"
+   }
+  },
+  {
+   "member": "Plot-holder 15",
+   "voter_pub": "_FbHdPULdwANUDsKcMMU0Phs70QpmrlPH9tOG12rGxM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "PgmAk5LuDjvzdtl-reaEiZjuffFMgY4Fgp4oM3lxXEC1dchkTQdNjz2ZC-Th0ZbAdOfW7pv0tQMWjelnV0FFBQ"
+   }
+  },
+  {
+   "member": "Plot-holder 16",
+   "voter_pub": "Eeu6S7tcUd3TaPPLHH_c49OmG2RxEUZKoeR3KlSyxvo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "2B6pF-NmFJo59nEns9A9VqHuLV9aWqkZtqwRk4QXNuNBm6bBgS1yez-FLuN3SXowhB0zNOuMgAEfphYaXhw6CQ"
+   }
+  },
+  {
+   "member": "Plot-holder 17",
+   "voter_pub": "dU7sAHFrcXHKUj6Cp9RE4KFQiStyeBGcie7KqgMeQV0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "3sBpbAWazlGPqolXKH9Q-DuPk8ivHib4h_lEW_TwVRI0KuNQOg0rCJthMsNM6gvnsPXemQ1HsRQznjTnL0oTCw"
+   }
+  },
+  {
+   "member": "Plot-holder 18",
+   "voter_pub": "kfGMmxpYPYpznmcoVxXZdfmuAVfjDsDpg_L802p538Y",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "EMGYByUil5QXcHKWjo4zdcC_gnMVqdqsdU7o6sua21ukAFMaYS_67PWkh6dbIKfRMcM-mAaF9dTNxYMQZKXsBA"
+   }
+  },
+  {
+   "member": "Plot-holder 19",
+   "voter_pub": "MGF8y8EbKRCgTLAyq6H11IfX62C3C4wjhdCNv4w0zU0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Qr85CVCX72oxPNaWw-fMWXiJR2KYa-pFLU0On0GZK6WSxE7rozy4Vr9gSTrA7CZbPYM7J4YnQjtLlYufnz1jAw"
+   }
+  },
+  {
+   "member": "Plot-holder 20",
+   "voter_pub": "jPGAdfxLi7BE9iXSn9A6ddRtmIl-IoQ0lub1ZaUWNg0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "DhdS_yzFqSAiSI7TsCyN1jCD3R-pbj0lD7QT-1MMeObVguXIZ8xo_uvGSC_ZUSF_zxRnsZJqr7JUMcV2vXXuAw"
+   }
+  },
+  {
+   "member": "Plot-holder 21",
+   "voter_pub": "W_VOutn-Xwd3Z6onAQAG-WbmcN0LkVxpxDfuM5LkRWk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "lnwounvpNr7Yg8nGudXxd_vV-uNEVIzQ-1E2Esr49d4tEMIVc4jbPvwWjqPHiCO2XTFGZhAUhaBK9o3zv0M4CA"
+   }
+  },
+  {
+   "member": "Plot-holder 22",
+   "voter_pub": "xUhfxWo1v6bWGGD38tJHkLNWxCl-Qo7r1zzDLVHtIPA",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "FnP2V8NOOadc2TbQfO5rUUnxN6sfJsKOcSlq9ZpOuhJuF0nQXKoRCWw5vPXysFToiwQsY2HxH5FkZdQI_etBDA"
+   }
+  },
+  {
+   "member": "Plot-holder 23",
+   "voter_pub": "D6BgM1FgzZcN0kq4TtAZYMHRpw-Bh1mmMPICg3yiE7o",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "AUcFfxyF51z0YnqXY12zIvGRD2VV6FH1nEncOdBMx6m2Rx0bvj3y_WyJ5c6hEy481aoVpnPjVCcc24BbuRL9Bg"
+   }
+  },
+  {
+   "member": "Plot-holder 24",
+   "voter_pub": "hlQzz_uwLyEv-2HSOzhYqkvP9jVof0sCNMkKCbPwkz4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "YncYIr9BsEwBnNZAkm_0RXxh6oAYbiinjOUu65P_niQ2vD_gNsIosPrGDvc6HHZXguPFtHHZcWY7f1W3qQTTDQ"
+   }
+  },
+  {
+   "member": "Plot-holder 25",
+   "voter_pub": "ZpS7EcIsSyzfV-SAc4bfzaE5gn6Wlc6g3sQTn4iixmA",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Px8iAhcr_1vrFD0qoO2mv3RXpX0epfvOAEhAD8-MNHEjd-rleX4PztG2ea8xo39fSPq1JuGpJODy9nn-HQIEDw"
+   }
+  },
+  {
+   "member": "Plot-holder 26",
+   "voter_pub": "J01Q2d8j6mJDPr3ii4uaTGcARM66mC6QS7mrfQ15zjo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "idERi58gdvKJs6qx1ay22OmB8OKRNi0hBaQj09uWMX6yzJkGMBPDh6DGkIZyyxv43sG2H_OZ7RHRSUa6TbpZDQ"
+   }
+  },
+  {
+   "member": "Plot-holder 27",
+   "voter_pub": "1BENGeJrpmYurN0bNnsST2OEFUurdbgzMXLcffUvlcY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "WDahY1q3X79VKyfsv3iC98bJbS8fhYlhYBMKVZa8DMKDT6x0eheKt61AL1K2VlEt23ue3XrKE5-IhqyFeAEmBg"
+   }
+  },
+  {
+   "member": "Plot-holder 28",
+   "voter_pub": "KBGgIcKRt3ggvNE6Qt0OocSng6d95K8JgKU6LAUvtd4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "igH3FvTeO5g1r6jGbAYUpunQnl5j_Os8BlrZCU7_r-Wsv11miyC5vZ40mIp8GwCZ5_daJECIvNZAVdA7qs4sBA"
+   }
+  },
+  {
+   "member": "Plot-holder 29",
+   "voter_pub": "l68ocRzLcBUyBnM0WFSec2Umiv3d0Qal56TAnXmOXho",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Mls74ntZ9FkGXFiB3pWG1z28HHQYdBK4qx_WhESFqRfaefH-Cw2V19AbTr1S7bUUtIvuuuYFia1L-FZHBlCvDA"
+   }
+  },
+  {
+   "member": "Plot-holder 30",
+   "voter_pub": "_4vpOcQtfbVv0_dQkdx9oDOlhW3irQh_SD3eJM5DfpE",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "POIEW3xI7pKPOfRQhsnXkrjzDyLNBcC1UL3VvxiGTVv07Gmdd6cQl-Sv8_9DaKannYMp_IJXmrIhxP_yF2O2Cg"
+   }
+  },
+  {
+   "member": "Plot-holder 31",
+   "voter_pub": "F-9-V4lwH5pyvZ7kKTdrh0OhFqKQTWXM79TG5n0WZMg",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "_UKWX8S4Hb07c1UFA-rYTPCJ0CfQ-rT3zes9WP3Ynf1BS7z3MbklxcBaDpA2Mz9FyeEHq_6sWIPMIBOX94TKAg"
+   }
+  },
+  {
+   "member": "Plot-holder 32",
+   "voter_pub": "j7ANAzmEBQVoqsSSnW7L0aqOTnw2_izCB63VkxtBNkU",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "8wa-6dee8lEiwldka5O1X7qzz5WZFEFIIcdwExsE_ykYR8-xwPcWhyCIbSg6nNr6uZiFvxkCRBe6Hr-_3FoFCQ"
+   }
+  },
+  {
+   "member": "Plot-holder 33",
+   "voter_pub": "SBSFT6-YRR2JC4peVYhml_LUtC0j_9QIY1Wb8I0Yrd4",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "fELGyF0inHxU9EbNOenODXliIPn7w7MhUEGAdh84IcEOGQaL16tRMSpD6gZzapEY_8o-iFr25a71VCleXFJ9Dw"
+   }
+  },
+  {
+   "member": "Plot-holder 34",
+   "voter_pub": "jgRxCP6K29dRBLFm_UlBtDV0Hb5962BhWTJXR3IoRkM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "_lzs_bvFc977mdpT39RWOkKZ_FxWIOtvRzI8ZdKy_11ZoeXr41K0NLv_1H30S8IhP9LVyIBwjLbbGFUtGvQZDg"
+   }
+  },
+  {
+   "member": "Plot-holder 35",
+   "voter_pub": "DXHlxJxmJP-qjqqQljz11XucAX3i18IBha8KcGAEVSk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "MW0njEYqAPiiBYsdJZt6M5gz7VFlC89QM3UfWzXdFdNmFnaOv4VWdDqaoh4ex2MVsCW2c6pHW_gSxY58YAVBDA"
+   }
+  },
+  {
+   "member": "Plot-holder 36",
+   "voter_pub": "f9-dwLvtH9o_3c2EfAMRTLdi3f9KNTwRiIShKk-kVbY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "eGbGkhmvh8Yu5mlDj7T6FbL1x6Kca5g4vRBSI7SWF424JMOEUwGUiT_eWsu_kdQk65f4-7ro6EcIc5uI8xlPBA"
+   }
+  },
+  {
+   "member": "Plot-holder 37",
+   "voter_pub": "mwz4fGCh9f0r1608I6-8HFeEKLiJX02yo1IFJ2iD04Y",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "d4gofy6ZYiRvq2hOaZYRNjaK1-2jhno3J1tZ47OH4ZnDQXYL8K4YhzZ8zwQyDEIKYFWZwiogrpBrhTubs9-CDA"
+   }
+  },
+  {
+   "member": "Plot-holder 38",
+   "voter_pub": "YbFRaHLg8Rd6C46WrBNP6vvg6rvxG3IKnT_raDX1o7I",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "bL9NKA91BiQPwcVUkkeJNjeadMFxaA7WQGxe9N48YcKcaBIPHscjU6Nu2GD5SmwV1puIqfaoU4qn43HHDz9ZCw"
+   }
+  },
+  {
+   "member": "Plot-holder 39",
+   "voter_pub": "D6FWM35UDPV0eHjwv9WPK7hpAxIVf6DtdIjdzhqUY8E",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "7WjFSjgDLBX852Agwq9uPNyNzk70watb2OIPbq114kCyvRIhRljy6Na4BQVnScR7OA3recwgBCrSLt5XljO9Dw"
+   }
+  },
+  {
+   "member": "Plot-holder 40",
+   "voter_pub": "0wByl09DlpjHDoe8OEHhAXbYKoWXCxCWXn39D9-qJoo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "nR2gBjBFXGCfct-b1K1jTlN3DNNIOx85AQMlkYjP5Znb8Dqn55u4dF0DeamqJwXBzaLD2LuEoOzIJ2kIbHGiBg"
+   }
+  },
+  {
+   "member": "Plot-holder 41",
+   "voter_pub": "WCsxKB0Sz67rKIcB9lwN1XlmXF9h_Cg-Bditsn3HcDo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "0_0BZy2G6uB6ZUbVw38ZFgG-p_eSaHMSmWKwQfwu9Xup3FCcidsAKKJwWNIh5Yr2833fzjKFZDzRy23-JYVfDw"
+   }
+  },
+  {
+   "member": "Plot-holder 42",
+   "voter_pub": "Ooq6t2XkqboBdFyJbAaNUkD_Vk-094DCl9TTWsRGHGQ",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "hjKJf0i6GjpNMAKh4MIgp3Ffa-bmEnOYaPq2Ar6pXL9rIiqcyEjrR7VI1stYX2LIzC0JK4TS4naNXqSG4WqdBg"
+   }
+  },
+  {
+   "member": "Plot-holder 43",
+   "voter_pub": "tbNkS4pnqJ0Wf7-Nv3z9OkGrIZArV519EfHrS-bTTYM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "sn1iCkMwaRcxuPwa33FnEIP6Wpq4LENbN3j4MNIpSTh6oowqZGwARINjNaqD8cnY85TcBtB83Fuy6OcBGxLJCA"
+   }
+  },
+  {
+   "member": "Plot-holder 44",
+   "voter_pub": "L3rsy8yIsShuOrEIDtWtxVl2EhydMdOvU3qON2VqC_I",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "NzO6IYnGu1wIF9oNO1rhBwVJqH8Beae7EF9Z05qsTMufXSbFhZXZtzVhyT1FSixW4hYlUEfKa1GrE3TsewX5BQ"
+   }
+  },
+  {
+   "member": "Plot-holder 45",
+   "voter_pub": "UAhnk6HYLsYR_8aVTnHQfR4BxVQDT9VAzuBlMKvo8Vs",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "iak4oiy0rjt91IN--LFSwZAUn9bQpz8umLf-mRnD8xhyjT_JbYqnrmr4QJ8oFEMGcX0yoIoRHwBXxiJRs0Q4Dg"
+   }
+  },
+  {
+   "member": "Plot-holder 46",
+   "voter_pub": "p3uLMUxOTuPb2xR6jIr75xHGGiUky6fqDHkX6spkAQM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Myo4DFjkOppi0ggUymdiC48Pj5oJI3ZXEK0r87Tl4pm4JUZRj9aF_bmbFKBzhAL7N52Eloq-vf1FZ5ngUocCBg"
+   }
+  },
+  {
+   "member": "Plot-holder 47",
+   "voter_pub": "lJ9WnrNaBph8Zlw3ZCb-Dzf2NMTTw7A15Z_kzBnn2b0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Vrgg8Pl1jN8llaGLRCjjsYsmER91PwGTycGDAG79jR4dYFKzifp-Yt_mUUTe9ePVgfZk_pvCeswgWxgcs_cUDQ"
+   }
+  },
+  {
+   "member": "Plot-holder 48",
+   "voter_pub": "hmmmXtvdbBsGAGXVCGZwvQtJVW9Qe64JR44vnf-ZCU0",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "zh9QyhnuNfbvePHekEarYA1y64r6smzlWdm4DNxFgw2wX7-3Vrx37nlBR2f-nlFjKRui6BmDZgh44ylr15Y_Dw"
+   }
+  },
+  {
+   "member": "Plot-holder 49",
+   "voter_pub": "ypDxk4_qixYjqttqq1IU2ZrAYWnEcpulHZfrb7A2_NM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "HR-zponLxO655_zL5bvPpRfLD42lZ49VBBBsj97ryxldAnwzO7_fdIbbK3plPqQbVjFR5GbbIJ8aqx_O3LicDg"
+   }
+  },
+  {
+   "member": "Plot-holder 50",
+   "voter_pub": "qNQ4a4n2SO52tfMvEYtLNkadrLuKsMVsJQTJR7wh9rk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "CeFwJk4TOf6Uo0Q-4nSc-oWq7pB9x0qBcW05aCIKlePCFiJBnfFLaVvz92c-zuDWdof7CyU11dFarQ6H7BEBCw"
+   }
+  },
+  {
+   "member": "Plot-holder 51",
+   "voter_pub": "9nhzY3-Mu2fxBzFwgWLfDOKDgHtNbNcOgCSEpDw7_8w",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "qbpWKDJ0Pr1kSTN0r17E-K_bPX6yAefTP1qVfuBa_6s6s7aaS31giyKU4HUKc_4jNQN7cIxJN-Ohw8cOtleADA"
+   }
+  },
+  {
+   "member": "Plot-holder 52",
+   "voter_pub": "47yM7L6uTWhnl0KuA47C4cP7ZbYiNSDbxmOPaY7_QFo",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "9lEg7dIaSTs2R8qvaKByAQG-K34maH2gfeB-ZNj5oYTVAE6rS-1Bz-DXXFvJ9gb0OL3aHqjHRWNSiJmQ6OisCg"
+   }
+  },
+  {
+   "member": "Plot-holder 53",
+   "voter_pub": "JdTYdRrPDsIiljW1dXUAKIBwWVe1J2yz1G0HZn0gOFM",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "a6GEPHM622lL5KNhUZzZ9QiUVaqH4MWt4Q_ClTpTpapeJv8BitKgAEsF9mlARlkPaO8NLyDjfK8Hq5ER5k3NCQ"
+   }
+  },
+  {
+   "member": "Plot-holder 54",
+   "voter_pub": "oHhYURXAGLIfKy-w0qu1Wjh5n7owyAls4d2F12a0irY",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Zf6Ed8OdUiwRYCPxguv1Q5cNQKqmGf2TZFbc4z1nfvSrcPhS5yd4RRciGZr2fDjpLw5uj_Ggs434r6qxK_IrAg"
+   }
+  },
+  {
+   "member": "Plot-holder 55",
+   "voter_pub": "S5LOxWlD8_qo9xgy3QhkT0uPcgmtrPGLc2r5RSXHNag",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "kleWBln3LaGlG6s_t0kpRJrHfNhfGZQoQIm_GhNi7q1Qimqp3BU3mIQr6l0qmwkFXkXJETqrXCL6Yc8vXLO9DA"
+   }
+  },
+  {
+   "member": "Plot-holder 56",
+   "voter_pub": "A8ssVfNpOFTINlzHP9i3IccsKez5QPKe7tmv7iIn90Q",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "0kMYWN4KvFNbHkSjDc1fgemkiJpetKxiSRx8eXPuzIWIwE-j5wvDvSKUQbPEr2Vk62LMFKSwmV4p30vOvVALDA"
+   }
+  },
+  {
+   "member": "Plot-holder 57",
+   "voter_pub": "WCTsJ2pRMy68RmNY4r7u6kR6LffVZHb2jS2eaIFivOw",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "PnN-701lYH4yrRm6hAnD49uR8AIeovX45dKgX8dXvpapAs8DZSlO8mBu_dGXeS2C6PUuHsyH_A7eh5Xoz1DMDw"
+   }
+  },
+  {
+   "member": "Plot-holder 58",
+   "voter_pub": "Fl9U51ETcB7S6h0RV5LIGj-_wCwym0b1KOEvSdYE7pg",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "Q3GkgJEbt4sRNOnzGBnsos_Uui4nyPRd_IeuNLBKcqFiQOVxPRwIBzpAtZWK-RZgpoflQfVqLlMhcOPLqd8pAQ"
+   }
+  },
+  {
+   "member": "Plot-holder 59",
+   "voter_pub": "PGs56XBoDAx3ASxpujPDNRE923T126feTan_7DR6_Wc",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "oJDzTJiqqs7qOqnNF1p8jgTOOX_-WyGLSuoUoYSa2DLVLLEgME1XAHvthfF0fmhzUsHL-nNL70D0BxqYMJjdAg"
+   }
+  },
+  {
+   "member": "Plot-holder 60",
+   "voter_pub": "wMLVG7_pf47T1MD2fSWLuez8Y17BmGFDFeXAkBevtqk",
+   "issuer_sig": {
+    "key_id": "did:web:heeley-bank-allotments.example#roster-1",
+    "alg": "ed25519",
+    "value": "fTb14RU0ufoNrszIhBfuLoupfawYXqAoxvx3H59pgT48pB2n_mNt1v2U8juSvJSJuW1rnn_mO4V84jYqRiYKAA"
+   }
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "v": "civic-kernel/manifest/v0",
+ "community": {
+  "id": "did:web:heeley-bank-allotments.example",
+  "name": "Heeley Bank Allotment Society, Sheffield (prototype run)",
+  "parent": "did:web:sheffield-allotment-federation.example"
+ },
+ "services": {
+  "personhood": true,
+  "decisions": true,
+  "rights_guard": false,
+  "transparency_log": true
+ },
+ "personhood": {
+  "method": "platform-account",
+  "issuer": "plot-register roster (simulated ceremony)",
+  "unlinkable": false,
+  "sybil_resistance": "weak",
+  "eligibility_rules": "plot-register/2026 sha256:5d7f3ccb42932d91d1956ab6a0119c52e901651ba2dd417ce46f7e30344ed63e"
+ },
+ "decisions": {
+  "verifiable": true,
+  "receipt_free": false,
+  "cast_or_audit": false,
+  "paper_channel": false,
+  "coercion_resistance": "revote-silent"
+ },
+ "transparency_log": {
+  "log_id": "did:web:heeley-bank-allotments.example",
+  "witnesses": [
+   "did:web:sheffield-allotment-federation.example",
+   "did:web:meersbrook-allotments.example"
+  ]
+ },
+ "decision_metadata": false,
+ "sig": {
+  "key_id": "did:web:heeley-bank-allotments.example#manifest-1",
+  "alg": "ed25519",
+  "value": "o_5vkSwTTh_AyAAf-dZpt4qtcF-P_gD7VLQ6SOO9NmeuRPKDpRhaYIWSGbbppW2moJIa1GfUPIv9_f2OFizYCw"
+ }
+}
