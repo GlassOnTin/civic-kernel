@@ -59,7 +59,8 @@
     20,
     21
    ],
-   "remedy": "strike"
+   "remedy": "strike",
+   "scope": "unconditional"
   },
   "transparency_log": {
    "log_id": "did:web:united-states.example",

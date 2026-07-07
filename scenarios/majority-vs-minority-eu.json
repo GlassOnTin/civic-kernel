@@ -72,7 +72,8 @@
     26,
     30
    ],
-   "remedy": "strike"
+   "remedy": "strike",
+   "scope": "conditional"
   },
   "transparency_log": {
    "log_id": "did:web:valmiria.example",
@@ -291,9 +292,9 @@
    "observation": "SERIES RESULT — a THIRD axis, not coverage and not remedy, gated the EU column. On the two axes the earlier runs measured, the EU Charter is the strongest of the four: highest coverage (25 of 30 backed, more than the UK's 20, Germany's 23, or the US's 14) AND a strike remedy. On those two numbers alone it 'should' have resolved cleanly like Germany and the US. It did resolve the same way — struck — but only after clearing a gate the three national constitutions never face: jurisdictional SCOPE. Charter Art 51 binds a Member State 'only when it is implementing Union law', so before any judge could apply Art 10 or Art 21 the community had to establish an EU-law nexus. A German constitution applies to a German law in a German court as a matter of course; the Charter's applicability had to be litigated first, all the way to Luxembourg. Completeness-on-paper plus a strike remedy did not translate into guaranteed protection, because a third dimension — does the instrument reach this situation at all — sits upstream of both. That is the distinctive finding of the EU run."
   },
   {
-   "severity": "strain",
+   "severity": "note",
    "doc_ref": "§6",
-   "observation": "SCHEMA LIMITATION — the manifest's remedy field cannot say 'strike, but only within EU-law scope'. rights_guard.remedy is a single enum: none / declaration / escalate / strike. Valmiria honestly declares 'strike', and that is true whenever the Charter applies — but it is silent about the Art 51 pre-condition that decides WHETHER it applies. This is the same class of blind spot that coverage-alone had in the UK run, where a full-looking invariant list hid a declaration-only remedy; here the remedy field looks maximal while hiding that the strike is conditional on jurisdiction. The classification entry had to carry the caveat in a free-text 'remedy_conditional_on_scope' flag and a 'threshold_question' block precisely because the waist has no field for it. Art 51 scope is a real dimension of protection-strength — arguably a fourth column after personhood, decisions, and coverage/remedy — that the current manifest schema does not model. A citizen comparing manifests would see EU 'strike' next to Germany 'strike' and reasonably conclude they are equivalent. They are not."
+   "observation": "SCHEMA — this run motivated a third rights_guard axis, now added. The remedy field alone could not say 'strike, but only within EU-law scope': a citizen comparing manifests would have seen EU 'strike' beside Germany 'strike' and read them as equivalent — they are not. The waist now models it (rights_guard.scope: unconditional | conditional), and Valmiria declares scope: 'conditional'. So the comparison now separates three axes that form a cascade — scope (does the instrument apply at all: Art 51 gates the EU, the three national constitutions are unconditional), then remedy (what a court can do: UK declaration vs strike), then coverage (which rights are named). The EU is strongest on the last two and gated on the first, and the manifest can now say exactly that."
   },
   {
    "severity": "strain",

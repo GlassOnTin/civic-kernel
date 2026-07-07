@@ -63,7 +63,8 @@
     26,
     30
    ],
-   "remedy": "declaration"
+   "remedy": "declaration",
+   "scope": "unconditional"
   },
   "transparency_log": {
    "log_id": "did:web:united-kingdom.example",

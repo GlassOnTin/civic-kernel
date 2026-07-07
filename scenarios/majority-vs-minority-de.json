@@ -71,7 +71,8 @@
     26,
     30
    ],
-   "remedy": "strike"
+   "remedy": "strike",
+   "scope": "unconditional"
   },
   "transparency_log": {
    "log_id": "did:web:bund.example",

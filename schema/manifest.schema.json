@@ -81,6 +81,10 @@
         "remedy": {
           "enum": ["none", "declaration", "escalate", "strike"],
           "description": "What the guard can actually DO when a decision trips an invariant — a second axis distinct from coverage, because two systems can uphold the same article with very different force. 'none' = no remedy; 'declaration' = flag only, the decision still stands (e.g. UK: HRA s.4 declaration of incompatibility, Parliament remains sovereign); 'escalate' = re-route to supermajority + adversarial review, the kernel's reference posture (§3.3); 'strike' = a constitutional court can void the decision, and an unamendable core may block even a supermajority (e.g. Germany: Grundgesetz Art 79(3) eternity clause + Bundesverfassungsgericht). Coverage says which rights are named; remedy says what naming them is worth."
+        },
+        "scope": {
+          "enum": ["unconditional", "conditional"],
+          "description": "Whether the guard applies to EVERY decision in the community's domain, or only to a subset gated by a precondition — a THIRD axis, distinct from coverage (which rights are named) and remedy (what a court can do about them). 'unconditional' = a national constitution binds all of its own community's decisions (the reference case: the German, UK and US instruments apply to any national law in their own courts). 'conditional' = the guard's applicability to a given decision must first be established, e.g. the EU Charter, which Art 51 confines to Member States 'only when they are implementing Union law' — so for a purely national matter its protection must be argued into. The three axes form a CASCADE: an instrument must apply (scope) before its remedy matters, before the breadth of rights it names (coverage) matters. The EU majority-vs-minority run exposed this: coverage and remedy both looked strongest, yet scope gated everything, and remedy alone could not express it."
         }
       }
     },

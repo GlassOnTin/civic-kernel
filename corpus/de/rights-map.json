@@ -11,6 +11,8 @@
     },
     "remedy": "strike",
     "remedy_note": "The Bundesverfassungsgericht can VOID a law (abstract and concrete judicial review). Art 79(3) — the eternity clause — puts human dignity (Art 1) and the democratic/social order (Art 20) beyond amendment even by a two-thirds supermajority. So the guard here can strike, and the core cannot be repealed at all. Germany also practises 'militant democracy' (streitbare Demokratie): parties aiming to abolish the free democratic order can be banned (GG Art 21(2)), and rights forfeited (Art 18).",
+    "scope": "unconditional",
+    "scope_note": "The Grundgesetz binds all German law; the Bundesverfassungsgericht may review any statute in abstract or concrete review.",
     "coverage": {
       "backed": 23,
       "structural": 6,

@@ -45,15 +45,19 @@ def main() -> int:
         code = rmap.get("meta", {}).get("code", f.parent.name)
         ids = [r["invariant"] for r in rmap["invariants"]]
         bad = [r["invariant"] for r in rmap["invariants"] if r.get("status") not in STATUSES]
+        scope = rmap["meta"].get("scope")
         if ids != list(range(1, 31)):
             errs += 1
             print(f"FAIL rights-map {code}: invariant ids must be 1..30 exactly, got {ids}", file=sys.stderr)
         elif bad:
             errs += 1
             print(f"FAIL rights-map {code}: invalid status on invariants {bad}", file=sys.stderr)
+        elif scope not in ("unconditional", "conditional"):
+            errs += 1
+            print(f"FAIL rights-map {code}: meta.scope must be 'unconditional' or 'conditional', got {scope!r}", file=sys.stderr)
         else:
             cov = rmap["meta"]["coverage"]
-            print(f"ok   rights-map {code}  backed {cov['backed']} · structural {cov['structural']} · none {cov['none']} · remedy '{rmap['meta']['remedy']}'")
+            print(f"ok   rights-map {code}  backed {cov['backed']} · structural {cov['structural']} · none {cov['none']} · remedy '{rmap['meta']['remedy']}' · scope '{scope}'")
             jurisdictions.append(rmap)
 
     if errs:

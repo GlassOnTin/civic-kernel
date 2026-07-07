@@ -121,6 +121,7 @@
   .rrow details { margin-top: .25rem; }
   .rrow summary { font-size: .72rem; }
   .rstatus.structural { color: var(--muted); background: var(--paper); border-color: var(--line-strong); }
+  .rstatus.conditional { color: var(--amber); background: var(--amber-soft); border-color: var(--amber); }
   .jcards { display: flex; gap: .8rem; flex-wrap: wrap; margin: 1.3rem 0; }
   .jcard { flex: 1 1 240px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; }
   .jcard .jname { font-weight: 700; font-size: 1.05rem; }
@@ -2351,7 +2352,8 @@
      26,
      30
     ],
-    "remedy": "strike"
+    "remedy": "strike",
+    "scope": "unconditional"
    },
    "transparency_log": {
     "log_id": "did:web:bund.example",
@@ -2635,7 +2637,8 @@
      26,
      30
     ],
-    "remedy": "strike"
+    "remedy": "strike",
+    "scope": "conditional"
    },
    "transparency_log": {
     "log_id": "did:web:valmiria.example",
@@ -2854,9 +2857,9 @@
     "observation": "SERIES RESULT — a THIRD axis, not coverage and not remedy, gated the EU column. On the two axes the earlier runs measured, the EU Charter is the strongest of the four: highest coverage (25 of 30 backed, more than the UK's 20, Germany's 23, or the US's 14) AND a strike remedy. On those two numbers alone it 'should' have resolved cleanly like Germany and the US. It did resolve the same way — struck — but only after clearing a gate the three national constitutions never face: jurisdictional SCOPE. Charter Art 51 binds a Member State 'only when it is implementing Union law', so before any judge could apply Art 10 or Art 21 the community had to establish an EU-law nexus. A German constitution applies to a German law in a German court as a matter of course; the Charter's applicability had to be litigated first, all the way to Luxembourg. Completeness-on-paper plus a strike remedy did not translate into guaranteed protection, because a third dimension — does the instrument reach this situation at all — sits upstream of both. That is the distinctive finding of the EU run."
    },
    {
-    "severity": "strain",
+    "severity": "note",
     "doc_ref": "§6",
-    "observation": "SCHEMA LIMITATION — the manifest's remedy field cannot say 'strike, but only within EU-law scope'. rights_guard.remedy is a single enum: none / declaration / escalate / strike. Valmiria honestly declares 'strike', and that is true whenever the Charter applies — but it is silent about the Art 51 pre-condition that decides WHETHER it applies. This is the same class of blind spot that coverage-alone had in the UK run, where a full-looking invariant list hid a declaration-only remedy; here the remedy field looks maximal while hiding that the strike is conditional on jurisdiction. The classification entry had to carry the caveat in a free-text 'remedy_conditional_on_scope' flag and a 'threshold_question' block precisely because the waist has no field for it. Art 51 scope is a real dimension of protection-strength — arguably a fourth column after personhood, decisions, and coverage/remedy — that the current manifest schema does not model. A citizen comparing manifests would see EU 'strike' next to Germany 'strike' and reasonably conclude they are equivalent. They are not."
+    "observation": "SCHEMA — this run motivated a third rights_guard axis, now added. The remedy field alone could not say 'strike, but only within EU-law scope': a citizen comparing manifests would have seen EU 'strike' beside Germany 'strike' and read them as equivalent — they are not. The waist now models it (rights_guard.scope: unconditional | conditional), and Valmiria declares scope: 'conditional'. So the comparison now separates three axes that form a cascade — scope (does the instrument apply at all: Art 51 gates the EU, the three national constitutions are unconditional), then remedy (what a court can do: UK declaration vs strike), then coverage (which rights are named). The EU is strongest on the last two and gated on the first, and the manifest can now say exactly that."
    },
    {
     "severity": "strain",
@@ -2940,7 +2943,8 @@
      26,
      30
     ],
-    "remedy": "declaration"
+    "remedy": "declaration",
+    "scope": "unconditional"
    },
    "transparency_log": {
     "log_id": "did:web:united-kingdom.example",
@@ -3222,7 +3226,8 @@
      20,
      21
     ],
-    "remedy": "strike"
+    "remedy": "strike",
+    "scope": "unconditional"
    },
    "transparency_log": {
     "log_id": "did:web:united-states.example",
@@ -5281,6 +5286,8 @@
     },
     "remedy": "strike",
     "remedy_note": "The Bundesverfassungsgericht can VOID a law (abstract and concrete judicial review). Art 79(3) — the eternity clause — puts human dignity (Art 1) and the democratic/social order (Art 20) beyond amendment even by a two-thirds supermajority. So the guard here can strike, and the core cannot be repealed at all. Germany also practises 'militant democracy' (streitbare Demokratie): parties aiming to abolish the free democratic order can be banned (GG Art 21(2)), and rights forfeited (Art 18).",
+    "scope": "unconditional",
+    "scope_note": "The Grundgesetz binds all German law; the Bundesverfassungsgericht may review any statute in abstract or concrete review.",
     "coverage": {
      "backed": 23,
      "structural": 6,
@@ -5543,6 +5550,8 @@
     },
     "remedy": "strike",
     "remedy_note": "The Court of Justice of the EU (CJEU) can annul EU acts that breach the Charter, and national courts must disapply national law conflicting with it — a strike remedy. But it is SCOPE-LIMITED by Art 51: the Charter binds the EU institutions and the Member States 'only when they are implementing Union law.' It does not reach purely national matters outside the field of EU law, so its strong coverage on paper is bounded by jurisdiction, not by remedy strength. No eternity clause, but the founding Treaties are extremely hard to amend (unanimity + national ratification).",
+    "scope": "conditional",
+    "scope_note": "Art 51 confines the Charter to the Member States 'only when they are implementing Union law'. For a given national decision the Charter's applicability must first be established (an EU-law nexus), so — unlike a national constitution — it does not reach every in-domain decision.",
     "coverage": {
      "backed": 25,
      "structural": 5,
@@ -5805,6 +5814,8 @@
     },
     "remedy": "declaration",
     "remedy_note": "The HRA gives courts only a s.4 DECLARATION OF INCOMPATIBILITY: the offending law is flagged but stays in force, and Parliament — sovereign — may proceed regardless. Courts cannot strike primary legislation, and no part of the constitution is unamendable. The compatibility gate (s.19) runs before Second Reading, but it too only reports; it does not block.",
+    "scope": "unconditional",
+    "scope_note": "The Human Rights Act applies to all UK primary legislation — a court may review any Act for Convention compatibility. Scope is unconditional; the weakness here is the remedy (only a s.4 declaration), not applicability.",
     "coverage": {
      "backed": 17,
      "structural": 3,
@@ -6072,6 +6083,8 @@
     },
     "remedy": "strike",
     "remedy_note": "US courts exercise judicial review (Marbury v. Madison, 1803) and can VOID a law as unconstitutional — a strike remedy like Germany's. But unlike Germany there is NO eternity clause: the Constitution is fully amendable under Article V (a deliberately hard two-thirds + three-quarters bar), so no right is placed beyond amendment. The US also has no militant-democracy doctrine — it protects the anti-democratic speech (Brandenburg v. Ohio) that Germany would forfeit (invariant 30).",
+    "scope": "unconditional",
+    "scope_note": "Judicial review (Marbury v. Madison) reaches any federal or state law within constitutional limits — though only in a live case brought by a plaintiff with standing.",
     "coverage": {
      "backed": 14,
      "structural": 7,
@@ -6484,13 +6497,15 @@ function corpus() {
   document.title = 'Comparative rights map — Civic Kernel';
   const remLabel = { none: 'no remedy', declaration: 'declaration only', escalate: 'escalate (supermajority + review)', strike: 'strike (court voids)' };
   const remClass = { none: 'none', declaration: 'structural', escalate: 'backed', strike: 'backed' };
+  const scLabel = { unconditional: 'unconditional', conditional: 'conditional (Art 51)' };
+  const scClass = { unconditional: 'backed', conditional: 'conditional' };
   const cards = js.map(j => {
     const c = j.meta.coverage;
     return `<div class="jcard">
       <div class="jname">${esc(j.meta.name)}</div>
       <div class="cite">${esc(j.meta.instrument.title)} · ${esc(j.meta.instrument.retrieved_via)}</div>
       <div class="jcov"><span class="present">${c.backed} backed</span> · ${c.structural} structural · <span class="absent">${c.none} none</span> (of 30)</div>
-      <div class="jrem">remedy: <span class="rstatus ${remClass[j.meta.remedy]}">${esc(remLabel[j.meta.remedy] || j.meta.remedy)}</span></div>
+      <div class="jrem">remedy: <span class="rstatus ${remClass[j.meta.remedy]}">${esc(remLabel[j.meta.remedy] || j.meta.remedy)}</span> &nbsp; scope: <span class="rstatus ${scClass[j.meta.scope] || 'structural'}">${esc(scLabel[j.meta.scope] || j.meta.scope || '—')}</span></div>
     </div>`;
   }).join('');
   const head = `<tr><th>#</th><th>UDHR article</th>${js.map(j => `<th>${esc(j.meta.name)}</th>`).join('')}</tr>`;
@@ -6512,6 +6527,8 @@ function corpus() {
   const uk = byCode.uk, de = byCode.de;
   const strikers = js.filter(j => j.meta.remedy === 'strike').map(j => j.meta.name);
   const flaggers = js.filter(j => j.meta.remedy === 'declaration').map(j => j.meta.name);
+  const uncond = js.filter(j => j.meta.scope === 'unconditional').map(j => j.meta.name);
+  const cond = js.filter(j => j.meta.scope === 'conditional').map(j => j.meta.name);
   const andList = a => a.length <= 1 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
   const divisions = (CORPUS.divisions || []).map(d => {
     const b = d.body, prov = (b.provenance || {});
@@ -6532,10 +6549,12 @@ function corpus() {
       <p class="cite" style="font-style:italic">A coarse comparative-law mapping from public sources (UK via legislation.gov.uk; Germany via gesetze-im-internet.de; US via archives.gov; EU via eur-lex.europa.eu) — it points to where systems differ, and is not legal advice or authoritative scholarship. Some cells are debatable; the caveats live in each corpus file.</p>
       <div class="jcards">${cards}</div>
       <div class="client">
-        <div class="cap">The two axes the comparison surfaces</div>
+        <div class="cap">Three axes decide the outcome — and they form a cascade</div>
+        <p style="margin:0 0 .6rem">Running the same attack — a 61% majority banning a minority's worship — against all four showed the verdict is set not by one property but by three, in order: an instrument must <b>apply</b>, before its <b>remedy</b> matters, before the <b>coverage</b> of rights it names matters.</p>
         <ul>
-          <li><b>Coverage.</b> ${js.map(j => `${esc(j.meta.name)} backs <b>${j.meta.coverage.backed}</b>`).join(', ')} of 30 — and the gaps differ in kind: the <abbr title="Charter of Fundamental Rights of the European Union">EU Charter</abbr> alone reaches the socio-economic rights (social security, health, even rest and leisure) the national instruments omit and has <span class="present">no fully-unbacked article</span> — but binds only within the scope of EU law (Art 51); the UK omits movement, asylum and nationality; the US alone lacks a constitutional right to education, privacy or asylum.</li>
-          <li><b>Remedy — the sharper axis.</b> ${flaggers.length ? `${andList(flaggers)} can only issue a <span class="rstatus structural">declaration</span> (the law stands; the legislature is sovereign); ` : ''}${andList(strikers)} can <span class="rstatus backed">strike</span> (a court voids it)${de ? `, and Germany's core is additionally unamendable (Art 79(3) eternity clause)` : ''}. Same rights on paper, very different force.</li>
+          <li><b>1 · Scope — does it apply at all?</b> ${cond.length ? `${andList(uncond)} bind every decision in their domain — <span class="rstatus backed">unconditional</span>; ${andList(cond)} ${cond.length === 1 ? 'is' : 'are'} <span class="rstatus conditional">conditional</span>: Art 51 confines the Charter to acts "implementing Union law", so for a purely national matter its protection must first be argued into.` : `every column applies unconditionally to its own decisions.`} The strongest instrument on paper can be gated here before either axis below is reached.</li>
+          <li><b>2 · Remedy — what can a court do?</b> ${flaggers.length ? `${andList(flaggers)} can only issue a <span class="rstatus structural">declaration</span> (the law stands; the legislature is sovereign); ` : ''}${andList(strikers)} can <span class="rstatus backed">strike</span> (a court voids it)${de ? `, and Germany's core is additionally unamendable (Art 79(3) eternity clause)` : ''}. This is what makes the UK run <span class="absent">break</span> where the strike jurisdictions only strain.</li>
+          <li><b>3 · Coverage — is the right even named?</b> ${js.map(j => `${esc(j.meta.name)} backs <b>${j.meta.coverage.backed}</b>`).join(', ')} of 30 — the <abbr title="Charter of Fundamental Rights of the European Union">EU Charter</abbr> alone reaches the socio-economic rights (social security, health, even rest and leisure) the national instruments omit and has <span class="present">no fully-unbacked article</span>; the UK omits movement, asylum and nationality; the US alone lacks a constitutional right to education, privacy or asylum. Necessary, but — the UK proves — nowhere near sufficient.</li>
         </ul>
       </div>
       <h2 class="sec">Coverage matrix — 30 <abbr title="Universal Declaration of Human Rights">UDHR</abbr> invariants × jurisdiction</h2>
