@@ -160,7 +160,11 @@ Multiple, local, context-dependent. The dynamics does not converge to one Best D
 converges, per domain, toward the local Pareto frontier of the axes given that domain's
 declared objective — then stops, and leaves incomparable choices (adopt proportional
 representation? write a constitution?) to politics. The invariant floor — the §1 goals and
-the UDHR — is never decreased: it is the operator's fixed constraint, not its target.
+the UDHR — is the operator's fixed constraint, never its target. Its scope is the §5–§6
+settlement, stated exactly: inside a community subscribed to the full profile the floor is
+near-consensus-locked; across the lattice a decrease is never *prevented* — the kernel has
+no army — but always *witnessed*, a legible manifest-diff. **Never silently decreased** is
+the enforceable form of the constraint.
 
 ## 7 · The safety property — what the math must never do
 

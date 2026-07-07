@@ -6,9 +6,9 @@ define it, the [harness](https://glassontin.github.io/civic-kernel/scenarios.htm
 measures it, the [model](docs/functional-model.md) gives it dynamics — this page only
 states it. If a requirement is not here, it is rationale, evidence, or ecosystem.
 
-> **Four services, four verbs, two formats, one floor — and twelve refusals.**
+> **Fourteen threats, four services, four verbs, two formats, one floor — and twelve refusals.**
 
-*(§N refers to the essay's sections; T-numbers to its threat register.)*
+*(§N refers to the essay's sections; T-numbers to the threat register below.)*
 
 ## The problem (§1)
 
@@ -25,6 +25,35 @@ smallest set of guarantees that markets and communities cannot provide for thems
    type-check, whatever its majority.
 4. **Evolvability** — the rules amend through the system itself: versioned, staged, reversible.
 5. **Inclusion** — no smartphone, no sight, no trust in computers: still first-class.
+
+## The threats (§2)
+
+Design runs from the attacks backwards. T1–T9 attack the machinery, T10–T12 the terms
+of participation, T13 the defense itself, T14 the wires beneath it all.
+
+| | threat | answer |
+|---|---|---|
+| T1 | state capture | nothing worth capturing: thin kernel, distributed operators, forkable with history (§3, §5) |
+| T2 | vendor capture | open protocol, open clients, no remote attestation (§1, §4) |
+| T3 | sybils | ceremony-issued credentials; cryptographic uniqueness per decision (§3.1, §10) |
+| T4 | coercion & vote buying | receipt-free verifiable ballots; silent re-vote, last ballot counts (§3.2) |
+| T5 | device compromise | keys in enclaves, cast-or-audit challenges, second channel, paper path (§3.2, §4) |
+| T6 | surveillance chill | zero-knowledge eligibility, unlinkable pseudonyms, local-first data (§3.1, §4) |
+| T7 | majoritarian rights-stripping | rights guard re-routes to the constitutional path (§3.3) |
+| T8 | record tampering | witnessed append-only logs; any phone detects a rewritten past (§3.4) |
+| T9 | digital exclusion | paper, kiosk, assisted — same protocol, same verifiability (§4) |
+| T10 | dilution & standards capture | signed conformance manifests; subtraction is legible (§6) |
+| T11 | epistemic gating | no gate on the ballot path; scaffold everything, assess nothing (§7) |
+| T12 | sludge | four verbs, computable eligibility, cited demands, published interaction cost (§8) |
+| T13 | autoimmune defense | sense at machine speed, respond at constitutional speed (§9) |
+| T14 | infrastructure denial | kilobyte payloads, delay-tolerant, paper as the zero-bandwidth floor (§4, §3.4) |
+
+Two threats are deliberately unanswered — disinformation and bad judgment — because a
+central answer is a ministry of truth (refusal 11). And the answers are measured claims,
+not promises: under the harness, T4 breaks against coercion under live observation (the
+limit §12 concedes), and the `executive-ignores` run breaks on an enforcement gap no
+T-number owns — a decision binds only where power obeys the record. The register states
+what the design answers; the harness reports what survives.
 
 ## Four services, and no fifth (§3)
 
