@@ -16,6 +16,22 @@
   "T7",
   "T1"
  ],
+ "precedents": [
+  {
+   "event": "Church of the Lukumi Babalu Aye v. City of Hialeah",
+   "year": 1993,
+   "source": "Cornell Law School, Legal Information Institute (508 U.S. 520)",
+   "url": "https://www.law.cornell.edu/supct/html/91-948.ZS.html",
+   "shows": "The Supreme Court held the ordinances targeting Santería sacrifice 'were enacted contrary to free exercise principles, and they are void' — all nine Justices agreed to invalidate: the strike remedy working against a local majority."
+  },
+  {
+   "event": "Islamic Center of Murfreesboro — federal order forces occupancy certificate",
+   "year": 2012,
+   "source": "Becket Fund for Religious Liberty (counsel to the mosque)",
+   "url": "https://www.becketlaw.org/media/mosque-wins-right-meet-drops-lawsuit/",
+   "shows": "After local-majority opposition held a mosque to a heightened standard, a federal court ordered the county to inspect and certify it 'as it would for any other house of worship'."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

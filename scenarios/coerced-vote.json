@@ -13,6 +13,29 @@
   "§10",
   "§12"
  ],
+ "precedents": [
+  {
+   "event": "ODIHR observation, Serbia parliamentary elections: family voting in ~19% of polling stations",
+   "year": 2023,
+   "source": "OSCE/ODIHR final report",
+   "url": "https://odihr.osce.org/odihr/elections/serbia/563505",
+   "shows": "International observers recorded group or family voting in some 19 per cent of polling stations and vote-secrecy breaches in 24 per cent of observations — family-level control of the ballot is a recurring, measured phenomenon."
+  },
+  {
+   "event": "Birmingham election court voids two 2004 local elections over postal-vote fraud",
+   "year": 2005,
+   "source": "Parliamentary Affairs (Oxford University Press)",
+   "url": "https://academic.oup.com/pa/article-abstract/59/4/654/1548179",
+   "shows": "An election court found fraud 'on a massive scale' via intercepted and fraudulently completed postal ballots and voided both elections, in a judgment that said the system 'would disgrace a banana republic' — the at-home ballot is the coercion and interception surface."
+  },
+  {
+   "event": "Estonia's deployed re-vote safeguard: the last vote counts, paper overrides",
+   "year": 2005,
+   "source": "Estonian State Electoral Office",
+   "url": "https://www.valimised.ee/en/internet-voting/i-voting-fact-check-myth-and-reality",
+   "shows": "Official national policy: a later i-vote supersedes an earlier one and a paper ballot supersedes them all, stated as protecting 'the freedom of voting' — silent re-voting as anti-coercion design is deployed practice, not theory."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

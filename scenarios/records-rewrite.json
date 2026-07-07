@@ -17,6 +17,29 @@
   "T1",
   "T9"
  ],
+ "precedents": [
+  {
+   "event": "Unauthorized google.com certificate caught by Certificate Transparency",
+   "year": 2015,
+   "source": "The Register",
+   "url": "https://www.theregister.com/2015/09/21/symantec_fires_workers_over_rogue_certs/",
+   "shows": "An unauthorized certificate issued by Symantec's Thawte CA was detected by the Certificate Transparency project — the exact mechanism this scenario leans on (append-only public logs exposing illegitimate records) working in the wild."
+  },
+  {
+   "event": "Public CT logs expose 108 improperly issued Symantec certificates",
+   "year": 2017,
+   "source": "TechTarget SearchSecurity",
+   "url": "https://www.techtarget.com/searchsecurity/news/450411573/Certificate-Transparency-snags-Symantec-CA-for-improper-certs",
+   "shows": "A researcher reading the public logs found 108 mis-issued certificates and forced revocation within 24 hours — transparency logs catching institutional record-tampering repeatedly, not as a one-off."
+  },
+  {
+   "event": "Belarus: photographed polling-station protocols contradict the official 80.1% result",
+   "year": 2020,
+   "source": "DFRLab (Atlantic Council)",
+   "url": "https://medium.com/dfrlab/belarus-election-open-source-election-reports-raise-questions-about-official-results-c8b9937e6278",
+   "shows": "One hundred crowdsourced official station tallies gave the incumbent ~55% against the centrally published 80.1% — station-level records diverging from the central publication (DFRLab itself flags the sample as biased and inconclusive; it anchors the divergence pattern, not a fraud estimate)."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

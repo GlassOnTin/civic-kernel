@@ -62,7 +62,9 @@ consistency-proof failure, not a marketing dispute.
 The goals above and the thirty UDHR invariants are pinned beneath the amendment process:
 changeable only by near-consensus, while everything about mechanism stays cheap to amend —
 staged, canaried, sunset-claused. Cheap to change mechanisms, nearly impossible to change
-personhood: the design in one sentence.
+personhood: the design in one sentence. Scope, precisely: the pin binds inside a community
+subscribed to the full profile; across the lattice it is the reference posture adoption
+pressure pushes toward — elsewhere the kernel guarantees only that the gap is legible (§5–§6).
 
 ## Twelve refusals
 
@@ -117,11 +119,13 @@ research program, not a trained system.
   log, verifiable ballots — are worth taking and don't flip the verdict; the one move
   that flips it requires the sovereign to bind itself. Legibility ≠ availability ≠
   movement.
-- **19 scenarios**, each cross-validated against the waist schemas: 15 strain, 3 break,
-  1 holds. The one hold is `records-rewrite` — the log defeating tampering, the mechanism
-  the design leans on hardest. The three breaks are the named limits meeting
-  unaccountable power: coercion under live observation, an executive that ignores court
-  orders, a remedy too weak to stop a majority.
+- **19 scenarios**, each cross-validated against the waist schemas and each anchored to
+  documented real-world precedents (46 verified citations — the schema requires them: no
+  attack without a cited precedent): 15 strain, 3 break, 1 holds. The one hold is
+  `records-rewrite` — the log defeating tampering, the mechanism the design leans on
+  hardest. The three breaks are the named limits meeting unaccountable power: coercion
+  under live observation, an executive that ignores court orders, a remedy too weak to
+  stop a majority.
 
 ## What is not solved (§12)
 

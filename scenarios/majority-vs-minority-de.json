@@ -18,6 +18,22 @@
   "T7",
   "T1"
  ],
+ "precedents": [
+  {
+   "event": "BVerfG ritual-slaughter (Schächten) decision, 1 BvR 1783/99",
+   "year": 2002,
+   "source": "Bundesverfassungsgericht, official English translation",
+   "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/EN/2002/01/rs20020115_1bvr178399en.html",
+   "shows": "A Muslim butcher's constitutional complaint succeeded: applying the stunning requirement without religious exemption violated Art. 2(1) with Art. 4 GG, and the state may not second-guess whether a belief truly mandates the practice."
+  },
+  {
+   "event": "BVerfG Aviation Security Act judgment, 1 BvR 357/05",
+   "year": 2006,
+   "source": "Bundesverfassungsgericht, official English translation",
+   "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/EN/2006/02/rs20060215_1bvr035705en.html",
+   "shows": "The strike power in action: the court declared a provision of a democratically enacted federal statute unconstitutional and void on human-dignity and right-to-life grounds."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

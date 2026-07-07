@@ -21,6 +21,22 @@
   "T5",
   "T9"
  ],
+ "precedents": [
+  {
+   "event": "Ofcom: around 1.5 million UK homes (6%) without internet access",
+   "year": 2021,
+   "source": "Ofcom",
+   "url": "https://www.ofcom.org.uk/media-use-and-attitudes/online-habits/digital-divide-narrowed-but-around-1.5m-homes-offline",
+   "shows": "Ofcom's research found 6% of UK homes offline, rising to 18% among adults 65 and over — a measured population that digital-only civic systems would disenfranchise."
+  },
+  {
+   "event": "Estonia retains paper voting alongside i-voting, with paper supremacy",
+   "year": 2005,
+   "source": "Estonian State Electoral Office",
+   "url": "https://www.valimised.ee/en/internet-voting/i-voting-fact-check-myth-and-reality",
+   "shows": "The most digital electoral state deliberately keeps paper first-class: paper remains available and a paper ballot overrides the i-vote."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

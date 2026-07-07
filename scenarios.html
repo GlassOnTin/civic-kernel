@@ -100,6 +100,12 @@
     padding: .7rem .8rem; font-family: var(--mono); font-size: .72rem; line-height: 1.5;
     overflow-x: auto; margin: .4rem 0 0;
   }
+  .precedents { border-left: 3px solid var(--line-strong); padding: .1rem 0 .1rem .9rem; margin: 1.2rem 0 1.4rem; }
+  .precedents .prec-note { color: var(--muted); font-size: .85rem; margin: 0 0 .4rem; }
+  .precedents ul { margin: 0; padding-left: 1.1rem; }
+  .precedents li { margin: .35rem 0; font-size: .92rem; }
+  .precedents li a { color: var(--accent); }
+  .precedents .prec-src { font-family: var(--mono); font-size: .72rem; color: var(--muted); white-space: nowrap; }
   .finding { display: flex; gap: .7rem; margin: 0 0 .8rem; align-items: baseline; }
   .finding .badge { flex: 0 0 auto; }
   .badge.note { color: var(--muted); background: var(--paper); border-color: var(--line-strong); }
@@ -142,7 +148,7 @@
 </head>
 <body>
 <div class="wrap"><main id="app"></main>
-<footer>Every manifest and log entry shown here validates against the <a href="schema/manifest.schema.json">two waist schemas</a> — that is the test. Scenarios are imagined situations, generated and machine-checked; verdicts are the harness's honest reading of the <a href="index.html">architecture document</a>'s own claims and limits, not endorsements.</footer>
+<footer>Every manifest and log entry shown here validates against the <a href="schema/manifest.schema.json">two waist schemas</a> — that is the test. The stories are fiction anchored to fact: the people are invented, and every attack pattern cites a documented real-world precedent on its page. Verdicts are the harness's honest reading of the <a href="index.html">architecture document</a>'s own claims and limits, not endorsements.</footer>
 </div>
 
 <script id="scenario-data" type="application/json">
@@ -165,6 +171,29 @@
    "§12",
    "T6",
    "T13"
+  ],
+  "precedents": [
+   {
+    "event": "Apple's Patriot Act warrant canary and its disappearance",
+    "year": 2014,
+    "source": "The Register",
+    "url": "https://www.theregister.com/2014/09/20/apples_warrant_canary_is_either_cockup_conspiracy_or_the_antigoogle_selling_point/",
+    "shows": "Apple's 2013 statement that it had never received a Section 215 order vanished from later transparency reports, and the absence was widely read as signalling a secret order it could not disclose — public existence-signalling for sealed process, deployed in practice (the reading was contested; the mechanism is the precedent)."
+   },
+   {
+    "event": "In re National Security Letters — gag orders litigated",
+    "year": 2013,
+    "source": "Electronic Frontier Foundation",
+    "url": "https://www.eff.org/issues/national-security-letters",
+    "shows": "Hundreds of thousands of NSLs issued with unilateral gag provisions — secret legal process whose very existence recipients could not acknowledge; a federal judge declared the statute unconstitutional in 2013 and Congress amended it in 2015."
+   },
+   {
+    "event": "IPCO annual reports: authorisation counts public, contents sealed",
+    "year": 2023,
+    "source": "Investigatory Powers Commissioner's Office",
+    "url": "https://www.ipco.org.uk/news/publication-of-investigatory-powers-commissioners-2023-annual-report/",
+    "shows": "The UK's warrant oversight body publishes aggregate statistics — just under 360,000 authorisations, 386 inspections, 11 serious-error investigations in the 2023 report — while warrant contents stay sealed: counts-without-contents as existing practice."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -450,6 +479,22 @@
    "§10",
    "§11",
    "§12"
+  ],
+  "precedents": [
+   {
+    "event": "Missing Out 2024: unclaimed UK benefits estimate",
+    "year": 2024,
+    "source": "Policy in Practice",
+    "url": "https://policyinpractice.co.uk/publication/missing-out-2024/",
+    "shows": "An estimated £22.7 billion of income-related benefits and social tariffs goes unclaimed across Great Britain each year, with application complexity and administrative burden named as key causes of non-take-up."
+   },
+   {
+    "event": "NAO report: Universal Credit five-week wait and hardship",
+    "year": 2018,
+    "source": "UK National Audit Office",
+    "url": "https://www.nao.org.uk/reports/rolling-out-universal-credit/",
+    "shows": "A designed-in five-week wait for first payment left about 113,000 new claims (roughly 1 in 4) paid late in 2017, four in ten surveyed claimants in financial difficulty, and the department dismissing evidence of hardship — administrative burden operating as deterrence."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -755,6 +800,22 @@
    "T9",
    "T14"
   ],
+  "precedents": [
+   {
+    "event": "Uganda's nationwide internet shutdown across its general election",
+    "year": 2021,
+    "source": "NetBlocks network measurements",
+    "url": "https://netblocks.org/reports/social-media-and-messaging-platforms-restricted-in-uganda-ahead-of-general-election-XB7aaO87",
+    "shows": "A state-ordered blackout began on election eve, connectivity fell to 12% of ordinary levels on polling day, and restoration came only days later — a national election conducted under a deliberate internet cut."
+   },
+   {
+    "event": "#KeepItOn count: 283 internet shutdowns in 39 countries in 2023, the most on record",
+    "year": 2023,
+    "source": "Access Now / #KeepItOn coalition",
+    "url": "https://www.accessnow.org/internet-shutdowns-2023/",
+    "shows": "Government-imposed blackouts are a systemic and growing pattern — 283 documented in a single year — not isolated incidents."
+   }
+  ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
    "community": {
@@ -1032,6 +1093,22 @@
    "T4",
    "T9"
   ],
+  "precedents": [
+   {
+    "event": "Handforth Parish Council viral Zoom meeting",
+    "year": 2021,
+    "source": "Wikipedia (corroborated by a fetched Vice interview)",
+    "url": "https://en.wikipedia.org/wiki/Handforth_Town_Council",
+    "shows": "A parish-council committee meeting collapsed over who held procedural authority — the chair ejected the facilitator as having 'no authority here'; a later investigation costing £85,000 found she indeed lacked formal power — small-democracy procedure is contested and unverifiable."
+   },
+   {
+    "event": "ETU ballot-rigging exposed in the High Court (Byrne v Foulkes)",
+    "year": 1961,
+    "source": "British Online Archives",
+    "url": "https://britishonlinearchives.com/collections/96/trade-unions-in-crisis-the-1961-etu-ballot-rigging-scandal",
+    "shows": "A member organisation's leadership rigged its own internal election by disqualifying returns from branches that voted against it; the fraud was corrected only by external adjudication in the High Court."
+   }
+  ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
    "community": {
@@ -1253,6 +1330,29 @@
    "§6",
    "§10",
    "§12"
+  ],
+  "precedents": [
+   {
+    "event": "ODIHR observation, Serbia parliamentary elections: family voting in ~19% of polling stations",
+    "year": 2023,
+    "source": "OSCE/ODIHR final report",
+    "url": "https://odihr.osce.org/odihr/elections/serbia/563505",
+    "shows": "International observers recorded group or family voting in some 19 per cent of polling stations and vote-secrecy breaches in 24 per cent of observations — family-level control of the ballot is a recurring, measured phenomenon."
+   },
+   {
+    "event": "Birmingham election court voids two 2004 local elections over postal-vote fraud",
+    "year": 2005,
+    "source": "Parliamentary Affairs (Oxford University Press)",
+    "url": "https://academic.oup.com/pa/article-abstract/59/4/654/1548179",
+    "shows": "An election court found fraud 'on a massive scale' via intercepted and fraudulently completed postal ballots and voided both elections, in a judgment that said the system 'would disgrace a banana republic' — the at-home ballot is the coercion and interception surface."
+   },
+   {
+    "event": "Estonia's deployed re-vote safeguard: the last vote counts, paper overrides",
+    "year": 2005,
+    "source": "Estonian State Electoral Office",
+    "url": "https://www.valimised.ee/en/internet-voting/i-voting-fact-check-myth-and-reality",
+    "shows": "Official national policy: a later i-vote supersedes an earlier one and a paper ballot supersedes them all, stated as protecting 'the freedom of voting' — silent re-voting as anti-coercion design is deployed practice, not theory."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -1553,6 +1653,29 @@
    "T4",
    "T10"
   ],
+  "precedents": [
+   {
+    "event": "OOXML fast-track standardization vote irregularities",
+    "year": 2008,
+    "source": "The Register",
+    "url": "https://www.theregister.com/2008/03/31/iso_ooxml_votes_approve/",
+    "shows": "Contemporaneous reporting of the ISO approval vote documents delegate complaints of heavy-handed tactics across multiple countries, including a national body's staff casting 'approve' against 19 of 24 committee members — a vendor bending a standards process while keeping the compliance label."
+   },
+   {
+    "event": "ISO/IEC dismiss four national bodies' appeals against OOXML",
+    "year": 2008,
+    "source": "The Register",
+    "url": "https://www.theregister.com/2008/08/16/iso_rejects_ooxml_appeal/",
+    "shows": "Brazil, India, South Africa and Venezuela formally appealed the process; the appeals failed and the standard proceeded — the capture completing because the label, not the substance, was what the process certified."
+   },
+   {
+    "event": "Industry joint statement against eIDAS 2.0 Article 45",
+    "year": 2023,
+    "source": "Joint industry letter (Cloudflare, Mozilla, Internet Society, Linux Foundation, others)",
+    "url": "https://blog.mozilla.org/netpolicy/files/2023/11/eIDAS-Industry-Letter.pdf",
+    "shows": "Industry and civil-society signatories warned that Article 45 would force browsers to trust state-appointed certificate authorities and forbid enforcing stronger checks such as Certificate Transparency — a legally mandated dilution of an existing security baseline."
+   }
+  ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
    "community": {
@@ -1768,6 +1891,22 @@
    "§6",
    "T1",
    "T8"
+  ],
+  "precedents": [
+   {
+    "event": "Poland refuses to publish Constitutional Tribunal judgments",
+    "year": 2016,
+    "source": "Venice Commission (Council of Europe), Opinion CDL-AD(2016)026",
+    "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2016)026-e",
+    "shows": "The government withheld publication of Constitutional Tribunal rulings to deny them legal effect; the Commission held that no valid system of constitutional justice can depend on the goodwill of political authorities."
+   },
+   {
+    "event": "Ecuador misses court-ordered Yasuní oil shutdown after referendum",
+    "year": 2024,
+    "source": "Mongabay",
+    "url": "https://news.mongabay.com/2024/08/one-year-after-oil-referendum-whats-next-for-ecuadors-yasuni-national-park/",
+    "shows": "After 59% of voters chose to halt drilling in Yasuní Block 43-ITT and the Constitutional Court set a one-year deadline, state oil production continued past the August 2024 deadline at roughly 50,000 barrels a day — an executive overriding both a popular vote and a court order."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -2047,6 +2186,29 @@
    "T6",
    "T4"
   ],
+  "precedents": [
+   {
+    "event": "Apple v FBI — the San Bernardino All Writs Act order",
+    "year": 2016,
+    "source": "Electronic Frontier Foundation case archive",
+    "url": "https://www.eff.org/cases/apple-challenges-fbi-all-writs-act-order",
+    "shows": "A court ordered Apple to break one phone's security; Apple argued compliance would undermine security for all users, and the demand collapsed when the FBI bought a third-party unlock — compelled-decryption demands meeting an architecture built to refuse them."
+   },
+   {
+    "event": "Apple Inc v Secretary of State for the Home Department (IPT)",
+    "year": 2025,
+    "source": "Investigatory Powers Tribunal",
+    "url": "https://investigatorypowerstribunal.org.uk/judgement/apple-inc-v-secretary-of-state-for-the-home-department/",
+    "shows": "After reporting that the Home Office had issued a Technical Capability Notice demanding access to iCloud user data, Apple litigated — and the Tribunal's public judgment refused to keep even the bare existence of the case secret."
+   },
+   {
+    "event": "Apple withdraws Advanced Data Protection for UK users",
+    "year": 2025,
+    "source": "TechTarget SearchSecurity",
+    "url": "https://www.techtarget.com/searchsecurity/news/366619638/Apple-pulls-Advanced-Data-Protection-in-UK-sparking-concerns",
+    "shows": "Rather than build the demanded access capability, Apple removed its end-to-end-encrypted iCloud tier for UK users, stating it had never built a backdoor or master key — refusal by removing the service instead of weakening it."
+   }
+  ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
    "community": {
@@ -2298,6 +2460,22 @@
    "§13",
    "T7",
    "T1"
+  ],
+  "precedents": [
+   {
+    "event": "BVerfG ritual-slaughter (Schächten) decision, 1 BvR 1783/99",
+    "year": 2002,
+    "source": "Bundesverfassungsgericht, official English translation",
+    "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/EN/2002/01/rs20020115_1bvr178399en.html",
+    "shows": "A Muslim butcher's constitutional complaint succeeded: applying the stunning requirement without religious exemption violated Art. 2(1) with Art. 4 GG, and the state may not second-guess whether a belief truly mandates the practice."
+   },
+   {
+    "event": "BVerfG Aviation Security Act judgment, 1 BvR 357/05",
+    "year": 2006,
+    "source": "Bundesverfassungsgericht, official English translation",
+    "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/EN/2006/02/rs20060215_1bvr035705en.html",
+    "shows": "The strike power in action: the court declared a provision of a democratically enacted federal statute unconstitutional and void on human-dignity and right-to-life grounds."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -2580,6 +2758,22 @@
    "§12",
    "T7",
    "T1"
+  ],
+  "precedents": [
+   {
+    "event": "Åkerberg Fransson, C-617/10",
+    "year": 2013,
+    "source": "EUR-Lex (CJEU Grand Chamber, CELEX 62010CJ0617)",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62010CJ0617",
+    "shows": "The Art. 51 gate this scenario turns on: the Charter binds member states 'only when they are implementing Union law' — and where Union law applies, Charter rights apply with it."
+   },
+   {
+    "event": "Centraal Israëlitisch Consistorie van België, C-336/19",
+    "year": 2020,
+    "source": "CJEU, CURIA Press Release No 163/20 (Grand Chamber)",
+    "url": "https://curia.europa.eu/jcms/upload/docs/application/pdf/2020-12/cp200163en.pdf",
+    "shows": "A member-state restriction on a religious practice was reviewed under the Charter only because it operated within an EU regulation — and the Grand Chamber upheld the restriction as proportionate: Charter scope demonstrated, no strike."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -2895,6 +3089,22 @@
    "T7",
    "T1"
   ],
+  "precedents": [
+   {
+    "event": "Church of the Lukumi Babalu Aye v. City of Hialeah",
+    "year": 1993,
+    "source": "Cornell Law School, Legal Information Institute (508 U.S. 520)",
+    "url": "https://www.law.cornell.edu/supct/html/91-948.ZS.html",
+    "shows": "Subject-matter fit for the counterfactual: an apex court voiding a local majority's ordinances aimed at a minority religion's worship — though against municipal ordinances, not national legislation."
+   },
+   {
+    "event": "BVerfG Aviation Security Act judgment, 1 BvR 357/05",
+    "year": 2006,
+    "source": "Bundesverfassungsgericht, official English translation",
+    "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/EN/2006/02/rs20060215_1bvr035705en.html",
+    "shows": "Institutional fit: a constitutional court declaring part of the national parliament's statute void on fundamental-rights grounds — the mechanism a strike-empowered UK court would use; no verified case anywhere voids a national referendum-backed worship ban."
+   }
+  ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
    "community": {
@@ -3180,6 +3390,29 @@
    "§6",
    "§12",
    "T7"
+  ],
+  "precedents": [
+   {
+    "event": "Swiss minaret referendum",
+    "year": 2009,
+    "source": "Swissvotes (University of Bern), vote no. 547",
+    "url": "https://swissvotes.ch/vote/547.00",
+    "shows": "The premise is real: a 57.5% national majority constitutionally banned a minority religion's buildings."
+   },
+   {
+    "event": "A v Secretary of State (Belmarsh) — declaration of incompatibility",
+    "year": 2004,
+    "source": "UK Ministry of Justice, Responding to Human Rights Judgments (s.4 HRA register)",
+    "url": "https://assets.publishing.service.gov.uk/media/654cf01c014cc9000d677371/responding-human-rights-judgments-2022_2023.pdf",
+    "shows": "The government's own register of s.4 declarations records the House of Lords declaring indefinite detention incompatible — and the remedy arriving only as later legislation, never as judicial voiding; s.4(6) HRA says a declaration 'does not affect the validity, continuing operation or enforcement' of the provision."
+   },
+   {
+    "event": "Prevention of Terrorism Act 2005 replaces the incompatible detention scheme",
+    "year": 2005,
+    "source": "legislation.gov.uk, Explanatory Notes",
+    "url": "https://www.legislation.gov.uk/ukpga/2005/2/notes",
+    "shows": "The provision declared incompatible in December 2004 stayed in force until Parliament's replacement took effect on 14 March 2005 — the declared-but-standing law this scenario turns on."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -3469,6 +3702,22 @@
    "§12",
    "T7",
    "T1"
+  ],
+  "precedents": [
+   {
+    "event": "Church of the Lukumi Babalu Aye v. City of Hialeah",
+    "year": 1993,
+    "source": "Cornell Law School, Legal Information Institute (508 U.S. 520)",
+    "url": "https://www.law.cornell.edu/supct/html/91-948.ZS.html",
+    "shows": "The Supreme Court held the ordinances targeting Santería sacrifice 'were enacted contrary to free exercise principles, and they are void' — all nine Justices agreed to invalidate: the strike remedy working against a local majority."
+   },
+   {
+    "event": "Islamic Center of Murfreesboro — federal order forces occupancy certificate",
+    "year": 2012,
+    "source": "Becket Fund for Religious Liberty (counsel to the mosque)",
+    "url": "https://www.becketlaw.org/media/mosque-wins-right-meet-drops-lawsuit/",
+    "shows": "After local-majority opposition held a mosque to a heightened standard, a federal court ordered the county to inspect and certify it 'as it would for any other house of worship'."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -3765,6 +4014,29 @@
    "T4",
    "T7",
    "T11"
+  ],
+  "precedents": [
+   {
+    "event": "Swiss minaret referendum",
+    "year": 2009,
+    "source": "Swissvotes (University of Bern), vote no. 547",
+    "url": "https://swissvotes.ch/vote/547.00",
+    "shows": "A real national majority — 57.5% and 19½ of 23 cantonal votes — constitutionally banned construction of a religious minority's buildings, adding a minaret prohibition to the Swiss Federal Constitution."
+   },
+   {
+    "event": "Church of the Lukumi Babalu Aye v. City of Hialeah",
+    "year": 1993,
+    "source": "Cornell Law School, Legal Information Institute (508 U.S. 520)",
+    "url": "https://www.law.cornell.edu/supct/html/91-948.ZS.html",
+    "shows": "A city majority enacted ordinances targeting a minority religion's worship practice while exempting comparable secular conduct — facially neutral law aimed at one faith."
+   },
+   {
+    "event": "Islamic Center of Murfreesboro occupancy fight",
+    "year": 2012,
+    "source": "Becket Fund for Religious Liberty (counsel to the mosque)",
+    "url": "https://www.becketlaw.org/media/mosque-wins-right-meet-drops-lawsuit/",
+    "shows": "Sustained local-majority opposition and a heightened court standard kept a completed mosque shut until a federal order required the county to certify it like any other house of worship."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -4118,6 +4390,22 @@
    "T5",
    "T9"
   ],
+  "precedents": [
+   {
+    "event": "Ofcom: around 1.5 million UK homes (6%) without internet access",
+    "year": 2021,
+    "source": "Ofcom",
+    "url": "https://www.ofcom.org.uk/media-use-and-attitudes/online-habits/digital-divide-narrowed-but-around-1.5m-homes-offline",
+    "shows": "Ofcom's research found 6% of UK homes offline, rising to 18% among adults 65 and over — a measured population that digital-only civic systems would disenfranchise."
+   },
+   {
+    "event": "Estonia retains paper voting alongside i-voting, with paper supremacy",
+    "year": 2005,
+    "source": "Estonian State Electoral Office",
+    "url": "https://www.valimised.ee/en/internet-voting/i-voting-fact-check-myth-and-reality",
+    "shows": "The most digital electoral state deliberately keeps paper first-class: paper remains available and a paper ballot overrides the i-vote."
+   }
+  ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
    "community": {
@@ -4396,6 +4684,29 @@
    "T8",
    "T1",
    "T9"
+  ],
+  "precedents": [
+   {
+    "event": "Unauthorized google.com certificate caught by Certificate Transparency",
+    "year": 2015,
+    "source": "The Register",
+    "url": "https://www.theregister.com/2015/09/21/symantec_fires_workers_over_rogue_certs/",
+    "shows": "An unauthorized certificate issued by Symantec's Thawte CA was detected by the Certificate Transparency project — the exact mechanism this scenario leans on (append-only public logs exposing illegitimate records) working in the wild."
+   },
+   {
+    "event": "Public CT logs expose 108 improperly issued Symantec certificates",
+    "year": 2017,
+    "source": "TechTarget SearchSecurity",
+    "url": "https://www.techtarget.com/searchsecurity/news/450411573/Certificate-Transparency-snags-Symantec-CA-for-improper-certs",
+    "shows": "A researcher reading the public logs found 108 mis-issued certificates and forced revocation within 24 hours — transparency logs catching institutional record-tampering repeatedly, not as a one-off."
+   },
+   {
+    "event": "Belarus: photographed polling-station protocols contradict the official 80.1% result",
+    "year": 2020,
+    "source": "DFRLab (Atlantic Council)",
+    "url": "https://medium.com/dfrlab/belarus-election-open-source-election-reports-raise-questions-about-official-results-c8b9937e6278",
+    "shows": "One hundred crowdsourced official station tallies gave the incumbent ~55% against the centrally published 80.1% — station-level records diverging from the central publication (DFRLab itself flags the sample as biased and inconclusive; it anchors the divergence pattern, not a fraud estimate)."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -4691,6 +5002,22 @@
    "T1",
    "T3",
    "T9"
+  ],
+  "precedents": [
+   {
+    "event": "Taliban capture of US/Afghan biometric identity systems",
+    "year": 2021,
+    "source": "Human Rights Watch",
+    "url": "https://www.hrw.org/news/2022/03/30/new-evidence-biometric-data-systems-imperil-afghans",
+    "shows": "Six biometric systems holding iris scans, fingerprints, ethnicity and family data fell under Taliban control in 2021 and were used at checkpoints to identify former security personnel — a seized identity register is lethal."
+   },
+   {
+    "event": "UNHCR Rohingya biometric data reaches Myanmar without consent",
+    "year": 2021,
+    "source": "Human Rights Watch",
+    "url": "https://www.hrw.org/news/2021/06/15/un-shared-rohingya-data-without-informed-consent",
+    "shows": "Biometrics collected from Rohingya refugees for aid registration were passed via Bangladesh to Myanmar for repatriation vetting without informed consent; refugees whose names reached Myanmar went into hiding."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -5029,6 +5356,22 @@
    "T6",
    "T9"
   ],
+  "precedents": [
+   {
+    "event": "London mobile-phone theft: 81,365 phones stolen in one year",
+    "year": 2024,
+    "source": "Mayor of London / Metropolitan Police",
+    "url": "https://www.london.gov.uk/mayor-outlines-major-crackdown-mobile-phone-theft-new-mobile-phone-theft-command-cell-and-ps45m-more",
+    "shows": "Official Met figures put phone theft in one city at over eighty thousand devices a year — snatch-theft at a scale where any phone-resident credential must survive loss of the device."
+   },
+   {
+    "event": "FBI IC3 SIM-swap alert: 1,611 complaints, over $68M in losses in 2021",
+    "year": 2021,
+    "source": "FBI Internet Crime Complaint Center, PSA 220208",
+    "url": "https://www.ic3.gov/PSA/2022/PSA220208",
+    "shows": "SIM-swap complaints jumped five-fold in a year with $68M in adjusted losses — identity anchored to a phone number is a documented account-takeover vector, which is why the credential must live in the enclave and revoke publicly."
+   }
+  ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
    "community": {
@@ -5298,6 +5641,29 @@
    "§3.4",
    "§9",
    "§6"
+  ],
+  "precedents": [
+   {
+    "event": "Home Office stop-and-search ethnicity statistics, England and Wales",
+    "year": 2024,
+    "source": "GOV.UK Ethnicity facts and figures (Home Office data)",
+    "url": "https://www.ethnicity-facts-figures.service.gov.uk/crime-justice-and-the-law/policing/stop-and-search/latest/",
+    "shows": "Official statistics for the year ending March 2023 record 24.5 stop-and-searches per 1,000 Black people against 5.9 per 1,000 White people — about 4.1 times the rate: a disparity visible only in the aggregate while each individual stop is presumptively lawful."
+   },
+   {
+    "event": "ICO enforcement notice on the Met Police Gangs Violence Matrix",
+    "year": 2018,
+    "source": "Information Commissioner's Office (notice hosted by the Metropolitan Police)",
+    "url": "https://www.met.police.uk/SysSiteAssets/media/downloads/force-content/met/about-us/gangs-violence-matrix/ico-enforcement-notice.pdf",
+    "shows": "The regulator's notice records that some 80% of individuals on the Matrix were Black, 64% were rated low-risk, victims were processed as suspects, and data was shared unredacted — an unlawful discriminatory pattern inside an ostensibly legitimate policing database."
+   },
+   {
+    "event": "Floyd v City of New York",
+    "year": 2013,
+    "source": "Civil Rights Litigation Clearinghouse (959 F. Supp. 2d 540, S.D.N.Y.)",
+    "url": "https://clearinghouse.net/case/12021/",
+    "shows": "After a nine-week trial, a federal court held NYPD stop-and-frisk as practiced unconstitutional on Fourth Amendment and Equal Protection grounds and appointed a monitor — liability established from the aggregate pattern, not any single stop."
+   }
   ],
   "manifest": {
    "v": "civic-kernel/manifest/v0",
@@ -6742,7 +7108,7 @@ function list() {
     <header class="hero">
       <h1>Real life against the protocol</h1>
       <p class="lede">The <a href="index.html">Civic Kernel</a> is a design for democratic infrastructure — thin, verifiable on the phone in your pocket, hard to capture. To find out whether it holds up, we drop it into the hardest situations real people face and follow one person through, step by step. Each story below says plainly where the design <em>holds</em>, <em>strains</em>, or <em>breaks</em>.</p>
-      <p class="tally">${DATA.length} stories · ${counts.holds} hold · ${counts.strains} strain · ${counts.breaks} break · nothing cherry-picked</p>
+      <p class="tally">${DATA.length} stories · ${counts.holds} hold · ${counts.strains} strain · ${counts.breaks} break · ${DATA.reduce((n, s) => n + (s.precedents || []).length, 0)} documented precedents · nothing cherry-picked</p>
     </header>
     ${sections}
     ${more}`;
@@ -6757,6 +7123,10 @@ function detail(s) {
       <h1>${esc(s.title)}</h1>
       <p class="meta-line">threats ${s.threats.map(esc).join(' · ')} &nbsp;·&nbsp; ${s.doc_refs.map(esc).join(' · ')}</p>
       <div class="setting">${s.setting.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join('')}</div>
+      ${s.precedents && s.precedents.length ? `<div class="precedents">
+        <p class="prec-note">The people here are invented; the attack is not. Documented precedents:</p>
+        <ul>${s.precedents.map(p => `<li><a href="${esc(p.url)}" rel="noopener">${esc(p.event)} (${esc(String(p.year))})</a> — ${esc(p.shows)} <span class="prec-src">${esc(p.source)}</span></li>`).join('')}</ul>
+      </div>` : ''}
       ${clientView(s.manifest)}
       <h2 class="sec">Walkthrough</h2>
       ${s.walkthrough.map(st => `

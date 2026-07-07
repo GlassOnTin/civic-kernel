@@ -22,6 +22,22 @@
   "T4",
   "T9"
  ],
+ "precedents": [
+  {
+   "event": "Handforth Parish Council viral Zoom meeting",
+   "year": 2021,
+   "source": "Wikipedia (corroborated by a fetched Vice interview)",
+   "url": "https://en.wikipedia.org/wiki/Handforth_Town_Council",
+   "shows": "A parish-council committee meeting collapsed over who held procedural authority — the chair ejected the facilitator as having 'no authority here'; a later investigation costing £85,000 found she indeed lacked formal power — small-democracy procedure is contested and unverifiable."
+  },
+  {
+   "event": "ETU ballot-rigging exposed in the High Court (Byrne v Foulkes)",
+   "year": 1961,
+   "source": "British Online Archives",
+   "url": "https://britishonlinearchives.com/collections/96/trade-unions-in-crisis-the-1961-etu-ballot-rigging-scandal",
+   "shows": "A member organisation's leadership rigged its own internal election by disqualifying returns from branches that voted against it; the fraud was corrected only by external adjudication in the High Court."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

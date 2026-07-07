@@ -14,6 +14,29 @@
   "§12",
   "T7"
  ],
+ "precedents": [
+  {
+   "event": "Swiss minaret referendum",
+   "year": 2009,
+   "source": "Swissvotes (University of Bern), vote no. 547",
+   "url": "https://swissvotes.ch/vote/547.00",
+   "shows": "The premise is real: a 57.5% national majority constitutionally banned a minority religion's buildings."
+  },
+  {
+   "event": "A v Secretary of State (Belmarsh) — declaration of incompatibility",
+   "year": 2004,
+   "source": "UK Ministry of Justice, Responding to Human Rights Judgments (s.4 HRA register)",
+   "url": "https://assets.publishing.service.gov.uk/media/654cf01c014cc9000d677371/responding-human-rights-judgments-2022_2023.pdf",
+   "shows": "The government's own register of s.4 declarations records the House of Lords declaring indefinite detention incompatible — and the remedy arriving only as later legislation, never as judicial voiding; s.4(6) HRA says a declaration 'does not affect the validity, continuing operation or enforcement' of the provision."
+  },
+  {
+   "event": "Prevention of Terrorism Act 2005 replaces the incompatible detention scheme",
+   "year": 2005,
+   "source": "legislation.gov.uk, Explanatory Notes",
+   "url": "https://www.legislation.gov.uk/ukpga/2005/2/notes",
+   "shows": "The provision declared incompatible in December 2004 stayed in force until Parliament's replacement took effect on 14 March 2005 — the declared-but-standing law this scenario turns on."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

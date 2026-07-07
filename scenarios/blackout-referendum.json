@@ -22,6 +22,22 @@
   "T9",
   "T14"
  ],
+ "precedents": [
+  {
+   "event": "Uganda's nationwide internet shutdown across its general election",
+   "year": 2021,
+   "source": "NetBlocks network measurements",
+   "url": "https://netblocks.org/reports/social-media-and-messaging-platforms-restricted-in-uganda-ahead-of-general-election-XB7aaO87",
+   "shows": "A state-ordered blackout began on election eve, connectivity fell to 12% of ordinary levels on polling day, and restoration came only days later — a national election conducted under a deliberate internet cut."
+  },
+  {
+   "event": "#KeepItOn count: 283 internet shutdowns in 39 countries in 2023, the most on record",
+   "year": 2023,
+   "source": "Access Now / #KeepItOn coalition",
+   "url": "https://www.accessnow.org/internet-shutdowns-2023/",
+   "shows": "Government-imposed blackouts are a systemic and growing pattern — 283 documented in a single year — not isolated incidents."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

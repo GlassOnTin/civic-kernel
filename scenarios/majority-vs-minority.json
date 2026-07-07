@@ -19,6 +19,29 @@
   "T7",
   "T11"
  ],
+ "precedents": [
+  {
+   "event": "Swiss minaret referendum",
+   "year": 2009,
+   "source": "Swissvotes (University of Bern), vote no. 547",
+   "url": "https://swissvotes.ch/vote/547.00",
+   "shows": "A real national majority — 57.5% and 19½ of 23 cantonal votes — constitutionally banned construction of a religious minority's buildings, adding a minaret prohibition to the Swiss Federal Constitution."
+  },
+  {
+   "event": "Church of the Lukumi Babalu Aye v. City of Hialeah",
+   "year": 1993,
+   "source": "Cornell Law School, Legal Information Institute (508 U.S. 520)",
+   "url": "https://www.law.cornell.edu/supct/html/91-948.ZS.html",
+   "shows": "A city majority enacted ordinances targeting a minority religion's worship practice while exempting comparable secular conduct — facially neutral law aimed at one faith."
+  },
+  {
+   "event": "Islamic Center of Murfreesboro occupancy fight",
+   "year": 2012,
+   "source": "Becket Fund for Religious Liberty (counsel to the mosque)",
+   "url": "https://www.becketlaw.org/media/mosque-wins-right-meet-drops-lawsuit/",
+   "shows": "Sustained local-majority opposition and a heightened court standard kept a completed mosque shut until a federal order required the county to certify it like any other house of worship."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

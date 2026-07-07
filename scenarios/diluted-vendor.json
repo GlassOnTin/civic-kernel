@@ -19,6 +19,29 @@
   "T4",
   "T10"
  ],
+ "precedents": [
+  {
+   "event": "OOXML fast-track standardization vote irregularities",
+   "year": 2008,
+   "source": "The Register",
+   "url": "https://www.theregister.com/2008/03/31/iso_ooxml_votes_approve/",
+   "shows": "Contemporaneous reporting of the ISO approval vote documents delegate complaints of heavy-handed tactics across multiple countries, including a national body's staff casting 'approve' against 19 of 24 committee members — a vendor bending a standards process while keeping the compliance label."
+  },
+  {
+   "event": "ISO/IEC dismiss four national bodies' appeals against OOXML",
+   "year": 2008,
+   "source": "The Register",
+   "url": "https://www.theregister.com/2008/08/16/iso_rejects_ooxml_appeal/",
+   "shows": "Brazil, India, South Africa and Venezuela formally appealed the process; the appeals failed and the standard proceeded — the capture completing because the label, not the substance, was what the process certified."
+  },
+  {
+   "event": "Industry joint statement against eIDAS 2.0 Article 45",
+   "year": 2023,
+   "source": "Joint industry letter (Cloudflare, Mozilla, Internet Society, Linux Foundation, others)",
+   "url": "https://blog.mozilla.org/netpolicy/files/2023/11/eIDAS-Industry-Letter.pdf",
+   "shows": "Industry and civil-society signatories warned that Article 45 would force browsers to trust state-appointed certificate authorities and forbid enforcing stronger checks such as Certificate Transparency — a legally mandated dilution of an existing security baseline."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

@@ -20,6 +20,29 @@
   "T6",
   "T4"
  ],
+ "precedents": [
+  {
+   "event": "Apple v FBI — the San Bernardino All Writs Act order",
+   "year": 2016,
+   "source": "Electronic Frontier Foundation case archive",
+   "url": "https://www.eff.org/cases/apple-challenges-fbi-all-writs-act-order",
+   "shows": "A court ordered Apple to break one phone's security; Apple argued compliance would undermine security for all users, and the demand collapsed when the FBI bought a third-party unlock — compelled-decryption demands meeting an architecture built to refuse them."
+  },
+  {
+   "event": "Apple Inc v Secretary of State for the Home Department (IPT)",
+   "year": 2025,
+   "source": "Investigatory Powers Tribunal",
+   "url": "https://investigatorypowerstribunal.org.uk/judgement/apple-inc-v-secretary-of-state-for-the-home-department/",
+   "shows": "After reporting that the Home Office had issued a Technical Capability Notice demanding access to iCloud user data, Apple litigated — and the Tribunal's public judgment refused to keep even the bare existence of the case secret."
+  },
+  {
+   "event": "Apple withdraws Advanced Data Protection for UK users",
+   "year": 2025,
+   "source": "TechTarget SearchSecurity",
+   "url": "https://www.techtarget.com/searchsecurity/news/366619638/Apple-pulls-Advanced-Data-Protection-in-UK-sparking-concerns",
+   "shows": "Rather than build the demanded access capability, Apple removed its end-to-end-encrypted iCloud tier for UK users, stating it had never built a backdoor or master key — refusal by removing the service instead of weakening it."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

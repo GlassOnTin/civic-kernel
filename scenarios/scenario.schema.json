@@ -4,7 +4,7 @@
   "title": "Civic Kernel stress-test scenario",
   "description": "One imagined real-life human situation walked through the protocol. Test-harness format, not part of the waist. The embedded manifest and log-entry artifacts must additionally validate against the two waist schemas in ../schema/ — that cross-check is the test: can the waist express this situation? Enforced by tools/validate.py.",
   "type": "object",
-  "required": ["id", "title", "setting", "threats", "doc_refs", "manifest", "walkthrough", "verdict", "findings"],
+  "required": ["id", "title", "setting", "threats", "doc_refs", "precedents", "manifest", "walkthrough", "verdict", "findings"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
@@ -12,6 +12,23 @@
     "setting": { "type": "string", "description": "The scene: named people, a real place, what is at stake. General-reader prose." },
     "threats": { "type": "array", "items": { "type": "string", "pattern": "^T[0-9]+$" }, "description": "Threat-register IDs under test (§2)." },
     "doc_refs": { "type": "array", "items": { "type": "string" } },
+    "precedents": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Documented real-world events the fiction is modeled on: the people are invented, the attack pattern is not. Same discipline the kernel demands of a form field (no demand without a cited rule): no attack without a cited precedent.",
+      "items": {
+        "type": "object",
+        "required": ["event", "year", "source", "url", "shows"],
+        "additionalProperties": false,
+        "properties": {
+          "event": { "type": "string", "description": "Short name of the documented event, case, or statistic." },
+          "year": { "type": "integer" },
+          "source": { "type": "string", "description": "Publisher or institution behind the url." },
+          "url": { "type": "string", "pattern": "^https?://" },
+          "shows": { "type": "string", "description": "One sentence: which of this scenario's attack patterns the event documents." }
+        }
+      }
+    },
     "manifest": { "type": "object", "description": "The community's conformance manifest; must validate against ../schema/manifest.schema.json." },
     "walkthrough": {
       "type": "array",

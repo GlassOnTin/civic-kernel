@@ -15,6 +15,22 @@
   "T1",
   "T8"
  ],
+ "precedents": [
+  {
+   "event": "Poland refuses to publish Constitutional Tribunal judgments",
+   "year": 2016,
+   "source": "Venice Commission (Council of Europe), Opinion CDL-AD(2016)026",
+   "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2016)026-e",
+   "shows": "The government withheld publication of Constitutional Tribunal rulings to deny them legal effect; the Commission held that no valid system of constitutional justice can depend on the goodwill of political authorities."
+  },
+  {
+   "event": "Ecuador misses court-ordered Yasuní oil shutdown after referendum",
+   "year": 2024,
+   "source": "Mongabay",
+   "url": "https://news.mongabay.com/2024/08/one-year-after-oil-referendum-whats-next-for-ecuadors-yasuni-national-park/",
+   "shows": "After 59% of voters chose to halt drilling in Yasuní Block 43-ITT and the Constitutional Court set a one-year deadline, state oil production continued past the August 2024 deadline at roughly 50,000 barrels a day — an executive overriding both a popular vote and a court order."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

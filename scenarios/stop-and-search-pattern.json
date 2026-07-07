@@ -14,6 +14,29 @@
   "§9",
   "§6"
  ],
+ "precedents": [
+  {
+   "event": "Home Office stop-and-search ethnicity statistics, England and Wales",
+   "year": 2024,
+   "source": "GOV.UK Ethnicity facts and figures (Home Office data)",
+   "url": "https://www.ethnicity-facts-figures.service.gov.uk/crime-justice-and-the-law/policing/stop-and-search/latest/",
+   "shows": "Official statistics for the year ending March 2023 record 24.5 stop-and-searches per 1,000 Black people against 5.9 per 1,000 White people — about 4.1 times the rate: a disparity visible only in the aggregate while each individual stop is presumptively lawful."
+  },
+  {
+   "event": "ICO enforcement notice on the Met Police Gangs Violence Matrix",
+   "year": 2018,
+   "source": "Information Commissioner's Office (notice hosted by the Metropolitan Police)",
+   "url": "https://www.met.police.uk/SysSiteAssets/media/downloads/force-content/met/about-us/gangs-violence-matrix/ico-enforcement-notice.pdf",
+   "shows": "The regulator's notice records that some 80% of individuals on the Matrix were Black, 64% were rated low-risk, victims were processed as suspects, and data was shared unredacted — an unlawful discriminatory pattern inside an ostensibly legitimate policing database."
+  },
+  {
+   "event": "Floyd v City of New York",
+   "year": 2013,
+   "source": "Civil Rights Litigation Clearinghouse (959 F. Supp. 2d 540, S.D.N.Y.)",
+   "url": "https://clearinghouse.net/case/12021/",
+   "shows": "After a nine-week trial, a federal court held NYPD stop-and-frisk as practiced unconstitutional on Fourth Amendment and Equal Protection grounds and appointed a monitor — liability established from the aggregate pattern, not any single stop."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

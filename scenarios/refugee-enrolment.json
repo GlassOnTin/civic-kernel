@@ -21,6 +21,22 @@
   "T3",
   "T9"
  ],
+ "precedents": [
+  {
+   "event": "Taliban capture of US/Afghan biometric identity systems",
+   "year": 2021,
+   "source": "Human Rights Watch",
+   "url": "https://www.hrw.org/news/2022/03/30/new-evidence-biometric-data-systems-imperil-afghans",
+   "shows": "Six biometric systems holding iris scans, fingerprints, ethnicity and family data fell under Taliban control in 2021 and were used at checkpoints to identify former security personnel — a seized identity register is lethal."
+  },
+  {
+   "event": "UNHCR Rohingya biometric data reaches Myanmar without consent",
+   "year": 2021,
+   "source": "Human Rights Watch",
+   "url": "https://www.hrw.org/news/2021/06/15/un-shared-rohingya-data-without-informed-consent",
+   "shows": "Biometrics collected from Rohingya refugees for aid registration were passed via Bangladesh to Myanmar for repatriation vetting without informed consent; refugees whose names reached Myanmar went into hiding."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

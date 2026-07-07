@@ -21,6 +21,22 @@
   "T6",
   "T9"
  ],
+ "precedents": [
+  {
+   "event": "London mobile-phone theft: 81,365 phones stolen in one year",
+   "year": 2024,
+   "source": "Mayor of London / Metropolitan Police",
+   "url": "https://www.london.gov.uk/mayor-outlines-major-crackdown-mobile-phone-theft-new-mobile-phone-theft-command-cell-and-ps45m-more",
+   "shows": "Official Met figures put phone theft in one city at over eighty thousand devices a year — snatch-theft at a scale where any phone-resident credential must survive loss of the device."
+  },
+  {
+   "event": "FBI IC3 SIM-swap alert: 1,611 complaints, over $68M in losses in 2021",
+   "year": 2021,
+   "source": "FBI Internet Crime Complaint Center, PSA 220208",
+   "url": "https://www.ic3.gov/PSA/2022/PSA220208",
+   "shows": "SIM-swap complaints jumped five-fold in a year with $68M in adjusted losses — identity anchored to a phone number is a documented account-takeover vector, which is why the credential must live in the enclave and revoke publicly."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

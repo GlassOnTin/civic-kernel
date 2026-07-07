@@ -16,6 +16,22 @@
   "T7",
   "T1"
  ],
+ "precedents": [
+  {
+   "event": "Åkerberg Fransson, C-617/10",
+   "year": 2013,
+   "source": "EUR-Lex (CJEU Grand Chamber, CELEX 62010CJ0617)",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62010CJ0617",
+   "shows": "The Art. 51 gate this scenario turns on: the Charter binds member states 'only when they are implementing Union law' — and where Union law applies, Charter rights apply with it."
+  },
+  {
+   "event": "Centraal Israëlitisch Consistorie van België, C-336/19",
+   "year": 2020,
+   "source": "CJEU, CURIA Press Release No 163/20 (Grand Chamber)",
+   "url": "https://curia.europa.eu/jcms/upload/docs/application/pdf/2020-12/cp200163en.pdf",
+   "shows": "A member-state restriction on a religious practice was reviewed under the Charter only because it operated within an EU regulation — and the Grand Chamber upheld the restriction as proportionate: Charter scope demonstrated, no strike."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

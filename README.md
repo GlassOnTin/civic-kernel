@@ -24,7 +24,9 @@ four services, four verbs, two formats, one floor, twelve refusals, and what is 
   - `manifest.schema.json` — a community's conformance manifest: which services and which of the
     30 UDHR invariants it upholds, its `decisions.coercion_resistance`, and its `rights_guard.remedy`.
 - **`scenarios/`** — imagined human situations, each walked through the four verbs. Every embedded
-  manifest and log entry is validated against the waist schemas. `scenario.schema.json` is the record format.
+  manifest and log entry is validated against the waist schemas, and every scenario must cite
+  documented real-world precedents for its attack pattern (a required `precedents` field, 46
+  citations verified July 2026). `scenario.schema.json` is the record format.
 - **`corpus/`** — real legal systems captured under the same schema, sharing the 30-invariant spine:
   - `uk/` — Human Rights Act 1998 (via legislation.gov.uk) + real Commons divisions as `decision.closed` entries.
   - `de/` — Grundgesetz (via gesetze-im-internet.de).
@@ -49,9 +51,11 @@ deploys without running these — running them is how you regenerate it after ed
 
 ## Honest caveats
 
-- The scenarios are **AI-generated fiction** — plausibility tests of the architecture, not records
-  of real events. The verdicts (`holds` / `strains` / `breaks`) are the harness's reading of the
-  architecture document's own claims and limits, not endorsements.
+- The scenarios are **fiction anchored to fact**: the people and places are invented, but every
+  attack pattern cites documented real-world precedents (each checked against its source when
+  added, July 2026). They are plausibility tests of the architecture, not records of real events;
+  the verdicts (`holds` / `strains` / `breaks`) are the harness's reading of the architecture
+  document's own claims and limits, not endorsements.
 - The comparative rights-map is a **coarse** mapping of UDHR articles to domestic constitutional
   provisions from public legal sources. It points to where systems differ; it is not legal advice
   or authoritative comparative-law scholarship, and some cells are debatable.

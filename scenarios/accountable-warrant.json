@@ -17,6 +17,29 @@
   "T6",
   "T13"
  ],
+ "precedents": [
+  {
+   "event": "Apple's Patriot Act warrant canary and its disappearance",
+   "year": 2014,
+   "source": "The Register",
+   "url": "https://www.theregister.com/2014/09/20/apples_warrant_canary_is_either_cockup_conspiracy_or_the_antigoogle_selling_point/",
+   "shows": "Apple's 2013 statement that it had never received a Section 215 order vanished from later transparency reports, and the absence was widely read as signalling a secret order it could not disclose — public existence-signalling for sealed process, deployed in practice (the reading was contested; the mechanism is the precedent)."
+  },
+  {
+   "event": "In re National Security Letters — gag orders litigated",
+   "year": 2013,
+   "source": "Electronic Frontier Foundation",
+   "url": "https://www.eff.org/issues/national-security-letters",
+   "shows": "Hundreds of thousands of NSLs issued with unilateral gag provisions — secret legal process whose very existence recipients could not acknowledge; a federal judge declared the statute unconstitutional in 2013 and Congress amended it in 2015."
+  },
+  {
+   "event": "IPCO annual reports: authorisation counts public, contents sealed",
+   "year": 2023,
+   "source": "Investigatory Powers Commissioner's Office",
+   "url": "https://www.ipco.org.uk/news/publication-of-investigatory-powers-commissioners-2023-annual-report/",
+   "shows": "The UK's warrant oversight body publishes aggregate statistics — just under 360,000 authorisations, 386 inspections, 11 serious-error investigations in the 2023 report — while warrant contents stay sealed: counts-without-contents as existing practice."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

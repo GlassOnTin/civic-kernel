@@ -18,6 +18,22 @@
   "§11",
   "§12"
  ],
+ "precedents": [
+  {
+   "event": "Missing Out 2024: unclaimed UK benefits estimate",
+   "year": 2024,
+   "source": "Policy in Practice",
+   "url": "https://policyinpractice.co.uk/publication/missing-out-2024/",
+   "shows": "An estimated £22.7 billion of income-related benefits and social tariffs goes unclaimed across Great Britain each year, with application complexity and administrative burden named as key causes of non-take-up."
+  },
+  {
+   "event": "NAO report: Universal Credit five-week wait and hardship",
+   "year": 2018,
+   "source": "UK National Audit Office",
+   "url": "https://www.nao.org.uk/reports/rolling-out-universal-credit/",
+   "shows": "A designed-in five-week wait for first payment left about 113,000 new claims (roughly 1 in 4) paid late in 2017, four in ten surveyed claimants in financial difficulty, and the department dismissing evidence of hardship — administrative burden operating as deterrence."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {

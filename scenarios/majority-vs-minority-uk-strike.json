@@ -15,6 +15,22 @@
   "T7",
   "T1"
  ],
+ "precedents": [
+  {
+   "event": "Church of the Lukumi Babalu Aye v. City of Hialeah",
+   "year": 1993,
+   "source": "Cornell Law School, Legal Information Institute (508 U.S. 520)",
+   "url": "https://www.law.cornell.edu/supct/html/91-948.ZS.html",
+   "shows": "Subject-matter fit for the counterfactual: an apex court voiding a local majority's ordinances aimed at a minority religion's worship — though against municipal ordinances, not national legislation."
+  },
+  {
+   "event": "BVerfG Aviation Security Act judgment, 1 BvR 357/05",
+   "year": 2006,
+   "source": "Bundesverfassungsgericht, official English translation",
+   "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/EN/2006/02/rs20060215_1bvr035705en.html",
+   "shows": "Institutional fit: a constitutional court declaring part of the national parliament's statute void on fundamental-rights grounds — the mechanism a strike-empowered UK court would use; no verified case anywhere voids a national referendum-backed worship ban."
+  }
+ ],
  "manifest": {
   "v": "civic-kernel/manifest/v0",
   "community": {
