@@ -10,7 +10,7 @@ four services, four verbs, two formats, one floor, twelve refusals, and what is 
 ### Read it live
 
 - **[The architecture →](https://glassontin.github.io/civic-kernel/)**  the proposal: a thin waist, four services, rights as invariants
-- **[The protocol against real life →](https://glassontin.github.io/civic-kernel/scenarios.html)**  19 stress-test stories, each machine-validated against the schemas
+- **[Real life against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)**  19 stress-test stories, each machine-validated against the schemas
 - **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**  the same 30 rights across the UK, Germany, the US, and the EU Charter
 
 ## Layout

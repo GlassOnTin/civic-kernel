@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Civic Kernel — the protocol against real life</title>
+<title>Civic Kernel — real life against the protocol</title>
 <style>
   :root {
     --paper: #f6f7f9; --card: #ffffff; --ink: #1c2333; --muted: #5a6376;
@@ -6720,7 +6720,7 @@ function card(s) {
 }
 
 function list() {
-  document.title = 'The protocol against real life — Civic Kernel';
+  document.title = 'Real life against the protocol — Civic Kernel';
   const byId = Object.fromEntries(DATA.map(s => [s.id, s]));
   const used = new Set();
   const counts = { holds: 0, strains: 0, breaks: 0 };
@@ -6740,7 +6740,7 @@ function list() {
   const more = leftover.length ? `<section class="group"><h2>More</h2><ul class="cards">${leftover.map(card).join('')}</ul></section>` : '';
   app.innerHTML = `
     <header class="hero">
-      <h1>The protocol against real life</h1>
+      <h1>Real life against the protocol</h1>
       <p class="lede">The <a href="index.html">Civic Kernel</a> is a design for democratic infrastructure — thin, verifiable on the phone in your pocket, hard to capture. To find out whether it holds up, we drop it into the hardest situations real people face and follow one person through, step by step. Each story below says plainly where the design <em>holds</em>, <em>strains</em>, or <em>breaks</em>.</p>
       <p class="tally">${DATA.length} stories · ${counts.holds} hold · ${counts.strains} strain · ${counts.breaks} break · nothing cherry-picked</p>
     </header>
