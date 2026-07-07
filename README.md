@@ -1,12 +1,14 @@
 # The Civic Kernel
 
-An architecture proposal for a thin, capture-resistant protocol for democratic
-decision-making — plus a machine-checked stress-test suite and a comparative-law
-corpus that hold the design against real situations and real legal systems.
+**A thin, capture-resistant protocol for democratic decision-making** — with a
+machine-checked stress-test suite and a comparative-law corpus that hold the design
+against real situations and real legal systems.
 
-**Live:** [glassontin.github.io/civic-kernel](https://glassontin.github.io/civic-kernel/) — the architecture document, with a [companion stress-test suite & comparative-law corpus](https://glassontin.github.io/civic-kernel/scenarios.html) (UK · Germany · US).
+### Read it live
 
-Start with **`index.html`** (the architecture document, rev. 3).
+- **[The architecture →](https://glassontin.github.io/civic-kernel/)**  the proposal: a thin waist, four services, rights as invariants
+- **[The protocol against real life →](https://glassontin.github.io/civic-kernel/scenarios.html)**  17 stress-test stories, each machine-validated against the schemas
+- **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**  the same 30 rights across the UK, Germany, and the US
 
 ## Layout
 

@@ -42,16 +42,23 @@
   header { text-align: center; }
   .wrap { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
   header h1 { font-size: 1.9rem; margin: 0 0 .3rem; line-height: 1.25; }
-  header .sub { color: var(--muted); margin: 0 0 .4rem; }
   header a { color: var(--accent); }
-  .tally { font-family: var(--mono); font-size: .78rem; color: var(--muted); margin: 1rem 0 0; }
-  .cards { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .hero { text-align: center; margin: 1rem 0 3rem; }
+  .hero h1 { font-size: 2.1rem; margin: 0; line-height: 1.2; }
+  .lede { font-size: 1.08rem; line-height: 1.65; color: var(--ink); max-width: 40rem; margin: 1rem auto 0; }
+  .tally { font-family: var(--mono); font-size: .78rem; color: var(--muted); margin: 1.3rem 0 0; }
+  .group { margin: 2.8rem 0 0; }
+  .group > h2 { font-size: 1.3rem; margin: 0 0 .25rem; line-height: 1.3; }
+  .group-blurb { color: var(--muted); margin: 0 0 1.2rem; max-width: 44rem; }
+  .group-cta { margin: 1.1rem 0 0; font-family: var(--mono); font-size: .82rem; }
+  .group-cta a { color: var(--accent); }
+  .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
   .cards a {
     display: block; height: 100%; background: var(--card); border: 1px solid var(--line);
     border-radius: 8px; padding: 1rem 1.1rem; color: inherit; text-decoration: none;
   }
   .cards a:hover { border-color: var(--accent); }
-  .cards h2 { font-size: 1.02rem; margin: .45rem 0 .35rem; line-height: 1.35; }
+  .cards h3 { font-size: 1.02rem; margin: .5rem 0 .35rem; line-height: 1.35; }
   .cards p { font-size: .85rem; color: var(--muted); margin: 0; }
   .badge {
     display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em;
@@ -5811,24 +5818,54 @@ function clientView(m) {
   return `<div class="client"><div class="cap">What a citizen's verifier client renders for ${esc((m.community || {}).name || (m.community || {}).id || 'this community')}</div><ul>${lines.join('')}</ul></div>`;
 }
 
+const SECTIONS = [
+  { title: 'One person at a time',
+    blurb: "The kernel's promise is made to one human — so the first tests take one human at a time, in the moments hardest to get right: a coerced vote, a voter who distrusts every computer, a stolen phone, a camp with no papers.",
+    ids: ['coerced-vote', 'no-smartphone', 'stolen-phone', 'refugee-enrolment', 'club-agm', 'benefit-sludge', 'blackout-referendum'] },
+  { title: 'When institutions turn',
+    blurb: "The harder test is the powerful acting in bad faith — a vendor selling a watered-down copy, a clerk rewriting the record, a governor ignoring the vote, the police reaching for a name the system was built never to hold.",
+    ids: ['diluted-vendor', 'records-rewrite', 'accountable-warrant', 'executive-ignores', 'lawful-access-refusal', 'stop-and-search-pattern'] },
+  { title: 'One law, three constitutions',
+    blurb: "The same attack — a 61% majority voting to ban a minority's worship — run against a full-profile community and then the real UK, Germany, and United States. The verdict flips with the legal system, not the story.",
+    ids: ['majority-vs-minority', 'majority-vs-minority-uk', 'majority-vs-minority-de', 'majority-vs-minority-us'],
+    corpus: true },
+];
+
+function card(s) {
+  return `<li><a href="#${esc(s.id)}">
+    <span class="badge ${esc(s.verdict)}">${esc(s.verdict)}</span>
+    <h3>${esc(s.title)}</h3>
+    <p>${esc(s.setting.split(/(?<=[.!?])\s/)[0])}</p>
+  </a></li>`;
+}
+
 function list() {
+  document.title = 'The protocol against real life — Civic Kernel';
+  const byId = Object.fromEntries(DATA.map(s => [s.id, s]));
+  const used = new Set();
   const counts = { holds: 0, strains: 0, breaks: 0 };
   DATA.forEach(s => counts[s.verdict]++);
-  document.title = 'Civic Kernel — the protocol against real life';
+  const sections = SECTIONS.map(sec => {
+    const cs = sec.ids.map(id => byId[id]).filter(Boolean);
+    cs.forEach(s => used.add(s.id));
+    if (!cs.length) return '';
+    return `<section class="group">
+      <h2>${esc(sec.title)}</h2>
+      <p class="group-blurb">${sec.blurb}</p>
+      <ul class="cards">${cs.map(card).join('')}</ul>
+      ${sec.corpus && CORPUS ? `<p class="group-cta"><a href="#corpus">See all 30 rights side by side, UK · Germany · US &rarr;</a></p>` : ''}
+    </section>`;
+  }).join('');
+  const leftover = DATA.filter(s => !used.has(s.id));
+  const more = leftover.length ? `<section class="group"><h2>More</h2><ul class="cards">${leftover.map(card).join('')}</ul></section>` : '';
   app.innerHTML = `
-    <header>
+    <header class="hero">
       <h1>The protocol against real life</h1>
-      <p class="sub">Imagined human situations, walked through the <a href="index.html">Civic Kernel</a>'s four verbs. Every embedded manifest and log entry is machine-validated against the waist schemas; every verdict names what the protocol did <em>not</em> do.</p>
-      <p class="tally">${DATA.length} scenarios · ${counts.holds} hold · ${counts.strains} strain · ${counts.breaks} break</p>
-      ${CORPUS ? `<p class="nav"><a href="#corpus">Real UK law, in the kernel's terms &rarr; the rights map &amp; parliamentary divisions</a></p>` : ''}
+      <p class="lede">The <a href="index.html">Civic Kernel</a> is a design for democratic infrastructure — thin, verifiable on the phone in your pocket, hard to capture. To find out whether it holds up, we drop it into the hardest situations real people face and follow one person through, step by step. Each story below says plainly where the design <em>holds</em>, <em>strains</em>, or <em>breaks</em>.</p>
+      <p class="tally">${DATA.length} stories · ${counts.holds} hold · ${counts.strains} strain · ${counts.breaks} break · nothing cherry-picked</p>
     </header>
-    <ul class="cards">${DATA.map(s => `
-      <li><a href="#${esc(s.id)}">
-        <span class="badge ${esc(s.verdict)}">${esc(s.verdict)}</span><span class="chips">${s.threats.map(esc).join(' ')}</span>
-        <h2>${esc(s.title)}</h2>
-        <p>${esc(s.setting.split(/(?<=[.!?])\s/)[0])}</p>
-      </a></li>`).join('')}
-    </ul>`;
+    ${sections}
+    ${more}`;
 }
 
 function detail(s) {
