@@ -13,7 +13,7 @@ The attack is fixed throughout: a 61% majority banning a minority's worship (the
 | S0 | **The UK today** — HRA 1998 | declaration | unconditional | 17/30 | **breaks** | measured (`majority-vs-minority-uk`) |
 | S1 | + adopt the transparency log (§3.4) | declaration | unconditional | 17/30 | breaks | inferred |
 | S2 | + verifiable ballots on the paper channel (§3.2) | declaration | unconditional | 17/30 | breaks | inferred |
-| S3 | **+ strengthen the remedy: declaration → strike** | strike | unconditional | 17/30 | *would be* strains | measured for strike (DE/US/EU) — **but the UK cannot take this step** |
+| S3 | **+ strengthen the remedy: declaration → strike** | strike | unconditional | 17/30 | **strains** | measured in-context (`majority-vs-minority-uk-strike`) — **but the UK cannot take this step** |
 
 **Why the intermediate moves don't flip it, and are worth taking anyway.** The
 four-jurisdiction series established that this verdict is gated by *remedy*: `declaration →
@@ -38,8 +38,10 @@ improvement path jams, and it is not where the engineering is hard but where the
 
 ---
 
-*Honesty note: S1–S2 verdicts are inferred from the measured remedy-gating, not re-run; S3's
-flip is measured across the strike jurisdictions, not on a UK-with-strike manifest
-specifically. One harness run on a hypothetical UK-with-strike manifest would confirm both
-in-context and let the agent narrate the self-lock in the UK's own terms — say if that's worth
-the tokens.*
+*Honesty note: S1–S2 verdicts are inferred from the measured remedy-gating, not re-run. S3 is
+now measured **in-context** (`majority-vs-minority-uk-strike`): holding the real UK constant to
+the byte and moving only the remedy declaration→strike flips `breaks → strains`. The run is
+scrupulous that this is a modelled counterfactual — a Britain that has abolished parliamentary
+sovereignty — not history. Two riders it surfaced: strike is only as strong as an uncaptured
+court (hence `strains`, not `holds`), and even when it works the relief is eventual, not
+immediate — the Act had a live interim window before a court voided it.*

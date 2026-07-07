@@ -1,0 +1,287 @@
+{
+ "id": "majority-vs-minority-uk-strike",
+ "title": "The Same 61% Passes the Same Ban in Cawforth — This Time a Court Voids It, in a Britain That Cannot Exist",
+ "setting": "This is Cawforth again: the same former mill town in the north of England, the same shell of the old Weavers' Institute on Shawcross Lane, the same Dr Nasreen Iqbal — GP, chair of the Cawforth Central Mosque Trust, born in the maternity ward two streets over. The planning consent, the tabloid front page reading A MOSQUE ON EVERY HIGH STREET?, the poll at 61 per cent, the backbench ten-minute-rule bill that the Government adopts and turns into the Places of Worship (Suspension of New Establishment) Bill — every detail is identical to the run that broke. Nothing about the attack has changed. Nothing about the town, the people, the Bill, or the rights at stake has changed.\n\nOne thing has changed, and it is not in Cawforth. This is a Britain that, roughly a decade before these events, did the thing the real United Kingdom has never done: it wrote down a constitution and let its courts enforce it against Parliament. In this counterfactual, an entrenched Bill of Rights places certain rights beyond ordinary repeal and empowers a constitutional court to VOID an Act that breaches them — not merely to declare it incompatible and watch it stay in force. On the Civic Kernel's machine-readable manifest, that entire civilisational difference reduces to a single field. The real UK's deployment declares rights_guard.remedy = 'declaration'; this one declares rights_guard.remedy = 'strike'. Same twenty-of-thirty invariants, same unconditional scope, same witnesses, same verifiable ballots, same everything else, down to the byte. One enum value is the whole distance between the two worlds.\n\nSo this run is a controlled experiment. Hold the town, the people, the Bill, the coverage and the scope constant; move only the remedy; see whether the verdict flips. It does: where the real UK's declaration remedy let the ban stand while a High Court tutted, this Britain's strike remedy lets a court quash the Act outright, and Nasreen gets her building. That confirms in the UK's own context what the four-jurisdiction series showed across Germany, the US and the EU — that remedy, not coverage, gates the outcome.\n\nBut the honesty this run exists to deliver is the warning stapled to the result. Getting from the real Britain to this one is not a small, reversible, individually-adoptable move along a lattice. It is the sovereign Parliament binding its own future majorities — surrendering the supremacy that a 51 per cent majority values most precisely when it has 51 per cent. That is the one step a transient majority will not take, which is why the UK's improvement trajectory stalls exactly here. This is a portrait of a country the real UK cannot become by any path the model can walk. The vindication is real. So is the wall in front of it.",
+ "threats": [
+  "T7",
+  "T1"
+ ],
+ "doc_refs": [
+  "§3.3",
+  "§3.4",
+  "§5",
+  "§6",
+  "§12",
+  "T7",
+  "T1"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:united-kingdom.example",
+   "name": "United Kingdom (national deployment)"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "document",
+   "issuer": "UK Electoral Registration Officers (per-decision unlinkable pseudonyms)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "representation-of-the-people-roll/2026"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "3-of-5: UK Supreme Court, University of Oxford, University of Edinburgh, and the two largest opposition parties"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    26,
+    30
+   ],
+   "remedy": "strike",
+   "scope": "unconditional"
+  },
+  "transparency_log": {
+   "log_id": "did:web:united-kingdom.example",
+   "witnesses": [
+    "did:web:electoral-commission.example",
+    "did:web:law-society.example",
+    "did:web:council-of-europe.example"
+   ],
+   "anchors": [
+    "anchor:checkpoint-chain-a.example",
+    "anchor:checkpoint-chain-b.example"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:united-kingdom.example#manifest-2026",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdVS1N0cmlrZU1hbmlmZXN0Tm90UmVhbENyeXB0bw"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The town of Cawforth, then the whole country",
+   "verb": "offstage",
+   "narrative": "Byte for byte the run that broke: the borough council grants consent for the mosque at the old Weavers' Institute; a tabloid campaign lifts the row onto the national front pages; a poll puts support for a suspension at 61 per cent; a backbench ten-minute-rule bill becomes the Government's Places of Worship (Suspension of New Establishment) Bill. The posters, the phone-ins, the petition all live where the kernel deliberately does not reach. Only the constitution beneath this Parliament is different — and that difference will not show up until the Bill hits the rights guard."
+  },
+  {
+   "actor": "The rights guard (SVC-3), UK deployment",
+   "verb": "verify",
+   "narrative": "At the pre-Second-Reading compatibility gate the guard runs the Bill as a static analysis against the encoded invariants, and trips exactly the three it tripped in the declaration run: Article 18 (freedom to manifest religion in community with others), and Articles 2 and 7 (non-discrimination and equality before the law), because a facially neutral land-use measure singles out a religiously-defined class the explanatory notes name by town. The reasons are word-for-word what the declaration deployment logged. The single difference in this entry is downstream of the single difference in the manifest: because rights_guard.remedy is 'strike', the guard does not merely flag and stand aside — it re-routes the Bill off the ordinary majority path and onto the constitutional path, whose endpoint is a court that can void the Act. guard_power reads 'escalate', not 'flag-only'.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-02-24T10:00:00Z",
+    "body": {
+     "bill_id": "places-of-worship-suspension-bill-2026",
+     "bill_hash": "sha256:3f8c1a9d0e42b675c8a1f4e9d27b60a3541cde92b04f7a6d3e158c29b7f0a441",
+     "stage": "pre-second-reading (constitutional compatibility gate)",
+     "invariants_tripped": [
+      2,
+      7,
+      18
+     ],
+     "reasons": [
+      "Art 18 (entrenched freedom of thought, conscience and religion): the Bill suspends the establishment of new places of worship, burdening the freedom to manifest religion in community with others and in public",
+      "Art 2 & 7 (entrenched non-discrimination and equality before the law): drafted as neutral land-use policy, the measure singles out a religiously-defined class; the explanatory notes name the Cawforth mosque as its object",
+      "classifier: uk-invariants/v1 (Akoma Ntoso match on worship-use suspension), confirmed by the constitutional-review reviewer"
+     ],
+     "remedy": "strike",
+     "guard_power": "escalate",
+     "routing": {
+      "path": "constitutional",
+      "note": "Under this deployment's manifest (rights_guard.remedy = 'strike'), a tripped invariant re-routes the Bill off the ordinary majority path and onto the constitutional path: a mandatory deliberation period, adversarial review by an SVC-2 sortition panel, and referral to the Constitutional Court, which under the entrenched Bill of Rights may void the Act. The guard does not silence the Bill (that would hand its operator the veto the kernel refuses); it escalates it to a forum that can strike it. §3.3, 'escalate, never veto', with strike as the ceiling rather than a non-binding flag."
+     },
+     "appealable": true
+    },
+    "sig": {
+     "key_id": "did:web:united-kingdom.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdVS1N0cmlrZVJpZ2h0c0NsYXNzaWZpY2F0aW9uRXNjYWxhdGU"
+    }
+   }
+  },
+  {
+   "actor": "Dr Nasreen Iqbal",
+   "verb": "read",
+   "narrative": "Nasreen's civic client syncs the classification that evening. The screen is almost identical to the one her counterpart read in the run that broke — the same three articles, the same acknowledgment in public writing that the Bill burdens her community's rights — except for two fields. Where the declaration run said remedy 'declaration' and guard_power 'flag-only', hers says remedy 'strike' and guard_power 'escalate'. She has read enough this year to know exactly what those two words are worth. It is the difference between 'this is wrong' and 'this is wrong, and it may not stand.' She forwards it to the Trust's solicitor, who this time is drafting not for a declaration of incompatibility but for annulment."
+  },
+  {
+   "actor": "Parliament, over four months",
+   "verb": "offstage",
+   "narrative": "Second Reading, Committee, Report, the Lords, ping-pong — none of it kernel machinery, all of it happening where the protocol has no organ by design. And the human cost is identical to the run that broke: a brick goes through the Trust's office window; the police log it; Nasreen's fourteen-year-old is asked in the school corridor when the vote on 'your lot' is. The remedy field changes what an Act is worth once passed. It changes nothing about the months of fear before it passes. The kernel moderates none of this, ranks none of it, prevents none of it — in either world."
+  },
+  {
+   "actor": "Members of Parliament",
+   "verb": "cast",
+   "narrative": "The Commons carries the Bill at Third Reading on a recorded division — the identical tally to the run that broke, 361 to 248, a public named vote in Hansard, the deliberate opposite of a citizen's secret ballot. The majority does precisely what it did before; the difference is not in what Parliament does but in what its Act is now worth. The decision closes on the constitutional path the guard re-routed it to, and the Act receives Royal Assent flagged for annulment review — in force, enforceable in the interim, but voidable ab initio if the Court strikes it.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.closed",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-05-19T22:45:00Z",
+    "body": {
+     "decision_id": "places-of-worship-suspension-bill-2026/commons-third-reading",
+     "question_hash": "sha256:7a31f0c9e2b6d4885f1a0c3e9d27b65a40e8c1f2d5936b7a0e4d18c25f6a93b0",
+     "path": "constitutional",
+     "chamber": "House of Commons",
+     "vote_type": "recorded division (public, named — parliamentary accountability, NOT a receipt-free ballot)",
+     "eligibility_rules": "commons-membership/58th-parliament",
+     "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+     "compatibility_statement": "constitutional compatibility gate: the Minister in charge could not certify the Bill compatible with the entrenched rights; under remedy 'strike' that failure makes referral to the Constitutional Court mandatory, not advisory",
+     "tally": {
+      "ayes": 361,
+      "noes": 248
+     },
+     "result": "carried, referred for constitutional review",
+     "onward": "Lords stages completed 2026-05-27; Royal Assent 2026-05-28; enacted as Places of Worship (Suspension of New Establishment) Act 2026 c.14. Because the guard re-routed the Bill onto the constitutional path (rights_guard.remedy = 'strike'), the Act enters force flagged for annulment before the Constitutional Court; enforcement in the interim is lawful but voidable ab initio if the Court strikes it. This is the only material divergence from the declaration run's decision.closed entry: there, path was 'ordinary' and the Act was simply law-in-force."
+    },
+    "sig": {
+     "key_id": "did:web:united-kingdom.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdVS1N0cmlrZURlY2lzaW9uQ2xvc2VkQ2FycmllZE5vdFJlYWw"
+    }
+   }
+  },
+  {
+   "actor": "Cawforth Borough Council (enforcement authority)",
+   "verb": "offstage",
+   "narrative": "The strike is not instantaneous, and the interim has teeth. Two weeks after Royal Assent, before the Court has heard the case, the council's planning enforcement serves a stop notice under the new Act and halts all works at Shawcross Lane. The kernel does not wield this power, but it forces the act to be legible: the sanction cannot be logged validly without citing its warrant by section, naming its issuing authority, and pointing to both the rights classification that flagged it and the appeal route. The building stops. The scaffolding stays up. For three weeks a statute the guard has already routed for striking bites the congregation in the present tense — the honest cost that keeps this run at 'strains' and not 'holds'.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-06-10T09:00:00Z",
+    "body": {
+     "act_class": "sanction",
+     "authorizing_rule": "Places of Worship (Suspension of New Establishment) Act 2026 c.14, s.1(1) (suspension of consents) and s.4 (enforcement penalty)",
+     "issuing_authority": "Cawforth Borough Council, planning enforcement",
+     "subject_ref": "enforcement-id:cawforth-central-mosque-trust/charity-1187432",
+     "rights_guard_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+     "appeal_trace": "appeal:pow-enforcement/CCMT-2026-0610"
+    },
+    "sig": {
+     "key_id": "did:web:united-kingdom.example#enforcement-log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdVS1N0cmlrZUNvZXJjaXZlU2FuY3Rpb25TdG9wTm90aWNl"
+    }
+   }
+  },
+  {
+   "actor": "The Cawforth Central Mosque Trust, joined by a quarter of the Commons",
+   "verb": "challenge",
+   "narrative": "The Trust, with Nasreen as named claimant and a quarter of the House of Commons joining, brings the Act before the Supreme Court sitting as a constitutional court under the entrenched Bill of Rights. This is the challenge verb at full constitutional weight — not a citizen auditing a tally, but claimants seeking annulment of primary legislation, the remedy the real UK's courts do not possess. In the run that broke, on these same facts, the most these claimants could ask for was a declaration that would leave the Act untouched. Here they ask the court to quash it, and the court has the power to say yes."
+  },
+  {
+   "actor": "The Supreme Court of the United Kingdom (constitutional jurisdiction)",
+   "verb": "verify",
+   "narrative": "The court verifies the Act against the entrenched constitution and voids it — quashed, void ab initio, treated as never having had legal force — on the grounds the guard named in February: entrenched freedom of religion, and entrenched equality. The resolution lands in the log as an escalation resolving to 'struck', and it lists the Cawforth stop notice among the dependent acts now void, restoring the planning consent. Because these rights are entrenched, the judgment records that Parliament cannot re-enact the ban by simple majority — the counterfactual analogue of the eternity clause that hardened Germany's strike. This is the flip: same court date as the declaration run's s.4 hearing, opposite power, opposite outcome.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-07-01T14:30:00Z",
+    "body": {
+     "act_id": "places-of-worship-suspension-act-2026",
+     "phase": "constitutional-review",
+     "forum": "The Supreme Court of the United Kingdom, sitting as a constitutional court under the entrenched Bill of Rights",
+     "claimant": "Cawforth Central Mosque Trust (and Dr N. Iqbal); joined by one quarter of the House of Commons",
+     "instrument": "entrenched Bill of Rights — annulment of an Act incompatible with entrenched rights",
+     "resolution": "struck",
+     "effect": "void ab initio: the Act is quashed and treated as never having had legal force; it does not bind and cannot be enforced",
+     "declared_incompatible_with": [
+      "entrenched freedom of religion (UDHR Art 18 / ECHR Art 9)",
+      "entrenched non-discrimination and equal protection (UDHR Art 2 & 7 / ECHR Art 14)"
+     ],
+     "invariants": [
+      2,
+      7,
+      18
+     ],
+     "dependent_acts_voided": [
+      "enforcement-id:cawforth-central-mosque-trust/charity-1187432 sanction of 2026-06-10 (stop notice) — now void; works may resume and the planning consent is restored"
+     ],
+     "entrenchment_note": "These rights are placed beyond ordinary repeal, so Parliament cannot re-enact this ban by simple majority; amendment of the entrenched core requires the special constitutional procedure. This is the exact lever the real UK's parliamentary sovereignty withholds from its courts (§5), and the counterfactual analogue of Germany's Grundgesetz Art 79(3).",
+     "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification"
+    },
+    "sig": {
+     "key_id": "did:web:uk-supreme-court.example#constitutional-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdVS1N0cmlrZUVzY2FsYXRpb25TdHJ1Y2tWb2lkQWJJbml0aW8"
+    }
+   }
+  },
+  {
+   "actor": "Dr Nasreen Iqbal's phone (§4 audit fleet)",
+   "verb": "verify",
+   "narrative": "Nasreen's client runs the same passive audit millions of phones run in the background: it checks that the escalation is included in the log, that today's log head strictly extends the one that carried the stop notice, and that the sanction's authorising Act is now void. The audit fleet is the identical machinery that, in the run that broke, flawlessly certified a lawful persecution. Here the same mathematics certifies relief. Integrity is neutral about what it makes legible — which is exactly why it can be trusted to report either result without flinching."
+  },
+  {
+   "actor": "Dr Nasreen Iqbal",
+   "verb": "read",
+   "narrative": "The final state renders plainly on her phone: the Act is struck, void from the start; the stop notice is a dead letter; the consent is restored; the scaffolding can come down. She gets the building her counterpart in the other run never will. And on the same honest screen sits the residual the run exists to name. First, this protection was only ever as strong as the single field remedy 'strike' and the court willing to enforce it — a captured Constitutional Court could simply decline to quash, and the log would make that capture legible without preventing it (T1). Second, and larger: the Britain she lives in is not one her real country can reach. To flip that one enum value from 'declaration' to 'strike', the real Parliament would have to abolish its own sovereignty and bind its future majorities — the move a 51 per cent Parliament will not make. This run measured the hypothetical. It did not move history."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§3.3",
+   "observation": "THE ISOLATED VARIABLE FLIPS THE VERDICT, IN THE UK'S OWN CONTEXT. This run holds the real UK deployment constant to the byte — same town, same people, same Bill, the same twenty-of-thirty invariants (2, 7 and 18 all present), the same unconditional scope, the same witnesses, the same 361:248 division — and moves exactly one field: rights_guard.remedy, 'declaration' to 'strike'. The verdict moves with it, breaks to strains. Where the declaration run's guard could only flag while the Act stood (guard_power 'flag-only', ceiling a non-binding s.4 declaration), the strike run's guard escalates to a court that quashes the Act void ab initio. Same rights, same coverage, same scope, opposite outcome for Nasreen. This confirms in-context what the four-jurisdiction series (DE/US/EU) showed across different countries: REMEDY, not coverage, gates this attack. The cascade §6 names is visible here reduced to its cleanest form — scope held unconditional, coverage held identical, and remedy alone doing all the work."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§5",
+   "observation": "THE SELF-LOCK — legibility is not availability is not movement. This manifest describes a UK that has ABOLISHED PARLIAMENTARY SOVEREIGNTY: an entrenched, court-enforceable constitution is the only thing that lets a UK court void an Act rather than merely declare it incompatible, and 'strike' cannot be declared honestly without it. Reaching this state from the real UK (remedy 'declaration') is not a small, reversible, individually-adoptable lattice-move like adopting the transparency log (S1) or verifiable ballots (S2), which cost no sovereignty and leave the verdict at breaks. It is the sovereign binding its own future majorities — the one move a 51 per cent Parliament will not make, because it means surrendering the supremacy a transient majority values most. So the model can render S3 fully legible and even prove it is the ONLY move that flips the verdict, and still not move the UK to it: the improvement path stalls not where the engineering is hard but where the politics forbids self-binding. Legibility (the model shows the target) is not availability (the target is well-defined and occupied by DE/US/EU) is not movement (the UK cannot incrementally get there). That stall is the interesting result, and it is a real limit of the whole approach, not of this scenario."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T1",
+   "observation": "STRIKE IS ONLY AS STRONG AS AN UNCAPTURED COURT — the reason the verdict is 'strains', not 'holds'. The protection that saved the Cawforth mosque rests entirely on a Constitutional Court willing and able to quash. The kernel logs the classification and the escalation and makes any tampering with that record visible (§3.4), but it does not run the court and cannot stop court-packing. A 61 per cent movement blocked from re-enacting the ban by simple majority CAN, over years, change who sits on the bench — appointment rules, retirement ages, panel sizes — and a captured court could simply decline to strike, or read the entrenched rights down to nothing. The transparency log would make that capture legible; it would not prevent it. There is a genuine trade the run surfaces: the same entrenched-court power that protects a minority from a majority today (T7) concentrates the strike power in an institution that is itself a prime capture target (T1). Parliamentary sovereignty is, among other things, a refusal of that concentration — which is part of why the real UK's refusal to self-bind is not mere incumbency but a contested constitutional position."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "STRIKE DELIVERS EVENTUAL, NOT IMMEDIATE, RELIEF — the interim window still bit. Even in the world where the remedy works, the strike was not instantaneous: the Act received Royal Assent, the council served a stop notice under it, and works at Shawcross Lane were halted for three weeks before the court voided it ab initio. The strike then reached back and voided the enforcement (dependent_acts_voided), which the declaration run could never do — but the congregation still lost three weeks of building and lived under a lawful-if-voidable sanction in the present tense. §3.3's honest framing that the guard makes rights-stripping 'expensive, slow, and loud, not impossible' cuts both ways here: under strike the process is genuinely made expensive and reversible, but 'slow' is a cost the wronged party pays in real time before the reversal lands. Better than the declaration run's permanent shell of a building; not the same as never having been stopped."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "THE MANIFEST COMPRESSED A CIVILISATIONAL DIFFERENCE INTO ONE LEGIBLE FIELD — which is the §6 thesis working exactly as designed. The entire constitutional gulf between the real UK and this counterfactual — parliamentary sovereignty versus an entrenched, court-enforceable bill of rights, a decade of hypothetical constitutional upheaval — surfaces on the citizen's phone as a single enum value flipping from 'declaration' to 'strike'. A stranger comparing the two deployments' manifests would not need a constitutional-law degree to see that one court can annul a rights-violating Act and the other cannot; the difference is rendered as plainly as 'upholds 20 of 30 invariants'. The remedy axis (added precisely so two systems that name the same Article 18 can be told apart by what naming it is worth) did its whole job. Note the honest boundary that comes with it: coverage is unchanged at 20/30 and orthogonal to this attack, since the UK backs 2, 7 and 18 either way — the legibility win here is entirely on the remedy axis, not the coverage one."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§12",
+   "observation": "NOT SOLVED, AND NAMED AS SUCH: this is a modelled counterfactual, and the harness measured the hypothetical, not history. There is no Britain with an entrenched constitution and a strike remedy; this run fabricated one by flipping a field and then honestly reported what the protocol would do inside it. That result is a claim about a manifest, not about the United Kingdom — it says 'IF the UK sat at remedy=strike THEN this attack strains rather than breaks', and it deliberately does not say the UK can or will sit there (the self-lock finding says the opposite). Two further limits inherited from the reference kernel apply unchanged and were not solved by moving the remedy: the strike protection still assumes the unlinkable-pseudonym personhood the manifest claims, which §13 flags as pre-final cryptography; and rights classification remained a judgment call a clever drafter can word around (§12), contained here only because the strike path routes even an imperfect classification to a forum that can void the law. The run should leave a reader clear-eyed: it isolated a variable and proved remedy gates the verdict, and it proved, in the same breath, that proving a door exists is not the same as being able to walk through it."
+  }
+ ]
+}
