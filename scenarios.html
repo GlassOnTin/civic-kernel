@@ -46,6 +46,7 @@
   .hero { text-align: center; margin: 1rem 0 3rem; }
   .hero h1 { font-size: 2.1rem; margin: 0; line-height: 1.2; }
   .lede { font-size: 1.08rem; line-height: 1.65; color: var(--ink); max-width: 40rem; margin: 1rem auto 0; }
+  abbr[title] { text-decoration: underline dotted; text-underline-offset: 2px; cursor: help; }
   .tally { font-family: var(--mono); font-size: .78rem; color: var(--muted); margin: 1.3rem 0 0; }
   .group { margin: 2.8rem 0 0; }
   .group > h2 { font-size: 1.3rem; margin: 0 0 .25rem; line-height: 1.3; }
@@ -5216,6 +5217,268 @@
    ]
   },
   {
+   "$comment": "European Union column — the Charter of Fundamental Rights of the European Union (legally binding since the Lisbon Treaty, 2009), text retrieved verbatim from EUR-Lex (web). It is the MOST COMPLETE of the four on paper: the only column with ZERO fully-unbacked UDHR articles (25 backed, 5 structural, 0 none), because it is the only instrument that explicitly enumerates socio-economic rights — social security (Art 34), health care (Art 35), and, uniquely among all four columns, rest and leisure / paid annual leave (Art 31(2), backing UDHR 24 that no national constitution here reaches). The essential honest caveat is jurisdictional and lives in meta.remedy: Art 51 confines the Charter to matters within the scope of EU law, so completeness on paper does NOT mean it reaches every national situation. It is also supranational, not a national constitution — different in kind from the UK, German and US columns.",
+   "meta": {
+    "code": "eu",
+    "name": "European Union",
+    "instrument": {
+     "title": "Charter of Fundamental Rights of the European Union",
+     "id": "eu-charter-cfr",
+     "uri": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:12012P/TXT",
+     "retrieved_via": "EUR-Lex (eur-lex.europa.eu), web"
+    },
+    "remedy": "strike",
+    "remedy_note": "The Court of Justice of the EU (CJEU) can annul EU acts that breach the Charter, and national courts must disapply national law conflicting with it — a strike remedy. But it is SCOPE-LIMITED by Art 51: the Charter binds the EU institutions and the Member States 'only when they are implementing Union law.' It does not reach purely national matters outside the field of EU law, so its strong coverage on paper is bounded by jurisdiction, not by remedy strength. No eternity clause, but the founding Treaties are extremely hard to amend (unanimity + national ratification).",
+    "coverage": {
+     "backed": 25,
+     "structural": 5,
+     "none": 0
+    }
+   },
+   "invariants": [
+    {
+     "invariant": 1,
+     "udhr": "Art 1 — free and equal in dignity",
+     "right": "CFR Art 1 — human dignity, inviolable",
+     "citation": "EU Charter Art 1",
+     "status": "backed",
+     "text": "Human dignity is inviolable. It must be respected and protected."
+    },
+    {
+     "invariant": 2,
+     "udhr": "Art 2 — non-discrimination",
+     "right": "CFR Art 21 — non-discrimination",
+     "citation": "EU Charter Art 21",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 3,
+     "udhr": "Art 3 — life, liberty, security",
+     "right": "CFR Art 2 (life) + Art 6 (liberty and security)",
+     "citation": "EU Charter Arts 2, 6",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 4,
+     "udhr": "Art 4 — no slavery",
+     "right": "CFR Art 5 — prohibition of slavery and forced labour",
+     "citation": "EU Charter Art 5",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 5,
+     "udhr": "Art 5 — no torture",
+     "right": "CFR Art 4 — prohibition of torture",
+     "citation": "EU Charter Art 4",
+     "status": "backed",
+     "text": "No one shall be subjected to torture or to inhuman or degrading treatment or punishment."
+    },
+    {
+     "invariant": 6,
+     "udhr": "Art 6 — recognition before the law",
+     "right": "CFR Art 20 (equality before the law); legal personality implicit",
+     "citation": "EU Charter Art 20",
+     "status": "structural",
+     "text": null
+    },
+    {
+     "invariant": 7,
+     "udhr": "Art 7 — equal protection",
+     "right": "CFR Art 20 (equality before the law) + Art 21",
+     "citation": "EU Charter Arts 20, 21",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 8,
+     "udhr": "Art 8 — effective remedy",
+     "right": "CFR Art 47 — effective remedy before a tribunal (explicit)",
+     "citation": "EU Charter Art 47",
+     "status": "backed",
+     "text": "Everyone whose rights and freedoms guaranteed by the law of the Union are violated has the right to an effective remedy before a tribunal in compliance with the conditions laid down in this Article."
+    },
+    {
+     "invariant": 9,
+     "udhr": "Art 9 — no arbitrary arrest",
+     "right": "CFR Art 6 — liberty and security",
+     "citation": "EU Charter Art 6",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 10,
+     "udhr": "Art 10 — fair and public hearing",
+     "right": "CFR Art 47 — fair trial",
+     "citation": "EU Charter Art 47",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 11,
+     "udhr": "Art 11 — presumption of innocence; no retroactive law",
+     "right": "CFR Art 48 (presumption of innocence) + Art 49 (legality, no retroactivity)",
+     "citation": "EU Charter Arts 48, 49",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 12,
+     "udhr": "Art 12 — privacy",
+     "right": "CFR Art 7 (private and family life) + Art 8 (personal data -- distinctively strong)",
+     "citation": "EU Charter Arts 7, 8",
+     "status": "backed",
+     "text": "Everyone has the right to the protection of personal data concerning him or her."
+    },
+    {
+     "invariant": 13,
+     "udhr": "Art 13 — freedom of movement",
+     "right": "CFR Art 45 — freedom of movement and residence",
+     "citation": "EU Charter Art 45",
+     "status": "backed",
+     "text": "Every citizen of the Union has the right to move and reside freely within the territory of the Member States."
+    },
+    {
+     "invariant": 14,
+     "udhr": "Art 14 — asylum",
+     "right": "CFR Art 18 — right to asylum (explicit)",
+     "citation": "EU Charter Art 18",
+     "status": "backed",
+     "text": "The right to asylum shall be guaranteed with due respect for the rules of the Geneva Convention of 28 July 1951 and the Protocol of 31 January 1967 relating to the status of refugees and in accordance with the Treaty on European Union and the Treaty on the Functioning of the European Union."
+    },
+    {
+     "invariant": 15,
+     "udhr": "Art 15 — nationality",
+     "right": "No distinct Charter article; EU citizenship rests in the Treaties (TFEU), not the Charter",
+     "citation": "EU Treaties (not the Charter)",
+     "status": "structural",
+     "text": null
+    },
+    {
+     "invariant": 16,
+     "udhr": "Art 16 — marriage and family",
+     "right": "CFR Art 9 (right to marry and found a family) + Art 33 (family and professional life)",
+     "citation": "EU Charter Arts 9, 33",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 17,
+     "udhr": "Art 17 — property",
+     "right": "CFR Art 17 — right to property",
+     "citation": "EU Charter Art 17",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 18,
+     "udhr": "Art 18 — thought, conscience, religion",
+     "right": "CFR Art 10 — freedom of thought, conscience and religion",
+     "citation": "EU Charter Art 10",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 19,
+     "udhr": "Art 19 — freedom of expression",
+     "right": "CFR Art 11 — expression and information",
+     "citation": "EU Charter Art 11",
+     "status": "backed",
+     "text": "Everyone has the right to freedom of expression. This right shall include freedom to hold opinions and to receive and impart information and ideas without interference by public authority and regardless of frontiers."
+    },
+    {
+     "invariant": 20,
+     "udhr": "Art 20 — assembly and association",
+     "right": "CFR Art 12 — assembly and association",
+     "citation": "EU Charter Art 12",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 21,
+     "udhr": "Art 21 — participation; free elections",
+     "right": "CFR Art 39 (European Parliament elections) + Art 40 (municipal) — EU/municipal, not national",
+     "citation": "EU Charter Arts 39, 40",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 22,
+     "udhr": "Art 22 — social security",
+     "right": "CFR Art 34 — social security and social assistance (explicit)",
+     "citation": "EU Charter Art 34",
+     "status": "backed",
+     "text": "The Union recognises and respects the entitlement to social security benefits and social services providing protection in cases such as maternity, illness, industrial accidents, dependency or old age, and in the case of loss of employment."
+    },
+    {
+     "invariant": 23,
+     "udhr": "Art 23 — work, unions",
+     "right": "CFR Art 15 (work) + Arts 27-28 (info/consultation, collective bargaining) + Art 31 (fair conditions)",
+     "citation": "EU Charter Arts 15, 27-28, 31",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 24,
+     "udhr": "Art 24 — rest and leisure",
+     "right": "CFR Art 31(2) — daily/weekly rest and paid annual leave (the ONLY column here that backs this)",
+     "citation": "EU Charter Art 31(2)",
+     "status": "backed",
+     "text": "Every worker has the right to limitation of maximum working hours, to daily and weekly rest periods and to an annual period of paid leave."
+    },
+    {
+     "invariant": 25,
+     "udhr": "Art 25 — adequate standard of living",
+     "right": "CFR Art 34(3) (decent existence / housing assistance) + Art 35 (health care)",
+     "citation": "EU Charter Arts 34, 35",
+     "status": "backed",
+     "text": "Everyone has the right of access to preventive health care and the right to benefit from medical treatment under the conditions established by national laws and practices."
+    },
+    {
+     "invariant": 26,
+     "udhr": "Art 26 — education",
+     "right": "CFR Art 14 — right to education",
+     "citation": "EU Charter Art 14",
+     "status": "backed",
+     "text": null
+    },
+    {
+     "invariant": 27,
+     "udhr": "Art 27 — cultural life",
+     "right": "CFR Art 13 (arts and sciences) + Art 22 (cultural diversity) — production/diversity, not a participatory right",
+     "citation": "EU Charter Arts 13, 22",
+     "status": "structural",
+     "text": null
+    },
+    {
+     "invariant": 28,
+     "udhr": "Art 28 — social and international order",
+     "right": "CFR Title IV (Solidarity) as the social-order expression; no single article",
+     "citation": "EU Charter Title IV",
+     "status": "structural",
+     "text": null
+    },
+    {
+     "invariant": 29,
+     "udhr": "Art 29 — duties; limits of rights",
+     "right": "CFR Art 52 — limitations must be law-based, respect the essence, be proportionate (limits, not duties)",
+     "citation": "EU Charter Art 52",
+     "status": "structural",
+     "text": null
+    },
+    {
+     "invariant": 30,
+     "udhr": "Art 30 — no destruction of rights",
+     "right": "CFR Art 54 — prohibition of abuse of rights (explicit)",
+     "citation": "EU Charter Art 54",
+     "status": "backed",
+     "text": "Nothing in this Charter shall be interpreted as implying any right to engage in any activity or to perform any act aimed at the destruction of any of the rights and freedoms recognised in this Charter."
+    }
+   ]
+  },
+  {
    "$comment": "Seed corpus, not a waist artifact. Grounds the rights-guard's abstract '30 UDHR invariants' (the integers in a manifest's rights_guard.invariants) in real UK law: each UDHR article mapped to its European Convention right and the Human Rights Act 1998 provision that domesticates it. Legislation verified via the legislation.gov.uk / Lex API (HRA 1998 = ukpga/1998/42, retrieved 2026-07; Act status 'revised', valid 2026-04-06). HONEST FINDING surfaced by building this: the HRA/ECHR domesticates the CIVIL-POLITICAL rights but not the socio-economic ones — the UDHR articles on social security, work, standard of living and culture (22-27, bar the education article 26) have NO Convention or HRA counterpart, and neither do movement/asylum/nationality (13-15). 20 of 30 articles have some domestic legal backing, 10 have none — and 3 of the 20 (articles 1 dignity, 6 recognition-before-law, 8 effective-remedy) are backed only indirectly/structurally, with no single Convention article to quote, so they carry no retrieved text. Articles 28-29 are among the unbacked (programmatic). So the UK, expressed on the kernel's UDHR lattice (§6), sits at a partial point by law, not by choice. That is exactly the kind of subtraction a §6 conformance manifest is built to declare.",
    "meta": {
     "code": "uk",
@@ -5807,7 +6070,7 @@ function clientView(m) {
   if (svc.rights_guard && m.rights_guard) {
     const inv = m.rights_guard.invariants || [];
     const missing = Array.from({length: 30}, (_, i) => i + 1).filter(n => !inv.includes(n));
-    lines.push(`<li>Rights: upholds <b>${inv.length} of 30</b> UDHR invariants${missing.length ? ` — <span class="absent">absent: Art. ${missing.join(', ')}</span>` : ' <span class="present">(full profile)</span>'}</li>`);
+    lines.push(`<li>Rights: upholds <b>${inv.length} of 30</b> <abbr title="Universal Declaration of Human Rights">UDHR</abbr> invariants${missing.length ? ` — <span class="absent">absent: Art. ${missing.join(', ')}</span>` : ' <span class="present">(full profile)</span>'}</li>`);
   }
   if (svc.transparency_log && m.transparency_log) {
     const t = m.transparency_log, w = (t.witnesses || []).length, a = (t.anchors || []).length;
@@ -5853,7 +6116,7 @@ function list() {
       <h2>${esc(sec.title)}</h2>
       <p class="group-blurb">${sec.blurb}</p>
       <ul class="cards">${cs.map(card).join('')}</ul>
-      ${sec.corpus && CORPUS ? `<p class="group-cta"><a href="#corpus">See all 30 rights side by side, UK · Germany · US &rarr;</a></p>` : ''}
+      ${sec.corpus && CORPUS ? `<p class="group-cta"><a href="#corpus">See all 30 rights side by side across ${CORPUS.jurisdictions.length} legal systems &rarr;</a></p>` : ''}
     </section>`;
   }).join('');
   const leftover = DATA.filter(s => !used.has(s.id));
@@ -5935,6 +6198,7 @@ function corpus() {
   const uk = byCode.uk, de = byCode.de;
   const strikers = js.filter(j => j.meta.remedy === 'strike').map(j => j.meta.name);
   const flaggers = js.filter(j => j.meta.remedy === 'declaration').map(j => j.meta.name);
+  const andList = a => a.length <= 1 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
   const divisions = (CORPUS.divisions || []).map(d => {
     const b = d.body, prov = (b.provenance || {});
     return `<div class="step">
@@ -5950,17 +6214,17 @@ function corpus() {
     <p class="back"><a href="#">← all scenarios</a></p>
     <article>
       <h1>Real legal systems, under one schema</h1>
-      <p class="meta-line">the 30-invariant UDHR spine is the fixed axis; each column swaps the legal backing · validated by tools/validate-corpus.py</p>
-      <p class="cite" style="font-style:italic">A coarse comparative-law mapping from public sources (UK via legislation.gov.uk; Germany via gesetze-im-internet.de; US via archives.gov) — it points to where systems differ, and is not legal advice or authoritative scholarship. Some cells are debatable; the caveats live in each corpus file.</p>
+      <p class="meta-line">the fixed axis is the 30 articles of the <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights">Universal Declaration of Human Rights</a> (<abbr title="Universal Declaration of Human Rights">UDHR</abbr>); each column swaps the legal backing · validated by tools/validate-corpus.py</p>
+      <p class="cite" style="font-style:italic">A coarse comparative-law mapping from public sources (UK via legislation.gov.uk; Germany via gesetze-im-internet.de; US via archives.gov; EU via eur-lex.europa.eu) — it points to where systems differ, and is not legal advice or authoritative scholarship. Some cells are debatable; the caveats live in each corpus file.</p>
       <div class="jcards">${cards}</div>
       <div class="client">
         <div class="cap">The two axes the comparison surfaces</div>
         <ul>
-          <li><b>Coverage.</b> ${js.map(j => `${esc(j.meta.name)} backs <b>${j.meta.coverage.backed}</b>`).join(', ')} of 30 — and the gaps differ in kind: only Germany's constitution reaches socio-economic ground, the UK omits movement, asylum and nationality, and the US alone has <span class="absent">no constitutional right to education, privacy or asylum</span> (strong speech, though — the 1st Amendment).</li>
-          <li><b>Remedy — the sharper axis.</b> ${flaggers.length ? `${flaggers.join(', ')} can only issue a <span class="rstatus structural">declaration</span> (the law stands; the legislature is sovereign); ` : ''}${strikers.join(' and ')} can <span class="rstatus backed">strike</span> (a court voids it)${de ? `, and Germany's core is additionally unamendable (Art 79(3) eternity clause)` : ''}. Same rights on paper, very different force — which is why the same scenario resolves differently under each.</li>
+          <li><b>Coverage.</b> ${js.map(j => `${esc(j.meta.name)} backs <b>${j.meta.coverage.backed}</b>`).join(', ')} of 30 — and the gaps differ in kind: the <abbr title="Charter of Fundamental Rights of the European Union">EU Charter</abbr> alone reaches the socio-economic rights (social security, health, even rest and leisure) the national instruments omit and has <span class="present">no fully-unbacked article</span> — but binds only within the scope of EU law (Art 51); the UK omits movement, asylum and nationality; the US alone lacks a constitutional right to education, privacy or asylum.</li>
+          <li><b>Remedy — the sharper axis.</b> ${flaggers.length ? `${andList(flaggers)} can only issue a <span class="rstatus structural">declaration</span> (the law stands; the legislature is sovereign); ` : ''}${andList(strikers)} can <span class="rstatus backed">strike</span> (a court voids it)${de ? `, and Germany's core is additionally unamendable (Art 79(3) eternity clause)` : ''}. Same rights on paper, very different force.</li>
         </ul>
       </div>
-      <h2 class="sec">Coverage matrix — 30 UDHR invariants × jurisdiction</h2>
+      <h2 class="sec">Coverage matrix — 30 <abbr title="Universal Declaration of Human Rights">UDHR</abbr> invariants × jurisdiction</h2>
       <p>Red cells are invariants with <em>no</em> domestic backing. The pattern down each column is that system's position on the kernel's §6 lattice — legible, and comparable, because the spine is shared.</p>
       <div style="overflow-x:auto"><table class="cmp"><thead>${head}</thead><tbody>${rows}</tbody></table></div>
       <h2 class="sec">Parliamentary decisions</h2>

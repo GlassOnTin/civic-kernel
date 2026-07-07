@@ -8,7 +8,7 @@ against real situations and real legal systems.
 
 - **[The architecture →](https://glassontin.github.io/civic-kernel/)**  the proposal: a thin waist, four services, rights as invariants
 - **[The protocol against real life →](https://glassontin.github.io/civic-kernel/scenarios.html)**  17 stress-test stories, each machine-validated against the schemas
-- **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**  the same 30 rights across the UK, Germany, and the US
+- **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**  the same 30 rights across the UK, Germany, the US, and the EU Charter
 
 ## Layout
 
