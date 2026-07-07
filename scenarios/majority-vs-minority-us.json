@@ -1,0 +1,292 @@
+{
+ "id": "majority-vs-minority-us",
+ "title": "Riverton Wanted the Mosque Barred. The Constitution Said No, and Meant It.",
+ "setting": "Riverton is a town of about forty thousand in northern Ohio, a grid of brick storefronts and vinyl-sided subdivisions between two exits of the interstate. On Delmar Avenue stands a shuttered grocery hall, flat-roofed and windowless, that the Riverton Islamic Center bought at auction after nine years of renting a converted storefront with a leaking roof and no room for the women's prayer line. Fatima Nasser, thirty-nine, teaches chemistry at Riverton High and chairs the Center's building committee. She spent two years on the conditional-use permit: the traffic study, the parking count, the neighbors' meeting in the library basement, the drainage plan the city engineer wanted redone twice. In January the city council granted the permit, 5 to 2. The congregation of about three hundred and fifty started a spreadsheet counting down to the first Friday prayer under a real roof.\n\nThen a phone video of the council vote went viral, a cable segment ran under the chyron A MOSQUE ON MAIN STREET?, and a local zoning fight became a national argument in a fortnight. A member of Congress introduced a bill; the leadership, reading a poll that put support at sixty-one percent, gave it floor time. The Community Preservation and Places of Worship Suspension Act of 2026 was short: a ten-year suspension of new federal and federally-assisted permits for any building 'principally used or to be used for religious worship.' It was drafted to read as neutral community-character policy that applied to every faith equally. Nobody in the country misunderstood it, and the House committee report named the Riverton project by address.\n\nRiverton's civic record runs on the Civic Kernel, and the United States' national deployment runs the machinery through it: voter enrollment, verifiable ballots, a transparency log co-witnessed by the National Archives, the ACLU, and the Associated Press, and a rights guard encoding the fourteen of thirty UDHR articles that US constitutional law actually backs with justiciable force. One field in that deployment's manifest decides Fatima's story: rights_guard.remedy is set to 'strike.' Under Marbury v. Madison a federal court exercises judicial review and can hold a statute void. But the US order carries its own hard edge: a duly enacted law is presumed constitutional and takes effect at once, enforced until a court stops it, and no court will touch it in the abstract. Someone has to be hurt by it, and sue.\n\nThis is the third run of one attack. In the United Kingdom the same bill produced a court that could only declare the law wrong while it stayed in force, and the ban stood. In Germany a court voided it outright, and the ban fell. The US is the other strike jurisdiction, and its governing precedent is nearly on point: Church of Lukumi Babalu Aye v. City of Hialeah (1993) held that a facially neutral law whose object is the suppression of a religion is not neutral, fails strict scrutiny, and is void. The question the scenario tests is whether the remedy axis, and not the breadth of rights on the books, is what decided all three.",
+ "threats": [
+  "T7",
+  "T1"
+ ],
+ "doc_refs": [
+  "§1",
+  "§3.3",
+  "§3.4",
+  "§5",
+  "§6",
+  "§12",
+  "T7",
+  "T1"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:united-states.example",
+   "name": "United States of America (national deployment)"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "document",
+   "issuer": "US state election officials + Election Assistance Commission (per-decision unlinkable pseudonyms)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "state-voter-rolls/HAVA-2002/v2026"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "3-of-5: Election Assistance Commission, two state universities, and the two largest congressional caucuses"
+  },
+  "rights_guard": {
+   "invariants": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    9,
+    10,
+    11,
+    15,
+    17,
+    18,
+    19,
+    20,
+    21
+   ],
+   "remedy": "strike"
+  },
+  "transparency_log": {
+   "log_id": "did:web:united-states.example",
+   "witnesses": [
+    "did:web:nara.example",
+    "did:web:aclu.example",
+    "did:web:apnews.example"
+   ],
+   "anchors": [
+    "anchor:checkpoint-chain-a.example",
+    "anchor:checkpoint-chain-b.example"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:united-states.example#manifest-2026",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdVU01hbmlmZXN0U3RyaWtlTm90UmVhbENyeXB0bw"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Riverton, then the whole country",
+   "verb": "offstage",
+   "narrative": "The city council grants the conditional-use permit for the mosque on Delmar Avenue. A phone video of the vote goes viral; a cable chyron lifts the zoning fight onto the national stage; a poll puts support for a nationwide suspension at sixty-one percent. A member of Congress introduces the Community Preservation and Places of Worship Suspension Act, and the leadership schedules it. The rallies, the phone-ins, the committee report that names the Riverton project by address -- all of it lives where the kernel deliberately does not reach. What the kernel is about to touch is only the machinery of the decision itself."
+  },
+  {
+   "actor": "The United States Congress",
+   "verb": "cast",
+   "narrative": "The House and the Senate pass the Act on recorded roll-call votes -- public, named, in the Congressional Record, the deliberate opposite of a citizen's secret ballot, because a legislator is accountable for how she votes and a citizen is protected from it. The President signs it. Here the US order diverges from both prior runs: there is no pre-enactment rights gate as in the UK's compatibility statement, and no 'pending constitutional review' hold as in Germany. A duly enacted statute is presumed constitutional and takes effect the instant it is signed. The decision closes on the ordinary path, in force.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.closed",
+    "community": "did:web:united-states.example",
+    "timestamp": "2026-04-15T22:30:00Z",
+    "body": {
+     "decision_id": "places-of-worship-suspension-act-2026/enrolled",
+     "question_hash": "sha256:7a31f0c9e2b6d4885f1a0c3e9d27b65a40e8c1f2d5936b7a0e4d18c25f6a93b0",
+     "path": "ordinary",
+     "chamber": "United States Congress (House and Senate, enrolled bill), signed by the President",
+     "vote_type": "recorded roll-call (public, named -- constitutional accountability, NOT a receipt-free citizen ballot)",
+     "eligibility_rules": "congress-membership/119th",
+     "tally": {
+      "house": {
+       "ayes": 264,
+       "noes": 171
+      },
+      "senate": {
+       "ayes": 61,
+       "noes": 39
+      }
+     },
+     "result": "passed both chambers; signed by the President; in force",
+     "us_note": "Under the US order a duly enacted statute is presumed constitutional and takes effect immediately; it is enforceable unless and until a federal court enjoins or voids it. There is no pre-enactment rights gate and no advisory review -- Article III courts decide only live cases or controversies.",
+     "enacted_as": "Community Preservation and Places of Worship Suspension Act of 2026, Pub. L. 119-142"
+    },
+    "sig": {
+     "key_id": "did:web:united-states.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdVU0RlY2lzaW9uQ2xvc2VkUGFzc2Vk"
+    }
+   }
+  },
+  {
+   "actor": "The rights guard (SVC-3), US deployment",
+   "verb": "verify",
+   "narrative": "The static analyser type-checks the enacted statute against the encoded invariants. Suspending the establishment of places of worship burdens the free exercise of religion and is, on its face, a law respecting religion -- tripping invariant 18 (First Amendment). Drafted as neutral land-use policy but aimed at a religiously-defined class, with a committee report naming the Riverton project, it trips invariants 2 and 7 (Fourteenth Amendment Equal Protection). The remedy is 'strike,' and the classification cites the precedent squarely: Lukumi. But the guard is honest about US mechanics -- the flag suspends nothing and routes nothing automatically; a plaintiff with standing must bring a live case for the strike power to fire.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:united-states.example",
+    "timestamp": "2026-04-16T14:00:00Z",
+    "body": {
+     "statute_id": "places-of-worship-suspension-act-2026",
+     "statute_hash": "sha256:3f8c1a9d0e42b675c8a1f4e9d27b60a3541cde92b04f7a6d3e158c29b7f0a441",
+     "stage": "post-enactment static analysis (statute in force; presumed constitutional pending judicial review)",
+     "invariants_tripped": [
+      2,
+      7,
+      18
+     ],
+     "reasons": [
+      "Art 18 (1st Amendment): 'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof' -- a statute suspending the establishment of places of worship both burdens free exercise and is, on its face, a law respecting religion.",
+      "Arts 2 & 7 (14th Amendment, Equal Protection): though drafted as neutral community-character / land-use policy, the legislative record and the committee report name the Riverton Islamic Center as the object; a law whose object is the suppression of a religion is neither neutral nor generally applicable.",
+      "governing precedent: Church of Lukumi Babalu Aye v. City of Hialeah, 508 U.S. 520 (1993) -- a facially neutral measure whose object is to target religious exercise fails strict scrutiny and is void; Employment Division v. Smith (1990) does not save it, because Smith shields only neutral laws of general application.",
+      "classifier: us-invariants/v1 (Akoma Ntoso match on worship-use suspension), corroborated by the reviewing counsel"
+     ],
+     "remedy": "strike",
+     "guard_power": "escalate-to-Article-III-review",
+     "routing": {
+      "path": "judicial-review",
+      "note": "Unlike a strike regime with abstract or automatic review (e.g. Germany's Normenkontrolle), US judicial review is post-hoc and adversarial: this flag does NOT suspend the statute and does NOT route it automatically. It requires a plaintiff with standing to bring a live case or controversy (Art III). Until a court enjoins it, the statute is enforced.",
+      "authority": "Marbury v. Madison, 5 U.S. 137 (1803): a federal court may hold a statute repugnant to the Constitution void."
+     },
+     "appealable": true
+    },
+    "sig": {
+     "key_id": "did:web:united-states.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdVU1JpZ2h0c0NsYXNzaWZpY2F0aW9uU3RyaWtl"
+    }
+   }
+  },
+  {
+   "actor": "Fatima Nasser",
+   "verb": "read",
+   "narrative": "Fatima's civic client syncs the classification. The screen is exact, and for one line it is more than the UK ever offered: remedy, strike -- a federal court can void this. Then the harder lines. guard_power: escalate to Article III review. routing: the flag suspends nothing; the statute is in force; a court will act only on a live case brought by someone the law has actually harmed. She reads it twice. In Germany the law would already be frozen, unenforceable pending Karlsruhe. Here it is live, and the promise of a strike is a promise she has to go and win. The bitter arithmetic is that the thing which will give her standing has not happened yet -- the city has not yet moved against the permit. She forwards the entry to the ACLU of Ohio and to the Becket Fund. A strike is real, and it starts with an injury."
+  },
+  {
+   "actor": "City of Riverton, Department of Building and Zoning",
+   "verb": "cast",
+   "narrative": "Three weeks after the Act takes effect, the city revokes the mosque's conditional-use permit under it and orders the Delmar Avenue site closed to construction. The coercive act is logged as the kernel requires: it cites its warrant -- the Act, by section -- names its issuing authority, and points to both the rights classification that already flagged the statute and the appeal route. The kernel makes the enforcement perfectly legible and perfectly appealable. It also, for now, proceeds, because a court-flagged statute is still a presumed-valid statute until a judge says otherwise. Legibility is not prevention -- but this revocation is also, precisely, the injury that unlocks the courthouse.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:united-states.example",
+    "timestamp": "2026-05-11T13:00:00Z",
+    "body": {
+     "act_class": "sanction",
+     "authorizing_rule": "Community Preservation and Places of Worship Suspension Act of 2026, Pub. L. 119-142, sec. 2(a) (suspension of new places-of-worship permits)",
+     "issuing_authority": "City of Riverton, Department of Building and Zoning (revoking conditional-use permit CUP-2026-0143)",
+     "subject_ref": "enforcement-id:riverton-islamic-center/permit-CUP-2026-0143",
+     "rights_guard_ref": "leaf:2026-04-16T14:00:00Z/rights.classification",
+     "appeal_trace": "appeal:riverton-islamic-center/1:26-cv-00417-NDOhio"
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#enforcement-log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdVU0NvZXJjaXZlU2FuY3Rpb25QZXJtaXQ"
+    }
+   }
+  },
+  {
+   "actor": "Riverton Islamic Center (with the ACLU and the Becket Fund)",
+   "verb": "challenge",
+   "narrative": "The Center sues in the United States District Court for the Northern District of Ohio, naming the United States and the city. The revoked permit is the concrete injury that confers standing and makes the case ripe -- no abstract question, a live controversy. On the same papers it moves for a preliminary injunction, and the district court grants it: under Lukumi the plaintiffs are likely to succeed on the merits, and the balance of harms favors pausing enforcement. This is the interim protection neither prior run had at this stage: construction may resume while the case is decided. The government appeals; the injunction holds pending review."
+  },
+  {
+   "actor": "The courts, and Riverton, over fourteen months",
+   "verb": "offstage",
+   "narrative": "The case climbs -- the district court on the merits, the US Court of Appeals for the Sixth Circuit, then certiorari granted by the Supreme Court. None of it is kernel machinery: the briefing, the oral argument, the amicus flood, the slow accretion of doctrine happen where the protocol has no organ, by design, so that no one can capture the organ that would. In Riverton a rock goes through the Center's window; the police log it; Fatima's sixteen-year-old is asked in the school hallway when 'the vote on your people' is. The kernel moderates none of this, ranks none of it, prevents none of it."
+  },
+  {
+   "actor": "Supreme Court of the United States",
+   "verb": "verify",
+   "narrative": "The Court verifies the statute against the Constitution and holds it void. Applying Lukumi, it finds the Act neither neutral nor generally applicable: its object, on the legislative record, is the suppression of a religion, so strict scrutiny applies and the Act cannot survive it. Employment Division v. Smith does not save it. The Act is a nullity, and the Riverton permit revocation that rested on it falls with it. The resolution lands in the log as an escalation resolving to 'struck,' and it is honest in the same breath about the two things this strike is not: it is not beyond a future amendment, and it is not independent of who sits on the Court.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:united-states.example",
+    "timestamp": "2027-06-28T14:00:00Z",
+    "body": {
+     "statute_id": "places-of-worship-suspension-act-2026",
+     "phase": "merits judgment",
+     "forum": "Supreme Court of the United States",
+     "case": "Riverton Islamic Center v. United States, 601 U.S. ___ (2027)",
+     "petitioner": "Riverton Islamic Center (and F. Nasser), with the ACLU and the Becket Fund",
+     "instrument": "judicial review (Marbury v. Madison) -- facial invalidation under strict scrutiny",
+     "controlling_precedent": "Church of Lukumi Babalu Aye v. City of Hialeah, 508 U.S. 520 (1993)",
+     "resolution": "struck",
+     "effect": "void -- the Act is held unconstitutional and unenforceable; it is a nullity, and the Riverton permit revocation that rested on it is void with it.",
+     "grounds": [
+      "1st Amendment Free Exercise Clause",
+      "1st Amendment Establishment Clause",
+      "14th Amendment Equal Protection Clause"
+     ],
+     "invariants": [
+      2,
+      7,
+      18
+     ],
+     "amendability_note": "There is NO eternity clause. Unlike Germany's Grundgesetz Art 79(3), no US right is placed beyond amendment: Article V permits amendment by two-thirds of both houses of Congress plus three-quarters of the states (38 of 50). That bar is far higher than the ordinary statute that just fell, and has almost never been used to contract an individual liberty -- but it is a lawful path, not a metaphysical bar.",
+     "contingency_note": "The strike power depends on an independent Article III court; First Amendment free-exercise doctrine (the Smith / Lukumi / Fulton line) shifts with the Court's composition, which the appointment and confirmation process can change over time.",
+     "classification_ref": "leaf:2026-04-16T14:00:00Z/rights.classification",
+     "dependent_acts_voided": [
+      "enforcement-id:riverton-islamic-center/permit-CUP-2026-0143 revocation of 2026-05-11"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:supremecourt.example#log-1",
+     "alg": "ed25519",
+     "value": "U3RydWNrVm9pZEJ5U0NPVFVTUGxhY2Vob2xkZXJTaWdVUw"
+    }
+   }
+  },
+  {
+   "actor": "Fatima Nasser's phone (SVC-4 audit fleet)",
+   "verb": "verify",
+   "narrative": "Fatima's client checks the log's inclusion and consistency proofs -- the same passive audit millions of phones run in the background. It confirms the escalation is included, that today's log strictly extends the one that carried the Act's enactment and the permit revocation, and that the revocation's authorizing rule is now void. The app surfaces the practical consequence: the Delmar Avenue closure order is a dead letter and the appeal it pointed to is moot. She does not have to trust the clerk, the city, or the government. She calls the contractor."
+  },
+  {
+   "actor": "Fatima Nasser",
+   "verb": "read",
+   "narrative": "The final state renders plainly: the Act is struck, void; the permit stands; construction may finish. The same screen is honest about why it went her way and what it rests on. The strike fired because the two rights her attackers trod on -- the First and Fourteenth Amendments -- sit inside the narrow, strongly-remedied core the US actually backs, and because Lukumi was almost exactly her case, and because the Court that heard it was independent. It also shows the shadows: there is no eternity clause, so a determined supermajority could in principle reach for Article V; and the doctrine that saved her could shift with a future bench. Stronger than the UK, which could only annotate her defeat. Contingent, like Germany, on a court staying free."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "SERIES RESULT -- the remedy axis, not coverage, predicted all three outcomes. One 61% attack, three jurisdictions, the same three rights named each time (invariants 2, 7, 18). The UK guard named them and could only flag: remedy 'declaration,' the ban stood (verdict breaks). Germany named them and could void the law: remedy 'strike,' the ban fell (verdict strains). The US names them and voids the law: remedy 'strike,' the ban falls (verdict strains) -- resolving LIKE Germany and UNLIKE the UK, exactly as the remedy field predicts. The cleanest proof that coverage did not decide it is the coverage numbers themselves: the US backs the FEWEST invariants of the three (14 of 30, against the UK's 20 and Germany's 23), yet delivers the strongest outcome for the plaintiff. Higher coverage (UK) produced the worse result; the lowest coverage plus a strike remedy (US) produced a better one. The single manifest field that moved between the UK loss and the two wins was rights_guard.remedy. Naming a right is worth only as much as the remedy bolted to it."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§5",
+   "observation": "US-SPECIFIC WEAKNESS versus GERMANY: there is no eternity clause. Germany's strike rested on Grundgesetz Art 79(3), which puts human dignity beyond amendment even by a two-thirds supermajority, so the majority cannot return with a bigger majority and re-enact the ban as constitutional text. The US has no such backstop, and the rights.escalation records it honestly: under Article V, two-thirds of both houses of Congress plus three-quarters of the states (38 of 50) can amend the Constitution itself. That bar is enormously higher than the ordinary statute that just fell, and it has essentially never been used to contract an individual liberty -- but it is a lawful path, not a metaphysical bar. §5's design pin, 'nearly impossible to change personhood,' is in the US a matter of 'very hard' where Germany's is 'impossible.' The kernel surfaces the difference; it cannot supply the missing clause."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "WHAT THE PROTOCOL DOES NOT SOLVE: the strike is not self-executing, and it rests on an uncaptured Court the kernel does not run. Three gaps the log makes visible but cannot close. (1) Standing -- US review is post-hoc and adversarial, with no abstract or automatic route, so the classification suspended nothing on its own; it took a concrete injury (the revoked permit), a coalition of well-resourced lawyers, and fourteen months to convert the flag into a judgment. A minority without the injury, the money, or the time gets the flag and little else. (2) Composition -- free-exercise doctrine (the Smith / Lukumi / Fulton line) turns on who sits on the bench, and the same 61% movement that struggles to amend the Constitution can, over years, reshape the Court through appointments and confirmations; that is the court-capture risk (T1) the log would render legible but could not prevent. (3) The kernel does not run Article III. It recorded the classification and the strike with unbreakable integrity; it did not, and could not, guarantee that the Court would strike. That contingency is why the verdict is 'strains,' not 'holds.'"
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "COVERAGE IS NARROW AND DEEP, AND THE MANIFEST SAYS SO. The US deployment declares only 14 of 30 invariants -- the fewest of the three columns -- because US constitutional law backs almost no socio-economic rights (Arts 22-28 absent), no federal right to education (San Antonio v. Rodriguez), no textual privacy right, and no constitutional right to asylum (Art 14 absent). What it does back, it backs with strike force, and in the First Amendment it is the strongest speech-and-religion protection of the three columns -- which is exactly the right at issue here. The citizen client renders a blunt, honest picture: a short list, deeply enforced. Fatima was protected not because the US protects broadly but because the two rights her attackers trod on happen to sit inside that narrow, strongly-remedied core. A different attack -- on welfare, on education, on privacy -- would have found the guard with nothing backed to trip."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "HONEST INTERIM: unlike Germany, the law took EFFECT and was ENFORCED before it was struck. Germany's moratorium entered the log 'enacted-pending-constitutional-review' and never operated as ordinary law; the US statute was presumed constitutional and enforceable the moment it was signed, and the City of Riverton revoked the mosque's permit under it three weeks later -- a real coercive act, logged with its warrant, that carried legal force. The mitigation is genuine and worth naming: the district court's preliminary injunction, granted on likelihood of success under Lukumi, paused enforcement during the litigation, so the interim harm was bounded -- a protection the UK's declaration regime never offered at any stage. But 'bounded' is not 'none.' There was a window in which a court-flagged, ultimately-void statute nonetheless stripped a permit, and only a separately-won injunction closed it. The guard flagged instantly; the relief was neither instant nor automatic."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "TRANSPARENCY IS NEUTRAL ABOUT WHAT IT LEGITIMISES. The same append-only log that carried the Supreme Court's strike also gave the ban a flawless, tamper-evident provenance: a permanent public record that Congress passed and the President signed a law suspending a minority's houses of worship, with the roll-call names attached. Between April 2026 and June 2027 the audit fleet faithfully certified a statute in force that the Court would later declare void -- integrity guarantees a true record of the persecution, not its absence. SVC-4 will certify a clean rights-stripping as faithfully as a clean election. The consolation, and it is real, is that same record's second life: the unbroken chain from classification to permit-revocation to strike became the petitioner's evidence, and stands as the receipt that the last such law was void should a future bench ever be tempted to try again."
+  }
+ ]
+}
