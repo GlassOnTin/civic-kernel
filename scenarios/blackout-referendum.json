@@ -1,0 +1,277 @@
+{
+ "id": "blackout-referendum",
+ "title": "The Valley That Voted in the Dark",
+ "setting": "San Marcos Alto sits at 3,800 metres, a town of nine thousand where the water that feeds the potato terraces comes off the Quri Q'asa ridge — the same ridge Andesita Global S.A. wants to open-pit for copper. The municipal referendum on the concession has split families. The regional government in the valley capital wants the mine and the royalties; the town's registrar, Señora Ivonne Paredes, ran enrolment ceremonies in the school gymnasium for three weekends so that every adult on the padrón holds a credential on their phone or a paper equivalent. Marisol Quispe, who teaches secondary school, has read the ballot's plain-language summary aloud at two community assemblies. Don Ezequiel Huamán, a retired miner with silicosis, intends to vote no and tells anyone who asks.\n\nEveryone also knows what happened in the province next door last year: on the morning of a contested vote, mobile data went dark \"for public order\" and stayed dark until the count was announced. So the Radio Club Cóndor — eleven members, president Bruno Callisaya, a shelf of LoRa boards and solar panels — spent the winter placing mesh nodes on rooftops and on the ridge, a Reticulum network that reaches the market square, the clinic, and, two valleys away, the physics department of the Universidad de los Dos Valles, which co-signs the town's transparency log along with El Heraldo, a newspaper in the capital.\n\nAt 06:00 on decision day the expected thing happens: the regional government orders the carriers to suspend data service. Phones show full bars and carry nothing. The question of the day is no longer only whether the town says yes or no to the mine — it is whether a vote conducted over a few bits per second of amateur radio can produce a result the losers, and the region, cannot call fake.",
+ "threats": [
+  "T14",
+  "T8"
+ ],
+ "doc_refs": [
+  "§2",
+  "§3.1",
+  "§3.2",
+  "§3.4",
+  "§4",
+  "§5",
+  "§6",
+  "§9",
+  "§12",
+  "T4",
+  "T6",
+  "T8",
+  "T9",
+  "T14"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:sanmarcos-alto.example",
+   "name": "Municipio de San Marcos Alto",
+   "parent": "did:web:altiplano-region.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "municipal registrar (Registro Civil de San Marcos Alto)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "padron/v7"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "3-of-5: provincial court, Universidad de los Dos Valles, El Heraldo de la Capital, diocesan council, miners' union local 12"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    17,
+    19,
+    20,
+    21,
+    25,
+    29
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:log.sanmarcos-alto.example",
+   "witnesses": [
+    "did:web:univalles.example",
+    "did:web:elheraldo-capital.example",
+    "did:web:municipio-qollpa.example"
+   ],
+   "anchors": [
+    "anchor:profile/chain-a.example",
+    "anchor:profile/chain-b.example"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "referendum-2026-quri-qasa: prove + cast",
+    "steps": 3,
+    "fields": 0,
+    "median_seconds": 210,
+    "abandonment_rate": 0.03
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:sanmarcos-alto.example#manifest-2",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvTWFuaWZlc3RTTUE"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Marisol Quispe (schoolteacher)",
+   "verb": "read",
+   "narrative": "Two weeks before the vote, Marisol's civic client shows the referendum entry from the town's log: the question, its hash, the eligibility-rule version, and a window — deliberation until the evening of 4 July, casting until 22:00 UTC on 5 July. Her client also renders the manifest honestly: ceremony-issued credentials, sybil resistance only 'medium' (a small-town registrar, no biometric dedup), 15 of 30 UDHR invariants encoded, ballots verifiable and receipt-free. She reads the plain-language summary and both structured argument sets to her students' parents at an assembly.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:sanmarcos-alto.example",
+    "timestamp": "2026-06-21T15:00:00Z",
+    "body": {
+     "decision_id": "2026-ref-quri-qasa",
+     "question_hash": "sha256:4c7e2a91b0d5f8e3a6b1c9d2e7f0a3b8c5d6e1f4a9b2c7d0e5f8a1b4c9d2e7f0",
+     "question_plain": "Shall the municipality consent to the Quri Q'asa open-pit concession requested by Andesita Global S.A.?",
+     "eligibility_rules": "padron/v7",
+     "window": {
+      "deliberation_ends": "2026-07-04T22:00:00Z",
+      "cast_ends": "2026-07-05T22:00:00Z"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:log.sanmarcos-alto.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvT3BlbmVkMjAyNg"
+    }
+   }
+  },
+  {
+   "actor": "Regional government / mobile carriers",
+   "verb": "offstage",
+   "narrative": "06:00, decision day. The regional secretariat orders both carriers to suspend mobile data 'for public order' — the documented tactic, timed to the cast window. Phones show bars and carry nothing. Bruno Callisaya's radio club flips its Reticulum mesh to civic priority: LoRa nodes on the church roof, the clinic, the market, and the ridge repeater start carrying nothing but kilobyte kernel payloads, store-and-forward, at a few hundred bits per second. Nobody asked the region's permission; the mesh has no registration and no source addresses to lean on."
+  },
+  {
+   "actor": "Don Ezequiel Huamán (retired miner)",
+   "verb": "prove",
+   "narrative": "At the market kiosk, Ezequiel's phone derives a one-decision pseudonym from his ceremony-issued credential — a zero-knowledge proof that he is on padrón v7 and has not yet spoken in this decision, about a kilobyte, revealing nothing else. It does not need a live round trip to any server: the payload is self-contained and queues into the mesh's store-and-forward layer. The kiosk also hands paper ballots to his neighbours who never enrolled a phone — same protocol, same tally."
+  },
+  {
+   "actor": "Marisol Quispe",
+   "verb": "challenge",
+   "narrative": "Marisol does not trust her second-hand phone, so before casting she runs a cast-or-audit challenge: the device commits to an encrypted ballot, she challenges, it opens the encryption and proves it encrypted exactly what she chose, then discards it and re-encrypts afresh. The challenge works fully offline — the device cannot tell a real ballot from an audit, blackout or not."
+  },
+  {
+   "actor": "Marisol Quispe",
+   "verb": "cast",
+   "narrative": "Her real ballot — encrypted, signed, nullifier-bearing, 1.4 kB — leaves her phone and hops three LoRa nodes over forty minutes to the collector at the municipal office. It was built to be valid whenever it arrives: the nullifier makes double-casting impossible however many mesh copies exist, so latency costs nothing but time. Her tracker will later prove her ballot is in the tally; it can never prove to her brother-in-law, who works for Andesita, what it says."
+  },
+  {
+   "actor": "Universidad de los Dos Valles (log witness)",
+   "verb": "verify",
+   "narrative": "The municipal log's public mirror is hosted in the regional data centre — and by mid-morning it is serving a head that is quietly two entries short, missing the blackout-morning entries: a stale, split view of history (T8). But the radio club is gossiping the true co-signed log head over LoRa to the university two valleys away, outside the blackout zone. The university's witness compares heads, finds the fibre-served head is not a consistent extension of what it co-signed at 08:00, refuses its co-signature, and phones El Heraldo. The split view dies in hours instead of being discovered after the count, because the gossip channel is one no operator or state runs."
+  },
+  {
+   "actor": "Municipal electoral council",
+   "verb": "read",
+   "narrative": "By noon it is clear that ballots from the high hamlets are crawling in at radio speed and some will miss the 22:00 close. The kernel spec says payloads are valid whenever they arrive; the decision window says arrive by 22:00 — the protocol itself has no rule for that collision. San Marcos Alto has one because it pre-legislated one, §9-style, after last year's blackout next door: padrón v7 article 14 extends the cast window 24 hours when two independent witnesses attest infrastructure denial. The council invokes it in the open, in the log, self-expiring — not an emergency power, a tripwire that was already law.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-window.infrastructure-extension",
+    "community": "did:web:sanmarcos-alto.example",
+    "timestamp": "2026-07-05T13:40:00Z",
+    "body": {
+     "decision_id": "2026-ref-quri-qasa",
+     "authorizing_rule": "padron/v7 art.14 (infrastructure-denial clause, pre-legislated 2025-11)",
+     "trigger": "carrier data suspension ordered 2026-07-05T06:00 local; attested by witnesses did:web:univalles.example and did:web:elheraldo-capital.example",
+     "new_cast_ends": "2026-07-06T22:00:00Z",
+     "self_expiring": true,
+     "note": "store-and-forward ballots bearing valid nullifiers accepted until new_cast_ends; later arrivals logged as received-uncounted"
+    },
+    "sig": {
+     "key_id": "did:web:log.sanmarcos-alto.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvRXh0ZW5zaW9u"
+    }
+   }
+  },
+  {
+   "actor": "Regional police direction-finding unit",
+   "verb": "offstage",
+   "narrative": "That evening a police truck with a directional antenna works the switchbacks below the ridge. LoRa packets carry no source addresses, but radio is radio: transmissions can be direction-found, and the ridge repeater is a fixed emitter. They triangulate it by dark and detain Bruno Callisaya overnight for 'unlicensed emergency-band operation'. The mesh reroutes around the seized node — store-and-forward was designed for dead links — but the protocol's own document admitted this honestly: physical-layer anonymity is weaker than IP's, and no schema protects the man who owns the antenna."
+  },
+  {
+   "actor": "Voters of Qollpa hamlet",
+   "verb": "cast",
+   "narrative": "Overnight, forty-one encrypted ballots from Qollpa — beyond mesh coverage — travel by motorcycle on an SD card to the nearest node: sneakernet, exactly as the spec permits, since a ballot never trusted its transport. Thirty-eight arrive inside the extended window and enter the tally. Thirty-one other ballots, from herders' phones that only synced when carriers briefly flickered on after the extension lapsed, arrive too late even for article 14: they are appended to the log as received-uncounted — provably real, provably late, and not in the total. The rule was public before the vote, which is the only reason this line survives scrutiny."
+  },
+  {
+   "actor": "Trustee quorum (court, university, miners' union)",
+   "verb": "verify",
+   "narrative": "The extended window closes 22:00 on 6 July. Three of the five trustees — the provincial court, the university, and the miners' union local — meet the threshold and jointly decrypt only the homomorphic tally, never a ballot. The result: 2,669 no, 1,841 yes. The tally proof lands in the log; any phone in town, mesh-fed, can check the announced total against the encrypted ballots and check its own ballot's inclusion. Marisol's tracker matches. Ezequiel's matches. The paper ballots — 612 of them — are in the same count, subject to a risk-limiting audit.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:sanmarcos-alto.example",
+    "timestamp": "2026-07-07T02:15:00Z",
+    "body": {
+     "decision_id": "2026-ref-quri-qasa",
+     "tally": {
+      "yes": 1841,
+      "no": 2669
+     },
+     "ballots_counted": 4510,
+     "ballots_received_after_extension_uncounted": 31,
+     "paper_channel_ballots_included": 612,
+     "proof": "sha256:9b3d6e1f4a7c0b5d8e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d",
+     "trustees_present": "3-of-5: provincial court, Universidad de los Dos Valles, miners' union local 12"
+    },
+    "sig": {
+     "key_id": "did:web:log.sanmarcos-alto.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvVGFsbHlQcm9vZg"
+    }
+   }
+  },
+  {
+   "actor": "El Heraldo de la Capital (log witness)",
+   "verb": "read",
+   "narrative": "El Heraldo runs the story with the log head, the tally proof, and the university's account of the attempted stale-head serve — every quoted record checkable from any reader's phone. The final checkpoint, carried by radio out of the blackout and anchored to two independent permissionless chains from the capital, means that even if every local witness were later leaned on, yesterday cannot be rewritten. The regional government, which controlled the wires all day, is left disputing a result it can no longer edit — its remaining moves are political and legal, not forensic.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "anchor.checkpoint",
+    "community": "did:web:sanmarcos-alto.example",
+    "timestamp": "2026-07-07T03:00:00Z",
+    "body": {
+     "log_head": "sha256:2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d9b3d6e1f4a7c0b5d8e",
+     "tree_size": 5312,
+     "anchors": [
+      "anchor:profile/chain-a.example",
+      "anchor:profile/chain-b.example"
+     ],
+     "note": "checkpoint carried over LoRa mesh to Universidad de los Dos Valles, relayed to anchors from outside the blackout zone"
+    },
+    "sig": {
+     "key_id": "did:web:log.sanmarcos-alto.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvQ2hlY2twb2ludA"
+    }
+   }
+  },
+  {
+   "actor": "Bruno Callisaya and the town",
+   "verb": "offstage",
+   "narrative": "Bruno is released the next morning without charge; his repeater is not returned. The concession is refused; Andesita announces an appeal to the regional court. The kernel produced a result the losers cannot call forged — but it did not get Bruno's night back, did not count the thirty-one herders, and did not make the region accept losing gracefully. Those remain what they always were: politics, courts, and courage."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "T14",
+   "observation": "The core T14 claim held under a real blackout: eligibility proofs and encrypted ballots are self-contained kilobyte payloads (nullifier-bearing, valid whenever they arrive), so store-and-forward over a ~300 bps LoRa mesh and an SD card on a motorcycle carried a full referendum with no new trust assumptions. No citizen verb required an interactive round trip beyond the citizen's own device (§4), and that single design constraint is what made the shutdown survivable rather than fatal."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T8",
+   "observation": "Log-head gossip over radio defeated the split-view attempt in hours: the regionally-hosted mirror served a stale head omitting blackout-morning entries, and it was caught because witnesses received the true co-signed head over a channel the state does not run (§3.4). The blackout and the rewrite attempt failed against the same mechanism, exactly as §2's T14 row claims — but note this worked only because the community had provisioned an out-of-jurisdiction witness and a physical path to it before the crisis."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§4",
+   "observation": "The decision-window policy for late-arriving ballots is a hole in the kernel, not a feature of it. §4 says payloads are 'valid whenever they arrive'; §3.2 decisions carry a hard cast_ends; the protocol specifies no reconciliation. San Marcos Alto survived only because it had pre-legislated its own infrastructure-denial extension clause (an x- extension entry, §9-style: witnessed, self-expiring) — and even so, 31 provably-real ballots arrived too late and were logged as received-uncounted. A community without such a clause faces an ugly live choice between disenfranchising the slow-path voters and improvising window rules mid-decision, which is precisely the legitimacy fight the kernel exists to prevent. This belongs in the spec, not in each town's foresight."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§4",
+   "observation": "The protocol does not protect the humans who carry it. The architecture document honestly concedes that radio can be direction-found and physical-layer anonymity is weaker than IP's (T6 caveat in §4) — and this scenario cashes that concession out as Bruno Callisaya detained overnight and a repeater seized. Ballots have no source addresses; ridge repeaters have GPS coordinates. Every mesh-dependent deployment inherits an unmodeled dependency on a handful of identifiable volunteer operators, who are the cheapest remaining attack surface once the payloads themselves are unstoppable. The kernel makes their equipment replaceable; it makes them arrestable."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T9",
+   "observation": "The blackout still redistributed the franchise even though it failed to stop the vote. Mesh coverage reached the market, the clinic, and one ridge line; herders beyond coverage voted only if a motorcycle happened to ride, and turnout was structurally easier inside town than outside it. The kernel made the denial legible (witnessed attestations, an extension entry in the log) and survivable, but equal convenience of participation under infrastructure denial is unachieved — the §12 admission that the digital divide 'is a fact, not a variable' applies with extra force when the network is being actively withheld rather than merely absent."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§12",
+   "observation": "Not solved here, and named as such by the document itself (T4, §12): a blackout pushes voting into homes and market queues, where a foreman or a brother-in-law can simply watch the screen. Receipt-freeness held — no ballot could be proven after the fact — but coercion under live observation is untouched by any of this machinery, and a community under this much economic pressure from a mining concern is exactly where that residual risk concentrates. The supervised paper channel was the real mitigation, and it is a social institution, not a protocol property."
+  }
+ ]
+}

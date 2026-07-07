@@ -1,0 +1,254 @@
+{
+ "id": "lawful-access-refusal",
+ "title": "A Bribery Inquiry Meets a Ballot Box With No Key — Not Even for the Court",
+ "setting": "The Meridian Movement began as a coalition of nurses, teachers, and small-shop owners in Vela Harbour, the port district of the national capital, and by 2027 it was large enough that its internal leadership contest mattered to the whole republic. In June it held that contest — a members' primary between the reformist slate led by Dr. Ines Calvo and the continuity slate — not on paper ballots dropped in a school-hall box, but through the civic kernel: every member proved she was a member without saying which member, cast a ballot her own phone could later confirm was counted, and no one — not even the movement's own officers — could see how any single person had voted. The reform slate won by two hundred and seventy-five votes.\n\nAmara Ndoro cast one of them. She is a thirty-four-year-old intensive-care nurse at St. Fenn's, a hospital whose board is chaired by a man with close ties to the continuity slate. Amara has never told a colleague which way she leans; the last nurse who did was moved to permanent nights and then quietly not renewed. When she voted for Calvo's slate, the only things that left her phone were an encrypted ballot and a proof that she was eligible and had not voted twice. The kernel was built precisely so that her fear and her vote could never be joined in any file that anyone — her employer, her union, her government — could ever open.\n\nThen the money surfaced. A leaked correspondent-banking file suggested that a foundation registered abroad had wired roughly four hundred thousand euro, in the weeks before the primary, into accounts connected to the reform campaign. Deputy State Prosecutor Marek Halász opened a file. It is not a pretext; foreign electoral financing is a serious crime, and the pattern in the banking records is real. In July his office obtained a production order from the National Capital District Court and served it on the kernel's trustee consortium and log operators. It demanded two things: the list of every member who had voted for the reform slate, and the true identity of the person behind a per-decision pseudonym that appeared, handwritten, in a seized campaign ledger.\n\nThe operators can honour part of that order completely. They can hand the prosecutor the entire, cryptographically verifiable record of what the movement decided and that it decided it validly. What they cannot do — not \"will not,\" cannot — is either of the two things he actually needs. There is no key that turns a ballot back into a voter, and no party who holds one, because the personhood layer was built so that key never exists. This is the moment the wall was built for, and it does not care that the person knocking on it is, this time, in the right.",
+ "threats": [
+  "T6",
+  "T1",
+  "T4"
+ ],
+ "doc_refs": [
+  "§1",
+  "§3.1",
+  "§3.2",
+  "§3.4",
+  "§6",
+  "§10",
+  "§11",
+  "§12",
+  "T1",
+  "T6",
+  "T4"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:meridian-movement.example",
+   "name": "Meridian Movement",
+   "parent": "did:web:national-kernel.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony-biometric-dedup",
+   "issuer": "national-electoral-registry + movement-membership-registrar",
+   "unlinkable": true,
+   "sybil_resistance": "strong",
+   "eligibility_rules": "members/v5"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-safe-space",
+   "trustee_quorum": "3-of-5: national court, two universities, two opposition parties"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    18,
+    19,
+    20,
+    21,
+    27,
+    28,
+    29,
+    30
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:meridian-movement.example",
+   "witnesses": [
+    "did:web:national-kernel.example",
+    "did:web:press-guild.example",
+    "did:web:university-witness.example"
+   ],
+   "anchors": [
+    "anchor:ethereum-mainnet",
+    "anchor:sigsum-witness-2"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:meridian-movement.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdNYW5pZmVzdE5vdFJlYWw"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Amara Ndoro (ICU nurse, movement member)",
+   "verb": "offstage",
+   "narrative": "Amara nurses at St. Fenn's, whose board chair backs the continuity slate; she has watched a colleague pushed out for the wrong loyalty. Her politics are a secret she keeps to survive at work. The kernel touches none of this fear — it cannot make her workplace safe — but it is built so that her fear and her ballot are never joined in a file anyone can open."
+  },
+  {
+   "actor": "Amara Ndoro",
+   "verb": "prove",
+   "narrative": "On the last day of the June primary, Amara's phone derives a per-decision pseudonym from her membership credential — her nym_secret combined with this decision's context id — and proves she is an eligible member who has not already voted, without revealing which member she is (§3.1). The pseudonym is valid for this decision only and links to nothing else she has ever done."
+  },
+  {
+   "actor": "Amara Ndoro",
+   "verb": "cast",
+   "narrative": "She casts an end-to-end-verifiable, receipt-free ballot for Dr. Ines Calvo's reform slate. Her phone keeps a tracker that will later prove her ballot is inside the tally — but that tracker proves nothing to anyone about what the ballot said (§3.2, T4). What leaves the phone is an encrypted ballot and a nullifier, nothing more."
+  },
+  {
+   "actor": "Trustee consortium (court, two universities, two opposition parties)",
+   "verb": "verify",
+   "narrative": "After casting closes, the 3-of-5 trustees jointly decrypt only the homomorphic total and publish a tally proof. Amara's phone — and any journalist's — verifies the announced result against the encrypted ballots without opening a single one. The reform slate wins by 275. The record of what was decided, and that it was decided validly, is now public and cryptographically checkable by anyone.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:meridian-movement.example",
+    "timestamp": "2027-06-21T20:00:00Z",
+    "body": {
+     "decision_id": "2027-leadership-primary",
+     "question_hash": "sha256:3b1e9c0a7d5f42a8b6c1e0d4f9a2b7c3d8e5f6a1b0c9d8e7f6a5b4c3d2e1f0a9b",
+     "eligibility_rules": "members/v5",
+     "trustee_quorum": "3-of-5",
+     "tally": {
+      "reform-slate": 4182,
+      "continuity-slate": 3907,
+      "spoiled": 61
+     },
+     "homomorphic_tally_proof": "sha256:7f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a",
+     "verifiable": true,
+     "receipt_free": true
+    },
+    "sig": {
+     "key_id": "did:web:meridian-movement.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdUYWxseVByb29mMDE"
+    }
+   }
+  },
+  {
+   "actor": "Deputy State Prosecutor Marek Halász",
+   "verb": "offstage",
+   "narrative": "Weeks later, a leaked correspondent-banking file shows roughly 400,000 euro wired from a foreign-registered foundation into accounts tied to the reform campaign. Halász opens a genuine criminal investigation into foreign electoral financing — the pattern is real, not a pretext. In July the National Capital District Court grants a production order, served on the kernel's trustees and log operators, demanding (a) the list of every member who voted for the reform slate and (b) the identity behind a per-decision pseudonym found handwritten in a seized campaign ledger."
+  },
+  {
+   "actor": "Kernel log operators",
+   "verb": "read",
+   "narrative": "For everything the record legitimately contains, the order asks for nothing the operators can withhold — or need to. The tally, the eligibility rules, the trustees, and the proof of validity are already public in the transparency log; the prosecutor's own phone can read and verify them. What the operators point him to is exactly that: the decided outcome, provably valid. It is genuinely useful — and it is not what parts (a) and (b) demand."
+  },
+  {
+   "actor": "Trustee consortium",
+   "verb": "offstage",
+   "narrative": "To answer (a) and (b), the operators look for the key that turns a ballot back into a voter. There is none. Individual ballots are never decrypted; even if all five mutually-distrusting trustees colluded to open one, they would learn only that a per-decision pseudonym voted a certain way, never which person that pseudonym is (§3.1, §3.2). No party holds a pseudonym-to-person table, because the personhood layer was designed so that table never exists. The refusal is not a policy the operators could reverse under pressure — it is a fact about the architecture. Refusal-by-construction (T6, T1)."
+  },
+  {
+   "actor": "Kernel log operators",
+   "verb": "offstage",
+   "narrative": "The operators do not merely decline in a letter. The demand itself is entered into the movement's own transparency log as a coercive.act: a compelled production, classed as a seizure, citing the court's production order as its authorizing rule and the court as issuing authority. Critically, the entry's subject reference is the prosecutor's own case file in the enforcement identity domain — never a civic pseudonym, because the schema forbids bridging civic anonymity to enforcement attribution (T6, T1). Even the demand is now on the record and appealable.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:meridian-movement.example",
+    "timestamp": "2027-07-14T09:30:00Z",
+    "body": {
+     "act_class": "seizure",
+     "authorizing_rule": "Production Order PF-2027-0413 under Political Financing Act 2019 s.44(2) and Criminal Procedure Code s.117 (National Capital District Court)",
+     "issuing_authority": "National Capital District Court, Investigating Chamber",
+     "subject_ref": "prosecutor-file:PF-2027-0413",
+     "rights_guard_ref": "rights.classification:2027-07-14:PF-2027-0413",
+     "appeal_trace": "did:web:meridian-movement.example/appeals/PF-2027-0413"
+    },
+    "sig": {
+     "key_id": "did:web:meridian-movement.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdDb2VyY2l2ZUFjdDAx"
+    }
+   }
+  },
+  {
+   "actor": "Rights guard",
+   "verb": "offstage",
+   "narrative": "The rights guard evaluates the demand as it would any proposal touching protected articles. It trips Article 12 (arbitrary interference with privacy) and Article 21 (the secret ballot and the free expression of electors' will), escalates onto the constitutional path, and records its reasons. The classification states the outcome plainly: the demand is not merely refused, it is structurally unsatisfiable — there is nothing to hand over even if a judge, a trustee, and every operator wished to comply.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:meridian-movement.example",
+    "timestamp": "2027-07-14T09:45:00Z",
+    "body": {
+     "classification_id": "2027-07-14:PF-2027-0413",
+     "subject": "coercive.act:PF-2027-0413",
+     "tripped_invariants": [
+      12,
+      21
+     ],
+     "reasons": {
+      "12": "The demand seeks to expose the private, secret exercise of the ballot - arbitrary interference with privacy (UDHR Art. 12).",
+      "21": "Would breach the secrecy of the ballot and the free expression of the will of electors (UDHR Art. 21(3))."
+     },
+     "escalation": "constitutional-path",
+     "outcome": "structurally-unsatisfiable",
+     "appeal_trace": "did:web:meridian-movement.example/appeals/PF-2027-0413"
+    },
+    "sig": {
+     "key_id": "did:web:meridian-movement.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdSaWdodHNDbGFzczAx"
+    }
+   }
+  },
+  {
+   "actor": "Amara Ndoro",
+   "verb": "read",
+   "narrative": "Because the movement's log is public and her client watches it, Amara can read, on her own phone, that a prosecutor sought to expose how members like her voted — and that the attempt was logged, classified against her rights, and left with nothing to seize. The same transparency that lets her verify a tally lets her see an attempt to unmask her, with an appeal trace telling her how to contest it. Surveillance chill is answered not by secrecy about the demand but by daylight on it (T6)."
+  },
+  {
+   "actor": "Deputy State Prosecutor Marek Halász",
+   "verb": "offstage",
+   "narrative": "Halász is left with a real crime and a wall. He cannot get the voter list; he cannot name the pseudonym. His lawful road forward runs through the money, not the ballots: correspondent-banking records, the foundation's transfers, the campaign's accounts — the financial system is not anonymous the way the vote is (§11). Where the bribery can be proven by following euros, it can still be prosecuted. Where the only available proof would have been the ballots themselves, it cannot — and the kernel makes no exception, not even for him."
+  },
+  {
+   "actor": "The republic",
+   "verb": "offstage",
+   "narrative": "The wall held exactly as designed, and it did not discriminate: the identical construction that kept Amara's job safe also shielded whoever, if anyone, took the foreign money. The kernel chose freedom-by-default — its first-priority goal (§1) — and paid this price on purpose. That is the trade, stated without flinching: a legitimate investigation is impeded so that no investigation, ever, can be turned into an instrument for unmasking how a citizen voted."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§3.1",
+   "observation": "The attribution-versus-unlinkability wall holds by construction. The operators can produce the entire valid public record, but cannot produce the linkage the order demands, because no key maps a per-decision pseudonym to a person and no party holds one. Even total collusion of the mutually-distrusting trustees yields at most 'a pseudonym voted X,' never 'a person voted X.' The correct behaviour here is refusal-by-construction, not refusal-by-policy — and the demand itself lands in the log as an appealable coercive.act."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§1",
+   "observation": "The cost is real and nobody pretends otherwise. A genuine foreign-financing investigation is impeded, and the identical wall that protects nurse Amara Ndoro's job also shields whoever actually took the foreign money. The kernel resolves this in favour of freedom-by-default — its first-priority §1 goal — and pays the price on purpose. This is a deliberate trade, not a defect; a design that let the sympathetic case through would no longer be the design."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T6",
+   "observation": "A lawful-access backdoor would BE the T1/T6 catastrophe. There is no 'deanonymize only under a valid warrant' version of this system: the moment a key exists that can turn a ballot back into a voter for a sympathetic prosecutor, that same key exists for a captured state hunting dissidents, and the kernel has become the surveillance instrument it was built to prevent. The log-entry schema encodes this at the format level by forbidding a coercive.act subject_ref from ever being a civic pseudonym — the civic-anonymity-to-enforcement-attribution bridge is refused, not merely discouraged."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§11",
+   "observation": "What the protocol does NOT solve: the case whose only available proof is the ballot itself. Here a lawful alternative happens to exist — the money trail runs through the non-anonymous banking system (§11), where the inquiry can still proceed. But the kernel guarantees no such alternative in general. A bribery scheme provable only by unmasking voters is, by this design, unprovable, and the kernel offers no middle path between full ballot secrecy and full deanonymization."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "What the protocol does NOT solve: 'structurally impossible' is conditional on an honest enrolment. Unlinkability rests on no party ever retaining a person-to-nym_secret mapping at the physical ceremony; §10 and §12 name a corrupt issuing quorum as the sharpest residual risk. A registrar plus observers who secretly kept such a table at enrolment could deanonymize off-protocol, and no ballot-layer proof would reveal that they had. The wall is exactly as strong as the ceremony that anchors it — hardened by §10, but not made impossible to subvert. (Related and also untouched: unlinkability protects the record, not the moment of casting — a coercer at Amara's shoulder is a T4 problem the secret ballot cannot reach.)"
+  }
+ ]
+}

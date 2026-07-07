@@ -1,0 +1,262 @@
+{
+  "$comment": "Germany column of the comparative rights-map. Same 30-UDHR-invariant spine as the UK map; backing = the Grundgesetz (Basic Law). Distinctive-article text retrieved from the official English translation at gesetze-im-internet.de (web, not an API — a different provenance tier from the UK's Lex source). Two contrasts with the UK are the whole point: (1) COVERAGE is wider — Germany constitutionally backs freedom of movement (Art 11), asylum (Art 16a) and nationality (Art 16), none of which the UK HRA covers, plus a judicially-derived subsistence minimum (Existenzminimum, Art 1+20); (2) REMEDY is far stronger — see meta.remedy.",
+  "meta": {
+    "code": "de",
+    "name": "Germany",
+    "instrument": {
+      "title": "Grundgesetz fuer die Bundesrepublik Deutschland (Basic Law)",
+      "id": "grundgesetz",
+      "uri": "https://www.gesetze-im-internet.de/englisch_gg/",
+      "retrieved_via": "gesetze-im-internet.de official English translation (web)"
+    },
+    "remedy": "strike",
+    "remedy_note": "The Bundesverfassungsgericht can VOID a law (abstract and concrete judicial review). Art 79(3) — the eternity clause — puts human dignity (Art 1) and the democratic/social order (Art 20) beyond amendment even by a two-thirds supermajority. So the guard here can strike, and the core cannot be repealed at all. Germany also practises 'militant democracy' (streitbare Demokratie): parties aiming to abolish the free democratic order can be banned (GG Art 21(2)), and rights forfeited (Art 18).",
+    "coverage": {
+      "backed": 23,
+      "structural": 6,
+      "none": 1
+    }
+  },
+  "invariants": [
+    {
+      "invariant": 1,
+      "udhr": "Art 1 — free and equal in dignity",
+      "right": "GG Art 1 — human dignity, inviolable (unamendable via Art 79(3))",
+      "citation": "Grundgesetz Art 1",
+      "status": "backed",
+      "text": "Human dignity shall be inviolable."
+    },
+    {
+      "invariant": 2,
+      "udhr": "Art 2 — non-discrimination",
+      "right": "GG Art 3 — equality before the law",
+      "citation": "Grundgesetz Art 3",
+      "status": "backed",
+      "text": "All persons shall be equal before the law."
+    },
+    {
+      "invariant": 3,
+      "udhr": "Art 3 — life, liberty, security",
+      "right": "GG Art 2(2) — life, physical integrity, liberty",
+      "citation": "Grundgesetz Art 2",
+      "status": "backed",
+      "text": "Every person shall have the right to free development of his personality..."
+    },
+    {
+      "invariant": 4,
+      "udhr": "Art 4 — no slavery",
+      "right": "GG Art 12(2)-(3) — prohibition of forced labour",
+      "citation": "Grundgesetz Art 12",
+      "status": "backed",
+      "text": null
+    },
+    {
+      "invariant": 5,
+      "udhr": "Art 5 — no torture",
+      "right": "GG Art 1(1) dignity + Art 104(1) (no abuse of detainees)",
+      "citation": "Grundgesetz Arts 1, 104",
+      "status": "backed",
+      "text": "Human dignity shall be inviolable."
+    },
+    {
+      "invariant": 6,
+      "udhr": "Art 6 — recognition before the law",
+      "right": "GG Arts 1-2 — legal personality via dignity",
+      "citation": "Grundgesetz Arts 1, 2",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 7,
+      "udhr": "Art 7 — equal protection",
+      "right": "GG Art 3 — equality before the law",
+      "citation": "Grundgesetz Art 3",
+      "status": "backed",
+      "text": "All persons shall be equal before the law."
+    },
+    {
+      "invariant": 8,
+      "udhr": "Art 8 — effective remedy",
+      "right": "GG Art 19(4) — recourse to the courts (strong, explicit)",
+      "citation": "Grundgesetz Art 19(4)",
+      "status": "backed",
+      "text": "Should any person's rights be violated by public authority, he may have recourse to the courts."
+    },
+    {
+      "invariant": 9,
+      "udhr": "Art 9 — no arbitrary arrest",
+      "right": "GG Art 2(2) + Art 104 — deprivation-of-liberty safeguards",
+      "citation": "Grundgesetz Arts 2, 104",
+      "status": "backed",
+      "text": null
+    },
+    {
+      "invariant": 10,
+      "udhr": "Art 10 — fair and public hearing",
+      "right": "GG Art 103(1) right to be heard + Art 101 lawful judge",
+      "citation": "Grundgesetz Arts 101, 103",
+      "status": "backed",
+      "text": null
+    },
+    {
+      "invariant": 11,
+      "udhr": "Art 11 — presumption of innocence; no retroactive law",
+      "right": "GG Art 103(2) — nulla poena sine lege",
+      "citation": "Grundgesetz Art 103(2)",
+      "status": "backed",
+      "text": null
+    },
+    {
+      "invariant": 12,
+      "udhr": "Art 12 — privacy",
+      "right": "GG Art 10 (correspondence) + Art 13 (home) + Art 2(1) informational self-determination",
+      "citation": "Grundgesetz Arts 10, 13",
+      "status": "backed",
+      "text": "The privacy of correspondence, posts and telecommunications shall be inviolable."
+    },
+    {
+      "invariant": 13,
+      "udhr": "Art 13 — freedom of movement",
+      "right": "GG Art 11 — freedom of movement",
+      "citation": "Grundgesetz Art 11",
+      "status": "backed",
+      "text": "All Germans shall have the right to move freely throughout the federal territory."
+    },
+    {
+      "invariant": 14,
+      "udhr": "Art 14 — asylum",
+      "right": "GG Art 16a — right of asylum (explicit constitutional right)",
+      "citation": "Grundgesetz Art 16a",
+      "status": "backed",
+      "text": "Persons persecuted on political grounds shall have the right of asylum."
+    },
+    {
+      "invariant": 15,
+      "udhr": "Art 15 — nationality",
+      "right": "GG Art 16 — no deprivation of citizenship",
+      "citation": "Grundgesetz Art 16",
+      "status": "backed",
+      "text": "No German may be deprived of his citizenship."
+    },
+    {
+      "invariant": 16,
+      "udhr": "Art 16 — marriage and family",
+      "right": "GG Art 6 — special protection of marriage and family",
+      "citation": "Grundgesetz Art 6",
+      "status": "backed",
+      "text": null
+    },
+    {
+      "invariant": 17,
+      "udhr": "Art 17 — property",
+      "right": "GG Art 14 — property and inheritance guaranteed",
+      "citation": "Grundgesetz Art 14",
+      "status": "backed",
+      "text": "Property and the right of inheritance shall be guaranteed."
+    },
+    {
+      "invariant": 18,
+      "udhr": "Art 18 — thought, conscience, religion",
+      "right": "GG Art 4 — freedom of faith and conscience, inviolable",
+      "citation": "Grundgesetz Art 4",
+      "status": "backed",
+      "text": "Freedom of faith and of conscience and freedom to profess a religious or philosophical creed shall be inviolable."
+    },
+    {
+      "invariant": 19,
+      "udhr": "Art 19 — freedom of expression",
+      "right": "GG Art 5 — expression, press, arts, sciences",
+      "citation": "Grundgesetz Art 5",
+      "status": "backed",
+      "text": "Every person shall have the right freely to express and disseminate his opinions in speech, writing and pictures..."
+    },
+    {
+      "invariant": 20,
+      "udhr": "Art 20 — assembly and association",
+      "right": "GG Art 8 (assembly) + Art 9 (association, incl. unions)",
+      "citation": "Grundgesetz Arts 8, 9",
+      "status": "backed",
+      "text": "All Germans shall have the right to assemble peacefully and unarmed without prior notification or permission."
+    },
+    {
+      "invariant": 21,
+      "udhr": "Art 21 — participation; free elections",
+      "right": "GG Art 38 (general, direct, free, equal, secret) + Art 20(2)",
+      "citation": "Grundgesetz Arts 38, 20",
+      "status": "backed",
+      "text": "Members of the German Bundestag shall be elected in general, direct, free, equal and secret elections."
+    },
+    {
+      "invariant": 22,
+      "udhr": "Art 22 — social security",
+      "right": "GG Art 20(1) Sozialstaatsprinzip — social-state principle (state objective, not an enumerated individual right)",
+      "citation": "Grundgesetz Art 20",
+      "status": "structural",
+      "text": "The Federal Republic of Germany is a democratic and social federal state."
+    },
+    {
+      "invariant": 23,
+      "udhr": "Art 23 — work, unions",
+      "right": "GG Art 12 (occupational freedom) + Art 9(3) (union freedom, collective bargaining)",
+      "citation": "Grundgesetz Arts 12, 9",
+      "status": "backed",
+      "text": null
+    },
+    {
+      "invariant": 24,
+      "udhr": "Art 24 — rest and leisure",
+      "right": "(no constitutional counterpart)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 25,
+      "udhr": "Art 25 — adequate standard of living",
+      "right": "Existenzminimum — a subsistence minimum the BVerfG derives from GG Art 1 + Art 20 (Hartz IV, 2010)",
+      "citation": "Grundgesetz Arts 1, 20",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 26,
+      "udhr": "Art 26 — education",
+      "right": "GG Art 7 — the entire school system under state supervision",
+      "citation": "Grundgesetz Art 7",
+      "status": "backed",
+      "text": null
+    },
+    {
+      "invariant": 27,
+      "udhr": "Art 27 — cultural life",
+      "right": "GG Art 5(3) — freedom of the arts and sciences (production, not participation)",
+      "citation": "Grundgesetz Art 5(3)",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 28,
+      "udhr": "Art 28 — social and international order",
+      "right": "GG Art 20 — democratic and social federal state (programmatic)",
+      "citation": "Grundgesetz Art 20",
+      "status": "structural",
+      "text": "The Federal Republic of Germany is a democratic and social federal state."
+    },
+    {
+      "invariant": 29,
+      "udhr": "Art 29 — duties; limits of rights",
+      "right": "GG Art 2(1) — rights limited by the rights of others and the constitutional order",
+      "citation": "Grundgesetz Art 2(1)",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 30,
+      "udhr": "Art 30 — no destruction of rights",
+      "right": "GG Art 18 (forfeiture of basic rights — militant democracy) + Art 79(3) eternity clause",
+      "citation": "Grundgesetz Arts 18, 79",
+      "status": "backed",
+      "text": null
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+# Only needed to run the validators in tools/ (the site itself has no dependencies).
+jsonschema>=4.18

@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glassontin.github.io/civic-kernel/schema/manifest.schema.json",
+  "title": "Civic Kernel conformance manifest",
+  "description": "A community's signed, machine-readable declaration of exactly which kernel services and which UDHR invariants it upholds (§6). Published as a `manifest.published` entry in the community's own transparency log, so a manifest that lies is a consistency-proof failure, not a marketing dispute. Subtraction must be explicit: all four services are declared true or false — absence of a claim is never silence, it is a schema violation. The citizen's client renders this directly: 'upholds 24 of 30 invariants; absent: Art. 12, 19; ballots verifiable but not receipt-free.'",
+  "type": "object",
+  "required": ["v", "community", "services", "sig"],
+  "additionalProperties": false,
+  "properties": {
+    "v": {
+      "const": "civic-kernel/manifest/v0",
+      "description": "Format identifier and version."
+    },
+    "community": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "format": "uri", "description": "DID or URI of the community. One person couples into many communities under unlinkable pseudonyms (§6)." },
+        "name": { "type": "string" },
+        "parent": { "type": "string", "format": "uri", "description": "Enclosing community, if nested — a parish inside a city inside a nation (§6, fractal adoption)." }
+      }
+    },
+    "services": {
+      "type": "object",
+      "description": "The lattice position (§6). Every service is declared explicitly; a `true` here requires the matching detail block below.",
+      "required": ["personhood", "decisions", "rights_guard", "transparency_log"],
+      "additionalProperties": false,
+      "properties": {
+        "personhood": { "type": "boolean" },
+        "decisions": { "type": "boolean" },
+        "rights_guard": { "type": "boolean" },
+        "transparency_log": { "type": "boolean" }
+      }
+    },
+    "personhood": {
+      "type": "object",
+      "description": "How 'one human, one voice' is established (§3.1, §10, §13). Issuers are lattice entries, not architectural commitments.",
+      "required": ["method", "unlinkable", "sybil_resistance"],
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "enum": ["ceremony", "ceremony-biometric-dedup", "document", "external-issuer", "platform-account"],
+          "description": "ceremony = physical enrolment, the reference profile; ceremony-biometric-dedup adds the secret-shared MPC gallery (§10); platform-account = a chat roster, the legitimate low-lattice onboarding ramp (Form C)."
+        },
+        "issuer": { "type": "string", "description": "Who signs eligibility credentials, e.g. 'municipal registrar', 'World ID', 'discord:server-roster'." },
+        "unlinkable": { "type": "boolean", "description": "Whether presentations are unlinkable across decisions. An EUDI-wallet deployment today would declare false — the legible degradation §6 exists to express (§13)." },
+        "sybil_resistance": { "enum": ["strong", "medium", "weak"] },
+        "eligibility_rules": { "type": "string", "description": "Version reference of the rules-as-code eligibility criteria; amendable only via the constitutional path (§10)." }
+      }
+    },
+    "decisions": {
+      "type": "object",
+      "description": "Ballot properties (§3.2). The two non-negotiables of the reference profile are declared, not assumed.",
+      "required": ["verifiable", "receipt_free"],
+      "additionalProperties": false,
+      "properties": {
+        "verifiable": { "type": "boolean", "description": "End-to-end verifiable: anyone can check the announced total against the encrypted ballots." },
+        "receipt_free": { "type": "boolean", "description": "You can prove your vote was counted, never what it said (T4)." },
+        "cast_or_audit": { "type": "boolean", "description": "Benaloh challenge against a compromised device (T5)." },
+        "paper_channel": { "type": "boolean", "description": "Paper/kiosk/assisted channels in the same protocol with the same verifiability (T9, §4)." },
+        "coercion_resistance": {
+          "enum": ["none", "revote-silent", "revote-safe-space", "fake-credential"],
+          "description": "Defence against a coercer present DURING casting (T4), which receipt-freeness alone cannot touch. A lattice, weakest first: 'none' = receipt-free only, no defence against over-the-shoulder observation; 'revote-silent' = any later ballot silently supersedes (deniability by silence — the coercer cannot detect a re-vote), but requires a later coercer-excluded moment; 'revote-safe-space' = silent re-vote PLUS staffed coercer-excluded cast points (booths, pharmacies, refuges — the domestic-abuse safeguarding estate), so the private moment is guaranteed, not hoped for; 'fake-credential' = indistinguishable fake credentials filtered at tally (JCJ/Civitas), deniability by indistinguishability. Honest caveats a client should surface: no level defeats forced abstention or a coercer who controls the device from enrolment onward; and 'fake-credential' is sound only if universal within the community — a known, opt-in duress mode inverts the burden ('prove you did not fake it') and can escalate harm."
+        },
+        "trustee_quorum": { "type": "string", "description": "Threshold-decryption arrangement, e.g. '3-of-5: court, two universities, two opposition parties'." }
+      }
+    },
+    "rights_guard": {
+      "type": "object",
+      "description": "Which UDHR articles are encoded as machine-checkable invariants (§3.3). The reference profile is all thirty.",
+      "required": ["invariants"],
+      "additionalProperties": false,
+      "properties": {
+        "invariants": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 1, "maximum": 30 },
+          "description": "UDHR article numbers upheld. Clients render the complement — what is absent — as prominently as what is present."
+        },
+        "remedy": {
+          "enum": ["none", "declaration", "escalate", "strike"],
+          "description": "What the guard can actually DO when a decision trips an invariant — a second axis distinct from coverage, because two systems can uphold the same article with very different force. 'none' = no remedy; 'declaration' = flag only, the decision still stands (e.g. UK: HRA s.4 declaration of incompatibility, Parliament remains sovereign); 'escalate' = re-route to supermajority + adversarial review, the kernel's reference posture (§3.3); 'strike' = a constitutional court can void the decision, and an unamendable core may block even a supermajority (e.g. Germany: Grundgesetz Art 79(3) eternity clause + Bundesverfassungsgericht). Coverage says which rights are named; remedy says what naming them is worth."
+        }
+      }
+    },
+    "transparency_log": {
+      "type": "object",
+      "required": ["log_id"],
+      "additionalProperties": false,
+      "properties": {
+        "log_id": { "type": "string", "format": "uri" },
+        "witnesses": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Independent institutions co-signing the log head (§3.4)."
+        },
+        "anchors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Permissionless chains receiving periodic log-head/manifest-digest checkpoints — notary of last resort, never database (§6). Reference profile: at least two independent anchors. No token ever enters the citizen's path."
+        }
+      }
+    },
+    "decision_metadata": {
+      "type": "boolean",
+      "description": "Whether every ballot carries the decision-metadata standard: plain-language summary, structured arguments for and against, provenance for both (§7)."
+    },
+    "interaction_cost": {
+      "type": "array",
+      "description": "Published burden metrics per civic process, in anonymous aggregate — measure the process, never the person (§8). Sludge becomes two comparable numbers on the same dashboard.",
+      "items": {
+        "type": "object",
+        "required": ["process", "steps", "fields", "median_seconds"],
+        "additionalProperties": false,
+        "properties": {
+          "process": { "type": "string" },
+          "steps": { "type": "integer", "minimum": 0 },
+          "fields": { "type": "integer", "minimum": 0, "description": "Every demanded field must cite its authorizing rule (T12)." },
+          "median_seconds": { "type": "number", "minimum": 0 },
+          "abandonment_rate": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "sig": {
+      "type": "object",
+      "required": ["key_id", "alg", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "key_id": { "type": "string" },
+        "alg": { "type": "string", "examples": ["ed25519"] },
+        "value": { "type": "string", "contentEncoding": "base64url", "description": "Detached signature over the JCS (RFC 8785) canonical form of the manifest minus `sig`." }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "services": { "properties": { "personhood": { "const": true } } } } },
+      "then": { "required": ["personhood"] }
+    },
+    {
+      "if": { "properties": { "services": { "properties": { "decisions": { "const": true } } } } },
+      "then": { "required": ["decisions"] }
+    },
+    {
+      "if": { "properties": { "services": { "properties": { "rights_guard": { "const": true } } } } },
+      "then": { "required": ["rights_guard"] }
+    },
+    {
+      "if": { "properties": { "services": { "properties": { "transparency_log": { "const": true } } } } },
+      "then": { "required": ["transparency_log"] }
+    }
+  ],
+  "examples": [
+    {
+      "v": "civic-kernel/manifest/v0",
+      "community": {
+        "id": "did:web:allotment-society.example",
+        "name": "Model Allotment Society",
+        "parent": "did:web:example-town.example"
+      },
+      "services": {
+        "personhood": true,
+        "decisions": true,
+        "rights_guard": false,
+        "transparency_log": true
+      },
+      "personhood": {
+        "method": "platform-account",
+        "issuer": "whatsapp:group-roster",
+        "unlinkable": false,
+        "sybil_resistance": "weak",
+        "eligibility_rules": "roster/v3"
+      },
+      "decisions": {
+        "verifiable": true,
+        "receipt_free": false,
+        "cast_or_audit": true,
+        "paper_channel": false
+      },
+      "transparency_log": {
+        "log_id": "did:web:allotment-society.example",
+        "witnesses": ["did:web:example-town.example", "did:web:neighbouring-society.example"]
+      },
+      "decision_metadata": true,
+      "sig": {
+        "key_id": "did:web:allotment-society.example#manifest-1",
+        "alg": "ed25519",
+        "value": "qR5sT7uV9wX1yZ3aB5chbXNaP1yQvR8sT2uW4xZ6aB9cD0eF3gH5iJ7kL9mN1oP3"
+      }
+    }
+  ]
+}

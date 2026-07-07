@@ -1,0 +1,28 @@
+{
+  "v": "civic-kernel/log-entry/v0",
+  "type": "decision.closed",
+  "community": "did:web:uk-parliament.example",
+  "timestamp": "2024-11-29T14:39:00Z",
+  "body": {
+    "decision_id": "commons-division/2024-11-29/terminally-ill-adults-2r",
+    "title": "Terminally Ill Adults (End of Life) Bill — Second Reading",
+    "stage": "second-reading",
+    "result": "carried",
+    "tally": { "ayes": 330, "noes": 275 },
+    "vote_type": "free-vote-unwhipped",
+    "voting_mode": "public-named",
+    "$mode_note": "A Commons division is a PUBLIC, NAMED, recorded vote — the deliberate OPPOSITE of the citizen ballot's receipt-freeness (§3.2/T4). That is correct for a representative body: an MP's vote is public so constituents can hold them to it, whereas a citizen's ballot is secret so no one can coerce it. The kernel's decision service (SVC-2) covers BOTH modes; a parliamentary division is the public-named profile.",
+    "$provenance_note": "This entry REPRESENTS a real, already-recorded outcome; it does not re-derive it cryptographically. There is no homomorphic tally proof for a 2024 lobby division — the authority for the numbers is Hansard, cited below. Do not read the sig as real crypto (see $sig_note).",
+    "provenance": {
+      "hansard": "https://hansard.parliament.uk/commons/2024-11-29",
+      "theyworkforyou": "https://www.theyworkforyou.com/divisions/pw-2024-11-29-51-commons",
+      "retrieved": "2026-07"
+    },
+    "$sig_note": "The sig below is a placeholder — this corpus is a representation of public record, not a signed Parliament deployment."
+  },
+  "sig": {
+    "key_id": "did:web:uk-parliament.example#log-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdSZXByZXNlbnRhdGlvbk5vdFJlYWxDcnlwdG8"
+  }
+}

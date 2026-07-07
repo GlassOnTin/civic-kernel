@@ -1,0 +1,300 @@
+{
+ "id": "benefit-sludge",
+ "title": "The Eleven-Hour Claim That Now Takes Twenty-Three Minutes — Until the Council Cuts the Rate",
+ "setting": "Keisha Morrison is 34, lives in a two-bedroom terrace off Rookery Road in Handsworth, Birmingham, and holds her week together with tape: morning shifts as a care assistant in Perry Barr, evening shifts on the tills at a supermarket in Aston, Tion (7) and Amara (4) shuttled between school, nursery and her mother's flat. In 2024 a support worker told her she might qualify for housing-cost support. The claim consumed eleven hours across three offices — a housing desk that opened only when she was at work, a benefits office that demanded the same payslips three times, a school-grant counter that sent her back for a landlord's signature it had already been given once. Her landlord, Mr. Akhtar, signed the first form and ignored the second. She abandoned the claim, and never learned there were two other programmes she qualified for. Nobody designed that gauntlet on paper; it accreted, and it worked exactly like a design.\n\nIn spring 2026 Birmingham City Council moves its three household-support programmes onto kernel-governed processes: the eligibility rules are published as signed, executable code in a public transparency log witnessed by Aston University, the Birmingham Mail, and Coventry's council; every field a claim form demands must cite the rule that authorizes it; every denial produces a machine-checkable computation trace; and the burden of each civic process — steps, fields, median completion time, abandonment rate — is published quarterly as anonymous aggregates in the council's conformance manifest, next to the numbers for renewing a parking permit.\n\nWhat follows is what the protocol actually does for Keisha — the discovery flip that tells her what she is owed instead of daring her to guess, the denial she can read and beat, the sludge gap turned into two numbers a journalist can print — and what it cannot do: it cannot make her landlord answer an attestation request, and it cannot stop the council's cabinet, staring at a budget hole, from cutting the very supplement she just won on appeal, through a rule amendment that will be perfectly witnessed, perfectly legible, and perfectly legal.",
+ "threats": [
+  "T12",
+  "T9"
+ ],
+ "doc_refs": [
+  "§2",
+  "§3.3",
+  "§3.4",
+  "§4",
+  "§5",
+  "§6",
+  "§8",
+  "§10",
+  "§11",
+  "§12"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:birmingham-city.example",
+   "name": "Birmingham City Council — Entitlements Pilot"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": false,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "document",
+   "issuer": "Birmingham City Council registrar (library enrolment desks)",
+   "unlinkable": false,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "bcc-entitlements/rules/v2.3.1"
+  },
+  "rights_guard": {
+   "invariants": [
+    2,
+    7,
+    8,
+    12,
+    21,
+    22,
+    25
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:log.birmingham-city.example",
+   "witnesses": [
+    "did:web:aston-university.example",
+    "did:web:birmingham-mail.example",
+    "did:web:coventry-city.example"
+   ],
+   "anchors": [
+    "anchor:opentimestamps.example",
+    "anchor:eth-checkpoint.example"
+   ]
+  },
+  "decision_metadata": false,
+  "interaction_cost": [
+   {
+    "process": "parking-permit-renewal",
+    "steps": 3,
+    "fields": 5,
+    "median_seconds": 130,
+    "abandonment_rate": 0.02
+   },
+   {
+    "process": "household-support-claim-legacy-2025Q4-baseline",
+    "steps": 27,
+    "fields": 112,
+    "median_seconds": 39600,
+    "abandonment_rate": 0.61
+   },
+   {
+    "process": "household-support-claim-kernel-2026Q2",
+    "steps": 4,
+    "fields": 9,
+    "median_seconds": 1400,
+    "abandonment_rate": 0.07
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:birmingham-city.example#manifest-2026",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvTWFuaWZlc3RCaGFt"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Keisha Morrison",
+   "verb": "offstage",
+   "narrative": "2024, the legacy world. Eleven hours of her life across three offices, unpaid shifts swapped and burned. The housing desk wants Mr. Akhtar's signature; the school-grant counter wants it again on a different form, and he stops answering her texts after the first. One office demands her payslips three times; none can say why it needs her bus pass number. She abandons the claim two programmes short of what she is owed. No rule anywhere says 'deter this woman' — the deterrence lives entirely in the procedure, which is what makes it deniable."
+  },
+  {
+   "actor": "Birmingham City Council (full council)",
+   "verb": "cast",
+   "narrative": "March 2026. The council enacts its three household-support schemes as executable rules — Catala-class code, each clause carrying provenance back to the enabling legislation — through the kernel's own amendment path, and the signed rule version lands in the transparency log. From this moment there is no secret internal decision tree: the code is the policy, any client can run it, and a claim form can only contain fields that appear as free variables in these logged rules. A fishing field cannot exist without showing up in a public schema diff.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rules.amendment",
+    "community": "did:web:birmingham-city.example",
+    "timestamp": "2026-03-30T10:15:00Z",
+    "body": {
+     "rules": "bcc-entitlements/rules/v2.3.1",
+     "programs": [
+      "housing-cost-support",
+      "school-essentials-grant",
+      "childcare-cost-supplement"
+     ],
+     "provenance": "Welfare Reform (Local Schemes) Act, sched. 2; BCC full-council resolution 2026/14",
+     "effective": "2026-04-06T00:00:00Z",
+     "note": "Claim forms are generated from the free variables of these rules; a field with no citing rule cannot exist in the schema."
+    },
+    "sig": {
+     "key_id": "did:web:birmingham-city.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvUnVsZXNWMjMx"
+    }
+   }
+  },
+  {
+   "actor": "Priya Chauhan, welfare rights adviser, Birmingham Settlement",
+   "verb": "read",
+   "narrative": "The council publishes its conformance manifest the day the pilot opens, and Priya reads it on her phone the way she'd read a food-hygiene sticker. It is honest about what this deployment is not: document-check enrolment at library desks (medium sybil resistance, not the full ceremony), presentations linkable across services (no BBS unlinkability in the pilot wallet stack), no kernel ballots at all, seven of thirty UDHR invariants encoded — her client renders the absent twenty-three as prominently as the present seven. And it carries the number she has wanted for fifteen years: the benefit claim and the parking permit, measured as the same quantity, on the same page.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "manifest.published",
+    "community": "did:web:birmingham-city.example",
+    "timestamp": "2026-04-06T09:00:00Z",
+    "body": {
+     "manifest_digest": "sha256:5b1c9a4e7d2f8b3a6c0e9d1f4a7b2c5d8e3f6a9b0c1d4e7f2a5b8c3d6e9f0a1b",
+     "manifest_version": "2026-04",
+     "summary": "personhood: document/medium/linkable; decisions: none; rights guard: 7 of 30 invariants; log witnessed by 3, anchored to 2"
+    },
+    "sig": {
+     "key_id": "did:web:birmingham-city.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvTWFuUHVi"
+    }
+   }
+  },
+  {
+   "actor": "Keisha Morrison",
+   "verb": "offstage",
+   "narrative": "Mid-April. Enrolment at Handsworth Library takes twenty minutes: a document check, a credential signed into the wallet on her own phone. Her neighbour Donna, 71 and phoneless, enrols at the same desk and will claim through the library kiosk with an assistant — same protocol, same verifiability, twice the bus fare. Then the part the kernel cannot compress: Keisha's tenancy attestation needs Mr. Akhtar's signature, once, digitally. The request he receives cites the exact rule that requires it — he can no longer be asked twice, and he can see why he is asked at all — but the protocol cannot make him tap 'sign'. He takes nineteen days."
+  },
+  {
+   "actor": "Keisha Morrison",
+   "verb": "read",
+   "narrative": "The night the tenancy attestation finally arrives, her wallet re-runs the logged rules locally against what it already holds — payslips attested by both employers, the tenancy, household composition, Amara's registered nursery. The phone says: you appear to qualify for housing-cost support (~£34/week), a school essentials grant (£120 per child), and the childcare-cost supplement (~£19/week). Nothing has left the device; the council never sees the speculative query. For the first time the system has told Keisha what she is owed, instead of daring her to guess and then exhausting her for guessing right. In 2024 she never learned two of these programmes existed."
+  },
+  {
+   "actor": "Keisha Morrison",
+   "verb": "prove",
+   "narrative": "18 May, on the number 11 bus between jobs, she submits all three claims in twenty-three minutes. The forms are generated from the rule code: nine fields, each one displaying the provision that authorizes it, most answered by selective-disclosure proofs — income below threshold as a range proof (the amount itself stays private), resident in the district, rent above the floor. One per-programme pseudonym makes double-claiming cryptographically impossible. Two awards land in her wallet as credentials within the hour. The third comes back: DENIED — and instead of a letter that says 'you do not meet the conditions', the log holds a trace.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.denial-trace",
+    "community": "did:web:birmingham-city.example",
+    "timestamp": "2026-05-18T14:22:31Z",
+    "body": {
+     "claim_context": "nym:9f4KpQ2vXwL7mR3t",
+     "process": "childcare-cost-supplement",
+     "rules": "bcc-entitlements/rules/v2.3.1",
+     "input_commitment": "sha256:8e2d7c1b0a9f4e3d6b5a2c1e0d7f9a8b3c6d5e4f1a2b3c4d5e6f7a8b9c0d1e2f",
+     "fired": [
+      "r1.residency: PASS",
+      "r3.household-composition: PASS",
+      "r5.childcare-provider-registered: PASS",
+      "r7.2c.net-weekly-earnings: FAIL"
+     ],
+     "binding_threshold": "r7.2(c): net weekly earnings must be <= 285.00 GBP; computed 296.40 GBP",
+     "outcome": "denied",
+     "appeal": "fact error: correct an attestation and re-prove; encoding error: challenge via the constitutional path, 90 days"
+    },
+    "sig": {
+     "key_id": "did:web:birmingham-city.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvRGVuaWFs"
+    }
+   }
+  },
+  {
+   "actor": "Keisha Morrison, with Priya Chauhan",
+   "verb": "verify",
+   "narrative": "Keisha's phone checks the trace against the logged rule version and her committed inputs: the computation is faithful, the inputs are hers, rule r7.2(c) is the one that bound — £296.40 against a £285.00 threshold. Because the 'why' is machine-verifiable, Priya finds the real defect in minutes rather than months: May had five Friday paydays, and the code averaged that one long month as if it were her recurring weekly income. The statute says 'normal weekly earnings'. Her normal week is about £277. This is not a fact error in her attestations; the code misreads the law."
+  },
+  {
+   "actor": "Keisha Morrison",
+   "verb": "challenge",
+   "narrative": "She files the challenge as an encoding error, which routes it off the private-reconsideration path and onto the constitutional one: adversarial review, in public. In June the review upholds it, and the fix is a logged rule amendment — not a quiet concession in one woman's file. The council re-runs every denial made under the broken clause: 214 traces, 61 retroactive awards to households who never complained, including a night-shift porter in Nechells who had assumed, as people are trained to, that the refusal was his own fault. Keisha's appeal fixed the rule once, for everyone — the difference between a computation trace and a reconsideration letter.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rules.amendment",
+    "community": "did:web:birmingham-city.example",
+    "timestamp": "2026-06-24T11:05:00Z",
+    "body": {
+     "rules": "bcc-entitlements/rules/v2.3.2",
+     "supersedes": "bcc-entitlements/rules/v2.3.1",
+     "finding": "encoding error: r7.2(c) treated one five-week pay month as recurring weekly income, contra 'normal weekly earnings' in sched. 2 s.4(1)",
+     "origin": "challenge 2026-0521-cc, upheld on adversarial review",
+     "population_delta": "214 denials under v2.3.1 re-run; 61 awards issued retroactively"
+    },
+    "sig": {
+     "key_id": "did:web:birmingham-city.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvUnVsZXNWMjMy"
+    }
+   }
+  },
+  {
+   "actor": "Tom Beddow, Birmingham Mail",
+   "verb": "read",
+   "narrative": "1 July, the quarterly cost aggregate lands in the log, co-signed by the witnesses — one of whom is his own newspaper, which is precisely why he trusts the number enough to print it. His story writes itself from two rows of the same table: renewing a parking permit takes 130 seconds and loses 2% of applicants; claiming household support used to take a median of eleven hours and lose 61%, and now takes twenty-three minutes and loses 7%. The eleven hours was never news when it was 9,000 private ordeals; as a witnessed aggregate it is a finding someone has to answer for. Sludge has stopped being an anecdote.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:birmingham-city.example",
+    "timestamp": "2026-07-01T08:00:00Z",
+    "body": {
+     "period": "2026-Q2",
+     "aggregates": [
+      {
+       "process": "parking-permit-renewal",
+       "steps": 3,
+       "fields": 5,
+       "median_seconds": 130,
+       "abandonment_rate": 0.02,
+       "n": 41205
+      },
+      {
+       "process": "household-support-claim",
+       "steps": 4,
+       "fields": 9,
+       "median_seconds": 1400,
+       "abandonment_rate": 0.07,
+       "n": 9312
+      }
+     ],
+     "baseline": {
+      "process": "household-support-claim (legacy, 2025-Q4)",
+      "steps": 27,
+      "fields": 112,
+      "median_seconds": 39600,
+      "abandonment_rate": 0.61
+     },
+     "note": "anonymous aggregates only; the process is measured, never the person"
+    },
+    "sig": {
+     "key_id": "did:web:birmingham-city.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvQ29zdEFnZw"
+    }
+   }
+  },
+  {
+   "actor": "Birmingham City Council cabinet",
+   "verb": "offstage",
+   "narrative": "3 July. Uptake worked: with abandonment down from 61% to 7%, thousands more eligible households are claiming, and the scheme is overspent. The cabinet paper proposes cutting the childcare supplement rate by 30% from October. When it passes it will travel the kernel's own amendment path — versioned, witnessed, with the population-level delta published in anonymous aggregate for the town to argue about — and none of that machinery can stop it, fund the programme, or make the rule generous. The kernel got Keisha everything the written rules owed her, made a hidden tax on her exhaustion into a public number, and fixed a broken clause for 61 strangers. What the rules owe her is still decided where it always was: by politics, offstage."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "The T12 core held end-to-end: discovery ran on Keisha's device against logged rules (she learned of two programmes she never knew existed), all nine demanded fields cited their authorizing rule so the 2024-style triple payslip demand and the unexplainable bus-pass field could not exist in the schema, and the 11-hour/23-minute asymmetry became two witnessed rows in one table (39600s at 61% abandonment vs 1400s at 7%) that a journalist could print as a measured quantity rather than an anecdote."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§11",
+   "observation": "The discovery flip only reaches as far as the wallet's attested facts, and the attestation ecosystem is the unbuilt dependency the document itself names: Keisha's claim stalled 19 days on her landlord's signature. The kernel reduced the demand from twice to once and forced it to cite its rule, but it has no lever over a third party who simply does not tap 'sign' — for tenants with hostile or absent landlords, the old chokepoint survives in miniature."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§5",
+   "observation": "What the protocol does NOT solve, demonstrated: the kernel cannot fund the programmes or write good rules. Higher uptake blew the budget, and the cabinet's 30% rate cut will pass through the kernel's own amendment path — witnessed, canaried, with its population delta published — and be entirely legal. Legibility converts a quiet cut into a public argument, which is more than the status quo and much less than a guarantee; the same machinery that made Keisha's entitlement undeniable will make its shrinkage undeniable too."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.4",
+   "observation": "The per-claim process.denial-trace sits in tension with §8's own maxim 'measure the process, never the person': it is pseudonymous but public, carrying programme, timestamp, fired rules and the computed-vs-threshold margin. In a low-volume programme in a small ward, timing plus programme plus margin is plausibly re-identifying — the schema enforces aggregation for cost metrics but not for denial traces, and neither the schema nor §11 specifies how much of a trace belongs in the public log versus in the citizen's wallet with only a commitment logged."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Donna, 71 and phoneless, was not disenfranchised — kiosk enrolment and assisted claiming ran the same protocol with the same verifiability — but her claim cost two bus trips and a helper's availability against Keisha's 23 minutes on the number 11. Equal convenience across the digital divide is unachieved, exactly as §12(4) concedes; the aggregate metrics as specified do not even break out per-channel, so the kiosk channel's higher burden is invisible in the very dashboard built to expose burden."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§11",
+   "observation": "Payment breaks the anonymity the ballot machinery elsewhere provides, as §11 admits: three per-programme pseudonyms prevent double-claiming, but all three awards pay into one bank account, so the council can trivially join Keisha's contexts downstream — and the pilot manifest honestly declares unlinkable:false and medium sybil resistance anyway. Data minimisation, not anonymity, is the real ceiling here, and citizens reading the manifest get the truth of that rather than a stronger implied promise."
+  }
+ ]
+}

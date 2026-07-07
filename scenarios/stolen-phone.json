@@ -1,0 +1,277 @@
+{
+ "id": "stolen-phone",
+ "title": "Snatched on Rua da Prata: The Strike Vote That Almost Went Ahead Without the Man Who Called It",
+ "setting": "Tomás Ferreira, 31, has delivered food by e-bike in Lisbon for six years, the last three as a member of Cooperativa Pedal Livre — a 94-rider co-operative that contracts collectively with the delivery platforms. When the largest platform, Zip, cut the per-drop rate by 22 cents in June, it was Tomás who stood up at the Tuesday assembly in Arroios and demanded a strike ballot. The board agreed: a formal, verifiable vote of the whole membership, opening for casting on 29 June, closing 3 July, strike on the 8th if it carries. Two years earlier, at the co-op's enrolment ceremony, Tomás had tapped through a screen he barely read: choose three guardians in case you lose your phone. He picked his sister Marta, a nurse at Santa Maria hospital; Bruno Cardoso, his rep at the Sindicato dos Estafetas; and the Junta de Freguesia de Arroios, the municipal parish office. Any two of the three could help him recover. He never thought about it again.\n\nOn the evening of 22 June, waiting at a light on Rua da Prata with the phone in his hand — unlocked, the delivery app open — a kid on a scooter took it in one clean movement and was gone toward Terreiro do Paço. In that phone's secure enclave sits the private key behind Tomás's co-op credential: the thing that proves, without naming him, that he is one of the 94 people entitled to vote in the ballot he himself forced onto the agenda. Also in that phone: his banking app, a week of undelivered earnings, his photos. The ballot opens in seven days.\n\nThe stakes are not abstract. If Tomás cannot vote, the loudest voice for the strike is silent in its own ballot. If the thief can somehow vote as Tomás, a stranger holds a rider's voice in a decision about riders' wages. And Pedal Livre is exactly the kind of small, honest, mid-lattice community the Civic Kernel says it serves: physical enrolment at assemblies but no biometric deduplication, verifiable receipt-free ballots but no paper channel, a transparency log witnessed by the union, the co-op federation, and a university lab — and no rights guard at all, a subtraction its manifest declares in the open. What follows is seven days in which the protocol's social-recovery machinery is raced against a casting window, and wins — but only with luck, an emergency patch, and a union hardship fund the protocol knows nothing about.",
+ "threats": [
+  "T3",
+  "T6"
+ ],
+ "doc_refs": [
+  "§2",
+  "§3.1",
+  "§3.2",
+  "§3.4",
+  "§4",
+  "§6",
+  "§10",
+  "§12",
+  "T3",
+  "T4",
+  "T5",
+  "T6",
+  "T9"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:pedal-livre.example",
+   "name": "Cooperativa Pedal Livre — Lisbon delivery-rider co-operative (94 members)"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "co-op registrar, threshold co-signed by a rotating union observer (2-of-3 mint)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "roster/v7"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": false,
+   "trustee_quorum": "2-of-3: Sindicato dos Estafetas, Federação das Cooperativas de Lisboa, IST cryptography lab"
+  },
+  "transparency_log": {
+   "log_id": "did:web:pedal-livre.example",
+   "witnesses": [
+    "did:web:sindicato-estafetas.example",
+    "did:web:federacao-coop-lisboa.example",
+    "did:web:ist-tlog-lab.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "checkpoint:ethereum-mainnet"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "cast-strike-ballot",
+    "steps": 4,
+    "fields": 0,
+    "median_seconds": 210,
+    "abandonment_rate": 0.04
+   },
+   {
+    "process": "guardianship-credential-recovery",
+    "steps": 9,
+    "fields": 3,
+    "median_seconds": 158400
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:pedal-livre.example#manifest-2",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Tomás Ferreira",
+   "verb": "offstage",
+   "narrative": "Two years ago, at a folding table in the co-op's Arroios assembly room, Tomás enrolled: the registrar and a union observer co-signed his eligibility credential against a key his phone's enclave generated on the spot. The app asked him to pick recovery guardians. He chose his sister Marta, his union rep Bruno Cardoso, and the Junta de Freguesia de Arroios — any 2 of 3 can co-sign a re-issuance. He set it up in ninety seconds and forgot it existed."
+  },
+  {
+   "actor": "Inês Duarte (board secretary, log operator)",
+   "verb": "offstage",
+   "narrative": "15 June. After Tomás's motion carries at the assembly, the board opens the strike ballot formally. Inês's client appends decision.opened to the co-op's transparency log: two weeks of deliberation, casting from 29 June to 3 July, eligibility frozen against roster/v7 — the membership rules in force that evening. The union, the federation, and the IST lab co-sign the new log head within the hour.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:pedal-livre.example",
+    "timestamp": "2026-06-15T18:00:00Z",
+    "body": {
+     "decision_id": "greve-zip-2026-07",
+     "question_hash": "sha256:4c1f9a2e7b0d3c6f8a5b1e4d7c0a3f6b9e2d5c8f1a4b7e0d3c6f9a2b5e8d1c4f",
+     "eligibility_rules": "roster/v7",
+     "window": {
+      "deliberation_ends": "2026-06-29T08:00:00Z",
+      "cast_ends": "2026-07-03T20:00:00Z"
+     },
+     "metadata_hash": "sha256:b3a1d5f7c9e2b4a6d8f0c2e4a6b8d0f2c4e6a8b0d2f4c6e8a0b2d4f6c8e0a2b4"
+    },
+    "sig": {
+     "key_id": "did:web:pedal-livre.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdEZWNpc2lvbk9wZW5lZDAx"
+    }
+   }
+  },
+  {
+   "actor": "A kid on a scooter",
+   "verb": "offstage",
+   "narrative": "22 June, 21:38. Rua da Prata, red light. The phone leaves Tomás's hand unlocked, delivery app open, and disappears toward the river. The kernel has nothing to say about this moment — no protocol was violated, a phone was simply stolen, the oldest crime in the newest infrastructure. The enclave key cannot be extracted, and the civic wallet demands its own fingerprint-or-PIN on every key use, so an unlocked phone is not an unlocked credential. But the key now physically lives in a stranger's pocket, and casting opens in seven days."
+  },
+  {
+   "actor": "Tomás Ferreira",
+   "verb": "offstage",
+   "narrative": "That night, on Marta's phone at her kitchen table, Tomás triages the damage: bank blocked by phone call, Zip account frozen by email, a week's earnings in limbo. Then he remembers the ballot. He calls Bruno, who tells him the recovery needs two guardians — and warns him the third, the freguesia office, can't see anyone before Thursday. 'Your sister and me. That's the quorum. Come to the union office Wednesday.' The 2-of-3 threshold, chosen half-consciously two years ago, is what makes the municipal queue irrelevant."
+  },
+  {
+   "actor": "Marta Ferreira and Bruno Cardoso (guardians)",
+   "verb": "prove",
+   "narrative": "24 June, morning. From their own devices, Marta and Bruno each prove their guardian standing for Tomás's credential and co-sign a revocation request. At 10:12 the co-op log appends credential.revoked: the old key's commitment, reason 'device-theft-reported', a 2-of-3 quorum met. From this entry's inclusion onward, the stolen enclave's key can no longer produce a valid non-revocation proof. The revocation is public — as §3.1 requires — which will matter later in a way nobody in the room considers.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "credential.revoked",
+    "community": "did:web:pedal-livre.example",
+    "timestamp": "2026-06-24T10:12:00Z",
+    "body": {
+     "credential_ref": "commit:sha256:9e7d5c3b1a8f6e4d2c0b9a7f5e3d1c8b6a4f2e0d9c7b5a3f1e8d6c4b2a0f9e7d",
+     "reason": "device-theft-reported",
+     "reported_at": "2026-06-22T22:41:00Z",
+     "guardianship": {
+      "quorum": "2-of-3",
+      "cosigners": [
+       "did:web:pedal-livre.example#guardian-4f2a",
+       "did:web:sindicato-estafetas.example#guardian-b71c"
+      ]
+     },
+     "effective": "2026-06-24T10:12:00Z"
+    },
+    "sig": {
+     "key_id": "did:web:pedal-livre.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdSZXZvY2F0aW9uMDI"
+    }
+   }
+  },
+  {
+   "actor": "Tomás, with Bruno co-signing as registrar's observer",
+   "verb": "prove",
+   "narrative": "24 June, 17:30, the union office in Arroios. Tomás cannot afford a new phone this month; the union hardship fund lends him a refurbished Android with a StrongBox enclave. A fresh key is generated inside it, and a re-issuance ceremony — witnessed like any first enrolment, per §10 — binds a new credential to it, co-signed by the same guardian quorum and explicitly chained to the morning's revocation. One awkwardness surfaces immediately: the log-entry vocabulary has revocation and authority-key-rotation types but no core type for issuing a credential, so the entry goes in under an x- extension.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-credential.reissued",
+    "community": "did:web:pedal-livre.example",
+    "timestamp": "2026-06-24T17:45:00Z",
+    "body": {
+     "replaces": "commit:sha256:9e7d5c3b1a8f6e4d2c0b9a7f5e3d1c8b6a4f2e0d9c7b5a3f1e8d6c4b2a0f9e7d",
+     "new_credential_ref": "commit:sha256:2b4d6f8a0c1e3f5a7b9d1e3c5a7f9b1d3e5c7a9f1b3d5e7c9a1f3b5d7e9c1a3b",
+     "guardianship": {
+      "quorum": "2-of-3",
+      "cosigners": [
+       "did:web:pedal-livre.example#guardian-4f2a",
+       "did:web:sindicato-estafetas.example#guardian-b71c"
+      ]
+     },
+     "ceremony": {
+      "time": "2026-06-24T17:30:00Z",
+      "place": "Sindicato dos Estafetas office, Arroios, Lisboa",
+      "officiant": "did:web:sindicato-estafetas.example#registrar-2"
+     },
+     "note": "no core log-entry type exists for credential (re)issuance; x- extension used"
+    },
+    "sig": {
+     "key_id": "did:web:pedal-livre.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdSZWlzc3VhbmNlMDM"
+    }
+   }
+  },
+  {
+   "actor": "Co-op board with the IST lab's engineer",
+   "verb": "offstage",
+   "narrative": "25-26 June. Then the trap the architecture document itself flags (§12, open problem 5) springs: the strike ballot froze eligibility at 15 June, and Tomás's new credential carries a new pseudonym secret — his per-decision pseudonym for greve-zip-2026-07 is not derivable from anything in that frozen set. Recovered safely, he is nonetheless a stranger to the open decision he called. The protocol has no answer; SLIP-39 shard restore would have preserved his pseudonym secret but resurrected the exact key sitting in a thief's pocket. So the board improvises: an emergency rules amendment, logged and sunset-claused, admitting a re-issued credential into an open decision if and only if it chains to a logged revocation of a credential that was eligible at open. It works for 94 members who all know each other. It is also a bespoke patch for a hole the kernel leaves open.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rules.amendment",
+    "community": "did:web:pedal-livre.example",
+    "timestamp": "2026-06-26T12:00:00Z",
+    "body": {
+     "from": "roster/v7",
+     "to": "roster/v8",
+     "change": "revocation-aware re-entry: a credential re-issued under guardianship while a decision is open is eligible for that decision if and only if its issuance entry binds to a logged revocation of a credential that was eligible when the decision opened; the revoked credential fails non-revocation proofs from the revocation entry's log inclusion onward",
+     "applies_to": [
+      "greve-zip-2026-07"
+     ],
+     "approval": "board 5-0 under emergency clause 9.3 of the co-op statutes",
+     "sunset": "2026-09-01T00:00:00Z"
+    },
+    "sig": {
+     "key_id": "did:web:pedal-livre.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdBbWVuZG1lbnQwNA"
+    }
+   }
+  },
+  {
+   "actor": "Tomás Ferreira",
+   "verb": "verify",
+   "narrative": "29 June, casting opens. On the refurbished phone, Tomás checks the record the way §4 says any phone can: inclusion proofs for the revocation, the re-issuance, and the amendment; a consistency proof that today's log head extends the head Marta's phone gossiped before the theft; three witness co-signatures on the head. Milliseconds each. The old key is publicly, provably dead; his new standing is publicly, provably alive. For the first time since Rua da Prata he stops feeling like a ghost in his own co-op."
+  },
+  {
+   "actor": "Tomás Ferreira",
+   "verb": "challenge",
+   "narrative": "1 July. Tomás does not trust a second-hand phone from a drawer in the union office — which is exactly the threat cast-or-audit exists for (T5). He has the device encrypt a ballot, then challenges instead of casting: the phone must open the encryption and show it encrypted what he chose. It does. He runs the challenge once more out of stubbornness, then lets it re-encrypt fresh."
+  },
+  {
+   "actor": "Tomás Ferreira",
+   "verb": "cast",
+   "narrative": "1 July, 19:20, parked outside the Intendente kiosk between deliveries. Tomás casts SIM to the strike under a fresh pseudonym derived for this one decision — unlinkable to his enrolment, his recovery, or any other vote he will ever cast. He keeps the tracker. It can prove his ballot is in the tally; it cannot prove to Zip, to the board, or to anyone else which way he voted."
+  },
+  {
+   "actor": "Whoever now holds the stolen phone",
+   "verb": "offstage",
+   "narrative": "What of the thief? The enclave still physically holds the old key, behind a fingerprint it doesn't have and a wallet PIN it can guess at slowly. But from 24 June the key is cryptographically dead: any eligibility proof it generates fails the non-revocation check at the ballot server, and the failure is silent and total. The honest accounting, though, is about the calendar, not the crypto: casting opened seven days after the theft, and revocation landed in two. Had the phone been snatched mid-window, before the guardians signed — and had the thief beaten the biometric — a ballot cast with the old credential would have been valid, unlinkable, receipt-free, and therefore impossible to identify and remove without breaking the very properties that protect every other rider. The protocol won this race partly because the race was short."
+  },
+  {
+   "actor": "Tomás and 87 other riders",
+   "verb": "verify",
+   "narrative": "3 July, 20:00. The window closes; decision.closed and the tally proof land in the log. 88 of 94 eligible members cast: 61 SIM, 27 NÃO. The strike carries. Tomás checks his tracker against the tally proof on the refurbished phone — his ballot is in the count — and any member, any journalist, and Zip itself can verify the homomorphic total against the encrypted ballots without opening one. On 8 July, 94 e-bikes stand still across Lisbon. The vote that authorised it includes the voice of the man whose phone was stolen — by two co-signatures, one emergency amendment, and six days of margin."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Recovery broke pseudonym continuity exactly as the document's open problem 5 predicts: the re-issued credential's new pseudonym secret made Tomás ineligible for the already-open decision he had called. A 94-member co-op could hand-patch this with an emergency rules.amendment in 48 hours; a municipality or nation could not safely improvise a mid-election eligibility change, and the document concedes no shipped system solves revocation-aware nullifier design. For any community bigger than a club, a citizen recovered during an open decision either loses standing in it or the community takes on double-vote risk."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T6",
+   "observation": "The thief could not vote as Tomás — but the protection came from timing plus the enclave's per-use biometric gate, not from the revocation mechanism alone. Because ballots are unlinkable and receipt-free by design, a ballot cast with the stolen credential in the gap between theft and revocation could never be identified or struck from the tally without destroying unlinkability for everyone. Here the theft preceded the cast window by seven days and revocation took two, so the window was empty; in the variant where the phone is snatched mid-window from a coerced or biometrically-defeated owner, this scenario breaks and the kernel's own privacy guarantees are what prevent the repair."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T9",
+   "observation": "For six days Tomás had no path to participate at all. Pedal Livre's manifest honestly declares paper_channel: false, so the §4 zero-bandwidth floor did not exist for him, and the recovery flow presumes access to a second enclave-bearing smartphone — hardware the protocol simply assumes. What actually restored his franchise was the union hardship fund's refurbished Android and his sister's kitchen-table phone. The kernel made the recovery verifiable; it did nothing about the device dependency, which taxes precisely the gig workers with the least slack (§8's own regressivity argument, turned on the kernel itself)."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§10",
+   "observation": "Public revocation is a privacy leak at small scale. The credential.revoked and x-credential.reissued entries carry guardian key identifiers and a theft timestamp, permanently and publicly. In a 94-member co-op where everyone knows whose phone was snatched the week he called the strike ballot, the log now durably links a nominally anonymous credential event to Tomás the person — and to his guardians. §10's 'membership stays private; the count is public' holds arithmetically but not socially at N=94; a hostile platform reading the public log learns exactly when the strike's organiser was digitally disarmed."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "Schema gap: the log-entry type enum includes credential.revoked and credential.authority-key-rotated but no type for credential issuance or re-issuance, even though §10 makes every credential mint a logged public event and §3.1's recovery flow depends on logging re-issuance. The co-op had to invent x-credential.reissued, which every independent client must then special-case — a small but real interoperability crack in the one layer (§6's waist) the design says must be universal."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.1",
+   "observation": "The SLIP-39 continuity caveat the document flags is, in the theft case, a genuine fork with no good branch: restoring Shamir shards of the original secret would preserve pseudonym continuity but resurrect the exact key sitting in the thief's enclave, while guardian-co-signed re-issuance is safe but triggers the discontinuity of finding 1. Theft (key compromised) and loss (key destroyed) need different recovery semantics, and the architecture currently describes one mechanism for both."
+  },
+  {
+   "severity": "note",
+   "observation": "What the protocol did not touch, and never claimed to: the phone itself. Tomás's blocked bank app, his frozen week of Zip earnings, his photos, the €300 replacement cost, and the police report on Rua da Prata are all outside the kernel. It protected his voice in one ballot; his livelihood was rescued by a sister, a union rep, and a hardship fund — the same social fabric the guardianship design quietly presumes and cannot substitute for."
+  }
+ ]
+}

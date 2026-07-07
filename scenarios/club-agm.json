@@ -1,0 +1,231 @@
+{
+ "id": "club-agm",
+ "title": "The Shed Count Ends: Sixty Plots, One Link, and the Vote Derek Didn't Get to Touch",
+ "setting": "Heeley Bank Allotment Society sits on a south-facing slope above the Meers Brook in Sheffield: sixty plots, a clubhouse that smells of creosote, and a WhatsApp group with seventy-one numbers in it. For nine years the treasurer, Derek Wainwright, has run the AGM elections the way his predecessor did — paper slips folded into a biscuit tin, carried to the tool shed, counted by Derek alone while everyone else queued for tea. Nobody minded while the votes were about bark chippings. This year the vote is about Derek's own succession, and it has split the society in two: Sandra Okafor, who wants the accounts published and the water-rate surplus investigated, against Keith Bramall, Derek's ally of twenty years. Sandra's camp says the tin has been cooked for years. Keith's camp says Sandra's lot will cry fraud whatever the tin says. Both sides, for once, agree on something: neither will accept a number that comes out of that shed.\n\nInto the deadlock steps Priya Mistry, whose mother Nalini has held plot 31 since 2009. Priya writes payment systems for a living and has watched the WhatsApp group tear itself apart from her mother's phone screen. At the July committee meeting she makes an offer: a vote run over a link dropped into the group chat — every member casts on their own phone, the encrypted ballots are published where anyone can check them, and the count is a mathematical proof rather than Derek's word. The committee, exhausted, agrees to try it, with conditions that immediately expose the seams: who exactly gets a vote, when seventy-one phone numbers share sixty plots? What about Ernest Toft, eighty-one, plot 12 since 1987, who owns no smartphone and has said, flatly, that he wouldn't trust \"any of it\" — the shed, the phones, or Priya's link?\n\nWhat follows is a real test of the protocol's smallest advertised deployment: a Form C club vote where the electorate is a chat roster, the stakes are one society's money and nine years of grudges, and the adversary is not a hostile state but a man with admin rights on the group and a reputation to protect.",
+ "threats": [
+  "T2",
+  "T3",
+  "T9"
+ ],
+ "doc_refs": [
+  "§2",
+  "§3.1",
+  "§3.2",
+  "§3.4",
+  "§4",
+  "§6",
+  "§10",
+  "§13",
+  "§15",
+  "T2",
+  "T3",
+  "T4",
+  "T9"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:heeley-bank-allotments.example",
+   "name": "Heeley Bank Allotment Society, Sheffield",
+   "parent": "did:web:sheffield-allotment-federation.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "platform-account",
+   "issuer": "whatsapp:group-roster (snapshot 2026-07-03, cross-checked against the paper plot register)",
+   "unlinkable": false,
+   "sybil_resistance": "weak",
+   "eligibility_rules": "plot-register/2026 + whatsapp-roster-snapshot/2026-07-03: one vote per named plot-holder"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": false,
+   "cast_or_audit": true,
+   "paper_channel": false,
+   "trustee_quorum": "2-of-3: Priya Mistry (setup volunteer), federation secretary, Meersbrook society secretary"
+  },
+  "transparency_log": {
+   "log_id": "did:web:heeley-bank-allotments.example",
+   "witnesses": [
+    "did:web:sheffield-allotment-federation.example",
+    "did:web:meersbrook-allotments.example"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:heeley-bank-allotments.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The committee (Derek presiding, barely)",
+   "verb": "offstage",
+   "narrative": "The July committee meeting nearly ends the society. Sandra's camp refuses the biscuit tin; Keith's camp refuses a show of hands 'so the losers can be photographed'. Priya offers the kernel vote. Derek objects that 'a computer count is just a count you can't see' — and Priya's answer, which lands, is that the shed count is a count nobody can see. The committee votes 7-2 to try it for the treasurer election only. Nothing about this step touches the protocol; it is pure, necessary politics."
+  },
+  {
+   "actor": "Priya Mistry",
+   "verb": "read",
+   "narrative": "Priya publishes the society's conformance manifest as the first entry in a brand-new transparency log, witnessed by the Sheffield federation and the neighbouring Meersbrook society, whose secretaries agree to co-sign log heads. The manifest is deliberately unflattering: personhood is a WhatsApp roster (sybil-weak, linkable), ballots are verifiable but not receipt-free, there is no rights guard and no paper channel. When members tap the link, the client renders the subtractions before anything else: 'This community cannot stop duplicate members, cannot hide who participated from the group admins, and offers no paper vote.' Sandra's camp finds the honesty reassuring; Derek reads it aloud as evidence the whole thing is flimsy. Both readings are correct, which is the point of the manifest.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "manifest.published",
+    "community": "did:web:heeley-bank-allotments.example",
+    "timestamp": "2026-07-01T19:42:00Z",
+    "body": {
+     "manifest_digest": "sha256:6b1e0d3a9c2f4e5b7a8d1c0e3f6a9b2d5c8e1f4a7b0d3c6e9f2a5b8d1c4e7f0a",
+     "note": "First manifest. Declares: platform-account personhood (sybil-weak), verifiable but not receipt-free ballots, no rights guard, no paper channel."
+    },
+    "sig": {
+     "key_id": "did:web:heeley-bank-allotments.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Derek Wainwright, WhatsApp group admin",
+   "verb": "offstage",
+   "narrative": "The seam the protocol cannot close by itself: seventy-one numbers, sixty plots. The committee sets the eligibility rule — one vote per named plot-holder, WhatsApp number cross-checked against the paper plot register — with a roster snapshot on 3 July. On 1 July, Derek quietly adds three new numbers to the group ('shed volunteers, been meaning to add them for months'). Because Priya hashes the roster into the snapshot and posts the diff to the group, the additions are visible to everyone within the hour. Two of the three are not in the plot register and are struck from the eligibility list by the committee; the third is a genuine co-holder of plot 44 and stays. The sybil defence here is not cryptography — it is a hash, a diff, and forty people who know who actually digs which plot."
+  },
+  {
+   "actor": "Every phone in the group",
+   "verb": "read",
+   "narrative": "On 4 July the decision opens and the link lands in the chat between a photo of someone's marrow and a complaint about the communal hosepipe. Each member's client fetches the decision.opened entry: the question hash, the frozen roster digest, sixty eligible voters, four days to argue and three more to vote. Both candidates' statements ride along as decision metadata. WhatsApp itself carries only a URL and a preview card — the platform can see who is in the group and who taps, but there is nothing in the payload for it to alter that any client would accept.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:heeley-bank-allotments.example",
+    "timestamp": "2026-07-04T18:00:00Z",
+    "body": {
+     "decision_id": "2026-agm-treasurer",
+     "question_hash": "sha256:2f8c1b7a4d0e9c3b6f5a2e1d8c7b0a9f3e6d5c4b1a2f3e4d5c6b7a8f9e0d1c2b",
+     "eligibility_rules": "plot-register/2026 + whatsapp-roster-snapshot/2026-07-03: one vote per named plot-holder",
+     "roster_snapshot_digest": "sha256:9a4e7c1f0b3d6e9a2c5f8b1e4d7a0c3f6b9e2d5a8c1f4b7e0d3a6c9f2b5e8d1a",
+     "eligible_count": 60,
+     "window": {
+      "deliberation_ends": "2026-07-08T18:00:00Z",
+      "cast_ends": "2026-07-11T18:00:00Z"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:heeley-bank-allotments.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Maureen Hobson, plot 7",
+   "verb": "prove",
+   "narrative": "Maureen taps the link on the number 38 bus. Her client derives an eligibility credential from her roster entry and mints a pseudonym valid for this decision only — she can vote once and the tally will prove no one voted twice. But the proof is only as good as the roster beneath it: 'eligible person' here means 'phone number Derek's group contained on 3 July, matched to the plot book'. The manifest said exactly this. Maureen does not read manifests; she trusts Priya, which is the actual trust chain for most of the sixty."
+  },
+  {
+   "actor": "Maureen Hobson",
+   "verb": "cast",
+   "narrative": "She votes for Sandra somewhere around the Broadfield Road stop. Her phone encrypts the choice before anything leaves the device; what travels is ciphertext, and what she keeps is a short tracker code that will let her confirm her ballot is in the published set — without being able to show anyone which way it went. WhatsApp never sees the ballot at all; casting happens against the log endpoint, not through the chat."
+  },
+  {
+   "actor": "Jordan Bramall, Keith's nephew, plot 52, expecting fraud",
+   "verb": "challenge",
+   "narrative": "Jordan is certain the app is rigged for Sandra — Priya's mum is on Sandra's side, after all. So he uses the challenge the protocol builds in: he fills in a vote for Keith, then, instead of casting, demands the app open that encrypted ballot and prove it encrypted what he chose. It does. He repeats it twice more, once on his own phone and once on his girlfriend's, using a differently-built client he found through the protocol spec — no one needed permission to build it, which is what keeps Priya's copy honest. Satisfied the machinery can't tell a test from a real ballot, he casts fresh, for Keith."
+  },
+  {
+   "actor": "Ernest Toft, plot 12, no smartphone, trusts nothing with a screen",
+   "verb": "offstage",
+   "narrative": "The protocol's worst hour. The architecture promises a paper channel in the same protocol with the same verifiability — but this deployment declared paper_channel: false, honestly, because nobody in a sixty-plot society is pre-printing encrypted ballots. What Ernest gets instead is improvised: he writes 'OKAFOR' on a slip in the clubhouse, and two tellers — one from each camp — cast it together on a spare phone while he watches. Ernest can verify nothing himself. He has traded trusting one man in a shed for trusting two people at a table. It is a smaller, witnessed trust, and it is still trust in people, which is precisely what he was promised he would no longer need. The kernel did not reach Ernest; the society's decency did."
+  },
+  {
+   "actor": "The log",
+   "verb": "read",
+   "narrative": "Casting closes on 11 July: fifty-four ballots from sixty eligible, the set sealed by a published digest. In the group chat, someone notes that Meta now knows more about the society's civic life than it did a fortnight ago — who tapped a voting link, when, from a group named 'Heeley Bank Allotments OFFICIAL'. It saw no votes and could forge none, but the participation metadata is a real, unpriced cost of holding your electorate inside someone else's platform.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.closed",
+    "community": "did:web:heeley-bank-allotments.example",
+    "timestamp": "2026-07-11T18:00:04Z",
+    "body": {
+     "decision_id": "2026-agm-treasurer",
+     "ballots_accepted": 54,
+     "ballot_set_digest": "sha256:c3d6e9f2a5b8d1c4e7f0a6b1e0d3a9c2f4e5b7a8d1c0e3f6a9b2d5c8e1f4a7b0"
+    },
+    "sig": {
+     "key_id": "did:web:heeley-bank-allotments.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Jordan Bramall, and anyone else who cares to",
+   "verb": "verify",
+   "narrative": "Two trustees — the federation secretary and the Meersbrook secretary, deliberately not Priya — combine their key shares and publish the tally with its proof: Sandra Okafor 37, Keith Bramall 17. Jordan re-runs the verification on the independent client, fully expecting to catch the fix. The homomorphic tally over the published ciphertexts matches the announced total; his tracker code is in the set; fifty-four unique pseudonyms, none duplicated, all from the frozen roster. He posts a single grudging message to the group: 'checks out.' Keith concedes the same evening. That message — the loser's own verifier agreeing — is the thing the biscuit tin could never produce.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:heeley-bank-allotments.example",
+    "timestamp": "2026-07-11T20:15:00Z",
+    "body": {
+     "decision_id": "2026-agm-treasurer",
+     "ballots_accepted": 54,
+     "result": {
+      "sandra-okafor": 37,
+      "keith-bramall": 17
+     },
+     "tally_proof_digest": "sha256:e1f4a7b0d3c6e9f2a5b8d1c4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4",
+     "trustees_present": "2-of-3: federation secretary, Meersbrook society secretary",
+     "verification": "any conforming verifier may recompute the homomorphic tally from the published encrypted ballot set"
+    },
+    "sig": {
+     "key_id": "did:web:heeley-bank-allotments.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "The society, afterwards",
+   "verb": "offstage",
+   "narrative": "The AGM itself is almost dull. Derek hands over the accounts folder with the air of a man wronged by mathematics. Screenshots saying 'I voted Sandra 🌻' had circulated in the pub all week — the manifest declared the vote not receipt-free, and at these stakes the screenshots are camaraderie, not coercion, but everyone who read the manifest knows the same pattern at higher stakes would be a weapon. Ernest tells his daughter he 'supposes it was fair', on the grounds that Jordan Bramall of all people said so. The log head, co-signed by two neighbouring societies, means that in five years no one — not Derek, not Sandra, not Priya — can quietly say the count was other than it was."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "strain",
+   "doc_ref": "T3",
+   "observation": "Sybil resistance at this lattice point is social, not cryptographic — and the protocol's honest 'weak' label does not make it strong. Derek's roster-packing was caught only because Priya hashed and diffed the roster snapshot and forty members knew the plot register; an admin who packed the group three months earlier, or a society without a paper register to cross-check, has no defence at all. The manifest makes the weakness legible (§6, §10), which is genuinely more than the shed offered, but legibility is the whole of what T3 gets here: the kernel converted a hidden electorate into a disputable one, and left the dispute to humans."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T9",
+   "observation": "The protocol did not reach Ernest Toft, and this is the finding the document's §4 promise ('paper, kiosk, and assisted channels in the same protocol with the same verifiability — not a legacy annex') must own: at the Form C club scale, the paper channel is economically fictional, the deployment honestly declared paper_channel: false, and the member who distrusts all computers ended up trusting two tellers at a table — the shed-count trust model, merely halved and witnessed. Ernest could verify nothing himself; his eventual acceptance routed through Jordan's verification, i.e. through a person. The kernel shrank and witnessed the trust he had to extend; it did not remove it. Equal participation for the computer-distrusting member is unsolved here, exactly as §12's digital-divide admission predicts."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T2",
+   "observation": "Form C's claim 'the ballot box never enters the chat' held — WhatsApp carried only links and previews, saw no ballot, and could forge nothing any client would accept, and the independent second client (Jordan's) is exactly the T2 answer working. But the electorate DID enter the chat: personhood was issued off the group roster, whose admins (including Derek, a candidate's patron) control membership, and Meta observed the full participation metadata — who tapped a voting link, when, in which named community. T2 is answered for the tally, only half-answered for the roll, and not answered at all for platform surveillance of participation (a T6-shaped cost the manifest's unlinkable:false at least declares)."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T4",
+   "observation": "Not solved, by declaration: the vote was not receipt-free, and 'I voted Sandra' screenshots circulated freely. At allotment stakes this is texture, not attack, but the walkthrough shows how naturally the receipt habit forms — the same community running its next, nastier vote (evicting a plot-holder, say) on the same manifest would hand every household's dominant member a proof-demand mechanism. The lattice upgrade path (§6) exists; nothing in the protocol forces a community to notice when its stakes have outgrown its manifest."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "The witness recursion bottoms out fast at club scale: two neighbouring-society secretaries co-sign the log head, there are no anchors, and the trustee quorum includes the person who built the deployment. A colluding federation could rewrite this history for the cost of two friendships. The absurd cost/benefit ratio protects Heeley Bank, not the mechanism — and the manifest's empty anchors field states this plainly, which is the design working as specified: less than a guarantee, more than the status quo."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§15",
+   "observation": "What the protocol unambiguously delivered — the wedge working as §15 predicts: the losing camp's own designated sceptic verified the tally on an independently built client and conceded in public, an outcome nine years of shed counts never once produced. The load-bearing human fact is that legitimacy arrived via Jordan's grudging 'checks out', not via cryptography directly: the proofs convinced the one distrustful person the losers trusted, and he convinced the rest. The kernel's product, here, was a credible sceptic."
+  }
+ ]
+}

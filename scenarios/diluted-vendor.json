@@ -1,0 +1,220 @@
+{
+ "id": "diluted-vendor",
+ "title": "The Kernel That Wasn't: How Wuppertal Bought the Brand and the Fine Print Fought Back",
+ "setting": "The demo in the Barmen town hall lasted forty minutes, and by the end of it half the committee was already sold. Jonas Beck of CivicFlow GmbH, a Berlin vendor with a stand at every smart-city fair, walked Wuppertal's digitalisation committee through a participation platform that was genuinely lovely: three taps to vote on the Nordstadt participatory budget, a live dashboard, accessibility badges, and — the closer — 'full Civic Kernel compatibility'. The contract was signed in April. In May, press office head Petra Sandmann sent out the release the mayor had asked for: 'Wuppertal now runs on the Civic Kernel.' The local paper printed it almost verbatim.\n\nWhat the press release did not say, the conformance manifest could not avoid saying. The kernel's manifest schema forces every deployment to declare all four services true or false and to detail what it actually built: CivicFlow's ballots are mathematically verifiable but not receipt-free — the app emails you a confirmation showing how you voted. Eligibility is a live lookup against the city's resident register, so the city gets a linkable record of who participated in what. The transparency log has exactly one witness: CivicFlow itself, signing off on its own honesty. No rights guard. No paper channel. No cast-or-audit. The manifest is signed with CivicFlow's own company key, not the city's.\n\nFor most of Wuppertal's 28,000 budget voters, none of this surfaced. For Meryem Kaya, a care-home worker in Oberbarmen whose shift coordinator asked the whole team to forward their voting confirmations 'for the team tally', the missing receipt-freeness was not fine print. And for Leyla Arslan, a reporter who had learned to run the kernel's reference verifier client, the gap between the press release and the manifest was a story — the only kind of story a machine-readable declaration makes possible.",
+ "threats": [
+  "T10",
+  "T2"
+ ],
+ "doc_refs": [
+  "§1",
+  "§3.2",
+  "§3.4",
+  "§4",
+  "§6",
+  "§8",
+  "§12",
+  "§13",
+  "T2",
+  "T4",
+  "T10"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:beteiligung.wuppertal.example",
+   "name": "Stadt Wuppertal Bürgerbeteiligung (operated by CivicFlow GmbH)",
+   "parent": "did:web:wuppertal.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "external-issuer",
+   "issuer": "Stadt Wuppertal Einwohnermelderegister, queried per-decision via CivicFlow ID-Check",
+   "unlinkable": false,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "civicflow-eligibility/2026.2"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": false,
+   "cast_or_audit": false,
+   "paper_channel": false,
+   "trustee_quorum": "2-of-2: CivicFlow GmbH operations key + Stadt Wuppertal IT department"
+  },
+  "transparency_log": {
+   "log_id": "https://log.civicflow.example/wuppertal",
+   "witnesses": [
+    "did:web:civicflow.example"
+   ],
+   "anchors": []
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "cast ballot (Bürgerbudget)",
+    "steps": 3,
+    "fields": 2,
+    "median_seconds": 92,
+    "abandonment_rate": 0.04
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:civicflow.example#manifest-2026",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Jonas Beck (CivicFlow GmbH) and Petra Sandmann (city press office)",
+   "verb": "offstage",
+   "narrative": "The contract is signed in the Barmen town hall; procurement scores CivicFlow highest on usability and price. Sandmann's press release goes out: 'Wuppertal now runs on the Civic Kernel.' Nothing in the kernel can validate a press release — this sentence lives entirely outside the protocol, which is exactly where the dilution attack starts."
+  },
+  {
+   "actor": "Dr. Anne Roth, CivicFlow compliance engineer",
+   "verb": "offstage",
+   "narrative": "To interoperate with kernel clients at all, CivicFlow must publish a signed conformance manifest into its transparency log. Roth fills it in and discovers the schema refuses silence: all four services must be declared true or false, and every claimed service drags in its detail block. There is no way to omit receipt_free, no way to leave unlinkable blank, no way to hide that the witness list has one name on it — her employer's. She signs with the company key and appends the entry. The polished product is now, in one kilobyte, machine-readably unpolished.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "manifest.published",
+    "community": "did:web:beteiligung.wuppertal.example",
+    "timestamp": "2026-05-18T09:00:00Z",
+    "body": {
+     "manifest_digest": "sha256:7d1f3a9c2b8e4d6f0a5c1e9b3d7f2a8c4e6b0d9f1a3c5e7b2d4f6a8c0e1b3d5f",
+     "manifest_url": "https://beteiligung.wuppertal.example/.well-known/civic-kernel/manifest.json"
+    },
+    "sig": {
+     "key_id": "did:web:civicflow.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJMb2dTaWdBTm90UmVhbENyeXB0bw"
+    }
+   }
+  },
+  {
+   "actor": "Wuppertal city council (via the CivicFlow platform)",
+   "verb": "offstage",
+   "narrative": "The council opens the Nordstadt participatory budget: 1.2 million euros between playground renewal and street lighting. The decision.opened entry lands in the log with a three-week window — the platform does this part exactly as the kernel specifies, and the decision metadata (plain-language summary, arguments for and against) is genuinely good.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:beteiligung.wuppertal.example",
+    "timestamp": "2026-06-01T08:00:00Z",
+    "body": {
+     "decision_id": "2026-buergerbudget-nordstadt",
+     "question_hash": "sha256:3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f2a9f2b7c1a0d4e8f",
+     "eligibility_rules": "civicflow-eligibility/2026.2",
+     "window": {
+      "deliberation_ends": "2026-06-08T20:00:00Z",
+      "cast_ends": "2026-06-21T20:00:00Z"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:civicflow.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJMb2dTaWdCTm90UmVhbENyeXB0bw"
+    }
+   }
+  },
+  {
+   "actor": "Meryem Kaya, care-home worker, Oberbarmen",
+   "verb": "prove",
+   "narrative": "Meryem logs in with her city service account. Eligibility is a live lookup against the resident register — the manifest's 'external-issuer, unlinkable: false' in action. It works instantly, and it means the city now holds a timestamped, identity-linked record that Meryem Kaya participated in this decision. No pseudonym, no zero-knowledge proof; the kernel's reference personhood design (§3.1) was the part CivicFlow found cheapest to skip."
+  },
+  {
+   "actor": "Meryem Kaya",
+   "verb": "cast",
+   "narrative": "She votes for the playgrounds in 92 seconds — the interaction_cost line in the manifest is honest; the UX is superb. Then the app emails her a 'Stimmbestätigung' listing her choices. Because receipt_free is false, that confirmation is a receipt. That evening her shift coordinator, Frau Brandt, posts in the team chat: everyone forward your confirmations, we want lighting on our street and I'd like to see the team pulled together. Meryem forwards hers. The manifest disclosed this exact vulnerability three weeks earlier; disclosure did not stand between her and her boss."
+  },
+  {
+   "actor": "Marek Nowak, retired network engineer, Elberfeld",
+   "verb": "verify",
+   "narrative": "Marek installs the open-source reference verifier client (§13, Form B) after reading about it in a forum. It fetches the manifest from the log and renders the degradation banner the schema was built for: 'Ballots verifiable — NOT receipt-free. Personhood: linkable to your identity (municipal register). Transparency log: 1 witness — the operator itself. No independent anchors. Rights guard: absent. No paper channel.' Five red lines, on his own device, that no press release can overwrite. The manifest that lies would be a consistency-proof failure; this one doesn't lie — it confesses."
+  },
+  {
+   "actor": "Marek Nowak",
+   "verb": "challenge",
+   "narrative": "Marek tries the Benaloh challenge his client offers — force the device to open an encrypted ballot and prove it encrypted what was asked (§3.2, T5). The button is greyed out; the tooltip cites the manifest line cast_or_audit: false. The absence of a verb is itself legible: he cannot audit, and he can see precisely why he cannot, and whose declaration says so."
+  },
+  {
+   "actor": "CivicFlow GmbH (log operator)",
+   "verb": "offstage",
+   "narrative": "The decision closes; 28,417 ballots. CivicFlow publishes the homomorphic tally proof to its log. Credit where due: the cryptography they did implement is real — the encrypted ballots combine to the announced total and anyone can check the arithmetic.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:beteiligung.wuppertal.example",
+    "timestamp": "2026-06-22T14:00:00Z",
+    "body": {
+     "decision_id": "2026-buergerbudget-nordstadt",
+     "ballots_counted": 28417,
+     "result_digest": "sha256:9c4e6b0d9f1a3c5e7b2d4f6a8c0e1b3d5f7d1f3a9c2b8e4d6f0a5c1e9b3d7f2a",
+     "tally_proof_url": "https://log.civicflow.example/wuppertal/proofs/2026-buergerbudget-nordstadt.json",
+     "trustees_present": "2-of-2"
+    },
+    "sig": {
+     "key_id": "did:web:civicflow.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJMb2dTaWdDTm90UmVhbENyeXB0bw"
+    }
+   }
+  },
+  {
+   "actor": "Marek Nowak",
+   "verb": "verify",
+   "narrative": "His client verifies the tally proof: the math passes. Then it appends the caveat the manifest forces: log consistency is attested by a single witness that is the operator — a forked log showing different histories to different citizens would be undetectable until an independent witness or anchor exists (§3.4, T8). 'Verifiable' is true and weaker than it sounds, and his phone says both things at once."
+  },
+  {
+   "actor": "Leyla Arslan, Westdeutsche Zeitung",
+   "verb": "read",
+   "narrative": "Leyla pulls the manifest from the log and diffs it against the reference profile with the kernel's comparison tooling — a two-minute operation, because both sides are machine-readable. Her story runs the press release and the manifest side by side: 'runs on the Civic Kernel' against services: rights_guard: false, receipt_free: false, witnesses: [civicflow]. She doesn't need a leaked memo or a whistleblower; the vendor's own signed log is the source, and any reader's phone can confirm her quotation of it. This is the anti-dilution mechanism working exactly as §6 designed it: the weakened variant is free to exist, but its own log testifies to what it subtracted."
+  },
+  {
+   "actor": "The city, the vendor, and everyone else",
+   "verb": "offstage",
+   "narrative": "Fallout, honestly sized. The press office quietly rewords to 'kernel-compatible participation profile'. The council's procurement review attaches Leyla's manifest diff, and the renewal contract now drafts in two independent witnesses, checkpoint anchoring, and a receipt-freeness roadmap — visible comparison creating lattice pressure, §6's wager paying off. But: roughly 600 of 28,417 voters ever opened a verifier client; the app keeps its 4.7-star rating; Frau Brandt's chat still holds fourteen forwarded receipts, including Meryem's; and the linkable participation records from June sit in the register logs indefinitely. The protocol made the dilution legible. It could not make anyone look, and it could not un-coerce a vote already surrendered."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "strain",
+   "doc_ref": "§6 / T10",
+   "observation": "The manifest did its job as the anti-dilution waist: the schema's forced booleans and required detail blocks made CivicFlow's subtractions machine-readable, and a journalist turned that into accountability in an afternoon. But the mechanism only binds artifacts, not marketing — the press release 'we now run the Civic Kernel' is un-schema'd speech, and it reached roughly fifty times more residents than the manifest ever did. Legibility converted the lie from unfalsifiable to checkable; it did not convert it to unsaid."
+  },
+  {
+   "severity": "break",
+   "doc_ref": "§3.2 / T4",
+   "observation": "For Meryem the protocol broke, and the manifest's honesty is no consolation: receipt_free: false plus an emailed confirmation gave her shift coordinator a working coercion instrument, and a declared degradation coerces exactly as effectively as a hidden one. The kernel does not solve harm inside a community that legitimately subscribed low on the lattice — §6 says so itself ('less than a guarantee, more than the status quo'). The manifest prices the subtraction; it does not protect the person standing under it."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.4 / T8",
+   "observation": "A single self-witnessed log makes 'verifiable' technically true and practically hollow: tally arithmetic checks out, but the operator retains the unilateral ability to fork history or show split views, detectable by no one. The manifest schema permits witnesses: [operator] and anchors: [] — it makes the weakness declarable, but a citizen must know what 'witnesses: 1' implies to feel the cold. The reference client rendered it; the schema itself imposes no floor."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§4 / §13 Form B",
+   "observation": "The 'millions of phones as a passive audit fleet' argument is aspirational at this adoption level: about 600 of 28,417 participants ran a verifier client. Legibility was load-bearing only through an intermediary — one journalist who knew the tooling. The protocol's honest dependency, named by the brief and confirmed here: manifests protect a population only via the fraction that checks, plus the press that amplifies them. Below some literacy threshold, T10 mostly succeeds anyway."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T2",
+   "observation": "The manifest and every log entry are signed by did:web:civicflow.example keys, not the city's — the vendor holds the community's voice at the waist itself. The schema validates this happily (key_id is a free string), so vendor capture of the declaration channel is legible only to someone who inspects key_id. A reference-client heuristic ('community identity and signing authority differ') would surface it; today nothing does."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6 / §5",
+   "observation": "The lattice's evolutionary mechanism showed a real, if modest, pull: once the diff was public, contract-renewal pressure moved the deployment toward independent witnesses, anchoring, and a receipt-freeness roadmap. Dilution became a negotiating position instead of a fait accompli — which is the precise, limited claim §6 makes, and it held."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.1 / T6",
+   "observation": "Not solved and worth naming: the linkable register lookups from the June decision are now permanent state — the city holds identity-linked participation records the kernel's reference profile exists to prevent. Moving up the lattice later fixes future decisions; nothing in the protocol can unlink the past."
+  }
+ ]
+}

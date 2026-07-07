@@ -1,0 +1,267 @@
+{
+  "$comment": "Seed corpus, not a waist artifact. Grounds the rights-guard's abstract '30 UDHR invariants' (the integers in a manifest's rights_guard.invariants) in real UK law: each UDHR article mapped to its European Convention right and the Human Rights Act 1998 provision that domesticates it. Legislation verified via the legislation.gov.uk / Lex API (HRA 1998 = ukpga/1998/42, retrieved 2026-07; Act status 'revised', valid 2026-04-06). HONEST FINDING surfaced by building this: the HRA/ECHR domesticates the CIVIL-POLITICAL rights but not the socio-economic ones — the UDHR articles on social security, work, standard of living and culture (22-27, bar the education article 26) have NO Convention or HRA counterpart, and neither do movement/asylum/nationality (13-15). 20 of 30 articles have some domestic legal backing, 10 have none — and 3 of the 20 (articles 1 dignity, 6 recognition-before-law, 8 effective-remedy) are backed only indirectly/structurally, with no single Convention article to quote, so they carry no retrieved text. Articles 28-29 are among the unbacked (programmatic). So the UK, expressed on the kernel's UDHR lattice (§6), sits at a partial point by law, not by choice. That is exactly the kind of subtraction a §6 conformance manifest is built to declare.",
+  "meta": {
+    "code": "uk",
+    "name": "United Kingdom",
+    "instrument": {
+      "title": "Human Rights Act 1998",
+      "id": "ukpga/1998/42",
+      "uri": "https://www.legislation.gov.uk/ukpga/1998/42",
+      "retrieved_via": "legislation.gov.uk / Lex API"
+    },
+    "remedy": "declaration",
+    "remedy_note": "The HRA gives courts only a s.4 DECLARATION OF INCOMPATIBILITY: the offending law is flagged but stays in force, and Parliament — sovereign — may proceed regardless. Courts cannot strike primary legislation, and no part of the constitution is unamendable. The compatibility gate (s.19) runs before Second Reading, but it too only reports; it does not block.",
+    "coverage": {
+      "backed": 17,
+      "structural": 3,
+      "none": 10
+    },
+    "proto_rights_guard": {
+      "provision": "HRA 1998 s.19 — Statements of compatibility",
+      "uri": "https://www.legislation.gov.uk/ukpga/1998/42/section/19",
+      "note": "A Minister in charge of a Bill must, BEFORE Second Reading, state whether in their view the Bill is compatible with the Convention rights (or that the government wishes to proceed regardless). This is a real, shipped, statutory PROTO-RIGHTS-GUARD: a compatibility check gated ahead of the decision — SVC-3 (§3.3) as legislation already practised, minus the machine-checkability. s.4 (declaration of incompatibility) is its judicial-review escalation — courts flag, never strike, exactly the guard's 'escalate, never veto' posture."
+    }
+  },
+  "invariants": [
+    {
+      "invariant": 1,
+      "udhr": "Art 1 — free and equal in dignity and rights",
+      "right": "(foundational; expressed through Art 14)",
+      "citation": "Sch. 1 Art 14",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 2,
+      "udhr": "Art 2 — non-discrimination",
+      "right": "ECHR Art 14 — prohibition of discrimination",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 14",
+      "status": "backed",
+      "text": "Article 14 Prohibition of discrimination The enjoyment of the rights and freedoms set forth in this Convention shall be secured without discrimination on any ground such as sex, race, colour, language, religion, political or other opinion, national or social origin, association with a national minor"
+    },
+    {
+      "invariant": 3,
+      "udhr": "Art 3 — life, liberty, security",
+      "right": "ECHR Art 2 (life) + Art 5 (liberty & security)",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Arts 2, 5",
+      "status": "backed",
+      "text": "Article 2 Right to life 1) Everyone’s right to life shall be protected by law. No one shall be deprived of his life intentionally save in the execution of a sentence of a court following his conviction of a crime for which this penalty is provided by law."
+    },
+    {
+      "invariant": 4,
+      "udhr": "Art 4 — no slavery",
+      "right": "ECHR Art 4 — prohibition of slavery and forced labour",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 4",
+      "status": "backed",
+      "text": "Article 4 Prohibition of slavery and forced labour 1) No one shall be held in slavery or servitude. 2) No one shall be required to perform forced or compulsory labour."
+    },
+    {
+      "invariant": 5,
+      "udhr": "Art 5 — no torture",
+      "right": "ECHR Art 3 — prohibition of torture",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 3",
+      "status": "backed",
+      "text": "Article 3 Prohibition of torture No one shall be subjected to torture or to inhuman or degrading treatment or punishment."
+    },
+    {
+      "invariant": 6,
+      "udhr": "Art 6 — recognition before the law",
+      "right": "(implicit; via Art 6 fair trial)",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 6",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 7,
+      "udhr": "Art 7 — equal protection of the law",
+      "right": "ECHR Art 14 — prohibition of discrimination",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 14",
+      "status": "backed",
+      "text": "Article 14 Prohibition of discrimination The enjoyment of the rights and freedoms set forth in this Convention shall be secured without discrimination on any ground such as sex, race, colour, language, religion, political or other opinion, national or social origin, association with a national minor"
+    },
+    {
+      "invariant": 8,
+      "udhr": "Art 8 — effective remedy",
+      "right": "ECHR Art 13 (given effect by HRA ss.7-8 remedies)",
+      "citation": "ukpga/1998/42 s.8",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 9,
+      "udhr": "Art 9 — no arbitrary arrest",
+      "right": "ECHR Art 5 — right to liberty and security",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 5",
+      "status": "backed",
+      "text": "Article 5 Right to liberty and security 1) Everyone has the right to liberty and security of person."
+    },
+    {
+      "invariant": 10,
+      "udhr": "Art 10 — fair and public hearing",
+      "right": "ECHR Art 6 — right to a fair trial",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 6",
+      "status": "backed",
+      "text": "Article 6 Right to a fair trial 1) In the determination of his civil rights and obligations or of any criminal charge against him, everyone is entitled to a fair and public hearing within a reasonable time by an independent and impartial tribunal established by law."
+    },
+    {
+      "invariant": 11,
+      "udhr": "Art 11 — presumption of innocence; no retroactive law",
+      "right": "ECHR Art 6(2) + Art 7 — no punishment without law",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Arts 6, 7",
+      "status": "backed",
+      "text": "Article 7 No punishment without law 1) No one shall be held guilty of any criminal offence on account of any act or omission which did not constitute a criminal offence under national or international law at the time when it was committed."
+    },
+    {
+      "invariant": 12,
+      "udhr": "Art 12 — privacy, family, home, correspondence",
+      "right": "ECHR Art 8 — respect for private and family life",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 8",
+      "status": "backed",
+      "text": "Article 8 Right to respect for private and family life 1) Everyone has the right to respect for his private and family life, his home and his correspondence."
+    },
+    {
+      "invariant": 13,
+      "udhr": "Art 13 — freedom of movement",
+      "right": "ECHR Protocol 4 Art 2 (NOT ratified into HRA by the UK)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 14,
+      "udhr": "Art 14 — asylum",
+      "right": "(no direct Convention right)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 15,
+      "udhr": "Art 15 — nationality",
+      "right": "(no direct Convention right)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 16,
+      "udhr": "Art 16 — marriage and family",
+      "right": "ECHR Art 12 — right to marry",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 12",
+      "status": "backed",
+      "text": "Article 12 Right to marry Men and women of marriageable age have the right to marry and to found a family, according to the national laws governing the exercise of this right."
+    },
+    {
+      "invariant": 17,
+      "udhr": "Art 17 — property",
+      "right": "ECHR Protocol 1 Art 1 — protection of property",
+      "citation": "ukpga/1998/42 Sch. 1 Pt II Art 1",
+      "status": "backed",
+      "text": "Article 1 Protection of property Every natural or legal person is entitled to the peaceful enjoyment of his possessions. No one shall be deprived of his possessions except in the public interest and subject to the conditions provided for by law and by the general principles of international law."
+    },
+    {
+      "invariant": 18,
+      "udhr": "Art 18 — thought, conscience, religion",
+      "right": "ECHR Art 9 — freedom of thought, conscience and religion",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 9",
+      "status": "backed",
+      "text": "Article 9 Freedom of thought, conscience and religion 1) Everyone has the right to freedom of thought, conscience and religion; this right includes freedom to change his religion or belief and freedom, either alone or in community with others and in public or private, to manifest his religion or be"
+    },
+    {
+      "invariant": 19,
+      "udhr": "Art 19 — freedom of expression",
+      "right": "ECHR Art 10 — freedom of expression",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 10; procedural safeguard at s.12",
+      "status": "backed",
+      "text": "Article 10 Freedom of expression 1) Everyone has the right to freedom of expression. This right shall include freedom to hold opinions and to receive and impart information and ideas without interference by public authority and regardless of frontiers."
+    },
+    {
+      "invariant": 20,
+      "udhr": "Art 20 — assembly and association",
+      "right": "ECHR Art 11 — freedom of assembly and association",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 11",
+      "status": "backed",
+      "text": "Article 11 Freedom of assembly and association 1) Everyone has the right to freedom of peaceful assembly and to freedom of association with others, including the right to form and to join trade unions for the protection of his interests."
+    },
+    {
+      "invariant": 21,
+      "udhr": "Art 21 — take part in government; free elections",
+      "right": "ECHR Protocol 1 Art 3 — right to free elections",
+      "citation": "ukpga/1998/42 Sch. 1 Pt II Art 3",
+      "status": "backed",
+      "text": "Article 3 Right to free elections The High Contracting Parties undertake to hold free elections at reasonable intervals by secret ballot, under conditions which will ensure the free expression of the opinion of the people in the choice of the legislature."
+    },
+    {
+      "invariant": 22,
+      "udhr": "Art 22 — social security",
+      "right": "(no Convention right — socio-economic)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 23,
+      "udhr": "Art 23 — work, fair pay, unions",
+      "right": "(association element only, via Art 11; no economic right)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 24,
+      "udhr": "Art 24 — rest and leisure",
+      "right": "(no Convention right — socio-economic)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 25,
+      "udhr": "Art 25 — adequate standard of living, health",
+      "right": "(no Convention right — socio-economic)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 26,
+      "udhr": "Art 26 — education",
+      "right": "ECHR Protocol 1 Art 2 — right to education",
+      "citation": "ukpga/1998/42 Sch. 1 Pt II Art 2",
+      "status": "backed",
+      "text": "Article 2 Right to education No person shall be denied the right to education."
+    },
+    {
+      "invariant": 27,
+      "udhr": "Art 27 — cultural life",
+      "right": "(no Convention right — socio-economic/cultural)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 28,
+      "udhr": "Art 28 — social and international order",
+      "right": "(programmatic; no justiciable Convention right)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 29,
+      "udhr": "Art 29 — duties; limits of rights",
+      "right": "(reflected in the qualified-rights limitation clauses of Arts 8-11)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 30,
+      "udhr": "Art 30 — no destruction of rights",
+      "right": "ECHR Art 17 — prohibition of abuse of rights",
+      "citation": "ukpga/1998/42 Sch. 1 Pt I Art 17",
+      "status": "backed",
+      "text": "Article 17 Prohibition of abuse of rights Nothing in this Convention may be interpreted as implying for any State, group or person any right to engage in any activity or perform any act aimed at the destruction of any of the rights and freedoms set forth herein or at their limitation to a greater ex"
+    }
+  ]
+}

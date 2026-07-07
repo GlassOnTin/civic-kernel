@@ -1,0 +1,284 @@
+{
+ "id": "accountable-warrant",
+ "title": "The Sealed Warrant: Riverton Logs a Secret Wiretap It Cannot Hide — but Still Cannot Fully Trust",
+ "setting": "Detective Inspector Sara Koval has spent four months on Petar Ilic, who owns a shuttered-looking restaurant near the Riverton docks and, Koval believes, a trafficking route running women through the port. A survivor who gives her name only as Mara has made a statement; two more women have gone missing from the same three streets. To reach the handlers upstream of Ilic before the next arrival, Koval needs to listen to his phones. She drafts an application for a thirty-day covert communications intercept. Under the regime she trained in, that application would end its life in a locked cabinet inside her unit, seen by no one outside it, ever.\n\nRiverton is different now. Three years ago the city adopted the civic kernel at close to its full profile — verifiable elections, an unlinkable electoral roll, the rights guard, and, unusually, a coercive-act log: a public, tamper-evident ledger into which every exercise of state force is written the moment it happens. The bargain the city struck was precise. Surveillance can still be secret — a live tap tipped off is a tap wasted, and a leak could cost Mara her life — but its existence cannot. A warrant is logged the instant it issues: the fact of it, the minute of it, the statute behind it, the magistrate who signed it, all in the clear and witnessed. The contents are sealed behind a cryptographic commitment and a date the seal lifts, so the operation runs blind to no one it is watching, while the record of the authority to watch is frozen where no one can quietly delete or backdate it.\n\nTwo things pull against each other over Koval's desk. The operation must stay dark — Ilic must not learn he is heard. And the public must be able to believe the unit is not running unaccountable taps in the dark forever. Dev Anand, a reporter at the Riverton Courier, runs a civic app on his phone that quietly checks the city's log for consistency, and lately he has been counting: the number of sealed intercepts is climbing, and the old paper cabinet gave him no way even to ask why. District Magistrate Elena Fournier holds the constitutional authority to grant Koval's warrant — and the court she sits in holds the key that will, one day, unlock it.\n\nThat key is the whole question. The kernel can make the warrant's existence undeniable and its eventual disclosure verifiable. What it cannot do is make the hand that holds the key honest. Everything that follows works — cleanly, better than the cabinet — right up to the place where it has to trust the court, and there it stops being cryptography and starts being faith.",
+ "threats": [
+  "T6",
+  "T13",
+  "T8",
+  "T1"
+ ],
+ "doc_refs": [
+  "§3.3",
+  "§3.4",
+  "§6",
+  "§8",
+  "§12",
+  "T6",
+  "T13"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:riverton.example",
+   "name": "City of Riverton",
+   "parent": "did:web:riverside-county.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony-biometric-dedup",
+   "issuer": "Riverton municipal registrar",
+   "unlinkable": true,
+   "sybil_resistance": "strong",
+   "eligibility_rules": "riverton-electoral-roll/v7"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-safe-space",
+   "trustee_quorum": "3-of-5: Riverside County Court, Riverton University, Coastal Institute of Technology, two registered opposition parties"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:riverton.example",
+   "witnesses": [
+    "did:web:riverside-county.example",
+    "did:web:riverton-university.example",
+    "did:web:the-riverton-courier.example",
+    "did:web:coastal-civil-liberties.example"
+   ],
+   "anchors": [
+    "anchor:bitcoin-mainnet",
+    "anchor:ethereum-mainnet"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:riverton.example#manifest-7",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "DI Sara Koval",
+   "verb": "offstage",
+   "narrative": "Koval has spent four months on Petar Ilic. Mara has named him; two more women have vanished from the port district. To reach the handlers above Ilic before the next shipment, Koval needs to listen to his phones, so she drafts an application for a thirty-day covert communications intercept. None of this touches the kernel: the investigation, the informants, and the judgement that a tap is justified are human police work the protocol never sees."
+  },
+  {
+   "actor": "Riverton rights guard (SVC-3)",
+   "verb": "cast",
+   "narrative": "The instant the application is filed, the rights guard reads its metadata and trips Article 12 — interference with privacy and correspondence. It cannot approve or deny; it re-routes. The application is pushed off the ordinary administrative path onto the constitutional one — single-magistrate review with an adversarial public-interest advocate appointed — and the escalation itself is written to the log as a rights.classification, with reasons attached, before any warrant exists.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:riverton.example",
+    "timestamp": "2026-05-04T09:15:00Z",
+    "body": {
+     "classification_id": "rc-2026-05-0041",
+     "subject_entry": "coercive-warrant-application:HT-0417",
+     "invariants_tripped": [
+      12
+     ],
+     "reasons": "Application for a 30-day covert communications intercept engages Article 12 (arbitrary interference with privacy and correspondence). Escalated off the ordinary administrative path onto the constitutional/judicial-authorization path: single-magistrate review under the targeted-interception statute, adversarial public-interest advocate appointed, decision and reasons to be logged.",
+     "routed_to": "constitutional-path/judicial-authorization",
+     "eligibility_rules": "riverton-electoral-roll/v7"
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "cmlnaHRzR3VhcmRDbGFzc2lmaWNhdGlvblBsYWNlaG9sZGVy"
+    }
+   }
+  },
+  {
+   "actor": "District Magistrate Elena Fournier",
+   "verb": "offstage",
+   "narrative": "Fournier hears the application under the escalated path. She weighs necessity and proportionality, narrows the intercept to Ilic's two known numbers, and authorises thirty days. This is judgement, not computation — the kernel does not and must not decide whether the tap is warranted. It only insists that the decision, once made, be recorded."
+  },
+  {
+   "actor": "Riverton enforcement log (issuing authority)",
+   "verb": "cast",
+   "narrative": "As the warrant issues, it is written to Riverton's coercive-act log — but sealed. The entry records, in the clear and immediately, that a surveillance act exists, the exact minute it issued, the statute authorising it, that Magistrate Fournier signed it, and an opaque reference to the subject that lives in the police identity domain. The warrant's actual contents — numbers, targets, methods — are withheld behind a hash (sealed_body_digest) and a date the seal auto-lifts. The live operation is not tipped: a reader sees that a tap exists, never whose or what.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:riverton.example",
+    "timestamp": "2026-05-04T14:30:00Z",
+    "body": {
+     "act_class": "surveillance",
+     "authorizing_rule": "did:web:riverton.example/rules/targeted-interception/v4#s12-covert-communications-intercept",
+     "issuing_authority": "District Magistrate Elena Fournier, Riverton District Court",
+     "subject_ref": "riverton-police:enf-id/HT-0417-subjectA",
+     "sealed_until": "2026-09-01T00:00:00Z",
+     "sealed_body_digest": "sha256:3b1f9c2e7a04d5e8f36b2a5c1d7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f",
+     "rights_guard_ref": "rc-2026-05-0041"
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#enforcement-log-1",
+     "alg": "ed25519",
+     "value": "Y29lcmNpdmVBY3RTZWFsZWRXYXJyYW50UGxhY2Vob2xkZXI"
+    }
+   }
+  },
+  {
+   "actor": "Independent witnesses (university, county, newspaper)",
+   "verb": "verify",
+   "narrative": "Within the hour, Riverton University, the county, and the Courier co-sign the new log head. From this point the entry's existence and its 14:30 timestamp are tamper-evident: no one, the police included, can later delete it or claim it issued on a different day."
+  },
+  {
+   "actor": "Anchor process (log-head checkpoint)",
+   "verb": "cast",
+   "narrative": "That evening the log head and manifest digest are checkpointed to two permissionless chains. This is the property that matters most while the warrant is still secret: even total collusion of Riverton's own witnesses could no longer backdate or manufacture this warrant, because a hash committing to its existence is now frozen in ledgers no local coalition controls. A tap run without a warrant can no longer be papered over with one invented afterwards.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "anchor.checkpoint",
+    "community": "did:web:riverton.example",
+    "timestamp": "2026-05-04T18:00:00Z",
+    "body": {
+     "log_id": "did:web:riverton.example",
+     "tree_size": 48214,
+     "log_head": "sha256:7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f2a3b1f9c2e7a04d5e8f36b2a5c",
+     "manifest_digest": "sha256:1b2c3d4e5f6a7b8c9d0e1f2a3b1f9c2e7a04d5e8f36b2a5c1d7f0a9b8c3d6e5f",
+     "co_signing_witnesses": [
+      "did:web:riverside-county.example",
+      "did:web:riverton-university.example",
+      "did:web:the-riverton-courier.example"
+     ],
+     "anchored_to": [
+      "anchor:bitcoin-mainnet:block/000000000000000000021a9e",
+      "anchor:ethereum-mainnet:block/22841903"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#log-checkpoint-1",
+     "alg": "ed25519",
+     "value": "YW5jaG9yQ2hlY2twb2ludExvZ0hlYWRQbGFjZWhvbGRlcg"
+    }
+   }
+  },
+  {
+   "actor": "Dev Anand (Courier reporter, running the audit-fleet client)",
+   "verb": "read",
+   "narrative": "Anand's civic app checks the log's consistency in the background. He cannot see the warrant's contents, its subject, or Koval's name — the subject reference lives in the police's separate identity domain, walled off by the schema from any civic pseudonym, so the accountability ledger can never be turned into a tool for unmasking who does what in civic life. What he can see is a count: twelve sealed intercepts this quarter, up from four. He publishes the number and asks the question the old paper cabinet made unaskable."
+  },
+  {
+   "actor": "DI Sara Koval",
+   "verb": "offstage",
+   "narrative": "The thirty days run. The intercepts corroborate Mara's account, identify a handler upstream, and time the next arrival. Officers move: two women are found and taken to a refuge; Ilic and three associates are arrested and charged. The kernel touches none of this — it recorded only that the authority to listen existed."
+  },
+  {
+   "actor": "Riverton District Court (holder of the unseal key)",
+   "verb": "cast",
+   "narrative": "With charges filed and the operation closed, the court orders the seal lifted early — the 'by court order' path, ahead of the automatic date. A reveal entry publishes the warrant's plaintext and, crucially, shows its hash matches the commitment frozen back in May: the contents were not altered between sealing and revealing. The entry carries a pointer to the appeal trace, and the subject is formally notified.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-seal.lifted",
+    "community": "did:web:riverton.example",
+    "timestamp": "2026-08-20T10:00:00Z",
+    "body": {
+     "unseals_entry": "coercive.act@leaf/48213",
+     "act_class": "surveillance",
+     "reveal_reason": "court-order",
+     "reveal_order": "Riverton District Court, order 2026-CO-1188 (operation closed; charges filed against subject and three associates)",
+     "revealed_body_digest": "sha256:3b1f9c2e7a04d5e8f36b2a5c1d7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f",
+     "digest_matches_commitment": true,
+     "revealed_content_uri": "riverton-court-registry:warrant/HT-0417/plaintext",
+     "subject_notified": true,
+     "appeal_trace": "did:web:court.riverton.example/appeals/HT-0417/computation-trace"
+    },
+    "sig": {
+     "key_id": "did:web:court.riverton.example#unseal-1",
+     "alg": "ed25519",
+     "value": "c2VhbExpZnRlZFJldmVhbEFwcGVhbFRyYWNlUGxhY2Vob2xkZXI"
+    }
+   }
+  },
+  {
+   "actor": "Petar Ilic and defence counsel",
+   "verb": "read",
+   "narrative": "For the first time, Ilic and his solicitor can read the thing that listened to him: the authorising statute, Magistrate Fournier's name, the Article 12 escalation that preceded the warrant, and the machine-checkable trace of why it was granted. Under the old regime this sat in a file he would never have seen."
+  },
+  {
+   "actor": "Petar Ilic and defence counsel",
+   "verb": "challenge",
+   "narrative": "His counsel challenges the warrant, arguing the intercept swept broader than necessity allowed. Because the reasons and the authorising rule are in the log as data, the appeal runs against a concrete, verifiable record rather than an official's recollection. The post-hoc right to contest surveillance is real here in a way it was not before — but it arrives after the listening is already done."
+  },
+  {
+   "actor": "Dev Anand and the public",
+   "verb": "verify",
+   "narrative": "Anyone can now verify the revealed warrant against the commitment anchored months earlier — proof the court did not fabricate or backdate it. And here the seam shows plainly: the same court that adjudicates Ilic's appeal is the party that held the unseal key. Its honesty on the reveal is checkable; its willingness to reveal at all is not. A captured court could have set the seal a decade out, never published the plaintext, or quietly handed it to the very unit it was meant to watch. The log proves a warrant existed. It cannot prove the key-holder is trustworthy."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The pattern genuinely delivers on its central promise for the honest case: the warrant's EXISTENCE and issue-minute are tamper-evident within the hour (witness co-signing) and un-backdatable by that evening (anchor.checkpoint to two permissionless chains), all while the contents stay sealed. A captured unit can no longer manufacture a warrant after being challenged, nor predate one to cover an illegal tap — the exact failure the old paper cabinet permitted invisibly (T8)."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "Because coercive.act REQUIRES authorizing_rule, an intercept with no citable warrant cannot be logged validly, and any surveillance that later surfaces in discovery with no matching, dated coercive.act entry becomes a visible anomaly rather than a deniable one. Unaccounted surveillance moves from 'un-provable' to 'detectable' — and the public count of sealed intercepts (four to twelve in a quarter) is a question a reporter or assembly can now actually put."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T6",
+   "observation": "The T6 wall holds: subject_ref sits in the enforcement identity domain (riverton-police:enf-id/...), and the schema forbids bridging it to any civic unlinkable pseudonym. So the ledger built to make force accountable cannot itself be turned into a surveillance-chill instrument that links a person's civic voice to an enforcement target. The accountability log does not become a dossier."
+  },
+  {
+   "severity": "break",
+   "doc_ref": "§6",
+   "observation": "What the pattern does NOT guarantee: honest revelation. The unseal key is a TRUSTED party — the court — the same witness-recursion §6 admits at its anchor, not a cryptographic guarantee. A captured or colluding court can set sealed_until a decade out, simply never publish the reveal (seal-forever), unseal selectively, or leak the sealed plaintext to the live operation while the public sees only a hash. The log makes a warrant's existence undeniable; it cannot force the honest disclosure of its contents, and it does nothing to stop the authorized surveillance itself (T13)."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "Accountability here is retrospective, not preventive, and that is a real cost. The subject's appeal is genuine but post-hoc: by the time the seal lifts, the thirty days of interception have already happened. The rights guard escalated and logged the Article 12 concern but, by design, does not veto — it makes rights-touching 'expensive, slow, and loud, not impossible' (§3.3). A wrongful tap is documented and contestable, never prevented."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T6",
+   "observation": "The same transparency that catches unaccounted surveillance also publishes a live count of active covert operations. In a city small enough, a sophisticated target — or a corrupt insider reading the public log — can infer that some intercept is running this quarter and correlate sealed-entry timestamps with real-world events, a partial tip-off the sealing was meant to prevent. Detectability of unaccounted taps and operational secrecy of accounted ones are in genuine tension, not fully reconciled."
+  }
+ ]
+}

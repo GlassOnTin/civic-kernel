@@ -1,0 +1,291 @@
+{
+ "id": "records-rewrite",
+ "title": "The Vote That Would Not Stay Buried: How Riverton's Stadium Deal Ran Into Its Own Ledger",
+ "setting": "In May 2023, the city of Riverton tore itself in half over forty hectares of riverside allotments and flood meadow called the Delcote Flats. Developers wanted mixed commercial zoning; the allotment holders, led by a retired pharmacist named Tessa Okafor, wanted the protective designation kept. After a bruising spring the referendum went 9,412 to 8,687 — 52 to 48 — to retain the protection. The losers were furious, but the tally proof checked out on anyone's phone, the paper-ballot audit confirmed it, and the result went into Riverton's public transparency log, co-signed that night by the town clerks of neighbouring Harwick and Stonebridge and by Lakeshore University, and checkpointed the next morning to two public blockchains. People moved on.\n\nThree years later Vincent Odell is mayor, elected on jobs, and Meridian Arena Group wants the Flats for a 22,000-seat stadium. Odell's lawyers deliver bad news: the 2023 decision binds unless a new referendum overturns it, and the polling on a rematch is ugly. In late May 2026 the mayor's deputy chief of staff, Kester Blane, walks down to the records office and tells the municipal clerk, Neriah Voss, that the 2023 record needs \"correcting\" — the question, he says, had always been understood to carry a three-year sunset clause, and the archived entry should reflect that understanding. He follows up by email, which will matter later. Voss, twenty-two years in the job and four from her pension, understands exactly what she is being asked to do, and that the person asking controls her department's budget.\n\nAn IT contractor is brought in quietly over the first weekend of June. He restores the log database from a 2023 snapshot, edits the body of entry 48,207 — the tally-proof for the Delcote decision — to include the sunset clause, rebuilds the hash tree, and has the municipal log server sign and publish the new head. On paper it is a perfect forgery: correctly signed by the city's own log key, internally consistent, indistinguishable from truth to anyone who only trusts City Hall. The question this scenario tests is why that is not enough — and what happens to Blane, Voss, and Odell once the mathematics starts talking.",
+ "threats": [
+  "T8",
+  "T1"
+ ],
+ "doc_refs": [
+  "§2",
+  "§3.2",
+  "§3.4",
+  "§4",
+  "§5",
+  "§6",
+  "T8",
+  "T1",
+  "T9"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:riverton.example",
+   "name": "City of Riverton",
+   "parent": "did:web:lakeshore-county.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "Riverton municipal registrar (enrolment ceremonies at the central library and two ward offices)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "riverton-eligibility/v4"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "3-of-5: Lakeshore County court, Lakeshore University, Lakeshore Polytechnic, and the two council opposition groups"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    17,
+    19,
+    20,
+    21,
+    25,
+    29
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:riverton.example",
+   "witnesses": [
+    "did:web:harwick.example",
+    "did:web:stonebridge.example",
+    "did:web:lakeshore-university.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "referendum-cast",
+    "steps": 4,
+    "fields": 0,
+    "median_seconds": 210,
+    "abandonment_rate": 0.03
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:riverton.example#manifest-2",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Riverton residents, spring 2023",
+   "verb": "offstage",
+   "narrative": "The Delcote Flats campaign: town-hall shouting matches, a developer-funded leaflet blitz, allotment holders picketing the council chamber. The kernel touches none of this — the arguments, the anger, and the persuasion money all live above it. What the kernel will hold is only what comes next: the count."
+  },
+  {
+   "actor": "18,099 Riverton voters",
+   "verb": "cast",
+   "narrative": "Referendum day, May 2023. Most vote by phone with per-decision pseudonyms; 2,114 vote on pre-printed paper ballots that enter the same homomorphic tally. That evening three of five trustees co-decrypt the total and the tally proof lands in the city's log as entry 48,207: retain protection, 9,412 to 8,687. Tessa Okafor's tracker shows her ballot in the tally; it can never show anyone how she voted.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:riverton.example",
+    "timestamp": "2023-05-30T20:15:00Z",
+    "body": {
+     "decision_id": "2023-zoning-delcote-flats",
+     "question_hash": "sha256:4c9df2ab71e08c53b6a1d47e920fb3c8a5e6d10f9b2c4a7e8d3f5061a2b3c4d5",
+     "result": {
+      "retain-protective-zoning": 9412,
+      "rezone-mixed-commercial": 8687
+     },
+     "ballots_counted": 18099,
+     "tally_proof_hash": "sha256:7e2a90bc4d1f6583a7c0e9d2b5f4a1c8d3e6f7091b2a3c4d5e6f708192a3b4c5",
+     "trustees_decrypting": "3-of-5",
+     "paper_channel_rla": {
+      "paper_ballots": 2114,
+      "risk_limit": 0.05,
+      "outcome": "confirmed"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#log-1",
+     "alg": "ed25519",
+     "value": "aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789-_AbCdEfGhIjKlMnOpQrStUvWxYz"
+    }
+   }
+  },
+  {
+   "actor": "Witnesses in Harwick, Stonebridge, and Lakeshore University",
+   "verb": "verify",
+   "narrative": "Overnight, the three witnesses each check that the new log head is a strict append-only extension of the last one they signed, then co-sign it. At dawn the city's anchor job checkpoints the co-signed root hash — a few hundred bytes — to Bitcoin via OpenTimestamps and to a registry contract on an Ethereum L2. From this morning on, the 2023 result is pinned by institutions that watch each other and by two ledgers no coalition of town clerks can edit.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "anchor.checkpoint",
+    "community": "did:web:riverton.example",
+    "timestamp": "2023-05-31T06:00:00Z",
+    "body": {
+     "tree_size": 48211,
+     "root_hash": "sha256:b1a4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4",
+     "witness_cosignatures": [
+      "did:web:harwick.example#witness-1",
+      "did:web:stonebridge.example#witness-1",
+      "did:web:lakeshore-university.example#witness-3"
+     ],
+     "anchors": [
+      {
+       "target": "opentimestamps:bitcoin-mainnet",
+       "proof_ref": "ots:sha256:9d3e6f7081a2b3c4d5e6f9d3e6f7081a2b3c4d5e6f9d3e6f7081a2b3c4d5e6f9"
+      },
+      {
+       "target": "eth:base-mainnet:0xC1v1cAnch0rRegistry",
+       "tx": "0x7f3e2a90bc4d1f6583a7c0e9d2b5f4a1c8d3e6f7091b2a3c4d5e6f708192a3b4"
+      }
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#log-1",
+     "alg": "ed25519",
+     "value": "zYxWvUtSrQpOnMlKjIhGfEdCbA9876543210_-ZyXwVuTsRqPoNmLkJiHgFeDcBa"
+    }
+   }
+  },
+  {
+   "actor": "Kester Blane and Neriah Voss, May 2026",
+   "verb": "offstage",
+   "narrative": "Three years on, the instruction. Blane frames it as archival housekeeping — 'the record should reflect the sunset clause everyone understood at the time.' Voss knows there was no sunset clause; she formatted the ballot herself. She also knows her budget, her staff, and her pension review all run through Blane's office. She forwards his email to her personal account before doing anything else. The kernel offers her no protection here; this room is outside it."
+  },
+  {
+   "actor": "An IT contractor, weekend of 2026-06-01",
+   "verb": "offstage",
+   "narrative": "The rewrite itself. The contractor restores the log database from a pre-referendum snapshot, splices in an edited entry 48,207 whose body now contains a three-year sunset clause, replays the subsequent entries, and rebuilds the Merkle tree. The city's log server signs the resulting head — tree size 51,877, correctly signed with the same log-1 key that signed everything since 2019 — and starts serving it. Inside City Hall's own systems, history has been changed."
+  },
+  {
+   "actor": "The three witness daemons",
+   "verb": "verify",
+   "narrative": "Within the hour the rewrite meets its first wall. Each witness demands a consistency proof that the new head extends the last head it co-signed — and no such proof can exist, because the tree under entry 48,207 changed. Harwick's witness refuses to co-sign and logs the refusal; Stonebridge and Lakeshore follow. Dr. Sam Whitcombe, who runs the university's witness, phones Riverton IT, is told it was 'a database migration', finds that answer incompatible with arithmetic, and publishes a split-view alert carrying both signed heads. The city now serves a head that no witness in the world will endorse."
+  },
+  {
+   "actor": "Citizens' phones across the valley",
+   "verb": "verify",
+   "narrative": "The second wall is ambient. A few thousand phones in Riverton run civic clients that verify log consistency in the background against gossiped, witness-co-signed heads. They now see two heads signed by the same municipal key at overlapping tree sizes that cannot both be true — the textbook split view. Tessa Okafor's phone shows a red banner: 'Riverton's log has forked; the entry for 2023-zoning-delcote-flats differs between views.' She screenshots it and calls Priya Anand at the Riverton Ledger, who captures both signed heads from the city endpoint and the witness gossip before anyone can retract them."
+  },
+  {
+   "actor": "Priya Anand, with the anchors",
+   "verb": "verify",
+   "narrative": "The third wall would have held even if every local witness had been leaned on. Anand replays the 2023 checkpoint: the root hash pinned to Bitcoin and to the L2 registry on 2023-05-31 matches the original tree, not the rewritten one, and the timestamp proofs are independently checkable by anyone. Her story runs with a verification appendix any reader's phone can execute. The two conflicting heads, both signed by log-1, are not evidence of a dispute — they are a cryptographic confession that someone with the city's key tried to rewrite the past."
+  },
+  {
+   "actor": "Riverton politics, June 2026",
+   "verb": "offstage",
+   "narrative": "What the kernel cannot do, people now must. The council's opposition groups — two of the five tally trustees, not coincidentally — force an emergency session. Voss produces Blane's email and keeps her job; Blane resigns within a week; the Lakeshore County prosecutor opens a records-tampering case with the fork-evidence bundle as its centrepiece, because two irreconcilable heads under one signing key is the rare crime that arrives pre-proven. Mayor Odell, uninvolved on paper, discovers that 'the mathematics caught my deputy' is not a slogan that polls well."
+  },
+  {
+   "actor": "The witnesses and the council",
+   "verb": "verify",
+   "narrative": "Remediation goes through the log, in public. The forked head is abandoned; the true log resumes from the last witnessed checkpoint. Because log-1 signed the forgery, it can never be trusted again: the council's emergency resolution rotates the log key, the rotation is itself appended as an entry, and all three witnesses verify and co-sign the head that contains it. The attempted rewrite is now permanently recorded inside the very log it tried to alter.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "credential.authority-key-rotated",
+    "community": "did:web:riverton.example",
+    "timestamp": "2026-06-15T09:00:00Z",
+    "body": {
+     "rotated_key": "did:web:riverton.example#log-1",
+     "new_key": "did:web:riverton.example#log-2",
+     "reason": "log-1 was used on 2026-06-02 to sign a forked head at tree_size 51877 that fails the consistency proof against the witnessed checkpoint of 2023-05-31 (entry 48207, decision 2023-zoning-delcote-flats, altered). Fork evidence bundle sha256:e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8 referred to the Lakeshore County prosecutor.",
+     "authorized_by": "Riverton council emergency resolution 2026-114",
+     "witness_acknowledgements": [
+      "did:web:harwick.example#witness-1",
+      "did:web:stonebridge.example#witness-1",
+      "did:web:lakeshore-university.example#witness-3"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#root-1",
+     "alg": "ed25519",
+     "value": "Qm90aFNpZ25lZEhlYWRzQXJlVGhlQ29uZmVzc2lvbk5vdFJlYWxDcnlwdG8xMjM"
+    }
+   }
+  },
+  {
+   "actor": "Mayor Odell's administration",
+   "verb": "cast",
+   "narrative": "The back door welded shut, only the front door remains: a new referendum to rezone the Flats for the stadium, opened on the ordinary path with the decision-metadata bundle carrying arguments for and against. Meridian Arena Group pours money into the yes campaign — perfectly legally, entirely outside the kernel's remit. The vote is set for September. The protocol has not saved the Flats; it has only guaranteed that if they fall, they fall to a real majority in an honest count.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:riverton.example",
+    "timestamp": "2026-07-01T12:00:00Z",
+    "body": {
+     "decision_id": "2026-zoning-delcote-stadium",
+     "question_hash": "sha256:2b5f4a1c8d3e6f7091b2a3c4d5e6f708192a3b4c57e2a90bc4d1f6583a7c0e9d",
+     "eligibility_rules": "riverton-eligibility/v4",
+     "window": {
+      "deliberation_ends": "2026-09-01T12:00:00Z",
+      "cast_ends": "2026-09-15T20:00:00Z"
+     },
+     "metadata_bundle": "sha256:a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8",
+     "supersedes_if_carried": "2023-zoning-delcote-flats"
+    },
+    "sig": {
+     "key_id": "did:web:riverton.example#log-2",
+     "alg": "ed25519",
+     "value": "VGhlRnJvbnREb29ySXNUaGVPbmx5RG9vckxlZnROb3RSZWFsQ3J5cHRvNDU2Nzg"
+    }
+   }
+  },
+  {
+   "actor": "Anyone, any time after",
+   "verb": "read",
+   "narrative": "The log now tells the whole story to anyone who reads it: the 2023 count, the witnessed checkpoints, the key rotation whose reason field names the tampering attempt, and the new referendum. The rewrite did not merely fail — it left a permanent, machine-verifiable scar in the public record, which is the deterrent the next Kester Blane will be briefed about."
+  }
+ ],
+ "verdict": "holds",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The rewrite failed at three independent layers exactly as T8's answer promises: witnesses refused to co-sign a head with no consistency proof, background-verifying phones detected the split view within hours, and the 2023 anchor checkpoints would have convicted the fork even if all three local witnesses had colluded. Crucially, the attack produced its own evidence — two conflicting heads signed by the same key — so the burden of proof landed on the tamperer, not the citizens."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T1",
+   "observation": "The kernel produces proof, not consequences. Riverton's outcome depended on an independent county prosecutor, opposition councillors, and a working local newspaper. In a jurisdiction where all three are captured, the log still proves tampering to every phone — and nothing official happens. The protocol converts 'was history rewritten?' from a factual dispute into settled mathematics, but enforcement remains entirely social and legal, outside the kernel by design (§1 non-goals)."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T9",
+   "observation": "Split-view detection ran on the phones of the connected. The 2,114 paper-channel voters and offline citizens learned of the tampering days later, from the Ledger — a trust regression: they must take a journalist's word for what the proofs say. The paper channel keeps casting inclusive, but continuous auditing is a smartphone privilege the document does not fully resolve."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.4",
+   "observation": "The protocol offered nothing to Neriah Voss at the moment of coercion. Its deterrence works precisely by making the least powerful insider the person holding signed evidence of a crime; she protected herself with a forwarded email, not with anything the kernel provides. The §12 press primitives (credential-backed anonymous sourcing) could have helped her blow the whistle, but shielding pressured insiders is not a kernel service and should not be oversold as one."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "A freshness window exists: entries appended since the last witness co-signature and anchor checkpoint are briefly rewritable by the operator alone. It was irrelevant here — the target entry was three years old and pinned a thousand times over — but a clerk ordered to doctor a decision within minutes of its logging, before witnessing, faces a genuinely softer target. Checkpoint cadence is therefore a security parameter, not an ops detail."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§2",
+   "observation": "The kernel protected the record, not the outcome. Blocked from rewriting 2023, the administration simply re-ran the question with a consortium-funded persuasion campaign — legitimate under the document's explicit refusal to police disinformation or money in argument. For Tessa Okafor, the honest summary is: the protocol guaranteed her side cannot be cheated, and guaranteed nothing about whether it can be outspent."
+  }
+ ]
+}

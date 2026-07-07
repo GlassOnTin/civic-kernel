@@ -1,0 +1,273 @@
+{
+ "id": "executive-ignores",
+ "title": "The Region Voted to Save the River. The Governor Sent Bulldozers Anyway.",
+ "setting": "The River Vell runs down out of the Marn uplands and past a string of farming villages — Kessloe, Anfeld, Dunmere — that have drawn on it for as long as anyone keeps records. In 2025 the Halvern Construction Consortium proposed the Lower Vell Diversion: a set of weirs and channels to redirect most of the river's flow up to new reservoirs and an industrial park, leaving the downstream fields on what the villagers called \"a promise of rain.\" Sana Okeke, who teaches the middle grades at the Kessloe school, spent that autumn at kitchen-table meetings where the argument was not really about hydrology — it was about whether the people who lived by the water or the people who had bought a permit to move it got to decide its fate.\n\nThe region put it to a referendum, and because halting a licensed concession touches both the consortium's property and the villages' access to water and livelihood, the rights guard routed it onto the constitutional path: ninety days of deliberation, a required supermajority, a sortition panel and judicial review alongside the ordinary vote. It carried — 67 percent, above the 60 percent bar — and the concession, CP-2019-114, was recorded as revoked. The close was witnessed by Vell University, the regional newspaper (the Marn Ledger), and the neighbouring region of Aldery, and anchored to two independent public ledgers. For six months the Vell ran full to Kessloe and the thing felt genuinely settled: not just decided, but decided in a way any villager could check on their phone and no official could quietly undo.\n\nThen, in spring, Marn elected a new governor. Marek Duval ran on jobs and the upland park; the Halvern Consortium's money ran behind him. Within weeks of taking office he announced that the diversion \"will proceed on schedule.\" On the second of July, at dawn, enforcement officers and Halvern's machines arrived at the Lower Vell riverbank to begin cutting the first channel and seizing the bankside parcels — under an executive order that cited, as its authority, the very concession the region had voted to revoke. Sana heard the diesel before she saw anything. By the time she had her phone unlocked, the contradiction was exact and provable: the log said the diversion was halted and the concession dead; the men with the machines said proceed.\n\nThat is the whole of this test, and it is a hard one. The kernel did everything it promises. The decision cannot be forged. The record cannot be rewritten. The violation is undeniable to anyone holding a phone, and it will stay in the record forever as the basis for a prosecution, a recall, or an exit. And the bulldozers keep digging. What the Civic Kernel gives Kessloe is perfect proof and not one gram of force to stop the water leaving. This is the enforcement gap at the scale of an entire region — the same helplessness a single wronged citizen once faced, now generalized to a whole polity.",
+ "threats": [
+  "T1",
+  "T8"
+ ],
+ "doc_refs": [
+  "§3.2",
+  "§3.3",
+  "§3.4",
+  "§5",
+  "§6",
+  "T1",
+  "T8"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:marn.example",
+   "name": "Region of Marn",
+   "parent": "did:web:federation.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "Marn regional registrar",
+   "unlinkable": true,
+   "sybil_resistance": "strong",
+   "eligibility_rules": "marn-eligibility/v2"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-safe-space",
+   "trustee_quorum": "3-of-5: Marn regional court, Vell University, Aldery Polytechnic, two registered opposition parties"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:marn.example",
+   "witnesses": [
+    "did:web:vell-university.example",
+    "did:web:marn-ledger.example",
+    "did:web:aldery.example"
+   ],
+   "anchors": [
+    "public-ledger:anchor-north",
+    "public-ledger:anchor-south"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:marn.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The Lower Vell villages and the Halvern Consortium",
+   "verb": "offstage",
+   "narrative": "Through autumn 2025 the fight over the diversion plays out where the kernel never reaches: kitchen-table meetings in Kessloe, consortium open houses, op-eds in the Marn Ledger. Deliberation is ecosystem, not kernel. The kernel only starts to matter once someone submits the question."
+  },
+  {
+   "actor": "Marn rights guard",
+   "verb": "verify",
+   "narrative": "The proposal to halt the diversion and revoke the concession is submitted. The rights guard runs it against all thirty UDHR invariants and finds it rights-touching on both sides — the concession-holder's property (Art. 17) and the villages' water, life, and livelihood (Art. 3, Art. 25). It routes the question off the simple-majority path and onto the constitutional path, and writes that classification, with reasons, to the log.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:marn.example",
+    "timestamp": "2025-10-20T09:00:00Z",
+    "body": {
+     "decision_id": "2025-lower-vell-diversion-halt",
+     "question_hash": "sha256:3f8a1c9e2b7d4f60a15c8e93d02b47f1a9c6e3d8b0f24a71c5e9d3b8a6042f1c7",
+     "path": "constitutional",
+     "tripped_invariants": [
+      3,
+      17,
+      25
+     ],
+     "reasons": "Halting a licensed concession (CP-2019-114) engages the concession-holder's property interest (Art. 17) and the downstream communities' access to water, health, and livelihood (Art. 3, Art. 25). Rights-touching on both sides: routed off simple-majority onto the constitutional path — supermajority >= 0.60, 90-day deliberation, sortition panel plus judicial review.",
+     "eligibility_rules": "marn-eligibility/v2"
+    },
+    "sig": {
+     "key_id": "did:web:marn.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Citizens of Marn (Sana Okeke among them)",
+   "verb": "cast",
+   "narrative": "After the ninety-day deliberation window, the region votes. Ballots are end-to-end verifiable and receipt-free; the offline villages up the valley use the paper channel that enters the same tally. Sana keeps her tracker — enough to prove her ballot is counted, never enough to prove to anyone how she voted."
+  },
+  {
+   "actor": "Marn trustee quorum and the phone audit fleet",
+   "verb": "verify",
+   "narrative": "The trustee quorum decrypts only the aggregate; the tally proof is published and re-checkable on any phone. The decision closes CARRIED at 67.2 percent, clear of the 60 percent bar, and the close records that concession CP-2019-114 is revoked and the diversion works prohibited. For six months this is simply the law of Marn, and the river runs to Kessloe.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.closed",
+    "community": "did:web:marn.example",
+    "timestamp": "2026-01-14T18:00:00Z",
+    "body": {
+     "decision_id": "2025-lower-vell-diversion-halt",
+     "question": "Shall the Lower Vell Diversion be halted permanently and concession CP-2019-114 revoked?",
+     "path": "constitutional",
+     "result": "carried",
+     "tally": {
+      "yes": 412940,
+      "no": 201460,
+      "cast": 614400,
+      "eligible": 903000
+     },
+     "yes_fraction": 0.6721,
+     "threshold_required": 0.6,
+     "tally_proof_ref": "sha256:b2c7f019d3e84a5f6071c2b9e4d80a3f5c1e97d24b6a0f83e2c5d719a4f60b3d8",
+     "supersedes_rules": [
+      "Marn Water Infrastructure Act 2019 s14",
+      "concession CP-2019-114"
+     ],
+     "effect": "Concession CP-2019-114 revoked; all Lower Vell Diversion works prohibited.",
+     "eligibility_rules": "marn-eligibility/v2"
+    },
+    "sig": {
+     "key_id": "did:web:marn.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "The Marn electorate and Governor-elect Marek Duval",
+   "verb": "offstage",
+   "narrative": "In spring 2026 Marn elects a new governor. Duval runs on the upland park with the Halvern Consortium's money behind him, and wins the executive. He announces the diversion will proceed. This is state capture (T1) in its plainest form — and it happens entirely outside the kernel, which has no view of, and no lever on, who controls the region's bulldozers and enforcement officers."
+  },
+  {
+   "actor": "Halvern machines and Marn enforcement officers",
+   "verb": "offstage",
+   "narrative": "At dawn on 2 July, machines and officers arrive at the Lower Vell riverbank, begin cutting the first channel, and move to seize the bankside parcels. Diesel, steel, and men with authority to clear the ground: none of it is anything the kernel touches. The physical act is already underway before a single log entry describes it."
+  },
+  {
+   "actor": "Sana Okeke",
+   "verb": "verify",
+   "narrative": "To dress the seizure as lawful, the Governor's office appends a coercive.act citing the 2019 Act and concession CP-2019-114 under Executive Order EO-2026-31. It is schema-valid — it names a warrant. Sana's client pulls it and does two checks in under a second: the log head is consistent and un-rewritten (the carried close is still there, witnessed and anchored — T8 holds), and the cited concession resolves to the very rule decision.closed marked REVOKED. The warrant is void on its face, and now everyone can see it.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:marn.example",
+    "timestamp": "2026-07-02T07:30:00Z",
+    "body": {
+     "act_class": "seizure",
+     "authorizing_rule": "Marn Water Infrastructure Act 2019 s14; concession CP-2019-114; Executive Order EO-2026-31",
+     "issuing_authority": "Office of the Governor of Marn",
+     "subject_ref": "enf:lower-vell-riverbank-parcels-A12-A44",
+     "appeal_trace": "did:web:marn.example/appeals/EO-2026-31"
+    },
+    "sig": {
+     "key_id": "did:web:marn.example#governor-office-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Ivo Karr, counsel for the downstream residents",
+   "verb": "challenge",
+   "narrative": "Karr files a formal contest of the seizure. The rights guard, matching the coercive.act's cited rule against the carried close, appends a rights.escalation: the warrant is void, Art. 8 (right to a remedy) and Art. 17 are engaged, and the matter is referred to the regional court and the university witnesses. The entry says plainly, in its own body, what the kernel is and is not doing — it records the violation and cannot halt it.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:marn.example",
+    "timestamp": "2026-07-03T14:10:00Z",
+    "body": {
+     "escalation_id": "esc-2026-vell-seizure",
+     "triggered_by": "coercive.act@2026-07-02T07:30:00Z (seizure, EO-2026-31)",
+     "finding": "Cited authorizing_rule (Marn Water Infrastructure Act 2019 s14; concession CP-2019-114) was revoked by decision.closed 2025-lower-vell-diversion-halt (carried, constitutional path, 2026-01-14). Warrant void on its face.",
+     "tripped_invariants": [
+      8,
+      17
+     ],
+     "referred_to": [
+      "did:web:marn-regional-court.example",
+      "did:web:vell-university.example"
+     ],
+     "remedy_path": "constitutional",
+     "note": "This escalation records the violation and makes it permanent and checkable. It does not and cannot stop the seizure. Enforcement of any remedy lies with the regional court and the citizenry, never with the kernel."
+    },
+    "sig": {
+     "key_id": "did:web:marn.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "The regional court, prosecutors, the federation, and the villages",
+   "verb": "offstage",
+   "narrative": "Now everything that can actually stop a bulldozer sits outside the kernel. The court may issue an injunction — or, if Duval's capture reached it too, may not. Prosecutors weigh charges. The national federation and neighbouring Aldery read Marn's log and see a documented defiance of a carried constitutional vote. Some Kessloe residents begin talking about exit under the fork right. Meanwhile the channel gets wider. The kernel handed every one of these actors flawless evidence; whether any of them acts is a human question the protocol cannot answer."
+  },
+  {
+   "actor": "Dana Vos, Marn Ledger",
+   "verb": "read",
+   "narrative": "Vos reads the whole chain straight off the log — classification, carried close, void-warrant seizure, escalation — and publishes; any reader's phone re-verifies every link. The record is permanent and portable: even if the governorship and the courts fall, the proof of what Marn decided and what Duval defied survives, travels with anyone who exits, and remains the standing basis for a future prosecution or reversal. That is the kernel's real and only contribution here — total legibility, and no force."
+  }
+ ],
+ "verdict": "breaks",
+ "findings": [
+  {
+   "severity": "break",
+   "doc_ref": "T1",
+   "observation": "Proof is not compliance. Every kernel service worked: the decision is unforgeable, the record un-rewritable, the governor's defiance undeniable to anyone with a phone in milliseconds, and permanent as the basis for prosecution, recall, or exit. The kernel converts 'done in the dark' into 'done in the light' completely. What it cannot do — by §6's own words, 'it has no army, and the design refuses to want one' — is compel Governor Duval to stop. Against a captured executive the kernel's only real power is identical to its power against a fork: make defection visible and hand it to humans. The channel is being cut while the proof is perfect. That gap between total knowledge and zero force is why this breaks."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.4",
+   "observation": "The coercive.act schema enforces 'cite a warrant,' not 'cite a valid one.' The Governor's office appended a fully schema-valid seizure entry — it names an authorizing_rule, so it passes. What convicts Duval is a semantic check the citizen's client runs afterward: resolving that citation against decision.closed and finding the concession revoked. The log-entry schema's promise that 'an unwarranted coercive act cannot be logged validly' bites only against a total absence of citation; a bad-faith citation of a dead rule logs cleanly and is caught one layer up, by verification, not by the schema. The log delivers legibility and appealability exactly as intended — but it is not a validity gate, and it should not be mistaken for one."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "The remedy the kernel produces has to land somewhere the kernel does not control. rights.escalation refers the violation to the regional court and the witnesses — but if the same capture that took the governorship also reaches the court, the legislature, and the police (the 'sufficiently correlated capture event' §6 concedes at the anchor), the evidence is impeccable and inert. The deepest fallback is §5 forkability and exit: the history travels intact with whoever leaves. That preserves the truth and the community's constitution. It does not preserve the river, the fields, or the parcels being seized this morning."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T8",
+   "observation": "What genuinely held, and deserves credit: the record could not be quietly rewritten. Duval's faction could not make the carried close 'un-carry' — cross-border witnesses (Vell University, the Marn Ledger, neighbouring Aldery) co-sign the log head and it is anchored to two independent public ledgers, so any rewrite forks the view and every phone detects it. T8 is answered in full. Legibility is the substrate every downstream remedy is built on; without a tamper-evident record there is nothing to prosecute with. The kernel delivered that substrate completely. The break is not that legibility failed — it is that legibility is not force, and this situation needed force."
+  }
+ ]
+}

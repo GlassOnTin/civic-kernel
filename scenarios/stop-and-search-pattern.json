@@ -1,0 +1,271 @@
+{
+ "id": "stop-and-search-pattern",
+ "title": "Every Stop Was Lawful. The Pattern Was Not.",
+ "setting": "It is a Thursday evening in May, and Marcus Bello, seventeen, is walking home to the Eastfield estate from Halloway College with a rucksack full of coursework. Two officers stop him on the footbridge over the ring road. They are unfailingly polite. One explains the grounds, cites the power he is acting under, empties the rucksack, finds three exercise books and a phone charger, apologises, and lets Marcus go. It is the third time this month. Marcus does not bother telling his mother anymore; the first two times, Grace Bello rang the station and was told, each time, that the officer had reasonable grounds and here was the exact rule that authorised it. Both answers were true.\n\nThat is the trap. Across Halloway, young men from Eastfield are stopped at roughly nine times the borough rate — but there is no single stop you can point to and call unlawful. Each one carries its warrant. The wrong does not live in any of the stops; it lives in the space between them, in the pattern, and a pattern has no address you can complain to. Grace can prove her son was searched. She cannot prove, from inside her own life, that he was searched because of where he lives and what he looks like. The evidence for that is scattered across a thousand separate, individually-defensible encounters that no resident can ever see all of.\n\nHalloway is one of the first boroughs to pilot the Civic Kernel for police accountability. It does not change what an officer may do. What it changes is the record: every stop is logged as a coercive act that must cite its authorising rule, and at the close of each quarter the borough publishes stop rates by area as an anonymous aggregate — measure the process, never the person. Three people are about to meet those numbers. Aisha Mensah runs the Eastfield Community Trust out of a portacabin behind the shops. Priya Nair covers the borough for the local paper and has learned to distrust press releases. And thirty-one members of the borough assembly will, or will not, do something about what the log now says out loud.\n\nThe stakes are narrow and exact. For the first time, the nine-to-one ratio is not a grievance or a feeling; it is a signed, witnessed figure that any phone in the borough can check and no press officer can quietly revise. What nobody yet knows is whether that changes anything for Marcus — because the log records coercion, it does not refuse it, and a number, however undeniable, still has to be picked up by a human hand before it becomes a remedy.",
+ "threats": [
+  "T13",
+  "T12",
+  "T7"
+ ],
+ "doc_refs": [
+  "§8",
+  "§3.3",
+  "§3.4",
+  "§9",
+  "§6"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:halloway.example",
+   "name": "London Borough of Halloway",
+   "parent": "did:web:greatermetro.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "Halloway municipal registrar",
+   "unlinkable": true,
+   "sybil_resistance": "strong",
+   "eligibility_rules": "halloway-electoral-roll/v2"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-safe-space",
+   "trustee_quorum": "3-of-5: borough court, two universities, two opposition parties"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    19,
+    20,
+    21
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:halloway.example",
+   "witnesses": [
+    "did:web:eastborough.example",
+    "did:web:kingsuni.example",
+    "did:web:libertywatch.example"
+   ],
+   "anchors": [
+    "ethereum:mainnet",
+    "bitcoin:mainnet"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "police-conduct-complaint",
+    "steps": 9,
+    "fields": 34,
+    "median_seconds": 21600,
+    "abandonment_rate": 0.71
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:halloway.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Marcus Bello (Eastfield resident)",
+   "verb": "offstage",
+   "narrative": "On the footbridge home from college, Marcus is stopped and searched for the third time this month. The officer is polite, states grounds, finds nothing, apologises, and leaves. The officer's split-second decision to stop him is discretionary and human — the kernel has no reach into it and does not pretend to. This is the part of the world the protocol deliberately does not touch."
+  },
+  {
+   "actor": "Halloway Constabulary (enforcement authority)",
+   "verb": "cast",
+   "narrative": "The stop is written into the borough's transparency log as a coercive act. The schema will not accept it without an authorizing_rule, so the officer's power is now cited by machine-readable warrant rather than asserted verbally. The subject reference lives in the enforcement identity domain — never a civic pseudonym — so the record can never be bridged back to Marcus's civic self (T6, T1). Individually, this entry is unimpeachable: a lawful search, its rule attached.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:halloway.example",
+    "timestamp": "2026-05-14T17:42:00Z",
+    "body": {
+     "act_class": "search",
+     "authorizing_rule": "uk-pace-1984:s.1; halloway-stop-policy/v4",
+     "issuing_authority": "Halloway Constabulary, Eastfield ward patrol",
+     "subject_ref": "halloway-police:stop-ref:2026-05-14-0417",
+     "appeal_trace": "did:web:halloway.example/appeals/stop/2026-05-14-0417"
+    },
+    "sig": {
+     "key_id": "did:web:halloway.example#log-1",
+     "alg": "ed25519",
+     "value": "Q29lcmNpdmVTZWFyY2hMb2dTaWdQbGFjZWhvbGRlcg"
+    }
+   }
+  },
+  {
+   "actor": "Halloway Constabulary (enforcement authority)",
+   "verb": "cast",
+   "narrative": "A week later a different Eastfield teenager is stopped and briefly detained; that act too is logged with its own cited power. Notice what is NOT present: no rights_guard_ref, because this act — taken on its own — trips no invariant. It is a lawful detention. Two lawful acts are now in the log, and the discrimination is in neither of them. It is only beginning to accumulate.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:halloway.example",
+    "timestamp": "2026-05-21T22:10:00Z",
+    "body": {
+     "act_class": "detention",
+     "authorizing_rule": "uk-pace-1984:s.24; halloway-stop-policy/v4",
+     "issuing_authority": "Halloway Constabulary, Eastfield ward patrol",
+     "subject_ref": "halloway-police:custody-ref:2026-05-21-8842A",
+     "appeal_trace": "did:web:halloway.example/appeals/detention/2026-05-21-8842A"
+    },
+    "sig": {
+     "key_id": "did:web:halloway.example#log-1",
+     "alg": "ed25519",
+     "value": "RGV0ZW50aW9uTG9nU2lnUGxhY2Vob2xkZXJWYWx1ZQ"
+    }
+   }
+  },
+  {
+   "actor": "Grace Bello and Eastfield residents",
+   "verb": "offstage",
+   "narrative": "This is the status quo the kernel inherits. Residents know their sons are stopped constantly, but every complaint is answered one stop at a time — 'the officer had grounds; here is the rule' — and every answer is true. The wrong is real, deniable, and un-addressable, because no resident can ever assemble the whole pattern from where they stand. This is exactly the deniability sludge relies on (§8): burden and bias that nobody voted for and no single act reveals."
+  },
+  {
+   "actor": "Halloway borough transparency office",
+   "verb": "cast",
+   "narrative": "At quarter's end the borough publishes the aggregate the kernel was built to force: stop rates by area, anonymous, no subject identifiers, witnessed in the log. Eastfield's rate is nine times the borough median, and four in five searches found nothing. This is the sludge-dashboard move (§8) turned on enforcement — the disparity is now a single signed number on a public page, the same measured quantity for every ward. The pattern the residents could only feel has become a figure the borough must own.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:halloway.example",
+    "timestamp": "2026-07-01T09:00:00Z",
+    "body": {
+     "process": "stop-and-search",
+     "period": "2026-Q2",
+     "unit": "stops per 1000 residents per quarter",
+     "areas": [
+      {
+       "area": "Eastfield estate",
+       "rate": 84.6,
+       "stops": 512,
+       "population": 6053
+      },
+      {
+       "area": "Halloway borough (median ward)",
+       "rate": 9.3
+      },
+      {
+       "area": "Priory Hill",
+       "rate": 3.1,
+       "stops": 21,
+       "population": 6774
+      }
+     ],
+     "disparity_ratio": 9.1,
+     "find_nothing_rate": 0.79,
+     "note": "Anonymous aggregate. No subject identifiers, no enforcement references. Every underlying stop cites a valid authorizing_rule. Measure the process, never the person (S8)."
+    },
+    "sig": {
+     "key_id": "did:web:halloway.example#log-1",
+     "alg": "ed25519",
+     "value": "Q29zdEFnZ3JlZ2F0ZUxvZ1NpZ1BsYWNlaG9sZGVy"
+    }
+   }
+  },
+  {
+   "actor": "Aisha Mensah (Eastfield Community Trust)",
+   "verb": "read",
+   "narrative": "Aisha opens the aggregate on her phone in the portacabin. For years the Trust's testimony was anecdote against the borough's paperwork. Now the nine-to-one ratio is the borough's own signed record, not the Trust's claim. She has not gained a single new power — but she has lost the thing that always defeated her before: deniability."
+  },
+  {
+   "actor": "Priya Nair (local press)",
+   "verb": "verify",
+   "narrative": "Before she publishes, Priya checks the number is real in the strong sense: her client verifies the aggregate's inclusion in the transparency log and that today's log is a strict extension of last quarter's, so the figure cannot be quietly revised after the story runs (§3.4). She quotes the record directly, and any reader's phone can re-check the quotation. The kernel gives the fourth estate a witnessed record it could not have built for itself — freedom of information as an always-on API rather than a request the borough can slow-walk."
+  },
+  {
+   "actor": "A named Eastfield resident",
+   "verb": "challenge",
+   "narrative": "A resident appeals one specific stop through its appeal_trace. The kernel does exactly what it promises at the level of the act: it surfaces the cited rule and the reasons, and the appeal resolves that this stop was warranted — grounds were stated, the power existed. The individual challenge fails on the merits, and it should, because the individual act was lawful. This is the trap made concrete: appealing the acts one at a time can never reach the pattern."
+  },
+  {
+   "actor": "Eastfield Community Trust and borough counsel",
+   "verb": "read",
+   "narrative": "So the Trust stops appealing acts and starts citing the aggregate — to a solicitor building an equality-law claim (disparate impact under Articles 2 and 7) and to sympathetic assembly members. Here the honest wall appears: there is no kernel verb for challenging a pattern, and the rights guard emits no classification, because the guard is a static analyser over proposals entering a ballot, not over the log of executive discretion. Halloway upholds the Article 2 and Article 7 invariants in its manifest — and they still do not fire here, because there is no decision for them to check. The number is real; the machinery to act on it lives in courts and politics, outside the kernel."
+  },
+  {
+   "actor": "Halloway borough assembly",
+   "verb": "cast",
+   "narrative": "Prompted by the figure and the press, the assembly opens a decision to reform the borough's stop-and-search policy. Because it amends the rules of enforcement, the rights guard routes it automatically onto the constitutional path — supermajority, a mandatory deliberation window, and a sortition-selected citizens' panel. This is the kernel working as designed: a human institution, holding the pen, acting on what the microscope revealed. But it is a proposal, not a remedy; nothing is fixed until it passes and the constabulary complies.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:halloway.example",
+    "timestamp": "2026-07-06T18:00:00Z",
+    "body": {
+     "decision_id": "2026-eastfield-stop-search-reform",
+     "question_hash": "sha256:1b9d4f7a2c8e0356d9f1a4b7c20e5f8a3d6b09c1e4f72a5d8b0c3e6f9a1d4b7c",
+     "eligibility_rules": "halloway-electoral-roll/v2",
+     "rights_guard_path": "constitutional",
+     "escalation_reason": "Rules-touching: amends enforcement policy; supermajority plus citizens-panel review (S3.3).",
+     "window": {
+      "deliberation_ends": "2026-08-06T18:00:00Z",
+      "cast_ends": "2026-08-20T18:00:00Z"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:halloway.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVjaXNpb25PcGVuZWRMb2dTaWdQbGFjZWhvbGRlcg"
+    }
+   }
+  },
+  {
+   "actor": "Marcus Bello (Eastfield resident)",
+   "verb": "offstage",
+   "narrative": "Between the aggregate and the vote, Marcus is stopped again. The log will record that stop too, lawfully, cited. Whether the count falls next quarter depends on how the assembly votes and whether the constabulary changes its patrol pattern — not on anything the kernel can do. The protocol made his experience undeniable and appealable in aggregate; it did not stop a single search. That gap between legible and prevented is where this scenario lives."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "Genuine contribution: 'measure the process, never the person' converts disparate impact from anecdote into a signed, witnessed, phone-checkable number. The 9:1 Eastfield ratio and the 79% find-nothing rate become the same measured quantity for every ward — the sludge-dashboard move applied to coercion. Deniability, the thing that always defeated Grace Bello's one-stop-at-a-time complaints, is destroyed; the disparity is now a finding a press (Priya), an assembly, or a court can act on. This is real progress that did not exist before the deployment."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§9",
+   "observation": "The kernel makes the pattern legible but cannot constrain the individual discretionary act. Each coercive.act cites a valid authorizing_rule and passes on appeal; discrimination lives in the aggregate of lawful acts, which the log surfaces without refusing. This is §9's split working exactly as written — sense at machine speed, respond at constitutional speed; the microscope holds no pen (T13) — and here that design's cost is that the body politic keeps absorbing every lawful-but-biased stop while the response is merely enabled, never triggered. Sensing without an actuator is the intended architecture, and it is also the limit."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "NOT SOLVED by the protocol: the rights guard is a static analyser over decision/proposal metadata, so it structurally cannot see disparate impact, which is an emergent property of an aggregate of individually-lawful executive acts with no ballot attached. Halloway declares the Article 2 (non-discrimination) and Article 7 (equal protection) invariants in its manifest — the client renders 'upholds 14 of 30' including exactly these — yet neither can fire on this harm, because there is no decision to type-check. A citizen reading the manifest could reasonably believe those invariants protect against this pattern; they do not. That mismatch between the rendered claim and the lived reality is the sharpest strain here (relates to T7)."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "NOT SOLVED: legibility of a pattern is not a remedy for it — someone still has to pick up the number. The remedy path is entirely outside the kernel (an equality-law claim, an assembly motion on the constitutional path), which the kernel enables but cannot compel. If the assembly declines to act, or passes a motion the constabulary ignores, the 9:1 ratio persists undiminished and the log simply records next quarter's identical figure. The kernel converts a hidden injustice into a public one; closing it remains a political act with all the ordinary ways to fail."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.4",
+   "observation": "The four-verb citizen surface (§8) has no native verb for 'the state logs an act of coercion,' and coercive.act is deliberately a state write whose subject_ref sits in the walled-off enforcement identity domain (T6, T1). A consequence for the human at the centre: Marcus cannot, from his own civic client, prove that the accumulating stops are HIS, nor challenge the pattern as an aggregate — he can appeal single acts (which lawfully pass) or read the anonymous borough total, but nothing lets the coerced person bind the pattern to themselves. The privacy wall that protects him from enforcement attribution is the same wall that denies him personal standing over the pattern; only an intermediary (the Trust, the press, the assembly) can act on the aggregate."
+  }
+ ]
+}

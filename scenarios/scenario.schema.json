@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glassontin.github.io/civic-kernel/scenarios/scenario.schema.json",
+  "title": "Civic Kernel stress-test scenario",
+  "description": "One imagined real-life human situation walked through the protocol. Test-harness format, not part of the waist. The embedded manifest and log-entry artifacts must additionally validate against the two waist schemas in ../schema/ — that cross-check is the test: can the waist express this situation? Enforced by tools/validate.py.",
+  "type": "object",
+  "required": ["id", "title", "setting", "threats", "doc_refs", "manifest", "walkthrough", "verdict", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "title": { "type": "string" },
+    "setting": { "type": "string", "description": "The scene: named people, a real place, what is at stake. General-reader prose." },
+    "threats": { "type": "array", "items": { "type": "string", "pattern": "^T[0-9]+$" }, "description": "Threat-register IDs under test (§2)." },
+    "doc_refs": { "type": "array", "items": { "type": "string" } },
+    "manifest": { "type": "object", "description": "The community's conformance manifest; must validate against ../schema/manifest.schema.json." },
+    "walkthrough": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "required": ["actor", "verb", "narrative"],
+        "additionalProperties": false,
+        "properties": {
+          "actor": { "type": "string" },
+          "verb": { "enum": ["prove", "cast", "challenge", "verify", "read", "offstage"], "description": "One of the four citizen verbs (§8; cast/challenge split), or 'offstage' for the parts of life the kernel deliberately does not touch." },
+          "narrative": { "type": "string" },
+          "artifact": { "type": "object", "description": "The log entry this step appends, if any; must validate against ../schema/log-entry.schema.json." }
+        }
+      }
+    },
+    "verdict": { "enum": ["holds", "strains", "breaks"] },
+    "findings": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["severity", "observation"],
+        "additionalProperties": false,
+        "properties": {
+          "severity": { "enum": ["note", "strain", "break"] },
+          "observation": { "type": "string" },
+          "doc_ref": { "type": "string" }
+        }
+      }
+    }
+  }
+}

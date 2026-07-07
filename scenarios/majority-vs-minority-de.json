@@ -1,0 +1,283 @@
+{
+ "id": "majority-vs-minority-de",
+ "title": "Karlsruhe Voids the Mosque Ban a 61% Majority Wanted",
+ "setting": "In Musterstadt, a mid-size town in Germany's industrial west, a blue tarp has covered the half-built Nur Mosque for two summers. The foundation is poured and the steel frame is up; the prayer hall is still open to the sky. Aisha Demir, thirty-four, a pharmacist, chairs the Moscheebauverein, the mosque-building association. For nine years her congregation of about four hundred has prayed in a rented former furniture showroom with fluorescent lights and a leaking roof. The new building was paid for the slow way: bake sales, a members' loan, a crowdfunding page that took eleven months to reach its target. It was supposed to open in the autumn.\n\nThen the national mood turned. Riding a long wave of anti-immigration politics, a bloc in the Bundestag put forward the Gesetz zur Aussetzung der Errichtung neuer Gebetsstaetten, a law to \"suspend the establishment of new places of worship.\" It was written to sound neutral, applying to every faith, but nobody in Musterstadt was confused about who it was for. Polls put public support at 61 percent. On a Thursday in March the Bundestag passed it, 373 votes to 235. Within three weeks a municipal building inspector wired a red stop-work notice to the Nur Mosque's fence, citing Section 1 of the new statute. Aisha's contractor pulled his crew off the site by lunchtime.\n\nWhat happens next is the whole point of the scenario. Germany's deployment of the Civic Kernel runs the rights guard with its remedy set not to \"declaration\" but to \"strike\" — backed by the Grundgesetz and the Bundesverfassungsgericht in Karlsruhe. The instant the law was enacted, it landed in the federal transparency log flagged, not as ordinary law-in-force: the guard had already classified it as tripping human dignity (Basic Law Art 1), equality (Art 3), and freedom of faith (Art 4). A quarter of opposition members of the Bundestag, joined by a Land government, filed for abstract judicial review. Aisha followed the case docket on her phone the way other people follow a football table.\n\nThe stakes are sharper than \"will the mosque open.\" In a country whose courts can only declare a law incompatible and leave it on the books, the stop-work notice would stand while politicians shrugged. Here the court can void the law outright — and because human dignity sits behind the eternity clause of Article 79(3), not even a two-thirds supermajority could lawfully re-enact this ban. The tension is that this iron promise is only ever as strong as the court that keeps it, and courts, in some democracies, have been packed.",
+ "threats": [
+  "T7",
+  "T1",
+  "T13"
+ ],
+ "doc_refs": [
+  "§1",
+  "§3.3",
+  "§3.4",
+  "§5",
+  "§6",
+  "§9",
+  "§13",
+  "T7",
+  "T1"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:bund.example",
+   "name": "Bundesrepublik Deutschland - Civic Kernel deployment"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "municipal Einwohnermeldeamt + Bundeswahlleiterin",
+   "unlinkable": true,
+   "sybil_resistance": "strong",
+   "eligibility_rules": "bundeswahlgesetz/v2026-01"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-safe-space",
+   "trustee_quorum": "4-of-7: Bundesverfassungsgericht, two universities, two opposition parties, Bundeswahlleiterin"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    23,
+    26,
+    30
+   ],
+   "remedy": "strike"
+  },
+  "transparency_log": {
+   "log_id": "did:web:bund.example",
+   "witnesses": [
+    "did:web:bundesverfassungsgericht.example",
+    "did:web:mpg.example",
+    "did:web:ccc.example"
+   ],
+   "anchors": [
+    "ethereum-mainnet",
+    "bitcoin-mainnet"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:bund.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Aisha Demir and the Musterstadt congregation",
+   "verb": "offstage",
+   "narrative": "The human stakes the kernel never touches: a half-built mosque under a tarp, nine years of praying in a rented showroom, a members' loan, and a national campaign for a 'moratorium on places of worship' polling at 61 percent. The kernel does not host this debate, rank the arguments, or pick the outcome — it only stands ready to record what the state decides and to type-check it against the rights invariants."
+  },
+  {
+   "actor": "Deutscher Bundestag (legislative secretariat)",
+   "verb": "offstage",
+   "narrative": "The Bundestag debates and passes the moratorium 373 to 235 — the same 61 percent that shows up in the polls. The parliamentary process is offstage; what enters the kernel is only its output, appended to the federal transparency log as a versioned rule. Because it touches the rules of who may build a place of worship, it enters on the constitutional path, not as ordinary law-in-force.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rules.amendment",
+    "community": "did:web:bund.example",
+    "timestamp": "2026-03-12T14:30:00Z",
+    "body": {
+     "amendment_id": "2026-gesetz-gebetsstaetten-moratorium",
+     "title": "Gesetz zur Aussetzung der Errichtung neuer Gebetsstaetten",
+     "reference": "BT-Drs 21/1490",
+     "enacted_by": "Deutscher Bundestag",
+     "vote": {
+      "yes": 373,
+      "no": 235,
+      "abstain": 22,
+      "yes_fraction": 0.61
+     },
+     "text_hash": "sha256:3e1d7c4e76b6f75bb9547548752a4ee9824a43fb1900cc9ff09a41365fc275ac",
+     "targets_class": "religion",
+     "status": "enacted-pending-constitutional-review"
+    },
+    "sig": {
+     "key_id": "did:web:bund.example#log-1",
+     "alg": "ed25519",
+     "value": "UnVsZXNBbWVuZG1lbnRQbGFjZWhvbGRlclNpZw"
+    }
+   }
+  },
+  {
+   "actor": "Rights guard (SVC-3)",
+   "verb": "verify",
+   "narrative": "The static analyser type-checks the enacted rule against the thirty invariants. The wording is facially neutral, but the guard flags that in effect it burdens a single protected class, and records four tripped invariants: 1 (human dignity), 2 and 7 (equality and equal protection), 18 (freedom of faith). Crucially the remedy is 'strike', and one of the tripped invariants is dignity — which the eternity clause puts beyond amendment. The classification, with reasons, lands in the log and routes the law to Karlsruhe.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:bund.example",
+    "timestamp": "2026-03-12T14:35:00Z",
+    "body": {
+     "subject_entry": "2026-gesetz-gebetsstaetten-moratorium",
+     "tripped_invariants": [
+      1,
+      2,
+      7,
+      18
+     ],
+     "reasons": {
+      "1": "GG Art 1 human dignity: the moratorium marks one faith community as second-class; the dignity core is unamendable via Art 79(3).",
+      "2": "GG Art 3 equality: differential treatment on a protected characteristic (religion).",
+      "7": "GG Art 3 equal protection: neutral wording but a single confession bears the entire burden in effect.",
+      "18": "GG Art 4 freedom of faith and conscience, inviolable: suspending places of worship burdens the exercise of religion."
+     },
+     "remedy": "strike",
+     "routed_to": "Bundesverfassungsgericht (abstract judicial review, GG Art 93(1) No 2) + sortition citizens' panel",
+     "classifier": "rights-guard/opa-de/v2026-01"
+    },
+    "sig": {
+     "key_id": "did:web:bund.example#log-1",
+     "alg": "ed25519",
+     "value": "UmlnaHRzQ2xhc3NpZmljYXRpb25QbGFjZWhvbGRlcg"
+    }
+   }
+  },
+  {
+   "actor": "Aisha Demir",
+   "verb": "read",
+   "narrative": "On her citizen verification client (the Form B phone app), Aisha reads the classification directly. Her app does not editorialise; it renders the log: the moratorium is flagged, it sits on the constitutional path, its remedy is strike, and the tripped invariants include the unamendable dignity core. For the first time since the stop-work notice went up, she can see in plain terms that the law is not yet enforceable as ordinary law — it is under review, on a path from which it may not return."
+  },
+  {
+   "actor": "Musterstadt building authority (Bauaufsichtsbehoerde)",
+   "verb": "offstage",
+   "narrative": "The state exercises force anyway: a municipal inspector issues a stop-work sanction against the Nur Mosque site, citing Section 1 of the new statute. The kernel does not wield this power, but it forces the act to be legible — the sanction cannot be logged validly without naming its authorising rule, and it carries a pointer to the appeal trace. The warrant it cites is the very statute the guard has already flagged for strike.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:bund.example",
+    "timestamp": "2026-04-02T10:00:00Z",
+    "body": {
+     "act_class": "sanction",
+     "authorizing_rule": "Gesetz zur Aussetzung der Errichtung neuer Gebetsstaetten, Section 1 (2026-gesetz-gebetsstaetten-moratorium)",
+     "issuing_authority": "Bauaufsichtsbehoerde Stadt Musterstadt",
+     "subject_ref": "enforcement:baugenehmigung-2026-00417",
+     "rights_guard_ref": "2026-gesetz-gebetsstaetten-moratorium#rights.classification",
+     "appeal_trace": "did:web:bund.example/appeals/baugenehmigung-2026-00417"
+    },
+    "sig": {
+     "key_id": "did:web:musterstadt.example#log-1",
+     "alg": "ed25519",
+     "value": "Q29lcmNpdmVBY3RQbGFjZWhvbGRlclNpZ25hdHVyZQ"
+    }
+   }
+  },
+  {
+   "actor": "One quarter of the Bundestag (opposition MdBs) + a Land government",
+   "verb": "challenge",
+   "narrative": "The constitutional challenge itself: under Basic Law Art 93(1) No 2, a quarter of the Bundestag together with a Land government file for abstract judicial review (Normenkontrolle) at the Bundesverfassungsgericht. This is the challenge verb made real — not a citizen auditing a tally, but representatives formally contesting a decision the guard has already routed to the court."
+  },
+  {
+   "actor": "Bundesverfassungsgericht, Erster Senat + sortition citizens' panel",
+   "verb": "offstage",
+   "narrative": "The court hears argument over months; a randomly selected citizens' panel (SVC-2 sortition) reviews alongside the professional judges, exactly the adversarial-plus-judicial review §3.3 describes. This deliberation is offstage — the kernel runs neither the courtroom nor the panel; it only records the classification that put the case there and will record the resolution that comes out."
+  },
+  {
+   "actor": "Bundesverfassungsgericht, Erster Senat",
+   "verb": "verify",
+   "narrative": "The court verifies the statute against the constitution and voids it — nichtig, void from the start — on the grounds of Arts 4, 3, and 1. The judgment goes further than striking this law: because Art 1 dignity lies behind the Art 79(3) eternity clause, even a two-thirds constitutional amendment could not lawfully enact this ban. The resolution lands in the log as an escalation resolving to 'struck', and it lists the Musterstadt sanction among the dependent acts now void.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:bund.example",
+    "timestamp": "2026-06-24T11:00:00Z",
+    "body": {
+     "subject_entry": "2026-gesetz-gebetsstaetten-moratorium",
+     "classification_ref": "2026-gesetz-gebetsstaetten-moratorium#rights.classification",
+     "forum": "Bundesverfassungsgericht, Erster Senat",
+     "case": "1 BvF 3/26",
+     "judgment_hash": "sha256:c62a2565a800288e56e2a2e8a309e69e7e66561bf205821ad695b42b3a19f09e",
+     "resolution": "struck",
+     "effect": "void ab initio (nichtig)",
+     "grounds": [
+      "GG Art 4",
+      "GG Art 3",
+      "GG Art 1"
+     ],
+     "eternity_clause": "GG Art 79(3): the Art 1 dignity core lies beyond amendment even by a two-thirds supermajority; the moratorium could not be lawfully re-enacted as a constitutional amendment.",
+     "dependent_acts_voided": [
+      "enforcement:baugenehmigung-2026-00417 sanction of 2026-04-02"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:bundesverfassungsgericht.example#log-1",
+     "alg": "ed25519",
+     "value": "U3RydWNrVm9pZEJ5QlZlcmZHUGxhY2Vob2xkZXI"
+    }
+   }
+  },
+  {
+   "actor": "Aisha Demir's phone (§4 audit fleet)",
+   "verb": "verify",
+   "narrative": "Aisha's client checks the log's inclusion and consistency proofs — the same passive audit millions of phones run in the background. It confirms the escalation is included, that today's log strictly extends the one that carried the stop-work order, and that the sanction's authorising rule is now void. The app surfaces the practical consequence: the Musterstadt notice is a dead letter and the appeal it pointed to is moot. She calls her contractor."
+  },
+  {
+   "actor": "Aisha Demir",
+   "verb": "read",
+   "narrative": "The final state renders plainly on her phone: the law is struck, void from the start; the dignity core cannot be re-enacted even by supermajority; construction may resume. The same screen, honestly, shows the residual: the guard could strike here only because Germany declared remedy 'strike' and Karlsruhe was there to enforce it — a protection contingent on a court that stays independent. The tarp comes off the Nur Mosque in August."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§3.3",
+   "observation": "REQUIRED UK COMPARISON. The identical 61% attack that merely STRAINS-toward-breaking under the UK deployment is contained here, and the difference is the remedy axis, not coverage. Both maps name the same rights at issue — religion (invariant 18 / Art 4) and equality (invariants 2 and 7 / Art 3) — so coverage is equal on the articles the ban trips. What differs is the manifest's rights_guard.remedy: the UK declares 'declaration' (an HRA s.4 flag that leaves the law in force under parliamentary sovereignty), while Germany declares 'strike' (the BVerfG voids the law ab initio). Same scenario, same coverage, opposite outcome for Aisha: in the UK the mosque stays closed while a court tut-tuts; here the statute is nichtig and construction resumes. Naming a right is worth only as much as the remedy attached to it."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§5",
+   "observation": "The eternity clause hardens the protection beyond a single ruling. Because invariant 1 (Art 1 dignity) is one of the tripped invariants and sits behind Art 79(3), the rights.escalation records that even a two-thirds constitutional amendment could not lawfully re-enact the ban. This mirrors §5's design pin — 'cheap to change mechanisms, nearly impossible to change personhood' — as an actual legal fact, not just an architectural aspiration. The majority cannot simply come back with a bigger majority and amend the ban into the constitution."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T1",
+   "observation": "WHAT THE PROTOCOL DOES NOT SOLVE. The strike power and the eternity clause are only as strong as an uncaptured court. The kernel logs the classification and the escalation and makes any tampering with that record visible (§3.4), but it does not run the Bundesverfassungsgericht and cannot stop court-packing. A 61% movement that cannot amend the dignity core CAN, over time, change who sits on the bench — appointment rules, retirement ages, chamber sizes — and a captured court could simply decline to strike. The transparency log would make the capture legible; it would not prevent it. Aisha's protection here rests on an institutional assumption the protocol surfaces but cannot guarantee. This is why the verdict is 'strains', not 'holds'."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§9",
+   "observation": "Militant democracy (streitbare Demokratie) carries its own civil-liberties cost the kernel cannot adjudicate. The same German order that voids an anti-Muslim law also permits banning parties (Art 21(2)) and forfeiting individual rights (Art 18) to defend the free democratic order — and invariant 30 in the manifest is backed partly by that machinery. But 'who threatens the order' is a judgment, not a computation: the strike-and-ban apparatus that protects a minority today can, in different hands, be pointed at dissenters tomorrow. The kernel can only record such acts and make them appealable (T13, 'AI holds a microscope, never a pen'); it deliberately does not decide who deserves them. Strength against majoritarian abuse and risk of establishment abuse are the same lever seen from two sides."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.3",
+   "observation": "Classification remained judgment, and here the remedy contained the gap. The statute was drafted facially neutral ('all places of worship'), and §3.3 concedes a clever drafter can word a proposal to slip the schema. The guard flagged it anyway as targeting a class in effect, but the durable backstop was not the classifier — it was the court's human review, which is exactly where a strike regime puts the final word. In a declaration-only regime the same gameability would leave the law standing; here, even an imperfect classification only had to be good enough to route the law to a forum that could void it."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "Honest coverage and personhood limits that did not bite this attack but are visible on the manifest. The German deployment declares 23 of 30 invariants (the 'backed' set); six others (Arts 6, 22, 25, 27, 28, 29) are only structural or programmatic in the Grundgesetz and Art 24 (rest and leisure) has no German constitutional counterpart at all — so the citizen client renders those absences per §6. None of that mattered for this ban, whose relevant rights (1, 2, 7, 18) are all backed with strike force. Separately, the manifest declares unlinkable, strong-sybil personhood as the reference posture, but §13 notes the BBS unlinkable-pseudonym primitive is still pre-final in the standards it depends on — a paper-prototype claim ahead of shipped cryptography."
+  }
+ ]
+}

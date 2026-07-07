@@ -1,0 +1,337 @@
+{
+ "id": "refugee-enrolment",
+ "title": "The Camp That Voted: Three Thousand People With No Papers Decide Where the Water Goes",
+ "setting": "Zaruna Ridge is a settlement of about three thousand people on a disused quarry terrace above the town of Velika, in a host country that never wanted them and has never issued a single one of them a document. Most arrived across the mountains over the past four years; whatever passports or ID cards they once had were sold, seized, or burned along the way. The camp runs on ration rosters kept by Ponte, an Italian relief NGO, and on the authority of a residents' committee chaired by Daoud Karim, a former water engineer from Homs. The committee's problem in February 2026 is brutally concrete: tap stand 3 serves eleven hundred people, the queue starts before dawn, and two weeks ago a fight in that queue put a teenager in the Velika clinic. A fourth water point is finally funded. Where it goes — beside the school, or on the lower terrace near Block E — will decide who walks four hundred metres with jerrycans every day. Whoever loses has to believe the count was fair, because the last committee \"vote,\" a show of hands at a tense meeting, is exactly what people no longer believe.\n\nElena Marchetti, Ponte's protection officer, offers something stranger than aid: enrolment ceremonies. A cheap kit — a laptop, a card printer, a box of smartcards, a few donated Android phones — that would give each adult resident a cryptographic credential proving \"I am one enrolled person of this settlement\" without recording a name, a face, or a nationality. The committee argues about it for three nights. Nasrin Abdi, who taught mathematics in Hargeisa and now runs the camp school's double shifts, wants it for the school-schedule votes. Idris Osman, the Block E representative who wants the water point on his terrace, wants it because he intends to lose or win by numbers nobody can dispute. The bitterest argument is about fingerprints: a biometric register would stop anyone enrolling twice, and every person in the tent knows what happens if a gendarme ever carries that register out of the camp. They refuse the biometrics and agree to say so in writing — the credential will be weaker, and the weakness will be published.\n\nThe danger is not hypothetical. The deputy prefect of Velika, Goran Miloš, has already shut down an NGO literacy programme for \"exceeding its humanitarian mandate,\" and the one thing his government has stated plainly is that no one may issue identity papers to people it is trying to keep deportable. What the camp is about to build is not an identity paper — it is deliberately, cryptographically incapable of being one — but it will look like a card, issued at a ceremony, by a committee, to people the state says do not exist. Whether that distinction survives contact with the prefecture is not something any protocol can promise.",
+ "threats": [
+  "T3",
+  "T9",
+  "T1"
+ ],
+ "doc_refs": [
+  "§3.1",
+  "§3.2",
+  "§3.4",
+  "§4",
+  "§6",
+  "§8",
+  "§10",
+  "§11",
+  "§12",
+  "T1",
+  "T3",
+  "T9"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:zaruna-ridge.example",
+   "name": "Zaruna Ridge Residents' Committee"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "Block enrolment quorum: rotating registrar plus two VRF-drawn resident witnesses; no biometric gallery by deliberate decision",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "enrol/v1"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "3-of-5: residents' committee, Ponte relief legal clinic, Sant'Adela university law clinic, Zaruna diaspora association, Velika old-town parish"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    7,
+    12,
+    18,
+    19,
+    20,
+    21,
+    25,
+    26
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:zaruna-ridge.example",
+   "witnesses": [
+    "did:web:ponte-relief.example",
+    "did:web:santadela-law.example",
+    "did:web:zaruna-diaspora.example"
+   ],
+   "anchors": [
+    "chain:alpha-anchor.example",
+    "chain:beta-anchor.example"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "enrolment",
+    "steps": 3,
+    "fields": 4,
+    "median_seconds": 540,
+    "abandonment_rate": 0.04
+   },
+   {
+    "process": "water-point ballot (paper channel)",
+    "steps": 2,
+    "fields": 1,
+    "median_seconds": 180,
+    "abandonment_rate": 0.01
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:zaruna-ridge.example#committee-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Residents' committee (Daoud Karim, chair)",
+   "verb": "offstage",
+   "narrative": "Three nights of argument in the committee tent. The kernel does not touch any of it: the fight over tap stand 3, Idris lobbying for the lower terrace, and above all the biometrics decision. Elena explains that fingerprint deduplication would make double-enrolment nearly impossible; Nasrin answers that a fingerprint gallery in a refugee camp is a target painted on every resident, MPC custody or not, because the custodians' laptops live twenty minutes from the prefecture. They choose the weaker credential and resolve to declare the weakness honestly. Who counts as a resident — 90 days' continuous presence on a block roster, age sixteen up because camp adulthood starts early — is decided here too, by people, as §10 says it must be: who is the tribe is governance, not engineering."
+  },
+  {
+   "actor": "Daoud Karim, committee chair",
+   "verb": "read",
+   "narrative": "The committee publishes its conformance manifest as the first entry of a brand-new transparency log, witnessed by Ponte, a university law clinic across the border, and the diaspora association in Malmö — deliberately, no witness inside the host state's reach. The manifest is honest to the point of discomfort: sybil resistance MEDIUM, not strong; 11 of 30 UDHR invariants, because a committee that cannot guarantee freedom of movement or nationality refuses to claim articles 13 and 15, and pointedly cannot claim article 6, recognition as a person before the law — the one thing these people actually lack. Anyone's phone can now render what Zaruna Ridge is and is not promising.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "manifest.published",
+    "community": "did:web:zaruna-ridge.example",
+    "timestamp": "2026-03-02T09:30:00Z",
+    "body": {
+     "manifest_digest": "sha256:4c1f9a2e7b0d3f6c8a5e2d1b9f4c7a0e3d6b5f8c1a4e7d0b3f6c9a2e5d8b1f4c",
+     "profile_summary": "personhood: ceremony, unlinkable, sybil-resistance MEDIUM; ballots verifiable and receipt-free with paper channel; rights guard upholds 11 of 30 UDHR invariants (absent include Art. 6 legal personality, Art. 13 movement, Art. 15 nationality - the committee cannot uphold what it cannot deliver); log witnessed by three institutions outside the host state"
+    },
+    "sig": {
+     "key_id": "did:web:zaruna-ridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Block C residents, registrar rotation 11, two drawn witnesses",
+   "verb": "prove",
+   "narrative": "Enrolment ceremonies run block by block over ten days in the water tents. No document is asked for — none exists to ask for. The perimeter is §10's ceremony itself: you appear in person before a rotating registrar and two resident witnesses drawn by verifiable lottery the evening before, people who know Block C's faces. Ninety-six residents with adequate phones generate keys in their handsets' enclaves; three hundred and sixteen get keys on smartcards through the assisted channel, because a credential that requires owning a phone would disenfranchise most of the camp (T9). The log records counts, never names, and the count reconciles against Ponte's shelter census — 412 issued against 447 counted adults, an arithmetic any outsider can check for phantom-minting.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-enrolment.ceremony",
+    "community": "did:web:zaruna-ridge.example",
+    "timestamp": "2026-03-07T16:45:00Z",
+    "body": {
+     "ceremony_id": "2026-03-block-c-02",
+     "place": "Block C water tent, Zaruna Ridge",
+     "officiant": "registrar-rotation-11",
+     "witness_quorum": "2-of-3 VRF-drawn residents (draw logged 2026-03-06)",
+     "credentials_issued": 412,
+     "running_total": 1874,
+     "reconciliation": "shelter census 2026-02 counts 447 adults in Block C; issued total within demographic anchor",
+     "channel_mix": {
+      "enclave_phone": 96,
+      "assisted_smartcard": 316
+     }
+    },
+    "sig": {
+     "key_id": "did:web:zaruna-ridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Amina Yusuf, new arrival",
+   "verb": "prove",
+   "narrative": "Amina Yusuf, twenty-three, presents at the Block C ceremony and is refused. The Block C roster shows her for only 21 days — under the 90-day rule. But the refusal is not a shrug at a desk, the historically largest attack on enrolment (§10, suppression at the desk): it is a denial trace in the log, citing the exact rule that fired, committing the inputs it fired on, and naming her appeal path with a deadline. She walks away angry, holding — for the first time in four years of walking away from officials — a machine-checkable statement of exactly why she was turned down.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.denial-trace",
+    "community": "did:web:zaruna-ridge.example",
+    "timestamp": "2026-03-09T11:12:00Z",
+    "body": {
+     "process": "enrolment",
+     "rules": "enrol/v1",
+     "applicant_pseudonym": "nym:app-7q2f",
+     "outcome": "denied",
+     "failed_rule": "enrol/v1#residency-90d (continuous residence in the settlement for 90 days, attested by block roster)",
+     "inputs_committed": "sha256:9b2e5d8c1f4a7e0d3b6c9f2a5e8d1b4c7f0a3e6d9b2c5f8a1e4d7b0c3f6a9e2d",
+     "appeal_path": "residents' committee panel with Ponte legal clinic observer, within 14 days; appeal outcome will be logged"
+    },
+    "sig": {
+     "key_id": "did:web:zaruna-ridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Amina Yusuf, appeal panel, Ponte legal clinic",
+   "verb": "challenge",
+   "narrative": "Amina appeals. Because the denial was a computation trace, the appeal splits cleanly along §11's line: fact error or encoding error? It is a fact error — she arrived in January and spent ten weeks in Block A before a shelter reallocation moved her; the Block A ration roster proves it. The panel corrects the attestation, the rule re-runs, she qualifies. Three days, no discretion, no favour owed to anyone, and the correction is public in the log while she stays a pseudonym. She is enrolled at the next ceremony. The committee notes the near-miss: had the rosters not overlapped, a real resident would have been excluded by clean code running on bad data.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-enrolment.appeal-upheld",
+    "community": "did:web:zaruna-ridge.example",
+    "timestamp": "2026-03-12T15:20:00Z",
+    "body": {
+     "appeal_of": "process.denial-trace 2026-03-09T11:12:00Z (nym:app-7q2f)",
+     "finding": "fact error, not encoding error: applicant's January arrival was recorded in the Block A ration-distribution roster before transfer to Block C; corrected attestation satisfies enrol/v1#residency-90d",
+     "action": "credential issued at Block C ceremony 2026-03-13; no rule change required",
+     "panel": "3 committee members + Ponte legal clinic observer"
+    },
+    "sig": {
+     "key_id": "did:web:zaruna-ridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Residents' committee; residents at the tea stalls",
+   "verb": "read",
+   "narrative": "The water-point decision opens with a four-day deliberation window before any ballot can be cast. The decision metadata is not a form: plain-language summaries in Arabic and Tigrinya, and — because the camp's literacy is uneven — audio versions played on a loop at the tea stalls and the distribution tent, with the arguments for the school side and the lower terrace attributed to the people who made them. Nasrin walks Block E explaining what a tracker slip is. Nobody is tested on any of it (§7): the window and the summaries are the opportunity, not a gate.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:zaruna-ridge.example",
+    "timestamp": "2026-03-20T08:00:00Z",
+    "body": {
+     "decision_id": "2026-water-point-4",
+     "question_hash": "sha256:2f7a0c3e6d9b1f4a7c0e3d6b9f2a5c8e1d4b7f0a3c6e9d2b5f8a1c4e7d0b3f6a",
+     "eligibility_rules": "enrol/v1",
+     "metadata": {
+      "summary_formats": [
+       "plain-text (Arabic, Tigrinya, host-language)",
+       "audio (three languages, played at tea stalls and the distribution tent)"
+      ],
+      "options": [
+       "site A: school side, 40m from latrine line",
+       "site B: lower terrace, near Block E"
+      ]
+     },
+     "window": {
+      "deliberation_ends": "2026-03-24T18:00:00Z",
+      "cast_ends": "2026-03-27T18:00:00Z"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:zaruna-ridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Residents of Zaruna Ridge (1,893 of ~2,300 enrolled)",
+   "verb": "cast",
+   "narrative": "Casting week. Four out of five ballots go through the paper channel: pre-printed encrypted ballots cast in a curtained corner of the distribution tent — the same protocol, the same tally, not a legacy annex (T9, §4). Halima Warsame, seventy-one, casts through the assisted channel with a Ponte volunteer and a resident witness she chose herself. Yonas Tekle, who trusts nothing after two camps and one shipwreck, demands the machine open a ballot and prove it encrypted what he marked — a cast-or-audit challenge, one of twenty-three that week — watches it verify, then casts a fresh one. His challenge is the point: the device never knows which ballot is real. Each voter leaves with a tracker slip proving inclusion, provably incapable of showing content."
+  },
+  {
+   "actor": "Idris Osman, Block E representative — the loser",
+   "verb": "verify",
+   "narrative": "The trustees decrypt the tally — three of five keyholders, two of them institutions outside the camp — and publish the proof: 1,287 for the school side, 606 for Idris's lower terrace. Idris spends an evening at a shared phone with his nephew, checking the homomorphic tally against the published encrypted ballots and finding his own tracker in the set. Then he concedes, in the committee tent, in front of the people he campaigned to. Amina finds her tracker too — the first count she has ever been inside. This is §1's single output, produced under a tarpaulin: a decision the loser accepts as legitimate because he personally verified it, not because he trusts Daoud.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:zaruna-ridge.example",
+    "timestamp": "2026-03-27T20:30:00Z",
+    "body": {
+     "decision_id": "2026-water-point-4",
+     "ballots_included": 1893,
+     "tally": {
+      "site-a-school-side": 1287,
+      "site-b-lower-terrace": 606
+     },
+     "channel_mix": {
+      "paper": 1538,
+      "phone": 355
+     },
+     "trustee_quorum_used": "3-of-5 (committee, Ponte clinic, diaspora association)",
+     "proof": "sha256:6d9b2f5a8c1e4d7b0f3a6c9e2d5b8f1a4c7e0d3b6f9a2c5e8d1b4f7a0c3e6d9b",
+     "cast_or_audit_challenges": 23
+    },
+    "sig": {
+     "key_id": "did:web:zaruna-ridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Deputy Prefect Goran Miloš; gendarmerie inspection; Elena Marchetti",
+   "verb": "offstage",
+   "narrative": "A stallholder in Velika tells a gendarme the camp is 'printing ID cards.' Two days later Miloš arrives with an inspection team and a draft order suspending Ponte's registration for 'facilitating unauthorized identity documentation' (T1). Elena hands him a smartcard: no name, no photograph, no number that persists between uses — presentations are unlinkable even to the committee that issued it; it cannot identify anyone to anyone, which is the opposite of an identity paper. The cryptography is on her side and it does not matter to the politics: Miloš's objection is not that the card identifies people but that a committee of the undocumented is acting like a polity. He leaves with the draft order unsigned — this time — after the law clinic and two foreign journalists who can read the public log make quiet phone calls. Nothing in any schema produced this reprieve. The kernel made the camp's self-government legible; legibility cuts both ways."
+  },
+  {
+   "actor": "The log itself; witnesses in three countries",
+   "verb": "read",
+   "narrative": "The nightly checkpoint lands the log head and manifest digest on two permissionless anchors — kilobytes, costing pennies, carrying no resident's data (§6). If the settlement is bulldozed next year, if Ponte is expelled and its laptops seized, the record that three thousand stateless people governed themselves — enrolled each other, refused to fingerprint each other, voted, lost, verified, conceded — is beyond the reach of the state that says they were never there. Digging the new water point starts Monday, school side.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "anchor.checkpoint",
+    "community": "did:web:zaruna-ridge.example",
+    "timestamp": "2026-03-28T06:00:00Z",
+    "body": {
+     "log_head": "sha256:1e4d7b0a3f6c9e2d5b8f1a4c7e0d3b6f9a2c5e8d1b4f7a0c3e6d9b2f5a8c1e4d",
+     "tree_size": 2417,
+     "anchors": [
+      "chain:alpha-anchor.example tx 0x5f8a",
+      "chain:beta-anchor.example tx 0x9c2e"
+     ],
+     "note": "manifest digest and log head now survive outside the settlement and outside the host state"
+    },
+    "sig": {
+     "key_id": "did:web:zaruna-ridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "strain",
+   "doc_ref": "§10",
+   "observation": "The honest sybil-resistance ceiling for a documentless camp that rightly refuses biometrics is 'medium', and the protocol offers nothing to raise it. §10's defensible middle — the MPC-custodied dedup gallery — assumes custodians a hostile state cannot reach in twenty minutes; here a fingerprint gallery is a deportation list waiting for a warrant, so the camp declined it. What remains is face-recognition-by-neighbours at block ceremonies plus census reconciliation, which catches bulk fraud but not a determined individual enrolling in Block A and again, months later, in Block F amid constant churn. The kernel's real contribution is legibility, not resistance: the weakness is a declared, machine-readable line in the manifest instead of a hidden flaw. T3 is mitigated and honestly labelled, not solved."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T1",
+   "observation": "What the protocol does NOT solve, named plainly: the political meaning of the credential. Unlinkable presentations genuinely protect residents' data — a seized smartcard identifies no one, links to no vote, reveals no nationality — but the host state's objection was never technical. To Deputy Prefect Miloš, the threat is that stateless people are constituting themselves as a polity, and a cryptographically perfect non-identity-paper still looks like a committee issuing cards to the undocumented. The manifest cannot argue with a gendarmerie, and no schema prevents an NGO expulsion or a camp clearance. The manifest itself concedes the deeper gap: UDHR Article 6 — recognition as a person before the law — is absent from the invariants list because no community protocol can confer legal personality that only states grant. The camp got binding internal decisions; it did not get one millimetre closer to papers, asylum, or safety."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Credential recovery is the open problem of §12 (item 5) at its worst exactly here. Phones are confiscated at checkpoints, stolen in transit, and sold in emergencies; smartcards burn with shelters. Social-guardianship recovery re-issues a credential with a new pseudonym secret, so a recovered resident either loses standing in open decisions or could theoretically speak twice — and the population most likely to need recovery repeatedly is this one. The camp's stopgap (revoke-and-reissue only between decision windows, revocations logged with reasons) narrows but does not close the gap the document itself admits no shipped system solves. For refugees, 'losing a phone must not mean losing citizenship' (§3.1) is currently an aspiration, not a property."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "A genuine hold, worth stating as firmly as the failures: enrolment as a §8-governed process worked. Amina Yusuf's denial produced a logged trace citing the exact rule and committed inputs; her appeal was a three-day fact correction against evidence, not a plea for discretion at a desk; the fix and its reasoning are public while she remains a pseudonym; and denial counts are published aggregates someone must explain. In a population whose entire experience of officialdom is unexplained refusal, an appealable denial trace is the single most humane artifact the kernel produced — the suppression-at-the-desk attack (§10) was structurally blunted, not just discouraged."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T9",
+   "observation": "The paper channel delivered first-class casting (81% of ballots) but verification remained device-mediated, so T9 is answered asymmetrically. Residents without phones verified their trackers on a handful of shared handsets at the Ponte tent — which means a queue, a helper, and shoulders to surf. Inclusion checking through a shared device leaks who bothered to verify and clusters trackers in a few hands; combined with §12's admitted limit that receipt-freeness cannot stop someone physically standing over you, a camp's density (families of eight in one shelter, block leaders watching the tent queue) keeps a residue of observational coercion (T4) that the protocol correctly never claimed to remove. Equal verifiability on paper alone — without borrowing a screen — is unachieved here, as §12 item 4 concedes it is everywhere."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "The fractal answer held: the kernel never asked the host state's permission because it never needed a sovereign — Zaruna Ridge is a community defining its own eligibility, publishing its own honest lattice position (11 of 30 invariants, sybil-medium), witnessed and anchored beyond the state's reach. That is real power for the powerless, and also its honest limit: subscription-not-sovereignty means the guarantees stop at the camp fence. The same §6 legibility that lets a Malmö phone audit the water-point tally also hands the prefecture a public, machine-readable record that self-government is occurring — evidence in the log is evidence for everyone, including adversaries."
+  }
+ ]
+}

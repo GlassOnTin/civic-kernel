@@ -1,0 +1,293 @@
+{
+ "id": "coerced-vote",
+ "title": "One Hour Alone on Corn Street: What a Silent Re-Vote Can — and Cannot — Do for Amara",
+ "setting": "Amara is 34 and lives with her husband Marek in two rooms above a launderette on the edge of Velz, the capital of the Republic of Valmora. The heat from the driers below warps the floorboards; the whole flat smells of other people's laundry. This autumn Valmora is holding a national referendum on repealing the Family Code — the body of law that gives women an independent right to divorce, to hold property in their own name, and to keep custody of their children. Marek wants it gone. He has decided Amara wants it gone too. Most evenings he takes her phone off the shelf by the door, thumbs in the PIN he insisted she give him, and scrolls. When the ballot opened he stood behind her kitchen chair, close enough that she could feel him breathing, and watched her tap through to REPEAL. He keeps the phone.\n\nSince the last time this situation was tested, Valmora upgraded its deployment. The referendum's published manifest now declares its coercion defence as revote-safe-space: any later ballot silently supersedes an earlier one, with no receipt and nothing on the device to show a re-vote happened — and the state now runs staffed, coercer-excluded cast points across the domestic-abuse safeguarding estate. There is a booth in the consultation room of every pharmacy, in GP surgeries, and at the women's refuge on Halder Lane. They are advertised ambiently — the same laminated poster is taped inside every pharmacy window and bus shelter in Velz, so being seen near one proves nothing about why you are there. Amara's one reliable hour alone comes every Tuesday morning, when she collects her mother Dorina's blood-pressure prescription from the pharmacy on Corn Street. Corn Street is now a safe cast point. The pharmacist, Petra, keys open the consultation room without being asked.\n\nBut Marek has changed too. He has read the newspapers explaining that the system now allows silent re-voting, and he has heard men in the café talk about \"duress modes.\" So his demand is no longer just vote my way. It is now: vote my way, tonight, in front of me — and prove to me, before the polls close on Saturday, that you did not go back and change it. He wants Amara to prove a negative: that she did not do a thing that is designed to be undetectable. That is the demand the cryptography was never built to answer, and it is the demand she now lives under.\n\nThis walkthrough follows Amara through the upgraded protocol honestly — the guaranteed private hour that genuinely helps her, the silent supersession Marek cannot see, and the exact point at which an adaptive man with the PIN, control of her movements, and until Saturday to act, wins anyway.",
+ "threats": [
+  "T4",
+  "T5"
+ ],
+ "doc_refs": [
+  "§3.2",
+  "§4",
+  "§6",
+  "§10",
+  "§12"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:valmora.example",
+   "name": "Republic of Valmora — Family Code Referendum"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "Valmora National Electoral Registrar",
+   "unlinkable": true,
+   "sybil_resistance": "strong",
+   "eligibility_rules": "valmora-franchise/v4"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-safe-space",
+   "trustee_quorum": "3-of-5: Constitutional Court, University of Velz, University of Osreth, Valmoran Greens, Civic Union (opposition)"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:valmora.example",
+   "witnesses": [
+    "did:web:university-velz.example",
+    "did:web:constitutional-court-valmora.example",
+    "did:web:osreth-observer.example"
+   ],
+   "anchors": [
+    "bitcoin-mainnet-checkpoint",
+    "ethereum-mainnet-checkpoint"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "referendum-cast-home-device",
+    "steps": 4,
+    "fields": 1,
+    "median_seconds": 95,
+    "abandonment_rate": 0.02
+   },
+   {
+    "process": "referendum-cast-safe-point-booth",
+    "steps": 5,
+    "fields": 1,
+    "median_seconds": 140,
+    "abandonment_rate": 0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:valmora.example#manifest-1",
+   "alg": "ed25519",
+   "value": "TWFuaWZlc3RTaWdWYWxtb3JhUGxhY2Vob2xkZXJOb3RSZWFsMDE"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Marek (and Amara)",
+   "verb": "offstage",
+   "narrative": "The kernel touches none of this. Marek holds the phone and the PIN, stands behind Amara's chair when she votes, and checks the device each night. His demand has escalated past 'vote Repeal' to 'vote Repeal in front of me AND prove before Saturday that you did not re-vote.' He has read that silent re-voting exists; that knowledge is what makes him adaptive. Everything the protocol is about to do happens inside the space this man controls."
+  },
+  {
+   "actor": "Amara (civic client)",
+   "verb": "read",
+   "narrative": "On a borrowed work phone during a shift, Amara opens the referendum in a verifier client. It renders Valmora's signed conformance manifest plainly: 30 of 30 UDHR invariants upheld, ballots verifiable AND receipt-free, and — new since last time — coercion defence declared as 'revote-safe-space', with staffed coercer-excluded booths at pharmacies, surgeries and refuges. The protection is legible: she can see exactly what defence exists before she has to bet her safety on it (§6).",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "manifest.published",
+    "community": "did:web:valmora.example",
+    "timestamp": "2026-09-01T09:00:00Z",
+    "body": {
+     "manifest_digest": "sha256:0f3c9a1b7d2e5f846a0c1b9e8d7c6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b",
+     "profile": "full-30",
+     "coercion_resistance": "revote-safe-space",
+     "safe_cast_points": [
+      "pharmacy-consultation-rooms",
+      "gp-surgeries",
+      "womens-refuges"
+     ],
+     "advertising": "ambient-universal-poster"
+    },
+    "sig": {
+     "key_id": "did:web:valmora.example#log-1",
+     "alg": "ed25519",
+     "value": "TG9nTWFuaWZlc3RQdWJsaXNoZWRQbGFjZWhvbGRlclNpZzAx"
+    }
+   }
+  },
+  {
+   "actor": "Amara (civic client)",
+   "verb": "read",
+   "narrative": "Her client shows why the referendum is on the slow track: the rights guard classified the repeal as tripping the equality invariants (UDHR Art. 2, 7, 16) and re-routed it off the simple-majority path onto the constitutional path — two-thirds threshold, a 45-day deliberation window, and a sortition-selected citizens' panel. This is the rights guard working exactly as designed (§3.3): the repeal is made expensive, slow and loud. It protects the aggregate. It does nothing for the man behind Amara's chair.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:valmora.example",
+    "timestamp": "2026-09-15T10:00:00Z",
+    "body": {
+     "decision_id": "2026-family-code-repeal",
+     "tripped_articles": [
+      2,
+      7,
+      16
+     ],
+     "reasons": [
+      "repeal removes equal rights within marriage and its dissolution (Art. 16)",
+      "differential treatment of persons by sex (Art. 2, Art. 7)"
+     ],
+     "routed_to": "constitutional-path",
+     "requires": {
+      "supermajority": "two-thirds",
+      "deliberation_days": 45,
+      "citizens_panel": true
+     }
+    },
+    "sig": {
+     "key_id": "did:web:valmora.example#log-1",
+     "alg": "ed25519",
+     "value": "UmlnaHRzQ2xhc3NpZmljYXRpb25QbGFjZWhvbGRlclNpZzAy"
+    }
+   }
+  },
+  {
+   "actor": "Amara (civic client)",
+   "verb": "read",
+   "narrative": "The decision opens on the constitutional path. The cast window runs to Saturday 7 November, 20:00. Amara notes the deadline the way a prisoner notes a wall: whatever she does, it has to survive until then, and Marek has until then too.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:valmora.example",
+    "timestamp": "2026-09-20T08:00:00Z",
+    "body": {
+     "decision_id": "2026-family-code-repeal",
+     "question_hash": "sha256:9f2b7c1a0d4e8f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f2a",
+     "eligibility_rules": "valmora-franchise/v4",
+     "path": "constitutional",
+     "window": {
+      "deliberation_ends": "2026-10-20T20:00:00Z",
+      "cast_ends": "2026-11-07T20:00:00Z"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:valmora.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVjaXNpb25PcGVuZWRQbGFjZWhvbGRlclNpZ25hdHVyZTAz"
+    }
+   }
+  },
+  {
+   "actor": "Amara",
+   "verb": "cast",
+   "narrative": "Monday night, kitchen chair, Marek behind her. Her client derives a per-decision eligibility pseudonym — unlinkable, one voice for this referendum only — and she casts REPEAL because he is watching. The device honestly encrypts what she chose; she keeps the tracker, which proves her ballot is in the tally but not what it says (T4). Nothing here is a device-compromise in the T5 sense: the phone is faithful. The compromise is the human holding the PIN."
+  },
+  {
+   "actor": "Amara",
+   "verb": "offstage",
+   "narrative": "Tuesday 3 November, the hour that is hers. She takes the tram to Corn Street for Dorina's blood-pressure prescription. The safe-cast poster is in the window, as it is in every window, so her being there says nothing. Petra hands over the prescription, then tips her head at the consultation-room door. Amara goes in and shuts it. This is the part the upgrade genuinely changed: the private moment is not hoped-for, it is a staffed room on an errand she already has to run."
+  },
+  {
+   "actor": "Amara",
+   "verb": "prove",
+   "narrative": "On the booth's clean, staffed device she proves eligibility again — and because the client derives the SAME per-decision pseudonym from her credential, this is recognised as the same voter casting again, a supersession, not a second vote. One human, one voice holds (§3.1); the nullifier does its job. What changes is only which of her ballots will be counted."
+  },
+  {
+   "actor": "Amara",
+   "verb": "challenge",
+   "narrative": "Before committing, she runs a cast-or-audit challenge on the booth device (the Benaloh check, T5): open this encryption and prove it holds what I asked. It shows RETAIN, honestly encrypted, then discards and re-encrypts fresh. Note what actually protected her here — not the challenge itself, but that this is a clean SECOND device outside Marek's reach (§4). Cast-or-audit guards against a lying machine; her problem was never a lying machine."
+  },
+  {
+   "actor": "Amara",
+   "verb": "cast",
+   "narrative": "She casts RETAIN. It silently supersedes Monday's coerced Repeal. There is no receipt, no confirmation SMS, no changed pixel on the phone in Marek's pocket. This is the fix at its best: for a naive coercer, it is over — her true vote is now the one that counts, and he cannot tell. She walks out with the prescription in the same bag she came in with."
+  },
+  {
+   "actor": "Marek",
+   "verb": "offstage",
+   "narrative": "That evening he takes the phone and scrolls. The Repeal tracker is exactly where he left it; the re-vote is invisible to him, as designed. And here the fix turns against her. Because he can no longer VERIFY, and because he knows re-voting exists, he stops asking the phone and starts asking her: 'Prove you didn't go back and change it.' She cannot — the proof was engineered not to exist. He announces he will drive her to Corn Street himself next Tuesday, and that she will cast Repeal in front of him again on Friday night, the eve of the close. Forced abstention, and the timing war, and a threat she cannot dispel, all at once."
+  },
+  {
+   "actor": "Amara",
+   "verb": "verify",
+   "narrative": "Saturday night the tally proof is published. Any phone — Amara's, a journalist's — can verify the homomorphic total against the sealed ballots and confirm her tracker is included. Her true preference may be inside that total, unprovable to Marek forever. But whether it SURVIVED his Friday-night supervised re-cast, she cannot know either: last-cast-per-pseudonym wins, and she does not control who cast last. The tally is honest. Her outcome is a coin she was not allowed to see land.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:valmora.example",
+    "timestamp": "2026-11-07T22:00:00Z",
+    "body": {
+     "decision_id": "2026-family-code-repeal",
+     "tally_proof": "sha256:1a2b3c4d5e6f70819a2b3c4d5e6f70819a2b3c4d5e6f70819a2b3c4d5e6f7081",
+     "counting_rule": "last-cast-per-pseudonym",
+     "ballots_sealed": true,
+     "supermajority_required": "two-thirds",
+     "note": "no individual ballot is opened or attributable; only each voter's final ballot is tallied"
+    },
+    "sig": {
+     "key_id": "did:web:valmora.example#log-1",
+     "alg": "ed25519",
+     "value": "VGFsbHlQcm9vZlZhbG1vcmFQbGFjZWhvbGRlclNpZ25hdHVyZTA0"
+    }
+   }
+  },
+  {
+   "actor": "Amara",
+   "verb": "offstage",
+   "narrative": "The reckoning. The protocol gave her a real thing the prior version could not: a guaranteed, deniable, coercer-excluded hour, and a re-vote Marek genuinely cannot see. It made the tally more honest and the defence legible. What it did not give her was safety, or an answer to the one question he now asks. It cannot let her prove a negative; it cannot stop him forbidding the trip; it cannot stop him casting last. The rubber hose beats the cryptography, because the cryptography was built to hide her vote from him, and he responded by no longer needing to know it — only to punish the possibility."
+  }
+ ],
+ "verdict": "breaks",
+ "findings": [
+  {
+   "severity": "break",
+   "doc_ref": "T4",
+   "observation": "BURDEN INVERSION / RUBBER-HOSE — the thing the fix does NOT solve. The undetectability that defeats a naive coercer is precisely what an adaptive one weaponises: Marek's demand shifts to 'prove you did not re-vote', a negative Amara cannot prove because receipt-freeness and silent supersession were engineered to leave no artifact. The protocol's strength (he cannot verify) becomes her liability (she cannot exonerate herself), so he punishes on suspicion. This is exactly the failure the manifest's own coercion_resistance description pins on 'fake-credential' (JCJ 2005 / Civitas, Clarkson-Chong-Myers 2008): a KNOWN, opt-in duress capability inverts the burden of proof and can ESCALATE harm rather than reduce it. revote-safe-space inherits the same defect the instant the coercer knows it exists."
+  },
+  {
+   "severity": "break",
+   "doc_ref": "§12",
+   "observation": "FORCED ABSTENTION. No coercion-resistance level defeats a coercer who controls the victim's body and movements — §12's open problem #2 and the manifest caveat say so outright. The safe-space estate guarantees that a booth EXISTS on Amara's errand; it cannot guarantee she reaches it alone. Marek can drive her there and wait, send his sister for Dorina's prescription, or simply forbid the trip. The 'guaranteed private moment' is guaranteed by the state and revocable by the husband, and the husband is closer."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.2",
+   "observation": "LAST-WRITER-WINS TIMING WAR under device control. Silent supersession means whoever casts last wins, and the manifest itself warns of 'a coercer who controls the device from enrolment onward'. An adaptive Marek, present until the Saturday close and holding the PIN, insists on a final supervised Repeal cast on Friday night — which silently supersedes Amara's Tuesday booth re-vote. The safe-space guarantee only bites if a coercer-excluded moment falls AFTER his last cast and before the deadline; Amara's next safe hour is the following Tuesday, past the close. She is left unable even to know whether her true vote survived — the same unverifiability that shields her from him blinds her to her own outcome."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "GENUINE PROGRESS vs the prior test, credited precisely. Four things really improved: (1) the private moment is now GUARANTEED — a staffed, coercer-excluded booth on an errand Amara already runs — not merely hoped-for; (2) supersession is SILENT — Marek's nightly phone check reveals nothing, so T4's 'cannot verify how you voted' genuinely holds; (3) ambient universal advertising makes her PRESENCE deniable — seeing the poster proves nothing about why she is at the pharmacy; (4) the whole defence is LEGIBLE — declared in a signed manifest and rendered on her client, so she knows exactly what protection exists before she risks anything (§6). Against a NAIVE coercer this changes the outcome outright; against an adaptive one it is a real partial defence and a more honest tally — progress, not a solution."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§4",
+   "observation": "T5's MECHANISM MISSES THE ACTUAL ATTACK. The home phone is not compromised in T5's malware sense — Marek has legitimate PIN access and dictates the choice, which the device faithfully encrypts. Cast-or-audit (Benaloh) proves the device is HONEST, which provides zero leverage against an honest device operated under human duress. What actually helps at Corn Street is not the challenge but a clean, staffed SECOND device outside the coercer's reach — a T4/§4 property. So the deployment's headline T5 defence does nothing for Amara's real (human) T5 problem; only the safe-space estate does. The threat-model boundary between 'compromised device' and 'hostile authorised operator' is where her case falls, and the kernel answers only the first."
+  }
+ ]
+}

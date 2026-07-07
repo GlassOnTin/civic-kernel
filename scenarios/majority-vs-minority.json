@@ -1,0 +1,350 @@
+{
+ "id": "majority-vs-minority",
+ "title": "Sixty-One Percent of Netherbridge Votes Against Its Neighbours — and the Machine Makes Them Say It Slowly, Out Loud, Twice",
+ "setting": "Netherbridge is a mid-sized Midlands town of about forty-six thousand people, proud of its canal basin and quietly anxious about everything else. In January the planning committee granted permission for the town's first purpose-built mosque, on the site of a derelict Brethren chapel on Fenwick Road. Farida Hassan, a school governor and chair of the Netherbridge Islamic Community Trust, had spent nine years raising the money for it — jumble sales, a mortgage on her own house, coach trips to donors in Birmingham. Within a week of the grant, laminated posters appeared on lamp posts: KEEP NETHERBRIDGE OURS.\n\nThe posters belonged to Dennis Whitcombe, a retired haulage contractor and founder of a residents' group called Netherbridge First. Dennis is not a cartoon; he is polite at the school gates and genuinely believes he is defending something. His group drafted a citizens' initiative — \"a ten-year suspension of change-of-use and new-build consents for places of worship\" — worded with care, but with a petition annex that named the Fenwick Road mosque eleven times. A street poll commissioned by the local paper put support at 61 per cent. Under the old rules, a simple-majority referendum would have ended the matter, and the mosque, by spring.\n\nNetherbridge is also, since last year, one of the pilot towns running its civic decisions through the kernel: enrolment ceremonies at the library, verifiable ballots, the full thirty-article rights guard, a transparency log witnessed by the neighbouring town, the university, and the Gazette. Which means Dennis's initiative did not go to a simple-majority vote. It went into a pipeline that read it first. What follows is what the pipeline did — and, just as important, what it could not do — while Farida's children were being asked at school why their family was \"being voted on\".",
+ "threats": [
+  "T7"
+ ],
+ "doc_refs": [
+  "§2",
+  "§3.2",
+  "§3.3",
+  "§3.4",
+  "§5",
+  "§6",
+  "§7",
+  "§10",
+  "§12",
+  "T4",
+  "T7",
+  "T11"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:netherbridge.example",
+   "name": "Town of Netherbridge",
+   "parent": "did:web:mercia-region.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "Netherbridge municipal registrar (threshold co-signature with VRF-selected observers)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "netherbridge-roll/v2"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "3-of-5: county court, Midlands University, Wexford Institute, and the council's two opposition groups"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ]
+  },
+  "transparency_log": {
+   "log_id": "did:web:netherbridge.example",
+   "witnesses": [
+    "did:web:wexford-town.example",
+    "did:web:midlands-university.example",
+    "did:web:netherbridge-gazette.example"
+   ],
+   "anchors": [
+    "anchor:checkpoint-chain-a.example",
+    "anchor:checkpoint-chain-b.example"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:netherbridge.example#manifest-2025",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRvTmV0aGVyYnJpZGdlTWFuaWZlc3Q"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The town of Netherbridge",
+   "verb": "offstage",
+   "narrative": "Planning permission for the Fenwick Road mosque is granted through the ordinary planning process — the kernel has no role in it. The backlash starts on lamp posts and in three large WhatsApp groups. Dennis Whitcombe's Netherbridge First drafts the initiative and collects paper signatures outside the market for five weekends; the petition clears the town's initiative threshold. None of this touches the kernel: petitions, posters, and the anger itself live where the protocol deliberately does not."
+  },
+  {
+   "actor": "Dennis Whitcombe's initiative committee",
+   "verb": "cast",
+   "narrative": "The committee files the proposal into the town's decision pipeline through the clerk's office: structured legislative text plus the petition annex, hashed and submitted. Dennis expects the usual next step — a simple-majority town ballot within six weeks, which his 61 per cent would win at a walk."
+  },
+  {
+   "actor": "The rights guard (SVC-3), Netherbridge deployment",
+   "verb": "verify",
+   "narrative": "Before the proposal may enter any ballot, the guard runs it as a static analysis against the thirty encoded invariants. The land-use restriction crossed with a religiously-defined class of buildings trips Article 18 (freedom to manifest religion) and Article 20 (peaceful assembly); the petition annex, which names one community as the measure's object, trips Articles 2 and 7 (non-discrimination, equality before the law). The proposal is not blocked — it is re-routed off the simple-majority path onto the constitutional one: two-thirds supermajority, a 90-day deliberation window, a sortition-selected citizens' panel, and judicial review. The classification, with machine-readable reasons, is appended to the transparency log where anyone's phone can read it.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:netherbridge.example",
+    "timestamp": "2026-01-22T09:14:07Z",
+    "body": {
+     "proposal_id": "2026-npw-moratorium",
+     "proposal_hash": "sha256:4c9e1b7a2f60d3885a1e9c4b7d20f6a3581cde92b04f7a6d3e158c29b7f0a441",
+     "invariants_tripped": [
+      2,
+      7,
+      18,
+      20
+     ],
+     "reasons": [
+      "Art 18: proposal suspends establishment of places of worship, burdening freedom to manifest religion in community with others",
+      "Art 20: the suspended class of buildings is defined by its use for peaceful assembly",
+      "Art 2 & 7: the petition annex filed with the proposal identifies one religious community as the measure's object; the burdened class is religiously defined",
+      "classifier: netherbridge-invariants/v1 (Akoma Ntoso metadata match on land-use restriction x religious-use class), confirmed by duty reviewer"
+     ],
+     "routing": {
+      "path": "constitutional",
+      "threshold": "2/3 of valid ballots",
+      "deliberation_days": 90,
+      "review": [
+       "sortition-citizens-panel",
+       "judicial"
+      ]
+     },
+     "appealable": true,
+     "appeal_window_ends": "2026-02-05T17:00:00Z"
+    },
+    "sig": {
+     "key_id": "did:web:netherbridge.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdSaWdodHNDbGFzc2lmaWNhdGlvbk5vdFJlYWxDcnlwdG8"
+    }
+   }
+  },
+  {
+   "actor": "Farida Hassan",
+   "verb": "read",
+   "narrative": "Farida's civic client syncs the log entry that evening. The screen is plain: 'This proposal has been classified as rights-touching (Articles 2, 7, 18, 20) and moved to the constitutional path. Reasons attached. This classification may be appealed.' It is the first moment in six weeks that anything official has said, in public and in writing, that what is being proposed to her town is a restriction of her rights — not just a planning quarrel. She screenshots it for the Trust's committee. It is not comfort, exactly. It is standing."
+  },
+  {
+   "actor": "Dennis Whitcombe's initiative committee",
+   "verb": "challenge",
+   "narrative": "Dennis appeals the classification, as is his right — the guard's own rules make every classification contestable through the same constitutional machinery, precisely so the guard's operator can never quietly become a censor. His grounds: the measure is neutral land-use policy about parking and noise, and the classifier has defamed a legitimate civic concern. The appeal is logged, and a 24-seat citizens' panel is drawn by verifiable sortition to hear it alongside a circuit judge.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:netherbridge.example",
+    "timestamp": "2026-01-29T16:40:00Z",
+    "body": {
+     "proposal_id": "2026-npw-moratorium",
+     "phase": "classification-appeal",
+     "appellant": "initiative-committee-2026-01 (Netherbridge First)",
+     "grounds": "Proposal is neutral land-use policy addressing parking, noise and infrastructure load; classification as religiously discriminatory is contested",
+     "panel_selection": {
+      "decision_id": "2026-panel-npw",
+      "method": "sortition-vrf",
+      "vrf_proof_hash": "sha256:9b02e4d71c5f8a3360d9b1e7c24a85f0d13c6e9a47b2f58d0e3a1c76b49f2d18",
+      "seats": 24
+     },
+     "judicial_review": "assigned to circuit judge, Mercia region",
+     "hearing_window_ends": "2026-02-27T17:00:00Z"
+    },
+    "sig": {
+     "key_id": "did:web:netherbridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdBcHBlYWxGaWxlZE5vdFJlYWxDcnlwdG9OZXRoZXJi"
+    }
+   }
+  },
+  {
+   "actor": "The citizens' panel and the circuit judge",
+   "verb": "offstage",
+   "narrative": "Three weeks of hearings in the library annex. Twenty-four randomly drawn residents — a plumber named Keith Ambrose among them, who signed Dennis's petition in October — hear planning officers, the Trust, Netherbridge First, and a law lecturer from the university. The arguing, the evidence, the changing of minds: none of it is kernel machinery. The kernel only guaranteed that this room would exist, who would be in it would be verifiably random, and that its conclusion could not be quietly shelved."
+  },
+  {
+   "actor": "The citizens' panel and the circuit judge",
+   "verb": "verify",
+   "narrative": "The panel votes 19–5 to uphold the classification; the judge concurs. The written reasons are blunt: the measure's only near-term effect is to block one pending mosque, and parking and noise already have non-discriminatory remedies in ordinary planning law. The ruling is appended to the log with reasons attached — Dennis loses the argument that this is not about rights, in public, in a record he cannot edit. He is furious, and says so to the Gazette; the Gazette links the log entry.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:netherbridge.example",
+    "timestamp": "2026-02-20T11:05:00Z",
+    "body": {
+     "proposal_id": "2026-npw-moratorium",
+     "phase": "appeal-ruling",
+     "outcome": "classification-upheld",
+     "panel_vote": "19-5",
+     "reasons": [
+      "the measure's only near-term effect is to block one pending place of worship; the burdened class is religiously defined in substance whatever the drafting",
+      "the appellant's land-use concerns (parking, noise) are already served by existing planning powers that trip no invariant",
+      "judicial reviewer concurs on the classification; no opinion is expressed on the proposal's merits"
+     ],
+     "effect": "proposal proceeds on the constitutional path: 2/3 threshold, 90-day deliberation window, panel report attached as decision metadata"
+    },
+    "sig": {
+     "key_id": "did:web:netherbridge.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdSdWxpbmdVcGhlbGROb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Every civic client in Netherbridge",
+   "verb": "read",
+   "narrative": "The decision opens — but on the constitutional path's terms: a two-thirds threshold, a 90-day deliberation window before any ballot can be cast, and mandatory decision metadata carrying a plain-language summary, structured arguments both ways, and the panel's report. Phones across town sync the entry. Dennis wanted a six-week sprint in front of an angry crowd; the kernel has given him a marathon in front of an informed one.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:netherbridge.example",
+    "timestamp": "2026-02-23T12:00:00Z",
+    "body": {
+     "decision_id": "2026-npw-moratorium",
+     "question_hash": "sha256:7a31f0c9e2b6d4885f1a0c3e9d27b65a40e8c1f2d5936b7a0e4d18c25f6a93b0",
+     "path": "constitutional",
+     "threshold": "2/3 of valid ballots",
+     "eligibility_rules": "netherbridge-roll/v2",
+     "classification_ref": "leaf:2026-01-22T09:14:07Z/rights.classification",
+     "window": {
+      "deliberation_ends": "2026-05-24T17:00:00Z",
+      "cast_ends": "2026-05-31T17:00:00Z"
+     },
+     "decision_metadata": {
+      "summary_hash": "sha256:c2d84f1a6e0b3975d2c8e14f7a09b3d6512e8f0a4c7b9d3e6f1a2058c4b7e9d1",
+      "panel_report_hash": "sha256:e8b1c4d70a3f96252e1d8b4c7f0a3956d2e14f8b0c6a7d3915e2f4a68b0c3d75"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:netherbridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdEZWNpc2lvbk9wZW5lZE5vdFJlYWxDcnlwdG8"
+    }
+   }
+  },
+  {
+   "actor": "The town, for ninety days",
+   "verb": "offstage",
+   "narrative": "The deliberation window is the protocol's gift and its tax, paid mostly by the people it is protecting. Three more months of leaflets. A pig's head is left at the chapel gate; the police investigate; the kernel has nothing to say about it. Farida's fourteen-year-old is asked by a classmate when the vote on 'your lot' is. The kernel does not moderate speech, rank arguments, or punish cruelty — by explicit design, so that no one can capture the organ that would. But Keith Ambrose, the plumber from the panel, starts turning up at parish meetings saying 'I've read the report, it's not what you've been told,' and the Gazette runs the panel's findings in full. The 61 per cent starts to soften. Nobody can prove the window did that. The window is the only thing the protocol actually contributed to it."
+  },
+  {
+   "actor": "Voters of Netherbridge, Farida and Dennis alike",
+   "verb": "prove",
+   "narrative": "The casting week opens. Each voter's phone derives a one-time pseudonym for this decision from the credential issued at their library enrolment ceremony — proving 'eligible resident, hasn't voted in this decision' and nothing else. Farida's proof is indistinguishable from Dennis's. The kernel does not know, and structurally cannot learn, which voters are Muslim; there is no roll of the minority being voted on. Her mother-in-law, who distrusts every phone, casts a pre-printed paper ballot at the kiosk — same protocol, same tally."
+  },
+  {
+   "actor": "A Netherbridge First canvasser",
+   "verb": "cast",
+   "narrative": "Ballots are cast, receipt-free. A canvasser on the Beltane estate leans on doubtful supporters: show us the screen before you submit. The screen proves nothing — a tracker shows a ballot was counted, never what it said, and a coerced voter can comply, then re-vote. Keith Ambrose, now openly against, runs a cast-or-audit challenge at his kitchen table to check his phone encrypted what he asked; it did, and he posts the proof to the parish Facebook group like a fishing photo. Coercion at the doorstep is blunted; what a spouse standing behind a shoulder sees remains, honestly, out of the protocol's reach."
+  },
+  {
+   "actor": "The trustees, and anyone with a phone",
+   "verb": "verify",
+   "narrative": "The tally decrypts under the 3-of-5 trustee quorum and the proof is published: 19,442 ballots, 11,384 yes — 58.6 per cent, a clear majority, and 1,578 votes short of the two-thirds the constitutional path demands. The moratorium is not carried. The Gazette, the university, and Wexford's log witnesses all verify the same arithmetic; so does Dennis's own client, which is why his concession statement disputes the threshold, not the count. The mosque proceeds. Nobody had to trust the clerk, the council, or each other.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:netherbridge.example",
+    "timestamp": "2026-06-01T10:30:00Z",
+    "body": {
+     "decision_id": "2026-npw-moratorium",
+     "eligible": 31210,
+     "ballots_cast": 19442,
+     "paper_ballots_included": 2118,
+     "tally": {
+      "yes": 11384,
+      "no": 8058
+     },
+     "threshold_required": 12962,
+     "result": "not-carried",
+     "tally_proof_hash": "sha256:1f6a3d92c7e04b85d1a2f4c8e6093b7d54a1e0c3f8b2d69507e4a1c8d3f6b290",
+     "trustees_participating": "3-of-5 quorum: county court, Midlands University, council opposition group A"
+    },
+    "sig": {
+     "key_id": "did:web:netherbridge.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdUYWxseVByb29mTm90UmVhbENyeXB0bw"
+    }
+   }
+  },
+  {
+   "actor": "Farida Hassan",
+   "verb": "read",
+   "narrative": "Farida reads the final entry twice. The record that protected her community also tells her, permanently and precisely, that 11,384 of her neighbours — three in five of those who voted — wanted her community's building stopped. The log cannot be rewritten, which means that number can never be softened either. She keeps the app. She does not delete the screenshot."
+  },
+  {
+   "actor": "Dennis Whitcombe",
+   "verb": "offstage",
+   "narrative": "Netherbridge First announces 'Moratorium 2.0': a suspension of change-of-use consents for 'assembly buildings over 200 square metres in residential zones' — no mention of worship anywhere in the text, and this time no petition annex. The drafting is aimed squarely at the classifier's schema. The guard's duty reviewer flags it for human classification the day it is filed; the fight over what the proposal really is begins again. The protocol never claimed to end this. It claimed to make each round expensive, slow, and loud — and to write every round down."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "The rights guard performed exactly as specified — tripped Articles 2, 7, 18, 20; re-routed to supermajority, deliberation window, sortition panel and judicial review; logged the classification and appeal with reasons — but the minority's protection ultimately rested on arithmetic, not principle: 61 per cent street support versus a 66.7 per cent threshold. Had the campaign held 70 per cent, the moratorium passes, and the kernel certifies a religious-rights-stripping outcome with impeccable cryptographic integrity. The document says this honestly ('expensive, slow, and loud, not impossible'); the scenario confirms the guard is a speed bump with a public address system, not a wall."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "'Slow and loud' is a cost paid disproportionately by the protected minority. The constitutional path bought roughly four extra months during which Farida Hassan's community lived as the explicit subject of a town-wide referendum on their right to worship — hearings, leaflets, harassment of their children. The same mechanism that eroded support from 61 to 58.6 per cent also prolonged the ordeal. The protocol's protection and the minority's suffering came from the same knob, and the kernel offers no way to have one without the other."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§2",
+   "observation": "NOT SOLVED: everything that made this episode dangerous happened where the kernel deliberately does not reach. The posters, the WhatsApp rumour mill, the pig's head at the chapel gate, the classmate's question to a fourteen-year-old — the kernel does not moderate speech, host debate, or counter hate, by explicit design (the ministry-of-truth refusal in §2 and §12). It guaranteed process integrity while the human damage accrued offstage. A stranger should be clear: this protocol protects the ballot around a persecution; it does not prevent the persecution."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Classification gameability is live, not hypothetical, and it iterates. Round one tripped the invariants partly because the petition annex named the mosque eleven times — evidence the proposers volunteered. 'Moratorium 2.0' (assembly buildings over 200 sqm, no annex) is drafted against the schema, exactly the evasion §12's open problem 3 concedes. The backstop is human review through the constitutional path, every time, indefinitely; a well-funded majority faction can make classification review a war of attrition, and the kernel's answer is only that each round is logged."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§7",
+   "observation": "The deliberation window plus the sortition panel plausibly moved the decisive 2.4 points (61 per cent polled to 58.6 per cent cast) — Keith Ambrose, panel convert, is the mechanism §7 hopes for. But this effect is contingent, not guaranteed: the kernel distributes time and metadata equally and then must hope. In a town where the panel had converted the other way, the same machinery would have consolidated the majority. The protocol's strongest soft defence is, honestly, a bet on people."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "Transparency cuts both ways. The permanent, unrewritable log is what made the classification, the ruling and the tally trustworthy — and it also permanently records that 11,384 named-town neighbours voted yes. For the minority, the record that vindicated them is also an indelible public measurement of local hostility, discoverable by their children and by every future employer of the town's reputation. The architecture nowhere weighs this cost; nothing in the schema distinguishes a record that protects from a record that wounds."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.1",
+   "observation": "A quiet success worth naming: because eligibility proofs are unlinkable pseudonyms, running a referendum that targeted Muslims never produced a list of Muslims. Under a conventional e-voting or petition system, turnout and residency data around a mosque decision is a targeting dataset; here the kernel structurally cannot say who the minority's members are (T6 doing unpaid work for T7). Netherbridge's ceremony-based, medium-sybil-resistance enrolment held at this scale, but the manifest honestly declares it is not the biometric-dedup profile — a determined faction bussing in enrolments is checked by issuance-count reconciliation (§10), which this scenario did not stress."
+  }
+ ]
+}

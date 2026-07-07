@@ -1,0 +1,283 @@
+{
+ "id": "no-smartphone",
+ "title": "The Woman Who Wanted a Box: Mosserdale Votes on Its Hall, With and Without Phones",
+ "setting": "Mosserdale is a village of about two hundred people in a west Cumbrian valley, and its hall is the last roofed thing in it that belongs to everyone. Built in 1923 as a war memorial, it has hosted the Women's Institute, wakes, whist drives, badger-group talks, and every parish vote since anyone can remember. Edith Braithwaite, 84, poured tea in it for forty years; her late husband Tom's name is on the honours board by the door. The roof now needs £48,000 the parish council does not have, and a holiday-let developer has made an offer. The council, unable to face deciding alone, has put it to the village: sell, or repair and keep.\n\nThe parish clerk, Margaret Tyson, has coupled the parish into a Civic Kernel pilot run with Cumberland Council — phone voting for the commuters and the diaspora children who moved to Carlisle and Manchester, and a paper channel in the hall itself for everyone else. Edith is everyone else. She has no smartphone and wants none; her hands are arthritic enough that a stylus is an insult; and her distrust of computers is not confusion but a position, articulately held: machines are somebody's machine, and she has never yet met the somebody. 'I want to put a paper in a box like I always have,' she tells Margaret at the post office, 'and I want to watch it counted.'\n\nHer granddaughter Katie, 26, a veterinary nurse in Cockermouth, has the phone client and adores both her grandmother and the hall. Katie will end up being Edith's window into half of this system — which is precisely the question this vote quietly tests. The old tin ballot box asked Edith to trust a seal, a public count, and neighbours' eyes. The new system promises her the same paper, the same box, the same public count — plus mathematics she cannot see and will not touch. Whether what Edith is asked to trust has grown or shrunk is not a footnote to the pilot. For her, it is the pilot.",
+ "threats": [
+  "T9",
+  "T4",
+  "T5"
+ ],
+ "doc_refs": [
+  "§1",
+  "§2",
+  "§3.1",
+  "§3.2",
+  "§3.4",
+  "§4",
+  "§6",
+  "§10",
+  "§12",
+  "T4",
+  "T5",
+  "T9"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:mosserdale-parish.example",
+   "name": "Mosserdale Parish Council",
+   "parent": "did:web:cumberland.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "parish clerk plus two VRF-selected resident observers, 2-of-3 co-signature",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "mosserdale-roll/v1"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "2-of-3: parish clerk, Cumberland Council electoral services, Loweswater parish clerk"
+  },
+  "transparency_log": {
+   "log_id": "did:web:mosserdale-parish.example",
+   "witnesses": [
+    "did:web:loweswater-parish.example",
+    "did:web:cumberland.example",
+    "did:web:cumberland-news.example"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "assisted-enrolment-in-person",
+    "steps": 4,
+    "fields": 2,
+    "median_seconds": 780,
+    "abandonment_rate": 0
+   },
+   {
+    "process": "cast-paper-in-person",
+    "steps": 3,
+    "fields": 0,
+    "median_seconds": 210,
+    "abandonment_rate": 0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:mosserdale-parish.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Margaret Tyson, parish clerk",
+   "verb": "offstage",
+   "narrative": "The February council meeting in the hall runs three hours over. The quotes for the roof are read out; the developer's offer is read out; nobody will move a motion either way. Councillor Hodgson finally says the thing everyone is thinking: 'This isn't ours to decide. Put it to the village.' Margaret agrees to run it through the Cumberland kernel pilot on one condition of her own devising, delivered while looking at the older half of the room: a paper channel, in this hall, or she resigns."
+  },
+  {
+   "actor": "Katie Braithwaite",
+   "verb": "read",
+   "narrative": "In May the parish publishes its conformance manifest. Katie's client renders it in plain words and she reads it to Edith at the kitchen table, alongside the same summary Margaret has pinned, on actual paper, to the hall noticeboard: ballots verifiable and receipt-free, paper channel first-class, enrolment witnessed in person by neighbours — and, printed just as prominently, what the parish does NOT run: no rights guard, and only document-grade duplicate checking, because Margaret knows every face on the roll. Edith snorts at most of it but concedes one point: 'At least it says what it doesn't do. The county council never did that.'",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "manifest.published",
+    "community": "did:web:mosserdale-parish.example",
+    "timestamp": "2026-05-04T10:00:00Z",
+    "body": {
+     "manifest_digest": "sha256:4b8e1d0a9c7f2e5b3a6d8c1f0e9b7a4d2c5f8e1b0a3d6c9f2e5b8a1d4c7f0e3b",
+     "manifest_version": 1,
+     "note": "Parish couples in for the village-hall decision; profile: personhood + decisions + log, no rights guard."
+    },
+    "sig": {
+     "key_id": "did:web:mosserdale-parish.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Edith Braithwaite",
+   "verb": "prove",
+   "narrative": "Enrolment Saturday, in the hall. Edith brings her bus pass and her rage. Margaret officiates; two observers picked by verifiable lottery — Alan Postlethwaite from the fell farm and a student home from Lancaster — co-sign every credential, so no single hand mints a voter. Phone owners enrol onto their own devices. Edith's credential is generated on a smartcard at the assisted station: the key is made in front of her, the card is handed to her, and it goes home to the kitchen drawer where Tom's medals live. The log records fourteen credentials issued at this time and place — a count, an officiant, never a name. What Edith cannot see, and says so, is whether the little grey machine kept a copy of what it just gave her. Nobody in the room can answer her with anything better than the co-signature and Alan's word.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-enrolment.ceremony",
+    "community": "did:web:mosserdale-parish.example",
+    "timestamp": "2026-05-16T11:30:00Z",
+    "body": {
+     "ceremony_id": "2026-05-16-village-hall",
+     "location": "Mosserdale Village Hall, main room",
+     "officiant": "parish-clerk",
+     "observers": 2,
+     "credentials_issued": 14,
+     "assisted_enrolments": 6,
+     "credential_medium": {
+      "phone-enclave": 8,
+      "smartcard": 6
+     }
+    },
+    "sig": {
+     "key_id": "did:web:mosserdale-parish.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Katie Braithwaite",
+   "verb": "read",
+   "narrative": "The decision opens on the first of June with a three-week deliberation window. Katie's phone shows the entry; the noticeboard shows the identical text — the exact question, the closing times, and a QR code that resolves to the same hash — because Margaret prints from the log, not alongside it. The one-page plain-language summary required by the decision-metadata line in the manifest goes through every letterbox in the valley: what the repair costs, what the developer pays, arguments for each, and who wrote which argument.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:mosserdale-parish.example",
+    "timestamp": "2026-06-01T18:00:00Z",
+    "body": {
+     "decision_id": "2026-hall-closure",
+     "question_hash": "sha256:9f2b7c1a0d4e8f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f2a",
+     "eligibility_rules": "mosserdale-roll/v1",
+     "window": {
+      "deliberation_ends": "2026-06-19T18:00:00Z",
+      "cast_ends": "2026-06-20T16:00:00Z"
+     },
+     "channels": [
+      "phone",
+      "paper-in-person"
+     ],
+     "metadata_digest": "sha256:2a5d8c1f0e3b6a9d4c7f2e5b8a1d0c3f6e9b2a5d8c1f4e7b0a3d6c9f2e5b8a1d"
+    },
+    "sig": {
+     "key_id": "did:web:mosserdale-parish.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "The village",
+   "verb": "offstage",
+   "narrative": "Deliberation happens where it always has: in the hall itself, one furious and tender public meeting; at the post office counter; over the fence. The kernel hosts none of it and ranks none of it. Edith speaks at the meeting for two minutes about 1923, the subscriptions raised farm by farm, and the difference between an asset and a memorial. It is generally agreed afterwards that the developer's agent picked the wrong evening to attend."
+  },
+  {
+   "actor": "Edith Braithwaite, with Alan Postlethwaite observing",
+   "verb": "challenge",
+   "narrative": "Polling morning. The paper ballots are pre-printed encrypted ballots: each sheet carries the two choices, a serial, and a detachable tracker stub, printed so that the stub reveals nothing about the choice. Before casting begins, the cast-or-audit rule is exercised in public: Edith, invited as the eldest present and visibly enjoying it, pulls three ballots at random from the stack and demands they be opened. Margaret unseals the print randomness; Alan's phone recomputes each encryption and shows a green tick — the paper says what its ciphertext says — and the three audited ballots are spoiled and pinned to the noticeboard. Edith watches carefully and then says the true thing out loud: 'I saw your telephone agree with your printer. I didn't see the sum.' The audit is real, and for her it is still testimony."
+  },
+  {
+   "actor": "Edith Braithwaite",
+   "verb": "cast",
+   "narrative": "Then she votes, and it is — to the minute — what she asked for. She takes a ballot behind the same plywood screen used since the 1974 boundary vote, marks keep-and-repair with a fat pencil on a string, folds it, and puts a paper in a box, in her hall, with her neighbours watching the box and not her. She keeps the tracker stub. Her smartcard is touched once to the reader at the desk to prove one-eligible-person-one-ballot without saying which person; total time, under four minutes; fields demanded of her: none. The stub goes in her handbag. She knows it is supposed to mean something. To her, unaided, it is a raffle ticket."
+  },
+  {
+   "actor": "Katie Braithwaite",
+   "verb": "verify",
+   "narrative": "The box is escorted to the scanning desk at four; the encrypted paper ballots enter the same homomorphic tally as the phone ballots; two of the three trustees co-operate to decrypt only the total. By evening the tally proof is in the log: 163 ballots, keep-and-repair 122, close-and-sell 41. Katie's client verifies the proof against the encrypted ballots, checks the log is a strict extension of yesterday's, and looks up Edith's tracker: included. She walks up the lane to tell her grandmother, and here the design is honest about its seam: Edith learns that HER ballot is in THAT tally from Katie's screen, or not at all. She trusts Katie completely. She notes, correctly, that this is not the same as needing to trust no one.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:mosserdale-parish.example",
+    "timestamp": "2026-06-20T19:45:00Z",
+    "body": {
+     "decision_id": "2026-hall-closure",
+     "ballots_included": 163,
+     "paper_ballots": 57,
+     "tally": {
+      "close-and-sell": 41,
+      "keep-and-repair": 122
+     },
+     "proof_digest": "sha256:c3f6e9b2a5d8c1f4e7b0a3d6c9f2e5b8a1d4c7f0e3b6a9d2c5f8e1b4a7d0c3f6",
+     "trustees_signing": [
+      "parish-clerk",
+      "cumberland-electoral-services"
+     ],
+     "rla_scheduled": "2026-06-27T14:00:00Z"
+    },
+    "sig": {
+     "key_id": "did:web:mosserdale-parish.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Edith Braithwaite",
+   "verb": "verify",
+   "narrative": "The following Saturday is the part of the protocol that belongs to Edith. The risk-limiting audit is a public session in the hall: twenty-nine paper ballots drawn by dice from the sealed batch, opened by hand, read aloud, chalked on the old whist-drive scoreboard, and compared against the announced result. Anyone may attend; eleven people do, which for Mosserdale is a crowd. Edith checks the chalk arithmetic herself — hand-count sampling is a verification she can perform with her own eyes and her own arithmetic, no device, no delegate. Zero discrepancies; the reported tally stands at a 5% risk limit. 'That part,' she tells Margaret, 'was a proper count.' It is the one verb the protocol gives her back whole.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-audit.rla-completed",
+    "community": "did:web:mosserdale-parish.example",
+    "timestamp": "2026-06-27T15:20:00Z",
+    "body": {
+     "decision_id": "2026-hall-closure",
+     "method": "ballot-polling-rla",
+     "risk_limit": 0.05,
+     "paper_ballots_sampled": 29,
+     "discrepancies": 0,
+     "outcome": "reported-tally-confirmed",
+     "venue": "Mosserdale Village Hall",
+     "public_session": true
+    },
+    "sig": {
+     "key_id": "did:web:mosserdale-parish.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+    }
+   }
+  },
+  {
+   "actor": "Edith and Katie Braithwaite",
+   "verb": "offstage",
+   "narrative": "The hall stays. The roof fund reopens with the vote's legitimacy behind it — the losers grumble but nobody disputes the count, which is the output the whole machine exists to produce. On the walk home Edith delivers her audit of the audit: 'The box was mine. The count on Saturday was mine. The rest of it was yours and Alan's telephones, and I had to take your word.' Katie starts to explain that anyone's phone, any client, any of millions, could have checked the same proofs — that she is not a trustee, only a window. Edith listens, allows it is better than the county's website, and observes that a window is still something you look through rather than stand in. Both of them are right, and the protocol document, to its credit, already knew it."
+  }
+ ],
+ "verdict": "strains",
+ "findings": [
+  {
+   "severity": "note",
+   "doc_ref": "§4",
+   "observation": "The paper channel genuinely held as first-class protocol, not a legacy annex: Edith enrolled, deliberated, audited a pre-printed ballot, cast paper into a box, and watched a hand-count RLA — casting demanded zero fields and under four minutes, and her ballot entered the same homomorphic tally as the phone ballots. T9's core promise (participation without a device) is met for the verbs prove and cast."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "T9",
+   "observation": "The verb VERIFY is device-gated at the individual level. Edith's tracker stub is cryptographically meaningful and personally meaningless: confirming HER ballot is in the tally requires computing an inclusion check, so she must delegate to Katie's phone or go without. The protocol converts 'trust the returning officer' into 'trust any one of many independent verifiers' — a real improvement in whom she may choose — but for a citizen with no device it never reaches 'trust no one'. Individual verification for the offline citizen is delegated trust, and the document should say so as plainly as it says paper is first-class."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.2",
+   "observation": "The paper channel's cast-or-audit ceremony is testimony, not verification, for its own constituency. When Edith challenged three pre-printed ballots, the proof that ciphertext matched plaintext was a green tick on Alan's phone — the exact class of artifact she distrusts. The challenge verb exists on paper but its evidence is only consumable through a device, so the person the paper channel serves cannot close the loop the challenge opens. Mitigation observed: doing it publicly with a locally trusted person converts it into social proof, which is the old paper system's trust model, not the new one's."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§4",
+   "observation": "Against the regression question — is trusting Katie worse than the old tin box? — the answer is no, but narrowly, and only because of the RLA. The old box gave Edith collective verification by eye (public count) and zero individual verification. The kernel gives her collective verification by eye (the public hand-count RLA, which she checked herself on the whist scoreboard) PLUS delegated individual verification she never had before. Nothing she previously possessed was taken; the strain is that the system's headline promise ('verify, don't trust') is only fully redeemed for device-holders. Remove the mandatory public RLA and this finding flips to a break — the RLA is load-bearing for T9, and the spec should mark it non-optional wherever a paper channel is declared."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.1",
+   "observation": "Key custody for the device-less is under-specified. §3.1's model is 'private key generated inside their phone's hardware enclave and never leaves it'; Edith has no enclave, so her key was generated by the enrolment station onto a smartcard. She asked the correct question — did the grey machine keep a copy? — and the protocol's only answer was the witnessed ceremony and threshold co-signature (§10), which bounds mis-issuance but not key exfiltration by the assisted-enrolment device. The paper channel is specified for ballots; the equivalent specification for personhood-key generation without a citizen-owned enclave is missing."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "T4",
+   "observation": "Receipt-freeness protected what Edith's ballot said, but in a 163-elector village the protocol cannot hide who enrolled, who walked into the hall, and who spoke at the meeting — Edith's views were village knowledge before a single ballot was encrypted. The document already concedes coercion under live observation (§12); at parish scale, social observability is the dominant channel and no cryptography touches it. Not a regression — the tin box had exactly this property — but not solved either."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "The parish honestly declared rights_guard: false, and the manifest made that absence legible on Katie's client and the noticeboard. Yet closing the village's only assembly space plausibly touches UDHR Art. 20 and 27, and nothing in this deployment would have escalated a closure decision to a constitutional path. Legibility worked as designed; protection was absent as declared. The lattice's honest cost (§6: 'the rights guard binds where it is subscribed') is concretely visible here."
+  }
+ ]
+}

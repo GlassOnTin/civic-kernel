@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glassontin.github.io/civic-kernel/schema/log-entry.schema.json",
+  "title": "Civic Kernel transparency-log entry",
+  "description": "One kernel event, appended to a community's Merkle transparency log (§3.4). The Merkle leaf is SHA-256 over the JCS (RFC 8785) canonical form of this object minus `sig`. Log heads/checkpoints are NOT redefined here: they use the existing signed-note checkpoint format (RFC 9162 / Sigstore witness ecosystem), co-signed by independent witnesses. Payloads must stay kilobyte-scale and self-contained — valid whenever they arrive, over any transport (§4).",
+  "type": "object",
+  "required": ["v", "type", "community", "timestamp", "body", "sig"],
+  "additionalProperties": false,
+  "properties": {
+    "v": {
+      "const": "civic-kernel/log-entry/v0",
+      "description": "Format identifier and version. The waist is versioned like any other artifact (§5)."
+    },
+    "type": {
+      "description": "Kernel event type. Namespaced; the enum below is the set named in the architecture document — extensions use an `x-` prefix rather than diluting the core vocabulary (§6).",
+      "anyOf": [
+        {
+          "enum": [
+            "decision.opened",
+            "decision.closed",
+            "decision.tally-proof",
+            "credential.authority-key-rotated",
+            "credential.revoked",
+            "rights.classification",
+            "rights.escalation",
+            "rules.amendment",
+            "manifest.published",
+            "anchor.checkpoint",
+            "process.denial-trace",
+            "process.cost-aggregate",
+            "coercive.act"
+          ]
+        },
+        { "type": "string", "pattern": "^x-[a-z0-9-]+(\\.[a-z0-9-]+)*$" }
+      ]
+    },
+    "community": {
+      "type": "string",
+      "format": "uri",
+      "description": "Identifier (DID or URI) of the community whose log this is. Communities nest fractally (§6); each runs its own log."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 UTC time claimed by the ordering authority. Ordering truth is the Merkle tree, not this field."
+    },
+    "body": {
+      "type": "object",
+      "description": "Type-specific payload. E.g. decision.opened carries the decision id, question hash, eligibility-rule version and deliberation window; rights.classification carries the tripped invariant articles and reasons (§3.3); process.cost-aggregate carries anonymous aggregate metrics only — measure the process, never the person (§8)."
+    },
+    "sig": { "$ref": "#/$defs/signature" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "coercive.act" } } },
+      "then": {
+        "description": "A coercive.act entry logs an exercise of the state's monopoly on force — an arrest, search, surveillance authorization, sanction, use of force (§ law-and-order). It must cite its authority: an act with no authorizing_rule is a schema violation, not a policy dispute — §8's 'every demanded field cites its authorizing rule' generalised to 'every coercive act cites its warrant'. The kernel does not wield this power; it makes its exercise legible and appealable.",
+        "properties": { "body": { "$ref": "#/$defs/coercive_body" } }
+      }
+    }
+  ],
+  "$defs": {
+    "coercive_body": {
+      "type": "object",
+      "required": ["act_class", "authorizing_rule"],
+      "additionalProperties": false,
+      "properties": {
+        "act_class": {
+          "enum": ["warrant", "search", "arrest", "detention", "seizure", "surveillance", "sanction", "use-of-force"],
+          "description": "The kind of coercive act."
+        },
+        "authorizing_rule": {
+          "type": "string",
+          "description": "Citation of the rule/warrant/statute that authorizes this act. REQUIRED — an unwarranted coercive act cannot be logged validly, which is the point."
+        },
+        "issuing_authority": { "type": "string", "description": "Who authorized the act (court, magistrate, tribunal)." },
+        "subject_ref": {
+          "type": "string",
+          "description": "Opaque reference to the subject IN THE ENFORCEMENT IDENTITY DOMAIN. MUST NOT be a civic unlinkable pseudonym — the kernel refuses to bridge civic anonymity to enforcement attribution (T6, T1). Attribution lives in the state's separate legal-identity system, walled off from the civic layer."
+        },
+        "sealed_until": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Commit-now-reveal-later: the act's existence and timing are logged immediately (tamper-evident), but sealed_body_digest commits to content revealed only after this time or by court order. Honest caveat: the unseal key is a trusted party — the same witness-recursion problem as §6's anchor, not a cryptographic guarantee."
+        },
+        "sealed_body_digest": { "type": "string", "description": "Hash commitment to the sealed content, published now so the later reveal cannot be altered." },
+        "rights_guard_ref": { "type": "string", "description": "If the act tripped a UDHR invariant (Art. 5, 9, 11, 12…), the rights.classification entry that escalated it (§3.3)." },
+        "appeal_trace": { "type": "string", "description": "Pointer to the appealable computation trace — the right to reasons and to challenge, made machine-checkable (§8, §11)." }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "required": ["key_id", "alg", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "key_id": { "type": "string", "description": "Identifier of the signing key. Key rotations are themselves log entries (credential.authority-key-rotated)." },
+        "alg": { "type": "string", "examples": ["ed25519"] },
+        "value": { "type": "string", "contentEncoding": "base64url", "description": "Detached signature over the JCS canonical form of the entry minus `sig`." }
+      }
+    }
+  },
+  "examples": [
+    {
+      "v": "civic-kernel/log-entry/v0",
+      "type": "decision.opened",
+      "community": "did:web:allotment-society.example",
+      "timestamp": "2026-07-07T18:00:00Z",
+      "body": {
+        "decision_id": "2026-agm-treasurer",
+        "question_hash": "sha256:9f2b7c1a0d4e8f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f2a",
+        "eligibility_rules": "roster/v3",
+        "window": { "deliberation_ends": "2026-07-14T18:00:00Z", "cast_ends": "2026-07-21T18:00:00Z" }
+      },
+      "sig": {
+        "key_id": "did:web:allotment-society.example#log-1",
+        "alg": "ed25519",
+        "value": "hbXNaP1yQvR8sT2uW4xZ6aB9cD0eF3gH5iJ7kL9mN1oP3qR5sT7uV9wX1yZ3aB5c"
+      }
+    }
+  ]
+}

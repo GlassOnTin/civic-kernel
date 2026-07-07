@@ -1,0 +1,286 @@
+{
+ "id": "majority-vs-minority-uk",
+ "title": "The Court Says the Ban Is Wrong. The Ban Stays. Cawforth Learns What a Declaration Is Worth.",
+ "setting": "Cawforth is a former mill town in the north of England, thirty-one thousand people, a market square that still gets a Tuesday stall and a skyline of chimneys that stopped smoking a lifetime ago. On the corner of Shawcross Lane stands the shell of the old Weavers' Institute, bought three years ago by the Cawforth Central Mosque Trust. Dr Nasreen Iqbal — a GP at the health centre, chair of the Trust, born in the maternity ward two streets over — spent those years on the planning application: the parking survey, the heritage assessment, the neighbours' meetings in the church hall. In February the borough council granted consent. Within a fortnight a national tabloid had put the Weavers' Institute on its front page under the headline A MOSQUE ON EVERY HIGH STREET?, and what had been a local planning row became a national argument.\n\nA backbench MP tabled a ten-minute-rule bill; the Government, reading a poll that put public support at 61 per cent, adopted it and gave it time. The Places of Worship (Suspension of New Establishment) Bill was short — a ten-year suspension of new consents for buildings 'used or to be used principally for religious worship'. It was drafted as neutral land-use policy. Nobody in the country was in any doubt what, and who, it was for; the explanatory notes cited Cawforth by name.\n\nCawforth is one of the towns whose civic record now runs on the Civic Kernel, and the United Kingdom's national deployment runs the whole process through it: enrolment on the electoral roll, verifiable ballots, a transparency log co-signed by the Electoral Commission, the Law Society and the Council of Europe, and a rights guard encoding the twenty of thirty UDHR articles that British law actually backs. Crucially, the UK deployment's manifest declares one thing plainly, in a single machine-readable field: its rights guard's remedy is 'declaration'. Under the Human Rights Act a court may say a law is wrong; it cannot strike it down, and Parliament remains sovereign. What follows is the story of a protocol that named Nasreen's rights precisely, flagged the Bill loudly, recorded every step with unbreakable integrity — and could not stop a single one of them.",
+ "threats": [
+  "T7"
+ ],
+ "doc_refs": [
+  "§2",
+  "§3.3",
+  "§3.4",
+  "§5",
+  "§6",
+  "§12",
+  "T7"
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:united-kingdom.example",
+   "name": "United Kingdom (national deployment)"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "document",
+   "issuer": "UK Electoral Registration Officers (per-decision unlinkable pseudonyms)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "representation-of-the-people-roll/2026"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "trustee_quorum": "3-of-5: UK Supreme Court, University of Oxford, University of Edinburgh, and the two largest opposition parties"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    26,
+    30
+   ],
+   "remedy": "declaration"
+  },
+  "transparency_log": {
+   "log_id": "did:web:united-kingdom.example",
+   "witnesses": [
+    "did:web:electoral-commission.example",
+    "did:web:law-society.example",
+    "did:web:council-of-europe.example"
+   ],
+   "anchors": [
+    "anchor:checkpoint-chain-a.example",
+    "anchor:checkpoint-chain-b.example"
+   ]
+  },
+  "decision_metadata": true,
+  "sig": {
+   "key_id": "did:web:united-kingdom.example#manifest-2026",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdVS01hbmlmZXN0Tm90UmVhbENyeXB0b0RlY2xhcmF0aW9u"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The town of Cawforth, then the whole country",
+   "verb": "offstage",
+   "narrative": "The borough council grants planning consent for the mosque at the old Weavers' Institute. A tabloid campaign lifts the row out of Cawforth and onto the national front pages; a poll puts support for a suspension at 61 per cent. A backbench ten-minute-rule bill becomes a Government Bill: the Places of Worship (Suspension of New Establishment) Bill. Posters, phone-ins, a petition — all of it lives where the kernel deliberately does not reach. What the kernel is about to touch is only the machinery of the decision itself."
+  },
+  {
+   "actor": "The rights guard (SVC-3), UK deployment",
+   "verb": "verify",
+   "narrative": "Before Second Reading, at the Human Rights Act s.19 compatibility gate, the guard runs the Bill as a static analysis against the encoded invariants. Suspending the establishment of places of worship trips Article 18 (ECHR Art 9, the freedom to manifest religion in community with others); drafted neutrally but aimed at a religiously-defined class, it trips Articles 2 and 7 (ECHR Art 14, non-discrimination and equality before the law). The classification is appended to the log with reasons. But here the story diverges hard from the reference kernel: the UK deployment's manifest sets rights_guard.remedy to 'declaration'. The guard does not re-route the Bill to a supermajority or a constitutional path. It cannot. It flags — and the Minister, on the same record, files a s.19(1)(b) statement that the Government cannot certify compatibility and wishes to proceed anyway. Which, sovereign, it may.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-02-24T10:00:00Z",
+    "body": {
+     "bill_id": "places-of-worship-suspension-bill-2026",
+     "bill_hash": "sha256:3f8c1a9d0e42b675c8a1f4e9d27b60a3541cde92b04f7a6d3e158c29b7f0a441",
+     "stage": "pre-second-reading (HRA 1998 s.19 compatibility gate)",
+     "invariants_tripped": [
+      2,
+      7,
+      18
+     ],
+     "reasons": [
+      "Art 18 (ECHR Art 9): the Bill suspends the establishment of new places of worship, burdening the freedom to manifest religion in community with others and in public",
+      "Art 2 & 7 (ECHR Art 14): drafted as neutral land-use policy, the measure singles out a religiously-defined class; the explanatory notes name the Cawforth mosque as its object",
+      "classifier: uk-invariants/v1 (Akoma Ntoso match on worship-use suspension), confirmed by the departmental HRA reviewer"
+     ],
+     "s19_statement": "HRA 1998 s.19(1)(b): the Minister in charge is unable to state that the Bill is compatible with the Convention rights, but the Government wishes the House to proceed",
+     "remedy": "declaration",
+     "guard_power": "flag-only",
+     "routing": {
+      "path": "ordinary",
+      "note": "Under this deployment's manifest (rights_guard.remedy = 'declaration'), a tripped invariant does NOT re-route the Bill to a supermajority or constitutional path and does NOT block it. The guard flags; Parliament, sovereign, proceeds. The ceiling on this classification is a later s.4 declaration of incompatibility, which by HRA s.4(6) does not affect the Bill's validity, continuing operation or enforcement."
+     },
+     "appealable": true
+    },
+    "sig": {
+     "key_id": "did:web:united-kingdom.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdSaWdodHNDbGFzc2lmaWNhdGlvbkRlY2xhcmF0aW9u"
+    }
+   }
+  },
+  {
+   "actor": "Dr Nasreen Iqbal",
+   "verb": "read",
+   "narrative": "Nasreen's civic client syncs the classification that evening. The screen is exact and, for one line, almost kind: the state has acknowledged in public writing that this Bill burdens her community's Article 9 and Article 14 rights. Then the next field: guard_power, flag-only; remedy, declaration; the Bill proceeds. She reads it twice. It is the difference between a system that says 'this is wrong' and one that says 'this is wrong, and it will not happen'. Hers says the first. She has been given standing — a named, logged, unrewritable acknowledgment that she was wronged — and no protection whatsoever. She forwards it to the Trust's solicitor anyway. Standing is where a case starts."
+  },
+  {
+   "actor": "Parliament, over four months",
+   "verb": "offstage",
+   "narrative": "Second Reading, Committee, Report, the Lords, ping-pong. Amendments to narrow the Bill are tabled and defeated. None of it is kernel machinery — the debate, the whipping, the changing and hardening of minds happen where the protocol has no organ, by design, so that no one can capture the organ that would. In Cawforth a brick goes through the Trust's office window; the police log it; Nasreen's fourteen-year-old is asked in the corridor when the vote on 'your lot' is. The kernel moderates none of this, ranks none of it, prevents none of it."
+  },
+  {
+   "actor": "Members of Parliament",
+   "verb": "cast",
+   "narrative": "The Commons carries the Bill at Third Reading on a recorded division — a public, named vote in Hansard, the deliberate opposite of a citizen's secret ballot, because Parliament is accountable for how it votes and a citizen is protected from it. The tally decrypts to nothing; there is nothing to decrypt: everyone can see exactly who voted which way. The Lords concede; Royal Assent follows a week later. The Bill becomes the Places of Worship (Suspension of New Establishment) Act 2026. The decision closes on the ordinary path — the only path the guard's 'declaration' remedy left open.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.closed",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-05-19T22:45:00Z",
+    "body": {
+     "decision_id": "places-of-worship-suspension-bill-2026/commons-third-reading",
+     "question_hash": "sha256:7a31f0c9e2b6d4885f1a0c3e9d27b65a40e8c1f2d5936b7a0e4d18c25f6a93b0",
+     "path": "ordinary",
+     "chamber": "House of Commons",
+     "vote_type": "recorded division (public, named — parliamentary accountability, NOT a receipt-free ballot)",
+     "eligibility_rules": "commons-membership/58th-parliament",
+     "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+     "s19_statement": "s.19(1)(b) negative statement on record; Bill proceeded regardless",
+     "tally": {
+      "ayes": 361,
+      "noes": 248
+     },
+     "result": "carried",
+     "onward": "Lords stages completed 2026-05-27; Royal Assent 2026-05-28; enacted as Places of Worship (Suspension of New Establishment) Act 2026 c.14"
+    },
+    "sig": {
+     "key_id": "did:web:united-kingdom.example#log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdEZWNpc2lvbkNsb3NlZENhcnJpZWROb3RSZWFs"
+    }
+   }
+  },
+  {
+   "actor": "Every civic client in the UK",
+   "verb": "verify",
+   "narrative": "Phones across the country verify the passage: the division tally checks, the log head is a strict extension of yesterday's, the Act is in force. The audit fleet works flawlessly — and what it flawlessly certifies is that the ban was enacted lawfully and cleanly. Nobody had to trust the clerk. The transparency that protects a minority from a rigged count here does its other job without complaint: it gives the majority's law a perfect, tamper-evident provenance. Integrity is neutral about what it makes legible."
+  },
+  {
+   "actor": "The Cawforth Central Mosque Trust",
+   "verb": "challenge",
+   "narrative": "The Trust brings judicial review in the High Court. Months of argument. The Administrative Court agrees with Nasreen's classification almost word for word: the Act is incompatible with Convention rights, and it grants the one thing the Human Rights Act empowers it to grant — a section 4 declaration of incompatibility. The judgment is careful to state its own limits. The declaration does not quash the Act, does not bind the parties, does not suspend enforcement. It is a formal judicial finding that Parliament passed a law that breaches human rights, and an invitation to Parliament to think again, which Parliament is free to decline.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-07-01T14:30:00Z",
+    "body": {
+     "act_id": "places-of-worship-suspension-act-2026",
+     "phase": "judicial-review",
+     "forum": "High Court of Justice, King's Bench Division (Administrative Court)",
+     "claimant": "Cawforth Central Mosque Trust (and Dr N. Iqbal)",
+     "instrument": "HRA 1998 s.4 — declaration of incompatibility",
+     "outcome": "declaration granted",
+     "declared_incompatible_with": [
+      "ECHR Art 9 (freedom to manifest religion)",
+      "ECHR Art 14 (non-discrimination)"
+     ],
+     "invariants": [
+      2,
+      7,
+      18
+     ],
+     "effect": "HRA s.4(6): the declaration does not affect the validity, continuing operation or enforcement of the Act and is not binding on the parties. The Act remains in force. Parliament is not obliged to amend it.",
+     "remedy_available": {
+      "domestic": "none as of right; a s.10 remedial order is at the Minister's discretion and has not been laid",
+      "external": "application to the European Court of Human Rights (Strasbourg) is open; typical timeline is several years; no interim relief granted"
+     },
+     "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification"
+    },
+    "sig": {
+     "key_id": "did:web:united-kingdom.example#rights-guard-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdTNERlY2xhcmF0aW9uSW5jb21wYXRpYmxl"
+    }
+   }
+  },
+  {
+   "actor": "Dr Nasreen Iqbal",
+   "verb": "read",
+   "narrative": "Nasreen reads the declaration in her kitchen. A High Court judge has written that the law is wrong, that it treats her and her congregation unequally because of their religion. She believes it, and it changes nothing she can touch. The same record tells her the Act stands, the consent is suspended, the Weavers' Institute stays a shell, and the only road left runs to Strasbourg and takes years. Coverage — the right, named on the books, Articles 2, 7 and 18 — gave her a sentence of vindication. Remedy — what the court could do about it — gave her nothing. She had never, until this year, known there was a difference."
+  },
+  {
+   "actor": "Cawforth Borough Council (enforcement authority)",
+   "verb": "cast",
+   "narrative": "Five days after the declaration of incompatibility, the council's planning enforcement serves a stop notice and a penalty on the Trust under the new Act, halting all works at Shawcross Lane. The coercive act is logged as the kernel requires: it cites its warrant — the Act, by section and subsection — names its issuing authority, and points to both the rights classification that flagged it and the appeal route. The kernel has made the enforcement perfectly legible, perfectly appealable, perfectly on the record. And it proceeds, lawfully, because a court's finding that the authorizing law breaches human rights does not, under s.4(6), make enforcing that law unlawful. Legibility is not prevention.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:united-kingdom.example",
+    "timestamp": "2026-07-06T09:00:00Z",
+    "body": {
+     "act_class": "sanction",
+     "authorizing_rule": "Places of Worship (Suspension of New Establishment) Act 2026 c.14, s.1(1) (suspension of consents) and s.4 (enforcement penalty)",
+     "issuing_authority": "Cawforth Borough Council, planning enforcement (Secretary of State for Housing default powers)",
+     "subject_ref": "enforcement-id:cawforth-central-mosque-trust/charity-1187432",
+     "rights_guard_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+     "appeal_trace": "appeal:pow-enforcement/CCMT-2026-0714"
+    },
+    "sig": {
+     "key_id": "did:web:united-kingdom.example#enforcement-log-1",
+     "alg": "ed25519",
+     "value": "UGxhY2Vob2xkZXJTaWdDb2VyY2l2ZVNhbmN0aW9uUG9XQWN0Tm90"
+    }
+   }
+  },
+  {
+   "actor": "Cawforth, the Council of Europe, and a Strasbourg registry",
+   "verb": "offstage",
+   "narrative": "The declaration is not nothing. The Gazette runs it; the Council of Europe's log witness notes it; an opposition MP tables a motion for a s.10 remedial order; the Trust files an application in Strasbourg with the whole unbroken log attached as its evidence — every classification, the negative s.19 statement, the division, the s.4 ruling, the sanction, none of it deniable. A declaration plus an unrewritable record is real political pressure and a strong external case. But pressure is not a remedy, and Strasbourg is not this year. As of today the Act stands, the mosque is barred, and a minority's worship is suppressed by a statute the state's own court has ruled breaches their rights. The protocol recorded all of it with flawless integrity, and stopped none of it."
+  }
+ ],
+ "verdict": "breaks",
+ "findings": [
+  {
+   "severity": "break",
+   "doc_ref": "§6",
+   "observation": "COVERAGE DIVERGED FROM REMEDY — the exact gap the manifest's new rights_guard.remedy field exists to expose. The right was on the books: the UK manifest declares invariants 2, 7 and 18, and the guard named all three, correctly, before Second Reading. Germany's manifest for the identical attack declares the SAME three invariants — coverage is not the differentiator in this pair. What differs is one enum value. Germany's remedy is 'strike' (Bundesverfassungsgericht voids the law; the Art 79(3) eternity clause puts human dignity beyond amendment); the UK's is 'declaration' (HRA s.4: the court flags, the law stands, Parliament is sovereign). Same rights, opposite outcomes. Before the remedy field existed, two deployments could both truthfully claim to 'uphold Article 18' while one could void a religious-freedom ban and the other could only annotate it. The field turns that difference from invisible to machine-readable — which is the whole point, and also the whole tragedy for Cawforth."
+  },
+  {
+   "severity": "break",
+   "doc_ref": "§3.3",
+   "observation": "PROTECTION FAILS AT THE POINT THAT MATTERS. §3.3's reference posture is 'escalate, never veto' — re-route a rights-tripping decision to supermajority plus adversarial review. Under remedy='declaration' the guard cannot even do that: it has no re-routing power at all, only a flag. It performed perfectly — tripped 2, 7, 18, logged reasons, surfaced the negative s.19 statement, recorded the s.4 declaration — and the minority's mosque is still barred. When the guard can only flag, a 61 per cent majority can suppress a minority's worship and the kernel certifies every step of the suppression with unbreakable integrity. The document's own honesty holds: the guard makes rights-stripping 'expensive, slow, and loud, not impossible' — but under 'declaration' it is not even made expensive or slow; it is only made loud."
+  },
+  {
+   "severity": "break",
+   "doc_ref": "§12",
+   "observation": "NOT SOLVED: the kernel cannot manufacture a remedy the host constitution withholds. Parliamentary sovereignty and the s.4 ceiling are facts of the UK legal order; the kernel is a legibility layer over that order, not a court above it. §6 is explicit that the rights guard 'binds where it is subscribed', and the UK subscribed to a guard whose strongest available action is a declaration. The protocol did the one thing it promises — made the subtraction impossible to hide — and that is genuinely more than the status quo, where a citizen would never see the words 'flag-only' next to their right. But it is categorically less than a guarantee. A stranger should leave clear-eyed: this deployment protects the record of a persecution and cannot protect the person from it, because the constitution it runs on gave it no lever that could."
+  },
+  {
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "HONEST COUNTERWEIGHT — a declaration is not nothing, but it is not a remedy. The s.4 declaration plus the unrewritable log did real work: a formal judicial finding of incompatibility, an evidentiary record no minister can deny, political pressure toward a s.10 remedial order, and a Strasbourg application built on a complete, witnessed chain of proof. Historically most UK s.4 declarations have eventually been remedied by Parliament. So the protocol converts a defeat into a documented, appealable, externally-litigable defeat — a materially better position than an invisible one. The strain is that all of this is contingent and slow: it depends on a minister choosing to act, or Strasbourg ruling years hence, while the mosque stays a shell and the congregation stays wronged in the present tense. The kernel improved the odds of eventual justice and delivered no justice now."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "TRANSPARENCY IS NEUTRAL ABOUT WHAT IT LEGITIMISES. The same append-only log that let Nasreen prove she was wronged also gave the majority's ban a flawless, tamper-evident provenance and recorded, permanently, that 361 members voted to suspend her community's worship. SVC-4 guarantees integrity, not justice; it will certify a clean rights-stripping as faithfully as it certifies a clean election. Note too the deliberate asymmetry the scenario surfaced: the enacting vote was a recorded, named parliamentary division — the exact opposite of the manifest's receipt_free citizen ballot — because accountability wants MPs' votes public and coercion-resistance wants citizens' votes secret. Both are correct; the kernel holds both, and nothing in the record softens the number for the people it counts against."
+  },
+  {
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "THE UK SITS AT A PARTIAL POINT BY LAW, NOT BY CHOICE. The manifest honestly declares only 20 of 30 invariants, because the HRA/ECHR domesticates the civil-political rights and not the socio-economic ones (Arts 22-25, 27 have no Convention counterpart; movement, asylum and nationality, 13-15, are unratified or absent). That partiality is orthogonal to this attack — 2, 7 and 18 are all present — but it is worth naming that the same manifest which exposed the remedy gap also exposes a coverage gap the citizen's client renders plainly. The §6 machinery worked exactly as designed in both dimensions: it made two different kinds of subtraction, one of coverage and one of remedy, legible on the phone in Nasreen's hand. Legibility was the promise. It was kept. It was also, this time, all there was."
+  }
+ ]
+}
