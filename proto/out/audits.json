@@ -1,0 +1,26 @@
+{
+ "decision_id": "2026-agm-treasurer",
+ "audits": [
+  {
+   "commit": "sha256:be8028caee74b3fa23de584fe39b52d4df08b8e8842e1669f6f9e8219eff621f",
+   "claimed_choice": "Sandra Okafor",
+   "opened_choice": "Sandra Okafor",
+   "opened_nonce": "934bc5bced00d63e1bb8d685510baac5",
+   "outcome": "match"
+  },
+  {
+   "commit": "sha256:ca301d20dbaf0b84aab1d142a0dc6d13829b363f59425edbbe13488cfc5acee2",
+   "claimed_choice": "Sandra Okafor",
+   "opened_choice": "Keith Bramall",
+   "opened_nonce": "cdbe029dc67efe41b1fe743a1b3800ca",
+   "outcome": "MISMATCH"
+  },
+  {
+   "commit": "sha256:0f5aaf148884a839331f9dcd059eba3267cc4229f1157eee13a9601e74606c25",
+   "claimed_choice": "Keith Bramall",
+   "opened_choice": "Keith Bramall",
+   "opened_nonce": "81682c696ffb1a938a89f7649f7fa6eb",
+   "outcome": "match"
+  }
+ ]
+}

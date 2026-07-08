@@ -44,6 +44,10 @@ def b64d(s: str) -> bytes:
     return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
 
 
+def commit_hex(choice: str, nonce: str) -> str:
+    return sha256_hex((choice + "|" + nonce).encode())
+
+
 def keypair(name: str) -> Ed25519PrivateKey:
     return Ed25519PrivateKey.from_private_bytes(hashlib.sha256(SEED + name.encode()).digest())
 
@@ -143,7 +147,7 @@ def run(outdir: Path):
         "personhood": {"method": "platform-account", "issuer": "plot-register roster (simulated ceremony)",
                        "unlinkable": False, "sybil_resistance": "weak",
                        "eligibility_rules": "plot-register/2026 " + roster_digest},
-        "decisions": {"verifiable": True, "receipt_free": False, "cast_or_audit": False,
+        "decisions": {"verifiable": True, "receipt_free": False, "cast_or_audit": True,
                       "paper_channel": False, "coercion_resistance": "revote-silent"},
         "transparency_log": {"log_id": COMMUNITY,
                              "witnesses": ["did:web:sheffield-allotment-federation.example",
@@ -158,9 +162,10 @@ def run(outdir: Path):
     log = Log(keypair("log"), t(1, 19))
     log.append("manifest.published", {
         "manifest_digest": manifest_digest,
-        "note": "Prototype run. Declares: roster personhood (sybil-weak, linkable), plaintext "
-                "pseudonymous ballots (verifiable by recount, NOT receipt-free, no cast-or-audit), "
-                "silent re-vote, no rights guard, no paper channel."}, t(1, 19))
+        "note": "Prototype run. Declares: roster personhood (sybil-weak, linkable), commit-then-"
+                "reveal pseudonymous ballots (verifiable by recount, NOT receipt-free), "
+                "cast-or-audit device challenges, silent re-vote, no rights guard, no paper "
+                "channel."}, t(1, 19))
     log.append("x-roster.published", {"roster_digest": roster_digest, "member_count": len(MEMBERS)}, t(1, 19, 5))
     log.append("decision.opened", {
         "decision_id": DECISION, "question": QUESTION, "question_hash": sha256_hex(QUESTION.encode()),
@@ -168,38 +173,73 @@ def run(outdir: Path):
         "recast_policy": "last-ballot-counts",
         "window": {"deliberation_ends": t(14, 18), "cast_ends": t(21, 18)}}, t(7, 18))
 
-    # --- casting (prove part 2 + cast): nullifier = sha256(voter_pub || decision_id)
-    box, seq = [], 0
+    # --- casting (prove part 2 + cast/challenge). The DEVICE commits to the choice
+    # (commit = sha256(choice|nonce)); the box holds commitments, so choices stay hidden
+    # until the close-time reveal. Before casting, a voter may CHALLENGE: the device must
+    # open its commitment, and since it cannot tell a challenge from a cast when it
+    # commits, a cheating device is caught with probability = the challenge rate (Benaloh).
+    # A challenged commitment is spoiled — logged in the audit file, never cast.
+    box, seq, audits, pending = [], 0, [], {}
 
-    def cast(name, choice, channel="app", witness=None):
+    def device_commit(choice, who, attempt, cheat=False):
+        nonce = hashlib.sha256(SEED + b"nonce" + who.encode() + bytes([attempt])).hexdigest()[:32]
+        committed = OPTIONS[1] if (cheat and choice != OPTIONS[1]) else choice
+        return commit_hex(committed, nonce), committed, nonce
+
+    def challenge(name, choice, attempt, cheat=False):
+        commit, committed, nonce = device_commit(choice, name, attempt, cheat)
+        rec = {"commit": commit, "claimed_choice": choice, "opened_choice": committed,
+               "opened_nonce": nonce, "outcome": "match" if committed == choice else "MISMATCH"}
+        audits.append(rec)
+        return rec
+
+    def cast(name, choice, channel="app", witness=None, attempt=0):
         nonlocal seq
         seq += 1
         voter = keypair("member:" + name)
         vpub = pub_b64(voter)
         cred = next(c for c in roster if c["voter_pub"] == vpub)
+        commit, committed, nonce = device_commit(choice, name, attempt)
         ballot = {"decision_id": DECISION, "seq": seq,
                   "nullifier": sha256_hex(b64d(vpub) + DECISION.encode()),
-                  "choice": choice, "voter_pub": vpub, "issuer_sig": cred["issuer_sig"], "channel": channel}
+                  "commit": commit, "voter_pub": vpub, "issuer_sig": cred["issuer_sig"],
+                  "channel": channel}
         if witness:
             ballot["witness_sig"] = sign_over(keypair("member:" + witness),
                                               "assisted-witness:" + witness, ballot)
         ballot["voter_sig"] = sign_over(voter, "voter:" + vpub, ballot)
         box.append(ballot)
+        pending[seq] = {"seq": seq, "choice": committed, "nonce": nonce}
 
-    # ordinary members vote (deterministic split: 27 Sandra, 21 Keith, 7 abstain)
+    # ordinary members vote (deterministic split; commitments, not choices, enter the box)
     for i, name in enumerate(MEMBERS[5:]):
         if i % 8 == 7:
             continue  # abstainers
         cast(name, OPTIONS[0] if i % 7 < 4 else OPTIONS[1])
-    cast("Sandra Okafor", OPTIONS[0])
+    # routine deterrence: two cautious members challenge first, see a match, then cast fresh
+    challenge("Sandra Okafor", OPTIONS[0], attempt=0)
+    cast("Sandra Okafor", OPTIONS[0], attempt=1)
     cast("Keith Bramall", OPTIONS[1])
     cast("Derek Wainwright", OPTIONS[1])
+    # Plot-holder 23's phone is compromised: it displays Sandra but commits to Keith.
+    # She challenges on a whim — the opened commitment does not match, the failure is
+    # logged publicly, and she recasts from the clubhouse kiosk: her earlier cast from
+    # that phone is silently superseded. The two remedies compose — cast-or-audit caught
+    # the device, and the recast policy repaired the vote.
+    caught = challenge("Plot-holder 23", OPTIONS[0], attempt=1, cheat=True)
+    log.append("x-ballot.audit-failed", {
+        "decision_id": DECISION, "commit": caught["commit"],
+        "claimed_choice": caught["claimed_choice"], "opened_choice": caught["opened_choice"],
+        "note": "cast-or-audit challenge: device display disagreed with its opened commitment; "
+                "commitment spoiled, member recast from a clean device"}, t(9, 11))
+    cast("Plot-holder 23", OPTIONS[0], channel="kiosk", attempt=2)
     # Nalini votes, thinks about the water-rate surplus overnight, and silently re-votes:
     cast("Nalini Mistry", OPTIONS[1])
-    cast("Nalini Mistry", OPTIONS[0])          # same nullifier, later seq -> supersedes
-    # Ernest (no smartphone, trusts none of it) casts through the assisted channel,
-    # two tellers at the table, Jordan's key witnessing the ballot:
-    cast("Ernest Toft", OPTIONS[1], channel="assisted", witness="Plot-holder 12")
+    cast("Nalini Mistry", OPTIONS[0], attempt=1)   # same nullifier, later seq -> supersedes
+    # Ernest (no smartphone, trusts none of it) casts through the assisted channel, two
+    # tellers at the table; the second teller runs one challenge in front of him first:
+    challenge("Ernest Toft", OPTIONS[1], attempt=0)
+    cast("Ernest Toft", OPTIONS[1], channel="assisted", witness="Plot-holder 12", attempt=1)
     # Derek tries to mint an extra voice for his unenrolled cousin: no roster credential
     try:
         cast("Cousin Ray", OPTIONS[1])
@@ -210,20 +250,33 @@ def run(outdir: Path):
     box_doc = {"decision_id": DECISION, "ballots": box}
     (out / "ballot-box.json").write_text(json.dumps(box_doc, indent=1) + "\n")
     box_digest = sha256_hex(canon(box_doc))
+    audits_doc = {"decision_id": DECISION, "audits": audits}
+    (out / "audits.json").write_text(json.dumps(audits_doc, indent=1) + "\n")
+    audits_digest = sha256_hex(canon(audits_doc))
 
-    # --- close + tally (a recount anyone can redo; the 'proof' is recomputability)
+    # --- close: casting ends; only now are the commitments opened
+    log.append("decision.closed", {
+        "decision_id": DECISION, "ballot_box_digest": box_digest,
+        "ballots_recorded": len(box), "audits_digest": audits_digest,
+        "commitments_audited": len(audits),
+        "audit_failures": sum(1 for a in audits if a["outcome"] == "MISMATCH"),
+        "rejected_at_cast": [rejected]}, t(21, 18))
+    reveals_doc = {"decision_id": DECISION,
+                   "reveals": [pending[s] for s in sorted(pending)]}
+    (out / "reveals.json").write_text(json.dumps(reveals_doc, indent=1) + "\n")
+    reveals_digest = sha256_hex(canon(reveals_doc))
+
+    # --- tally (a recount anyone can redo from box + reveals; the 'proof' is recomputability)
     latest = {}
     for b in box:
         latest[b["nullifier"]] = b  # ascending seq: last write wins
     counts = {o: 0 for o in OPTIONS}
     for b in latest.values():
-        counts[b["choice"]] += 1
-    log.append("decision.closed", {
-        "decision_id": DECISION, "ballot_box_digest": box_digest,
-        "ballots_recorded": len(box), "rejected_at_cast": [rejected]}, t(21, 18))
+        counts[pending[b["seq"]]["choice"]] += 1
     log.append("decision.tally-proof", {
-        "decision_id": DECISION, "method": "public-recount/v0 (last ballot per nullifier counts)",
-        "ballot_box_digest": box_digest, "counts": counts,
+        "decision_id": DECISION,
+        "method": "commit-reveal public recount/v1 (last ballot per nullifier counts)",
+        "ballot_box_digest": box_digest, "reveals_digest": reveals_digest, "counts": counts,
         "distinct_voters": len(latest), "superseded": len(box) - len(latest)}, t(21, 18, 30))
 
     (out / "log.jsonl").write_text("".join(json.dumps(e) + "\n" for e in log.entries))
@@ -238,6 +291,8 @@ def run(outdir: Path):
     print(f"run complete -> {out}")
     print(f"  {len(MEMBERS)} enrolled, {len(box)} ballots ({len(latest)} counted, "
           f"{len(box) - len(latest)} superseded), 1 unenrolled cast rejected")
+    print(f"  {len(audits)} cast-or-audit challenges, "
+          f"{sum(1 for a in audits if a['outcome'] == 'MISMATCH')} cheating device caught and logged")
     print(f"  tally: " + ", ".join(f"{k} {v}" for k, v in counts.items()))
 
 
@@ -257,9 +312,9 @@ def tamper(src: Path, dst: Path, mode: str):
         e["sig"] = sign_over(keypair("log"), ACTORS["log"][0], e)
         lines[2] = json.dumps(e)
         (dst / "log.jsonl").write_text("\n".join(lines) + "\n")
-    elif mode == "box":  # quietly flip one counted ballot's choice
+    elif mode == "box":  # quietly swap one ballot's commitment for a commitment to the other option
         doc = json.loads((dst / "ballot-box.json").read_text())
-        doc["ballots"][0]["choice"] = OPTIONS[1]
+        doc["ballots"][0]["commit"] = commit_hex(OPTIONS[1], "0" * 32)
         (dst / "ballot-box.json").write_text(json.dumps(doc, indent=1) + "\n")
     elif mode == "forge":  # stuff the box with a ballot from a key the issuer never signed
         doc = json.loads((dst / "ballot-box.json").read_text())
@@ -267,11 +322,16 @@ def tamper(src: Path, dst: Path, mode: str):
         gpub = pub_b64(ghost)
         b = {"decision_id": DECISION, "seq": 999,
              "nullifier": sha256_hex(b64d(gpub) + DECISION.encode()),
-             "choice": OPTIONS[1], "voter_pub": gpub,
+             "commit": commit_hex(OPTIONS[1], "f" * 32), "voter_pub": gpub,
              "issuer_sig": doc["ballots"][0]["issuer_sig"], "channel": "app"}  # stolen credential sig
         b["voter_sig"] = sign_over(ghost, "voter:" + gpub, b)
         doc["ballots"].append(b)
         (dst / "ballot-box.json").write_text(json.dumps(doc, indent=1) + "\n")
+    elif mode == "reveal":  # flip one revealed choice at close time, leaving the cast commitment alone
+        doc = json.loads((dst / "reveals.json").read_text())
+        r = doc["reveals"][0]
+        r["choice"] = OPTIONS[0] if r["choice"] == OPTIONS[1] else OPTIONS[1]
+        (dst / "reveals.json").write_text(json.dumps(doc, indent=1) + "\n")
     else:
         sys.exit(f"unknown tamper mode: {mode}")
     print(f"tampered ({mode}) -> {dst}")

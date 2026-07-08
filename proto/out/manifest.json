@@ -21,7 +21,7 @@
  "decisions": {
   "verifiable": true,
   "receipt_free": false,
-  "cast_or_audit": false,
+  "cast_or_audit": true,
   "paper_channel": false,
   "coercion_resistance": "revote-silent"
  },
@@ -36,6 +36,6 @@
  "sig": {
   "key_id": "did:web:heeley-bank-allotments.example#manifest-1",
   "alg": "ed25519",
-  "value": "o_5vkSwTTh_AyAAf-dZpt4qtcF-P_gD7VLQ6SOO9NmeuRPKDpRhaYIWSGbbppW2moJIa1GfUPIv9_f2OFizYCw"
+  "value": "05IvuwK0MDXMflHuPkCeqfRjzCCIjTtWYhSb-zFjegG8CCSYJhZn6tBpWPrVraI6v-_KCzP1bbeHxTVa1VYMAQ"
  }
 }

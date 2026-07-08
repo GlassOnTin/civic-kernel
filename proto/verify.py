@@ -121,11 +121,34 @@ def main(outdir: Path) -> int:
     check(creds_ok, f"all {len(roster_doc['members'])} roster credentials verify against the issuer key")
     by_pub = {c["voter_pub"]: c for c in roster_doc["members"]}
 
-    print("[5] the recount: anyone can recompute the tally from the box alone")
+    print("[5] cast-or-audit: challenged commitments open correctly and were never cast")
+    audits_doc = json.loads((outdir / "audits.json").read_text())
+    audits = audits_doc["audits"]
+    check(closed.get("audits_digest") == sha256_hex(canon(audits_doc)),
+          "logged audits digest matches the published audit file")
+    bad_audit = [a for a in audits
+                 if sha256_hex((a["opened_choice"] + "|" + a["opened_nonce"]).encode()) != a["commit"]
+                 or (a["outcome"] == "match") != (a["opened_choice"] == a["claimed_choice"])]
+    check(not bad_audit, f"all {len(audits)} audit records are internally consistent evidence")
+    cast_commits = {b["commit"] for b in box_doc["ballots"]}
+    check(not [a for a in audits if a["commit"] in cast_commits],
+          "no challenged (spoiled) commitment was ever cast")
+    fails = [a for a in audits if a["outcome"] == "MISMATCH"]
+    af_entries = [e for e in entries if e["type"] == "x-ballot.audit-failed"]
+    check(len(af_entries) == len(fails) == closed.get("audit_failures", -1),
+          f"every audit failure is a public log entry ({len(fails)} cheating device caught)")
+
+    print("[6] the recount: anyone can recompute the tally from box + reveals alone")
+    reveals_doc = json.loads((outdir / "reveals.json").read_text())
+    tally = by_type.get("decision.tally-proof", {}).get("body", {})
+    check(tally.get("reveals_digest") == sha256_hex(canon(reveals_doc)),
+          "logged reveals digest matches the published reveals")
     opened = by_type.get("decision.opened", {}).get("body", {})
     decision_id = opened.get("decision_id")
+    reveal_by_seq = {r["seq"]: r for r in reveals_doc["reveals"]}
     ballots, problems = [], []
     for i, b in enumerate(box_doc["ballots"]):
+        r = reveal_by_seq.get(b["seq"])
         why = None
         if b["decision_id"] != decision_id:
             why = "wrong decision"
@@ -139,29 +162,34 @@ def main(outdir: Path) -> int:
                 trust.get(b["witness_sig"]["key_id"], ""), b["witness_sig"],
                 {k: v for k, v in b.items() if k not in ("voter_sig", "witness_sig")}):
             why = "assisted-channel witness signature invalid"
-        elif b["choice"] not in opened.get("options", []):
-            why = "choice not among the options"
+        elif r is None:
+            why = "cast commitment never revealed"
+        elif sha256_hex((r["choice"] + "|" + r["nonce"]).encode()) != b["commit"]:
+            why = "reveal does not open the cast commitment"
+        elif r["choice"] not in opened.get("options", []):
+            why = "revealed choice not among the options"
         if why:
             problems.append(f"ballot[{i}] {why}")
         else:
-            ballots.append(b)
-    check(not problems, f"all {len(box_doc['ballots'])} ballots in the box are valid"
+            ballots.append((b, r))
+    check(not problems, f"all {len(box_doc['ballots'])} cast commitments reveal validly"
           + ("" if not problems else " :: " + problems[0]))
+    check(len(reveal_by_seq) == len(box_doc["ballots"]),
+          "exactly one reveal per cast ballot, none extra")
 
     latest = {}
-    for b in sorted(ballots, key=lambda b: b["seq"]):
-        latest[b["nullifier"]] = b
+    for b, r in sorted(ballots, key=lambda br: br[0]["seq"]):
+        latest[b["nullifier"]] = (b, r)
     counts = {o: 0 for o in opened.get("options", [])}
-    for b in latest.values():
-        counts[b["choice"]] += 1
-    tally = by_type.get("decision.tally-proof", {}).get("body", {})
+    for b, r in latest.values():
+        counts[r["choice"]] += 1
     check(tally.get("counts") == counts, f"recount matches the published tally: {counts}")
     check(tally.get("distinct_voters") == len(latest)
           and tally.get("superseded") == len(ballots) - len(latest),
           f"recast policy applied: {len(ballots)} valid ballots, {len(latest)} voters counted, "
           f"{len(ballots) - len(latest)} silently superseded (last ballot counts)")
-    assisted = [b for b in latest.values() if b.get("channel") == "assisted"]
-    check(all(b["nullifier"] in latest for b in assisted) and len(assisted) >= 0,
+    assisted = [b for b, r in latest.values() if b.get("channel") == "assisted"]
+    check(len(assisted) >= 1,
           f"assisted-channel ballots counted in the same tally as any other ({len(assisted)} assisted)")
 
     print()

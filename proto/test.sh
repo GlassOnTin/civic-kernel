@@ -33,4 +33,9 @@ python3 clubvote.py tamper out "$T/forge" forge > /dev/null
 if python3 verify.py "$T/forge" > "$T/forge.txt" 2>&1; then echo "MISSED TAMPER"; exit 1; fi
 grep -m1 FAIL "$T/forge.txt"
 
-echo; echo "ALL GREEN: verified honest run, 3/3 tampers caught, reproducible."
+echo; echo "=== tamper 4: flip a revealed choice at close time (must FAIL)"
+python3 clubvote.py tamper out "$T/reveal" reveal > /dev/null
+if python3 verify.py "$T/reveal" > "$T/reveal.txt" 2>&1; then echo "MISSED TAMPER"; exit 1; fi
+grep -m1 FAIL "$T/reveal.txt"
+
+echo; echo "ALL GREEN: verified honest run, 4/4 tampers caught, reproducible."
