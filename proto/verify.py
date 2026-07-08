@@ -64,7 +64,10 @@ def merkle_root(leaves) -> bytes:
 
 
 def main(outdir: Path) -> int:
-    trust = json.loads((outdir / "trust.json").read_text())
+    # The trust anchors: keys the verifier already trusts, and which of those parties it
+    # requires as independent witnesses. Nothing inside the transcript can lower this bar.
+    anchors = json.loads((outdir / "trust.json").read_text())
+    trust, required_witnesses = anchors["keys"], anchors["witnesses"]
     manifest = json.loads((outdir / "manifest.json").read_text())
     roster_doc = json.loads((outdir / "roster.json").read_text())
     box_doc = json.loads((outdir / "ballot-box.json").read_text())
@@ -96,11 +99,43 @@ def main(outdir: Path) -> int:
     check(heads_ok, f"every published head's root matches a strict prefix of today's log "
                     f"(consistency, {len(heads)} heads)")
     check(heads[-1]["size"] == len(entries), "the latest head covers the whole log")
-    wit_ok = all(all(sig_ok(trust.get(s["key_id"], ""), s,
-                            {k: v for k, v in h.items() if k != "sigs"}) for s in h["sigs"])
-                 for h in heads)
-    n_wit = len(heads[-1]["sigs"]) - 1 if heads else 0
-    check(wit_ok, f"every head co-signed by the log key and {n_wit} independent witnesses")
+    # A head is only as good as WHO co-signed it. Checking that the signatures PRESENT
+    # verify is not enough: an insider who rewrites an entry can regenerate every head,
+    # re-sign each with the log key they hold, and simply drop the witnesses they cannot
+    # forge — the heads then pass consistency and signature checks alike. Nor can the
+    # standard be the manifest's own witness list: the manifest is signed by the log key,
+    # so the same insider can lower their own bar to zero. The standard is therefore the
+    # verifier's trust anchors, which name the witnesses independently (in reality: DID
+    # resolution and the witness ecosystem). An unwitnessed log cannot defeat a records
+    # rewrite, so verify.py declines to certify one.
+    # Every witness the trust anchors REQUIRE (a bar the transcript cannot lower) and every
+    # witness the manifest DECLARES (it may not advertise a guard it does not have) must
+    # co-sign every head. Dropping a co-signature and inflating the declared set both fail.
+    declared = manifest.get("transparency_log", {}).get("witnesses", [])
+    expected = set(required_witnesses) | set(declared)
+
+    def head_ok(h) -> bool:
+        body = {k: v for k, v in h.items() if k != "sigs"}
+        covered = set()
+        for s in h["sigs"]:
+            if not sig_ok(trust.get(s["key_id"], ""), s, body):
+                return False  # a signature that is present but does not verify
+            covered.update(w for w in expected
+                           if s["key_id"] == w or s["key_id"].startswith(w + "#"))
+        return expected <= covered
+
+    missing = [h["size"] for h in heads if not head_ok(h)]
+    check(bool(required_witnesses) and not missing,
+          f"every head co-signed by the log key and all {len(expected)} required/declared witnesses"
+          + ("" if required_witnesses else " :: the trust anchors name no witness, and an "
+             "unwitnessed log cannot defeat a records rewrite")
+          + ("" if not missing else f" :: head(s) at size {missing} lack a valid co-signature from "
+             f"every witness — the log key alone re-signed this history"))
+
+    check(set(required_witnesses) <= set(declared),
+          "the manifest declares every witness the trust anchors require (the manifest is signed "
+          "by the log key, so it cannot be its own standard: a manifest that quietly drops a "
+          "witness is a lying manifest)")
 
     by_type = {e["type"]: e for e in entries}
     pub = by_type.get("manifest.published", {}).get("body", {})

@@ -6,7 +6,7 @@ end to end with real cryptography, emitting a transcript that an independent
 verifier — sharing no code with the runner — confirms from the artifacts alone.
 
 ```sh
-./test.sh          # the success test: run, verify, reproduce, catch 3 tampers
+./test.sh          # the success test: run, verify, reproduce, catch 6 tampers
 python3 clubvote.py run      # -> out/ (committed as the reference transcript)
 python3 verify.py out        # independent verification, exit 0 = verified
 ```
@@ -34,14 +34,25 @@ Needs `cryptography` and `jsonschema` (`pip install -r ../requirements.txt`).
    The first implementation is a lattice point, subject to its own anti-dilution rule —
    and the climb is legible: v1 implemented the Benaloh challenge and flipped
    `cast_or_audit: false → true`, a one-field manifest diff backed by a working mechanism.
-3. **The tampers fail where the design says they must.** An *insider* who rewrites
-   history and re-signs it with the log key is caught by the witnessed head roots (the
-   keys the insider does not hold); a flipped or stuffed ballot is caught by the box
-   digest the log committed to; an unenrolled ballot has no issuer credential; a
-   choice flipped at reveal time fails against its own cast commitment. And in the
-   reference transcript itself, a compromised device that displayed Sandra while
-   committing to Keith is caught by a challenge, logged (`x-ballot.audit-failed`), and
-   repaired by a silent recast — the two remedies composing.
+3. **Every tamper is caught by the defence the design names for it** — and the test
+   asserts *which* check fired, because a tamper caught by the wrong check is a test that
+   passes for the wrong reason and would stay green if the named defence rotted. The three
+   log tampers are one insider escalating, each rung defeated by a different thing:
+
+   | tamper | what the insider does | what catches it |
+   |---|---|---|
+   | `log` | edits an entry, re-signs it with the log key | Merkle consistency — the published heads no longer root the log (**no witness required**) |
+   | `rehead` | edits it *and* regenerates every head to match | the missing witness co-signatures — they hold the log key, not the federation's |
+   | `unwitness` | *and* rewrites the manifest to say it never had witnesses | the verifier's trust anchors — the manifest is log-key-signed, so it cannot be its own standard |
+   | `box` | flips a cast commitment | the voter's own signature, which covers it |
+   | `forge` | stuffs a ballot from an unenrolled key | no issuer credential on the roster |
+   | `reveal` | opens a commitment as the other choice | the commitment it was cast under, sealed before the window shut |
+
+   `rehead` is the one the records-rewrite scenario is actually about. Note what `log`
+   proves and does not prove: a single-operator log with no witnesses at all would catch
+   it too. And in the reference transcript itself, a compromised device that displayed
+   Sandra while committing to Keith is caught by a challenge, logged
+   (`x-ballot.audit-failed`), and repaired by a silent recast — the two remedies composing.
 
 ## What v0 deliberately is not (the manifest is the source of truth)
 
@@ -56,7 +67,14 @@ Needs `cryptography` and `jsonschema` (`pip install -r ../requirements.txt`).
   Verification-from-artifacts is the property under test, not endpoint security.
 - Demo keys derive from a public seed so the transcript is byte-reproducible — zero
   privacy, by design. `trust.json` stands in for DID resolution and the witness
-  ecosystem: it is the verifier's explicit trust anchor set.
+  ecosystem: it is the verifier's explicit trust anchor set, naming both the keys it
+  trusts and, in `witnesses`, which parties it *requires* to co-sign every log head.
+  That list has to live outside the transcript. The manifest declares its own witnesses,
+  but the manifest is signed by the log key — so an insider holding that key can lower
+  their own bar to zero, and did, until `unwitness` was written to prove it. A manifest
+  cannot be its own standard. Correspondingly, `verify.py` declines to certify a log whose
+  trust anchors name no witness: an unwitnessed log cannot defeat a records rewrite,
+  and saying "verified" of one would be the verifier lying on the log's behalf.
 - Canonicalization approximates JCS (RFC 8785) as sorted compact JSON — exact for this
   artifact set (strings, integers, booleans only).
 - Total collusion (operator *and* both witnesses *and* the issuer) defeats v0, as §6

@@ -86,6 +86,14 @@ profile — but its manifest declares every subtraction machine-readably, and th
 client renders it. Dilution becomes legible, not lethal (T10); a manifest that lies is a
 consistency-proof failure, not a marketing dispute.
 
+One limit, measured in [`proto/`](proto/) rather than assumed: the manifest is signed by the
+operator's own log key, so it cannot vouch for *who witnesses it*. An operator can rewrite
+history, regenerate the log heads, declare in the manifest that the log never had witnesses,
+and hand over a transcript on which every signature verifies and nothing internally
+disagrees. The witness set is therefore the one thing a verifier must hold out of band — from
+DID resolution and the witness ecosystem, never from the transcript under audit. A manifest
+cannot be its own standard (T8, T10).
+
 ## One floor (§5)
 
 The goals above and the thirty UDHR invariants are pinned beneath the amendment process:

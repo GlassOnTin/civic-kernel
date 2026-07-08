@@ -1,8 +1,14 @@
 {
- "did:web:heeley-bank-allotments.example#log-1": "JfeHi6ty93aKICaBDMZbV9Y2qwba2WMGLWPQ3cAfDl4",
- "did:web:heeley-bank-allotments.example#roster-1": "PQ25k_7Ec9t0RlIOX_LIiKrZiOcptR0tZgW0kajwQmE",
- "did:web:sheffield-allotment-federation.example#w1": "6ekTZgN0g6Ngv5c3rf-a6jSF4Yquf-CALZkFJ6mewU0",
- "did:web:meersbrook-allotments.example#w1": "nSd2muep19aV1Ld_TEX5x7z6Wu6AvwWiC8vAx57lANQ",
- "did:web:heeley-bank-allotments.example#manifest-1": "JfeHi6ty93aKICaBDMZbV9Y2qwba2WMGLWPQ3cAfDl4",
- "assisted-witness:Plot-holder 12": "PqfSeWlZN2tFopaEKlMiL7_8FEEzga0B54FpHzpOu1k"
+ "keys": {
+  "did:web:heeley-bank-allotments.example#log-1": "JfeHi6ty93aKICaBDMZbV9Y2qwba2WMGLWPQ3cAfDl4",
+  "did:web:heeley-bank-allotments.example#roster-1": "PQ25k_7Ec9t0RlIOX_LIiKrZiOcptR0tZgW0kajwQmE",
+  "did:web:sheffield-allotment-federation.example#w1": "6ekTZgN0g6Ngv5c3rf-a6jSF4Yquf-CALZkFJ6mewU0",
+  "did:web:meersbrook-allotments.example#w1": "nSd2muep19aV1Ld_TEX5x7z6Wu6AvwWiC8vAx57lANQ",
+  "did:web:heeley-bank-allotments.example#manifest-1": "JfeHi6ty93aKICaBDMZbV9Y2qwba2WMGLWPQ3cAfDl4",
+  "assisted-witness:Plot-holder 12": "PqfSeWlZN2tFopaEKlMiL7_8FEEzga0B54FpHzpOu1k"
+ },
+ "witnesses": [
+  "did:web:sheffield-allotment-federation.example",
+  "did:web:meersbrook-allotments.example"
+ ]
 }

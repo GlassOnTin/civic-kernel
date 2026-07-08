@@ -5,8 +5,13 @@ Simulates every actor in one process (key custody is NOT the property under test
 verification-from-artifacts is) and emits a transcript any independent party can check
 with verify.py, which shares no code with this file.
 
-  python3 clubvote.py run [outdir]            deterministic full election -> artifacts
-  python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it (mode: log|box|forge)
+  python3 clubvote.py run [outdir]               deterministic full election -> artifacts
+  python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
+      escalation by one insider who holds the log key: log (edit an entry) -> rehead (edit it and
+      regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
+      (and rewrite the manifest to declare there were never any witnesses). Plus three attacks on
+      the vote itself: box (flip a cast commitment), forge (stuff an unenrolled ballot),
+      reveal (open a commitment as the other choice).
 
 Deliberate v0 subtractions, declared in the emitted manifest rather than hidden:
 ballots are pseudonymous but NOT encrypted (verifiable by recount, not receipt-free),
@@ -282,11 +287,14 @@ def run(outdir: Path):
     (out / "log.jsonl").write_text("".join(json.dumps(e) + "\n" for e in log.entries))
     (out / "heads.jsonl").write_text("".join(json.dumps(h) + "\n" for h in log.heads))
 
-    # --- trust anchors: what a verifier must already trust (in reality: DID resolution + witnesses)
-    trust = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ACTORS}
-    trust[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
-    trust["assisted-witness:Plot-holder 12"] = pub_b64(keypair("member:Plot-holder 12"))
-    (out / "trust.json").write_text(json.dumps(trust, indent=1) + "\n")
+    # --- trust anchors: what a verifier must already trust (in reality: DID resolution +
+    # the witness ecosystem). `witnesses` is the bar the transcript cannot lower: the
+    # manifest is signed by the log key, so it cannot vouch for its own witness count.
+    keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ACTORS}
+    keys[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
+    keys["assisted-witness:Plot-holder 12"] = pub_b64(keypair("member:Plot-holder 12"))
+    (out / "trust.json").write_text(json.dumps(
+        {"keys": keys, "witnesses": manifest["transparency_log"]["witnesses"]}, indent=1) + "\n")
 
     print(f"run complete -> {out}")
     print(f"  {len(MEMBERS)} enrolled, {len(box)} ballots ({len(latest)} counted, "
@@ -296,15 +304,34 @@ def run(outdir: Path):
     print(f"  tally: " + ", ".join(f"{k} {v}" for k, v in counts.items()))
 
 
+def reforge(dst: Path, entries: list):
+    """Re-sign every entry and regenerate every head from the history the insider wishes
+    were true. They hold the log key, so all of that is available to them. They do not hold
+    the witnesses' keys, so the heads come out carrying one signature where they carried three.
+    """
+    for e in entries:
+        del e["sig"]
+        e["sig"] = sign_over(keypair("log"), ACTORS["log"][0], e)
+    (dst / "log.jsonl").write_text("".join(json.dumps(e) + "\n" for e in entries))
+    heads = []
+    for n in range(1, len(entries) + 1):
+        leaves = [leaf_hash(canon({k: v for k, v in e.items() if k != "sig"})) for e in entries[:n]]
+        head = {"log_id": COMMUNITY, "size": n, "root": "sha256:" + merkle_root(leaves).hex(),
+                "timestamp": entries[n - 1]["timestamp"]}
+        heads.append({**head, "sigs": [sign_over(keypair("log"), ACTORS["log"][0], head)]})
+    (dst / "heads.jsonl").write_text("".join(json.dumps(h) + "\n" for h in heads))
+
+
 def tamper(src: Path, dst: Path, mode: str):
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst)
     if mode == "log":
         # An INSIDER rewrites history: the committee holds the log key, edits the recorded
-        # question after the fact and re-signs it validly. Signatures pass; the witnessed
-        # heads cannot be re-signed (the insider does not hold the witnesses' keys), so the
-        # rewrite must fail against the co-signed roots — records-rewrite, the scenario.
+        # question after the fact and re-signs it validly. Every signature still verifies —
+        # but the entry's Merkle leaf changed, so the already-published heads no longer
+        # root the log they claim to. This is caught by consistency alone, and needs no
+        # witnesses; the insider who thinks to regenerate the heads is mode "rehead".
         lines = (dst / "log.jsonl").read_text().splitlines()
         e = json.loads(lines[2])
         e["body"]["question"] = QUESTION.replace("treasurer", "treasurer-for-life")
@@ -312,6 +339,34 @@ def tamper(src: Path, dst: Path, mode: str):
         e["sig"] = sign_over(keypair("log"), ACTORS["log"][0], e)
         lines[2] = json.dumps(e)
         (dst / "log.jsonl").write_text("\n".join(lines) + "\n")
+    elif mode == "rehead":
+        # The insider's BEST move against a witnessed log. Editing an entry alone (mode
+        # "log") breaks the head roots and is caught by plain Merkle consistency — no
+        # witnesses required. So the insider goes further: edit the entry AND regenerate
+        # every head to match, re-signing each with the log key they hold. They cannot
+        # forge the federation's and Meersbrook's co-signatures, so their only move is to
+        # drop them. The transcript is now internally consistent and every signature on it
+        # verifies. The one thing that betrays the rewrite is who ISN'T on the heads.
+        entries = [json.loads(l) for l in (dst / "log.jsonl").read_text().splitlines()]
+        entries[2]["body"]["question"] = QUESTION.replace("treasurer", "treasurer-for-life")
+        reforge(dst, entries)
+    elif mode == "unwitness":
+        # ...and the insider's follow-up, once told the manifest is what declares the
+        # witnesses: rewrite the manifest to declare none, repair the logged manifest
+        # digest, and regenerate the heads. Now nothing INSIDE the transcript is
+        # inconsistent — the manifest, signed by the log key the insider holds, simply
+        # says this log never had witnesses. Only a bar set outside the transcript (the
+        # verifier's trust anchors) can still catch it. A manifest cannot be its own standard.
+        manifest = json.loads((dst / "manifest.json").read_text())
+        manifest["transparency_log"]["witnesses"] = []
+        del manifest["sig"]
+        manifest["sig"] = sign_over(keypair("log"), COMMUNITY + "#manifest-1", manifest)
+        (dst / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
+        entries = [json.loads(l) for l in (dst / "log.jsonl").read_text().splitlines()]
+        entries[0]["body"]["manifest_digest"] = sha256_hex(
+            canon({k: v for k, v in manifest.items() if k != "sig"}))
+        entries[2]["body"]["question"] = QUESTION.replace("treasurer", "treasurer-for-life")
+        reforge(dst, entries)
     elif mode == "box":  # quietly swap one ballot's commitment for a commitment to the other option
         doc = json.loads((dst / "ballot-box.json").read_text())
         doc["ballots"][0]["commit"] = commit_hex(OPTIONS[1], "0" * 32)
