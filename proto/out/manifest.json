@@ -14,9 +14,9 @@
  "personhood": {
   "method": "platform-account",
   "issuer": "plot-register roster (simulated ceremony)",
-  "unlinkable": false,
+  "unlinkable": true,
   "sybil_resistance": "weak",
-  "eligibility_rules": "plot-register/2026 sha256:5d7f3ccb42932d91d1956ab6a0119c52e901651ba2dd417ce46f7e30344ed63e"
+  "eligibility_rules": "plot-register/2026 sha256:02077dad84a599d2a3f09aa4d8b0f8e177efdc52c4f3f5ded86153c65aa4f447"
  },
  "decisions": {
   "verifiable": true,
@@ -37,6 +37,6 @@
  "sig": {
   "key_id": "did:web:heeley-bank-allotments.example#manifest-1",
   "alg": "ed25519",
-  "value": "pSjqNTN7-V26mrMWVErkv1S7CBTDDFAGfNG5bn3bXcMzZN_B2SnPuoYI6ItyyBD9JWUhOv4JS4CfF78Uf9eeAA"
+  "value": "DVodUJSH3YuB-x2BJSyyGBUSmic8om2bKZkgDUbDgr8ukxz9pg615fxOur8Q9GfpxqN4Tx6PgKukmTjh8rGMBw"
  }
 }

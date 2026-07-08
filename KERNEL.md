@@ -165,6 +165,18 @@ research program, not a trained system.
   recount, and a 0-or-1 ballot-validity proof respectively (mutation-tested: disable any
   one check and its fraud certifies). Signature collusion can still *drop* history —
   deniability, not forgery — which is the external anchor's job, not yet implemented.
+- **So does the franchise, and it costs anonymity nothing.** A ballot carries no name: it
+  proves membership of the roster's key ring (a linkable ring signature) and a per-decision
+  pseudonym `H(decision_id)^nym_secret` — SVC-1's `nym_secret × context_id`, running. The
+  same total collusion cannot mint a ballot or re-aim one, because eligibility is *proven*,
+  not asserted by a credential the box carries; and no voter can vote twice, because the
+  pseudonym is bound to the ring signature and checked into the prime-order subgroup
+  (mutation-tested: remove that one check and one secret becomes two voters — the negated
+  tag `-T` verifies just as well). The honest limit is arithmetic, not cryptographic: the
+  anonymity set is the roster and the proof is linear in it — 8.4 kB a ballot at sixty
+  plot-holders. Populations need the constant-size BBS presentation §13 tracks. The
+  interface — `prove(eligible, decision_id) → pseudonym + proof` — was written against the
+  abstraction, so swapping the proof system changes nothing else.
 - **19 scenarios**, each cross-validated against the waist schemas and each anchored to
   documented real-world precedents (46 verified citations — the schema requires them: no
   attack without a cited precedent): 15 strain, 3 break, 1 holds. The one hold is
@@ -184,6 +196,7 @@ cryptography is not yet shipped.
 
 *Every component named ships today; the composition is the contribution. The first running
 code is [`proto/`](proto/): the club vote end to end — all four verbs, waist-valid artifacts,
-ballots sealed to a trustee quorum and never individually opened, an independent verifier
-that catches nine tampers by their named defences, and a manifest that declares its own
-subtractions. The rest is specification, harness, and corpus — see the [README](README.md).*
+anonymous ballots sealed to a trustee quorum and never individually opened, an independent
+verifier that catches eleven tampers by their named defences, and a manifest that declares
+its own subtractions. The rest is specification, harness, and corpus — see the
+[README](README.md).*

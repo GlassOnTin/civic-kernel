@@ -16,7 +16,7 @@ jobs:
         run: python tools/validate.py
       - name: corpus validates against the waist
         run: python tools/validate-corpus.py
-      - name: the success test — run, verify, reproduce, catch 9 tampers
+      - name: the success test — run, verify, reproduce, catch 11 tampers
         run: proto/test.sh
       - name: committed artifacts are current (rebuilt site data and reference transcript match the code)
         run: git diff --exit-code

@@ -9,11 +9,21 @@ with verify.py, which shares no code with this file.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
-      (and rewrite the manifest to declare there were never any witnesses). Attacks on the vote:
-      box (swap a cast ciphertext), forge (stuff an unenrolled ballot), negate (a saboteur voter
-      warps his own ciphertext out of the group), overvote (an enrolled voter encrypts 2 votes,
-      and the committee accepts it). And, with the committee AND both witnesses colluding on a
-      rewritten history: share (announce a rigged decryption), count (announce rigged counts).
+      (and rewrite the manifest to declare there were never any witnesses) -> roster (rewrite
+      the eligibility rule in the published register). Attacks on the vote: box (swap a cast
+      ciphertext), stuff (mint an extra ballot), doublevote (an enrolled voter negates his own
+      linking tag to vote twice), negate (a saboteur voter warps his own ciphertext out of the
+      group), overvote (an enrolled voter encrypts 2 votes, and the committee accepts it). Most
+      of the vote attacks assume the committee AND both witnesses collude on a rewritten
+      history; the last two are pure tally lies under the same collusion: share (announce a
+      rigged decryption), count (announce rigged counts).
+
+Ballots are anonymous. Eligibility is proven, not asserted: each ballot carries a linkable
+ring signature (LSAG, Liu-Wei-Wong 2004) over the whole published roster, proving the signer
+holds SOME roster secret without revealing which, and binding the ballot to a per-decision
+linking tag H(decision_id)^x — §3.1's `nym_secret x context_id` pseudonym, in the exponent.
+Same voter twice in one decision: same tag, so the last ballot supersedes. Same voter in
+another decision: another context generator, so nothing links.
 
 Ballots are exponential-ElGamal encryptions to a 2-of-3 trustee key (RFC 3526 MODP-2048,
 stdlib pow — auditable over compact): the box holds ciphertexts that are never individually
@@ -22,8 +32,8 @@ Chaum-Pedersen correctness proof, each ballot a 0-or-1 validity proof (CDS). The
 generated distributively — each trustee deals their own Feldman-committed polynomial, and
 no party ever holds the joint secret. Deliberate subtractions, declared in the emitted
 manifest rather than hidden: the DKG has no hash-commitment round (a rushing trustee could
-bias the key's distribution), the issuer can link nullifiers to the roster, sybil
-resistance is the plot register, receipt-freeness holds only if the client discards its
+bias the key's distribution), the anonymity set is the roster and the proof is linear in it,
+sybil resistance is the plot register, receipt-freeness holds only if the client discards its
 encryption randomness (this file does — r never outlives cast()). See README.md.
 """
 import base64
@@ -51,10 +61,6 @@ def sha256_hex(b: bytes) -> str:
 
 def b64u(b: bytes) -> str:
     return base64.urlsafe_b64encode(b).decode().rstrip("=")
-
-
-def b64d(s: str) -> bytes:
-    return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
 
 
 def keypair(name: str) -> Ed25519PrivateKey:
@@ -160,6 +166,66 @@ def cp_prove(x_i: int, c1_sum: int, index: int, ctx: str) -> tuple[int, dict]:
     return d, {"a": hx(a), "b": hx(b), "z": hx(z)}
 
 
+# ------------------------------------- unlinkable eligibility: the ring and the tag
+# §3.1 asks eligibility for `prove(eligible, decision_id) -> pseudonym + proof`, with the
+# pseudonym derived as `nym_secret x context_id`. Here context_id is a subgroup generator
+# hashed from the decision, and the pseudonym — the nullifier — is that generator raised
+# to the voter's nym secret. The proof is a linkable ring signature over the whole roster:
+# it proves the signer knows SOME roster secret and that the nullifier is that same
+# secret's tag, without revealing which roster entry signed. This is the village-scale
+# instantiation of the abstraction; BBS (§13) is the one that scales.
+
+
+def nym_secret(name: str) -> int:
+    return det_scalar("nym|" + name)  # in a deployment: generated on the voter's device
+
+
+def context_gen(ctx: str) -> int:
+    """A subgroup generator whose discrete log to base G nobody knows: square a hash.
+    A different decision means a different generator, so tags never link across decisions."""
+    for i in range(64):
+        c = int.from_bytes(hashlib.sha256(f"civic-kernel/ctx|{ctx}|{i}".encode()).digest()) % P
+        if c > 1 and pow(c, 2, P) != 1:
+            return pow(c, 2, P)
+    raise ValueError("no context generator")
+
+
+def link_tag(x: int, ctx: str) -> int:
+    return pow(context_gen(ctx), x, P)
+
+
+def ring_challenge(ring_digest: str, ctx: str, msg: str, tag: int, z1: int, z2: int) -> int:
+    # 256-bit challenge (not reduced mod q): ample for soundness, and eight times cheaper
+    # as an exponent than a full-width one. The ring digest binds the signature to THIS
+    # ring, so a ballot cannot be replayed against a roster it was not signed over.
+    return int.from_bytes(hashlib.sha256(canon(
+        {"t": "lsag", "ring": ring_digest, "ctx": ctx, "msg": msg,
+         "tag": hx(tag), "z1": hx(z1), "z2": hx(z2)})).digest())
+
+
+def ring_sign(ring: list[int], pi: int, x: int, ctx: str, msg: str, ring_digest: str,
+              label: str, tag: int | None = None) -> tuple[dict, int]:
+    """LSAG: simulate every ring position but the signer's, answer that one for real, and
+    close the challenge chain back onto itself. Returns (signature, challenge at the
+    signer's index) — the caller needs the latter only when forging a tag (see doublevote).
+    """
+    n = len(ring)
+    hl = context_gen(ctx)
+    tag = pow(hl, x, P) if tag is None else tag
+    u = det_scalar(label + "|u")
+    c, s = [0] * n, [0] * n
+    c[(pi + 1) % n] = ring_challenge(ring_digest, ctx, msg, tag, pow(G, u, P), pow(hl, u, P))
+    i = (pi + 1) % n
+    while i != pi:
+        s[i] = det_scalar(f"{label}|s|{i}")
+        z1 = pow(G, s[i], P) * pow(ring[i], c[i], P) % P
+        z2 = pow(hl, s[i], P) * pow(tag, c[i], P) % P
+        c[(i + 1) % n] = ring_challenge(ring_digest, ctx, msg, tag, z1, z2)
+        i = (i + 1) % n
+    s[pi] = (u - x * c[pi]) % Q
+    return {"c0": hx(c[0]), "s": [hx(v) for v in s]}, c[pi]
+
+
 # ---------------------------------------------------------------- the cast
 
 COMMUNITY = "did:web:heeley-bank-allotments.example"
@@ -173,6 +239,8 @@ ACTORS = {
     "witness-fed": ("did:web:sheffield-allotment-federation.example#w1", "witness"),
     "witness-meers": ("did:web:meersbrook-allotments.example#w1", "witness"),
 }
+# Members hold no signing key at all: the ballot is signed by the RING, not by a name.
+# What the issuer certifies is a nym public key g^x — the entry in the anonymity set.
 
 # 2-of-3 trustees; two happen to also be witnesses, the third is a neutral neighbour.
 # Trustees never sign anything — their shares are proven correct by mathematics (CP),
@@ -287,19 +355,25 @@ def run(outdir: Path):
     out.mkdir(parents=True, exist_ok=True)
     t = lambda day, hh, mm=0: f"2026-07-{day:02d}T{hh:02d}:{mm:02d}:00Z"
 
-    # --- ceremony (prove, part 1): the issuer signs each member's voting key
+    # --- ceremony (prove, part 1): the issuer certifies each member's nym public key.
+    # This is the last time a name and a key appear together. Everything downstream sees
+    # the ring — the set of keys — and never learns which of them signed a ballot.
     issuer = keypair("issuer")
     roster = []
     for name in MEMBERS:
-        voter = keypair("member:" + name)
-        vpub = pub_b64(voter)
-        cred = {"member": name, "voter_pub": vpub}
+        cred = {"member": name, "voter_pub": hx(pow(G, nym_secret(name), P))}
         cred["issuer_sig"] = sign_over(issuer, ACTORS["issuer"][0], cred)
         roster.append(cred)
     roster_doc = {"community": COMMUNITY, "eligibility": "plot-register/2026: one vote per named plot-holder",
                   "members": roster}
     (out / "roster.json").write_text(json.dumps(roster_doc, indent=1) + "\n")
     roster_digest = sha256_hex(canon(roster_doc))
+    ring = [int(c["voter_pub"], 16) for c in roster]
+    ring_index = {y: i for i, y in enumerate(ring)}
+    # the ring signature binds to the KEYS, not to the whole register: rewriting the
+    # eligibility prose is a records attack for the logged digest to catch, not a
+    # reason for every honest voter's proof to stop verifying
+    ring_digest = sha256_hex(canon([c["voter_pub"] for c in roster]))
 
     # --- the trustees generate the election key TOGETHER: each deals their own
     # Feldman-committed polynomial and sends every other trustee a private share, which
@@ -336,7 +410,7 @@ def run(outdir: Path):
                       "parent": "did:web:sheffield-allotment-federation.example"},
         "services": {"personhood": True, "decisions": True, "rights_guard": False, "transparency_log": True},
         "personhood": {"method": "platform-account", "issuer": "plot-register roster (simulated ceremony)",
-                       "unlinkable": False, "sybil_resistance": "weak",
+                       "unlinkable": True, "sybil_resistance": "weak",
                        "eligibility_rules": "plot-register/2026 " + roster_digest},
         "decisions": {"verifiable": True, "receipt_free": True, "cast_or_audit": True,
                       "paper_channel": False, "coercion_resistance": "revote-silent",
@@ -355,13 +429,17 @@ def run(outdir: Path):
     log = Log(keypair("log"), t(1, 19))
     log.append("manifest.published", {
         "manifest_digest": manifest_digest,
-        "note": "Prototype run. Declares: roster personhood (sybil-weak, linkable), ballots "
-                "encrypted to a distributively-generated 2-of-3 trustee key (no dealer; no "
-                "party ever holds the joint secret) and never individually opened — only the "
-                "homomorphic sum is decrypted; receipt-free at the transcript level (the "
-                "client must discard its encryption randomness after cast; a retained r "
-                "reconstructs a receipt), cast-or-audit device challenges, silent re-vote, "
-                "no rights guard, no paper channel."}, t(1, 19))
+        "note": "Prototype run. Declares: roster personhood, sybil-weak but UNLINKABLE — a "
+                "ballot proves membership of the roster ring by linkable ring signature and "
+                "carries a per-decision pseudonym H(decision)^nym_secret, so no party, the "
+                "issuer included, learns who cast which ballot, and nothing links a voter "
+                "across decisions (the anonymity set is the roster; the proof is linear in "
+                "it). Ballots encrypted to a distributively-generated 2-of-3 trustee key (no "
+                "dealer; no party ever holds the joint secret) and never individually opened "
+                "— only the homomorphic sum is decrypted; receipt-free at the transcript "
+                "level (the client must discard its encryption randomness after cast; a "
+                "retained r reconstructs a receipt), cast-or-audit device challenges, silent "
+                "re-vote, no rights guard, no paper channel."}, t(1, 19))
     log.append("x-roster.published", {"roster_digest": roster_digest, "member_count": len(MEMBERS)}, t(1, 19, 5))
     log.append("x-trustees.published", {
         "trustees_digest": trustees_digest, "threshold": "2-of-3",
@@ -379,7 +457,8 @@ def run(outdir: Path):
     # encrypts, a cheating device is caught with probability = the challenge rate
     # (Benaloh). A challenged ciphertext is a receipt by construction, so it is spoiled —
     # logged in the audit file, never cast. After a real cast, r is discarded: nothing
-    # this function returns can prove what the ballot says.
+    # this function returns can prove what the ballot says. Nor WHO said it: the ballot is
+    # signed by the ring, so what leaves this function is "some plot-holder, exactly once."
     h_pub = h
     box, seq, audits = [], 0, []
 
@@ -398,61 +477,72 @@ def run(outdir: Path):
         audits.append(rec)
         return rec
 
-    def cast(name, choice, channel="app", witness=None, attempt=0):
+    def cast(name, choice, attempt=0, cheat=False):
         nonlocal seq
+        x = nym_secret(name)
+        pi = ring_index[pow(G, x, P)]      # KeyError = not a plot-holder; nothing to sign with
         seq += 1
-        voter = keypair("member:" + name)
-        vpub = pub_b64(voter)
-        cred = next(c for c in roster if c["voter_pub"] == vpub)
-        ct, m, r = device_encrypt(choice, name, attempt)
+        ct, m, r = device_encrypt(choice, name, attempt, cheat)
         proof = prove01(m, r, ct, h_pub, DECISION, f"cds|{name}|{attempt}")
-        ballot = {"decision_id": DECISION, "seq": seq,
-                  "nullifier": sha256_hex(b64d(vpub) + DECISION.encode()),
-                  "ciphertext": ct, "proof": proof, "voter_pub": vpub,
-                  "issuer_sig": cred["issuer_sig"], "channel": channel}
-        if witness:
-            ballot["witness_sig"] = sign_over(keypair("member:" + witness),
-                                              "assisted-witness:" + witness, ballot)
-        ballot["voter_sig"] = sign_over(voter, "voter:" + vpub, ballot)
-        box.append(ballot)  # m and r go out of scope here — that is the receipt-freeness
+        ballot = {"decision_id": DECISION, "seq": seq, "nullifier": hx(link_tag(x, DECISION)),
+                  "ciphertext": ct, "proof": proof}
+        ballot["ring_sig"], _ = ring_sign(ring, pi, x, DECISION, sha256_hex(canon(ballot)),
+                                          ring_digest, f"lsag|{name}|{attempt}")
+        box.append(ballot)  # m, r and pi all go out of scope here: no receipt, no name
 
-    # ordinary members vote (deterministic split; sealed ciphertexts enter the box)
-    for i, name in enumerate(MEMBERS[5:]):
-        if i % 8 == 7:
-            continue  # abstainers
-        cast(name, OPTIONS[0] if i % 7 < 4 else OPTIONS[1])
-    # routine deterrence: two cautious members challenge first, see a match, then cast fresh
+    # Who turns up to an allotment AGM: about a plot in six, and the five named members.
+    # Sandra and Ernest challenge their devices first and cast on the next attempt.
+    # Plot-holder 23's phone is compromised — it displays Sandra and encrypts Keith — so
+    # her first cast is a lie she does not know she told. She challenges on a whim, the
+    # opened encryption does not match, the failure is logged publicly, and she recasts
+    # from the clubhouse kiosk: the phone's ballot is silently superseded, and stays
+    # sealed forever. Nobody will ever learn what it said. The two remedies compose —
+    # cast-or-audit caught the device, the recast policy repaired the vote.
+    # Nalini votes, thinks about the water-rate surplus overnight, and re-votes: same
+    # linking tag, later seq, so the first ballot is superseded without anyone knowing
+    # it was hers. Ernest (no smartphone, trusts none of it) votes at the table with two
+    # tellers; his ballot carries no mark of that — an "assisted" label on one ballot in
+    # a ring of sixty would name him.
+    def turns_out(name: str) -> bool:
+        return hashlib.sha256(("turnout|" + name).encode()).digest()[0] < 30
+
+    def leaning(name: str) -> str:
+        return OPTIONS[hashlib.sha256(("choice|" + name).encode()).digest()[0] % 7 // 4]
+
+    plan = [(n, leaning(n), 0, False) for n in MEMBERS[5:]
+            if turns_out(n) and n != "Plot-holder 23"]
+    plan += [("Sandra Okafor", OPTIONS[0], 1, False),
+             ("Keith Bramall", OPTIONS[1], 0, False),
+             ("Derek Wainwright", OPTIONS[1], 0, False),
+             ("Nalini Mistry", OPTIONS[1], 0, False),
+             ("Nalini Mistry", OPTIONS[0], 1, False),   # same tag, later seq -> supersedes
+             ("Plot-holder 23", OPTIONS[0], 0, True),   # the compromised phone
+             ("Plot-holder 23", OPTIONS[0], 2, False),  # the clubhouse kiosk, after the challenge
+             ("Ernest Toft", OPTIONS[1], 1, False)]
+    # Cast order is not roster order. `seq` decides which of a voter's ballots counts, so
+    # it has to be in the signed ballot — which means it must carry no trace of who cast it.
+    plan.sort(key=lambda p: (hashlib.sha256(("order|" + p[0]).encode()).hexdigest(), p[2]))
+    for name, choice, attempt, cheat in plan:
+        cast(name, choice, attempt, cheat)
+
     challenge("Sandra Okafor", OPTIONS[0], attempt=0)
-    cast("Sandra Okafor", OPTIONS[0], attempt=1)
-    cast("Keith Bramall", OPTIONS[1])
-    cast("Derek Wainwright", OPTIONS[1])
-    # Plot-holder 23's phone is compromised: it displays Sandra but encrypts Keith.
-    # She challenges on a whim — the opened encryption does not match, the failure is
-    # logged publicly, and she recasts from the clubhouse kiosk: her earlier cast from
-    # that phone is silently superseded (and stays sealed forever — nobody will ever
-    # learn what the compromised phone actually encrypted). The two remedies compose —
-    # cast-or-audit caught the device, and the recast policy repaired the vote.
+    challenge("Ernest Toft", OPTIONS[1], attempt=0)
     caught = challenge("Plot-holder 23", OPTIONS[0], attempt=1, cheat=True)
     log.append("x-ballot.audit-failed", {
         "decision_id": DECISION, "ciphertext": caught["ciphertext"],
         "claimed_choice": caught["claimed_choice"], "opened_choice": caught["opened_choice"],
         "note": "cast-or-audit challenge: device display disagreed with its opened encryption; "
                 "ciphertext spoiled, member recast from a clean device"}, t(9, 11))
-    cast("Plot-holder 23", OPTIONS[0], channel="kiosk", attempt=2)
-    # Nalini votes, thinks about the water-rate surplus overnight, and silently re-votes:
-    cast("Nalini Mistry", OPTIONS[1])
-    cast("Nalini Mistry", OPTIONS[0], attempt=1)   # same nullifier, later seq -> supersedes
-    # Ernest (no smartphone, trusts none of it) casts through the assisted channel, two
-    # tellers at the table; the second teller runs one challenge in front of him first:
-    challenge("Ernest Toft", OPTIONS[1], attempt=0)
-    cast("Ernest Toft", OPTIONS[1], channel="assisted", witness="Plot-holder 12", attempt=1)
-    # Derek tries to mint an extra voice for his unenrolled cousin: no roster credential
+    # Derek tries to mint an extra voice for his unenrolled cousin. There is no credential
+    # to steal and no signature to forge: Ray's key is not in the ring, so no proof exists.
     try:
         cast("Cousin Ray", OPTIONS[1])
-    except StopIteration:
+    except KeyError:
         rejected = {"attempt": "cast by unenrolled key", "member": "Cousin Ray",
-                    "result": "rejected: no roster credential"}
+                    "result": "rejected: not in the roster ring, so no membership proof exists"}
 
+    # Published in tag order: a ballot's position in the box must say nothing either.
+    box.sort(key=lambda b: b["nullifier"])
     box_doc = {"decision_id": DECISION, "ballots": box}
     (out / "ballot-box.json").write_text(json.dumps(box_doc, indent=1) + "\n")
     box_digest = sha256_hex(canon(box_doc))
@@ -484,18 +574,19 @@ def run(outdir: Path):
     # manifest is signed by the log key, so it cannot vouch for its own witness count.
     # No trustee keys here — trustee shares are proven by Chaum-Pedersen against the
     # Feldman commitments, which ride the witnessed log; and the election key cannot be
-    # swapped either, because every voter's validity proof binds to it under a signature
-    # only that voter can make.
+    # swapped either, because every ballot's validity proof binds to it under a ring
+    # signature only a plot-holder can make. No voter keys either, and that is the point:
+    # a verifier trusts the ring, never a name.
     keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ACTORS}
     keys[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
-    keys["assisted-witness:Plot-holder 12"] = pub_b64(keypair("member:Plot-holder 12"))
     (out / "trust.json").write_text(json.dumps(
         {"keys": keys, "witnesses": manifest["transparency_log"]["witnesses"]}, indent=1) + "\n")
 
     counts = body["counts"]
     print(f"run complete -> {out}")
-    print(f"  {len(MEMBERS)} enrolled, {len(box)} ballots ({body['distinct_voters']} counted, "
+    print(f"  {len(MEMBERS)} enrolled, {len(box)} anonymous ballots ({body['distinct_voters']} counted, "
           f"{body['superseded']} superseded), 1 unenrolled cast rejected")
+    print(f"  each ballot proves membership of the {len(ring)}-key ring; nothing says which key")
     print(f"  {len(audits)} cast-or-audit challenges, "
           f"{sum(1 for a in audits if a['outcome'] == 'MISMATCH')} cheating device caught and logged")
     print(f"  tally (threshold-decrypted sum; no ballot ever opened): "
@@ -547,24 +638,38 @@ def rewrite_box(dst: Path, mutate, collude=False):
         digest = sha256_hex(canon(doc))
         entries = load_entries(dst)
         entry(entries, "decision.closed")["body"]["ballot_box_digest"] = digest
+        entry(entries, "decision.closed")["body"]["ballots_recorded"] = len(doc["ballots"])
         old = entry(entries, "decision.tally-proof")["body"]
         entry(entries, "decision.tally-proof")["body"] = tally_body(
             doc["ballots"], digest, [1, 3], old["note"])
         reforge(dst, entries, with_witnesses=True)
 
 
-def resign_ballot(b: dict, name: str):
-    voter = keypair("member:" + name)
-    for k in ("voter_sig",):
-        b.pop(k, None)
-    b["voter_sig"] = sign_over(voter, "voter:" + b["voter_pub"], b)
+def ring_of(dst: Path) -> tuple[list, dict, str]:
+    members = json.loads((dst / "roster.json").read_text())["members"]
+    ring = [int(c["voter_pub"], 16) for c in members]
+    return ring, {y: i for i, y in enumerate(ring)}, sha256_hex(canon([c["voter_pub"] for c in members]))
+
+
+def resign_ballot(dst: Path, b: dict, name: str, label: str):
+    """A saboteur re-proves his OWN altered ballot. He can: it is his ring secret. What he
+    cannot do is make the altered ciphertext legal — that is a different check's job."""
+    ring, index, rd = ring_of(dst)
+    x = nym_secret(name)
+    b.pop("ring_sig", None)
+    b["ring_sig"], _ = ring_sign(ring, index[pow(G, x, P)], x, DECISION,
+                                 sha256_hex(canon(b)), rd, label)
+
+
+def find_by_tag(ballots: list, name: str) -> dict:
+    tag = hx(link_tag(nym_secret(name), DECISION))
+    return next(b for b in ballots if b["nullifier"] == tag)
 
 
 def tamper(src: Path, dst: Path, mode: str):
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst)
-    derek_null = sha256_hex(b64d(pub_b64(keypair("member:Derek Wainwright"))) + DECISION.encode())
     if mode == "log":
         # An INSIDER rewrites history: the committee holds the log key, edits the recorded
         # question after the fact and re-signs it validly. Every signature still verifies —
@@ -607,42 +712,99 @@ def tamper(src: Path, dst: Path, mode: str):
         entry(entries, "decision.opened")["body"]["question"] = \
             QUESTION.replace("treasurer", "treasurer-for-life")
         reforge(dst, entries)
-    elif mode == "box":  # quietly swap one ballot's ciphertext for an encryption of the other option
-        rewrite_box(dst, lambda ballots: ballots[0].__setitem__(
-            "ciphertext", enc(0, det_scalar("tamper-box"), election_pub())))
-    elif mode == "forge":  # stuff the box with a ballot from a key the issuer never signed
+    elif mode == "roster":
+        # The committee rewrites the eligibility RULE in the published register after the
+        # fact — "one vote per plot", so a member holding two plots may vote twice. Every
+        # credential still verifies, the ring is untouched, and every ballot still proves
+        # membership. What pins the register as it stood when the decision opened is the
+        # digest the witnessed log recorded. Until this tamper existed nothing exercised
+        # that check, so nothing proved it was load-bearing.
+        doc = json.loads((dst / "roster.json").read_text())
+        doc["eligibility"] = "plot-register/2026: one vote per plot"
+        (dst / "roster.json").write_text(json.dumps(doc, indent=1) + "\n")
+    elif mode == "box":
+        # Total collusion re-aims a sealed ballot — Sandra's own, which takes her 8-6 win to
+        # a 7-7 tie. The committee replaces her ciphertext with its own encryption of Keith
+        # and, since it chose the randomness, a perfectly valid fresh 0-or-1 proof to match;
+        # repairs the box digest; re-decrypts the sum honestly; and both witnesses co-sign.
+        # Nothing about the ballot is malformed any more. It is simply not the ballot its
+        # author signed — and its author is one of sixty people the committee cannot
+        # identify, never mind impersonate. (Here it can: it holds the seed. A real one
+        # could not even find her ballot in the box.)
+        def swap(ballots):
+            b = find_by_tag(ballots, "Sandra Okafor")
+            r = det_scalar("tamper-box")
+            b["ciphertext"] = enc(0, r, election_pub())
+            b["proof"] = prove01(0, r, b["ciphertext"], election_pub(), DECISION, "cds|tamper-box")
+        rewrite_box(dst, swap, collude=True)
+    elif mode == "stuff":
+        # Total collusion mints a vote. The committee builds a flawless extra ballot for
+        # Keith — a real encryption of 0, a real 0-or-1 proof, a well-formed linking tag
+        # nobody has used — repairs the box digest, re-decrypts the sum honestly, and both
+        # witnesses co-sign the rewritten history. Everything a signature or a hash could
+        # certify, they certified. The one artifact they cannot produce is a proof of
+        # membership in a ring they hold no key to. Eligibility is proven here, not
+        # asserted, so there is no credential left to steal: they copy a real ballot's ring
+        # signature, and it is bound to that ballot's contents and that voter's tag.
         def stuff(ballots):
-            ghost = keypair("member:Ghost")
-            gpub = pub_b64(ghost)
-            b = {"decision_id": DECISION, "seq": 999,
-                 "nullifier": sha256_hex(b64d(gpub) + DECISION.encode()),
-                 "ciphertext": ballots[0]["ciphertext"], "proof": ballots[0]["proof"],
-                 "voter_pub": gpub,
-                 "issuer_sig": ballots[0]["issuer_sig"], "channel": "app"}  # stolen credential sig
-            b["voter_sig"] = sign_over(ghost, "voter:" + gpub, b)
-            ballots.append(b)
-        rewrite_box(dst, stuff)
+            r = det_scalar("tamper-stuff")
+            ct = enc(0, r, election_pub())
+            ballots.append({
+                "decision_id": DECISION, "seq": 999,
+                "nullifier": hx(link_tag(det_scalar("tamper-stuff-nym"), DECISION)),
+                "ciphertext": ct,
+                "proof": prove01(0, r, ct, election_pub(), DECISION, "cds|stuffed"),
+                "ring_sig": ballots[0]["ring_sig"]})
+        rewrite_box(dst, stuff, collude=True)
+    elif mode == "doublevote":
+        # The attack unlinkability invites, and the reason the nullifier's subgroup check is
+        # not decoration. Derek cannot derive two tags from one secret: the ring signature
+        # binds the tag to the key. But p is a safe prime, so -1 is a non-residue — the
+        # NEGATED tag -T lies outside the prime-order subgroup, and the signature still
+        # closes whenever the challenge at Derek's own ring index comes out even. He grinds
+        # his nonce until it does (two tries, on average), and his second ballot — same
+        # secret, same ring, a tag that links to nothing — reads as a different voter. The
+        # corrupt committee counts both. Only `nullifier in the subgroup` says otherwise.
+        def doublevote(ballots):
+            ring, index, rd = ring_of(dst)
+            x = nym_secret("Derek Wainwright")
+            pi = index[pow(G, x, P)]
+            r = det_scalar("tamper-doublevote")
+            ct = enc(0, r, election_pub())          # a second voice, for Keith
+            b = {"decision_id": DECISION, "seq": 998,
+                 "nullifier": hx(P - link_tag(x, DECISION)),   # his own tag, negated
+                 "ciphertext": ct,
+                 "proof": prove01(0, r, ct, election_pub(), DECISION, "cds|doublevote")}
+            for grind in range(64):
+                sig, c_pi = ring_sign(ring, pi, x, DECISION, sha256_hex(canon(b)), rd,
+                                      f"doublevote|{grind}", tag=int(b["nullifier"], 16))
+                if c_pi % 2 == 0:                   # (-1)^c_pi == 1, so the ring closes
+                    b["ring_sig"] = sig
+                    ballots.append(b)
+                    return
+            raise ValueError("no even challenge found in 64 grinds")
+        rewrite_box(dst, doublevote, collude=True)
     elif mode == "negate":
         # A saboteur VOTER (enrolled — it is Derek) warps his own ciphertext out of the
-        # prime-order subgroup: c2 -> -c2, validly re-signed with his own voter key. The
+        # prime-order subgroup: c2 -> -c2, validly re-proved with his own ring secret. The
         # sum then decrypts to no small exponent at all and the election is griefed —
         # UNLESS the verifier checks group membership per ballot, which pins the sabotage
         # to this ballot instead of leaving an unattributable dead tally.
         def negate(ballots):
-            b = next(b for b in ballots if b["nullifier"] == derek_null)
+            b = find_by_tag(ballots, "Derek Wainwright")
             b["ciphertext"]["c2"] = hx(P - int(b["ciphertext"]["c2"], 16))
-            resign_ballot(b, "Derek Wainwright")
+            resign_ballot(dst, b, "Derek Wainwright", "tamper|negate")
         rewrite_box(dst, negate)
     elif mode == "overvote":
         # An enrolled voter (Derek again) encrypts m=2 — two votes for Sandra in one
-        # ballot — signs it validly, and the corrupt committee ACCEPTS it: box digest
-        # repaired, sum re-decrypted honestly, witnesses co-sign the history. Every hash,
-        # signature and trustee proof in the transcript now agrees. The only thing that
-        # cannot be manufactured is the 0-or-1 validity proof for a ballot that encrypts 2.
+        # ballot — proves membership validly, and the corrupt committee ACCEPTS it: box
+        # digest repaired, sum re-decrypted honestly, witnesses co-sign the history. Every
+        # hash, signature and trustee proof in the transcript now agrees. The only thing
+        # that cannot be manufactured is the 0-or-1 proof for a ballot that encrypts 2.
         def overvote(ballots):
-            b = next(b for b in ballots if b["nullifier"] == derek_null)
+            b = find_by_tag(ballots, "Derek Wainwright")
             b["ciphertext"] = enc(2, det_scalar("tamper-overvote"), election_pub())
-            resign_ballot(b, "Derek Wainwright")  # keeps his old proof: it binds to the old ciphertext
+            resign_ballot(dst, b, "Derek Wainwright", "tamper|overvote")  # old CDS proof binds the old ciphertext
         rewrite_box(dst, overvote, collude=True)
     elif mode == "share":
         # Total signature collusion: the committee AND both witnesses rewrite the tally to

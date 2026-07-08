@@ -2,11 +2,16 @@
 """Independent verifier for a clubvote transcript: `python3 verify.py <outdir>`.
 
 Shares NO code with clubvote.py — it reimplements canonicalization, the Merkle tree,
-the group arithmetic, both zero-knowledge proof verifications, and every check from the
-published artifacts plus the waist schemas in ../schema/. Trust anchors come from
+the group arithmetic, all three zero-knowledge proof verifications, and every check from
+the published artifacts plus the waist schemas in ../schema/. Trust anchors come from
 trust.json (in a real deployment: DID resolution and the witness ecosystem; here, a file
 you choose to trust). The ballot group is pinned BY NAME to this verifier's own
 constants — a transcript that could supply its own group could supply a smooth one.
+
+The ballots are anonymous, and this verifier never learns who cast one. It checks that
+each carries a linkable ring signature over the published roster — proof that SOME
+plot-holder cast it, bound to a per-decision linking tag that is the only thing
+distinguishing one voter from another.
 
 Exit 0 = every check passed. Exit 1 = the transcript is broken, and it says where.
 """
@@ -52,6 +57,10 @@ def sha256_hex(b: bytes) -> str:
 
 def b64d(s: str) -> bytes:
     return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
+
+
+def hx(n: int) -> str:
+    return format(n, "x")
 
 
 def sig_ok(pub_b64: str, sig: dict, obj_minus_sig: dict) -> bool:
@@ -167,12 +176,11 @@ def main(outdir: Path) -> int:
     check(closed.get("ballot_box_digest") == sha256_hex(canon(box_doc)),
           "logged ballot-box digest matches the published box")
 
-    print("[4] eligibility: one credential per enrolled member, issuer-signed")
+    print("[4] eligibility: the ring — one issuer-signed nym key per enrolled member")
     issuer_key = trust.get(roster_doc["members"][0]["issuer_sig"]["key_id"], "") if roster_doc["members"] else ""
     creds_ok = all(sig_ok(issuer_key, c["issuer_sig"],
                           {k: v for k, v in c.items() if k != "issuer_sig"}) for c in roster_doc["members"])
     check(creds_ok, f"all {len(roster_doc['members'])} roster credentials verify against the issuer key")
-    by_pub = {c["voter_pub"]: c for c in roster_doc["members"]}
 
     # --- the ballot group, pinned by name; the trustee setup, derived not asserted
     opened = by_type.get("decision.opened", {}).get("body", {})
@@ -220,6 +228,42 @@ def main(outdir: Path) -> int:
                 return False
         return True
 
+    # --- the anonymity set. The ring is the roster's keys, in the roster's order; the
+    # context generator is derived from the decision id, so a voter's tag in this decision
+    # says nothing about their tag in the next one. Neither is ever taken on the
+    # transcript's word: both are recomputed here from artifacts already digest-committed.
+    ring = [int(c["voter_pub"], 16) for c in roster_doc["members"]]
+    ring_digest = sha256_hex(canon([c["voter_pub"] for c in roster_doc["members"]]))
+
+    def context_gen(ctx: str) -> int:
+        for i in range(64):
+            c = int.from_bytes(hashlib.sha256(f"civic-kernel/ctx|{ctx}|{i}".encode()).digest()) % p
+            if c > 1 and pow(c, 2, p) != 1:
+                return pow(c, 2, p)
+        raise ValueError("no context generator")
+
+    def ring_challenge(msg: str, tag: int, z1: int, z2: int) -> int:
+        return int.from_bytes(hashlib.sha256(canon(
+            {"t": "lsag", "ring": ring_digest, "ctx": decision_id, "msg": msg,
+             "tag": hx(tag), "z1": hx(z1), "z2": hx(z2)})).digest())
+
+    hl = context_gen(decision_id)
+
+    def lsag_ok(b: dict) -> bool:
+        """The ring closes only if some ring key signed THIS ballot with THIS tag. Which
+        key, the signature does not say — and there is no other way to ask."""
+        sig = b.get("ring_sig") or {}
+        s = [int(v, 16) for v in sig.get("s", [])]
+        if len(s) != len(ring):
+            return False
+        tag, c0 = int(b["nullifier"], 16), int(sig.get("c0", "0"), 16)
+        msg, c = sha256_hex(canon({k: v for k, v in b.items() if k != "ring_sig"})), c0
+        for i, y in enumerate(ring):
+            z1 = pow(g, s[i], p) * pow(y, c, p) % p
+            z2 = pow(hl, s[i], p) * pow(tag, c, p) % p
+            c = ring_challenge(msg, tag, z1, z2)
+        return c == c0
+
     print("[5] cast-or-audit: challenged ciphertexts open correctly and were never cast")
     audits_doc = json.loads((outdir / "audits.json").read_text())
     audits = audits_doc["audits"]
@@ -245,32 +289,32 @@ def main(outdir: Path) -> int:
     check(len(af_entries) == len(fails) == closed.get("audit_failures", -1),
           f"every audit failure is a public log entry ({len(fails)} cheating device caught)")
 
-    print("[6] the box: sealed ballots, each one eligible, signed, in-group and 0-or-1")
+    print("[6] the box: anonymous ballots, each proving roster membership, in-group and 0-or-1")
+    check(all(in_group(y) for y in ring),
+          f"all {len(ring)} roster keys are prime-order subgroup elements (input hygiene on the "
+          "ring: no tamper reaches it, because a rewritten roster fails its logged digest first)")
     ballots, problems = [], []
     for i, b in enumerate(box_doc["ballots"]):
+        tag = int(b["nullifier"], 16)
         why = None
         if b["decision_id"] != decision_id:
             why = "wrong decision"
-        elif b["voter_pub"] not in by_pub:
-            why = "voter not on roster (no issuer credential)"
-        elif b["nullifier"] != sha256_hex(b64d(b["voter_pub"]) + decision_id.encode()):
-            why = "nullifier does not recompute"
-        elif not sig_ok(b["voter_pub"], b["voter_sig"], {k: v for k, v in b.items() if k != "voter_sig"}):
-            why = "voter signature invalid"
-        elif "witness_sig" in b and not sig_ok(
-                trust.get(b["witness_sig"]["key_id"], ""), b["witness_sig"],
-                {k: v for k, v in b.items() if k not in ("voter_sig", "witness_sig")}):
-            why = "assisted-channel witness signature invalid"
+        elif not (in_group(tag) and tag != 1):
+            # -T verifies as readily as T for a signer willing to grind, and links to
+            # nothing. Without this line, one secret yields two voters.
+            why = "nullifier is not in the prime-order subgroup (a negated linking tag votes twice)"
         elif not (in_group(int(b["ciphertext"]["c1"], 16)) and in_group(int(b["ciphertext"]["c2"], 16))):
             why = "ciphertext component not in the prime-order subgroup"
+        elif not lsag_ok(b):
+            why = "ring signature does not verify (no roster member signed this ballot with this nullifier)"
         elif not cds_ok(b["ciphertext"], b["proof"]):
             why = "ballot validity proof does not verify (not a 0-or-1 encryption)"
         if why:
             problems.append(f"ballot[{i}] {why}")
         else:
             ballots.append(b)
-    check(not problems, f"all {len(box_doc['ballots'])} cast ballots are well-formed sealed votes "
-          "(roster, signatures, subgroup membership, 0-or-1 validity proof)"
+    check(not problems, f"all {len(box_doc['ballots'])} cast ballots are well-formed anonymous votes "
+          "(subgroup membership, ring-membership proof, 0-or-1 validity proof)"
           + ("" if not problems else " :: " + problems[0]))
 
     print("[7] the tally: threshold-decrypted from the sum alone — no ballot is ever opened")
@@ -331,11 +375,8 @@ def main(outdir: Path) -> int:
           f"announced counts match the threshold decryption: {counts_dec}")
     check(tally.get("distinct_voters") == len(latest)
           and tally.get("superseded") == len(ballots) - len(latest),
-          f"recast policy applied: {len(ballots)} valid ballots, {len(latest)} voters counted, "
-          f"{len(ballots) - len(latest)} silently superseded (last ballot counts)")
-    assisted = [b for b in latest.values() if b.get("channel") == "assisted"]
-    check(len(assisted) >= 1,
-          f"assisted-channel ballots counted in the same tally as any other ({len(assisted)} assisted)")
+          f"recast policy applied: {len(ballots)} valid ballots, {len(latest)} distinct linking tags "
+          f"counted, {len(ballots) - len(latest)} silently superseded (last ballot counts)")
 
     return finish(counts_dec, roster_doc, latest)
 
@@ -350,9 +391,17 @@ def finish(counts, roster_doc, latest) -> int:
     winner = max(counts, key=counts.get)
     print(f"VERIFIED. {len(roster_doc['members'])} enrolled; {len(latest)} voted; "
           + "; ".join(f"{k} {v}" for k, v in counts.items())
-          + f". {winner} is elected; no ballot was ever opened, and nobody had to trust the shed.")
+          + f". {winner} is elected. No ballot was ever opened, no voter was ever named, "
+            "and nobody had to trust the shed.")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main(Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).parent / "out"))
+    # A verifier is a trust boundary: it is handed bytes by whoever wants them believed.
+    # Malformed input is a verdict, not a crash — "I could not check this" and "this checks
+    # out" must never be told apart by reading a stack trace.
+    try:
+        sys.exit(main(Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).parent / "out"))
+    except Exception as e:
+        print(f"\nNOT VERIFIED — the transcript is malformed: {type(e).__name__}: {e}")
+        sys.exit(1)
