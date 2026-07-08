@@ -2,83 +2,94 @@
 # The success test, executable. Green means: an independent verifier confirms the
 # election from the artifacts alone; every tamper is caught BY THE DEFENCE THE DESIGN
 # NAMES, not merely caught; the run is byte-reproducible. Run from anywhere.
-set -e
+#
+# Verifying an anonymous ballot is O(roster) — a ring signature per ballot — so a single
+# verification is seconds and the whole suite would be minutes run end to end. But the
+# honest check, the reproducibility run and all eleven tampers only READ out/, so they
+# are independent: this script fans them across cores and aggregates the verdicts. The
+# assertions are unchanged; only the scheduling is parallel.
+set -u
 cd "$(dirname "$0")"
 T=$(mktemp -d)
 trap 'rm -rf "$T"' EXIT
 
-# must_fail <mode> <substring of the FAIL line that defence must produce>
-# Asserting the SPECIFIC failure matters: a tamper caught by the wrong check is a test
-# that passes for the wrong reason, and would stay green if the named defence rotted.
-must_fail() {
-  local mode=$1 want=$2
-  python3 clubvote.py tamper out "$T/$mode" "$mode" > /dev/null
-  if python3 verify.py "$T/$mode" > "$T/$mode.txt" 2>&1; then
-    echo "  MISSED TAMPER ($mode): the verifier certified a corrupted transcript"; exit 1
+echo "=== run: deterministic election -> out/"
+python3 clubvote.py run out || { echo "  the run itself failed"; exit 1; }
+
+record() { printf '%s\t%s\n' "$1" "$2" > "$T/v.$1"; }  # name <TAB> "OK|FAIL: why"
+
+honest() {
+  if python3 verify.py out > "$T/honest.log" 2>&1
+  then record honest "OK   the honest transcript verifies"
+  else record honest "FAIL the honest transcript did NOT verify"; fi
+}
+reproduce() {
+  python3 clubvote.py run "$T/out2" > /dev/null 2>&1
+  if diff -rq out "$T/out2" > "$T/repro.log" 2>&1
+  then record reproduce "OK   a second run is byte-identical"
+  else record reproduce "FAIL a second run is not byte-reproducible"; fi
+}
+# must_fail: the verifier must REJECT the tamper, and a FAIL line must match the defence
+# the design names. A tamper caught by the wrong check is a test that passes for the wrong
+# reason and would stay green if the named defence rotted.
+must_fail() { # mode  want
+  local mode=$1 want=$2 line
+  python3 clubvote.py tamper out "$T/$mode" "$mode" > /dev/null 2>&1
+  if python3 verify.py "$T/$mode" > "$T/$mode.log" 2>&1; then
+    record "$mode" "FAIL MISSED TAMPER: the verifier certified a corrupted transcript"
+  elif line=$(grep -m1 "FAIL.*$want" "$T/$mode.log"); then
+    record "$mode" "OK   ${line#*FAIL }"
+  else
+    record "$mode" "FAIL WRONG DEFENCE: expected a FAIL matching '$want', got: $(grep -m1 FAIL "$T/$mode.log")"
   fi
-  if ! grep -q "FAIL.*$want" "$T/$mode.txt"; then
-    echo "  WRONG DEFENCE ($mode): expected a FAIL matching '$want', but got:"
-    grep FAIL "$T/$mode.txt"; exit 1
-  fi
-  grep -m1 "FAIL.*$want" "$T/$mode.txt"
 }
 
-echo "=== run: deterministic election -> out/"
-python3 clubvote.py run out
+# Everything below reads out/ and nothing else — launch it all at once (one verify per
+# core) and wait. `desc` is printed in a fixed order afterwards, so the output is
+# deterministic however the jobs interleave.
+honest & reproduce &
+must_fail log        "head's root matches a strict prefix"                 &
+must_fail rehead     "co-signed by the log key and all"                    &
+must_fail unwitness  "manifest declares every witness"                     &
+must_fail roster     "logged roster digest matches"                        &
+must_fail box        "ring signature does not verify"                      &
+must_fail stuff      "ring signature does not verify"                      &
+must_fail doublevote "negated linking tag"                                 &
+must_fail negate     "ciphertext component not in the prime-order subgroup" &
+must_fail overvote   "validity proof"                                      &
+must_fail share      "Chaum-Pedersen"                                      &
+must_fail count      "announced counts match"                             &
+wait
 
-echo; echo "=== verify: the honest transcript passes"
-python3 verify.py out
+declare -A desc=(
+  [honest]="the independent verifier confirms the election from artifacts alone"
+  [reproduce]="a second run is byte-identical (deterministic transcript)"
+  [log]="rewrite history in the log -> Merkle consistency"
+  [rehead]="rewrite AND regenerate heads -> the missing witness co-signatures"
+  [unwitness]="...and declare no witnesses -> the verifier's trust anchors"
+  [roster]="rewrite the eligibility rule after the vote -> the witnessed roster digest"
+  [box]="re-aim Sandra's ballot at Keith (7-7) -> the ring signature covers it"
+  [stuff]="mint an extra ballot under full collusion -> no ring membership to prove"
+  [doublevote]="negate a linking tag to vote twice -> the nullifier's subgroup check"
+  [negate]="warp a ciphertext out of the group -> per-ballot subgroup membership"
+  [overvote]="encrypt two votes, committee accepts -> the 0-or-1 validity proof"
+  [share]="collude on a rigged decryption -> the Chaum-Pedersen share proof"
+  [count]="collude on rigged counts -> the recount refutes itself"
+)
+ORDER="honest reproduce log rehead unwitness roster box stuff doublevote negate overvote share count"
 
-echo; echo "=== reproducibility: a second run is byte-identical"
-python3 clubvote.py run "$T/out2" > /dev/null
-diff -r out "$T/out2"
-echo "  ok   byte-identical"
+echo; fails=0
+for name in $ORDER; do
+  [ -f "$T/v.$name" ] || { echo "  FAIL $name — task produced no verdict (it crashed)"; fails=$((fails+1)); continue; }
+  verdict=$(cut -f2 "$T/v.$name")
+  printf '  %-11s %s\n             %s\n' "$name" "${desc[$name]}" "$verdict"
+  [[ $verdict == OK* ]] || fails=$((fails+1))
+done
 
-echo; echo "=== tamper 1: rewrite history in the log (caught by Merkle consistency)"
-must_fail log "head's root matches a strict prefix"
-
-echo; echo "=== tamper 2: rewrite history AND regenerate the heads to match"
-echo "===           (consistency now passes; caught only by the missing witnesses)"
-must_fail rehead "co-signed by the log key and all"
-
-echo; echo "=== tamper 3: ...and rewrite the manifest to declare it never had witnesses"
-echo "===           (nothing inside the transcript disagrees; caught by the trust anchors)"
-must_fail unwitness "manifest declares every witness"
-
-echo; echo "=== tamper 4: rewrite the eligibility RULE in the published register after the"
-echo "===           vote (every credential still verifies; the witnessed digest does not)"
-must_fail roster "logged roster digest matches"
-
-echo; echo "=== tamper 5: swap a counted ballot's ciphertext in the box"
-echo "===           (the ring signature covers it, and the shed is not in the ring)"
-must_fail box "ring signature does not verify"
-
-echo; echo "=== tamper 6: the committee AND both witnesses mint an extra ballot — real"
-echo "===           ciphertext, real 0-or-1 proof, fresh tag, digests repaired. There is no"
-echo "===           credential to steal: they cannot prove membership of a ring they are not in"
-must_fail stuff "ring signature does not verify"
-
-echo; echo "=== tamper 7: an enrolled voter NEGATES his own linking tag and grinds until the"
-echo "===           ring closes — one secret, two tags, two votes. Caught by the one check"
-echo "===           unlinkability makes load-bearing: the nullifier's subgroup membership"
-must_fail doublevote "negated linking tag"
-
-echo; echo "=== tamper 8: a saboteur voter warps his own ciphertext out of the group,"
-echo "===           poisoning the homomorphic sum (membership check pins it to HIS ballot)"
-must_fail negate "ciphertext component not in the prime-order subgroup"
-
-echo; echo "=== tamper 9: an enrolled voter encrypts TWO votes and the corrupt committee"
-echo "===           accepts and counts it — digests repaired, witnesses co-sign. The 0-or-1"
-echo "===           proof he cannot forge convicts his ballot, and the tally built on it falls"
-must_fail overvote "validity proof"
-
-echo; echo "=== tamper 10: the committee AND both witnesses collude on a rigged decryption —"
-echo "===            counts, shares and history all consistent; the Chaum-Pedersen proof"
-echo "===            for the rigged share needs a secret nobody colluding holds"
-must_fail share "Chaum-Pedersen"
-
-echo; echo "=== tamper 11: same total collusion, lazier lie: honest shares, rigged counts"
-echo "===            (anyone redoing the recount refutes the announcement)"
-must_fail count "announced counts match"
-
-echo; echo "ALL GREEN: verified honest run, 11/11 tampers caught by their named defence, reproducible."
+echo
+if [ "$fails" -eq 0 ]; then
+  echo "ALL GREEN: verified honest run, 11/11 tampers caught by their named defence, reproducible."
+else
+  echo "$fails FAILURE(S) — the reason is on each failing line above."
+  exit 1
+fi
