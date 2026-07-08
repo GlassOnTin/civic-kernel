@@ -626,11 +626,13 @@ def entry(entries: list, type_: str) -> dict:
     return next(e for e in entries if e["type"] == type_)
 
 
-def rewrite_box(dst: Path, mutate, collude=False):
+def rewrite_box(dst: Path, mutate, collude=False, retally=True):
     """Apply `mutate` to the ballot box. If the committee colludes, it repairs the box
-    digest in the log, re-runs the threshold decryption honestly over the poisoned box,
-    and the witnesses co-sign the rewritten history — every hash and signature then
-    agrees, and only the voter-level proofs can object."""
+    digest in the log and the witnesses co-sign the rewritten history — every hash and
+    signature then agrees, and only the voter-level proofs can object. `retally` re-runs
+    the threshold decryption honestly over the poisoned box; set it False when the poison
+    makes the sum undecryptable (a griefed tally cannot be re-announced), leaving the stale
+    tally to be gated away once a ballot is convicted."""
     doc = json.loads((dst / "ballot-box.json").read_text())
     mutate(doc["ballots"])
     (dst / "ballot-box.json").write_text(json.dumps(doc, indent=1) + "\n")
@@ -639,9 +641,10 @@ def rewrite_box(dst: Path, mutate, collude=False):
         entries = load_entries(dst)
         entry(entries, "decision.closed")["body"]["ballot_box_digest"] = digest
         entry(entries, "decision.closed")["body"]["ballots_recorded"] = len(doc["ballots"])
-        old = entry(entries, "decision.tally-proof")["body"]
-        entry(entries, "decision.tally-proof")["body"] = tally_body(
-            doc["ballots"], digest, [1, 3], old["note"])
+        if retally:
+            old = entry(entries, "decision.tally-proof")["body"]
+            entry(entries, "decision.tally-proof")["body"] = tally_body(
+                doc["ballots"], digest, [1, 3], old["note"])
         reforge(dst, entries, with_witnesses=True)
 
 
@@ -787,14 +790,18 @@ def tamper(src: Path, dst: Path, mode: str):
     elif mode == "negate":
         # A saboteur VOTER (enrolled — it is Derek) warps his own ciphertext out of the
         # prime-order subgroup: c2 -> -c2, validly re-proved with his own ring secret. The
-        # sum then decrypts to no small exponent at all and the election is griefed —
-        # UNLESS the verifier checks group membership per ballot, which pins the sabotage
-        # to this ballot instead of leaving an unattributable dead tally.
+        # committee logs it without complaint — it does not check subgroup membership, only
+        # the verifier does — so the box digest is consistent and the witnesses co-sign the
+        # heads over it. But the homomorphic sum now decrypts to no small exponent at all,
+        # so no honest tally can even be announced (retally=False: the stale one is left,
+        # and gated away). The election is griefed — UNLESS the verifier checks group
+        # membership per ballot, which pins the sabotage to THIS ballot rather than leaving
+        # an unattributable dead tally. That per-ballot check is the whole defence here.
         def negate(ballots):
             b = find_by_tag(ballots, "Derek Wainwright")
             b["ciphertext"]["c2"] = hx(P - int(b["ciphertext"]["c2"], 16))
             resign_ballot(dst, b, "Derek Wainwright", "tamper|negate")
-        rewrite_box(dst, negate)
+        rewrite_box(dst, negate, collude=True, retally=False)
     elif mode == "overvote":
         # An enrolled voter (Derek again) encrypts m=2 — two votes for Sandra in one
         # ballot — proves membership validly, and the corrupt committee ACCEPTS it: box

@@ -289,6 +289,15 @@ def main(outdir: Path) -> int:
     check(len(af_entries) == len(fails) == closed.get("audit_failures", -1),
           f"every audit failure is a public log entry ({len(fails)} cheating device caught)")
 
+    # Stage gate. Sections [1]–[5] are cheap; verifying a ballot is O(roster), and there
+    # are as many ballots as voters. If the log, its witnesses, or the digests committing
+    # to the box and the roster have already failed, the ballots would be checked against
+    # artifacts this transcript has not earned the right to assert — so decline here rather
+    # than spend the ring on a box the log does not vouch for. Same verdict, sooner.
+    if FAILURES:
+        print("[6-7] not checked: the artifacts that commit to the ballots did not verify (above)")
+        return finish(None, roster_doc, None)
+
     print("[6] the box: anonymous ballots, each proving roster membership, in-group and 0-or-1")
     check(all(in_group(y) for y in ring),
           f"all {len(ring)} roster keys are prime-order subgroup elements (input hygiene on the "
@@ -316,6 +325,13 @@ def main(outdir: Path) -> int:
     check(not problems, f"all {len(box_doc['ballots'])} cast ballots are well-formed anonymous votes "
           "(subgroup membership, ring-membership proof, 0-or-1 validity proof)"
           + ("" if not problems else " :: " + problems[0]))
+
+    # The tally is a function of the valid ballots. If the box did not verify there is
+    # nothing sound to tally, and checking announced counts against a poisoned box would
+    # only bury the real failure above under cascade noise.
+    if FAILURES:
+        print("[7] not checked: the ballots did not verify, so neither can their tally")
+        return finish(None, roster_doc, None)
 
     print("[7] the tally: threshold-decrypted from the sum alone — no ballot is ever opened")
     tally = by_type.get("decision.tally-proof", {}).get("body", {})

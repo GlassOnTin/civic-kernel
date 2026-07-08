@@ -116,8 +116,10 @@ system would use an elliptic-curve group for kilobyte ballots.
   it.** A ballot is indistinguishable among the sixty enrolled keys — not among a
   million. Measured on this run (60-key ring, 16 ballots): the ring signature is
   **8.4 kB** of a **13.4 kB** ballot and takes **~0.7 s** to verify; a whole-transcript
-  verification is **14 s**, and `test.sh`, which verifies the transcript twelve times over,
-  takes **3m15s** where it used to take 65 s. That is kilobytes and seconds at village
+  verification is **14 s**. `test.sh` verifies the transcript a dozen times over, but the
+  checks are independent, so it fans them across cores and gates the O(roster) ballot pass
+  behind the cheap ones that commit to it — **~45 s** on a four-core runner (a tamper
+  caught in the log never reaches the ring). That is kilobytes and seconds at village
   scale, which is the only scale this prototype claims — and §4's kilobyte-payload
   requirement (T14) survives *here*, at sixty. It does not survive a national roster, and
   no amount of engineering turns an O(n) proof into an O(1) one. This is precisely why §13
