@@ -45,15 +45,29 @@ echo; echo "=== tamper 3: ...and rewrite the manifest to declare it never had wi
 echo "===           (nothing inside the transcript disagrees; caught by the trust anchors)"
 must_fail unwitness "manifest declares every witness"
 
-echo; echo "=== tamper 4: flip a counted ballot in the box"
-echo "===           (the voter's own signature covers the commitment; the shed cannot re-sign it)"
+echo; echo "=== tamper 4: swap a counted ballot's ciphertext in the box"
+echo "===           (the voter's own signature covers it; the shed cannot re-sign it)"
 must_fail box "voter signature invalid"
 
 echo; echo "=== tamper 5: stuff the box with an unenrolled ballot (caught by the roster)"
 must_fail forge "voter not on roster"
 
-echo; echo "=== tamper 6: flip a revealed choice at close time"
-echo "===           (caught by the commitment it was cast under, sealed before the window shut)"
-must_fail reveal "reveal does not open the cast commitment"
+echo; echo "=== tamper 6: a saboteur voter warps his own ciphertext out of the group,"
+echo "===           poisoning the homomorphic sum (membership check pins it to HIS ballot)"
+must_fail negate "prime-order subgroup"
 
-echo; echo "ALL GREEN: verified honest run, 6/6 tampers caught by their named defence, reproducible."
+echo; echo "=== tamper 7: an enrolled voter encrypts TWO votes and the corrupt committee"
+echo "===           accepts and counts it — digests repaired, witnesses co-sign. The 0-or-1"
+echo "===           proof he cannot forge convicts his ballot, and the tally built on it falls"
+must_fail overvote "validity proof"
+
+echo; echo "=== tamper 8: the committee AND both witnesses collude on a rigged decryption —"
+echo "===           counts, shares and history all consistent; the Chaum-Pedersen proof"
+echo "===           for the rigged share needs a secret nobody colluding holds"
+must_fail share "Chaum-Pedersen"
+
+echo; echo "=== tamper 9: same total collusion, lazier lie: honest shares, rigged counts"
+echo "===           (anyone redoing the recount refutes the announcement)"
+must_fail count "announced counts match"
+
+echo; echo "ALL GREEN: verified honest run, 9/9 tampers caught by their named defence, reproducible."

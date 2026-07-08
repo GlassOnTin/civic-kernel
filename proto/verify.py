@@ -2,9 +2,11 @@
 """Independent verifier for a clubvote transcript: `python3 verify.py <outdir>`.
 
 Shares NO code with clubvote.py — it reimplements canonicalization, the Merkle tree,
-and every check from the published artifacts plus the waist schemas in ../schema/.
-Trust anchors come from trust.json (in a real deployment: DID resolution and the
-witness ecosystem; here, a file you choose to trust).
+the group arithmetic, both zero-knowledge proof verifications, and every check from the
+published artifacts plus the waist schemas in ../schema/. Trust anchors come from
+trust.json (in a real deployment: DID resolution and the witness ecosystem; here, a file
+you choose to trust). The ballot group is pinned BY NAME to this verifier's own
+constants — a transcript that could supply its own group could supply a smooth one.
 
 Exit 0 = every check passed. Exit 1 = the transcript is broken, and it says where.
 """
@@ -20,6 +22,18 @@ from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES = []
+
+# The verifier's own copy of RFC 3526 group 14 — parameters come from the verifier,
+# never from the transcript under audit.
+KNOWN_GROUPS = {"rfc3526-modp-2048": int(
+    "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129024E088A67CC74"
+    "020BBEA63B139B22514A08798E3404DDEF9519B3CD3A431B302B0A6DF25F1437"
+    "4FE1356D6D51C245E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7ED"
+    "EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3DC2007CB8A163BF05"
+    "98DA48361C55D39A69163FA8FD24CF5F83655D23DCA3AD961C62F356208552BB"
+    "9ED529077096966D670C354E4ABC9804F1746C08CA18217C32905E462E36CE3B"
+    "E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9DE2BCBF695581718"
+    "3995497CEA956AE515D2261898FA051015728E5A8AACAA68FFFFFFFFFFFFFFFF", 16)}
 
 
 def check(ok: bool, what: str):
@@ -71,6 +85,7 @@ def main(outdir: Path) -> int:
     manifest = json.loads((outdir / "manifest.json").read_text())
     roster_doc = json.loads((outdir / "roster.json").read_text())
     box_doc = json.loads((outdir / "ballot-box.json").read_text())
+    trustees_doc = json.loads((outdir / "trustees.json").read_text())
     entries = [json.loads(l) for l in (outdir / "log.jsonl").read_text().splitlines()]
     heads = [json.loads(l) for l in (outdir / "heads.jsonl").read_text().splitlines()]
 
@@ -145,6 +160,9 @@ def main(outdir: Path) -> int:
     rost = by_type.get("x-roster.published", {}).get("body", {})
     check(rost.get("roster_digest") == sha256_hex(canon(roster_doc)),
           f"logged roster digest matches the published roster ({rost.get('member_count')} members)")
+    trst = by_type.get("x-trustees.published", {}).get("body", {})
+    check(trst.get("trustees_digest") == sha256_hex(canon(trustees_doc)),
+          "logged trustee-setup digest matches the published setup")
     closed = by_type.get("decision.closed", {}).get("body", {})
     check(closed.get("ballot_box_digest") == sha256_hex(canon(box_doc)),
           "logged ballot-box digest matches the published box")
@@ -156,34 +174,73 @@ def main(outdir: Path) -> int:
     check(creds_ok, f"all {len(roster_doc['members'])} roster credentials verify against the issuer key")
     by_pub = {c["voter_pub"]: c for c in roster_doc["members"]}
 
-    print("[5] cast-or-audit: challenged commitments open correctly and were never cast")
+    # --- the ballot group, pinned by name; the trustee setup, derived not asserted
+    opened = by_type.get("decision.opened", {}).get("body", {})
+    decision_id = opened.get("decision_id")
+    options = opened.get("options", [])
+    check(trustees_doc.get("group") in KNOWN_GROUPS,
+          f"ballot group '{trustees_doc.get('group')}' is one this verifier pins "
+          "(parameters are the verifier's own, never the transcript's)")
+    if trustees_doc.get("group") not in KNOWN_GROUPS:
+        return finish(None, roster_doc, None)
+    p = KNOWN_GROUPS[trustees_doc["group"]]
+    q, g = (p - 1) // 2, 2
+    A = [int(c, 16) for c in trustees_doc["feldman_commitments"]]
+    h = A[0]  # the election key IS the constant-term commitment; shares must derive from it
+
+    def in_group(x: int) -> bool:
+        return 0 < x < p and pow(x, q, p) == 1
+
+    def fs_challenge(stmt: dict) -> int:
+        return int.from_bytes(hashlib.sha256(canon(stmt)).digest()) % q
+
+    def cds_ok(ct: dict, prf: dict) -> bool:
+        # disjunctive Chaum-Pedersen (CDS): ct encrypts g^0 or g^1 under h
+        c1, c2 = int(ct["c1"], 16), int(ct["c2"], 16)
+        stmt = {"t": "cds01", "ctx": decision_id, "h": format(h, "x"),
+                "c1": ct["c1"], "c2": ct["c2"],
+                "a0": prf["a0"], "b0": prf["b0"], "a1": prf["a1"], "b1": prf["b1"]}
+        cc = [int(prf["c0"], 16), int(prf["c1"], 16)]
+        zz = [int(prf["z0"], 16), int(prf["z1"], 16)]
+        if (cc[0] + cc[1]) % q != fs_challenge(stmt):
+            return False
+        for i in (0, 1):
+            a_i, b_i = int(prf[f"a{i}"], 16), int(prf[f"b{i}"], 16)
+            if pow(g, zz[i], p) != a_i * pow(c1, cc[i], p) % p:
+                return False
+            u = c2 * pow(pow(g, i, p), -1, p) % p  # c2 / g^i
+            if pow(h, zz[i], p) != b_i * pow(u, cc[i], p) % p:
+                return False
+        return True
+
+    print("[5] cast-or-audit: challenged ciphertexts open correctly and were never cast")
     audits_doc = json.loads((outdir / "audits.json").read_text())
     audits = audits_doc["audits"]
     check(closed.get("audits_digest") == sha256_hex(canon(audits_doc)),
           "logged audits digest matches the published audit file")
+
+    def reencrypts(a) -> bool:
+        m = 1 if a["opened_choice"] == options[0] else 0
+        r = int(a["opened_r"], 16)
+        return (int(a["ciphertext"]["c1"], 16) == pow(g, r, p)
+                and int(a["ciphertext"]["c2"], 16) == pow(g, m, p) * pow(h, r, p) % p)
+
     bad_audit = [a for a in audits
-                 if sha256_hex((a["opened_choice"] + "|" + a["opened_nonce"]).encode()) != a["commit"]
+                 if not reencrypts(a)
                  or (a["outcome"] == "match") != (a["opened_choice"] == a["claimed_choice"])]
-    check(not bad_audit, f"all {len(audits)} audit records are internally consistent evidence")
-    cast_commits = {b["commit"] for b in box_doc["ballots"]}
-    check(not [a for a in audits if a["commit"] in cast_commits],
-          "no challenged (spoiled) commitment was ever cast")
+    check(not bad_audit, f"all {len(audits)} audit records re-encrypt to their opened choice "
+                         "(internally consistent evidence)")
+    cast_cts = {(b["ciphertext"]["c1"], b["ciphertext"]["c2"]) for b in box_doc["ballots"]}
+    check(not [a for a in audits if (a["ciphertext"]["c1"], a["ciphertext"]["c2"]) in cast_cts],
+          "no challenged (spoiled) ciphertext was ever cast")
     fails = [a for a in audits if a["outcome"] == "MISMATCH"]
     af_entries = [e for e in entries if e["type"] == "x-ballot.audit-failed"]
     check(len(af_entries) == len(fails) == closed.get("audit_failures", -1),
           f"every audit failure is a public log entry ({len(fails)} cheating device caught)")
 
-    print("[6] the recount: anyone can recompute the tally from box + reveals alone")
-    reveals_doc = json.loads((outdir / "reveals.json").read_text())
-    tally = by_type.get("decision.tally-proof", {}).get("body", {})
-    check(tally.get("reveals_digest") == sha256_hex(canon(reveals_doc)),
-          "logged reveals digest matches the published reveals")
-    opened = by_type.get("decision.opened", {}).get("body", {})
-    decision_id = opened.get("decision_id")
-    reveal_by_seq = {r["seq"]: r for r in reveals_doc["reveals"]}
+    print("[6] the box: sealed ballots, each one eligible, signed, in-group and 0-or-1")
     ballots, problems = [], []
     for i, b in enumerate(box_doc["ballots"]):
-        r = reveal_by_seq.get(b["seq"])
         why = None
         if b["decision_id"] != decision_id:
             why = "wrong decision"
@@ -197,36 +254,86 @@ def main(outdir: Path) -> int:
                 trust.get(b["witness_sig"]["key_id"], ""), b["witness_sig"],
                 {k: v for k, v in b.items() if k not in ("voter_sig", "witness_sig")}):
             why = "assisted-channel witness signature invalid"
-        elif r is None:
-            why = "cast commitment never revealed"
-        elif sha256_hex((r["choice"] + "|" + r["nonce"]).encode()) != b["commit"]:
-            why = "reveal does not open the cast commitment"
-        elif r["choice"] not in opened.get("options", []):
-            why = "revealed choice not among the options"
+        elif not (in_group(int(b["ciphertext"]["c1"], 16)) and in_group(int(b["ciphertext"]["c2"], 16))):
+            why = "ciphertext component not in the prime-order subgroup"
+        elif not cds_ok(b["ciphertext"], b["proof"]):
+            why = "ballot validity proof does not verify (not a 0-or-1 encryption)"
         if why:
             problems.append(f"ballot[{i}] {why}")
         else:
-            ballots.append((b, r))
-    check(not problems, f"all {len(box_doc['ballots'])} cast commitments reveal validly"
+            ballots.append(b)
+    check(not problems, f"all {len(box_doc['ballots'])} cast ballots are well-formed sealed votes "
+          "(roster, signatures, subgroup membership, 0-or-1 validity proof)"
           + ("" if not problems else " :: " + problems[0]))
-    check(len(reveal_by_seq) == len(box_doc["ballots"]),
-          "exactly one reveal per cast ballot, none extra")
 
+    print("[7] the tally: threshold-decrypted from the sum alone — no ballot is ever opened")
+    tally = by_type.get("decision.tally-proof", {}).get("body", {})
     latest = {}
-    for b, r in sorted(ballots, key=lambda br: br[0]["seq"]):
-        latest[b["nullifier"]] = (b, r)
-    counts = {o: 0 for o in opened.get("options", [])}
-    for b, r in latest.values():
-        counts[r["choice"]] += 1
-    check(tally.get("counts") == counts, f"recount matches the published tally: {counts}")
+    for b in sorted(ballots, key=lambda b: b["seq"]):
+        latest[b["nullifier"]] = b
+    C1 = C2 = 1
+    for b in latest.values():
+        C1 = C1 * int(b["ciphertext"]["c1"], 16) % p
+        C2 = C2 * int(b["ciphertext"]["c2"], 16) % p
+    check(tally.get("sum_ciphertext") == {"c1": format(C1, "x"), "c2": format(C2, "x")},
+          f"the logged sum ciphertext is the homomorphic product of the {len(latest)} counted ballots")
+
+    # Each share carries a Chaum-Pedersen proof against a trustee key DERIVED from the
+    # Feldman commitments (h_i = A0 * A1^i) — the setup cannot assert keys it cannot
+    # prove, and the committee cannot manufacture a share for a secret it does not hold.
+    shares = tally.get("trustee_shares", [])
+    required = trustees_doc["threshold"]["required"]
+    valid = []
+    for s in shares:
+        idx, d = s.get("index"), int(s.get("share", "0"), 16)
+        if not (isinstance(idx, int) and 1 <= idx <= trustees_doc["threshold"]["of"]):
+            continue
+        if idx in [v[0] for v in valid] or not in_group(d):
+            continue
+        h_i = A[0] * pow(A[1], idx, p) % p
+        prf = s.get("proof", {})
+        stmt = {"t": "cp", "ctx": decision_id, "index": idx, "h_i": format(h_i, "x"),
+                "c1": format(C1, "x"), "d": s["share"], "a": prf.get("a"), "b": prf.get("b")}
+        c, z = fs_challenge(stmt), int(prf.get("z", "0"), 16)
+        a_, b_ = int(prf.get("a", "0"), 16), int(prf.get("b", "0"), 16)
+        if pow(g, z, p) == a_ * pow(h_i, c, p) % p and pow(C1, z, p) == b_ * pow(d, c, p) % p:
+            valid.append((idx, d))
+    check(len(valid) >= required,
+          f"a {required}-of-{trustees_doc['threshold']['of']} trustee quorum proved the decryption "
+          f"({len(valid)}/{required} required Chaum-Pedersen decryption proofs valid)")
+
+    counts_dec, T = None, None
+    if len(valid) >= required:
+        D = 1
+        for idx, d in valid:
+            lam = 1
+            for jdx, _ in valid:
+                if jdx != idx:
+                    lam = lam * jdx % q * pow(jdx - idx, -1, q) % q
+            D = D * pow(d, lam, p) % p
+        gT, acc = C2 * pow(D, -1, p) % p, 1
+        for t_ in range(len(latest) + 1):
+            if acc == gT:
+                T = t_
+                break
+            acc = acc * g % p
+        check(T is not None, "the combined decryption opens as a small exponent (the sum is well-formed)")
+        if T is not None:
+            counts_dec = {options[0]: T, options[1]: len(latest) - T}
+    check(counts_dec is not None and tally.get("counts") == counts_dec,
+          f"announced counts match the threshold decryption: {counts_dec}")
     check(tally.get("distinct_voters") == len(latest)
           and tally.get("superseded") == len(ballots) - len(latest),
           f"recast policy applied: {len(ballots)} valid ballots, {len(latest)} voters counted, "
           f"{len(ballots) - len(latest)} silently superseded (last ballot counts)")
-    assisted = [b for b, r in latest.values() if b.get("channel") == "assisted"]
+    assisted = [b for b in latest.values() if b.get("channel") == "assisted"]
     check(len(assisted) >= 1,
           f"assisted-channel ballots counted in the same tally as any other ({len(assisted)} assisted)")
 
+    return finish(counts_dec, roster_doc, latest)
+
+
+def finish(counts, roster_doc, latest) -> int:
     print()
     if FAILURES:
         print(f"NOT VERIFIED — {len(FAILURES)} failure(s):")
@@ -236,7 +343,7 @@ def main(outdir: Path) -> int:
     winner = max(counts, key=counts.get)
     print(f"VERIFIED. {len(roster_doc['members'])} enrolled; {len(latest)} voted; "
           + "; ".join(f"{k} {v}" for k, v in counts.items())
-          + f". {winner} is elected, and nobody had to trust the shed.")
+          + f". {winner} is elected; no ballot was ever opened, and nobody had to trust the shed.")
     return 0
 
 

@@ -156,6 +156,14 @@ research program, not a trained system.
   log, verifiable ballots — are worth taking and don't flip the verdict; the one move
   that flips it requires the sovereign to bind itself. Legibility ≠ availability ≠
   movement.
+- **The tally survives everyone who signs things.** In [`proto/`](proto/), ballots are
+  sealed to a 2-of-3 trustee key and only their homomorphic sum is ever decrypted. A
+  committee that holds the log key *and* both witnesses' keys can rewrite history with
+  every hash and signature agreeing — and a rigged decryption, a rigged count, and an
+  accepted double-vote are still each caught, by a Chaum-Pedersen share proof, a public
+  recount, and a 0-or-1 ballot-validity proof respectively (mutation-tested: disable any
+  one check and its fraud certifies). Signature collusion can still *drop* history —
+  deniability, not forgery — which is the external anchor's job, not yet implemented.
 - **19 scenarios**, each cross-validated against the waist schemas and each anchored to
   documented real-world precedents (46 verified citations — the schema requires them: no
   attack without a cited precedent): 15 strain, 3 break, 1 holds. The one hold is
@@ -175,5 +183,6 @@ cryptography is not yet shipped.
 
 *Every component named ships today; the composition is the contribution. The first running
 code is [`proto/`](proto/): the club vote end to end — all four verbs, waist-valid artifacts,
-an independent verifier, and a manifest that declares its own subtractions. The rest is
-specification, harness, and corpus — see the [README](README.md).*
+ballots sealed to a trustee quorum and never individually opened, an independent verifier
+that catches nine tampers by their named defences, and a manifest that declares its own
+subtractions. The rest is specification, harness, and corpus — see the [README](README.md).*

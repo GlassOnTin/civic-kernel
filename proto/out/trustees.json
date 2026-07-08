@@ -1,0 +1,28 @@
+{
+ "community": "did:web:heeley-bank-allotments.example",
+ "decision_id": "2026-agm-treasurer",
+ "group": "rfc3526-modp-2048",
+ "threshold": {
+  "required": 2,
+  "of": 3
+ },
+ "feldman_commitments": [
+  "b12de20998af3a521dab13439a36b86cc194a62845e91c200e99819d8307ce33f595ddc5adc8c499c3a77557d94626df773f66d20e84dcecc3297bf2b485473161635d61044fbcf5dce8a4e2fe08346a40536b283589b9b35d6205ef3acdd2261dfef26dbd2cb5577cb859595f9608e90df708b60726dfbec8b3697adbff2a5f1478fb2ed30cd84fe0fca90579ec93d362584817bd20d324f9a45e4cf1fa1ab9f56ff76a98fa488ebd29597e6598bf593984b3571fa296e379e2dbf7efceb49b672fa7e3d50d999d7fe2641572c75b9be01928fbb1a3d64164c04f81e639f46f727f211803e4a276950aff16582e2a4cfd80810ef4d7e721eb1dd9713ddf0cd2",
+  "ade8f05b69144bac72085928e753ab589f88d0da3da8437f052ebfffc7d18f90ab0340ff7d3668fd01940dcf66a28e9c8ca85241e714ef554a63cc27c03554d8c1a159be43111a212bcfa587591ad88ef613bc834f00811351ed76541d8240af06491a6ed2211076a9874cb23b48aed3e87b288707828ae4da1a267280e445c271913cc1d8a59f1f71185b4bd9cdd11f22207ae0812ecf2cf3d62b45286beaeac963cd86d4dbac695830dd46772f6d3f63434dca446f9ee85bae72cd42242bce03c4e2c4d9918a02aa13b6c0b1285eacd35e73260356a9127cdb3e5168ff6c9cda20be8ea8f2a4220384ef6fe4b3fde3b0f59dbadd3a239cf16fb88d32b43f1c"
+ ],
+ "trustees": [
+  {
+   "did": "did:web:sheffield-allotment-federation.example",
+   "index": 1
+  },
+  {
+   "did": "did:web:meersbrook-allotments.example",
+   "index": 2
+  },
+  {
+   "did": "did:web:heeley-city-farm.example",
+   "index": 3
+  }
+ ],
+ "note": "shares dealt at the enrolment ceremony in the parish room; the dealer knows the joint secret (declared subtraction \u2014 DKG is the next rung)"
+}

@@ -20,10 +20,11 @@
  },
  "decisions": {
   "verifiable": true,
-  "receipt_free": false,
+  "receipt_free": true,
   "cast_or_audit": true,
   "paper_channel": false,
-  "coercion_resistance": "revote-silent"
+  "coercion_resistance": "revote-silent",
+  "trustee_quorum": "2-of-3: Sheffield Allotment Federation, Meersbrook Allotments, Heeley City Farm"
  },
  "transparency_log": {
   "log_id": "did:web:heeley-bank-allotments.example",
@@ -36,6 +37,6 @@
  "sig": {
   "key_id": "did:web:heeley-bank-allotments.example#manifest-1",
   "alg": "ed25519",
-  "value": "05IvuwK0MDXMflHuPkCeqfRjzCCIjTtWYhSb-zFjegG8CCSYJhZn6tBpWPrVraI6v-_KCzP1bbeHxTVa1VYMAQ"
+  "value": "pSjqNTN7-V26mrMWVErkv1S7CBTDDFAGfNG5bn3bXcMzZN_B2SnPuoYI6ItyyBD9JWUhOv4JS4CfF78Uf9eeAA"
  }
 }
