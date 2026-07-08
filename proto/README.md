@@ -38,7 +38,9 @@ system would use an elliptic-curve group for kilobyte ballots.
    mechanism: v1 implemented the Benaloh challenge (`cast_or_audit: false → true`); v2
    sealed the ballots behind a 2-of-3 trustee key and a homomorphic tally
    (`receipt_free: false → true`, `trustee_quorum` declared), which also removed v1's
-   reveal-dependence — there is no reveal step for a device to fail at.
+   reveal-dependence — there is no reveal step for a device to fail at; v3 deleted v2's
+   dealer — the trustees generate the key distributively, so the caveat "someone knew
+   the joint secret" is not declared any more, it is gone.
 3. **Every tamper is caught by the defence the design names for it** — and the test
    asserts *which* check fired, because a tamper caught by the wrong check is a test that
    passes for the wrong reason and would stay green if the named defence rotted. Each
@@ -74,7 +76,7 @@ system would use an elliptic-curve group for kilobyte ballots.
    and repaired by a silent recast — the two remedies composing. What the compromised
    phone actually encrypted stays sealed forever.
 
-## What v2 deliberately is not (the manifest is the source of truth)
+## What v3 deliberately is not (the manifest is the source of truth)
 
 - **`receipt_free: true` holds at the transcript level, with a named behavioural edge.**
   The public artifacts never link any ballot to a choice — only the aggregate is
@@ -85,11 +87,16 @@ system would use an elliptic-curve group for kilobyte ballots.
   are spoiled and never cast. Receipt-freeness against a coercer who seizes the device
   *before* casting remains `coercion_resistance: revote-silent`, and breaks against
   live observation, as the harness has always said.
-- **The trustee ceremony is a dealer.** Shares are Feldman-committed and every
-  decryption is proven, but the dealer (the simulated enrolment ceremony) knows the
-  joint secret. Distributed key generation — no party ever holds `x` — is the next
-  rung. A verifier is protected from a *mis-dealt* setup regardless: trustee keys are
-  derived from the commitments, never asserted.
+- **The DKG has no hash-commitment round.** Each trustee deals their own
+  Feldman-committed polynomial and no party ever holds the joint secret — but a
+  trustee who waits to see the others' commitments before choosing their own could
+  bias the key's *distribution* (the rushing attack, Gennaro et al. 2007). The fix is
+  a commit-then-reveal round at the ceremony; a single transcript cannot evidence one
+  (a full-collusion rewrite fakes it, and everything it protects is already held by
+  voter binding and the share proofs), so per this project's own rule — no verifier
+  check without a tamper that exercises it — it is declared rather than half-checked.
+  A verifier is protected from a *mis-run* ceremony regardless: the election key and
+  every trustee key are derived from the commitment products, never asserted.
 - **Two options, one ciphertext.** `m ∈ {0,1}` with a disjunctive proof; `k` options
   generalise as a ciphertext vector with one 0-or-1 proof each plus a sum-to-1 proof.
 - **Linkable**: the issuer can map nullifiers to the roster. Real unlinkability is the

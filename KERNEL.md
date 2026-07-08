@@ -157,7 +157,8 @@ research program, not a trained system.
   that flips it requires the sovereign to bind itself. Legibility ≠ availability ≠
   movement.
 - **The tally survives everyone who signs things.** In [`proto/`](proto/), ballots are
-  sealed to a 2-of-3 trustee key and only their homomorphic sum is ever decrypted. A
+  sealed to a distributively-generated 2-of-3 trustee key — no party ever holds the
+  joint secret — and only their homomorphic sum is ever decrypted. A
   committee that holds the log key *and* both witnesses' keys can rewrite history with
   every hash and signature agreeing — and a rigged decryption, a rigged count, and an
   accepted double-vote are still each caught, by a Chaum-Pedersen share proof, a public

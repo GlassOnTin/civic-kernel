@@ -18,12 +18,13 @@ with verify.py, which shares no code with this file.
 Ballots are exponential-ElGamal encryptions to a 2-of-3 trustee key (RFC 3526 MODP-2048,
 stdlib pow — auditable over compact): the box holds ciphertexts that are never individually
 opened; the tally decrypts only their homomorphic SUM, each trustee share carrying a
-Chaum-Pedersen correctness proof, each ballot a 0-or-1 validity proof (CDS). Deliberate
-subtractions, declared in the emitted manifest rather than hidden: the trustee ceremony is
-a dealer who knows the joint secret (DKG is the next rung), the issuer can link nullifiers
-to the roster, sybil resistance is the plot register, receipt-freeness holds only if the
-client discards its encryption randomness (this file does — r never outlives cast()).
-See README.md.
+Chaum-Pedersen correctness proof, each ballot a 0-or-1 validity proof (CDS). The key is
+generated distributively — each trustee deals their own Feldman-committed polynomial, and
+no party ever holds the joint secret. Deliberate subtractions, declared in the emitted
+manifest rather than hidden: the DKG has no hash-commitment round (a rushing trustee could
+bias the key's distribution), the issuer can link nullifiers to the roster, sybil
+resistance is the plot register, receipt-freeness holds only if the client discards its
+encryption randomness (this file does — r never outlives cast()). See README.md.
 """
 import base64
 import hashlib
@@ -189,14 +190,20 @@ MEMBERS = ["Sandra Okafor", "Keith Bramall", "Nalini Mistry", "Ernest Toft", "De
 ]
 
 
+def dkg_polys() -> dict:
+    # Pedersen-style DKG: each trustee deals their OWN degree-1 polynomial f_j(z) =
+    # a_j0 + a_j1*z over Z_q. The joint secret x = sum_j a_j0 is never assembled anywhere;
+    # trustee i's share is x_i = sum_j f_j(i), and the joint polynomial F = sum_j f_j has
+    # F(0) = x, so any 2 shares reconstruct exponents of x — of a number no one knows.
+    return {j: (det_scalar(f"dkg|{j}|a0"), det_scalar(f"dkg|{j}|a1")) for j in (1, 2, 3)}
+
+
 def trustee_share(index: int) -> int:
-    # dealer-based Feldman: f(z) = x + a1*z over Z_q; the dealer (the enrolment ceremony,
-    # simulated) knows x — the declared subtraction DKG would remove
-    return (det_scalar("dealer-x") + det_scalar("dealer-a1") * index) % Q
+    return sum(a0 + a1 * index for a0, a1 in dkg_polys().values()) % Q
 
 
 def election_pub() -> int:
-    return pow(G, det_scalar("dealer-x"), P)
+    return pow(G, sum(a0 for a0, _ in dkg_polys().values()) % Q, P)
 
 
 class Log:
@@ -294,17 +301,30 @@ def run(outdir: Path):
     (out / "roster.json").write_text(json.dumps(roster_doc, indent=1) + "\n")
     roster_digest = sha256_hex(canon(roster_doc))
 
-    # --- the same ceremony deals the election key: 2-of-3 Feldman shares. The published
-    # setup is only the commitments — h_i is DERIVED from them by any verifier, so a
-    # mis-dealt setup cannot produce provable shares.
+    # --- the trustees generate the election key TOGETHER: each deals their own
+    # Feldman-committed polynomial and sends every other trustee a private share, which
+    # the recipient verifies against the dealer-trustee's commitments before accepting.
+    # The published setup is only the per-trustee commitments — the election key and
+    # every h_i are DERIVED from their product by any verifier, so a mis-run ceremony
+    # cannot produce provable shares, and no party ever holds the joint secret.
+    polys = dkg_polys()
+    comms = {j: [pow(G, a0, P), pow(G, a1, P)] for j, (a0, a1) in polys.items()}
+    for j, (a0, a1) in polys.items():          # each recipient's Feldman check
+        for i in (1, 2, 3):
+            assert pow(G, (a0 + a1 * i) % Q, P) == comms[j][0] * pow(comms[j][1], i, P) % P
     h = election_pub()
     trustees_doc = {
         "community": COMMUNITY, "decision_id": DECISION, "group": GROUP,
         "threshold": {"required": THRESHOLD, "of": len(TRUSTEES)},
-        "feldman_commitments": [hx(h), hx(pow(G, det_scalar("dealer-a1"), P))],
-        "trustees": TRUSTEES,
-        "note": "shares dealt at the enrolment ceremony in the parish room; the dealer "
-                "knows the joint secret (declared subtraction — DKG is the next rung)",
+        "trustees": [{**tr, "commitments": [hx(c) for c in comms[tr["index"]]]}
+                     for tr in TRUSTEES],
+        "note": "distributed key generation in the parish room: each trustee dealt their "
+                "own polynomial and exchanged Feldman-verified shares; no party — not the "
+                "committee, not the ceremony, not any single trustee — ever held the joint "
+                "secret. Not defended: a trustee who waits to see the others' commitments "
+                "before choosing their own could bias the key's distribution (the rushing "
+                "attack, Gennaro et al.); the fix is a hash-commitment round that a single "
+                "transcript cannot evidence, so it is declared instead",
     }
     (out / "trustees.json").write_text(json.dumps(trustees_doc, indent=1) + "\n")
     trustees_digest = sha256_hex(canon(trustees_doc))
@@ -336,7 +356,8 @@ def run(outdir: Path):
     log.append("manifest.published", {
         "manifest_digest": manifest_digest,
         "note": "Prototype run. Declares: roster personhood (sybil-weak, linkable), ballots "
-                "encrypted to a 2-of-3 trustee key and never individually opened — only the "
+                "encrypted to a distributively-generated 2-of-3 trustee key (no dealer; no "
+                "party ever holds the joint secret) and never individually opened — only the "
                 "homomorphic sum is decrypted; receipt-free at the transcript level (the "
                 "client must discard its encryption randomness after cast; a retained r "
                 "reconstructs a receipt), cast-or-audit device challenges, silent re-vote, "

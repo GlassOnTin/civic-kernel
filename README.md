@@ -62,10 +62,10 @@ deploys without running these — running them is how you regenerate it after ed
   provisions from public legal sources. It points to where systems differ; it is not legal advice
   or authoritative comparative-law scholarship, and some cells are debatable.
 - `proto/` is the first and only running code: a deliberately minimal four-verb loop whose manifest
-  declares its own subtractions (ballots sealed to a 2-of-3 trustee key and never individually
-  opened, cast-or-audit challenges, a dealer-based trustee ceremony rather than DKG — see
-  `proto/README.md`). Everything else is specification, test suite, and corpus; signatures inside
-  the *scenarios'* embedded artifacts remain placeholders.
+  declares its own subtractions (ballots sealed to a distributively-generated 2-of-3 trustee key
+  and never individually opened, cast-or-audit challenges — see `proto/README.md` for what remains
+  declared). Everything else is specification, test suite, and corpus; signatures inside the
+  *scenarios'* embedded artifacts remain placeholders.
 
 ## License
 

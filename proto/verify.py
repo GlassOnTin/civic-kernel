@@ -185,8 +185,15 @@ def main(outdir: Path) -> int:
         return finish(None, roster_doc, None)
     p = KNOWN_GROUPS[trustees_doc["group"]]
     q, g = (p - 1) // 2, 2
-    A = [int(c, 16) for c in trustees_doc["feldman_commitments"]]
-    h = A[0]  # the election key IS the constant-term commitment; shares must derive from it
+    # DKG: every trustee published their own Feldman commitment vector; the joint
+    # commitments are their product, the election key is the joint constant term, and
+    # every trustee key h_i derives from them — nothing about the key is ever asserted,
+    # and no single party's contribution determines it.
+    A = [1, 1]
+    for tr in trustees_doc["trustees"]:
+        A[0] = A[0] * int(tr["commitments"][0], 16) % p
+        A[1] = A[1] * int(tr["commitments"][1], 16) % p
+    h = A[0]
 
     def in_group(x: int) -> bool:
         return 0 < x < p and pow(x, q, p) == 1
