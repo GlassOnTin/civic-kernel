@@ -1,0 +1,22 @@
+name: test
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: scenarios validate against the waist
+        run: python tools/validate.py
+      - name: corpus validates against the waist
+        run: python tools/validate-corpus.py
+      - name: the success test — run, verify, reproduce, catch 9 tampers
+        run: proto/test.sh
+      - name: committed artifacts are current (rebuilt site data and reference transcript match the code)
+        run: git diff --exit-code
