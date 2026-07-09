@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-// The committee's half, end to end, with SEPARATE witnesses: a real election
-// (persistent keys, OS randomness) run across processes — witness new/watch,
-// agm new/enrol/open/collect/close, witness sign, agm witness-import — with
-// cast.js playing three voters whose secrets never touch the committee's
-// machine, and two witness directories playing societies whose keys never
-// touch it either. The independent Python verifier must certify the closed
-// transcript (Yes 2, No 1; 3 checkpointed heads), a re-vote must supersede,
-// and the refusals must hold — above all the witness's own: handed a
-// rewritten history with valid log signatures end to end, it must refuse,
-// because its memory of the last co-signed head is the defence.
+// The full separation, end to end: a REAL election run across processes and
+// FIVE machines' worth of directories — the committee (agm), two witnesses
+// (witness new/watch/sign), three trustees (trustee new/receive/share) — with
+// cast.js playing three voters whose secrets never touch any of them. The
+// committee holds no witness key and no trustee polynomial; no machine can
+// decrypt alone. The independent Python verifier must certify the closed
+// transcript (Yes 2, No 1; 3 checkpointed heads), and the refusals must hold:
+// a witness handed a re-signed rewrite refuses on its memory, a trustee handed
+// a corrupted cross-share refuses on the Feldman check, and a bogus tally
+// share convicts itself at import.
 import { createRequire } from "module";
 import { execFileSync } from "child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "fs";
@@ -35,18 +35,39 @@ const pyFails = (args, wantRe) => {
 const tmp = mkdtempSync(path.join(tmpdir(), "agmflow-"));
 const DIR = path.join(tmp, "agm"), PUB = path.join(DIR, "public");
 const W1 = path.join(tmp, "w-fed"), W2 = path.join(tmp, "w-meers"), W3 = path.join(tmp, "w-stranger");
+const T = i => path.join(tmp, "t" + i);
 const REQ = path.join(DIR, "witness-request.json");
 try {
-  // --- two witnesses are born on their own "machines"; the committee gets cards
+  // --- two witnesses and three trustees are born on their own "machines"
   py([CLUBVOTE, "witness", "new", W1, "did:web:sheffield-allotment-federation.example#w1"]);
   py([CLUBVOTE, "witness", "new", W2, "did:web:meersbrook-allotments.example#w1"]);
-  py([CLUBVOTE, "agm", "new", DIR, path.join(W1, "card.json"), path.join(W2, "card.json")]);
+  for (const i of [1, 2, 3]) py([CLUBVOTE, "trustee", "new", T(i), String(i)]);
+
+  // cross-shares travel trustee-to-trustee, never via the committee; each is
+  // Feldman-verified on receipt — and a corrupted one is refused
+  const corrupted = path.join(tmp, "corrupted-share.json");
+  const s21 = JSON.parse(readFileSync(path.join(T(2), "share-for-1.json"), "utf8"));
+  writeFileSync(corrupted, JSON.stringify({ ...s21, value: s21.value.replace(/^./, c => c === "0" ? "1" : "0") }));
+  say(pyFails([CLUBVOTE, "trustee", "receive", T(1), path.join(T(2), "deal.json"), corrupted],
+    /Feldman/),
+    "a corrupted cross-share is refused: it does not match the dealer's own commitments");
+  for (const [i, j] of [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]) {
+    py([CLUBVOTE, "trustee", "receive", T(i),
+      path.join(T(j), "deal.json"), path.join(T(j), `share-for-${i}.json`)]);
+  }
+  say(true, "3 trustees dealt their own polynomials; 6 cross-shares exchanged directly, all Feldman-verified");
+
+  // --- the committee opens shop holding only public halves
+  py([CLUBVOTE, "agm", "new", DIR,
+    path.join(W1, "card.json"), path.join(W2, "card.json"),
+    path.join(T(1), "deal.json"), path.join(T(2), "deal.json"), path.join(T(3), "deal.json")]);
   const trust = JSON.parse(readFileSync(path.join(PUB, "trust.json"), "utf8"));
   const community = JSON.parse(readFileSync(path.join(PUB, "manifest.json"), "utf8")).community.id;
   const logPub = trust.keys[community + "#log-1"];
   const committeeKeys = JSON.parse(readFileSync(path.join(DIR, "private", "keys.json"), "utf8"));
-  say(!("witness-fed" in committeeKeys.keys) && !("witness-meers" in committeeKeys.keys),
-    "the committee's keys.json holds NO witness key — the separation is real");
+  say(!("witness-fed" in committeeKeys.keys) && !("witness-meers" in committeeKeys.keys)
+    && Object.keys(committeeKeys.scalars).length === 0,
+    "the committee's keys.json holds NO witness key and NO trustee polynomial — the separation is real");
   py([CLUBVOTE, "witness", "watch", W1, community, logPub]);
   py([CLUBVOTE, "witness", "watch", W2, community, logPub]);
 
@@ -58,7 +79,7 @@ try {
   py([CLUBVOTE, "witness", "sign", W2, REQ]);
   const partial = py([CLUBVOTE, "agm", "witness-import", DIR, path.join(W1, "cosig-2.json")]);
   say(/still waiting on did:web:meersbrook/.test(partial),
-    "a partial import reports whom it is still waiting on");
+    "a partial witness-import reports whom it is still waiting on");
   py([CLUBVOTE, "agm", "witness-import", DIR, path.join(W2, "cosig-2.json")]);
 
   // --- enrolment season, then open (its head witnessed in turn)
@@ -101,17 +122,32 @@ try {
     /enrolment is closed/),
     "enrolment after open is refused: the logged digest pinned the roster");
 
+  // --- close commits the box and asks the trustees; it cannot tally alone
   const closeOut = py([CLUBVOTE, "agm", "close", DIR]);
-  say(/Yes 2, No 1/.test(closeOut), "close tallies Yes 2, No 1 (the re-vote superseded)");
+  say(/No tally yet/.test(closeOut), "close commits digests but cannot tally — it holds no trustee secret");
   say(pyFails([CLUBVOTE, "agm", "close", DIR], /already closed/), "a second close is refused");
   say(pyFails([CLUBVOTE, "agm", "collect", DIR, bpaths[0]], /cannot enter/),
     "a ballot after close is refused: the box is committed by digest");
 
-  // --- THE defence: the committee turns corrupt after the witnesses signed the
-  // open head. It rewrites the question, re-signs every artifact with the log
-  // key it genuinely holds, and asks the witnesses to co-sign the result. Every
-  // signature verifies; the root matches the rewritten log. Only the witness's
-  // MEMORY of the head it co-signed at size 4 objects.
+  // trustees 1 and 3 answer from their own machines (2's secretary is in
+  // Whitby with the key card in a drawer — the threshold is the point)
+  const TREQ = path.join(DIR, "tally-request.json");
+  py([CLUBVOTE, "trustee", "share", T(1), TREQ]);
+  py([CLUBVOTE, "trustee", "share", T(3), TREQ]);
+  const bogus = path.join(tmp, "bogus-share.json");
+  const s1 = JSON.parse(readFileSync(path.join(T(1), "share-1.json"), "utf8"));
+  writeFileSync(bogus, JSON.stringify({ ...s1, share: s1.share.replace(/^./, c => c === "0" ? "1" : "0") }));
+  say(pyFails([CLUBVOTE, "agm", "tally-import", DIR, bogus], /proof does not verify/),
+    "a bogus tally share convicts itself at import: the Chaum-Pedersen proof cannot be faked");
+  const tpartial = py([CLUBVOTE, "agm", "tally-import", DIR, path.join(T(1), "share-1.json")]);
+  say(/quorum is not yet met/.test(tpartial),
+    "a partial tally-import holds the share and waits for the quorum");
+  const tallied = py([CLUBVOTE, "agm", "tally-import", DIR, path.join(T(3), "share-3.json")]);
+  say(/Yes 2, No 1/.test(tallied),
+    "2-of-3 trustees answered from their own machines: Yes 2, No 1 (the re-vote superseded)");
+
+  // --- THE witness defence: the committee turns corrupt after the witnesses
+  // signed the open head; every signature genuine, only the memory objects.
   const rewritten = path.join(tmp, "rewritten-request.json");
   execFileSync("python3", ["-c", `
 import json, sys
@@ -164,7 +200,7 @@ Path(${JSON.stringify(rewritten)}).write_text(json.dumps(req))
   say(verdict.includes("consistency, 3 heads"),
     "three checkpointed heads (new, open, close), each co-signed by both witnesses");
   say(verdict.includes("{'Yes': 2, 'No': 1}"),
-    "verified counts match the close: {'Yes': 2, 'No': 1}");
+    "verified counts match the tally: {'Yes': 2, 'No': 1}");
   say(verdict.includes("4 valid ballots, 3 distinct linking tags counted, 1 silently superseded"),
     "recast policy verified: 4 ballots, 3 voters, 1 superseded");
 
@@ -178,7 +214,7 @@ Path(${JSON.stringify(rewritten)}).write_text(json.dumps(req))
 }
 
 if (failures) {
-  console.log(failures + " agm-flow failure(s) — the committee's half does not hold");
+  console.log(failures + " agm-flow failure(s) — the separation does not hold");
   process.exit(1);
 }
-console.log("agm flow: a real election with separate witnesses, verified from its published files");
+console.log("agm flow: committee, witnesses and trustees each on their own keys — verified from the published files");

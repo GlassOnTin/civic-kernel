@@ -15,16 +15,19 @@ with verify.py, which shares no code with this file.
       cast.html) to the box, then legitimately re-run everything downstream of it — box
       digest, tally, heads, anchor. Ballots are accepted, not judged: verify.py is the
       judge, so run it on <dst> afterwards. Demo-seed transcripts only.
-  python3 clubvote.py agm new <dir> <card.json>...   a REAL election the committee can
-      run across days: keys and trustee polynomials generated once from the OS and kept
-      in <dir>/private/keys.json (0600, the only file to guard); the publishable
-      transcript grows append-only in <dir>/public/. The cards are the witnesses' public
-      keys — the committee holds NO witness key, and every command that grows the log
-      cuts a head that must come back co-signed before history can advance. Then:
+  python3 clubvote.py agm new <dir> <cards-and-deals.json>...   a REAL election the
+      committee can run across days: its own keys generated once from the OS and kept in
+      <dir>/private/keys.json (0600, the only file to guard); the publishable transcript
+      grows append-only in <dir>/public/. The arguments are the witnesses' cards and the
+      trustees' deals — the committee holds NO witness key and NO trustee polynomial;
+      every command that grows the log cuts a head that must come back co-signed before
+      history can advance, and the tally waits for the trustees' answers. Then:
         agm enrol <dir> "<member>" <voter_pub>   certify a page-enrolled public key
         agm open <dir> <decision-id> "<question>" "<optA>" "<optB>"   pin the roster, open
         agm collect <dir> <ballot.json>...       box ballots from cast.html as they arrive
-        agm close <dir>                          commit digests, tally, cut the final head
+        agm close <dir>                          commit digests; emit tally-request.json
+        agm tally-import <dir> <share.json>...   verify the trustees' answers; at quorum,
+                                                 tally and cut the closing head
         agm witness-import <dir> <cosig.json>... attach the witnesses' answers; when the
                                                  closing head completes, the anchor follows
       The committee never reforges history (that is the tampers' move) — it only appends.
@@ -37,6 +40,14 @@ with verify.py, which shares no code with this file.
         witness sign <wdir> <witness-request.json>      check the head roots the log it
       came with AND extends the history already co-signed, then emit a cosig file. A
       history that is not an extension is REFUSED — the witness's memory is the defence.
+  python3 clubvote.py trustee new <tdir> <index>     a trustee, on the trustee's OWN
+      machine: deal your own polynomial. deal.json (public commitments) goes to the
+      committee and the other trustees; each share-for-N.json goes to trustee N ONLY,
+      directly — whoever collects all the cross-shares holds the joint secret. Then:
+        trustee receive <tdir> <deal.json> <share.json>   Feldman-verify a cross-share
+        trustee share <tdir> <tally-request.json>         recompute the sum from the box
+      in the request (never exponentiate a bare number — that is a decryption oracle)
+      and answer with a Chaum-Pedersen-proven share of it.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
@@ -247,13 +258,26 @@ def cp_prove(x_i: int, c1_sum: int, index: int, ctx: str) -> tuple[int, dict]:
     """Trustee share d = C1^x_i with a Chaum-Pedersen proof that log_g(h_i) = log_C1(d):
     the share is correct or the proof is impossible, no trust in the trustee required."""
     d = pow(c1_sum, x_i, P)
-    w = rand_scalar(f"cp|{index}|{ctx}")
+    # the nonce label binds the STATEMENT (via C1), so two proofs over different sums
+    # can never share a nonce — nonce reuse across statements would leak x_i
+    w = rand_scalar(f"cp|{index}|{ctx}|{hx(c1_sum)[:16]}")
     a, b = pow(G, w, P), pow(c1_sum, w, P)
     stmt = {"t": "cp", "ctx": ctx, "index": index, "h_i": hx(pow(G, x_i, P)),
             "c1": hx(c1_sum), "d": hx(d), "a": hx(a), "b": hx(b)}
     c = fs_challenge(stmt)
     z = (w + c * x_i) % Q
     return d, {"a": hx(a), "b": hx(b), "z": hx(z)}
+
+
+def cp_ok(share_hex: str, prf: dict, c1_sum: int, h_i: int, index: int, ctx: str) -> bool:
+    # an actor (the committee at tally-import) checking a returned share before
+    # accepting it — the independent verifier makes the same check in verify.py
+    stmt = {"t": "cp", "ctx": ctx, "index": index, "h_i": hx(h_i),
+            "c1": hx(c1_sum), "d": share_hex, "a": prf["a"], "b": prf["b"]}
+    c = fs_challenge(stmt)
+    z, a, b, d = (int(prf["z"], 16), int(prf["a"], 16), int(prf["b"], 16), int(share_hex, 16))
+    return pow(G, z, P) == a * pow(h_i, c, P) % P and \
+        pow(c1_sum, z, P) == b * pow(d, c, P) % P
 
 
 # ------------------------------------- unlinkable eligibility: the ring and the tag
@@ -358,7 +382,7 @@ def dkg_polys() -> dict:
     return {j: (rand_scalar(f"dkg|{j}|a0"), rand_scalar(f"dkg|{j}|a1")) for j in (1, 2, 3)}
 
 
-def trustee_share(index: int) -> int:
+def dkg_share(index: int) -> int:
     return sum(a0 + a1 * index for a0, a1 in dkg_polys().values()) % Q
 
 
@@ -394,12 +418,8 @@ class Log:
         self.heads.append({**head, "sigs": sigs})
 
 
-def build_tally(box: list, present_indices: list[int], decision_id: str = None,
-                options: list[str] = None) -> dict:
-    """Homomorphically sum the counted set (last ballot per nullifier), threshold-decrypt
-    the sum with the present trustees' shares, brute-force the small exponent. This is
-    also what the colluding-committee tampers reuse: even they cannot skip the proofs."""
-    decision_id, options = decision_id or DECISION, options or OPTIONS
+def counted_sum(box: list) -> tuple[dict, int, int]:
+    """The counted set (last ballot per nullifier) and its homomorphic sum."""
     latest = {}
     for b in sorted(box, key=lambda b: b["seq"]):
         latest[b["nullifier"]] = b
@@ -407,14 +427,15 @@ def build_tally(box: list, present_indices: list[int], decision_id: str = None,
     for b in latest.values():
         C1 = C1 * int(b["ciphertext"]["c1"], 16) % P
         C2 = C2 * int(b["ciphertext"]["c2"], 16) % P
-    shares = []
-    for i in present_indices:
-        d, proof = cp_prove(trustee_share(i), C1, i, decision_id)
-        shares.append({"trustee": TRUSTEES[i - 1]["did"], "index": i,
-                       "share": hx(d), "proof": proof})
-    lagrange = {i: 1 for i in present_indices}
-    for i in present_indices:
-        for j in present_indices:
+    return latest, C1, C2
+
+
+def combine_shares(n_counted: int, C2: int, shares: list, options: list[str]) -> dict:
+    """Lagrange-combine trustee shares and brute-force the small exponent."""
+    idxs = [s["index"] for s in shares]
+    lagrange = {i: 1 for i in idxs}
+    for i in idxs:
+        for j in idxs:
             if j != i:
                 lagrange[i] = lagrange[i] * j % Q * pow(j - i, -1, Q) % Q
     D = 1
@@ -422,14 +443,31 @@ def build_tally(box: list, present_indices: list[int], decision_id: str = None,
         D = D * pow(int(s["share"], 16), lagrange[s["index"]], P) % P
     gT = C2 * pow(D, -1, P) % P
     T, acc = None, 1
-    for t in range(2 * len(latest) + 3):
+    for t in range(2 * n_counted + 3):
         if acc == gT:
             T = t
             break
         acc = acc * G % P
     if T is None:
         raise ValueError("tally is not a small discrete log — a ciphertext was malformed")
-    counts = {options[0]: T, options[1]: len(latest) - T}
+    return {options[0]: T, options[1]: n_counted - T}
+
+
+def build_tally(box: list, present_indices: list[int], decision_id: str = None,
+                options: list[str] = None) -> dict:
+    """Homomorphically sum the counted set, threshold-decrypt the sum with the present
+    trustees' shares, brute-force the small exponent. The DEMO path: shares are computed
+    here because the demo holds every polynomial. This is also what the colluding-
+    committee tampers reuse: even they cannot skip the proofs. (agm cannot use this —
+    its trustees answer from their own machines; see agm_tally_import.)"""
+    decision_id, options = decision_id or DECISION, options or OPTIONS
+    latest, C1, C2 = counted_sum(box)
+    shares = []
+    for i in present_indices:
+        d, proof = cp_prove(dkg_share(i), C1, i, decision_id)
+        shares.append({"trustee": TRUSTEES[i - 1]["did"], "index": i,
+                       "share": hx(d), "proof": proof})
+    counts = combine_shares(len(latest), C2, shares, options)
     return {"latest": latest, "sum_ciphertext": {"c1": hx(C1), "c2": hx(C2)},
             "shares": shares, "counts": counts}
 
@@ -879,16 +917,18 @@ def collect(src: Path, dst: Path, ballot_paths: list[Path]):
 # their devices and never appear on this machine — the roster holds only certified
 # public keys, so the issuer cannot link a ballot to a member even in principle.
 #
-# WITNESSES ARE SEPARATE PARTIES. The committee's keys.json holds no witness key: at
-# `agm new` each witness hands over a card (their public key, made by `witness new` on
-# their own machine), and every command that grows the log cuts a PENDING head that
-# must travel to them and come back co-signed (`witness sign` -> `agm witness-import`)
-# before history can advance. A witness co-signs only after checking the head against
-# its own memory of the log — so a committee that rewrites history cannot get its
-# heads witnessed, which is the property this separation exists to enforce.
+# WITNESSES AND TRUSTEES ARE SEPARATE PARTIES. The committee's keys.json holds no
+# witness key and no trustee polynomial: at `agm new` each witness hands over a card
+# and each trustee a deal (public halves only, made by `witness new` / `trustee new`
+# on their own machines). Every command that grows the log cuts a PENDING head that
+# must come back co-signed (`witness sign` -> `agm witness-import`) before history
+# advances — a witness co-signs only what extends the history it remembers, so a
+# committee that rewrites cannot get witnessed. And the tally is not the committee's
+# to compute: `close` emits a request, each trustee answers from its own machine
+# (`trustee share` -> `agm tally-import`), and no machine anywhere can decrypt alone.
 # Shadow-mode subtractions, said in the manifest: the committee machine still holds
-# the issuer, anchor and all three trustee keys, and whoever collects ballot files
-# sees who handed over which.
+# the issuer and anchor keys, and whoever collects ballot files sees who handed over
+# which.
 
 def now_iso() -> str:
     from datetime import datetime, timezone
@@ -937,32 +977,41 @@ def agm_new(d: Path, card_paths: list[Path]):
     global REAL
     if d.exists():
         sys.exit(f"{d} already exists — one directory is one election")
-    cards = [json.loads(p.read_text()) for p in card_paths]
+    docs = [json.loads(p.read_text()) for p in card_paths]
+    cards = [c for c in docs if "witness" in c]
+    deals = [c for c in docs if "commitments" in c]
+    if len(cards) + len(deals) != len(docs):
+        sys.exit("unrecognized card: neither a witness card nor a trustee deal")
     for c in cards:
         if len(b64d(c["pub"])) != 32 or "#" not in c["witness"]:
             sys.exit(f"malformed witness card: {c}")
+    if not cards:
+        sys.exit("no witness cards — an unwitnessed log cannot defeat a records rewrite")
     if len({c["witness"].split('#')[0] for c in cards}) < len(cards):
         sys.exit("two cards from the same witness DID — witnesses must be independent parties")
     witness_dids = [c["witness"].split("#")[0] for c in cards]
+    # the trustees' PUBLIC deals: their own Feldman commitments, dealt on their own
+    # machines (`trustee new`); the private cross-shares travelled trustee-to-trustee
+    # and never came here. The committee holds no polynomial — it can derive everyone's
+    # PUBLIC key from these commitments, and nothing else.
+    if {(t["did"], t["index"]) for t in deals} != {(t["did"], t["index"]) for t in TRUSTEES}:
+        sys.exit(f"need exactly the {len(TRUSTEES)} trustees' deals: "
+                 + ", ".join(f"{t['did']} (index {t['index']})" for t in TRUSTEES))
     REAL = True
     (d / "private").mkdir(parents=True, mode=0o700)
     pub = d / "public"
     pub.mkdir()
 
-    # the trustees' DKG, exactly as in run() — with real polynomials this time
-    polys = dkg_polys()
-    comms = {j: [pow(G, a0, P), pow(G, a1, P)] for j, (a0, a1) in polys.items()}
-    for j, (a0, a1) in polys.items():
-        for i in (1, 2, 3):
-            assert pow(G, (a0 + a1 * i) % Q, P) == comms[j][0] * pow(comms[j][1], i, P) % P
     trustees_doc = {
         "community": COMMUNITY, "group": GROUP,
         "threshold": {"required": THRESHOLD, "of": len(TRUSTEES)},
-        "trustees": [{**tr, "commitments": [hx(c) for c in comms[tr["index"]]]}
-                     for tr in TRUSTEES],
-        "note": "shadow-mode DKG: the polynomials are real and Feldman-verified, but all "
-                "three were dealt on the committee machine — trustee separation is a "
-                "declared subtraction of this run, not of the design",
+        "trustees": [{"did": t["did"], "index": t["index"],
+                      "commitments": t["commitments"]}
+                     for t in sorted(deals, key=lambda t: t["index"])],
+        "note": "each trustee dealt their own Feldman-committed polynomial on their own "
+                "machine and exchanged private shares trustee-to-trustee; the committee "
+                "holds none of them. Not defended, as ever: the rushing attack "
+                "(Gennaro et al.) — declared, not half-checked",
     }
     (pub / "trustees.json").write_text(json.dumps(trustees_doc, indent=1) + "\n")
 
@@ -979,8 +1028,9 @@ def agm_new(d: Path, card_paths: list[Path]):
                                             "enrolment closes when the decision opens"},
         "decisions": {"verifiable": True, "receipt_free": True, "cast_or_audit": True,
                       "paper_channel": False, "coercion_resistance": "revote-silent",
-                      "trustee_quorum": "2-of-3 — all three keys on the committee machine "
-                                        "in shadow mode, declared"},
+                      "trustee_quorum": "2-of-3: " + ", ".join(t["did"] for t in TRUSTEES)
+                                        + " — each holding their own polynomial on their "
+                                          "own machine"},
         "transparency_log": {"log_id": COMMUNITY, "witnesses": witness_dids},
         "decision_metadata": False,
     }
@@ -1009,10 +1059,11 @@ def agm_new(d: Path, card_paths: list[Path]):
         "manifest_digest": sha256_hex(canon({k: v for k, v in manifest.items() if k != "sig"})),
         "note": "Shadow-mode run: real OS randomness, persistent committee keys, "
                 "enrolment secrets on voters' devices (cast.html), witnesses on their "
-                "own machines co-signing every checkpoint; the issuer, anchor and "
-                "trustee keys still sit with the committee — declared, not hidden. The "
-                "official result is whatever the meeting decides by hand; this record "
-                "exists so anyone can check what a real run would have them check."}, ts,
+                "own machines co-signing every checkpoint, trustees on their own "
+                "machines answering the tally; the issuer and anchor keys still sit "
+                "with the committee — declared, not hidden. The official result is "
+                "whatever the meeting decides by hand; this record exists so anyone "
+                "can check what a real run would have them check."}, ts,
                head=False)
     log.append("x-trustees.published", {
         "trustees_digest": sha256_hex(canon(trustees_doc)), "threshold": "2-of-3",
@@ -1130,14 +1181,79 @@ def agm_close(d: Path):
         "commitments_audited": len(audits_doc["audits"]),
         "audit_failures": sum(1 for a in audits_doc["audits"] if a["outcome"] == "MISMATCH"),
         "rejected_at_cast": []}, ts, head=False)
-    body = tally_body(box_doc["ballots"], box_digest, [1, 3],
-                      "shadow-mode threshold decryption: quorum 2-of-3 exercised, all "
-                      "three keys on the committee machine — declared",
-                      opened["decision_id"], opened["options"])
-    log.append("decision.tally-proof", body, ts, head=False)
     agm_write_log(pub, log)
-    print(f"closed. tally: " + ", ".join(f"{k} {v}" for k, v in body["counts"].items()))
-    print(f"  ({body['distinct_voters']} counted, {body['superseded']} superseded)")
+    latest, C1, _ = counted_sum(box_doc["ballots"])
+    # The tally request carries the WHOLE box: each trustee recomputes the sum itself
+    # and exponentiates only that — a trustee that raised a committee-supplied number
+    # would be a decryption oracle for any single ballot the committee cared to send.
+    (d / "tally-request.json").write_text(json.dumps({
+        "decision_id": opened["decision_id"], "box": box_doc,
+        "counted": len(latest), "sum_c1": hx(C1)}, indent=1) + "\n")
+    print(f"closed: {len(box_doc['ballots'])} ballots, {len(latest)} counted. No tally yet —")
+    print(f"  send {d / 'tally-request.json'} to the trustees; each answers with")
+    print(f"  `trustee share`, and a {THRESHOLD}-of-{len(TRUSTEES)} quorum of answers tallies:")
+    print(f"  agm tally-import {d} <share.json>...")
+
+
+def agm_tally_import(d: Path, share_paths: list[Path]):
+    pub, log = agm_load(d)
+    by = agm_by_type(log)
+    if "decision.closed" not in by:
+        sys.exit("the decision has not closed — there is no sum to decrypt yet")
+    if "decision.tally-proof" in by:
+        sys.exit("already tallied — the tally is once; the witnessed head seals it")
+    opened, closed = by["decision.opened"]["body"], by["decision.closed"]["body"]
+    box_doc = json.loads((pub / "ballot-box.json").read_text())
+    latest, C1, C2 = counted_sum(box_doc["ballots"])
+    trustees_doc = json.loads((pub / "trustees.json").read_text())
+    A = {t["index"]: [int(c, 16) for c in t["commitments"]] for t in trustees_doc["trustees"]}
+    pending_path = d / "pending-tally.json"
+    shares = json.loads(pending_path.read_text())["shares"] if pending_path.exists() else []
+    for p in share_paths:
+        s = json.loads(p.read_text())
+        if s.get("decision_id") != opened["decision_id"]:
+            sys.exit(f"{p}: share is for decision {s.get('decision_id')!r}")
+        idx = s.get("index")
+        if idx not in A:
+            sys.exit(f"{p}: index {idx} is not one of this election's trustees")
+        if any(v["index"] == idx for v in shares):
+            print(f"  {p}: trustee {idx} already answered — skipping duplicate")
+            continue
+        # h_i derives from the published commitments; the share proves itself against
+        # it or it does not enter. A wrong share convicts itself here, not at verify.
+        h_i = 1
+        for j in A:
+            h_i = h_i * (A[j][0] * pow(A[j][1], idx, P) % P) % P
+        if not cp_ok(s["share"], s["proof"], C1, h_i, idx, opened["decision_id"]):
+            sys.exit(f"{p}: the Chaum-Pedersen proof does not verify — this is not "
+                     f"trustee {idx}'s honest share of THIS sum; refused")
+        shares.append({"trustee": s["trustee"], "index": idx,
+                       "share": s["share"], "proof": s["proof"]})
+    if len(shares) < THRESHOLD:
+        pending_path.write_text(json.dumps({"shares": shares}, indent=1) + "\n")
+        print(f"{len(shares)} valid share(s) held; the {THRESHOLD}-of-{len(TRUSTEES)} "
+              "quorum is not yet met")
+        return
+    counts = combine_shares(len(latest), C2, shares, opened["options"])
+    body = {
+        "decision_id": opened["decision_id"],
+        "method": "homomorphic exp-elgamal recount, 2-of-3 threshold decryption/v1 "
+                  "(m=1 encodes options[0]; last ballot per nullifier counts)",
+        "ballot_box_digest": closed["ballot_box_digest"],
+        "sum_ciphertext": {"c1": hx(C1), "c2": hx(C2)},
+        "trustee_shares": sorted(shares, key=lambda s: s["index"]),
+        "counts": counts,
+        "distinct_voters": len(latest),
+        "superseded": len(box_doc["ballots"]) - len(latest),
+        "note": f"threshold decryption by {len(shares)} of {len(TRUSTEES)} trustees, "
+                "each answering from their own machine with their own share",
+    }
+    log.append("decision.tally-proof", body, now_iso(), head=False)
+    agm_write_log(pub, log)
+    pending_path.unlink(missing_ok=True)
+    (d / "tally-request.json").unlink(missing_ok=True)
+    print(f"tally: " + ", ".join(f"{k} {v}" for k, v in counts.items())
+          + f"  ({body['distinct_voters']} counted, {body['superseded']} superseded)")
     print("  the anchor follows the witnessed closing head — after the import:")
     print(f"  python3 {Path(__file__).parent / 'verify.py'} {pub}")
     agm_cut_head(d, log)
@@ -1252,6 +1368,101 @@ def witness_sign(wdir: Path, request_path: Path):
     witness_save(wdir, w)
     print(f"co-signed head at size {body['size']} -> {out}")
     print("  my memory now pins this history; I will refuse anything that does not extend it")
+
+
+# ---------------------------------------------------------------- the trustee
+# A third party on a third machine. Each trustee deals their OWN polynomial (`trustee
+# new`), sends every other trustee a private cross-share DIRECTLY — the committee never
+# carries them, because whoever holds all the cross-shares holds the joint secret — and
+# Feldman-verifies what it receives (`trustee receive`). At tally time it answers the
+# committee's request (`trustee share`) by recomputing the sum FROM THE BOX IT IS SENT
+# and proving its decryption share of exactly that: a trustee that exponentiated a bare
+# number on request would be a decryption oracle for any single ballot.
+
+def trustee_load(tdir: Path) -> dict:
+    return json.loads((tdir / "trustee.json").read_text())
+
+
+def trustee_save(tdir: Path, t: dict):
+    (tdir / "trustee.json").write_text(json.dumps(t, indent=1) + "\n")
+    (tdir / "trustee.json").chmod(0o600)
+
+
+def trustee_new(tdir: Path, index: int):
+    if tdir.exists():
+        sys.exit(f"{tdir} already exists")
+    me = next((t for t in TRUSTEES if t["index"] == index), None)
+    if me is None:
+        sys.exit(f"index must be one of {[t['index'] for t in TRUSTEES]} "
+                 f"({', '.join(t['did'] for t in TRUSTEES)})")
+    tdir.mkdir(parents=True, mode=0o700)
+    a0, a1 = secrets.randbelow(Q), secrets.randbelow(Q)
+    trustee_save(tdir, {"did": me["did"], "index": index,
+                        "a0": hx(a0), "a1": hx(a1), "received": {}})
+    (tdir / "deal.json").write_text(json.dumps({
+        "did": me["did"], "index": index,
+        "commitments": [hx(pow(G, a0, P)), hx(pow(G, a1, P))]}, indent=1) + "\n")
+    for t in TRUSTEES:
+        if t["index"] != index:
+            p = tdir / f"share-for-{t['index']}.json"
+            p.write_text(json.dumps({
+                "from": index, "to": t["index"],
+                "value": hx((a0 + a1 * t["index"]) % Q)}, indent=1) + "\n")
+            p.chmod(0o600)
+    print(f"trustee {index} ({me['did']}) -> {tdir}")
+    print(f"  deal.json is public: to the committee AND to the other trustees")
+    print(f"  share-for-N.json goes to trustee N ONLY, directly — never via the committee:")
+    print(f"  whoever collects all the cross-shares holds the joint secret")
+
+
+def trustee_receive(tdir: Path, deal_path: Path, share_path: Path):
+    t = trustee_load(tdir)
+    deal, share = json.loads(deal_path.read_text()), json.loads(share_path.read_text())
+    if share.get("to") != t["index"]:
+        sys.exit(f"that share is addressed to trustee {share.get('to')}, not to me ({t['index']})")
+    j = deal.get("index")
+    if j != share.get("from"):
+        sys.exit(f"deal (from {j}) and share (from {share.get('from')}) are not from the same trustee")
+    if not any(x["index"] == j for x in TRUSTEES) or j == t["index"]:
+        sys.exit(f"trustee index {j} is not another trustee of this election")
+    if str(j) in t["received"]:
+        sys.exit(f"already holding trustee {j}'s share — a second, different one would be an attack")
+    A0, A1 = (int(c, 16) for c in deal["commitments"])
+    v = int(share["value"], 16)
+    if pow(G, v, P) != A0 * pow(A1, t["index"], P) % P:
+        sys.exit("REFUSED: the share does not match the dealer's own commitments (Feldman "
+                 "check) — corrupted in transit, misdealt, or malicious; do not accept it")
+    t["received"][str(j)] = share["value"]
+    trustee_save(tdir, t)
+    waiting = [x["index"] for x in TRUSTEES
+               if x["index"] != t["index"] and str(x["index"]) not in t["received"]]
+    print(f"verified and stored trustee {j}'s cross-share"
+          + (f"; still waiting on {waiting}" if waiting else " — my share of the joint key is complete"))
+
+
+def trustee_answer(tdir: Path, request_path: Path):
+    global REAL
+    REAL = True  # the CP nonce must come from the OS
+    t = trustee_load(tdir)
+    waiting = [x["index"] for x in TRUSTEES
+               if x["index"] != t["index"] and str(x["index"]) not in t["received"]]
+    if waiting:
+        sys.exit(f"my share of the joint key is incomplete — still waiting on cross-shares "
+                 f"from {waiting}; answering now would decrypt against the wrong key")
+    req = json.loads(request_path.read_text())
+    latest, C1, _ = counted_sum(req["box"]["ballots"])
+    if req.get("sum_c1") != hx(C1):
+        sys.exit("the request's claimed sum does not match the box that came with it — "
+                 "refusing; I decrypt only a sum I computed myself")
+    x = (int(t["a0"], 16) + int(t["a1"], 16) * t["index"]
+         + sum(int(v, 16) for v in t["received"].values())) % Q
+    d_, proof = cp_prove(x, C1, t["index"], req["decision_id"])
+    out = tdir / f"share-{t['index']}.json"
+    out.write_text(json.dumps({
+        "decision_id": req["decision_id"], "trustee": t["did"], "index": t["index"],
+        "share": hx(d_), "proof": proof}, indent=1) + "\n")
+    print(f"decrypted my share of the sum of {len(latest)} counted ballots -> {out}")
+    print("  (eyeball that number: does the turnout look like your club?)")
 
 
 def tamper(src: Path, dst: Path, mode: str):
@@ -1479,11 +1690,19 @@ if __name__ == "__main__":
         agm_close(Path(args[2]))
     elif args[:2] == ["agm", "witness-import"] and len(args) >= 4:
         agm_witness_import(Path(args[2]), [Path(a) for a in args[3:]])
+    elif args[:2] == ["agm", "tally-import"] and len(args) >= 4:
+        agm_tally_import(Path(args[2]), [Path(a) for a in args[3:]])
     elif args[:2] == ["witness", "new"] and len(args) == 4:
         witness_new(Path(args[2]), args[3])
     elif args[:2] == ["witness", "watch"] and len(args) == 5:
         witness_watch(Path(args[2]), args[3], args[4])
     elif args[:2] == ["witness", "sign"] and len(args) == 4:
         witness_sign(Path(args[2]), Path(args[3]))
+    elif args[:2] == ["trustee", "new"] and len(args) == 4:
+        trustee_new(Path(args[2]), int(args[3]))
+    elif args[:2] == ["trustee", "receive"] and len(args) == 5:
+        trustee_receive(Path(args[2]), Path(args[3]), Path(args[4]))
+    elif args[:2] == ["trustee", "share"] and len(args) == 4:
+        trustee_answer(Path(args[2]), Path(args[3]))
     else:
         sys.exit(__doc__)

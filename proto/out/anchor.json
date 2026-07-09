@@ -3,12 +3,12 @@
   {
    "log_id": "did:web:heeley-bank-allotments.example",
    "size": 7,
-   "root": "sha256:bc5194f08121f57964ed42309f8a1b79fdcb95349f3191e68682b34361caac52",
+   "root": "sha256:354d80c2f9191a475dadcdebf526bc8c79566e1b9d97574cb85a1ac96037c2ff",
    "published": "Sheffield Star public notices, 2026-07-23 print edition (simulated)",
    "sig": {
     "key_id": "did:web:sheffield-star.example#notices-1",
     "alg": "ed25519",
-    "value": "oRRRFiyvSXbIT83RBuouQTXLtYDSmGhdvnPd87SNeY72MXvBNsc1WFo1hACrthrTJxqtbZ_xyeup2DwNbyuIDA"
+    "value": "tOfRGzjMFpfERO83bdT4ODIoI2Sru8Jad-Melh4KiiWOJ1wqsVsWUJPcwOAO4FpYPfk5yNNIfUq53yTCVX1ECA"
    }
   }
  ]
