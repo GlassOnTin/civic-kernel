@@ -24,6 +24,9 @@ system would use an elliptic-curve group for kilobyte ballots.
 
 ## The four verbs
 
+<details>
+<summary><b>Plainly</b> <i>The election as four moves: prove you are an enrolled member without saying which, seal your choice and prove it well-formed, verify the whole run from the files alone, read the record.</i></summary>
+
 | verb | where |
 |---|---|
 | **prove** | the issuer certifies each plot-holder's nym key `g^x` into a published roster. A ballot then proves membership of that **ring** with a linkable ring signature (LSAG), and carries the per-decision pseudonym `nullifier = H(decision_id)^x` — §3.1's `nym_secret × context_id`, in the exponent. Which of the sixty keys signed, nothing says |
@@ -31,7 +34,12 @@ system would use an elliptic-curve group for kilobyte ballots.
 | **verify** | `verify.py`: schemas, signatures, witnessed Merkle heads, digests, credentials, audits, per-ballot ring-membership and validity proofs, the tally — recompute the homomorphic sum, check each trustee share's Chaum-Pedersen proof, combine, brute-force the small exponent, compare with the announcement — and last, the anchor: the closing head must match a receipt from outside the collusion set |
 | **read** | `out/log.jsonl` — seven kernel events, each validating against the waist |
 
+</details>
+
 ## What makes it this project's prototype
+
+<details>
+<summary><b>Plainly</b> <i>Three claims made good: the spec's two formats are what the code actually emits, every weakness is declared in the manifest — and each of the twelve frauds is caught by the exact check the design names for it, proven by switching that check off.</i></summary>
 
 1. **The waist is executable.** Every log entry validates against
    [`schema/log-entry.schema.json`](../schema/log-entry.schema.json) and the manifest
@@ -141,7 +149,12 @@ system would use an elliptic-curve group for kilobyte ballots.
    election**: Sandra wins 8–6, and the unrepaired phone ballot would have made it 7–7.
    What that phone actually encrypted stays sealed forever.
 
+</details>
+
 ## What v5 deliberately is not (the manifest is the source of truth)
+
+<details>
+<summary><b>Plainly</b> <i>The honest limits, one by one: anonymity the size of a village, a reproducible run whose privacy is deliberately not real, and every other caveat — declared here rather than discovered later.</i></summary>
 
 - **`unlinkable: true` means the anonymity set is the roster, and the cost is linear in
   it.** A ballot is indistinguishable among the sixty enrolled keys — not among a
@@ -235,3 +248,5 @@ system would use an elliptic-curve group for kilobyte ballots.
   fails its logged digest first) — declared here as input hygiene, not as a defence.
 - Canonicalization approximates JCS (RFC 8785) as sorted compact JSON — exact for this
   artifact set (strings, integers, booleans only).
+
+</details>
