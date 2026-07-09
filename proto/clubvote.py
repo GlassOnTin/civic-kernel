@@ -5,7 +5,11 @@ Simulates every actor in one process (key custody is NOT the property under test
 verification-from-artifacts is) and emits a transcript any independent party can check
 with verify.py, which shares no code with this file.
 
-  python3 clubvote.py run [outdir]               deterministic full election -> artifacts
+  python3 clubvote.py run [outdir] [--real]      full election -> artifacts. Default: every
+      secret derives from a public seed — byte-reproducible, zero privacy, by design.
+      --real draws every key and scalar from the OS instead: same artifact set, same
+      verifier, real secrets — and no tampering, because the tampers below simulate
+      insiders who hold the demo keys, which a --real transcript's insiders do not.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
@@ -41,6 +45,7 @@ encryption randomness (this file does — r never outlives cast()). See README.m
 import base64
 import hashlib
 import json
+import secrets
 import shutil
 import sys
 from pathlib import Path
@@ -50,6 +55,10 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 # ---------------------------------------------------------------- primitives
 
 SEED = b"civic-kernel/proto/clubvote/v0"  # deterministic demo: zero privacy, by design
+REAL = False  # run --real: keys and scalars come from the OS, not the seed. A label then
+# names a value only within this process (nyms and DKG shares are re-derived across
+# functions), instead of deriving it for the world forever.
+_real: dict = {}
 
 
 def canon(obj) -> bytes:
@@ -66,6 +75,10 @@ def b64u(b: bytes) -> str:
 
 
 def keypair(name: str) -> Ed25519PrivateKey:
+    if REAL:
+        if "key|" + name not in _real:
+            _real["key|" + name] = Ed25519PrivateKey.generate()
+        return _real["key|" + name]
     return Ed25519PrivateKey.from_private_bytes(hashlib.sha256(SEED + name.encode()).digest())
 
 
@@ -117,7 +130,11 @@ def hx(n: int) -> str:
     return format(n, "x")
 
 
-def det_scalar(label: str) -> int:
+def rand_scalar(label: str) -> int:
+    if REAL:
+        if label not in _real:
+            _real[label] = secrets.randbelow(Q)
+        return _real[label]
     # all demo "randomness" derives from the public seed, so the run is byte-reproducible
     return int.from_bytes(hashlib.shake_256(SEED + b"|" + label.encode()).digest(64)) % Q
 
@@ -138,11 +155,11 @@ def prove01(m: int, r: int, ct: dict, h: int, ctx: str, label: str) -> dict:
     answer the true one, split the challenge so the verifier cannot tell which is which."""
     c1, c2 = int(ct["c1"], 16), int(ct["c2"], 16)
     f = 1 - m
-    zf, cf = det_scalar(label + "|zf"), det_scalar(label + "|cf")
+    zf, cf = rand_scalar(label + "|zf"), rand_scalar(label + "|cf")
     uf = c2 * pow(pow(G, f, P), -1, P) % P
     af = pow(G, zf, P) * pow(c1, -cf, P) % P
     bf = pow(h, zf, P) * pow(uf, -cf, P) % P
-    w = det_scalar(label + "|w")
+    w = rand_scalar(label + "|w")
     at, bt = pow(G, w, P), pow(h, w, P)
     a = {m: (at, bt), f: (af, bf)}
     stmt = {"t": "cds01", "ctx": ctx, "h": hx(h), "c1": ct["c1"], "c2": ct["c2"],
@@ -159,7 +176,7 @@ def cp_prove(x_i: int, c1_sum: int, index: int, ctx: str) -> tuple[int, dict]:
     """Trustee share d = C1^x_i with a Chaum-Pedersen proof that log_g(h_i) = log_C1(d):
     the share is correct or the proof is impossible, no trust in the trustee required."""
     d = pow(c1_sum, x_i, P)
-    w = det_scalar(f"cp|{index}|{ctx}")
+    w = rand_scalar(f"cp|{index}|{ctx}")
     a, b = pow(G, w, P), pow(c1_sum, w, P)
     stmt = {"t": "cp", "ctx": ctx, "index": index, "h_i": hx(pow(G, x_i, P)),
             "c1": hx(c1_sum), "d": hx(d), "a": hx(a), "b": hx(b)}
@@ -179,7 +196,7 @@ def cp_prove(x_i: int, c1_sum: int, index: int, ctx: str) -> tuple[int, dict]:
 
 
 def nym_secret(name: str) -> int:
-    return det_scalar("nym|" + name)  # in a deployment: generated on the voter's device
+    return rand_scalar("nym|" + name)  # in a deployment: generated on the voter's device
 
 
 def context_gen(ctx: str) -> int:
@@ -214,12 +231,12 @@ def ring_sign(ring: list[int], pi: int, x: int, ctx: str, msg: str, ring_digest:
     n = len(ring)
     hl = context_gen(ctx)
     tag = pow(hl, x, P) if tag is None else tag
-    u = det_scalar(label + "|u")
+    u = rand_scalar(label + "|u")
     c, s = [0] * n, [0] * n
     c[(pi + 1) % n] = ring_challenge(ring_digest, ctx, msg, tag, pow(G, u, P), pow(hl, u, P))
     i = (pi + 1) % n
     while i != pi:
-        s[i] = det_scalar(f"{label}|s|{i}")
+        s[i] = rand_scalar(f"{label}|s|{i}")
         z1 = pow(G, s[i], P) * pow(ring[i], c[i], P) % P
         z2 = pow(hl, s[i], P) * pow(tag, c[i], P) % P
         c[(i + 1) % n] = ring_challenge(ring_digest, ctx, msg, tag, z1, z2)
@@ -267,7 +284,7 @@ def dkg_polys() -> dict:
     # a_j0 + a_j1*z over Z_q. The joint secret x = sum_j a_j0 is never assembled anywhere;
     # trustee i's share is x_i = sum_j f_j(i), and the joint polynomial F = sum_j f_j has
     # F(0) = x, so any 2 shares reconstruct exponents of x — of a number no one knows.
-    return {j: (det_scalar(f"dkg|{j}|a0"), det_scalar(f"dkg|{j}|a1")) for j in (1, 2, 3)}
+    return {j: (rand_scalar(f"dkg|{j}|a0"), rand_scalar(f"dkg|{j}|a1")) for j in (1, 2, 3)}
 
 
 def trustee_share(index: int) -> int:
@@ -470,7 +487,7 @@ def run(outdir: Path):
         m = 1 if choice == OPTIONS[0] else 0
         if cheat:
             m = 0  # commits to Keith whatever it displays
-        r = det_scalar(f"ballot|{who}|{attempt}")
+        r = rand_scalar(f"ballot|{who}|{attempt}")
         return enc(m, r, h_pub), m, r
 
     def challenge(name, choice, attempt, cheat=False):
@@ -493,6 +510,7 @@ def run(outdir: Path):
         ballot["ring_sig"], _ = ring_sign(ring, pi, x, DECISION, sha256_hex(canon(ballot)),
                                           ring_digest, f"lsag|{name}|{attempt}")
         box.append(ballot)  # m, r and pi all go out of scope here: no receipt, no name
+        _real.pop(f"ballot|{name}|{attempt}", None)  # and under --real, r dies with them
 
     # Who turns up to an allotment AGM: about a plot in six, and the five named members.
     # Sandra and Ernest challenge their devices first and cast on the next attempt.
@@ -604,6 +622,8 @@ def run(outdir: Path):
 
     counts = body["counts"]
     print(f"run complete -> {out}")
+    print("  randomness: " + ("the OS (--real) — secrets are real, the run is not reproducible"
+                              if REAL else "the public demo seed — reproducible, zero privacy"))
     print(f"  {len(MEMBERS)} enrolled, {len(box)} anonymous ballots ({body['distinct_voters']} counted, "
           f"{body['superseded']} superseded), 1 unenrolled cast rejected")
     print(f"  each ballot proves membership of the {len(ring)}-key ring; nothing says which key")
@@ -698,12 +718,12 @@ def forge_cds_outside(c1: int, c2_bad: int, h: int, m: int, r: int, ctx: str, la
     that is not a well-formed group element at all: precisely what the per-ballot subgroup
     check, and nothing else, refuses to wave through."""
     f = 1 - m
-    cf, zf = det_scalar(label + "|cf"), det_scalar(label + "|zf")
+    cf, zf = rand_scalar(label + "|cf"), rand_scalar(label + "|zf")
     uf = c2_bad * pow(pow(G, f, P), -1, P) % P
     af = pow(G, zf, P) * pow(c1, -cf, P) % P
     bf = pow(h, zf, P) * pow(uf, -cf, P) % P
     for i in range(200):
-        w = det_scalar(f"{label}|w|{i}")
+        w = rand_scalar(f"{label}|w|{i}")
         a = {m: (pow(G, w, P), pow(h, w, P)), f: (af, bf)}
         stmt = {"t": "cds01", "ctx": ctx, "h": hx(h), "c1": hx(c1), "c2": hx(c2_bad),
                 "a0": hx(a[0][0]), "b0": hx(a[0][1]), "a1": hx(a[1][0]), "b1": hx(a[1][1])}
@@ -717,6 +737,14 @@ def forge_cds_outside(c1: int, c2_bad: int, h: int, m: int, r: int, ctx: str, la
 
 
 def tamper(src: Path, dst: Path, mode: str):
+    # Every tamper simulates an insider who HOLDS keys — the log key at least, often a
+    # voter's ring secret. Those are re-derived here from the demo seed, so a --real
+    # transcript has no insider this file can play: refuse rather than mis-simulate.
+    trust = json.loads((src / "trust.json").read_text())
+    if trust["keys"][ACTORS["log"][0]] != pub_b64(keypair("log")):
+        sys.exit(f"{src}: not a demo-seed transcript (--real?). The tampers simulate "
+                 "insiders holding the demo keys, and this transcript's keys are not "
+                 "derivable — there is no insider to play.")
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst)
@@ -783,7 +811,7 @@ def tamper(src: Path, dst: Path, mode: str):
         # could not even find her ballot in the box.)
         def swap(ballots):
             b = find_by_tag(ballots, "Sandra Okafor")
-            r = det_scalar("tamper-box")
+            r = rand_scalar("tamper-box")
             b["ciphertext"] = enc(0, r, election_pub())
             b["proof"] = prove01(0, r, b["ciphertext"], election_pub(), DECISION, "cds|tamper-box")
         rewrite_box(dst, swap, collude=True)
@@ -797,11 +825,11 @@ def tamper(src: Path, dst: Path, mode: str):
         # asserted, so there is no credential left to steal: they copy a real ballot's ring
         # signature, and it is bound to that ballot's contents and that voter's tag.
         def stuff(ballots):
-            r = det_scalar("tamper-stuff")
+            r = rand_scalar("tamper-stuff")
             ct = enc(0, r, election_pub())
             ballots.append({
                 "decision_id": DECISION, "seq": 999,
-                "nullifier": hx(link_tag(det_scalar("tamper-stuff-nym"), DECISION)),
+                "nullifier": hx(link_tag(rand_scalar("tamper-stuff-nym"), DECISION)),
                 "ciphertext": ct,
                 "proof": prove01(0, r, ct, election_pub(), DECISION, "cds|stuffed"),
                 "ring_sig": ballots[0]["ring_sig"]})
@@ -819,7 +847,7 @@ def tamper(src: Path, dst: Path, mode: str):
             ring, index, rd = ring_of(dst)
             x = nym_secret("Derek Wainwright")
             pi = index[pow(G, x, P)]
-            r = det_scalar("tamper-doublevote")
+            r = rand_scalar("tamper-doublevote")
             ct = enc(0, r, election_pub())          # a second voice, for Keith
             b = {"decision_id": DECISION, "seq": 998,
                  "nullifier": hx(P - link_tag(x, DECISION)),   # his own tag, negated
@@ -849,7 +877,7 @@ def tamper(src: Path, dst: Path, mode: str):
         def smuggle(ballots):
             x = nym_secret("Derek Wainwright")
             ring, index, rd = ring_of(dst)
-            r = det_scalar("tamper-smuggle")
+            r = rand_scalar("tamper-smuggle")
             ct = enc(0, r, election_pub())
             c1, c2_bad = int(ct["c1"], 16), P - int(ct["c2"], 16)   # -c2: out of the subgroup
             b = {"decision_id": DECISION, "seq": 0,                 # below his real ballot -> superseded
@@ -868,7 +896,7 @@ def tamper(src: Path, dst: Path, mode: str):
         # that cannot be manufactured is the 0-or-1 proof for a ballot that encrypts 2.
         def overvote(ballots):
             b = find_by_tag(ballots, "Derek Wainwright")
-            b["ciphertext"] = enc(2, det_scalar("tamper-overvote"), election_pub())
+            b["ciphertext"] = enc(2, rand_scalar("tamper-overvote"), election_pub())
             resign_ballot(dst, b, "Derek Wainwright", "tamper|overvote")  # old CDS proof binds the old ciphertext
         rewrite_box(dst, overvote, collude=True)
     elif mode == "share":
@@ -920,6 +948,8 @@ def tamper(src: Path, dst: Path, mode: str):
 
 if __name__ == "__main__":
     args = sys.argv[1:]
+    REAL = "--real" in args
+    args = [a for a in args if a != "--real"]
     if args[:1] == ["run"]:
         run(Path(args[1]) if len(args) > 1 else Path(__file__).parent / "out")
     elif args[:1] == ["tamper"] and len(args) == 4:

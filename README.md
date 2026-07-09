@@ -59,8 +59,8 @@ first real communities teach will revise it again.
 
 ## Next
 
-A shadow-mode run alongside one real club's AGM — an enrolment/cast page and a
-real-randomness mode, with the official result still decided by the show of hands.
+A shadow-mode run alongside one real club's AGM — an enrolment/cast page on top of the
+prototype's `--real` mode, with the official result still decided by the show of hands.
 
 ## The words, in plain speech
 

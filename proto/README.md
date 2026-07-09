@@ -7,9 +7,12 @@ transcript, and an independent verifier — sharing no code with the runner — 
 the election from those artifacts alone.
 
 ```sh
-./test.sh          # the success test: run, verify, reproduce, catch 12 tampers, browser parity
+./test.sh          # the success test: run, verify, reproduce, verify a --real run, catch
+                   # 12 tampers, browser parity
 python3 clubvote.py run      # -> out/ (committed as the reference transcript)
 python3 verify.py out        # independent verification, exit 0 = verified
+python3 clubvote.py run mydir --real   # same election, OS randomness: secrets are real,
+                                       # the verifier is identical, tampering refuses
 ```
 
 The same checks run in any current browser: [`../verifier.html`](../verifier.html)
@@ -173,13 +176,19 @@ system would use an elliptic-curve group for kilobyte ballots.
   signature is one lattice point beneath it; BBS is another. Swapping them changes no
   other line of the protocol — which is the claim [§13](https://glassontin.github.io/civic-kernel/#s13 "Every piece of this already exists somewhere, well funded. Nobody is joining the pieces up, and no one has built the citizen's side — the phone that checks. That gap sets the plan.") makes, and this rung is the first
   evidence for it.
-- **Unlinkable, not anonymous against the seed.** Every secret in this transcript,
-  including each voter's `nym_secret`, derives from a public constant so the run is
-  byte-reproducible. Anyone can therefore recompute every tag and de-anonymize *this
-  particular* transcript. That is the same declared subtraction that makes `receipt_free`
-  reproducible: the mechanism is real, this run's privacy is not, by design. A deployment
-  generates `x` on the voter's device, and then the issuer — who certified `g^x` and
-  never saw `x` — cannot link a ballot to a member either.
+- **Unlinkable, not anonymous against the seed.** Every secret in the *reference*
+  transcript, including each voter's `nym_secret`, derives from a public constant so
+  that run is byte-reproducible. Anyone can therefore recompute every tag and
+  de-anonymize *this particular* transcript. That is the same declared subtraction that
+  makes `receipt_free` reproducible: the mechanism is real, this run's privacy is not,
+  by design. `run --real` lifts exactly this subtraction — every key and scalar from
+  the OS, encryption randomness discarded at cast — and the verifier passes unchanged,
+  which is the point: it never depended on where the secrets came from. What `--real`
+  does *not* change: one process still plays every actor, so key custody and the
+  enrolment ceremony are still simulated (a deployment generates `x` on the voter's
+  device, and then the issuer — who certified `g^x` and never saw `x` — cannot link a
+  ballot to a member either), and the tamper suite refuses such a transcript, because
+  its insiders' keys are no longer anyone's to hold.
 - **What the box still shows.** How many distinct voters, how many re-voted and how many
   times (tags are equal or they are not), and that one device cheated. Not who. Cast
   order carries no identity: the reference run casts in a shuffled order and publishes the

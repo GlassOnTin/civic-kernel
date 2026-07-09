@@ -29,6 +29,17 @@ reproduce() {
   then record reproduce "OK   a second run is byte-identical"
   else record reproduce "FAIL a second run is not byte-reproducible"; fi
 }
+# --real: same election under OS randomness. The verifier must pass unchanged (it works
+# from the artifacts alone, so it cannot care where the secrets came from), and the
+# transcript must actually differ from the seeded one (the flag did something).
+real() {
+  python3 clubvote.py run "$T/real" --real > /dev/null 2>&1
+  if ! python3 verify.py "$T/real" > "$T/real.log" 2>&1
+  then record real "FAIL the --real transcript did NOT verify"
+  elif diff -q out/ballot-box.json "$T/real/ballot-box.json" > /dev/null 2>&1
+  then record real "FAIL --real reproduced the seeded ballot box (the flag had no effect)"
+  else record real "OK   verifies from artifacts alone; ballots differ from the seeded run"; fi
+}
 # The same checks ship as a browser page (../verifier.html). Its engine must reach
 # the same verdicts as verify.py, and its pinned copies of the waist schemas must
 # equal the repo's — tools/verify-parity.mjs asserts both. Needs node (CI has it).
@@ -59,7 +70,7 @@ must_fail() { # mode  want
 # Everything below reads out/ and nothing else — launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
-honest & reproduce & parity &
+honest & reproduce & real & parity &
 must_fail log        "head's root matches a strict prefix"                 &
 must_fail rehead     "co-signed by the log key and all"                    &
 must_fail unwitness  "manifest declares every witness"                     &
@@ -77,6 +88,7 @@ wait
 declare -A desc=(
   [honest]="the independent verifier confirms the election from artifacts alone"
   [reproduce]="a second run is byte-identical (deterministic transcript)"
+  [real]="the same election under OS randomness (--real) -> same verifier, different bytes"
   [log]="rewrite history in the log -> Merkle consistency"
   [rehead]="rewrite AND regenerate heads -> the missing witness co-signatures"
   [unwitness]="...and declare no witnesses -> the verifier's trust anchors"
@@ -91,7 +103,7 @@ declare -A desc=(
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
 )
-ORDER="honest reproduce parity log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
+ORDER="honest reproduce real parity log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do
