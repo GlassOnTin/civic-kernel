@@ -280,6 +280,7 @@
  ],
  "verdict": "holds",
  "verdict_plain": "The one story where the design simply wins: three years on, the rewrite fails at every layer it touches — witnesses refuse, phones notice, the anchor remembers. What the log cannot do is jail anyone; that still took a prosecutor and a newspaper.",
+ "protection": "the witnessed log",
  "findings": [
   {
    "severity": "note",

@@ -259,6 +259,7 @@
  ],
  "verdict": "strains",
  "verdict_plain": "Switching off the internet did not stop the vote: ballots crossed the valley by radio and SD card, and a doctored mirror was caught in hours. But the mesh did not reach every herder, and the design still has no rule for ballots that arrive after the close.",
+ "protection": "the delay-tolerant ballot path",
  "findings": [
   {
    "severity": "note",

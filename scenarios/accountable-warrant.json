@@ -273,6 +273,7 @@
  ],
  "verdict": "strains",
  "verdict_plain": "A secret wiretap can be logged without being revealed, and can never be backdated — but the court that must eventually unseal it is trusted, not proven. Accountability arrives after the listening, not before.",
+ "protection": "the sealed, witnessed warrant log",
  "findings": [
   {
    "severity": "note",

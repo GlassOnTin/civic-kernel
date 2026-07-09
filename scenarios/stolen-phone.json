@@ -255,6 +255,7 @@
  ],
  "verdict": "strains",
  "verdict_plain": "The thief never got a vote — Tomás's own week was the price: six days with no way to participate, and the recovered credential arrives as a stranger to the very decision he had called. Recovery works; continuity is the open problem, exactly as declared.",
+ "protection": "credential recovery",
  "findings": [
   {
    "severity": "strain",
