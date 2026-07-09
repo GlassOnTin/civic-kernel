@@ -112,6 +112,14 @@
     text-wrap: balance;
     max-width: 40rem;
   }
+  .masthead-links {
+    margin-top: 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+  }
 
   /* ---------- table of contents ---------- */
   nav.toc {
@@ -358,6 +366,7 @@
   </div>
   <h1>The Civic Kernel</h1>
   <p class="standfirst">A thin distributed service for a democracy that can evolve — verifiable on the phone in your pocket, joinable one person at a time, constrained by the rights of every person it serves, and too small to be worth capturing.</p>
+  <p class="masthead-links"><a href="verifier.html">Check the running election in your browser →</a> <a href="scenarios.html">Real life against the protocol →</a></p>
 </header>
 
 <nav class="toc" aria-label="Contents">
@@ -857,7 +866,7 @@
   <h2>What a citizen gets on day one</h2>
   <p>Architecture earns legitimacy; it does not earn installs. A protocol spreads through a population the way anything spreads now — because the first contact delivers personal value, and the person who received it tells someone else. Civic virtue is not that value: nobody's group chat lights up over verifiable tally proofs. So the adoption question is a product question, and the honest audit of this document's own proposals is that §13's Form B — <em>was my vote counted?</em> — is the right first artifact but not a viral one: casting happens a few times a year, and its payoff is reassurance, not gain. The wedge has to be something the kernel enables that people already want.</p>
   <p><strong>Wedge one: the money.</strong> §11 already contains it. In Great Britain alone, an estimated <a href="https://policyinpractice.co.uk/publication/missing-out-2025/">£24 billion of income-related support goes unclaimed each year</a> — over seven million households missing at least one entitlement, for exactly the reasons §8 names: opacity, complexity, stigma. The rules engines that fix this are shipped (§13); what does not exist is the citizen-side surface. <em>Your phone can tell you what you are owed, before you ask, without telling anyone you asked</em> — that is a sentence that travels through a family, and it recruits precisely the population sludge taxes hardest. The person who came for the money leaves holding a wallet, an attested credential, and a client that can also verify a ballot: personhood and verification arrive as side effects, never as asks. And the wedge bootstraps the one dependency §11 named as unbuilt — the attestation habit — because every award that lands in a wallet is an attestation ecosystem growing by one.</p>
-  <p><strong>Wedge two: the club vote.</strong> §6's fractal argument, pointed downward and delivered through Form C: the co-op election nobody can rig, the residents' association budget everyone can check, the provably fair raffle — invoked by a link in the group chat the community already has. Stakes low enough that <em>personhood: platform account</em> suffices; frequency high enough to make the verbs habitual. Every club that couples in normalizes the primitives before any government is in the room, and its members arrive at the first municipal deployment already knowing what a verifiable decision feels like.</p>
+  <p><strong>Wedge two: the club vote.</strong> §6's fractal argument, pointed downward and delivered through Form C: <a href="verifier.html">the co-op election nobody can rig</a>, the residents' association budget everyone can check, the provably fair raffle — invoked by a link in the group chat the community already has. Stakes low enough that <em>personhood: platform account</em> suffices; frequency high enough to make the verbs habitual. Every club that couples in normalizes the primitives before any government is in the room, and its members arrive at the first municipal deployment already knowing what a verifiable decision feels like.</p>
   <p>Both wedges compress to sound bites, and the register matters — one per audience. Citizens: <em>find out what you're owed; prove it; keep your privacy.</em> Communities: <em>decisions your members can check, on the phones they already have.</em> Institutions: <em>DNS-plus-TLS for democracy — four services, too small to capture.</em></p>
   <p>The honest tension, stated before it bites: wedge products are ecosystem-layer artifacts by this document's own taxonomy (§3, §12). A benefit-finder or a club-vote app that became <em>the</em> door into the kernel would be a new single point of capture wearing a friendly face — the platform mistake §1 rejects, rebuilt by its own advocates. The discipline is the same as everywhere above the waist: reference implementations, open protocol, plural clients, abandonable by design. The wedge exists to make the kernel wanted, never to become the kernel.</p>
 </section>
