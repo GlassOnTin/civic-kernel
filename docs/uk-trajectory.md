@@ -1,9 +1,11 @@
 # The UK trajectory
 
-A worked example for the [functional model](functional-model.md): can the operator guide the
-UK from its measured coordinate toward a configuration that survives the majority-vs-minority
-attack, by small, individually-adoptable, reversible moves? The honest answer — and the point
-— is that it **stalls at the remedy step**, which is political, not technical.
+Can small, reversible steps carry the UK to where a majority cannot strip a minority's
+rights? Almost. The cheap steps are worth taking and change no verdict; the one step that
+flips it — giving courts the power to strike the offending law down — is the step a
+sovereign Parliament will not take. A worked example for the
+[functional model](functional-model.md): the honest answer — and the point — is that the
+path **stalls at the remedy step**, which is political, not technical.
 
 The attack is fixed throughout: a 61% majority banning a minority's worship (the
 [`majority-vs-minority`](../scenarios.html) series). Only the UK's configuration changes.

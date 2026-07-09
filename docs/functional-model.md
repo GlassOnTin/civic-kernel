@@ -1,17 +1,22 @@
 # The Civic Kernel as a Functional Operator
 
-**Status: v0, exploratory — a speculative companion to the deployed thesis.** The
-deployed argument is [`index.html`](../index.html); the distilled statement of both is
-[`KERNEL.md`](../KERNEL.md). This document writes down, as precisely as honesty
-allows, what it would mean to treat the Civic Kernel not only as a thin service core but
-as a *mathematical operator* that maps a starting democracy toward an empirically
-more-likely-better one — and, just as important, exactly where that model is solid and
-where it is underdetermined.
+**Status: v0, exploratory — a speculative companion to the deployed thesis.** Plainly:
+this document tries to write the kernel's politics as mathematics — where a democracy
+stands, which way is better, how fast its law should move — and names every place the
+maths runs out. The deployed argument is [`index.html`](../index.html); the one-page
+statement of both is [`KERNEL.md`](../KERNEL.md). What follows writes down, as precisely
+as honesty allows, what it would mean to treat the Civic Kernel not only as a thin
+service core but as a *mathematical operator* that maps a starting democracy toward an
+empirically more-likely-better one — and, just as important, exactly where that model is
+solid and where it is underdetermined.
 
 *(Throughout, **§N** refers to a section of the architecture essay; **Part N** to a section
 of this document.)*
 
 ## 0 · Two senses of "kernel"
+
+<details>
+<summary><b>Plainly</b> <i>One word, two meanings: the small core that runs things, and a rule for how a democracy moves. The claim is that building the first gives you the second.</i></summary>
 
 The architecture uses *kernel* in the operating-systems sense: a thin, boring, invariant
 core (four services, one waist). This document uses it in a second, mathematical sense:
@@ -20,7 +25,12 @@ the second** — the thin core supplies a state space, an order, a set of legal 
 and an invariant floor, and the induced dynamics *is* the operator. The pun is
 load-bearing, not decorative.
 
+</details>
+
 ## 1 · State
+
+<details>
+<summary><b>Plainly</b> <i>Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Four real systems are measured so far.</i></summary>
 
 A polity's configuration is a tensor **S** indexed by **(community × policy-domain × axis)**:
 
@@ -37,7 +47,12 @@ We have **S** measured at four real coordinates (UK, US, Germany, EU) on the rig
 coarsely, and domain-agnostically. Four points in a high-dimensional space: enough to see
 structure, nowhere near enough to fit dynamics (see Part 8).
 
+</details>
+
 ## 2 · Order — partial, and per-domain
+
+<details>
+<summary><b>Plainly</b> <i>“Better” is not one number. Two democracies can each beat the other in different ways, and better-in-trade-law is not better-in-family-law. There is no single best democracy, by design.</i></summary>
 
 "Better" is not a scalar.
 
@@ -51,7 +66,12 @@ structure, nowhere near enough to fit dynamics (see Part 8).
   better achieved there), expressed as geometry. The operator therefore has **one attractor
   per domain**, never one global optimum.
 
+</details>
+
 ## 3 · The operator — a subsidiarity vector field
+
+<details>
+<summary><b>Plainly</b> <i>Each area of law looks at the real systems most relevant to it and is pulled toward the best of them. Crucially, people — not the maths — declare what counts as relevant and better.</i></summary>
 
 The operator is a **vector field** `v(S, domain)` giving the local improvement direction per
 domain, plus a stochastic transition kernel that moves along it. It has the shape of
@@ -70,7 +90,12 @@ inside `sim` are **democratic inputs** — chosen, per domain, per community, re
 is the entire safety property (Part 7), and the load-bearing difference between this model
 and a technocracy.
 
+</details>
+
 ## 4 · Damping — the control-theory core (rate)
+
+<details>
+<summary><b>Plainly</b> <i>How fast should law respond to opinion? Too fast and policy see-saws; too slow and nothing can be repaired. The right speed differs by area — the UK's flaw is one speed for everything.</i></summary>
 
 A polity is a feedback loop: preference − state → error → institutions → law → society →
 sensors (elections, press, the harness) → back. Institutional friction — supermajorities,
@@ -92,7 +117,12 @@ phase margin, pole placement) as the language for tuning it.
 Damping governs *how fast* the state moves. It does nothing to stop a system flipping back
 and forth across a threshold — a distinct failure that needs a distinct tool (Part 5).
 
+</details>
+
 ## 5 · Hysteresis, continuous voting, and the oscillation attack
+
+<details>
+<summary><b>Plainly</b> <i>Anyone may change their vote at any moment; the law moves only on a settled, lasting shift. One narrow Thursday cannot flip a nation — and the stickiness must fade with time, or it protects the last change instead of stability.</i></summary>
 
 **Hysteresis** is a dead-band with memory: the threshold to reverse a decision differs from
 the threshold that made it, so the state holds against noise near the margin. The canonical
@@ -154,7 +184,12 @@ supermajority-to-reverse, not gas.
    that must be declared and legible (§6 of the architecture), or the dead-band becomes a
    silent instrument of whoever tuned it.
 
+</details>
+
 ## 6 · Attractors
+
+<details>
+<summary><b>Plainly</b> <i>Each area of law settles toward its own good-enough frontier and stops. Rights are the floor the system must never sink through — not a summit it climbs toward.</i></summary>
 
 Multiple, local, context-dependent. The dynamics does not converge to one Best Democracy; it
 converges, per domain, toward the local Pareto frontier of the axes given that domain's
@@ -166,7 +201,12 @@ near-consensus-locked; across the lattice a decrease is never *prevented* — th
 no army — but always *witnessed*, a legible manifest-diff. **Never silently decreased** is
 the enforceable form of the constraint.
 
+</details>
+
 ## 7 · The safety property — what the math must never do
+
+<details>
+<summary><b>Plainly</b> <i>The rule above all the others: the maths may describe, steady, and illuminate; it may never decide what “better” means. People choose the direction — the model only makes the ground visible.</i></summary>
 
 The most important section, and the reason this is not the technocratic optimizer of "good
 governance" it superficially resembles.
@@ -198,7 +238,12 @@ itself, and asserting one hands whoever asserted it the capture-power the design
 distribute. The operator measures distance in this frame and holds the floor; it does not
 optimise toward a maximum.
 
+</details>
+
 ## 8 · Empirical status — solid specification, underdetermined predictor
+
+<details>
+<summary><b>Plainly</b> <i>The skeleton is sound; the numbers to run it do not exist. Four measured systems, one run of history, a model that changes what it measures: a research programme, not a trained system.</i></summary>
 
 Elegance blurs two claims that must stay separate.
 
@@ -216,7 +261,12 @@ trained system**, and must not be presented as one. The empirical instrument we 
 the [stress-test harness](../scenarios.html): expensive and sparse, but real — it evaluates a
 *proposed* move rather than pretending to have learned the whole field.
 
+</details>
+
 ## 9 · What "engineering it" means next
+
+<details>
+<summary><b>Plainly</b> <i>The buildable next steps, all with a human in the loop — richer measurement, declared preferences, declared speeds, and a hard no-autopilot rule. First test: walk the UK toward repair and watch where it jams.</i></summary>
 
 The honest, buildable path — each step inside the Part 7 safety property:
 
@@ -239,3 +289,5 @@ The first concrete proof would be the **UK trajectory**: from its measured coord
 (`declaration / unconditional / 17-of-30 / breaks`) along the smallest individually-adoptable,
 reversible moves, harness re-run at each step — expected, honestly, to *stall* at the remedy
 step (the self-lock of Part 4 above), which is the interesting result.
+
+</details>
