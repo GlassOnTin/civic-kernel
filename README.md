@@ -1,72 +1,136 @@
 # The Civic Kernel
 
+[![test](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml/badge.svg)](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml)
+
 **Rules for running a vote that nobody can rig and anybody can check — too small for
-anyone to own.** Technically: a thin, capture-resistant protocol for democratic
-decision-making — four services, four verbs, two message formats, and the UDHR as a
-measured floor. Small enough to state on one page ([`KERNEL.md`](KERNEL.md)).
+anyone to own.**
 
-The claim: **anyone can check the process that governs them from the published record
-alone** — no trust in the server, the committee, or the software that produced it. The
-running prototype is a sixty-member allotment society electing its treasurer: every
-ballot anonymous yet provably cast by an enrolled member, no ballot ever opened — only
-the encrypted sum is decrypted — and an independent verifier that confirms the election
-from the artifacts alone, then rejects all twelve ways we tried to rig it, up to a
-committee and both witnesses colluding to rewrite history, and finally to erase one
-inconvenient ballot from it. When everything holds, the verifier's closing line is:
-*"nobody had to trust the shed."* (`proto/test.sh` runs the lot in about a minute.)
+Technically: a thin, capture-resistant protocol for democratic decision-making —
+fourteen threats, four services, four verbs, two message formats, one floor, twelve
+refusals. The floor is the Universal Declaration of Human Rights, measured rather than
+recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
 
-Who it's for, in the end: the member who can see her own ballot counted without anyone
-learning her vote; the club or co-op whose election nobody can rig; one day — the long
-game — the household that learns what it is owed without telling anyone it asked. Today
-it is a research prototype at village scale, and says so: every deployment declares in
-a machine-readable manifest what it upholds *and what it subtracts* — subtraction
-declared, never silent.
+## See it work
 
-What it is not: not a product, not a platform, not a blockchain — no token in any
-citizen's path, ever. And not finished, by design: this repo treats its own documents
-the way the kernel treats law — the architecture essay is at rev. 3 because evidence
-already revised it twice, and what the code and the first real communities teach will
-revise it again.
+- **[Check the election in your browser →](https://glassontin.github.io/civic-kernel/verifier.html)**
+  No install. Every check runs on your machine, against the committed election
+  transcript or any transcript you drop on the page. Look up a ballot by its tag.
+- **[The architecture →](https://glassontin.github.io/civic-kernel/)**
+  The essay: democracy restated as an engineering problem, and the smallest honest
+  answer to it.
+- **[Real life against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)**
+  19 stress-test stories, each machine-validated against the schemas.
+- **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**
+  The same 30 rights across the UK, Germany, the US, and the EU Charter.
 
-**Next:** a shadow-mode run alongside one real club's AGM — an enrolment/cast page and
-a real-randomness mode, with the official result still decided by the show of hands;
-and the essay's rev. 4 (fold in what the prototype proved, and give every claim a
-plain-speech line).
+Or run everything locally — the election, its verification, and twelve attempts to rig
+it — in about a minute: [`proto/test.sh`](proto/).
 
-### Read it live
+## What it is
 
-- **[Check the election in your browser →](https://glassontin.github.io/civic-kernel/verifier.html)**  every check runs client-side on the reference transcript — or on any transcript you drop on the page; find your own ballot by its tag
-- **[The architecture →](https://glassontin.github.io/civic-kernel/)**  the proposal: a thin waist, four services, rights as invariants
-- **[Real life against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)**  19 stress-test stories, each machine-validated against the schemas
-- **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**  the same 30 rights across the UK, Germany, the US, and the EU Charter
+The claim: **anyone can check the process that governs them, from the published record
+alone.** No trust in the server. No trust in the committee. No trust in the software
+that produced the record.
+
+The running prototype is a sixty-member allotment society electing its treasurer.
+Every ballot is anonymous, yet provably cast by an enrolled member. No ballot is ever
+opened: ballots are added up while still encrypted, and only that sum is decrypted. An
+independent verifier — sharing no code with the election software — confirms the
+result from the published files alone. Then it catches all twelve of the ways we tried
+to rig it, up to a committee and both witnesses colluding to rewrite history, and
+finally to erase one inconvenient ballot from it. When everything holds, the
+verifier's closing line is: *"nobody had to trust the shed."*
+
+Who it's for: the member who can see her own ballot counted without anyone learning
+her vote. The club or co-op whose election nobody can rig. One day — the long game —
+the household that learns what it is owed without telling anyone it asked.
+
+Today it is a research prototype at village scale, and it says so. Every deployment
+publishes a machine-readable manifest of what it upholds **and what it leaves out** —
+weakness is permitted; hiding it is not.
+
+## What it is not
+
+Not a product, not a platform, not a blockchain — no token in any citizen's path,
+ever. And not finished, by design: this repo treats its own documents the way the
+kernel treats law. The architecture essay is at rev. 3 because evidence already
+revised it twice, and what the code and the first real communities teach will revise
+it again.
+
+## Next
+
+A shadow-mode run alongside one real club's AGM — an enrolment/cast page and a
+real-randomness mode, with the official result still decided by the show of hands.
+And the essay's rev. 4: fold in what the prototype proved, and give every claim a
+plain-speech line.
+
+## The words, in plain speech
+
+Every term of art in this repo, one line each.
+
+- **Transparency log** — the public record: append-only, each entry hash-chained to
+  the one before, so changing yesterday breaks every copy of today.
+- **Witness** — an independent party that co-signs the log's published fingerprints;
+  rewriting history means getting every witness to re-sign the lie.
+- **Anchor** — a copy of the log's closing fingerprint lodged beyond everyone who
+  signs things (think a newspaper's public notices), so history cannot quietly
+  shorten after the close.
+- **Manifest** — a deployment's signed, machine-readable declaration of what it
+  upholds and what it leaves out.
+- **Subtraction** — anything in the full design a deployment doesn't do. Allowed —
+  but only out loud, in the manifest.
+- **The waist** — the two formats every deployment must share (a log entry and a
+  manifest), kept deliberately narrow so anything can be compared with anything.
+- **Ring signature** — proof that *some member of a published list* signed, without
+  revealing which one. How a ballot proves eligibility without a name.
+- **Linking tag** — a per-election tag derived from the voter's secret: vote twice
+  and the tags match, so double votes show — but names never do. Also how you find
+  your own ballot in the public box.
+- **Homomorphic tally** — ballots are added up while still encrypted; only the total
+  is ever decrypted, never a ballot.
+- **Receipt-free** — you can check that your vote counted, but you cannot prove to
+  anyone else how you voted. Nothing to sell; nothing a coercer can demand afterwards.
+- **Cast-or-audit** — before casting, you may challenge the device to open the
+  encryption it just made. A cheating device cannot tell a test from a real cast, so
+  cheating gets caught.
+- **The floor** — the thirty rights of the Universal Declaration of Human Rights,
+  treated as constraints no decision may cross, whatever its majority.
 
 ## Layout
 
-- **`KERNEL.md`** — the distilled normative core: goals, threats, services, verbs, waist, refusals, measured status.
+- **`KERNEL.md`** — the distilled normative core: goals, threats, services, verbs,
+  waist, refusals, measured status.
 - **`index.html`** — the architecture document.
-- **`proto/`** — the first running code: the club-vote election end to end (all four verbs, real
-  signatures, real Merkle log, independent verifier, committed reference transcript). `proto/test.sh` is the success test.
-- **`verifier.html`** + **`verifier.js`** — the same checks in the browser: load or drop a
-  transcript, watch every check run, look up your own ballot by its linking tag. The engine is
-  held to `proto/verify.py`'s verdicts by `tools/verify-parity.mjs`, which CI runs; its standards
-  (the ballot group, the two schemas) are pinned inside the file, never fetched.
+- **`proto/`** — the first running code: the club-vote election end to end (all four
+  verbs, real signatures, real Merkle log, independent verifier, committed reference
+  transcript). `proto/test.sh` is the success test.
+- **`verifier.html`** + **`verifier.js`** — the same checks in the browser: load or
+  drop a transcript, watch every check run, look up a ballot by its linking tag. The
+  engine is held to `proto/verify.py`'s verdicts by `tools/verify-parity.mjs`, which
+  CI runs; its standards (the ballot group, the two schemas) are pinned inside the
+  file, never fetched.
 - **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
-- **`schema/`** — the "waist": the two universal formats, as JSON Schema (Draft 2020-12).
-  - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act` type,
-    whose body must cite its authorizing rule).
-  - `manifest.schema.json` — a community's conformance manifest: which services and which of the
-    30 UDHR invariants it upholds, its `decisions.coercion_resistance`, and its `rights_guard.remedy`.
-- **`scenarios/`** — imagined human situations, each walked through the four verbs. Every embedded
-  manifest and log entry is validated against the waist schemas, and every scenario must cite
-  documented real-world precedents for its attack pattern (a required `precedents` field, 46
-  citations verified July 2026). `scenario.schema.json` is the record format.
-- **`corpus/`** — real legal systems captured under the same schema, sharing the 30-invariant spine:
-  - `uk/` — Human Rights Act 1998 (via legislation.gov.uk) + real Commons divisions as `decision.closed` entries.
+- **`schema/`** — the waist: the two universal formats, as JSON Schema (Draft 2020-12).
+  - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act`
+    type, whose body must cite its authorizing rule).
+  - `manifest.schema.json` — a community's conformance manifest: which services and
+    which of the 30 UDHR invariants it upholds, its `decisions.coercion_resistance`,
+    and its `rights_guard.remedy`.
+- **`scenarios/`** — imagined human situations, each walked through the four verbs.
+  Every embedded manifest and log entry is validated against the waist schemas, and
+  every scenario must cite documented real-world precedents for its attack pattern
+  (a required `precedents` field, 46 citations verified July 2026).
+  `scenario.schema.json` is the record format.
+- **`corpus/`** — real legal systems captured under the same schema, sharing the
+  30-invariant spine:
+  - `uk/` — Human Rights Act 1998 (via legislation.gov.uk) + real Commons divisions
+    as `decision.closed` entries.
   - `de/` — Grundgesetz (via gesetze-im-internet.de).
   - `us/` — US Constitution and Bill of Rights.
   - `eu/` — EU Charter of Fundamental Rights (scope conditional under Art 51).
-- **`scenarios.html`** — a self-contained browsable site rendering the scenarios and the comparative
-  corpus. Data is inlined, so it serves as static files (GitHub Pages-ready); no runtime network calls.
+- **`scenarios.html`** — a self-contained browsable site rendering the scenarios and
+  the comparative corpus. Data is inlined, so it serves as static files (GitHub
+  Pages-ready); no runtime network calls.
 - **`tools/`** — validators that also rebuild the inlined data in `scenarios.html`.
 
 ## Build / validate
@@ -79,26 +143,28 @@ python tools/validate.py         # validate scenarios; rebuild scenario-data in 
 python tools/validate-corpus.py  # validate corpus;    rebuild corpus-data in scenarios.html
 ```
 
-Both exit non-zero on any validation failure. The site is pre-built (data already inlined), so it
-deploys without running these — running them is how you regenerate it after editing a scenario or corpus file.
+Both exit non-zero on any validation failure. The site is pre-built (data already
+inlined), so it deploys without running these — running them is how you regenerate it
+after editing a scenario or corpus file.
 
 ## Honest caveats
 
-- The scenarios are **fiction anchored to fact**: the people and places are invented, but every
-  attack pattern cites documented real-world precedents (each checked against its source when
-  added, July 2026). They are plausibility tests of the architecture, not records of real events;
-  the verdicts (`holds` / `strains` / `breaks`) are the harness's reading of the architecture
-  document's own claims and limits, not endorsements.
-- The comparative rights-map is a **coarse** mapping of UDHR articles to domestic constitutional
-  provisions from public legal sources. It points to where systems differ; it is not legal advice
-  or authoritative comparative-law scholarship, and some cells are debatable.
-- `proto/` is the first and only running code: a deliberately minimal four-verb loop whose manifest
-  declares its own subtractions (anonymous ballots proving roster membership by ring signature,
-  sealed to a distributively-generated 2-of-3 trustee key and never individually opened,
-  cast-or-audit challenges — see `proto/README.md` for what remains declared, including the one
-  that matters most: the anonymity set is the roster and the proof is linear in it, which is a
-  village, not a nation). Everything else is specification, test suite, and corpus; signatures
-  inside the *scenarios'* embedded artifacts remain placeholders.
+- The scenarios are **fiction anchored to fact**. The people and places are invented;
+  every attack pattern cites documented real-world precedents (each checked against
+  its source when added, July 2026). They are plausibility tests of the architecture,
+  not records of real events, and the verdicts (`holds` / `strains` / `breaks`) are
+  the harness's reading of the architecture document's own claims and limits — not
+  endorsements.
+- The comparative rights-map is **coarse**: UDHR articles mapped to domestic
+  constitutional provisions from public legal sources. It points to where systems
+  differ. It is not legal advice or authoritative comparative-law scholarship, and
+  some cells are debatable.
+- `proto/` is the first and only running code: a deliberately minimal four-verb loop
+  whose manifest declares its own subtractions — see [`proto/README.md`](proto/README.md)
+  for the list, including the one that matters most: the anonymity set is the roster
+  and the proof is linear in it, which is a village, not a nation. Everything else is
+  specification, test suite, and corpus; signatures inside the *scenarios'* embedded
+  artifacts remain placeholders.
 
 ## License
 

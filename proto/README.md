@@ -1,9 +1,10 @@
 # proto/ — the four verbs, running
 
-The smallest real run of the kernel loop: the Heeley Bank allotment election
-(the [`club-agm`](../scenarios/club-agm.json) scenario, §15's "wedge two") executed
-end to end with real cryptography, emitting a transcript that an independent
-verifier — sharing no code with the runner — confirms from the artifacts alone.
+One election, run end to end with real cryptography, then attacked twelve ways. This
+is the smallest real run of the kernel loop: the Heeley Bank allotment election (the
+[`club-agm`](../scenarios/club-agm.json) scenario, §15's "wedge two"). It emits a
+transcript, and an independent verifier — sharing no code with the runner — confirms
+the election from those artifacts alone.
 
 ```sh
 ./test.sh          # the success test: run, verify, reproduce, catch 12 tampers, browser parity
