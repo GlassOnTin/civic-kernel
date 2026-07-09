@@ -1,4 +1,4 @@
-# The Kernel, distilled
+# The Kernel
 
 The normative core of the Civic Kernel on one page. The
 [essay](https://glassontin.github.io/civic-kernel/) argues it, the [schemas](schema/)
