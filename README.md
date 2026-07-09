@@ -61,8 +61,8 @@ it again.
 
 A shadow-mode run alongside one real club's AGM — an enrolment/cast page and a
 real-randomness mode, with the official result still decided by the show of hands.
-And the essay's rev. 4: fold in what the prototype proved, and give every claim a
-plain-speech line.
+And the essay's rev. 4: fold in what the prototype proved — the plain-speech lines
+are in (every section and service now opens with one).
 
 ## The words, in plain speech
 
