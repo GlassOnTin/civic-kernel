@@ -2,7 +2,7 @@
 
 One election, run end to end with real cryptography, then attacked twelve ways. This
 is the smallest real run of the kernel loop: the Heeley Bank allotment election (the
-[`club-agm`](../scenarios/club-agm.json) scenario, §15's "wedge two"). It emits a
+[`club-agm`](../scenarios/club-agm.json) scenario, [§15](https://glassontin.github.io/civic-kernel/#s15 "Nobody installs an app out of civic virtue. Two things people already want: money they are owed and cannot find, and a club vote nobody can rig.")'s "wedge two"). It emits a
 transcript, and an independent verifier — sharing no code with the runner — confirms
 the election from those artifacts alone.
 
@@ -29,7 +29,7 @@ system would use an elliptic-curve group for kilobyte ballots.
 
 | verb | where |
 |---|---|
-| **prove** | the issuer certifies each plot-holder's nym key `g^x` into a published roster. A ballot then proves membership of that **ring** with a [linkable ring signature](../README.md#w-ring-signature) (LSAG), and carries the [per-decision pseudonym](../README.md#w-linking-tag) `nullifier = H(decision_id)^x` — §3.1's `nym_secret × context_id`, in the exponent. Which of the sixty keys signed, nothing says |
+| **prove** | the issuer certifies each plot-holder's nym key `g^x` into a published roster. A ballot then proves membership of that **ring** with a [linkable ring signature](../README.md#w-ring-signature) (LSAG), and carries the [per-decision pseudonym](../README.md#w-linking-tag) `nullifier = H(decision_id)^x` — [§3.1](https://glassontin.github.io/civic-kernel/#s3-1 "Prove you are on the list and have not already spoken — without saying which name on the list you are. No file on anyone is ever built.")'s `nym_secret × context_id`, in the exponent. Which of the sixty keys signed, nothing says |
 | **cast / challenge** | the device encrypts the choice to a 2-of-3 trustee key (exponential ElGamal) and attaches a 0-or-1 validity proof (CDS); the voter may challenge it to open the encryption before casting ([Benaloh](../README.md#w-cast-or-audit) — a cheating device cannot tell which is coming; a challenged ciphertext is a receipt by construction, so it is spoiled, never cast); sealed ciphertexts enter the box and are never individually opened; any later ballot with the same nullifier silently supersedes |
 | **verify** | `verify.py`: schemas, signatures, [witnessed](../README.md#w-witness) Merkle heads, digests, credentials, audits, per-ballot ring-membership and validity proofs, the tally — recompute the [homomorphic sum](../README.md#w-homomorphic-tally), check each trustee share's Chaum-Pedersen proof, combine, brute-force the small exponent, compare with the announcement — and last, the [anchor](../README.md#w-anchor): the closing head must match a receipt from outside the collusion set |
 | **read** | `out/log.jsonl` — seven kernel events, each validating against the [waist](../README.md#w-waist) |
@@ -164,14 +164,14 @@ system would use an elliptic-curve group for kilobyte ballots.
   checks are independent, so it fans them across cores and gates the O(roster) ballot pass
   behind the cheap ones that commit to it — **~45 s** on a four-core runner (a tamper
   caught in the log never reaches the ring). That is kilobytes and seconds at village
-  scale, which is the only scale this prototype claims — and §4's kilobyte-payload
+  scale, which is the only scale this prototype claims — and [§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")'s kilobyte-payload
   requirement (T14) survives *here*, at sixty. It does not survive a national roster, and
-  no amount of engineering turns an O(n) proof into an O(1) one. This is precisely why §13
+  no amount of engineering turns an O(n) proof into an O(1) one. This is precisely why [§13](https://glassontin.github.io/civic-kernel/#s13 "Every piece of this already exists somewhere, well funded. Nobody is joining the pieces up, and no one has built the citizen's side — the phone that checks. That gap sets the plan.")
   tracks the BBS per-verifier-linkability drafts as the pre-final answer: they give the
   same `prove(eligible, decision_id) → pseudonym + proof` interface with a constant-size
   presentation. **The kernel commits to the abstraction, not to the ring.** A ring
   signature is one lattice point beneath it; BBS is another. Swapping them changes no
-  other line of the protocol — which is the claim §13 makes, and this rung is the first
+  other line of the protocol — which is the claim [§13](https://glassontin.github.io/civic-kernel/#s13 "Every piece of this already exists somewhere, well funded. Nobody is joining the pieces up, and no one has built the citizen's side — the phone that checks. That gap sets the plan.") makes, and this rung is the first
   evidence for it.
 - **Unlinkable, not anonymous against the seed.** Every secret in this transcript,
   including each voter's `nym_secret`, derives from a public constant so the run is
