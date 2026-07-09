@@ -67,6 +67,21 @@
     display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em;
     padding: .1rem .5rem; border-radius: 99px; border: 1px solid; cursor: help;
   }
+  .badge[data-tip] { position: relative; }
+  .badge[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute; left: 0; top: calc(100% + .45rem); z-index: 30;
+    width: 17rem; max-width: 76vw;
+    background: var(--card); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: .5rem .65rem;
+    font-family: var(--serif); font-size: .8rem; line-height: 1.5;
+    letter-spacing: 0; white-space: normal;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+    display: none;
+  }
+  .badge.tipped::after { display: block; }
+  @media (hover: hover) { .badge[data-tip]:hover::after { display: block; } }
   .badge.holds   { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
   .badge.strains { color: var(--amber);  background: var(--amber-soft);  border-color: var(--amber); }
   .badge.breaks  { color: var(--threat); background: var(--threat-soft); border-color: var(--threat); }
@@ -7127,7 +7142,7 @@ const SECTIONS = [
 
 function card(s) {
   return `<li><a href="#${esc(s.id)}">
-    <span class="badge ${esc(s.verdict)}" title="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span>
+    <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span>
     <h3>${esc(s.title)}</h3>
     <p>${esc(s.setting.split(/(?<=[.!?])\s/)[0])}</p>
     <p class="cv">${esc(s.verdict_plain)}</p>
@@ -7168,7 +7183,7 @@ function detail(s) {
   app.innerHTML = `
     <p class="back"><a href="#">← all scenarios</a></p>
     <article>
-      <span class="badge ${esc(s.verdict)}" title="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span>
+      <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span>
       <h1>${esc(s.title)}</h1>
       <p class="meta-line">threats ${s.threats.map(esc).join(' · ')} &nbsp;·&nbsp; ${s.doc_refs.map(esc).join(' · ')}</p>
       <p class="plainverdict"><span class="pv-label">Plainly</span>${esc(s.verdict_plain)}</p>
@@ -7191,7 +7206,7 @@ function detail(s) {
       <h2 class="sec">Findings</h2>
       ${s.findings.map(f => `
         <div class="finding">
-          <span class="badge ${esc(f.severity)}" title="${esc(TIP[f.severity] || '')}">${esc(f.severity)}</span>
+          <span class="badge ${esc(f.severity)}" data-tip="${esc(TIP[f.severity] || '')}">${esc(f.severity)}</span>
           <span>${esc(f.observation)}</span>
           ${f.doc_ref ? `<span class="ref">${esc(f.doc_ref)}</span>` : ''}
         </div>`).join('')}
@@ -7212,7 +7227,7 @@ function corpus() {
   const cards = js.map(j => {
     const c = j.meta.coverage;
     return `<div class="jcard">
-      <div class="jname">${esc(j.meta.name)} <span class="badge ${esc(j.meta.verdict)}" title="${esc(TIP[j.meta.verdict])}">${esc(j.meta.verdict)}</span></div>
+      <div class="jname">${esc(j.meta.name)} <span class="badge ${esc(j.meta.verdict)}" data-tip="${esc(TIP[j.meta.verdict])}">${esc(j.meta.verdict)}</span></div>
       <p class="cv">${esc(j.meta.verdict_plain)}</p>
       <div class="cite">${esc(j.meta.instrument.title)} · ${esc(j.meta.instrument.retrieved_via)}</div>
       <div class="jcov"><span class="present">${c.backed} backed</span> · ${c.structural} structural · <span class="absent">${c.none} none</span> (of 30)</div>
@@ -7286,6 +7301,13 @@ function route() {
 }
 addEventListener('hashchange', route);
 route();
+
+// verdict badges: click/tap toggles the explanation (hover covers mouse users via CSS)
+document.addEventListener('click', e => {
+  const b = e.target.closest('.badge[data-tip]');
+  document.querySelectorAll('.badge.tipped').forEach(x => { if (x !== b) x.classList.remove('tipped'); });
+  if (b) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('tipped'); }
+});
 </script>
 </body>
 </html>
