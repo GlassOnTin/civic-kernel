@@ -68,23 +68,19 @@
     display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; font-style: normal;
     padding: .1rem .5rem; border-radius: 99px; border: 1px solid; cursor: help;
   }
-  .badge[data-tip], .prot[data-tip], .dref[data-tip] { position: relative; }
-  .dref[data-tip] { cursor: help; text-decoration: underline dotted; text-underline-offset: 3px; color: inherit; }
-  .prot[data-tip] { cursor: help; text-decoration: underline dotted; text-underline-offset: 3px; }
-  .badge[data-tip]::after, .prot[data-tip]::after, .dref[data-tip]::after {
-    content: attr(data-tip);
-    position: absolute; left: 0; top: calc(100% + .45rem); z-index: 30;
-    width: 17rem; max-width: 76vw;
+  [data-tip] { cursor: help; }
+  .prot[data-tip], .dref[data-tip], .rstatus[data-tip] { text-decoration: underline dotted; text-underline-offset: 3px; }
+  .dref[data-tip] { color: inherit; }
+  .termtip {
+    position: absolute; z-index: 30; display: none;
+    width: 19rem; max-width: 76vw;
     background: var(--card); color: var(--ink);
     border: 1px solid var(--line); border-radius: 8px;
-    padding: .5rem .65rem;
-    font-family: var(--serif); font-size: .8rem; line-height: 1.5; font-style: normal;
-    letter-spacing: 0; white-space: normal;
+    padding: .5rem .7rem;
+    font-family: var(--serif); font-size: .8rem; line-height: 1.5;
+    font-style: normal; letter-spacing: 0; white-space: normal;
     box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
-    display: none;
   }
-  .badge.tipped::after, .prot.tipped::after, .dref.tipped::after { display: block; }
-  @media (hover: hover) { .badge[data-tip]:hover::after, .prot[data-tip]:hover::after, .dref[data-tip]:hover::after { display: block; } }
   .badge.holds   { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
   .badge.strains { color: var(--amber);  background: var(--amber-soft);  border-color: var(--amber); }
   .badge.breaks  { color: var(--threat); background: var(--threat-soft); border-color: var(--threat); }
@@ -7306,6 +7302,11 @@ const TIP = {
   "break": "break — a point where the design fails outright.",
   note:    "note — an observation for context or credit, not a defect.",
 };
+const STATUS_TIP = {
+  backed:     "backed — a specific provision of this instrument names the right; it can be pleaded in court here.",
+  structural: "structural — no provision names the right, but its substance is protected indirectly, through the system's structure or another article's case law.",
+  none:       "none — no domestic backing found in this instrument; the article has no enforceable counterpart here.",
+};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 // what a citizen's verifier client would render from the manifest (§13, Form B)
@@ -7445,8 +7446,8 @@ function corpus() {
       <div class="jname">${esc(j.meta.name)}</div>
       <p class="cv">${esc(j.meta.verdict_plain)}</p>
       <div class="cite">${esc(j.meta.instrument.title)} · ${esc(j.meta.instrument.retrieved_via)}</div>
-      <div class="jcov"><span class="present">${c.backed} backed</span> · ${c.structural} structural · <span class="absent">${c.none} none</span> (of 30)</div>
-      <div class="jrem">remedy: <span class="rstatus ${remClass[j.meta.remedy]}">${esc(remLabel[j.meta.remedy] || j.meta.remedy)}</span> &nbsp; scope: <span class="rstatus ${scClass[j.meta.scope] || 'structural'}">${esc(scLabel[j.meta.scope] || j.meta.scope || '—')}</span></div>
+      <div class="jcov"><span class="present" data-tip="${esc(STATUS_TIP.backed)}">${c.backed} backed</span> · <span data-tip="${esc(STATUS_TIP.structural)}">${c.structural} structural</span> · <span class="absent" data-tip="${esc(STATUS_TIP.none)}">${c.none} none</span> (of 30)</div>
+      <div class="jrem">remedy: <span class="rstatus ${remClass[j.meta.remedy]}" data-tip="${esc(j.meta.remedy_note || '')}">${esc(remLabel[j.meta.remedy] || j.meta.remedy)}</span> &nbsp; scope: <span class="rstatus ${scClass[j.meta.scope] || 'structural'}" data-tip="${esc(j.meta.scope_note || '')}">${esc(scLabel[j.meta.scope] || j.meta.scope || '—')}</span></div>
     </div>`;
   }).join('');
   const head = `<tr><th>#</th><th>UDHR article</th>${js.map(j => `<th>${esc(j.meta.name)}</th>`).join('')}</tr>`;
@@ -7457,7 +7458,7 @@ function corpus() {
       const r = j.invariants.find(x => x.invariant === inv) || { status: 'none' };
       const st = r.status;
       return `<td class="cell ${st}">
-        <span class="rstatus ${st}">${st}</span>
+        <span class="rstatus ${st}" data-tip="${esc(STATUS_TIP[st] || '')}">${st}</span>
         <div class="cite">${esc(r.right || '—')}</div>
         ${r.text ? `<details><summary>text</summary><pre>${esc(r.text)}</pre></details>` : ''}
       </td>`;
@@ -7508,7 +7509,41 @@ function corpus() {
   window.scrollTo(0, 0);
 }
 
+// previews: one shared tip element on <body> (escapes scroll containers);
+// hover shows it transiently, click/tap pins it, modified clicks pass through
+const tipEl = document.createElement('div');
+tipEl.className = 'termtip';
+document.body.appendChild(tipEl);
+let tipFor = null, tipPinned = false;
+function showTip(el) {
+  tipEl.textContent = el.getAttribute('data-tip');
+  tipEl.style.display = 'block';
+  const r = el.getBoundingClientRect();
+  const x = Math.min(r.left + scrollX, scrollX + document.documentElement.clientWidth - tipEl.offsetWidth - 8);
+  tipEl.style.left = Math.max(scrollX + 8, x) + 'px';
+  tipEl.style.top = (r.bottom + scrollY + 6) + 'px';
+  tipFor = el;
+}
+function hideTip() { tipEl.style.display = 'none'; tipFor = null; tipPinned = false; }
+document.addEventListener('mouseover', e => {
+  const el = e.target.closest('[data-tip]');
+  if (el && !tipPinned && el !== tipFor) showTip(el);
+});
+document.addEventListener('mouseout', e => {
+  if (!tipPinned && e.target.closest('[data-tip]')) hideTip();
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-tip]');
+  if (!b) { hideTip(); return; }
+  if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault(); e.stopPropagation();
+  if (tipPinned && tipFor === b) hideTip();
+  else { showTip(b); tipPinned = true; }
+});
+addEventListener('scroll', () => { if (tipEl.style.display === 'block') hideTip(); }, { capture: true, passive: true });
+
 function route() {
+  if (typeof hideTip === 'function') hideTip();
   const id = location.hash.slice(1);
   if (id === 'corpus' && CORPUS) return corpus();
   const s = DATA.find(x => x.id === id);
@@ -7517,14 +7552,6 @@ function route() {
 addEventListener('hashchange', route);
 route();
 
-// verdict badges: click/tap toggles the explanation (hover covers mouse users via CSS)
-document.addEventListener('click', e => {
-  const b = e.target.closest('[data-tip]');
-  document.querySelectorAll('.tipped').forEach(x => { if (x !== b) x.classList.remove('tipped'); });
-  if (!b) return;
-  if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-  e.preventDefault(); e.stopPropagation(); b.classList.toggle('tipped');
-});
 </script>
 </body>
 </html>
