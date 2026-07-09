@@ -13,6 +13,8 @@
     "remedy_note": "US courts exercise judicial review (Marbury v. Madison, 1803) and can VOID a law as unconstitutional — a strike remedy like Germany's. But unlike Germany there is NO eternity clause: the Constitution is fully amendable under Article V (a deliberately hard two-thirds + three-quarters bar), so no right is placed beyond amendment. The US also has no militant-democracy doctrine — it protects the anti-democratic speech (Brandenburg v. Ohio) that Germany would forfeit (invariant 30).",
     "scope": "unconditional",
     "scope_note": "Judicial review (Marbury v. Madison) reaches any federal or state law within constitutional limits — though only in a live case brought by a plaintiff with standing.",
+    "verdict": "strains",
+    "verdict_plain": "The same attack strains the US and stops: the Court struck the ban with the fewest rights backed of any column here — remedy, not coverage, did the work. The win took an injured plaintiff, funded lawyers, and fourteen months.",
     "coverage": {
       "backed": 14,
       "structural": 7,
