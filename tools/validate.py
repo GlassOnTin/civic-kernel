@@ -108,6 +108,22 @@ def main() -> int:
         print(f"FAIL glossary parity: README {sorted(set(gloss) ^ set(essay))} out of step with index.html", file=sys.stderr)
         return 1
     print(f"glossary parity: {len(gloss)} terms, README.md == index.html appendix")
+
+    # KERNEL.md's §-links carry the essay's Plainly lines as hover titles —
+    # same anti-drift discipline as the glossary
+    html = (ROOT / "index.html").read_text()
+    plains = {}
+    for m in re.finditer(r'<p class="plain"><span class="plain-label">Plainly</span>(.*?)</p>', html, re.S):
+        ids = re.findall(r'id="(s[0-9-]+|words)"', html[: m.start()])
+        if ids and ids[-1] not in plains:
+            plains[ids[-1]] = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+    kern = (ROOT / "KERNEL.md").read_text()
+    klinks = re.findall(r'\[§[\d.]+\]\([^)"]*#(s[0-9-]+) "([^"]*)"\)', kern)
+    bad = sorted({sid for sid, title in klinks if plains.get(sid) != title})
+    if not klinks or bad:
+        print(f"FAIL KERNEL.md §-link previews out of step with the essay's Plainly lines: {bad or 'no links found'}", file=sys.stderr)
+        return 1
+    print(f"KERNEL.md previews: {len(klinks)} §-links match the essay's Plainly lines")
     return 0
 
 

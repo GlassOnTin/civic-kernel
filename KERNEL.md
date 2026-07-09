@@ -11,7 +11,7 @@ it is not here, it is not a rule: it is explanation, evidence, or the layer abov
 
 *(§N refers to the essay's sections; T-numbers to the threat register below.)*
 
-## The problem (§1)
+## The problem ([§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat."))
 
 <details>
 <summary><b>Plainly</b> <i>The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.</i></summary>
@@ -23,7 +23,7 @@ smallest set of guarantees that markets and communities cannot provide for thems
 
 </details>
 
-## Goals, in priority order (§1)
+## Goals, in priority order ([§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat."))
 
 <details>
 <summary><b>Plainly</b> <i>Five promises, strongest first: know as little as possible about anyone, be too small to steal, keep every decision inside human rights, stay changeable, leave nobody out.</i></summary>
@@ -37,7 +37,7 @@ smallest set of guarantees that markets and communities cannot provide for thems
 
 </details>
 
-## The threats (§2)
+## The threats ([§2](https://glassontin.github.io/civic-kernel/#s2 "List every way to break it before designing it. Fourteen attacks, each with a named answer — and two left unanswered on purpose, because the cure would be a ministry of truth."))
 
 <details>
 <summary><b>Plainly</b> <i>Every way to break it, listed before designing it: fourteen attacks, each with a named answer — and two unanswered on purpose, because the cure would be a ministry of truth.</i></summary>
@@ -47,31 +47,31 @@ of participation, T13 the defense itself, T14 the wires beneath it all.
 
 | | threat | answer |
 |---|---|---|
-| T1 | state capture | nothing worth capturing: thin kernel, distributed operators, forkable with history (§3, §5) |
-| T2 | vendor capture | open protocol, open clients, no remote attestation (§1, §4) |
-| T3 | [sybils](README.md#w-sybil) | ceremony-issued credentials; cryptographic uniqueness per decision (§3.1, §10) |
-| T4 | coercion & vote buying | [receipt-free](README.md#w-receipt-free) verifiable ballots; silent re-vote, last ballot counts (§3.2) |
-| T5 | device compromise | keys in enclaves, [cast-or-audit](README.md#w-cast-or-audit) challenges, second channel, paper path (§3.2, §4) |
-| T6 | surveillance chill | [zero-knowledge](README.md#w-zero-knowledge) eligibility, unlinkable pseudonyms, local-first data (§3.1, §4) |
-| T7 | majoritarian rights-stripping | rights guard re-routes to the constitutional path (§3.3) |
-| T8 | record tampering | [witnessed](README.md#w-witness) append-only logs; any phone detects a rewritten past (§3.4) |
-| T9 | digital exclusion | paper, kiosk, assisted — same protocol, same verifiability (§4) |
-| T10 | dilution & standards capture | signed conformance [manifests](README.md#w-manifest); [subtraction](README.md#w-subtraction) is legible (§6) |
-| T11 | epistemic gating | no gate on the ballot path; scaffold everything, assess nothing (§7) |
-| T12 | sludge | four verbs, computable eligibility, cited demands, published interaction cost (§8) |
-| T13 | autoimmune defense | sense at machine speed, respond at constitutional speed (§9) |
-| T14 | infrastructure denial | kilobyte payloads, delay-tolerant, paper as the zero-bandwidth floor (§4, §3.4) |
+| T1 | state capture | nothing worth capturing: thin kernel, distributed operators, forkable with history ([§3](https://glassontin.github.io/civic-kernel/#s3 "The whole machine is four small parts: prove you may speak, decide things anyone can check, keep decisions inside human rights, keep a record nobody can rewrite."), [§5](https://glassontin.github.io/civic-kernel/#s5 "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person.")) |
+| T2 | vendor capture | open protocol, open clients, no remote attestation ([§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat."), [§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")) |
+| T3 | [sybils](README.md#w-sybil) | ceremony-issued credentials; cryptographic uniqueness per decision ([§3.1](https://glassontin.github.io/civic-kernel/#s3-1 "Prove you are on the list and have not already spoken — without saying which name on the list you are. No file on anyone is ever built."), [§10](https://glassontin.github.io/civic-kernel/#s10 "Joining is a physical event, witnessed and counted in public — the count, never the names. Minting fake voters shows up in the arithmetic; turning real ones away shows up in the same public record.")) |
+| T4 | coercion & vote buying | [receipt-free](README.md#w-receipt-free) verifiable ballots; silent re-vote, last ballot counts ([§3.2](https://glassontin.github.io/civic-kernel/#s3-2 "Your ballot is sealed before it leaves your hand and counted without being opened. You can check it was counted; you cannot prove to anyone how you voted.")) |
+| T5 | device compromise | keys in enclaves, [cast-or-audit](README.md#w-cast-or-audit) challenges, second channel, paper path ([§3.2](https://glassontin.github.io/civic-kernel/#s3-2 "Your ballot is sealed before it leaves your hand and counted without being opened. You can check it was counted; you cannot prove to anyone how you voted."), [§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")) |
+| T6 | surveillance chill | [zero-knowledge](README.md#w-zero-knowledge) eligibility, unlinkable pseudonyms, local-first data ([§3.1](https://glassontin.github.io/civic-kernel/#s3-1 "Prove you are on the list and have not already spoken — without saying which name on the list you are. No file on anyone is ever built."), [§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")) |
+| T7 | majoritarian rights-stripping | rights guard re-routes to the constitutional path ([§3.3](https://glassontin.github.io/civic-kernel/#s3-3 "A vote to strip someone's rights does not sail through at 51%. It is pushed onto a slower, louder, harder road — never silently blocked, never cheaply passed.")) |
+| T8 | record tampering | [witnessed](README.md#w-witness) append-only logs; any phone detects a rewritten past ([§3.4](https://glassontin.github.io/civic-kernel/#s3-4 "Every act lands in a public record that can only grow. Rewrite yesterday and the sums stop matching in every copy of today — and any phone can tell.")) |
+| T9 | digital exclusion | paper, kiosk, assisted — same protocol, same verifiability ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")) |
+| T10 | dilution & standards capture | signed conformance [manifests](README.md#w-manifest); [subtraction](README.md#w-subtraction) is legible ([§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.")) |
+| T11 | epistemic gating | no gate on the ballot path; scaffold everything, assess nothing ([§7](https://glassontin.github.io/civic-kernel/#s7 "No test decides whose vote counts — whoever writes the test owns the electorate. The system offers time, summaries, and help to understand; it never checks whether you did.")) |
+| T12 | sludge | four verbs, computable eligibility, cited demands, published interaction cost ([§8](https://glassontin.github.io/civic-kernel/#s8 "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask.")) |
+| T13 | autoimmune defense | sense at machine speed, respond at constitutional speed ([§9](https://glassontin.github.io/civic-kernel/#s9 "The defences watch at machine speed but act only at the speed of law. AI gets a microscope, never a pen — and emergency powers expire on their own.")) |
+| T14 | infrastructure denial | kilobyte payloads, delay-tolerant, paper as the zero-bandwidth floor ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf."), [§3.4](https://glassontin.github.io/civic-kernel/#s3-4 "Every act lands in a public record that can only grow. Rewrite yesterday and the sums stop matching in every copy of today — and any phone can tell.")) |
 
 Two threats are deliberately unanswered — disinformation and bad judgment — because a
 central answer is a ministry of truth (refusal 11). And the answers are measured claims,
 not promises: under the harness, T4 breaks against coercion under live observation (the
-limit §12 concedes), and the `executive-ignores` run breaks on an enforcement gap no
+limit [§12](https://glassontin.github.io/civic-kernel/#s12 "What is excluded on purpose, and the six problems not yet solved — by this design or anyone's. Both lists in full.") concedes), and the `executive-ignores` run breaks on an enforcement gap no
 T-number owns — a decision binds only where power obeys the record. The register states
 what the design answers; the harness reports what survives.
 
 </details>
 
-## Four services, and no fifth (§3)
+## Four services, and no fifth ([§3](https://glassontin.github.io/civic-kernel/#s3 "The whole machine is four small parts: prove you may speak, decide things anyone can check, keep decisions inside human rights, keep a record nobody can rewrite."))
 
 <details>
 <summary><b>Plainly</b> <i>The whole machine is four small parts: prove you may speak, decide things anyone can check, keep decisions inside human rights, keep a record nobody can rewrite.</i></summary>
@@ -84,26 +84,26 @@ what the design answers; the harness reports what survives.
 | **SVC-4 Transparency log** | append-only Merkle log, cross-witnessed; any phone proves inclusion and that today's log extends yesterday's | T8 tampering, T14 shutdown |
 
 Admission test for a fifth: a function enters the kernel only if the ecosystem cannot
-provide it competitively **and** its absence breaks a §1 goal. Reputation, deliberation,
+provide it competitively **and** its absence breaks a [§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.") goal. Reputation, deliberation,
 fact-checking, delegation registries all fail it — each embeds an opinion about how
 politics should work, and opinion lives above the kernel, where it can be abandoned.
 
 </details>
 
-## Four verbs (§8)
+## Four verbs ([§8](https://glassontin.github.io/civic-kernel/#s8 "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask."))
 
 <details>
 <summary><b>Plainly</b> <i>Everything a citizen ever does is one of four moves — prove, cast, verify, read — in messages small enough to travel by radio, or on paper.</i></summary>
 
 **prove · cast/challenge · verify · read** — the entire citizen surface. Payloads are
 kilobytes, self-contained, valid whenever they arrive: transport-agnostic,
-delay-tolerant, deliverable over mesh, radio, or sneakernet when IP dies (§4, T14).
+delay-tolerant, deliverable over mesh, radio, or sneakernet when IP dies ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf."), T14).
 Paper is the zero-bandwidth floor — same protocol, same tally, same audit, not a legacy
 annex (T9). A surface this small has nowhere to hide burden (T12).
 
 </details>
 
-## Two formats — the waist (§6, [`schema/`](schema/))
+## Two formats — the waist ([§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out."), [`schema/`](schema/))
 
 <details>
 <summary><b>Plainly</b> <i>The waist is the narrow middle everything must share to talk at all — for the internet that is the IP packet; here it is two file formats. Any group may run a weakened version, but its manifest must say so in a form anyone's phone can read — and the one thing a manifest cannot vouch for is its own witnesses.</i></summary>
@@ -121,11 +121,11 @@ history, regenerate the log heads, declare in the manifest that the log never ha
 and hand over a transcript on which every signature verifies and nothing internally
 disagrees. The witness set is therefore the one thing a verifier must hold out of band — from
 DID resolution and the witness ecosystem, never from the transcript under audit. A manifest
-cannot be its own standard (§6, T8, T10).
+cannot be its own standard ([§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out."), T8, T10).
 
 </details>
 
-## One floor (§5)
+## One floor ([§5](https://glassontin.github.io/civic-kernel/#s5 "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person."))
 
 <details>
 <summary><b>Plainly</b> <i>Mechanisms stay cheap to change; a person's standing as free and equal is nearly impossible to change. That asymmetry is the whole design.</i></summary>
@@ -135,7 +135,7 @@ changeable only by near-consensus, while everything about mechanism stays cheap 
 staged, canaried, sunset-claused. Cheap to change mechanisms, nearly impossible to change
 personhood: the design in one sentence. Scope, precisely: the pin binds inside a community
 subscribed to the full profile; across the lattice it is the reference posture adoption
-pressure pushes toward — elsewhere the kernel guarantees only that the gap is legible (§5–§6).
+pressure pushes toward — elsewhere the kernel guarantees only that the gap is legible ([§5](https://glassontin.github.io/civic-kernel/#s5 "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person.")–[§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.")).
 
 </details>
 
@@ -146,25 +146,25 @@ pressure pushes toward — elsewhere the kernel guarantees only that the gap is 
 
 Each closes a capture surface. The pointer is the argument.
 
-1. **No fifth service.** Nothing opinionated in the core. (§3)
-2. **No population database.** Uniqueness without identity, even against the issuer. (§3.1)
+1. **No fifth service.** Nothing opinionated in the core. ([§3](https://glassontin.github.io/civic-kernel/#s3 "The whole machine is four small parts: prove you may speak, decide things anyone can check, keep decisions inside human rights, keep a record nobody can rewrite."))
+2. **No population database.** Uniqueness without identity, even against the issuer. ([§3.1](https://glassontin.github.io/civic-kernel/#s3-1 "Prove you are on the list and have not already spoken — without saying which name on the list you are. No file on anyone is ever built."))
 3. **No remote attestation.** Integrity comes from the protocol, or a vendor holds a veto
-   over participation. (§4)
-4. **No required device.** The phone is the richest endpoint, never a required one. (§4, T9)
+   over participation. ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf."))
+4. **No required device.** The phone is the richest endpoint, never a required one. ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf."), T9)
 5. **No token in the citizen's path.** A chain may anchor log heads — notary of last
-   resort, never database, never gatekeeper. Participation never costs gas. (§6)
+   resort, never database, never gatekeeper. Participation never costs gas. ([§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out."))
 6. **No comprehension gate on the ballot path.** Scaffold everything, assess nothing:
-   whoever writes the test owns the electorate. (§7, T11)
+   whoever writes the test owns the electorate. ([§7](https://glassontin.github.io/civic-kernel/#s7 "No test decides whose vote counts — whoever writes the test owns the electorate. The system offers time, summaries, and help to understand; it never checks whether you did."), T11)
 7. **Measure the process, never the person.** The same datum is tyranny as an individual
-   gate and hygiene as a population signal. (§7–§8)
+   gate and hygiene as a population signal. ([§7](https://glassontin.github.io/civic-kernel/#s7 "No test decides whose vote counts — whoever writes the test owns the electorate. The system offers time, summaries, and help to understand; it never checks whether you did.")–[§8](https://glassontin.github.io/civic-kernel/#s8 "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask."))
 8. **No demand without a cited rule.** A form field that cannot point to the
-   machine-readable provision requiring it cannot be asked. (§8, §11, T12)
+   machine-readable provision requiring it cannot be asked. ([§8](https://glassontin.github.io/civic-kernel/#s8 "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask."), [§11](https://glassontin.github.io/civic-kernel/#s11 "The machinery that runs a vote can run a benefit claim: your phone works out what you are owed, proves it without handing over your life, and any refusal must show its working."), T12)
 9. **AI holds a microscope, never a pen.** Sense at machine speed, respond at
-   constitutional speed; break-glass powers pre-legislated, witnessed, self-expiring. (§9, T13)
+   constitutional speed; break-glass powers pre-legislated, witnessed, self-expiring. ([§9](https://glassontin.github.io/civic-kernel/#s9 "The defences watch at machine speed but act only at the speed of law. AI gets a microscope, never a pen — and emergency powers expire on their own."), T13)
 10. **The kernel enforces a membership boundary; it never decides one.** Who counts is
-    versioned, witnessed governance. (§10)
+    versioned, witnessed governance. ([§10](https://glassontin.github.io/civic-kernel/#s10 "Joining is a physical event, witnessed and counted in public — the count, never the names. Minting fake voters shows up in the arithmetic; turning real ones away shows up in the same public record."))
 11. **No ministry of truth.** The kernel does not decide truth, host debate, rank
-    arguments, moderate speech, or pick outcomes — process integrity only. (§1–§2)
+    arguments, moderate speech, or pick outcomes — process integrity only. ([§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.")–[§2](https://glassontin.github.io/civic-kernel/#s2 "List every way to break it before designing it. Fourteen attacks, each with a named answer — and two left unanswered on purpose, because the cure would be a ministry of truth."))
 12. **The math never carries the objective.** Representation, damping, legibility — yes;
     the heading is declared per domain, per community, revisably. The UDHR enters as
     coordinate frame and floor, never as telos. ([model](docs/functional-model.md), Part 7)
@@ -231,7 +231,7 @@ research program, not a trained system.
   (mutation-tested: remove that one check and one secret becomes two voters — the negated
   tag `-T` verifies just as well). The honest limit is arithmetic, not cryptographic: the
   anonymity set is the roster and the proof is linear in it — 8.4 kB a ballot at sixty
-  plot-holders. Populations need the constant-size BBS presentation §13 tracks. The
+  plot-holders. Populations need the constant-size BBS presentation [§13](https://glassontin.github.io/civic-kernel/#s13 "Every piece of this already exists somewhere, well funded. Nobody is joining the pieces up, and no one has built the citizen's side — the phone that checks. That gap sets the plan.") tracks. The
   interface — `prove(eligible, decision_id) → pseudonym + proof` — was written against the
   abstraction, so swapping the proof system changes nothing else.
 - **T5's challenge and T4's silent re-vote compose — and decided the election.** In the
@@ -250,7 +250,7 @@ research program, not a trained system.
 
 </details>
 
-## What is not solved (§12)
+## What is not solved ([§12](https://glassontin.github.io/civic-kernel/#s12 "What is excluded on purpose, and the six problems not yet solved — by this design or anyone's. Both lists in full."))
 
 <details>
 <summary><b>Plainly</b> <i>Five problems nobody has solved — this design included. Named, not hidden.</i></summary>
