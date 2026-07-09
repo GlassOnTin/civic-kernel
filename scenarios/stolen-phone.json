@@ -256,38 +256,46 @@
  "verdict": "strains",
  "verdict_plain": "The thief never got a vote — Tomás's own week was the price: six days with no way to participate, and the recovered credential arrives as a stranger to the very decision he had called. Recovery works; continuity is the open problem, exactly as declared.",
  "protection": "credential recovery",
+ "protection_plain": "Social recovery: a threshold of self-chosen guardians can re-issue a lost credential, with the old key publicly revoked in the log.",
  "findings": [
   {
+   "protection": "pseudonym continuity",
    "severity": "strain",
    "doc_ref": "§12",
    "observation": "Recovery broke pseudonym continuity exactly as the document's open problem 5 predicts: the re-issued credential's new pseudonym secret made Tomás ineligible for the already-open decision he had called. A 94-member co-op could hand-patch this with an emergency rules.amendment in 48 hours; a municipality or nation could not safely improvise a mid-election eligibility change, and the document concedes no shipped system solves revocation-aware nullifier design. For any community bigger than a club, a citizen recovered during an open decision either loses standing in it or the community takes on double-vote risk."
   },
   {
+   "protection": "the revocation race",
    "severity": "strain",
    "doc_ref": "T6",
    "observation": "The thief could not vote as Tomás — but the protection came from timing plus the enclave's per-use biometric gate, not from the revocation mechanism alone. Because ballots are unlinkable and receipt-free by design, a ballot cast with the stolen credential in the gap between theft and revocation could never be identified or struck from the tally without destroying unlinkability for everyone. Here the theft preceded the cast window by seven days and revocation took two, so the window was empty; in the variant where the phone is snatched mid-window from a coerced or biometrically-defeated owner, this scenario breaks and the kernel's own privacy guarantees are what prevent the repair."
   },
   {
+   "protection": "six days without a channel",
    "severity": "strain",
    "doc_ref": "T9",
    "observation": "For six days Tomás had no path to participate at all. Pedal Livre's manifest honestly declares paper_channel: false, so the §4 zero-bandwidth floor did not exist for him, and the recovery flow presumes access to a second enclave-bearing smartphone — hardware the protocol simply assumes. What actually restored his franchise was the union hardship fund's refurbished Android and his sister's kitchen-table phone. The kernel made the recovery verifiable; it did nothing about the device dependency, which taxes precisely the gig workers with the least slack (§8's own regressivity argument, turned on the kernel itself)."
   },
   {
+   "protection": "public revocation at small scale",
    "severity": "strain",
    "doc_ref": "§10",
    "observation": "Public revocation is a privacy leak at small scale. The credential.revoked and x-credential.reissued entries carry guardian key identifiers and a theft timestamp, permanently and publicly. In a 94-member co-op where everyone knows whose phone was snatched the week he called the strike ballot, the log now durably links a nominally anonymous credential event to Tomás the person — and to his guardians. §10's 'membership stays private; the count is public' holds arithmetically but not socially at N=94; a hostile platform reading the public log learns exactly when the strike's organiser was digitally disarmed."
   },
   {
+   "protection": "a schema gap",
    "severity": "note",
    "doc_ref": "§3.4",
    "observation": "Schema gap: the log-entry type enum includes credential.revoked and credential.authority-key-rotated but no type for credential issuance or re-issuance, even though §10 makes every credential mint a logged public event and §3.1's recovery flow depends on logging re-issuance. The co-op had to invent x-credential.reissued, which every independent client must then special-case — a small but real interoperability crack in the one layer (§6's waist) the design says must be universal."
   },
   {
+   "protection": "the recovery fork",
    "severity": "note",
    "doc_ref": "§3.1",
    "observation": "The SLIP-39 continuity caveat the document flags is, in the theft case, a genuine fork with no good branch: restoring Shamir shards of the original secret would preserve pseudonym continuity but resurrect the exact key sitting in the thief's enclave, while guardian-co-signed re-issuance is safe but triggers the discontinuity of finding 1. Theft (key compromised) and loss (key destroyed) need different recovery semantics, and the architecture currently describes one mechanism for both."
   },
   {
+   "protection": "the phone itself",
    "severity": "note",
    "observation": "What the protocol did not touch, and never claimed to: the phone itself. Tomás's blocked bank app, his frozen week of Zip earnings, his photos, the €300 replacement cost, and the police report on Rua da Prata are all outside the kernel. It protected his voice in one ballot; his livelihood was rescued by a sister, a union rep, and a hardship fund — the same social fabric the guardianship design quietly presumes and cannot substitute for."
   }

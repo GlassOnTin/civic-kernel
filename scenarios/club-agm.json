@@ -214,33 +214,40 @@
  "verdict": "strains",
  "verdict_plain": "The losing side's own sceptic checked the count and conceded — nine years of shed-count rows ended by one link. But what stopped Derek's padded roster was a member's vigilance, not the maths: the 'weak' on the manifest means what it says.",
  "protection": "the club-vote wedge",
+ "protection_plain": "The kernel at club scale, invoked from the group chat the community already has: real ballots, real log, platform-account membership, declared weak.",
  "findings": [
   {
+   "protection": "social sybil resistance",
    "severity": "strain",
    "doc_ref": "T3",
    "observation": "Sybil resistance at this lattice point is social, not cryptographic — and the protocol's honest 'weak' label does not make it strong. Derek's roster-packing was caught only because Priya hashed and diffed the roster snapshot and forty members knew the plot register; an admin who packed the group three months earlier, or a society without a paper register to cross-check, has no defence at all. The manifest makes the weakness legible (§6, §10), which is genuinely more than the shed offered, but legibility is the whole of what T3 gets here: the kernel converted a hidden electorate into a disputable one, and left the dispute to humans."
   },
   {
+   "protection": "the assisted channel",
    "severity": "strain",
    "doc_ref": "T9",
    "observation": "The protocol did not reach Ernest Toft, and this is the finding the document's §4 promise ('paper, kiosk, and assisted channels in the same protocol with the same verifiability — not a legacy annex') must own: at the Form C club scale, the paper channel is economically fictional, the deployment honestly declared paper_channel: false, and the member who distrusts all computers ended up trusting two tellers at a table — the shed-count trust model, merely halved and witnessed. Ernest could verify nothing himself; his eventual acceptance routed through Jordan's verification, i.e. through a person. The kernel shrank and witnessed the trust he had to extend; it did not remove it. Equal participation for the computer-distrusting member is unsolved here, exactly as §12's digital-divide admission predicts."
   },
   {
+   "protection": "the untrusted-lobby claim",
    "severity": "strain",
    "doc_ref": "T2",
    "observation": "Form C's claim 'the ballot box never enters the chat' held — WhatsApp carried only links and previews, saw no ballot, and could forge nothing any client would accept, and the independent second client (Jordan's) is exactly the T2 answer working. But the electorate DID enter the chat: personhood was issued off the group roster, whose admins (including Derek, a candidate's patron) control membership, and Meta observed the full participation metadata — who tapped a voting link, when, in which named community. T2 is answered for the tally, only half-answered for the roll, and not answered at all for platform surveillance of participation (a T6-shaped cost the manifest's unlinkable:false at least declares)."
   },
   {
+   "protection": "receipt-freeness, declared away",
    "severity": "note",
    "doc_ref": "T4",
    "observation": "Not solved, by declaration: the vote was not receipt-free, and 'I voted Sandra' screenshots circulated freely. At allotment stakes this is texture, not attack, but the walkthrough shows how naturally the receipt habit forms — the same community running its next, nastier vote (evicting a plot-holder, say) on the same manifest would hand every household's dominant member a proof-demand mechanism. The lattice upgrade path (§6) exists; nothing in the protocol forces a community to notice when its stakes have outgrown its manifest."
   },
   {
+   "protection": "club-scale witnessing",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "The witness recursion bottoms out fast at club scale: two neighbouring-society secretaries co-sign the log head, there are no anchors, and the trustee quorum includes the person who built the deployment. A colluding federation could rewrite this history for the cost of two friendships. The absurd cost/benefit ratio protects Heeley Bank, not the mechanism — and the manifest's empty anchors field states this plainly, which is the design working as specified: less than a guarantee, more than the status quo."
   },
   {
+   "protection": "the sceptic's concession",
    "severity": "note",
    "doc_ref": "§15",
    "observation": "What the protocol unambiguously delivered — the wedge working as §15 predicts: the losing camp's own designated sceptic verified the tally on an independently built client and conceded in public, an outcome nine years of shed counts never once produced. The load-bearing human fact is that legitimacy arrived via Jordan's grudging 'checks out', not via cryptography directly: the proofs convinced the one distrustful person the losers trusted, and he convinced the rest. The kernel's product, here, was a credible sceptic."

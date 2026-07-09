@@ -61,7 +61,8 @@ def main() -> int:
         elif (ROOT / "scenarios" / f"majority-vs-minority-{code}.json").exists() and (
             rmap["meta"]["verdict"],
             rmap["meta"]["protection"],
-        ) != (lambda s: (s["verdict"], s["protection"]))(json.loads((ROOT / "scenarios" / f"majority-vs-minority-{code}.json").read_text())):
+            rmap["meta"].get("protection_plain"),
+        ) != (lambda s: (s["verdict"], s["protection"], s["protection_plain"]))(json.loads((ROOT / "scenarios" / f"majority-vs-minority-{code}.json").read_text())):
             errs += 1
             print(f"FAIL rights-map {code}: meta.verdict/protection contradict the measured scenario majority-vs-minority-{code}.json", file=sys.stderr)
         else:

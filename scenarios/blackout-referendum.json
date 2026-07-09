@@ -260,33 +260,40 @@
  "verdict": "strains",
  "verdict_plain": "Switching off the internet did not stop the vote: ballots crossed the valley by radio and SD card, and a doctored mirror was caught in hours. But the mesh did not reach every herder, and the design still has no rule for ballots that arrive after the close.",
  "protection": "the delay-tolerant ballot path",
+ "protection_plain": "Ballots and log fingerprints small and self-contained enough to travel any channel — radio, SD card, paper — and to arrive late but still valid.",
  "findings": [
   {
+   "protection": "delay-tolerant ballots",
    "severity": "note",
    "doc_ref": "T14",
    "observation": "The core T14 claim held under a real blackout: eligibility proofs and encrypted ballots are self-contained kilobyte payloads (nullifier-bearing, valid whenever they arrive), so store-and-forward over a ~300 bps LoRa mesh and an SD card on a motorcycle carried a full referendum with no new trust assumptions. No citizen verb required an interactive round trip beyond the citizen's own device (§4), and that single design constraint is what made the shutdown survivable rather than fatal."
   },
   {
+   "protection": "log-head gossip over radio",
    "severity": "note",
    "doc_ref": "T8",
    "observation": "Log-head gossip over radio defeated the split-view attempt in hours: the regionally-hosted mirror served a stale head omitting blackout-morning entries, and it was caught because witnesses received the true co-signed head over a channel the state does not run (§3.4). The blackout and the rewrite attempt failed against the same mechanism, exactly as §2's T14 row claims — but note this worked only because the community had provisioned an out-of-jurisdiction witness and a physical path to it before the crisis."
   },
   {
+   "protection": "the late-ballot window",
    "severity": "strain",
    "doc_ref": "§4",
    "observation": "The decision-window policy for late-arriving ballots is a hole in the kernel, not a feature of it. §4 says payloads are 'valid whenever they arrive'; §3.2 decisions carry a hard cast_ends; the protocol specifies no reconciliation. San Marcos Alto survived only because it had pre-legislated its own infrastructure-denial extension clause (an x- extension entry, §9-style: witnessed, self-expiring) — and even so, 31 provably-real ballots arrived too late and were logged as received-uncounted. A community without such a clause faces an ugly live choice between disenfranchising the slow-path voters and improvising window rules mid-decision, which is precisely the legitimacy fight the kernel exists to prevent. This belongs in the spec, not in each town's foresight."
   },
   {
+   "protection": "the humans who carry the mesh",
    "severity": "strain",
    "doc_ref": "§4",
    "observation": "The protocol does not protect the humans who carry it. The architecture document honestly concedes that radio can be direction-found and physical-layer anonymity is weaker than IP's (T6 caveat in §4) — and this scenario cashes that concession out as Bruno Callisaya detained overnight and a repeater seized. Ballots have no source addresses; ridge repeaters have GPS coordinates. Every mesh-dependent deployment inherits an unmodeled dependency on a handful of identifiable volunteer operators, who are the cheapest remaining attack surface once the payloads themselves are unstoppable. The kernel makes their equipment replaceable; it makes them arrestable."
   },
   {
+   "protection": "the mesh's reach",
    "severity": "strain",
    "doc_ref": "T9",
    "observation": "The blackout still redistributed the franchise even though it failed to stop the vote. Mesh coverage reached the market, the clinic, and one ridge line; herders beyond coverage voted only if a motorcycle happened to ride, and turnout was structurally easier inside town than outside it. The kernel made the denial legible (witnessed attestations, an extension entry in the log) and survivable, but equal convenience of participation under infrastructure denial is unachieved — the §12 admission that the digital divide 'is a fact, not a variable' applies with extra force when the network is being actively withheld rather than merely absent."
   },
   {
+   "protection": "coercion in a blackout",
    "severity": "note",
    "doc_ref": "§12",
    "observation": "Not solved here, and named as such by the document itself (T4, §12): a blackout pushes voting into homes and market queues, where a foreman or a brother-in-law can simply watch the screen. Receipt-freeness held — no ballot could be proven after the fact — but coercion under live observation is untouched by any of this machinery, and a community under this much economic pressure from a mining concern is exactly where that residual risk concentrates. The supervised paper channel was the real mitigation, and it is a social institution, not a protocol property."

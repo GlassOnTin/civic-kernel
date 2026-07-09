@@ -283,33 +283,40 @@
  "verdict": "strains",
  "verdict_plain": "The eleven-hour claim really does become twenty-three minutes — but only as far as paperwork was the problem. The kernel cannot sign for a slow landlord, fund the programme, or stop the council cutting the rate through the kernel's own lawful process.",
  "protection": "the sludge defences",
+ "protection_plain": "The rules that make paperwork answer for itself: eligibility computed for you, every demanded field citing the rule that allows it, burden published as a number.",
  "findings": [
   {
+   "protection": "the burden flip",
    "severity": "note",
    "doc_ref": "§8",
    "observation": "The T12 core held end-to-end: discovery ran on Keisha's device against logged rules (she learned of two programmes she never knew existed), all nine demanded fields cited their authorizing rule so the 2024-style triple payslip demand and the unexplainable bus-pass field could not exist in the schema, and the 11-hour/23-minute asymmetry became two witnessed rows in one table (39600s at 61% abandonment vs 1400s at 7%) that a journalist could print as a measured quantity rather than an anecdote."
   },
   {
+   "protection": "the attestation ecosystem",
    "severity": "strain",
    "doc_ref": "§11",
    "observation": "The discovery flip only reaches as far as the wallet's attested facts, and the attestation ecosystem is the unbuilt dependency the document itself names: Keisha's claim stalled 19 days on her landlord's signature. The kernel reduced the demand from twice to once and forced it to cite its rule, but it has no lever over a third party who simply does not tap 'sign' — for tenants with hostile or absent landlords, the old chokepoint survives in miniature."
   },
   {
+   "protection": "funding and rule quality",
    "severity": "strain",
    "doc_ref": "§5",
    "observation": "What the protocol does NOT solve, demonstrated: the kernel cannot fund the programmes or write good rules. Higher uptake blew the budget, and the cabinet's 30% rate cut will pass through the kernel's own amendment path — witnessed, canaried, with its population delta published — and be entirely legal. Legibility converts a quiet cut into a public argument, which is more than the status quo and much less than a guarantee; the same machinery that made Keisha's entitlement undeniable will make its shrinkage undeniable too."
   },
   {
+   "protection": "the public denial-trace",
    "severity": "strain",
    "doc_ref": "§3.4",
    "observation": "The per-claim process.denial-trace sits in tension with §8's own maxim 'measure the process, never the person': it is pseudonymous but public, carrying programme, timestamp, fired rules and the computed-vs-threshold margin. In a low-volume programme in a small ward, timing plus programme plus margin is plausibly re-identifying — the schema enforces aggregation for cost metrics but not for denial traces, and neither the schema nor §11 specifies how much of a trace belongs in the public log versus in the citizen's wallet with only a commitment logged."
   },
   {
+   "protection": "kiosk and assisted claiming",
    "severity": "strain",
    "doc_ref": "§12",
    "observation": "Donna, 71 and phoneless, was not disenfranchised — kiosk enrolment and assisted claiming ran the same protocol with the same verifiability — but her claim cost two bus trips and a helper's availability against Keisha's 23 minutes on the number 11. Equal convenience across the digital divide is unachieved, exactly as §12(4) concedes; the aggregate metrics as specified do not even break out per-channel, so the kiosk channel's higher burden is invisible in the very dashboard built to expose burden."
   },
   {
+   "protection": "payment-rail anonymity",
    "severity": "note",
    "doc_ref": "§11",
    "observation": "Payment breaks the anonymity the ballot machinery elsewhere provides, as §11 admits: three per-programme pseudonyms prevent double-claiming, but all three awards pay into one bank account, so the council can trivially join Keisha's contexts downstream — and the pilot manifest honestly declares unlinkable:false and medium sybil resistance anyway. Data minimisation, not anonymity, is the real ceiling here, and citizens reading the manifest get the truth of that rather than a stronger implied promise."

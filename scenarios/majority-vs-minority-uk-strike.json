@@ -270,33 +270,40 @@
  "verdict": "strains",
  "verdict_plain": "Give Britain an entrenched constitution and the same ban falls: one manifest field — declaration to strike — flips the verdict. The catch is the field: changing it means Parliament binding itself, the one step a sovereign majority will not take.",
  "protection": "the counterfactual strike remedy",
+ "protection_plain": "The remedy the real UK lacks, modelled: an entrenched constitution letting a court void an Act rather than merely declare against it.",
  "findings": [
   {
+   "protection": "the isolated variable",
    "severity": "note",
    "doc_ref": "§3.3",
    "observation": "THE ISOLATED VARIABLE FLIPS THE VERDICT, IN THE UK'S OWN CONTEXT. This run holds the real UK deployment constant to the byte — same town, same people, same Bill, the same twenty-of-thirty invariants (2, 7 and 18 all present), the same unconditional scope, the same witnesses, the same 361:248 division — and moves exactly one field: rights_guard.remedy, 'declaration' to 'strike'. The verdict moves with it, breaks to strains. Where the declaration run's guard could only flag while the Act stood (guard_power 'flag-only', ceiling a non-binding s.4 declaration), the strike run's guard escalates to a court that quashes the Act void ab initio. Same rights, same coverage, same scope, opposite outcome for Nasreen. This confirms in-context what the four-jurisdiction series (DE/US/EU) showed across different countries: REMEDY, not coverage, gates this attack. The cascade §6 names is visible here reduced to its cleanest form — scope held unconditional, coverage held identical, and remedy alone doing all the work."
   },
   {
+   "protection": "the self-lock",
    "severity": "strain",
    "doc_ref": "§5",
    "observation": "THE SELF-LOCK — legibility is not availability is not movement. This manifest describes a UK that has ABOLISHED PARLIAMENTARY SOVEREIGNTY: an entrenched, court-enforceable constitution is the only thing that lets a UK court void an Act rather than merely declare it incompatible, and 'strike' cannot be declared honestly without it. Reaching this state from the real UK (remedy 'declaration') is not a small, reversible, individually-adoptable lattice-move like adopting the transparency log (S1) or verifiable ballots (S2), which cost no sovereignty and leave the verdict at breaks. It is the sovereign binding its own future majorities — the one move a 51 per cent Parliament will not make, because it means surrendering the supremacy a transient majority values most. So the model can render S3 fully legible and even prove it is the ONLY move that flips the verdict, and still not move the UK to it: the improvement path stalls not where the engineering is hard but where the politics forbids self-binding. Legibility (the model shows the target) is not availability (the target is well-defined and occupied by DE/US/EU) is not movement (the UK cannot incrementally get there). That stall is the interesting result, and it is a real limit of the whole approach, not of this scenario."
   },
   {
+   "protection": "the uncaptured-court assumption",
    "severity": "strain",
    "doc_ref": "T1",
    "observation": "STRIKE IS ONLY AS STRONG AS AN UNCAPTURED COURT — the reason the verdict is 'strains', not 'holds'. The protection that saved the Cawforth mosque rests entirely on a Constitutional Court willing and able to quash. The kernel logs the classification and the escalation and makes any tampering with that record visible (§3.4), but it does not run the court and cannot stop court-packing. A 61 per cent movement blocked from re-enacting the ban by simple majority CAN, over years, change who sits on the bench — appointment rules, retirement ages, panel sizes — and a captured court could simply decline to strike, or read the entrenched rights down to nothing. The transparency log would make that capture legible; it would not prevent it. There is a genuine trade the run surfaces: the same entrenched-court power that protects a minority from a majority today (T7) concentrates the strike power in an institution that is itself a prime capture target (T1). Parliamentary sovereignty is, among other things, a refusal of that concentration — which is part of why the real UK's refusal to self-bind is not mere incumbency but a contested constitutional position."
   },
   {
+   "protection": "eventual, not immediate, relief",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "STRIKE DELIVERS EVENTUAL, NOT IMMEDIATE, RELIEF — the interim window still bit. Even in the world where the remedy works, the strike was not instantaneous: the Act received Royal Assent, the council served a stop notice under it, and works at Shawcross Lane were halted for three weeks before the court voided it ab initio. The strike then reached back and voided the enforcement (dependent_acts_voided), which the declaration run could never do — but the congregation still lost three weeks of building and lived under a lawful-if-voidable sanction in the present tense. §3.3's honest framing that the guard makes rights-stripping 'expensive, slow, and loud, not impossible' cuts both ways here: under strike the process is genuinely made expensive and reversible, but 'slow' is a cost the wronged party pays in real time before the reversal lands. Better than the declaration run's permanent shell of a building; not the same as never having been stopped."
   },
   {
+   "protection": "one field, one civilisation",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "THE MANIFEST COMPRESSED A CIVILISATIONAL DIFFERENCE INTO ONE LEGIBLE FIELD — which is the §6 thesis working exactly as designed. The entire constitutional gulf between the real UK and this counterfactual — parliamentary sovereignty versus an entrenched, court-enforceable bill of rights, a decade of hypothetical constitutional upheaval — surfaces on the citizen's phone as a single enum value flipping from 'declaration' to 'strike'. A stranger comparing the two deployments' manifests would not need a constitutional-law degree to see that one court can annul a rights-violating Act and the other cannot; the difference is rendered as plainly as 'upholds 20 of 30 invariants'. The remedy axis (added precisely so two systems that name the same Article 18 can be told apart by what naming it is worth) did its whole job. Note the honest boundary that comes with it: coverage is unchanged at 20/30 and orthogonal to this attack, since the UK backs 2, 7 and 18 either way — the legibility win here is entirely on the remedy axis, not the coverage one."
   },
   {
+   "protection": "a measured counterfactual",
    "severity": "note",
    "doc_ref": "§12",
    "observation": "NOT SOLVED, AND NAMED AS SUCH: this is a modelled counterfactual, and the harness measured the hypothetical, not history. There is no Britain with an entrenched constitution and a strike remedy; this run fabricated one by flipping a field and then honestly reported what the protocol would do inside it. That result is a claim about a manifest, not about the United Kingdom — it says 'IF the UK sat at remedy=strike THEN this attack strains rather than breaks', and it deliberately does not say the UK can or will sit there (the self-lock finding says the opposite). Two further limits inherited from the reference kernel apply unchanged and were not solved by moving the remedy: the strike protection still assumes the unlinkable-pseudonym personhood the manifest claims, which §13 flags as pre-final cryptography; and rights classification remained a judgment call a clever drafter can word around (§12), contained here only because the strike path routes even an imperfect classification to a forum that can void the law. The run should leave a reader clear-eyed: it isolated a variable and proved remedy gates the verdict, and it proved, in the same breath, that proving a door exists is not the same as being able to walk through it."

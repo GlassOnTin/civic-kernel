@@ -266,23 +266,28 @@
  "verdict": "breaks",
  "verdict_plain": "Every proof held: the vote is unforgeable, the defiance undeniable, the record permanent. The bulldozers came anyway. A decision binds only where power obeys the record, and no protocol can close that gap.",
  "protection": "the record's binding force",
+ "protection_plain": "The record's claim on power: a decision so provable and permanent that defying it is undeniable — the kernel's whole promise, minus enforcement.",
  "findings": [
   {
+   "protection": "proof against power",
    "severity": "break",
    "doc_ref": "T1",
    "observation": "Proof is not compliance. Every kernel service worked: the decision is unforgeable, the record un-rewritable, the governor's defiance undeniable to anyone with a phone in milliseconds, and permanent as the basis for prosecution, recall, or exit. The kernel converts 'done in the dark' into 'done in the light' completely. What it cannot do — by §6's own words, 'it has no army, and the design refuses to want one' — is compel Governor Duval to stop. Against a captured executive the kernel's only real power is identical to its power against a fork: make defection visible and hand it to humans. The channel is being cut while the proof is perfect. That gap between total knowledge and zero force is why this breaks."
   },
   {
+   "protection": "cite-a-warrant, not a valid one",
    "severity": "strain",
    "doc_ref": "§3.4",
    "observation": "The coercive.act schema enforces 'cite a warrant,' not 'cite a valid one.' The Governor's office appended a fully schema-valid seizure entry — it names an authorizing_rule, so it passes. What convicts Duval is a semantic check the citizen's client runs afterward: resolving that citation against decision.closed and finding the concession revoked. The log-entry schema's promise that 'an unwarranted coercive act cannot be logged validly' bites only against a total absence of citation; a bad-faith citation of a dead rule logs cleanly and is caught one layer up, by verification, not by the schema. The log delivers legibility and appealability exactly as intended — but it is not a validity gate, and it should not be mistaken for one."
   },
   {
+   "protection": "the remedy's landing ground",
    "severity": "strain",
    "doc_ref": "§6",
    "observation": "The remedy the kernel produces has to land somewhere the kernel does not control. rights.escalation refers the violation to the regional court and the witnesses — but if the same capture that took the governorship also reaches the court, the legislature, and the police (the 'sufficiently correlated capture event' §6 concedes at the anchor), the evidence is impeccable and inert. The deepest fallback is §5 forkability and exit: the history travels intact with whoever leaves. That preserves the truth and the community's constitution. It does not preserve the river, the fields, or the parcels being seized this morning."
   },
   {
+   "protection": "the unrewritable record",
    "severity": "note",
    "doc_ref": "T8",
    "observation": "What genuinely held, and deserves credit: the record could not be quietly rewritten. Duval's faction could not make the carried close 'un-carry' — cross-border witnesses (Vell University, the Marn Ledger, neighbouring Aldery) co-sign the log head and it is anchored to two independent public ledgers, so any rewrite forks the view and every phone detects it. T8 is answered in full. Legibility is the substrate every downstream remedy is built on; without a tamper-evident record there is nothing to prosecute with. The kernel delivered that substrate completely. The break is not that legibility failed — it is that legibility is not force, and this situation needed force."

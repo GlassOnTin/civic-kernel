@@ -274,33 +274,40 @@
  "verdict": "strains",
  "verdict_plain": "A secret wiretap can be logged without being revealed, and can never be backdated — but the court that must eventually unseal it is trusted, not proven. Accountability arrives after the listening, not before.",
  "protection": "the sealed, witnessed warrant log",
+ "protection_plain": "A public ledger where every act of state force is logged the moment it happens — existence and timing in the clear, contents sealed until a named date.",
  "findings": [
   {
+   "protection": "tamper-evident warrant existence",
    "severity": "note",
    "doc_ref": "§3.4",
    "observation": "The pattern genuinely delivers on its central promise for the honest case: the warrant's EXISTENCE and issue-minute are tamper-evident within the hour (witness co-signing) and un-backdatable by that evening (anchor.checkpoint to two permissionless chains), all while the contents stay sealed. A captured unit can no longer manufacture a warrant after being challenged, nor predate one to cover an illegal tap — the exact failure the old paper cabinet permitted invisibly (T8)."
   },
   {
+   "protection": "the cite-your-warrant rule",
    "severity": "note",
    "doc_ref": "§8",
    "observation": "Because coercive.act REQUIRES authorizing_rule, an intercept with no citable warrant cannot be logged validly, and any surveillance that later surfaces in discovery with no matching, dated coercive.act entry becomes a visible anomaly rather than a deniable one. Unaccounted surveillance moves from 'un-provable' to 'detectable' — and the public count of sealed intercepts (four to twelve in a quarter) is a question a reporter or assembly can now actually put."
   },
   {
+   "protection": "the enforcement-civic identity wall",
    "severity": "note",
    "doc_ref": "T6",
    "observation": "The T6 wall holds: subject_ref sits in the enforcement identity domain (riverton-police:enf-id/...), and the schema forbids bridging it to any civic unlinkable pseudonym. So the ledger built to make force accountable cannot itself be turned into a surveillance-chill instrument that links a person's civic voice to an enforcement target. The accountability log does not become a dossier."
   },
   {
+   "protection": "honest unsealing",
    "severity": "break",
    "doc_ref": "§6",
    "observation": "What the pattern does NOT guarantee: honest revelation. The unseal key is a TRUSTED party — the court — the same witness-recursion §6 admits at its anchor, not a cryptographic guarantee. A captured or colluding court can set sealed_until a decade out, simply never publish the reveal (seal-forever), unseal selectively, or leak the sealed plaintext to the live operation while the public sees only a hash. The log makes a warrant's existence undeniable; it cannot force the honest disclosure of its contents, and it does nothing to stop the authorized surveillance itself (T13)."
   },
   {
+   "protection": "after-the-fact accountability",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "Accountability here is retrospective, not preventive, and that is a real cost. The subject's appeal is genuine but post-hoc: by the time the seal lifts, the thirty days of interception have already happened. The rights guard escalated and logged the Article 12 concern but, by design, does not veto — it makes rights-touching 'expensive, slow, and loud, not impossible' (§3.3). A wrongful tap is documented and contestable, never prevented."
   },
   {
+   "protection": "the public count of covert taps",
    "severity": "strain",
    "doc_ref": "T6",
    "observation": "The same transparency that catches unaccounted surveillance also publishes a live count of active covert operations. In a city small enough, a sophisticated target — or a corrupt insider reading the public log — can infer that some intercept is running this quarter and correlate sealed-entry timestamps with real-world events, a partial tip-off the sealing was meant to prevent. Detectability of unaccounted taps and operational secrecy of accounted ones are in genuine tension, not fully reconciled."

@@ -277,33 +277,40 @@
  "verdict": "breaks",
  "verdict_plain": "The guard named every tripped right, the court agreed, the record is permanent — and the ban stands, because a UK declaration of incompatibility asks Parliament to reconsider and cannot make it. A right is worth the remedy bolted to it.",
  "protection": "the declaration remedy",
+ "protection_plain": "What UK courts can actually do: declare a law incompatible with rights — a formal finding the law survives, because Parliament stays sovereign.",
  "findings": [
   {
+   "protection": "coverage without remedy",
    "severity": "break",
    "doc_ref": "§6",
    "observation": "COVERAGE DIVERGED FROM REMEDY — the exact gap the manifest's new rights_guard.remedy field exists to expose. The right was on the books: the UK manifest declares invariants 2, 7 and 18, and the guard named all three, correctly, before Second Reading. Germany's manifest for the identical attack declares the SAME three invariants — coverage is not the differentiator in this pair. What differs is one enum value. Germany's remedy is 'strike' (Bundesverfassungsgericht voids the law; the Art 79(3) eternity clause puts human dignity beyond amendment); the UK's is 'declaration' (HRA s.4: the court flags, the law stands, Parliament is sovereign). Same rights, opposite outcomes. Before the remedy field existed, two deployments could both truthfully claim to 'uphold Article 18' while one could void a religious-freedom ban and the other could only annotate it. The field turns that difference from invisible to machine-readable — which is the whole point, and also the whole tragedy for Cawforth."
   },
   {
+   "protection": "the guard's escalation, capped",
    "severity": "break",
    "doc_ref": "§3.3",
    "observation": "PROTECTION FAILS AT THE POINT THAT MATTERS. §3.3's reference posture is 'escalate, never veto' — re-route a rights-tripping decision to supermajority plus adversarial review. Under remedy='declaration' the guard cannot even do that: it has no re-routing power at all, only a flag. It performed perfectly — tripped 2, 7, 18, logged reasons, surfaced the negative s.19 statement, recorded the s.4 declaration — and the minority's mosque is still barred. When the guard can only flag, a 61 per cent majority can suppress a minority's worship and the kernel certifies every step of the suppression with unbreakable integrity. The document's own honesty holds: the guard makes rights-stripping 'expensive, slow, and loud, not impossible' — but under 'declaration' it is not even made expensive or slow; it is only made loud."
   },
   {
+   "protection": "a remedy the host withholds",
    "severity": "break",
    "doc_ref": "§12",
    "observation": "NOT SOLVED: the kernel cannot manufacture a remedy the host constitution withholds. Parliamentary sovereignty and the s.4 ceiling are facts of the UK legal order; the kernel is a legibility layer over that order, not a court above it. §6 is explicit that the rights guard 'binds where it is subscribed', and the UK subscribed to a guard whose strongest available action is a declaration. The protocol did the one thing it promises — made the subtraction impossible to hide — and that is genuinely more than the status quo, where a citizen would never see the words 'flag-only' next to their right. But it is categorically less than a guarantee. A stranger should leave clear-eyed: this deployment protects the record of a persecution and cannot protect the person from it, because the constitution it runs on gave it no lever that could."
   },
   {
+   "protection": "the declaration's real work",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "HONEST COUNTERWEIGHT — a declaration is not nothing, but it is not a remedy. The s.4 declaration plus the unrewritable log did real work: a formal judicial finding of incompatibility, an evidentiary record no minister can deny, political pressure toward a s.10 remedial order, and a Strasbourg application built on a complete, witnessed chain of proof. Historically most UK s.4 declarations have eventually been remedied by Parliament. So the protocol converts a defeat into a documented, appealable, externally-litigable defeat — a materially better position than an invisible one. The strain is that all of this is contingent and slow: it depends on a minister choosing to act, or Strasbourg ruling years hence, while the mosque stays a shell and the congregation stays wronged in the present tense. The kernel improved the odds of eventual justice and delivered no justice now."
   },
   {
+   "protection": "transparency's neutrality",
    "severity": "note",
    "doc_ref": "§3.4",
    "observation": "TRANSPARENCY IS NEUTRAL ABOUT WHAT IT LEGITIMISES. The same append-only log that let Nasreen prove she was wronged also gave the majority's ban a flawless, tamper-evident provenance and recorded, permanently, that 361 members voted to suspend her community's worship. SVC-4 guarantees integrity, not justice; it will certify a clean rights-stripping as faithfully as it certifies a clean election. Note too the deliberate asymmetry the scenario surfaced: the enacting vote was a recorded, named parliamentary division — the exact opposite of the manifest's receipt_free citizen ballot — because accountability wants MPs' votes public and coercion-resistance wants citizens' votes secret. Both are correct; the kernel holds both, and nothing in the record softens the number for the people it counts against."
   },
   {
+   "protection": "a partial point by law",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "THE UK SITS AT A PARTIAL POINT BY LAW, NOT BY CHOICE. The manifest honestly declares only 20 of 30 invariants, because the HRA/ECHR domesticates the civil-political rights and not the socio-economic ones (Arts 22-25, 27 have no Convention counterpart; movement, asylum and nationality, 13-15, are unratified or absent). That partiality is orthogonal to this attack — 2, 7 and 18 are all present — but it is worth naming that the same manifest which exposed the remedy gap also exposes a coverage gap the citizen's client renders plainly. The §6 machinery worked exactly as designed in both dimensions: it made two different kinds of subtraction, one of coverage and one of remedy, legible on the phone in Nasreen's hand. Legibility was the promise. It was kept. It was also, this time, all there was."

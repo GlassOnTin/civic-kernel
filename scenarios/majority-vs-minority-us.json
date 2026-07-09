@@ -276,33 +276,40 @@
  "verdict": "strains",
  "verdict_plain": "The Constitution said no and meant it: the ban fell, in the system backing the fewest rights of any measured — remedy, not coverage, did the work. The win needed an injured plaintiff, funded lawyers, fourteen months, and a bench the same majority could slowly reshape.",
  "protection": "the strike remedy",
+ "protection_plain": "Judicial review that voids the offending law — post-hoc, adversarial, and only for a plaintiff with standing.",
  "findings": [
   {
+   "protection": "the remedy axis, confirmed",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "SERIES RESULT -- the remedy axis, not coverage, predicted all three outcomes. One 61% attack, three jurisdictions, the same three rights named each time (invariants 2, 7, 18). The UK guard named them and could only flag: remedy 'declaration,' the ban stood (verdict breaks). Germany named them and could void the law: remedy 'strike,' the ban fell (verdict strains). The US names them and voids the law: remedy 'strike,' the ban falls (verdict strains) -- resolving LIKE Germany and UNLIKE the UK, exactly as the remedy field predicts. The cleanest proof that coverage did not decide it is the coverage numbers themselves: the US backs the FEWEST invariants of the three (14 of 30, against the UK's 20 and Germany's 23), yet delivers the strongest outcome for the plaintiff. Higher coverage (UK) produced the worse result; the lowest coverage plus a strike remedy (US) produced a better one. The single manifest field that moved between the UK loss and the two wins was rights_guard.remedy. Naming a right is worth only as much as the remedy bolted to it."
   },
   {
+   "protection": "no eternity clause",
    "severity": "strain",
    "doc_ref": "§5",
    "observation": "US-SPECIFIC WEAKNESS versus GERMANY: there is no eternity clause. Germany's strike rested on Grundgesetz Art 79(3), which puts human dignity beyond amendment even by a two-thirds supermajority, so the majority cannot return with a bigger majority and re-enact the ban as constitutional text. The US has no such backstop, and the rights.escalation records it honestly: under Article V, two-thirds of both houses of Congress plus three-quarters of the states (38 of 50) can amend the Constitution itself. That bar is enormously higher than the ordinary statute that just fell, and it has essentially never been used to contract an individual liberty -- but it is a lawful path, not a metaphysical bar. §5's design pin, 'nearly impossible to change personhood,' is in the US a matter of 'very hard' where Germany's is 'impossible.' The kernel surfaces the difference; it cannot supply the missing clause."
   },
   {
+   "protection": "a strike that needs standing",
    "severity": "strain",
    "doc_ref": "§12",
    "observation": "WHAT THE PROTOCOL DOES NOT SOLVE: the strike is not self-executing, and it rests on an uncaptured Court the kernel does not run. Three gaps the log makes visible but cannot close. (1) Standing -- US review is post-hoc and adversarial, with no abstract or automatic route, so the classification suspended nothing on its own; it took a concrete injury (the revoked permit), a coalition of well-resourced lawyers, and fourteen months to convert the flag into a judgment. A minority without the injury, the money, or the time gets the flag and little else. (2) Composition -- free-exercise doctrine (the Smith / Lukumi / Fulton line) turns on who sits on the bench, and the same 61% movement that struggles to amend the Constitution can, over years, reshape the Court through appointments and confirmations; that is the court-capture risk (T1) the log would render legible but could not prevent. (3) The kernel does not run Article III. It recorded the classification and the strike with unbreakable integrity; it did not, and could not, guarantee that the Court would strike. That contingency is why the verdict is 'strains,' not 'holds.'"
   },
   {
+   "protection": "narrow, deep coverage",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "COVERAGE IS NARROW AND DEEP, AND THE MANIFEST SAYS SO. The US deployment declares only 14 of 30 invariants -- the fewest of the three columns -- because US constitutional law backs almost no socio-economic rights (Arts 22-28 absent), no federal right to education (San Antonio v. Rodriguez), no textual privacy right, and no constitutional right to asylum (Art 14 absent). What it does back, it backs with strike force, and in the First Amendment it is the strongest speech-and-religion protection of the three columns -- which is exactly the right at issue here. The citizen client renders a blunt, honest picture: a short list, deeply enforced. Fatima was protected not because the US protects broadly but because the two rights her attackers trod on happen to sit inside that narrow, strongly-remedied core. A different attack -- on welfare, on education, on privacy -- would have found the guard with nothing backed to trip."
   },
   {
+   "protection": "the enforced interim",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "HONEST INTERIM: unlike Germany, the law took EFFECT and was ENFORCED before it was struck. Germany's moratorium entered the log 'enacted-pending-constitutional-review' and never operated as ordinary law; the US statute was presumed constitutional and enforceable the moment it was signed, and the City of Riverton revoked the mosque's permit under it three weeks later -- a real coercive act, logged with its warrant, that carried legal force. The mitigation is genuine and worth naming: the district court's preliminary injunction, granted on likelihood of success under Lukumi, paused enforcement during the litigation, so the interim harm was bounded -- a protection the UK's declaration regime never offered at any stage. But 'bounded' is not 'none.' There was a window in which a court-flagged, ultimately-void statute nonetheless stripped a permit, and only a separately-won injunction closed it. The guard flagged instantly; the relief was neither instant nor automatic."
   },
   {
+   "protection": "transparency's neutrality",
    "severity": "note",
    "doc_ref": "§3.4",
    "observation": "TRANSPARENCY IS NEUTRAL ABOUT WHAT IT LEGITIMISES. The same append-only log that carried the Supreme Court's strike also gave the ban a flawless, tamper-evident provenance: a permanent public record that Congress passed and the President signed a law suspending a minority's houses of worship, with the roll-call names attached. Between April 2026 and June 2027 the audit fleet faithfully certified a statute in force that the Court would later declare void -- integrity guarantees a true record of the persecution, not its absence. SVC-4 will certify a clean rights-stripping as faithfully as a clean election. The consolation, and it is real, is that same record's second life: the unbroken chain from classification to permit-revocation to strike became the petitioner's evidence, and stands as the receipt that the last such law was void should a future bench ever be tempted to try again."

@@ -205,38 +205,46 @@
  "verdict": "strains",
  "verdict_plain": "The fine print fought back: the manifest made every cut corner machine-readable, and one journalist turned it into a scandal that forced repairs. A declared weakness still wounds, though — Meryem's emailed receipt coerced her exactly as the manifest warned it could.",
  "protection": "the manifest's legibility",
+ "protection_plain": "The manifest's forced honesty: every service and weakness declared machine-readably, so a diluted deployment can be caught lying but not stopped from shipping.",
  "findings": [
   {
+   "protection": "the anti-dilution manifest",
    "severity": "strain",
    "doc_ref": "§6 / T10",
    "observation": "The manifest did its job as the anti-dilution waist: the schema's forced booleans and required detail blocks made CivicFlow's subtractions machine-readable, and a journalist turned that into accountability in an afternoon. But the mechanism only binds artifacts, not marketing — the press release 'we now run the Civic Kernel' is un-schema'd speech, and it reached roughly fifty times more residents than the manifest ever did. Legibility converted the lie from unfalsifiable to checkable; it did not convert it to unsaid."
   },
   {
+   "protection": "the declared receipt",
    "severity": "break",
    "doc_ref": "§3.2 / T4",
    "observation": "For Meryem the protocol broke, and the manifest's honesty is no consolation: receipt_free: false plus an emailed confirmation gave her shift coordinator a working coercion instrument, and a declared degradation coerces exactly as effectively as a hidden one. The kernel does not solve harm inside a community that legitimately subscribed low on the lattice — §6 says so itself ('less than a guarantee, more than the status quo'). The manifest prices the subtraction; it does not protect the person standing under it."
   },
   {
+   "protection": "the self-witnessed log",
    "severity": "strain",
    "doc_ref": "§3.4 / T8",
    "observation": "A single self-witnessed log makes 'verifiable' technically true and practically hollow: tally arithmetic checks out, but the operator retains the unilateral ability to fork history or show split views, detectable by no one. The manifest schema permits witnesses: [operator] and anchors: [] — it makes the weakness declarable, but a citizen must know what 'witnesses: 1' implies to feel the cold. The reference client rendered it; the schema itself imposes no floor."
   },
   {
+   "protection": "the audit fleet at low adoption",
    "severity": "strain",
    "doc_ref": "§4 / §13 Form B",
    "observation": "The 'millions of phones as a passive audit fleet' argument is aspirational at this adoption level: about 600 of 28,417 participants ran a verifier client. Legibility was load-bearing only through an intermediary — one journalist who knew the tooling. The protocol's honest dependency, named by the brief and confirmed here: manifests protect a population only via the fraction that checks, plus the press that amplifies them. Below some literacy threshold, T10 mostly succeeds anyway."
   },
   {
+   "protection": "the vendor-held keys",
    "severity": "note",
    "doc_ref": "T2",
    "observation": "The manifest and every log entry are signed by did:web:civicflow.example keys, not the city's — the vendor holds the community's voice at the waist itself. The schema validates this happily (key_id is a free string), so vendor capture of the declaration channel is legible only to someone who inspects key_id. A reference-client heuristic ('community identity and signing authority differ') would surface it; today nothing does."
   },
   {
+   "protection": "the lattice's pull",
    "severity": "note",
    "doc_ref": "§6 / §5",
    "observation": "The lattice's evolutionary mechanism showed a real, if modest, pull: once the diff was public, contract-renewal pressure moved the deployment toward independent witnesses, anchoring, and a receipt-freeness roadmap. Dilution became a negotiating position instead of a fait accompli — which is the precise, limited claim §6 makes, and it held."
   },
   {
+   "protection": "the linkable register residue",
    "severity": "note",
    "doc_ref": "§3.1 / T6",
    "observation": "Not solved and worth naming: the linkable register lookups from the June decision are now permanent state — the city holds identity-linked participation records the kernel's reference profile exists to prevent. Moving up the lattice later fixes future decisions; nothing in the protocol can unlink the past."

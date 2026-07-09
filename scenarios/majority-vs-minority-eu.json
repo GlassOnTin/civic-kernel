@@ -303,28 +303,34 @@
  "verdict": "strains",
  "verdict_plain": "On paper the Charter is the strongest instrument of the four; in Valmiria it first had to spend fourteen months proving it applied at all. Strongest remedy, most conditional reach — and the ban ran as valid law the whole time the lawyers argued.",
  "protection": "the scope-gated strike",
+ "protection_plain": "The Charter's power to strike a national law — real, but only where the case is first argued into EU law's reach (Art 51).",
  "findings": [
   {
+   "protection": "the third axis: scope",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "SERIES RESULT — a THIRD axis, not coverage and not remedy, gated the EU column. On the two axes the earlier runs measured, the EU Charter is the strongest of the four: highest coverage (25 of 30 backed, more than the UK's 20, Germany's 23, or the US's 14) AND a strike remedy. On those two numbers alone it 'should' have resolved cleanly like Germany and the US. It did resolve the same way — struck — but only after clearing a gate the three national constitutions never face: jurisdictional SCOPE. Charter Art 51 binds a Member State 'only when it is implementing Union law', so before any judge could apply Art 10 or Art 21 the community had to establish an EU-law nexus. A German constitution applies to a German law in a German court as a matter of course; the Charter's applicability had to be litigated first, all the way to Luxembourg. Completeness-on-paper plus a strike remedy did not translate into guaranteed protection, because a third dimension — does the instrument reach this situation at all — sits upstream of both. That is the distinctive finding of the EU run."
   },
   {
+   "protection": "the schema's new scope field",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "SCHEMA — this run motivated a third rights_guard axis, now added. The remedy field alone could not say 'strike, but only within EU-law scope': a citizen comparing manifests would have seen EU 'strike' beside Germany 'strike' and read them as equivalent — they are not. The waist now models it (rights_guard.scope: unconditional | conditional), and Valmiria declares scope: 'conditional'. So the comparison now separates three axes that form a cascade — scope (does the instrument apply at all: Art 51 gates the EU, the three national constitutions are unconditional), then remedy (what a court can do: UK declaration vs strike), then coverage (which rights are named). The EU is strongest on the last two and gated on the first, and the manifest can now say exactly that."
   },
   {
+   "protection": "the contested nexus",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "HONEST AMBIGUITY — the outcome turned on contested lawyering, not a clean yes/no. Whether an EU-law nexus exists is not a computation the guard can decide; it is an argument. The load-bearing hook here — that a worship ban is 'in substance' ethnic-origin discrimination under Directive 2000/43 — works only because the Valmirian Tatars happen to be a historic ETHNIC minority, since religion as such is covered by Union anti-discrimination law only in employment (Directive 2000/78). For a Muslim community that was ethnically indistinct from the majority, that hook would likely fail, and the asylum and free-movement hooks are thinner still. The scenario resolves in-scope, but honestly: the Advocate General doubted one route and a dissenting strand called the whole matter purely internal. It could plausibly have gone the other way, in which case the escalation would have read 'Charter out of scope — referred to the national constitution and the ECHR', and this most-complete instrument would have protected no one here. The kernel logged the contest faithfully; §3.3's own admission that classification 'is a judgment call' extends, in the EU, to whether the guard has jurisdiction to judge at all."
   },
   {
+   "protection": "courts the kernel does not run",
    "severity": "strain",
    "doc_ref": "T1",
    "observation": "WHAT THE PROTOCOL DOES NOT SOLVE. Three things the log made legible but could not deliver. (1) The strike, like Germany's and the US's, rests on courts the kernel does not run — here TWO of them, an independent national court willing to refer under Art 267 and an independent CJEU willing to find scope and primacy; a captured or Charter-hostile national court can simply decline to refer, and no gossiped log head can compel the reference. (2) The interim harm was real and unfrozen: because scope was unresolved, the Act took effect and the Slavno stop-work order was issued and enforced as presumptively-valid national law for the fourteen months the litigation ran — unlike Germany, where the flag itself froze the law. (3) Even the win is scoped: disapplication binds where Union law reaches, not erga omnes, so any purely-national residue drops back to Valmiria's constitution. The kernel recorded the classification, the coercive act, and the escalation with tamper-evident integrity (§3.4); it did not, and could not, guarantee that the Charter would be found to apply or that a court would enforce it. That contingency, stacked on top of the ordinary court-independence contingency the German and US runs already carried, is why the verdict is 'strains', not 'holds'."
   },
   {
+   "protection": "a supranational instrument",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "SUPRANATIONAL, NOT NATIONAL — different in kind from the other three columns, and the manifest can only gesture at it. The EU Charter is not Valmiria's constitution; it is a supranational instrument the deployment couples to, which the manifest expresses only weakly, through community.parent = the EU. Its distinctive completeness is genuine on paper — it is the only column here that backs UDHR Art 24 (rest and leisure, Charter Art 31(2)) and the socio-economic articles 22 and 25 — and none of that breadth was reachable in this dispute, because breadth you cannot invoke is breadth that does not protect. The honest picture the citizen client should render is not 'the strongest column' but 'the most complete instrument, conditional on a jurisdictional test the other three do not impose' — a nuance that lives, at present, only in the free-text of the log entries, not in the machine-comparable fields of the waist."

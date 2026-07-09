@@ -288,28 +288,34 @@
  "verdict": "breaks",
  "verdict_plain": "The silent re-vote saves Amara from any coercer who leaves her one private hour — so Marek adapts: 'prove you did not re-vote' demands a proof the system was built never to produce, and he controls her hours. Against a coercer who owns your time, the design breaks.",
  "protection": "the silent re-vote",
+ "protection_plain": "Any later ballot silently replaces an earlier one — no receipt, nothing on the device to show it happened — plus staffed booths a coercer cannot enter.",
  "findings": [
   {
+   "protection": "the burden inversion",
    "severity": "break",
    "doc_ref": "T4",
    "observation": "BURDEN INVERSION / RUBBER-HOSE — the thing the fix does NOT solve. The undetectability that defeats a naive coercer is precisely what an adaptive one weaponises: Marek's demand shifts to 'prove you did not re-vote', a negative Amara cannot prove because receipt-freeness and silent supersession were engineered to leave no artifact. The protocol's strength (he cannot verify) becomes her liability (she cannot exonerate herself), so he punishes on suspicion. This is exactly the failure the manifest's own coercion_resistance description pins on 'fake-credential' (JCJ 2005 / Civitas, Clarkson-Chong-Myers 2008): a KNOWN, opt-in duress capability inverts the burden of proof and can ESCALATE harm rather than reduce it. revote-safe-space inherits the same defect the instant the coercer knows it exists."
   },
   {
+   "protection": "forced abstention",
    "severity": "break",
    "doc_ref": "§12",
    "observation": "FORCED ABSTENTION. No coercion-resistance level defeats a coercer who controls the victim's body and movements — §12's open problem #2 and the manifest caveat say so outright. The safe-space estate guarantees that a booth EXISTS on Amara's errand; it cannot guarantee she reaches it alone. Marek can drive her there and wait, send his sister for Dorina's prescription, or simply forbid the trip. The 'guaranteed private moment' is guaranteed by the state and revocable by the husband, and the husband is closer."
   },
   {
+   "protection": "last-writer-wins timing",
    "severity": "strain",
    "doc_ref": "§3.2",
    "observation": "LAST-WRITER-WINS TIMING WAR under device control. Silent supersession means whoever casts last wins, and the manifest itself warns of 'a coercer who controls the device from enrolment onward'. An adaptive Marek, present until the Saturday close and holding the PIN, insists on a final supervised Repeal cast on Friday night — which silently supersedes Amara's Tuesday booth re-vote. The safe-space guarantee only bites if a coercer-excluded moment falls AFTER his last cast and before the deadline; Amara's next safe hour is the following Tuesday, past the close. She is left unable even to know whether her true vote survived — the same unverifiability that shields her from him blinds her to her own outcome."
   },
   {
+   "protection": "the safe-space upgrade",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "GENUINE PROGRESS vs the prior test, credited precisely. Four things really improved: (1) the private moment is now GUARANTEED — a staffed, coercer-excluded booth on an errand Amara already runs — not merely hoped-for; (2) supersession is SILENT — Marek's nightly phone check reveals nothing, so T4's 'cannot verify how you voted' genuinely holds; (3) ambient universal advertising makes her PRESENCE deniable — seeing the poster proves nothing about why she is at the pharmacy; (4) the whole defence is LEGIBLE — declared in a signed manifest and rendered on her client, so she knows exactly what protection exists before she risks anything (§6). Against a NAIVE coercer this changes the outcome outright; against an adaptive one it is a real partial defence and a more honest tally — progress, not a solution."
   },
   {
+   "protection": "cast-or-audit against the wrong attack",
    "severity": "strain",
    "doc_ref": "§4",
    "observation": "T5's MECHANISM MISSES THE ACTUAL ATTACK. The home phone is not compromised in T5's malware sense — Marek has legitimate PIN access and dictates the choice, which the device faithfully encrypts. Cast-or-audit (Benaloh) proves the device is HONEST, which provides zero leverage against an honest device operated under human duress. What actually helps at Corn Street is not the challenge but a clean, staffed SECOND device outside the coercer's reach — a T4/§4 property. So the deployment's headline T5 defence does nothing for Amara's real (human) T5 problem; only the safe-space estate does. The threat-model boundary between 'compromised device' and 'hostile authorised operator' is where her case falls, and the kernel answers only the first."

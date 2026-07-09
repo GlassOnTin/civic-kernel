@@ -281,33 +281,40 @@
  "verdict": "holds",
  "verdict_plain": "The one story where the design simply wins: three years on, the rewrite fails at every layer it touches — witnesses refuse, phones notice, the anchor remembers. What the log cannot do is jail anyone; that still took a prosecutor and a newspaper.",
  "protection": "the witnessed log",
+ "protection_plain": "The append-only log plus its witnesses and anchor: rewriting any entry breaks fingerprints that independent parties and the world already hold.",
  "findings": [
   {
+   "protection": "the three-layer defence",
    "severity": "note",
    "doc_ref": "§3.4",
    "observation": "The rewrite failed at three independent layers exactly as T8's answer promises: witnesses refused to co-sign a head with no consistency proof, background-verifying phones detected the split view within hours, and the 2023 anchor checkpoints would have convicted the fork even if all three local witnesses had colluded. Crucially, the attack produced its own evidence — two conflicting heads signed by the same key — so the burden of proof landed on the tamperer, not the citizens."
   },
   {
+   "protection": "proof without consequences",
    "severity": "strain",
    "doc_ref": "T1",
    "observation": "The kernel produces proof, not consequences. Riverton's outcome depended on an independent county prosecutor, opposition councillors, and a working local newspaper. In a jurisdiction where all three are captured, the log still proves tampering to every phone — and nothing official happens. The protocol converts 'was history rewritten?' from a factual dispute into settled mathematics, but enforcement remains entirely social and legal, outside the kernel by design (§1 non-goals)."
   },
   {
+   "protection": "detection for the connected",
    "severity": "strain",
    "doc_ref": "T9",
    "observation": "Split-view detection ran on the phones of the connected. The 2,114 paper-channel voters and offline citizens learned of the tampering days later, from the Ledger — a trust regression: they must take a journalist's word for what the proofs say. The paper channel keeps casting inclusive, but continuous auditing is a smartphone privilege the document does not fully resolve."
   },
   {
+   "protection": "the insider at the moment of coercion",
    "severity": "strain",
    "doc_ref": "§3.4",
    "observation": "The protocol offered nothing to Neriah Voss at the moment of coercion. Its deterrence works precisely by making the least powerful insider the person holding signed evidence of a crime; she protected herself with a forwarded email, not with anything the kernel provides. The §12 press primitives (credential-backed anonymous sourcing) could have helped her blow the whistle, but shielding pressured insiders is not a kernel service and should not be oversold as one."
   },
   {
+   "protection": "the freshness window",
    "severity": "note",
    "doc_ref": "§3.4",
    "observation": "A freshness window exists: entries appended since the last witness co-signature and anchor checkpoint are briefly rewritable by the operator alone. It was irrelevant here — the target entry was three years old and pinned a thousand times over — but a clerk ordered to doctor a decision within minutes of its logging, before witnessing, faces a genuinely softer target. Checkpoint cadence is therefore a security parameter, not an ops detail."
   },
   {
+   "protection": "the record, not the outcome",
    "severity": "strain",
    "doc_ref": "§2",
    "observation": "The kernel protected the record, not the outcome. Blocked from rewriting 2023, the administration simply re-ran the question with a consortium-funded persuasion campaign — legitimate under the document's explicit refusal to police disinformation or money in argument. For Tessa Okafor, the honest summary is: the protocol guaranteed her side cannot be cheated, and guaranteed nothing about whether it can be outspent."

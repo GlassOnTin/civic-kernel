@@ -4,7 +4,7 @@
   "title": "Civic Kernel stress-test scenario",
   "description": "One imagined real-life human situation walked through the protocol. Test-harness format, not part of the waist. The embedded manifest and log-entry artifacts must additionally validate against the two waist schemas in ../schema/ — that cross-check is the test: can the waist express this situation? Enforced by tools/validate.py.",
   "type": "object",
-  "required": ["id", "title", "setting", "threats", "doc_refs", "precedents", "manifest", "walkthrough", "verdict", "verdict_plain", "protection", "findings"],
+  "required": ["id", "title", "setting", "threats", "doc_refs", "precedents", "manifest", "walkthrough", "verdict", "verdict_plain", "protection", "protection_plain", "findings"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
@@ -51,6 +51,10 @@
       "type": "string", "minLength": 3, "maxLength": 60,
       "description": "The protection under test, as a short subject phrase that reads grammatically before the verdict: '<protection> <verdict>' — e.g. 'the silent re-vote breaks'."
     },
+    "protection_plain": {
+      "type": "string", "minLength": 40, "maxLength": 300,
+      "description": "What the protection under test is, in one plain line - shown as the popover on the protection title."
+    },
     "verdict_plain": {
       "type": "string", "minLength": 40, "maxLength": 420,
       "description": "The verdict in plain speech, one or two sentences: where the design lands and why. Rendered as the story's opening line and its card text."
@@ -60,9 +64,10 @@
       "minItems": 2,
       "items": {
         "type": "object",
-        "required": ["severity", "observation"],
+        "required": ["protection", "severity", "observation"],
         "additionalProperties": false,
         "properties": {
+          "protection": { "type": "string", "minLength": 3, "maxLength": 60, "description": "This finding's subject, read before its severity badge." },
           "severity": { "enum": ["note", "strain", "break"] },
           "observation": { "type": "string" },
           "doc_ref": { "type": "string" }

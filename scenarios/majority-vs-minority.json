@@ -335,38 +335,46 @@
  "verdict": "strains",
  "verdict_plain": "The machine did everything it promised: the ban went the slow, loud, supermajority road — and lost. The cost is on the record too: months in which Farida's community lived as the explicit question of a town-wide vote, protected by the process and worn down by its length.",
  "protection": "the constitutional path",
+ "protection_plain": "The rights guard's re-route: a rights-tripping proposal is forced onto a slower road — supermajority, deliberation window, citizens' panel, review.",
  "findings": [
   {
+   "protection": "the guard as specified",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "The rights guard performed exactly as specified — tripped Articles 2, 7, 18, 20; re-routed to supermajority, deliberation window, sortition panel and judicial review; logged the classification and appeal with reasons — but the minority's protection ultimately rested on arithmetic, not principle: 61 per cent street support versus a 66.7 per cent threshold. Had the campaign held 70 per cent, the moratorium passes, and the kernel certifies a religious-rights-stripping outcome with impeccable cryptographic integrity. The document says this honestly ('expensive, slow, and loud, not impossible'); the scenario confirms the guard is a speed bump with a public address system, not a wall."
   },
   {
+   "protection": "the slow road's cost",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "'Slow and loud' is a cost paid disproportionately by the protected minority. The constitutional path bought roughly four extra months during which Farida Hassan's community lived as the explicit subject of a town-wide referendum on their right to worship — hearings, leaflets, harassment of their children. The same mechanism that eroded support from 61 to 58.6 per cent also prolonged the ordeal. The protocol's protection and the minority's suffering came from the same knob, and the kernel offers no way to have one without the other."
   },
   {
+   "protection": "the kernel's deliberate reach",
    "severity": "strain",
    "doc_ref": "§2",
    "observation": "NOT SOLVED: everything that made this episode dangerous happened where the kernel deliberately does not reach. The posters, the WhatsApp rumour mill, the pig's head at the chapel gate, the classmate's question to a fourteen-year-old — the kernel does not moderate speech, host debate, or counter hate, by explicit design (the ministry-of-truth refusal in §2 and §12). It guaranteed process integrity while the human damage accrued offstage. A stranger should be clear: this protocol protects the ballot around a persecution; it does not prevent the persecution."
   },
   {
+   "protection": "classification gameability",
    "severity": "strain",
    "doc_ref": "§12",
    "observation": "Classification gameability is live, not hypothetical, and it iterates. Round one tripped the invariants partly because the petition annex named the mosque eleven times — evidence the proposers volunteered. 'Moratorium 2.0' (assembly buildings over 200 sqm, no annex) is drafted against the schema, exactly the evasion §12's open problem 3 concedes. The backstop is human review through the constitutional path, every time, indefinitely; a well-funded majority faction can make classification review a war of attrition, and the kernel's answer is only that each round is logged."
   },
   {
+   "protection": "the deliberation dividend",
    "severity": "note",
    "doc_ref": "§7",
    "observation": "The deliberation window plus the sortition panel plausibly moved the decisive 2.4 points (61 per cent polled to 58.6 per cent cast) — Keith Ambrose, panel convert, is the mechanism §7 hopes for. But this effect is contingent, not guaranteed: the kernel distributes time and metadata equally and then must hope. In a town where the panel had converted the other way, the same machinery would have consolidated the majority. The protocol's strongest soft defence is, honestly, a bet on people."
   },
   {
+   "protection": "transparency's two edges",
    "severity": "note",
    "doc_ref": "§3.4",
    "observation": "Transparency cuts both ways. The permanent, unrewritable log is what made the classification, the ruling and the tally trustworthy — and it also permanently records that 11,384 named-town neighbours voted yes. For the minority, the record that vindicated them is also an indelible public measurement of local hostility, discoverable by their children and by every future employer of the town's reputation. The architecture nowhere weighs this cost; nothing in the schema distinguishes a record that protects from a record that wounds."
   },
   {
+   "protection": "no list of the targeted",
    "severity": "note",
    "doc_ref": "§3.1",
    "observation": "A quiet success worth naming: because eligibility proofs are unlinkable pseudonyms, running a referendum that targeted Muslims never produced a list of Muslims. Under a conventional e-voting or petition system, turnout and residency data around a mosque decision is a targeting dataset; here the kernel structurally cannot say who the minority's members are (T6 doing unpaid work for T7). Netherbridge's ceremony-based, medium-sybil-resistance enrolment held at this scale, but the manifest honestly declares it is not the biometric-dedup profile — a determined faction bussing in enrolments is checked by issuance-count reconciliation (§10), which this scenario did not stress."

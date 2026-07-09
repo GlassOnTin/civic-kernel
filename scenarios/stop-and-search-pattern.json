@@ -266,28 +266,34 @@
  "verdict": "strains",
  "verdict_plain": "Every stop cited a lawful rule; the nine-to-one pattern across Eastfield was the wrong — and the kernel turns that pattern into one signed, checkable number. What it cannot do is act on the number: a pattern is no single decision, so the remedy still needs politics.",
  "protection": "measure-the-process",
+ "protection_plain": "Measure the process, never the person: every coercive act logged with its cited rule, aggregates published, so a pattern becomes one checkable number.",
  "findings": [
   {
+   "protection": "the pattern made a number",
    "severity": "note",
    "doc_ref": "§8",
    "observation": "Genuine contribution: 'measure the process, never the person' converts disparate impact from anecdote into a signed, witnessed, phone-checkable number. The 9:1 Eastfield ratio and the 79% find-nothing rate become the same measured quantity for every ward — the sludge-dashboard move applied to coercion. Deniability, the thing that always defeated Grace Bello's one-stop-at-a-time complaints, is destroyed; the disparity is now a finding a press (Priya), an assembly, or a court can act on. This is real progress that did not exist before the deployment."
   },
   {
+   "protection": "the individual lawful act",
    "severity": "strain",
    "doc_ref": "§9",
    "observation": "The kernel makes the pattern legible but cannot constrain the individual discretionary act. Each coercive.act cites a valid authorizing_rule and passes on appeal; discrimination lives in the aggregate of lawful acts, which the log surfaces without refusing. This is §9's split working exactly as written — sense at machine speed, respond at constitutional speed; the microscope holds no pen (T13) — and here that design's cost is that the body politic keeps absorbing every lawful-but-biased stop while the response is merely enabled, never triggered. Sensing without an actuator is the intended architecture, and it is also the limit."
   },
   {
+   "protection": "the guard's blindness to aggregates",
    "severity": "strain",
    "doc_ref": "§3.3",
    "observation": "NOT SOLVED by the protocol: the rights guard is a static analyser over decision/proposal metadata, so it structurally cannot see disparate impact, which is an emergent property of an aggregate of individually-lawful executive acts with no ballot attached. Halloway declares the Article 2 (non-discrimination) and Article 7 (equal protection) invariants in its manifest — the client renders 'upholds 14 of 30' including exactly these — yet neither can fire on this harm, because there is no decision to type-check. A citizen reading the manifest could reasonably believe those invariants protect against this pattern; they do not. That mismatch between the rendered claim and the lived reality is the sharpest strain here (relates to T7)."
   },
   {
+   "protection": "a number is not a remedy",
    "severity": "strain",
    "doc_ref": "§6",
    "observation": "NOT SOLVED: legibility of a pattern is not a remedy for it — someone still has to pick up the number. The remedy path is entirely outside the kernel (an equality-law claim, an assembly motion on the constitutional path), which the kernel enables but cannot compel. If the assembly declines to act, or passes a motion the constabulary ignores, the 9:1 ratio persists undiminished and the log simply records next quarter's identical figure. The kernel converts a hidden injustice into a public one; closing it remains a political act with all the ordinary ways to fail."
   },
   {
+   "protection": "no citizen verb for coercion",
    "severity": "strain",
    "doc_ref": "§3.4",
    "observation": "The four-verb citizen surface (§8) has no native verb for 'the state logs an act of coercion,' and coercive.act is deliberately a state write whose subject_ref sits in the walled-off enforcement identity domain (T6, T1). A consequence for the human at the centre: Marcus cannot, from his own civic client, prove that the accumulating stops are HIS, nor challenge the pattern as an aggregate — he can appeal single acts (which lawfully pass) or read the anonymous borough total, but nothing lets the coerced person bind the pattern to themselves. The privacy wall that protects him from enforcement attribution is the same wall that denies him personal standing over the pattern; only an intermediary (the Trust, the press, the assembly) can act on the aggregate."

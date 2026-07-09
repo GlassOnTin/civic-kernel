@@ -249,28 +249,34 @@
  "verdict": "strains",
  "verdict_plain": "The court orders the ballot box unlocked and there is no key — not withheld, nonexistent, which is the design working. The cost is real: the wall that protects a nurse's job also shields whoever took the foreign money, and the inquiry must go the long way round.",
  "protection": "the anonymity wall",
+ "protection_plain": "Anonymity with no key to hand over: no party holds a mapping from ballots to people, so a court order finds nothing to unlock.",
  "findings": [
   {
+   "protection": "the no-key wall",
    "severity": "note",
    "doc_ref": "§3.1",
    "observation": "The attribution-versus-unlinkability wall holds by construction. The operators can produce the entire valid public record, but cannot produce the linkage the order demands, because no key maps a per-decision pseudonym to a person and no party holds one. Even total collusion of the mutually-distrusting trustees yields at most 'a pseudonym voted X,' never 'a person voted X.' The correct behaviour here is refusal-by-construction, not refusal-by-policy — and the demand itself lands in the log as an appealable coercive.act."
   },
   {
+   "protection": "the investigation's cost",
    "severity": "strain",
    "doc_ref": "§1",
    "observation": "The cost is real and nobody pretends otherwise. A genuine foreign-financing investigation is impeded, and the identical wall that protects nurse Amara Ndoro's job also shields whoever actually took the foreign money. The kernel resolves this in favour of freedom-by-default — its first-priority §1 goal — and pays the price on purpose. This is a deliberate trade, not a defect; a design that let the sympathetic case through would no longer be the design."
   },
   {
+   "protection": "the backdoor refusal",
    "severity": "note",
    "doc_ref": "T6",
    "observation": "A lawful-access backdoor would BE the T1/T6 catastrophe. There is no 'deanonymize only under a valid warrant' version of this system: the moment a key exists that can turn a ballot back into a voter for a sympathetic prosecutor, that same key exists for a captured state hunting dissidents, and the kernel has become the surveillance instrument it was built to prevent. The log-entry schema encodes this at the format level by forbidding a coercive.act subject_ref from ever being a civic pseudonym — the civic-anonymity-to-enforcement-attribution bridge is refused, not merely discouraged."
   },
   {
+   "protection": "the ballot-only case",
    "severity": "strain",
    "doc_ref": "§11",
    "observation": "What the protocol does NOT solve: the case whose only available proof is the ballot itself. Here a lawful alternative happens to exist — the money trail runs through the non-anonymous banking system (§11), where the inquiry can still proceed. But the kernel guarantees no such alternative in general. A bribery scheme provable only by unmasking voters is, by this design, unprovable, and the kernel offers no middle path between full ballot secrecy and full deanonymization."
   },
   {
+   "protection": "the honest-enrolment condition",
    "severity": "strain",
    "doc_ref": "§12",
    "observation": "What the protocol does NOT solve: 'structurally impossible' is conditional on an honest enrolment. Unlinkability rests on no party ever retaining a person-to-nym_secret mapping at the physical ceremony; §10 and §12 name a corrupt issuing quorum as the sharpest residual risk. A registrar plus observers who secretly kept such a table at enrolment could deanonymize off-protocol, and no ballot-layer proof would reveal that they had. The wall is exactly as strong as the ceremony that anchors it — hardened by §10, but not made impossible to subvert. (Related and also untouched: unlinkability protects the record, not the moment of casting — a coercer at Amara's shoulder is a T4 problem the secret ballot cannot reach.)"

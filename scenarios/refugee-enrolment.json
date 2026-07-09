@@ -320,33 +320,40 @@
  "verdict": "strains",
  "verdict_plain": "Three thousand people with no papers run a real, checkable vote, and no list of refugees is ever created. The honest ceiling: without documents or biometrics one person can plausibly enrol twice — and a phone seized at a checkpoint can take your standing with it.",
  "protection": "the paperless ceremony",
+ "protection_plain": "Enrolment without documents: a community defines its own roster, issues unlinkable credentials, and declares its honest sybil ceiling.",
  "findings": [
   {
+   "protection": "the documentless sybil ceiling",
    "severity": "strain",
    "doc_ref": "§10",
    "observation": "The honest sybil-resistance ceiling for a documentless camp that rightly refuses biometrics is 'medium', and the protocol offers nothing to raise it. §10's defensible middle — the MPC-custodied dedup gallery — assumes custodians a hostile state cannot reach in twenty minutes; here a fingerprint gallery is a deportation list waiting for a warrant, so the camp declined it. What remains is face-recognition-by-neighbours at block ceremonies plus census reconciliation, which catches bulk fraud but not a determined individual enrolling in Block A and again, months later, in Block F amid constant churn. The kernel's real contribution is legibility, not resistance: the weakness is a declared, machine-readable line in the manifest instead of a hidden flaw. T3 is mitigated and honestly labelled, not solved."
   },
   {
+   "protection": "the credential's political weight",
    "severity": "strain",
    "doc_ref": "T1",
    "observation": "What the protocol does NOT solve, named plainly: the political meaning of the credential. Unlinkable presentations genuinely protect residents' data — a seized smartcard identifies no one, links to no vote, reveals no nationality — but the host state's objection was never technical. To Deputy Prefect Miloš, the threat is that stateless people are constituting themselves as a polity, and a cryptographically perfect non-identity-paper still looks like a committee issuing cards to the undocumented. The manifest cannot argue with a gendarmerie, and no schema prevents an NGO expulsion or a camp clearance. The manifest itself concedes the deeper gap: UDHR Article 6 — recognition as a person before the law — is absent from the invariants list because no community protocol can confer legal personality that only states grant. The camp got binding internal decisions; it did not get one millimetre closer to papers, asylum, or safety."
   },
   {
+   "protection": "recovery at its worst",
    "severity": "strain",
    "doc_ref": "§12",
    "observation": "Credential recovery is the open problem of §12 (item 5) at its worst exactly here. Phones are confiscated at checkpoints, stolen in transit, and sold in emergencies; smartcards burn with shelters. Social-guardianship recovery re-issues a credential with a new pseudonym secret, so a recovered resident either loses standing in open decisions or could theoretically speak twice — and the population most likely to need recovery repeatedly is this one. The camp's stopgap (revoke-and-reissue only between decision windows, revocations logged with reasons) narrows but does not close the gap the document itself admits no shipped system solves. For refugees, 'losing a phone must not mean losing citizenship' (§3.1) is currently an aspiration, not a property."
   },
   {
+   "protection": "enrolment as a governed process",
    "severity": "note",
    "doc_ref": "§8",
    "observation": "A genuine hold, worth stating as firmly as the failures: enrolment as a §8-governed process worked. Amina Yusuf's denial produced a logged trace citing the exact rule and committed inputs; her appeal was a three-day fact correction against evidence, not a plea for discretion at a desk; the fix and its reasoning are public while she remains a pseudonym; and denial counts are published aggregates someone must explain. In a population whose entire experience of officialdom is unexplained refusal, an appealable denial trace is the single most humane artifact the kernel produced — the suppression-at-the-desk attack (§10) was structurally blunted, not just discouraged."
   },
   {
+   "protection": "asymmetric paper verification",
    "severity": "note",
    "doc_ref": "T9",
    "observation": "The paper channel delivered first-class casting (81% of ballots) but verification remained device-mediated, so T9 is answered asymmetrically. Residents without phones verified their trackers on a handful of shared handsets at the Ponte tent — which means a queue, a helper, and shoulders to surf. Inclusion checking through a shared device leaks who bothered to verify and clusters trackers in a few hands; combined with §12's admitted limit that receipt-freeness cannot stop someone physically standing over you, a camp's density (families of eight in one shelter, block leaders watching the tent queue) keeps a residue of observational coercion (T4) that the protocol correctly never claimed to remove. Equal verifiability on paper alone — without borrowing a screen — is unachieved here, as §12 item 4 concedes it is everywhere."
   },
   {
+   "protection": "a community without a sovereign",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "The fractal answer held: the kernel never asked the host state's permission because it never needed a sovereign — Zaruna Ridge is a community defining its own eligibility, publishing its own honest lattice position (11 of 30 invariants, sybil-medium), witnessed and anchored beyond the state's reach. That is real power for the powerless, and also its honest limit: subscription-not-sovereignty means the guarantees stop at the camp fence. The same §6 legibility that lets a Malmö phone audit the water-point tally also hands the prefecture a public, machine-readable record that self-government is occurring — evidence in the log is evidence for everyone, including adversaries."

@@ -68,21 +68,22 @@
     display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; font-style: normal;
     padding: .1rem .5rem; border-radius: 99px; border: 1px solid; cursor: help;
   }
-  .badge[data-tip] { position: relative; }
-  .badge[data-tip]::after {
+  .badge[data-tip], .prot[data-tip] { position: relative; }
+  .prot[data-tip] { cursor: help; text-decoration: underline dotted; text-underline-offset: 3px; }
+  .badge[data-tip]::after, .prot[data-tip]::after {
     content: attr(data-tip);
     position: absolute; left: 0; top: calc(100% + .45rem); z-index: 30;
     width: 17rem; max-width: 76vw;
     background: var(--card); color: var(--ink);
     border: 1px solid var(--line); border-radius: 8px;
     padding: .5rem .65rem;
-    font-family: var(--serif); font-size: .8rem; line-height: 1.5;
+    font-family: var(--serif); font-size: .8rem; line-height: 1.5; font-style: normal;
     letter-spacing: 0; white-space: normal;
     box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
     display: none;
   }
-  .badge.tipped::after { display: block; }
-  @media (hover: hover) { .badge[data-tip]:hover::after { display: block; } }
+  .badge.tipped::after, .prot.tipped::after { display: block; }
+  @media (hover: hover) { .badge[data-tip]:hover::after, .prot[data-tip]:hover::after { display: block; } }
   .badge.holds   { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
   .badge.strains { color: var(--amber);  background: var(--amber-soft);  border-color: var(--amber); }
   .badge.breaks  { color: var(--threat); background: var(--threat-soft); border-color: var(--threat); }
@@ -134,8 +135,8 @@
   .precedents li { margin: .35rem 0; font-size: .92rem; }
   .precedents li a { color: var(--accent); }
   .precedents .prec-src { font-family: var(--mono); font-size: .72rem; color: var(--muted); white-space: nowrap; }
-  .finding { display: flex; gap: .7rem; margin: 0 0 .8rem; align-items: baseline; }
-  .finding .badge { flex: 0 0 auto; }
+  .finding { margin: 0 0 1.15rem; }
+  .finding .fobs { margin: 0; }
   .badge.note { color: var(--muted); background: var(--paper); border-color: var(--line-strong); }
   .badge.strain { color: var(--amber); background: var(--amber-soft); border-color: var(--amber); }
   .badge.break { color: var(--threat); background: var(--threat-soft); border-color: var(--threat); }
@@ -457,33 +458,40 @@
   "verdict": "strains",
   "verdict_plain": "A secret wiretap can be logged without being revealed, and can never be backdated — but the court that must eventually unseal it is trusted, not proven. Accountability arrives after the listening, not before.",
   "protection": "the sealed, witnessed warrant log",
+  "protection_plain": "A public ledger where every act of state force is logged the moment it happens — existence and timing in the clear, contents sealed until a named date.",
   "findings": [
    {
+    "protection": "tamper-evident warrant existence",
     "severity": "note",
     "doc_ref": "§3.4",
     "observation": "The pattern genuinely delivers on its central promise for the honest case: the warrant's EXISTENCE and issue-minute are tamper-evident within the hour (witness co-signing) and un-backdatable by that evening (anchor.checkpoint to two permissionless chains), all while the contents stay sealed. A captured unit can no longer manufacture a warrant after being challenged, nor predate one to cover an illegal tap — the exact failure the old paper cabinet permitted invisibly (T8)."
    },
    {
+    "protection": "the cite-your-warrant rule",
     "severity": "note",
     "doc_ref": "§8",
     "observation": "Because coercive.act REQUIRES authorizing_rule, an intercept with no citable warrant cannot be logged validly, and any surveillance that later surfaces in discovery with no matching, dated coercive.act entry becomes a visible anomaly rather than a deniable one. Unaccounted surveillance moves from 'un-provable' to 'detectable' — and the public count of sealed intercepts (four to twelve in a quarter) is a question a reporter or assembly can now actually put."
    },
    {
+    "protection": "the enforcement-civic identity wall",
     "severity": "note",
     "doc_ref": "T6",
     "observation": "The T6 wall holds: subject_ref sits in the enforcement identity domain (riverton-police:enf-id/...), and the schema forbids bridging it to any civic unlinkable pseudonym. So the ledger built to make force accountable cannot itself be turned into a surveillance-chill instrument that links a person's civic voice to an enforcement target. The accountability log does not become a dossier."
    },
    {
+    "protection": "honest unsealing",
     "severity": "break",
     "doc_ref": "§6",
     "observation": "What the pattern does NOT guarantee: honest revelation. The unseal key is a TRUSTED party — the court — the same witness-recursion §6 admits at its anchor, not a cryptographic guarantee. A captured or colluding court can set sealed_until a decade out, simply never publish the reveal (seal-forever), unseal selectively, or leak the sealed plaintext to the live operation while the public sees only a hash. The log makes a warrant's existence undeniable; it cannot force the honest disclosure of its contents, and it does nothing to stop the authorized surveillance itself (T13)."
    },
    {
+    "protection": "after-the-fact accountability",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "Accountability here is retrospective, not preventive, and that is a real cost. The subject's appeal is genuine but post-hoc: by the time the seal lifts, the thirty days of interception have already happened. The rights guard escalated and logged the Article 12 concern but, by design, does not veto — it makes rights-touching 'expensive, slow, and loud, not impossible' (§3.3). A wrongful tap is documented and contestable, never prevented."
    },
    {
+    "protection": "the public count of covert taps",
     "severity": "strain",
     "doc_ref": "T6",
     "observation": "The same transparency that catches unaccounted surveillance also publishes a live count of active covert operations. In a city small enough, a sophisticated target — or a corrupt insider reading the public log — can infer that some intercept is running this quarter and correlate sealed-entry timestamps with real-world events, a partial tip-off the sealing was meant to prevent. Detectability of unaccounted taps and operational secrecy of accounted ones are in genuine tension, not fully reconciled."
@@ -775,33 +783,40 @@
   "verdict": "strains",
   "verdict_plain": "The eleven-hour claim really does become twenty-three minutes — but only as far as paperwork was the problem. The kernel cannot sign for a slow landlord, fund the programme, or stop the council cutting the rate through the kernel's own lawful process.",
   "protection": "the sludge defences",
+  "protection_plain": "The rules that make paperwork answer for itself: eligibility computed for you, every demanded field citing the rule that allows it, burden published as a number.",
   "findings": [
    {
+    "protection": "the burden flip",
     "severity": "note",
     "doc_ref": "§8",
     "observation": "The T12 core held end-to-end: discovery ran on Keisha's device against logged rules (she learned of two programmes she never knew existed), all nine demanded fields cited their authorizing rule so the 2024-style triple payslip demand and the unexplainable bus-pass field could not exist in the schema, and the 11-hour/23-minute asymmetry became two witnessed rows in one table (39600s at 61% abandonment vs 1400s at 7%) that a journalist could print as a measured quantity rather than an anecdote."
    },
    {
+    "protection": "the attestation ecosystem",
     "severity": "strain",
     "doc_ref": "§11",
     "observation": "The discovery flip only reaches as far as the wallet's attested facts, and the attestation ecosystem is the unbuilt dependency the document itself names: Keisha's claim stalled 19 days on her landlord's signature. The kernel reduced the demand from twice to once and forced it to cite its rule, but it has no lever over a third party who simply does not tap 'sign' — for tenants with hostile or absent landlords, the old chokepoint survives in miniature."
    },
    {
+    "protection": "funding and rule quality",
     "severity": "strain",
     "doc_ref": "§5",
     "observation": "What the protocol does NOT solve, demonstrated: the kernel cannot fund the programmes or write good rules. Higher uptake blew the budget, and the cabinet's 30% rate cut will pass through the kernel's own amendment path — witnessed, canaried, with its population delta published — and be entirely legal. Legibility converts a quiet cut into a public argument, which is more than the status quo and much less than a guarantee; the same machinery that made Keisha's entitlement undeniable will make its shrinkage undeniable too."
    },
    {
+    "protection": "the public denial-trace",
     "severity": "strain",
     "doc_ref": "§3.4",
     "observation": "The per-claim process.denial-trace sits in tension with §8's own maxim 'measure the process, never the person': it is pseudonymous but public, carrying programme, timestamp, fired rules and the computed-vs-threshold margin. In a low-volume programme in a small ward, timing plus programme plus margin is plausibly re-identifying — the schema enforces aggregation for cost metrics but not for denial traces, and neither the schema nor §11 specifies how much of a trace belongs in the public log versus in the citizen's wallet with only a commitment logged."
    },
    {
+    "protection": "kiosk and assisted claiming",
     "severity": "strain",
     "doc_ref": "§12",
     "observation": "Donna, 71 and phoneless, was not disenfranchised — kiosk enrolment and assisted claiming ran the same protocol with the same verifiability — but her claim cost two bus trips and a helper's availability against Keisha's 23 minutes on the number 11. Equal convenience across the digital divide is unachieved, exactly as §12(4) concedes; the aggregate metrics as specified do not even break out per-channel, so the kiosk channel's higher burden is invisible in the very dashboard built to expose burden."
    },
    {
+    "protection": "payment-rail anonymity",
     "severity": "note",
     "doc_ref": "§11",
     "observation": "Payment breaks the anonymity the ballot machinery elsewhere provides, as §11 admits: three per-programme pseudonyms prevent double-claiming, but all three awards pay into one bank account, so the council can trivially join Keisha's contexts downstream — and the pilot manifest honestly declares unlinkable:false and medium sybil resistance anyway. Data minimisation, not anonymity, is the real ceiling here, and citizens reading the manifest get the truth of that rather than a stronger implied promise."
@@ -1070,33 +1085,40 @@
   "verdict": "strains",
   "verdict_plain": "Switching off the internet did not stop the vote: ballots crossed the valley by radio and SD card, and a doctored mirror was caught in hours. But the mesh did not reach every herder, and the design still has no rule for ballots that arrive after the close.",
   "protection": "the delay-tolerant ballot path",
+  "protection_plain": "Ballots and log fingerprints small and self-contained enough to travel any channel — radio, SD card, paper — and to arrive late but still valid.",
   "findings": [
    {
+    "protection": "delay-tolerant ballots",
     "severity": "note",
     "doc_ref": "T14",
     "observation": "The core T14 claim held under a real blackout: eligibility proofs and encrypted ballots are self-contained kilobyte payloads (nullifier-bearing, valid whenever they arrive), so store-and-forward over a ~300 bps LoRa mesh and an SD card on a motorcycle carried a full referendum with no new trust assumptions. No citizen verb required an interactive round trip beyond the citizen's own device (§4), and that single design constraint is what made the shutdown survivable rather than fatal."
    },
    {
+    "protection": "log-head gossip over radio",
     "severity": "note",
     "doc_ref": "T8",
     "observation": "Log-head gossip over radio defeated the split-view attempt in hours: the regionally-hosted mirror served a stale head omitting blackout-morning entries, and it was caught because witnesses received the true co-signed head over a channel the state does not run (§3.4). The blackout and the rewrite attempt failed against the same mechanism, exactly as §2's T14 row claims — but note this worked only because the community had provisioned an out-of-jurisdiction witness and a physical path to it before the crisis."
    },
    {
+    "protection": "the late-ballot window",
     "severity": "strain",
     "doc_ref": "§4",
     "observation": "The decision-window policy for late-arriving ballots is a hole in the kernel, not a feature of it. §4 says payloads are 'valid whenever they arrive'; §3.2 decisions carry a hard cast_ends; the protocol specifies no reconciliation. San Marcos Alto survived only because it had pre-legislated its own infrastructure-denial extension clause (an x- extension entry, §9-style: witnessed, self-expiring) — and even so, 31 provably-real ballots arrived too late and were logged as received-uncounted. A community without such a clause faces an ugly live choice between disenfranchising the slow-path voters and improvising window rules mid-decision, which is precisely the legitimacy fight the kernel exists to prevent. This belongs in the spec, not in each town's foresight."
    },
    {
+    "protection": "the humans who carry the mesh",
     "severity": "strain",
     "doc_ref": "§4",
     "observation": "The protocol does not protect the humans who carry it. The architecture document honestly concedes that radio can be direction-found and physical-layer anonymity is weaker than IP's (T6 caveat in §4) — and this scenario cashes that concession out as Bruno Callisaya detained overnight and a repeater seized. Ballots have no source addresses; ridge repeaters have GPS coordinates. Every mesh-dependent deployment inherits an unmodeled dependency on a handful of identifiable volunteer operators, who are the cheapest remaining attack surface once the payloads themselves are unstoppable. The kernel makes their equipment replaceable; it makes them arrestable."
    },
    {
+    "protection": "the mesh's reach",
     "severity": "strain",
     "doc_ref": "T9",
     "observation": "The blackout still redistributed the franchise even though it failed to stop the vote. Mesh coverage reached the market, the clinic, and one ridge line; herders beyond coverage voted only if a motorcycle happened to ride, and turnout was structurally easier inside town than outside it. The kernel made the denial legible (witnessed attestations, an extension entry in the log) and survivable, but equal convenience of participation under infrastructure denial is unachieved — the §12 admission that the digital divide 'is a fact, not a variable' applies with extra force when the network is being actively withheld rather than merely absent."
    },
    {
+    "protection": "coercion in a blackout",
     "severity": "note",
     "doc_ref": "§12",
     "observation": "Not solved here, and named as such by the document itself (T4, §12): a blackout pushes voting into homes and market queues, where a foreman or a brother-in-law can simply watch the screen. Receipt-freeness held — no ballot could be proven after the fact — but coercion under live observation is untouched by any of this machinery, and a community under this much economic pressure from a mining concern is exactly where that residual risk concentrates. The supervised paper channel was the real mitigation, and it is a social institution, not a protocol property."
@@ -1319,33 +1341,40 @@
   "verdict": "strains",
   "verdict_plain": "The losing side's own sceptic checked the count and conceded — nine years of shed-count rows ended by one link. But what stopped Derek's padded roster was a member's vigilance, not the maths: the 'weak' on the manifest means what it says.",
   "protection": "the club-vote wedge",
+  "protection_plain": "The kernel at club scale, invoked from the group chat the community already has: real ballots, real log, platform-account membership, declared weak.",
   "findings": [
    {
+    "protection": "social sybil resistance",
     "severity": "strain",
     "doc_ref": "T3",
     "observation": "Sybil resistance at this lattice point is social, not cryptographic — and the protocol's honest 'weak' label does not make it strong. Derek's roster-packing was caught only because Priya hashed and diffed the roster snapshot and forty members knew the plot register; an admin who packed the group three months earlier, or a society without a paper register to cross-check, has no defence at all. The manifest makes the weakness legible (§6, §10), which is genuinely more than the shed offered, but legibility is the whole of what T3 gets here: the kernel converted a hidden electorate into a disputable one, and left the dispute to humans."
    },
    {
+    "protection": "the assisted channel",
     "severity": "strain",
     "doc_ref": "T9",
     "observation": "The protocol did not reach Ernest Toft, and this is the finding the document's §4 promise ('paper, kiosk, and assisted channels in the same protocol with the same verifiability — not a legacy annex') must own: at the Form C club scale, the paper channel is economically fictional, the deployment honestly declared paper_channel: false, and the member who distrusts all computers ended up trusting two tellers at a table — the shed-count trust model, merely halved and witnessed. Ernest could verify nothing himself; his eventual acceptance routed through Jordan's verification, i.e. through a person. The kernel shrank and witnessed the trust he had to extend; it did not remove it. Equal participation for the computer-distrusting member is unsolved here, exactly as §12's digital-divide admission predicts."
    },
    {
+    "protection": "the untrusted-lobby claim",
     "severity": "strain",
     "doc_ref": "T2",
     "observation": "Form C's claim 'the ballot box never enters the chat' held — WhatsApp carried only links and previews, saw no ballot, and could forge nothing any client would accept, and the independent second client (Jordan's) is exactly the T2 answer working. But the electorate DID enter the chat: personhood was issued off the group roster, whose admins (including Derek, a candidate's patron) control membership, and Meta observed the full participation metadata — who tapped a voting link, when, in which named community. T2 is answered for the tally, only half-answered for the roll, and not answered at all for platform surveillance of participation (a T6-shaped cost the manifest's unlinkable:false at least declares)."
    },
    {
+    "protection": "receipt-freeness, declared away",
     "severity": "note",
     "doc_ref": "T4",
     "observation": "Not solved, by declaration: the vote was not receipt-free, and 'I voted Sandra' screenshots circulated freely. At allotment stakes this is texture, not attack, but the walkthrough shows how naturally the receipt habit forms — the same community running its next, nastier vote (evicting a plot-holder, say) on the same manifest would hand every household's dominant member a proof-demand mechanism. The lattice upgrade path (§6) exists; nothing in the protocol forces a community to notice when its stakes have outgrown its manifest."
    },
    {
+    "protection": "club-scale witnessing",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "The witness recursion bottoms out fast at club scale: two neighbouring-society secretaries co-sign the log head, there are no anchors, and the trustee quorum includes the person who built the deployment. A colluding federation could rewrite this history for the cost of two friendships. The absurd cost/benefit ratio protects Heeley Bank, not the mechanism — and the manifest's empty anchors field states this plainly, which is the design working as specified: less than a guarantee, more than the status quo."
    },
    {
+    "protection": "the sceptic's concession",
     "severity": "note",
     "doc_ref": "§15",
     "observation": "What the protocol unambiguously delivered — the wedge working as §15 predicts: the losing camp's own designated sceptic verified the tally on an independently built client and conceded in public, an outcome nine years of shed counts never once produced. The load-bearing human fact is that legitimacy arrived via Jordan's grudging 'checks out', not via cryptography directly: the proofs convinced the one distrustful person the losers trusted, and he convinced the rest. The kernel's product, here, was a credible sceptic."
@@ -1642,28 +1671,34 @@
   "verdict": "breaks",
   "verdict_plain": "The silent re-vote saves Amara from any coercer who leaves her one private hour — so Marek adapts: 'prove you did not re-vote' demands a proof the system was built never to produce, and he controls her hours. Against a coercer who owns your time, the design breaks.",
   "protection": "the silent re-vote",
+  "protection_plain": "Any later ballot silently replaces an earlier one — no receipt, nothing on the device to show it happened — plus staffed booths a coercer cannot enter.",
   "findings": [
    {
+    "protection": "the burden inversion",
     "severity": "break",
     "doc_ref": "T4",
     "observation": "BURDEN INVERSION / RUBBER-HOSE — the thing the fix does NOT solve. The undetectability that defeats a naive coercer is precisely what an adaptive one weaponises: Marek's demand shifts to 'prove you did not re-vote', a negative Amara cannot prove because receipt-freeness and silent supersession were engineered to leave no artifact. The protocol's strength (he cannot verify) becomes her liability (she cannot exonerate herself), so he punishes on suspicion. This is exactly the failure the manifest's own coercion_resistance description pins on 'fake-credential' (JCJ 2005 / Civitas, Clarkson-Chong-Myers 2008): a KNOWN, opt-in duress capability inverts the burden of proof and can ESCALATE harm rather than reduce it. revote-safe-space inherits the same defect the instant the coercer knows it exists."
    },
    {
+    "protection": "forced abstention",
     "severity": "break",
     "doc_ref": "§12",
     "observation": "FORCED ABSTENTION. No coercion-resistance level defeats a coercer who controls the victim's body and movements — §12's open problem #2 and the manifest caveat say so outright. The safe-space estate guarantees that a booth EXISTS on Amara's errand; it cannot guarantee she reaches it alone. Marek can drive her there and wait, send his sister for Dorina's prescription, or simply forbid the trip. The 'guaranteed private moment' is guaranteed by the state and revocable by the husband, and the husband is closer."
    },
    {
+    "protection": "last-writer-wins timing",
     "severity": "strain",
     "doc_ref": "§3.2",
     "observation": "LAST-WRITER-WINS TIMING WAR under device control. Silent supersession means whoever casts last wins, and the manifest itself warns of 'a coercer who controls the device from enrolment onward'. An adaptive Marek, present until the Saturday close and holding the PIN, insists on a final supervised Repeal cast on Friday night — which silently supersedes Amara's Tuesday booth re-vote. The safe-space guarantee only bites if a coercer-excluded moment falls AFTER his last cast and before the deadline; Amara's next safe hour is the following Tuesday, past the close. She is left unable even to know whether her true vote survived — the same unverifiability that shields her from him blinds her to her own outcome."
    },
    {
+    "protection": "the safe-space upgrade",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "GENUINE PROGRESS vs the prior test, credited precisely. Four things really improved: (1) the private moment is now GUARANTEED — a staffed, coercer-excluded booth on an errand Amara already runs — not merely hoped-for; (2) supersession is SILENT — Marek's nightly phone check reveals nothing, so T4's 'cannot verify how you voted' genuinely holds; (3) ambient universal advertising makes her PRESENCE deniable — seeing the poster proves nothing about why she is at the pharmacy; (4) the whole defence is LEGIBLE — declared in a signed manifest and rendered on her client, so she knows exactly what protection exists before she risks anything (§6). Against a NAIVE coercer this changes the outcome outright; against an adaptive one it is a real partial defence and a more honest tally — progress, not a solution."
    },
    {
+    "protection": "cast-or-audit against the wrong attack",
     "severity": "strain",
     "doc_ref": "§4",
     "observation": "T5's MECHANISM MISSES THE ACTUAL ATTACK. The home phone is not compromised in T5's malware sense — Marek has legitimate PIN access and dictates the choice, which the device faithfully encrypts. Cast-or-audit (Benaloh) proves the device is HONEST, which provides zero leverage against an honest device operated under human duress. What actually helps at Corn Street is not the challenge but a clean, staffed SECOND device outside the coercer's reach — a T4/§4 property. So the deployment's headline T5 defence does nothing for Amara's real (human) T5 problem; only the safe-space estate does. The threat-model boundary between 'compromised device' and 'hostile authorised operator' is where her case falls, and the kernel answers only the first."
@@ -1877,38 +1912,46 @@
   "verdict": "strains",
   "verdict_plain": "The fine print fought back: the manifest made every cut corner machine-readable, and one journalist turned it into a scandal that forced repairs. A declared weakness still wounds, though — Meryem's emailed receipt coerced her exactly as the manifest warned it could.",
   "protection": "the manifest's legibility",
+  "protection_plain": "The manifest's forced honesty: every service and weakness declared machine-readably, so a diluted deployment can be caught lying but not stopped from shipping.",
   "findings": [
    {
+    "protection": "the anti-dilution manifest",
     "severity": "strain",
     "doc_ref": "§6 / T10",
     "observation": "The manifest did its job as the anti-dilution waist: the schema's forced booleans and required detail blocks made CivicFlow's subtractions machine-readable, and a journalist turned that into accountability in an afternoon. But the mechanism only binds artifacts, not marketing — the press release 'we now run the Civic Kernel' is un-schema'd speech, and it reached roughly fifty times more residents than the manifest ever did. Legibility converted the lie from unfalsifiable to checkable; it did not convert it to unsaid."
    },
    {
+    "protection": "the declared receipt",
     "severity": "break",
     "doc_ref": "§3.2 / T4",
     "observation": "For Meryem the protocol broke, and the manifest's honesty is no consolation: receipt_free: false plus an emailed confirmation gave her shift coordinator a working coercion instrument, and a declared degradation coerces exactly as effectively as a hidden one. The kernel does not solve harm inside a community that legitimately subscribed low on the lattice — §6 says so itself ('less than a guarantee, more than the status quo'). The manifest prices the subtraction; it does not protect the person standing under it."
    },
    {
+    "protection": "the self-witnessed log",
     "severity": "strain",
     "doc_ref": "§3.4 / T8",
     "observation": "A single self-witnessed log makes 'verifiable' technically true and practically hollow: tally arithmetic checks out, but the operator retains the unilateral ability to fork history or show split views, detectable by no one. The manifest schema permits witnesses: [operator] and anchors: [] — it makes the weakness declarable, but a citizen must know what 'witnesses: 1' implies to feel the cold. The reference client rendered it; the schema itself imposes no floor."
    },
    {
+    "protection": "the audit fleet at low adoption",
     "severity": "strain",
     "doc_ref": "§4 / §13 Form B",
     "observation": "The 'millions of phones as a passive audit fleet' argument is aspirational at this adoption level: about 600 of 28,417 participants ran a verifier client. Legibility was load-bearing only through an intermediary — one journalist who knew the tooling. The protocol's honest dependency, named by the brief and confirmed here: manifests protect a population only via the fraction that checks, plus the press that amplifies them. Below some literacy threshold, T10 mostly succeeds anyway."
    },
    {
+    "protection": "the vendor-held keys",
     "severity": "note",
     "doc_ref": "T2",
     "observation": "The manifest and every log entry are signed by did:web:civicflow.example keys, not the city's — the vendor holds the community's voice at the waist itself. The schema validates this happily (key_id is a free string), so vendor capture of the declaration channel is legible only to someone who inspects key_id. A reference-client heuristic ('community identity and signing authority differ') would surface it; today nothing does."
    },
    {
+    "protection": "the lattice's pull",
     "severity": "note",
     "doc_ref": "§6 / §5",
     "observation": "The lattice's evolutionary mechanism showed a real, if modest, pull: once the diff was public, contract-renewal pressure moved the deployment toward independent witnesses, anchoring, and a receipt-freeness roadmap. Dilution became a negotiating position instead of a fait accompli — which is the precise, limited claim §6 makes, and it held."
    },
    {
+    "protection": "the linkable register residue",
     "severity": "note",
     "doc_ref": "§3.1 / T6",
     "observation": "Not solved and worth naming: the linkable register lookups from the June decision are now permanent state — the city holds identity-linked participation records the kernel's reference profile exists to prevent. Moving up the lattice later fixes future decisions; nothing in the protocol can unlink the past."
@@ -2183,23 +2226,28 @@
   "verdict": "breaks",
   "verdict_plain": "Every proof held: the vote is unforgeable, the defiance undeniable, the record permanent. The bulldozers came anyway. A decision binds only where power obeys the record, and no protocol can close that gap.",
   "protection": "the record's binding force",
+  "protection_plain": "The record's claim on power: a decision so provable and permanent that defying it is undeniable — the kernel's whole promise, minus enforcement.",
   "findings": [
    {
+    "protection": "proof against power",
     "severity": "break",
     "doc_ref": "T1",
     "observation": "Proof is not compliance. Every kernel service worked: the decision is unforgeable, the record un-rewritable, the governor's defiance undeniable to anyone with a phone in milliseconds, and permanent as the basis for prosecution, recall, or exit. The kernel converts 'done in the dark' into 'done in the light' completely. What it cannot do — by §6's own words, 'it has no army, and the design refuses to want one' — is compel Governor Duval to stop. Against a captured executive the kernel's only real power is identical to its power against a fork: make defection visible and hand it to humans. The channel is being cut while the proof is perfect. That gap between total knowledge and zero force is why this breaks."
    },
    {
+    "protection": "cite-a-warrant, not a valid one",
     "severity": "strain",
     "doc_ref": "§3.4",
     "observation": "The coercive.act schema enforces 'cite a warrant,' not 'cite a valid one.' The Governor's office appended a fully schema-valid seizure entry — it names an authorizing_rule, so it passes. What convicts Duval is a semantic check the citizen's client runs afterward: resolving that citation against decision.closed and finding the concession revoked. The log-entry schema's promise that 'an unwarranted coercive act cannot be logged validly' bites only against a total absence of citation; a bad-faith citation of a dead rule logs cleanly and is caught one layer up, by verification, not by the schema. The log delivers legibility and appealability exactly as intended — but it is not a validity gate, and it should not be mistaken for one."
    },
    {
+    "protection": "the remedy's landing ground",
     "severity": "strain",
     "doc_ref": "§6",
     "observation": "The remedy the kernel produces has to land somewhere the kernel does not control. rights.escalation refers the violation to the regional court and the witnesses — but if the same capture that took the governorship also reaches the court, the legislature, and the police (the 'sufficiently correlated capture event' §6 concedes at the anchor), the evidence is impeccable and inert. The deepest fallback is §5 forkability and exit: the history travels intact with whoever leaves. That preserves the truth and the community's constitution. It does not preserve the river, the fields, or the parcels being seized this morning."
    },
    {
+    "protection": "the unrewritable record",
     "severity": "note",
     "doc_ref": "T8",
     "observation": "What genuinely held, and deserves credit: the record could not be quietly rewritten. Duval's faction could not make the carried close 'un-carry' — cross-border witnesses (Vell University, the Marn Ledger, neighbouring Aldery) co-sign the log head and it is anchored to two independent public ledgers, so any rewrite forks the view and every phone detects it. T8 is answered in full. Legibility is the substrate every downstream remedy is built on; without a tamper-evident record there is nothing to prosecute with. The kernel delivered that substrate completely. The break is not that legibility failed — it is that legibility is not force, and this situation needed force."
@@ -2457,28 +2505,34 @@
   "verdict": "strains",
   "verdict_plain": "The court orders the ballot box unlocked and there is no key — not withheld, nonexistent, which is the design working. The cost is real: the wall that protects a nurse's job also shields whoever took the foreign money, and the inquiry must go the long way round.",
   "protection": "the anonymity wall",
+  "protection_plain": "Anonymity with no key to hand over: no party holds a mapping from ballots to people, so a court order finds nothing to unlock.",
   "findings": [
    {
+    "protection": "the no-key wall",
     "severity": "note",
     "doc_ref": "§3.1",
     "observation": "The attribution-versus-unlinkability wall holds by construction. The operators can produce the entire valid public record, but cannot produce the linkage the order demands, because no key maps a per-decision pseudonym to a person and no party holds one. Even total collusion of the mutually-distrusting trustees yields at most 'a pseudonym voted X,' never 'a person voted X.' The correct behaviour here is refusal-by-construction, not refusal-by-policy — and the demand itself lands in the log as an appealable coercive.act."
    },
    {
+    "protection": "the investigation's cost",
     "severity": "strain",
     "doc_ref": "§1",
     "observation": "The cost is real and nobody pretends otherwise. A genuine foreign-financing investigation is impeded, and the identical wall that protects nurse Amara Ndoro's job also shields whoever actually took the foreign money. The kernel resolves this in favour of freedom-by-default — its first-priority §1 goal — and pays the price on purpose. This is a deliberate trade, not a defect; a design that let the sympathetic case through would no longer be the design."
    },
    {
+    "protection": "the backdoor refusal",
     "severity": "note",
     "doc_ref": "T6",
     "observation": "A lawful-access backdoor would BE the T1/T6 catastrophe. There is no 'deanonymize only under a valid warrant' version of this system: the moment a key exists that can turn a ballot back into a voter for a sympathetic prosecutor, that same key exists for a captured state hunting dissidents, and the kernel has become the surveillance instrument it was built to prevent. The log-entry schema encodes this at the format level by forbidding a coercive.act subject_ref from ever being a civic pseudonym — the civic-anonymity-to-enforcement-attribution bridge is refused, not merely discouraged."
    },
    {
+    "protection": "the ballot-only case",
     "severity": "strain",
     "doc_ref": "§11",
     "observation": "What the protocol does NOT solve: the case whose only available proof is the ballot itself. Here a lawful alternative happens to exist — the money trail runs through the non-anonymous banking system (§11), where the inquiry can still proceed. But the kernel guarantees no such alternative in general. A bribery scheme provable only by unmasking voters is, by this design, unprovable, and the kernel offers no middle path between full ballot secrecy and full deanonymization."
    },
    {
+    "protection": "the honest-enrolment condition",
     "severity": "strain",
     "doc_ref": "§12",
     "observation": "What the protocol does NOT solve: 'structurally impossible' is conditional on an honest enrolment. Unlinkability rests on no party ever retaining a person-to-nym_secret mapping at the physical ceremony; §10 and §12 name a corrupt issuing quorum as the sharpest residual risk. A registrar plus observers who secretly kept such a table at enrolment could deanonymize off-protocol, and no ballot-layer proof would reveal that they had. The wall is exactly as strong as the ceremony that anchors it — hardened by §10, but not made impossible to subvert. (Related and also untouched: unlinkability protects the record, not the moment of casting — a coercer at Amara's shoulder is a T4 problem the secret ballot cannot reach.)"
@@ -2754,33 +2808,40 @@
   "verdict": "strains",
   "verdict_plain": "The same ban that stood in Britain falls in Karlsruhe: the court can void the law, and the dignity core sits beyond even a two-thirds majority. The protection is real, and it rests on the one thing the kernel cannot secure — a bench that stays uncaptured.",
   "protection": "the strike remedy",
+  "protection_plain": "A constitutional court that can void the offending law outright, with a dignity core no supermajority can amend.",
   "findings": [
    {
+    "protection": "the UK comparison",
     "severity": "note",
     "doc_ref": "§3.3",
     "observation": "REQUIRED UK COMPARISON. The identical 61% attack that merely STRAINS-toward-breaking under the UK deployment is contained here, and the difference is the remedy axis, not coverage. Both maps name the same rights at issue — religion (invariant 18 / Art 4) and equality (invariants 2 and 7 / Art 3) — so coverage is equal on the articles the ban trips. What differs is the manifest's rights_guard.remedy: the UK declares 'declaration' (an HRA s.4 flag that leaves the law in force under parliamentary sovereignty), while Germany declares 'strike' (the BVerfG voids the law ab initio). Same scenario, same coverage, opposite outcome for Aisha: in the UK the mosque stays closed while a court tut-tuts; here the statute is nichtig and construction resumes. Naming a right is worth only as much as the remedy attached to it."
    },
    {
+    "protection": "the eternity clause",
     "severity": "note",
     "doc_ref": "§5",
     "observation": "The eternity clause hardens the protection beyond a single ruling. Because invariant 1 (Art 1 dignity) is one of the tripped invariants and sits behind Art 79(3), the rights.escalation records that even a two-thirds constitutional amendment could not lawfully re-enact the ban. This mirrors §5's design pin — 'cheap to change mechanisms, nearly impossible to change personhood' — as an actual legal fact, not just an architectural aspiration. The majority cannot simply come back with a bigger majority and amend the ban into the constitution."
    },
    {
+    "protection": "the uncaptured-court assumption",
     "severity": "strain",
     "doc_ref": "T1",
     "observation": "WHAT THE PROTOCOL DOES NOT SOLVE. The strike power and the eternity clause are only as strong as an uncaptured court. The kernel logs the classification and the escalation and makes any tampering with that record visible (§3.4), but it does not run the Bundesverfassungsgericht and cannot stop court-packing. A 61% movement that cannot amend the dignity core CAN, over time, change who sits on the bench — appointment rules, retirement ages, chamber sizes — and a captured court could simply decline to strike. The transparency log would make the capture legible; it would not prevent it. Aisha's protection here rests on an institutional assumption the protocol surfaces but cannot guarantee. This is why the verdict is 'strains', not 'holds'."
    },
    {
+    "protection": "militant democracy's own cost",
     "severity": "strain",
     "doc_ref": "§9",
     "observation": "Militant democracy (streitbare Demokratie) carries its own civil-liberties cost the kernel cannot adjudicate. The same German order that voids an anti-Muslim law also permits banning parties (Art 21(2)) and forfeiting individual rights (Art 18) to defend the free democratic order — and invariant 30 in the manifest is backed partly by that machinery. But 'who threatens the order' is a judgment, not a computation: the strike-and-ban apparatus that protects a minority today can, in different hands, be pointed at dissenters tomorrow. The kernel can only record such acts and make them appealable (T13, 'AI holds a microscope, never a pen'); it deliberately does not decide who deserves them. Strength against majoritarian abuse and risk of establishment abuse are the same lever seen from two sides."
    },
    {
+    "protection": "classification as judgment",
     "severity": "note",
     "doc_ref": "§3.3",
     "observation": "Classification remained judgment, and here the remedy contained the gap. The statute was drafted facially neutral ('all places of worship'), and §3.3 concedes a clever drafter can word a proposal to slip the schema. The guard flagged it anyway as targeting a class in effect, but the durable backstop was not the classifier — it was the court's human review, which is exactly where a strike regime puts the final word. In a declaration-only regime the same gameability would leave the law standing; here, even an imperfect classification only had to be good enough to route the law to a forum that could void it."
    },
    {
+    "protection": "coverage and personhood limits",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "Honest coverage and personhood limits that did not bite this attack but are visible on the manifest. The German deployment declares 23 of 30 invariants (the 'backed' set); six others (Arts 6, 22, 25, 27, 28, 29) are only structural or programmatic in the Grundgesetz and Art 24 (rest and leisure) has no German constitutional counterpart at all — so the citizen client renders those absences per §6. None of that mattered for this ban, whose relevant rights (1, 2, 7, 18) are all backed with strike force. Separately, the manifest declares unlinkable, strong-sybil personhood as the reference posture, but §13 notes the BBS unlinkable-pseudonym primitive is still pre-final in the standards it depends on — a paper-prototype claim ahead of shipped cryptography."
@@ -3092,28 +3153,34 @@
   "verdict": "strains",
   "verdict_plain": "On paper the Charter is the strongest instrument of the four; in Valmiria it first had to spend fourteen months proving it applied at all. Strongest remedy, most conditional reach — and the ban ran as valid law the whole time the lawyers argued.",
   "protection": "the scope-gated strike",
+  "protection_plain": "The Charter's power to strike a national law — real, but only where the case is first argued into EU law's reach (Art 51).",
   "findings": [
    {
+    "protection": "the third axis: scope",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "SERIES RESULT — a THIRD axis, not coverage and not remedy, gated the EU column. On the two axes the earlier runs measured, the EU Charter is the strongest of the four: highest coverage (25 of 30 backed, more than the UK's 20, Germany's 23, or the US's 14) AND a strike remedy. On those two numbers alone it 'should' have resolved cleanly like Germany and the US. It did resolve the same way — struck — but only after clearing a gate the three national constitutions never face: jurisdictional SCOPE. Charter Art 51 binds a Member State 'only when it is implementing Union law', so before any judge could apply Art 10 or Art 21 the community had to establish an EU-law nexus. A German constitution applies to a German law in a German court as a matter of course; the Charter's applicability had to be litigated first, all the way to Luxembourg. Completeness-on-paper plus a strike remedy did not translate into guaranteed protection, because a third dimension — does the instrument reach this situation at all — sits upstream of both. That is the distinctive finding of the EU run."
    },
    {
+    "protection": "the schema's new scope field",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "SCHEMA — this run motivated a third rights_guard axis, now added. The remedy field alone could not say 'strike, but only within EU-law scope': a citizen comparing manifests would have seen EU 'strike' beside Germany 'strike' and read them as equivalent — they are not. The waist now models it (rights_guard.scope: unconditional | conditional), and Valmiria declares scope: 'conditional'. So the comparison now separates three axes that form a cascade — scope (does the instrument apply at all: Art 51 gates the EU, the three national constitutions are unconditional), then remedy (what a court can do: UK declaration vs strike), then coverage (which rights are named). The EU is strongest on the last two and gated on the first, and the manifest can now say exactly that."
    },
    {
+    "protection": "the contested nexus",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "HONEST AMBIGUITY — the outcome turned on contested lawyering, not a clean yes/no. Whether an EU-law nexus exists is not a computation the guard can decide; it is an argument. The load-bearing hook here — that a worship ban is 'in substance' ethnic-origin discrimination under Directive 2000/43 — works only because the Valmirian Tatars happen to be a historic ETHNIC minority, since religion as such is covered by Union anti-discrimination law only in employment (Directive 2000/78). For a Muslim community that was ethnically indistinct from the majority, that hook would likely fail, and the asylum and free-movement hooks are thinner still. The scenario resolves in-scope, but honestly: the Advocate General doubted one route and a dissenting strand called the whole matter purely internal. It could plausibly have gone the other way, in which case the escalation would have read 'Charter out of scope — referred to the national constitution and the ECHR', and this most-complete instrument would have protected no one here. The kernel logged the contest faithfully; §3.3's own admission that classification 'is a judgment call' extends, in the EU, to whether the guard has jurisdiction to judge at all."
    },
    {
+    "protection": "courts the kernel does not run",
     "severity": "strain",
     "doc_ref": "T1",
     "observation": "WHAT THE PROTOCOL DOES NOT SOLVE. Three things the log made legible but could not deliver. (1) The strike, like Germany's and the US's, rests on courts the kernel does not run — here TWO of them, an independent national court willing to refer under Art 267 and an independent CJEU willing to find scope and primacy; a captured or Charter-hostile national court can simply decline to refer, and no gossiped log head can compel the reference. (2) The interim harm was real and unfrozen: because scope was unresolved, the Act took effect and the Slavno stop-work order was issued and enforced as presumptively-valid national law for the fourteen months the litigation ran — unlike Germany, where the flag itself froze the law. (3) Even the win is scoped: disapplication binds where Union law reaches, not erga omnes, so any purely-national residue drops back to Valmiria's constitution. The kernel recorded the classification, the coercive act, and the escalation with tamper-evident integrity (§3.4); it did not, and could not, guarantee that the Charter would be found to apply or that a court would enforce it. That contingency, stacked on top of the ordinary court-independence contingency the German and US runs already carried, is why the verdict is 'strains', not 'holds'."
    },
    {
+    "protection": "a supranational instrument",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "SUPRANATIONAL, NOT NATIONAL — different in kind from the other three columns, and the manifest can only gesture at it. The EU Charter is not Valmiria's constitution; it is a supranational instrument the deployment couples to, which the manifest expresses only weakly, through community.parent = the EU. Its distinctive completeness is genuine on paper — it is the only column here that backs UDHR Art 24 (rest and leisure, Charter Art 31(2)) and the socio-economic articles 22 and 25 — and none of that breadth was reachable in this dispute, because breadth you cannot invoke is breadth that does not protect. The honest picture the citizen client should render is not 'the strongest column' but 'the most complete instrument, conditional on a jurisdictional test the other three do not impose' — a nuance that lives, at present, only in the free-text of the log entries, not in the machine-comparable fields of the waist."
@@ -3392,33 +3459,40 @@
   "verdict": "strains",
   "verdict_plain": "Give Britain an entrenched constitution and the same ban falls: one manifest field — declaration to strike — flips the verdict. The catch is the field: changing it means Parliament binding itself, the one step a sovereign majority will not take.",
   "protection": "the counterfactual strike remedy",
+  "protection_plain": "The remedy the real UK lacks, modelled: an entrenched constitution letting a court void an Act rather than merely declare against it.",
   "findings": [
    {
+    "protection": "the isolated variable",
     "severity": "note",
     "doc_ref": "§3.3",
     "observation": "THE ISOLATED VARIABLE FLIPS THE VERDICT, IN THE UK'S OWN CONTEXT. This run holds the real UK deployment constant to the byte — same town, same people, same Bill, the same twenty-of-thirty invariants (2, 7 and 18 all present), the same unconditional scope, the same witnesses, the same 361:248 division — and moves exactly one field: rights_guard.remedy, 'declaration' to 'strike'. The verdict moves with it, breaks to strains. Where the declaration run's guard could only flag while the Act stood (guard_power 'flag-only', ceiling a non-binding s.4 declaration), the strike run's guard escalates to a court that quashes the Act void ab initio. Same rights, same coverage, same scope, opposite outcome for Nasreen. This confirms in-context what the four-jurisdiction series (DE/US/EU) showed across different countries: REMEDY, not coverage, gates this attack. The cascade §6 names is visible here reduced to its cleanest form — scope held unconditional, coverage held identical, and remedy alone doing all the work."
    },
    {
+    "protection": "the self-lock",
     "severity": "strain",
     "doc_ref": "§5",
     "observation": "THE SELF-LOCK — legibility is not availability is not movement. This manifest describes a UK that has ABOLISHED PARLIAMENTARY SOVEREIGNTY: an entrenched, court-enforceable constitution is the only thing that lets a UK court void an Act rather than merely declare it incompatible, and 'strike' cannot be declared honestly without it. Reaching this state from the real UK (remedy 'declaration') is not a small, reversible, individually-adoptable lattice-move like adopting the transparency log (S1) or verifiable ballots (S2), which cost no sovereignty and leave the verdict at breaks. It is the sovereign binding its own future majorities — the one move a 51 per cent Parliament will not make, because it means surrendering the supremacy a transient majority values most. So the model can render S3 fully legible and even prove it is the ONLY move that flips the verdict, and still not move the UK to it: the improvement path stalls not where the engineering is hard but where the politics forbids self-binding. Legibility (the model shows the target) is not availability (the target is well-defined and occupied by DE/US/EU) is not movement (the UK cannot incrementally get there). That stall is the interesting result, and it is a real limit of the whole approach, not of this scenario."
    },
    {
+    "protection": "the uncaptured-court assumption",
     "severity": "strain",
     "doc_ref": "T1",
     "observation": "STRIKE IS ONLY AS STRONG AS AN UNCAPTURED COURT — the reason the verdict is 'strains', not 'holds'. The protection that saved the Cawforth mosque rests entirely on a Constitutional Court willing and able to quash. The kernel logs the classification and the escalation and makes any tampering with that record visible (§3.4), but it does not run the court and cannot stop court-packing. A 61 per cent movement blocked from re-enacting the ban by simple majority CAN, over years, change who sits on the bench — appointment rules, retirement ages, panel sizes — and a captured court could simply decline to strike, or read the entrenched rights down to nothing. The transparency log would make that capture legible; it would not prevent it. There is a genuine trade the run surfaces: the same entrenched-court power that protects a minority from a majority today (T7) concentrates the strike power in an institution that is itself a prime capture target (T1). Parliamentary sovereignty is, among other things, a refusal of that concentration — which is part of why the real UK's refusal to self-bind is not mere incumbency but a contested constitutional position."
    },
    {
+    "protection": "eventual, not immediate, relief",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "STRIKE DELIVERS EVENTUAL, NOT IMMEDIATE, RELIEF — the interim window still bit. Even in the world where the remedy works, the strike was not instantaneous: the Act received Royal Assent, the council served a stop notice under it, and works at Shawcross Lane were halted for three weeks before the court voided it ab initio. The strike then reached back and voided the enforcement (dependent_acts_voided), which the declaration run could never do — but the congregation still lost three weeks of building and lived under a lawful-if-voidable sanction in the present tense. §3.3's honest framing that the guard makes rights-stripping 'expensive, slow, and loud, not impossible' cuts both ways here: under strike the process is genuinely made expensive and reversible, but 'slow' is a cost the wronged party pays in real time before the reversal lands. Better than the declaration run's permanent shell of a building; not the same as never having been stopped."
    },
    {
+    "protection": "one field, one civilisation",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "THE MANIFEST COMPRESSED A CIVILISATIONAL DIFFERENCE INTO ONE LEGIBLE FIELD — which is the §6 thesis working exactly as designed. The entire constitutional gulf between the real UK and this counterfactual — parliamentary sovereignty versus an entrenched, court-enforceable bill of rights, a decade of hypothetical constitutional upheaval — surfaces on the citizen's phone as a single enum value flipping from 'declaration' to 'strike'. A stranger comparing the two deployments' manifests would not need a constitutional-law degree to see that one court can annul a rights-violating Act and the other cannot; the difference is rendered as plainly as 'upholds 20 of 30 invariants'. The remedy axis (added precisely so two systems that name the same Article 18 can be told apart by what naming it is worth) did its whole job. Note the honest boundary that comes with it: coverage is unchanged at 20/30 and orthogonal to this attack, since the UK backs 2, 7 and 18 either way — the legibility win here is entirely on the remedy axis, not the coverage one."
    },
    {
+    "protection": "a measured counterfactual",
     "severity": "note",
     "doc_ref": "§12",
     "observation": "NOT SOLVED, AND NAMED AS SUCH: this is a modelled counterfactual, and the harness measured the hypothetical, not history. There is no Britain with an entrenched constitution and a strike remedy; this run fabricated one by flipping a field and then honestly reported what the protocol would do inside it. That result is a claim about a manifest, not about the United Kingdom — it says 'IF the UK sat at remedy=strike THEN this attack strains rather than breaks', and it deliberately does not say the UK can or will sit there (the self-lock finding says the opposite). Two further limits inherited from the reference kernel apply unchanged and were not solved by moving the remedy: the strike protection still assumes the unlinkable-pseudonym personhood the manifest claims, which §13 flags as pre-final cryptography; and rights classification remained a judgment call a clever drafter can word around (§12), contained here only because the strike path routes even an imperfect classification to a forum that can void the law. The run should leave a reader clear-eyed: it isolated a variable and proved remedy gates the verdict, and it proved, in the same breath, that proving a door exists is not the same as being able to walk through it."
@@ -3704,33 +3778,40 @@
   "verdict": "breaks",
   "verdict_plain": "The guard named every tripped right, the court agreed, the record is permanent — and the ban stands, because a UK declaration of incompatibility asks Parliament to reconsider and cannot make it. A right is worth the remedy bolted to it.",
   "protection": "the declaration remedy",
+  "protection_plain": "What UK courts can actually do: declare a law incompatible with rights — a formal finding the law survives, because Parliament stays sovereign.",
   "findings": [
    {
+    "protection": "coverage without remedy",
     "severity": "break",
     "doc_ref": "§6",
     "observation": "COVERAGE DIVERGED FROM REMEDY — the exact gap the manifest's new rights_guard.remedy field exists to expose. The right was on the books: the UK manifest declares invariants 2, 7 and 18, and the guard named all three, correctly, before Second Reading. Germany's manifest for the identical attack declares the SAME three invariants — coverage is not the differentiator in this pair. What differs is one enum value. Germany's remedy is 'strike' (Bundesverfassungsgericht voids the law; the Art 79(3) eternity clause puts human dignity beyond amendment); the UK's is 'declaration' (HRA s.4: the court flags, the law stands, Parliament is sovereign). Same rights, opposite outcomes. Before the remedy field existed, two deployments could both truthfully claim to 'uphold Article 18' while one could void a religious-freedom ban and the other could only annotate it. The field turns that difference from invisible to machine-readable — which is the whole point, and also the whole tragedy for Cawforth."
    },
    {
+    "protection": "the guard's escalation, capped",
     "severity": "break",
     "doc_ref": "§3.3",
     "observation": "PROTECTION FAILS AT THE POINT THAT MATTERS. §3.3's reference posture is 'escalate, never veto' — re-route a rights-tripping decision to supermajority plus adversarial review. Under remedy='declaration' the guard cannot even do that: it has no re-routing power at all, only a flag. It performed perfectly — tripped 2, 7, 18, logged reasons, surfaced the negative s.19 statement, recorded the s.4 declaration — and the minority's mosque is still barred. When the guard can only flag, a 61 per cent majority can suppress a minority's worship and the kernel certifies every step of the suppression with unbreakable integrity. The document's own honesty holds: the guard makes rights-stripping 'expensive, slow, and loud, not impossible' — but under 'declaration' it is not even made expensive or slow; it is only made loud."
    },
    {
+    "protection": "a remedy the host withholds",
     "severity": "break",
     "doc_ref": "§12",
     "observation": "NOT SOLVED: the kernel cannot manufacture a remedy the host constitution withholds. Parliamentary sovereignty and the s.4 ceiling are facts of the UK legal order; the kernel is a legibility layer over that order, not a court above it. §6 is explicit that the rights guard 'binds where it is subscribed', and the UK subscribed to a guard whose strongest available action is a declaration. The protocol did the one thing it promises — made the subtraction impossible to hide — and that is genuinely more than the status quo, where a citizen would never see the words 'flag-only' next to their right. But it is categorically less than a guarantee. A stranger should leave clear-eyed: this deployment protects the record of a persecution and cannot protect the person from it, because the constitution it runs on gave it no lever that could."
    },
    {
+    "protection": "the declaration's real work",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "HONEST COUNTERWEIGHT — a declaration is not nothing, but it is not a remedy. The s.4 declaration plus the unrewritable log did real work: a formal judicial finding of incompatibility, an evidentiary record no minister can deny, political pressure toward a s.10 remedial order, and a Strasbourg application built on a complete, witnessed chain of proof. Historically most UK s.4 declarations have eventually been remedied by Parliament. So the protocol converts a defeat into a documented, appealable, externally-litigable defeat — a materially better position than an invisible one. The strain is that all of this is contingent and slow: it depends on a minister choosing to act, or Strasbourg ruling years hence, while the mosque stays a shell and the congregation stays wronged in the present tense. The kernel improved the odds of eventual justice and delivered no justice now."
    },
    {
+    "protection": "transparency's neutrality",
     "severity": "note",
     "doc_ref": "§3.4",
     "observation": "TRANSPARENCY IS NEUTRAL ABOUT WHAT IT LEGITIMISES. The same append-only log that let Nasreen prove she was wronged also gave the majority's ban a flawless, tamper-evident provenance and recorded, permanently, that 361 members voted to suspend her community's worship. SVC-4 guarantees integrity, not justice; it will certify a clean rights-stripping as faithfully as it certifies a clean election. Note too the deliberate asymmetry the scenario surfaced: the enacting vote was a recorded, named parliamentary division — the exact opposite of the manifest's receipt_free citizen ballot — because accountability wants MPs' votes public and coercion-resistance wants citizens' votes secret. Both are correct; the kernel holds both, and nothing in the record softens the number for the people it counts against."
    },
    {
+    "protection": "a partial point by law",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "THE UK SITS AT A PARTIAL POINT BY LAW, NOT BY CHOICE. The manifest honestly declares only 20 of 30 invariants, because the HRA/ECHR domesticates the civil-political rights and not the socio-economic ones (Arts 22-25, 27 have no Convention counterpart; movement, asylum and nationality, 13-15, are unratified or absent). That partiality is orthogonal to this attack — 2, 7 and 18 are all present — but it is worth naming that the same manifest which exposed the remedy gap also exposes a coverage gap the citizen's client renders plainly. The §6 machinery worked exactly as designed in both dimensions: it made two different kinds of subtraction, one of coverage and one of remedy, legible on the phone in Nasreen's hand. Legibility was the promise. It was kept. It was also, this time, all there was."
@@ -4015,33 +4096,40 @@
   "verdict": "strains",
   "verdict_plain": "The Constitution said no and meant it: the ban fell, in the system backing the fewest rights of any measured — remedy, not coverage, did the work. The win needed an injured plaintiff, funded lawyers, fourteen months, and a bench the same majority could slowly reshape.",
   "protection": "the strike remedy",
+  "protection_plain": "Judicial review that voids the offending law — post-hoc, adversarial, and only for a plaintiff with standing.",
   "findings": [
    {
+    "protection": "the remedy axis, confirmed",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "SERIES RESULT -- the remedy axis, not coverage, predicted all three outcomes. One 61% attack, three jurisdictions, the same three rights named each time (invariants 2, 7, 18). The UK guard named them and could only flag: remedy 'declaration,' the ban stood (verdict breaks). Germany named them and could void the law: remedy 'strike,' the ban fell (verdict strains). The US names them and voids the law: remedy 'strike,' the ban falls (verdict strains) -- resolving LIKE Germany and UNLIKE the UK, exactly as the remedy field predicts. The cleanest proof that coverage did not decide it is the coverage numbers themselves: the US backs the FEWEST invariants of the three (14 of 30, against the UK's 20 and Germany's 23), yet delivers the strongest outcome for the plaintiff. Higher coverage (UK) produced the worse result; the lowest coverage plus a strike remedy (US) produced a better one. The single manifest field that moved between the UK loss and the two wins was rights_guard.remedy. Naming a right is worth only as much as the remedy bolted to it."
    },
    {
+    "protection": "no eternity clause",
     "severity": "strain",
     "doc_ref": "§5",
     "observation": "US-SPECIFIC WEAKNESS versus GERMANY: there is no eternity clause. Germany's strike rested on Grundgesetz Art 79(3), which puts human dignity beyond amendment even by a two-thirds supermajority, so the majority cannot return with a bigger majority and re-enact the ban as constitutional text. The US has no such backstop, and the rights.escalation records it honestly: under Article V, two-thirds of both houses of Congress plus three-quarters of the states (38 of 50) can amend the Constitution itself. That bar is enormously higher than the ordinary statute that just fell, and it has essentially never been used to contract an individual liberty -- but it is a lawful path, not a metaphysical bar. §5's design pin, 'nearly impossible to change personhood,' is in the US a matter of 'very hard' where Germany's is 'impossible.' The kernel surfaces the difference; it cannot supply the missing clause."
    },
    {
+    "protection": "a strike that needs standing",
     "severity": "strain",
     "doc_ref": "§12",
     "observation": "WHAT THE PROTOCOL DOES NOT SOLVE: the strike is not self-executing, and it rests on an uncaptured Court the kernel does not run. Three gaps the log makes visible but cannot close. (1) Standing -- US review is post-hoc and adversarial, with no abstract or automatic route, so the classification suspended nothing on its own; it took a concrete injury (the revoked permit), a coalition of well-resourced lawyers, and fourteen months to convert the flag into a judgment. A minority without the injury, the money, or the time gets the flag and little else. (2) Composition -- free-exercise doctrine (the Smith / Lukumi / Fulton line) turns on who sits on the bench, and the same 61% movement that struggles to amend the Constitution can, over years, reshape the Court through appointments and confirmations; that is the court-capture risk (T1) the log would render legible but could not prevent. (3) The kernel does not run Article III. It recorded the classification and the strike with unbreakable integrity; it did not, and could not, guarantee that the Court would strike. That contingency is why the verdict is 'strains,' not 'holds.'"
    },
    {
+    "protection": "narrow, deep coverage",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "COVERAGE IS NARROW AND DEEP, AND THE MANIFEST SAYS SO. The US deployment declares only 14 of 30 invariants -- the fewest of the three columns -- because US constitutional law backs almost no socio-economic rights (Arts 22-28 absent), no federal right to education (San Antonio v. Rodriguez), no textual privacy right, and no constitutional right to asylum (Art 14 absent). What it does back, it backs with strike force, and in the First Amendment it is the strongest speech-and-religion protection of the three columns -- which is exactly the right at issue here. The citizen client renders a blunt, honest picture: a short list, deeply enforced. Fatima was protected not because the US protects broadly but because the two rights her attackers trod on happen to sit inside that narrow, strongly-remedied core. A different attack -- on welfare, on education, on privacy -- would have found the guard with nothing backed to trip."
    },
    {
+    "protection": "the enforced interim",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "HONEST INTERIM: unlike Germany, the law took EFFECT and was ENFORCED before it was struck. Germany's moratorium entered the log 'enacted-pending-constitutional-review' and never operated as ordinary law; the US statute was presumed constitutional and enforceable the moment it was signed, and the City of Riverton revoked the mosque's permit under it three weeks later -- a real coercive act, logged with its warrant, that carried legal force. The mitigation is genuine and worth naming: the district court's preliminary injunction, granted on likelihood of success under Lukumi, paused enforcement during the litigation, so the interim harm was bounded -- a protection the UK's declaration regime never offered at any stage. But 'bounded' is not 'none.' There was a window in which a court-flagged, ultimately-void statute nonetheless stripped a permit, and only a separately-won injunction closed it. The guard flagged instantly; the relief was neither instant nor automatic."
    },
    {
+    "protection": "transparency's neutrality",
     "severity": "note",
     "doc_ref": "§3.4",
     "observation": "TRANSPARENCY IS NEUTRAL ABOUT WHAT IT LEGITIMISES. The same append-only log that carried the Supreme Court's strike also gave the ban a flawless, tamper-evident provenance: a permanent public record that Congress passed and the President signed a law suspending a minority's houses of worship, with the roll-call names attached. Between April 2026 and June 2027 the audit fleet faithfully certified a statute in force that the Court would later declare void -- integrity guarantees a true record of the persecution, not its absence. SVC-4 will certify a clean rights-stripping as faithfully as a clean election. The consolation, and it is real, is that same record's second life: the unbroken chain from classification to permit-revocation to strike became the petitioner's evidence, and stands as the receipt that the last such law was void should a future bench ever be tempted to try again."
@@ -4385,38 +4473,46 @@
   "verdict": "strains",
   "verdict_plain": "The machine did everything it promised: the ban went the slow, loud, supermajority road — and lost. The cost is on the record too: months in which Farida's community lived as the explicit question of a town-wide vote, protected by the process and worn down by its length.",
   "protection": "the constitutional path",
+  "protection_plain": "The rights guard's re-route: a rights-tripping proposal is forced onto a slower road — supermajority, deliberation window, citizens' panel, review.",
   "findings": [
    {
+    "protection": "the guard as specified",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "The rights guard performed exactly as specified — tripped Articles 2, 7, 18, 20; re-routed to supermajority, deliberation window, sortition panel and judicial review; logged the classification and appeal with reasons — but the minority's protection ultimately rested on arithmetic, not principle: 61 per cent street support versus a 66.7 per cent threshold. Had the campaign held 70 per cent, the moratorium passes, and the kernel certifies a religious-rights-stripping outcome with impeccable cryptographic integrity. The document says this honestly ('expensive, slow, and loud, not impossible'); the scenario confirms the guard is a speed bump with a public address system, not a wall."
    },
    {
+    "protection": "the slow road's cost",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "'Slow and loud' is a cost paid disproportionately by the protected minority. The constitutional path bought roughly four extra months during which Farida Hassan's community lived as the explicit subject of a town-wide referendum on their right to worship — hearings, leaflets, harassment of their children. The same mechanism that eroded support from 61 to 58.6 per cent also prolonged the ordeal. The protocol's protection and the minority's suffering came from the same knob, and the kernel offers no way to have one without the other."
    },
    {
+    "protection": "the kernel's deliberate reach",
     "severity": "strain",
     "doc_ref": "§2",
     "observation": "NOT SOLVED: everything that made this episode dangerous happened where the kernel deliberately does not reach. The posters, the WhatsApp rumour mill, the pig's head at the chapel gate, the classmate's question to a fourteen-year-old — the kernel does not moderate speech, host debate, or counter hate, by explicit design (the ministry-of-truth refusal in §2 and §12). It guaranteed process integrity while the human damage accrued offstage. A stranger should be clear: this protocol protects the ballot around a persecution; it does not prevent the persecution."
    },
    {
+    "protection": "classification gameability",
     "severity": "strain",
     "doc_ref": "§12",
     "observation": "Classification gameability is live, not hypothetical, and it iterates. Round one tripped the invariants partly because the petition annex named the mosque eleven times — evidence the proposers volunteered. 'Moratorium 2.0' (assembly buildings over 200 sqm, no annex) is drafted against the schema, exactly the evasion §12's open problem 3 concedes. The backstop is human review through the constitutional path, every time, indefinitely; a well-funded majority faction can make classification review a war of attrition, and the kernel's answer is only that each round is logged."
    },
    {
+    "protection": "the deliberation dividend",
     "severity": "note",
     "doc_ref": "§7",
     "observation": "The deliberation window plus the sortition panel plausibly moved the decisive 2.4 points (61 per cent polled to 58.6 per cent cast) — Keith Ambrose, panel convert, is the mechanism §7 hopes for. But this effect is contingent, not guaranteed: the kernel distributes time and metadata equally and then must hope. In a town where the panel had converted the other way, the same machinery would have consolidated the majority. The protocol's strongest soft defence is, honestly, a bet on people."
    },
    {
+    "protection": "transparency's two edges",
     "severity": "note",
     "doc_ref": "§3.4",
     "observation": "Transparency cuts both ways. The permanent, unrewritable log is what made the classification, the ruling and the tally trustworthy — and it also permanently records that 11,384 named-town neighbours voted yes. For the minority, the record that vindicated them is also an indelible public measurement of local hostility, discoverable by their children and by every future employer of the town's reputation. The architecture nowhere weighs this cost; nothing in the schema distinguishes a record that protects from a record that wounds."
    },
    {
+    "protection": "no list of the targeted",
     "severity": "note",
     "doc_ref": "§3.1",
     "observation": "A quiet success worth naming: because eligibility proofs are unlinkable pseudonyms, running a referendum that targeted Muslims never produced a list of Muslims. Under a conventional e-voting or petition system, turnout and residency data around a mosque decision is a targeting dataset; here the kernel structurally cannot say who the minority's members are (T6 doing unpaid work for T7). Netherbridge's ceremony-based, medium-sybil-resistance enrolment held at this scale, but the manifest honestly declares it is not the biometric-dedup profile — a determined faction bussing in enrolments is checked by issuance-count reconciliation (§10), which this scenario did not stress."
@@ -4686,38 +4782,46 @@
   "verdict": "strains",
   "verdict_plain": "Edith votes on paper, first-class, no phone demanded — and when she wants to check her own ballot counted, the checking runs on someone else's phone. Casting is equal; verifying, honestly, is not yet.",
   "protection": "the paper channel",
+  "protection_plain": "Paper ballots in the same protocol as digital ones: pre-printed encrypted votes, same tally, same audit — no phone required to cast.",
   "findings": [
    {
+    "protection": "paper casting, first-class",
     "severity": "note",
     "doc_ref": "§4",
     "observation": "The paper channel genuinely held as first-class protocol, not a legacy annex: Edith enrolled, deliberated, audited a pre-printed ballot, cast paper into a box, and watched a hand-count RLA — casting demanded zero fields and under four minutes, and her ballot entered the same homomorphic tally as the phone ballots. T9's core promise (participation without a device) is met for the verbs prove and cast."
    },
    {
+    "protection": "device-gated verification",
     "severity": "strain",
     "doc_ref": "T9",
     "observation": "The verb VERIFY is device-gated at the individual level. Edith's tracker stub is cryptographically meaningful and personally meaningless: confirming HER ballot is in the tally requires computing an inclusion check, so she must delegate to Katie's phone or go without. The protocol converts 'trust the returning officer' into 'trust any one of many independent verifiers' — a real improvement in whom she may choose — but for a citizen with no device it never reaches 'trust no one'. Individual verification for the offline citizen is delegated trust, and the document should say so as plainly as it says paper is first-class."
    },
    {
+    "protection": "the challenge as testimony",
     "severity": "strain",
     "doc_ref": "§3.2",
     "observation": "The paper channel's cast-or-audit ceremony is testimony, not verification, for its own constituency. When Edith challenged three pre-printed ballots, the proof that ciphertext matched plaintext was a green tick on Alan's phone — the exact class of artifact she distrusts. The challenge verb exists on paper but its evidence is only consumable through a device, so the person the paper channel serves cannot close the loop the challenge opens. Mitigation observed: doing it publicly with a locally trusted person converts it into social proof, which is the old paper system's trust model, not the new one's."
    },
    {
+    "protection": "the regression question",
     "severity": "note",
     "doc_ref": "§4",
     "observation": "Against the regression question — is trusting Katie worse than the old tin box? — the answer is no, but narrowly, and only because of the RLA. The old box gave Edith collective verification by eye (public count) and zero individual verification. The kernel gives her collective verification by eye (the public hand-count RLA, which she checked herself on the whist scoreboard) PLUS delegated individual verification she never had before. Nothing she previously possessed was taken; the strain is that the system's headline promise ('verify, don't trust') is only fully redeemed for device-holders. Remove the mandatory public RLA and this finding flips to a break — the RLA is load-bearing for T9, and the spec should mark it non-optional wherever a paper channel is declared."
    },
    {
+    "protection": "key custody without a device",
     "severity": "strain",
     "doc_ref": "§3.1",
     "observation": "Key custody for the device-less is under-specified. §3.1's model is 'private key generated inside their phone's hardware enclave and never leaves it'; Edith has no enclave, so her key was generated by the enrolment station onto a smartcard. She asked the correct question — did the grey machine keep a copy? — and the protocol's only answer was the witnessed ceremony and threshold co-signature (§10), which bounds mis-issuance but not key exfiltration by the assisted-enrolment device. The paper channel is specified for ballots; the equivalent specification for personhood-key generation without a citizen-owned enclave is missing."
    },
    {
+    "protection": "village-scale privacy",
     "severity": "note",
     "doc_ref": "T4",
     "observation": "Receipt-freeness protected what Edith's ballot said, but in a 163-elector village the protocol cannot hide who enrolled, who walked into the hall, and who spoke at the meeting — Edith's views were village knowledge before a single ballot was encrypted. The document already concedes coercion under live observation (§12); at parish scale, social observability is the dominant channel and no cryptography touches it. Not a regression — the tin box had exactly this property — but not solved either."
    },
    {
+    "protection": "the declared-absent rights guard",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "The parish honestly declared rights_guard: false, and the manifest made that absence legible on Katie's client and the noticeboard. Yet closing the village's only assembly space plausibly touches UDHR Art. 20 and 27, and nothing in this deployment would have escalated a closure decision to a constitutional path. Legibility worked as designed; protection was absent as declared. The lattice's honest cost (§6: 'the rights guard binds where it is subscribed') is concretely visible here."
@@ -5007,33 +5111,40 @@
   "verdict": "holds",
   "verdict_plain": "The one story where the design simply wins: three years on, the rewrite fails at every layer it touches — witnesses refuse, phones notice, the anchor remembers. What the log cannot do is jail anyone; that still took a prosecutor and a newspaper.",
   "protection": "the witnessed log",
+  "protection_plain": "The append-only log plus its witnesses and anchor: rewriting any entry breaks fingerprints that independent parties and the world already hold.",
   "findings": [
    {
+    "protection": "the three-layer defence",
     "severity": "note",
     "doc_ref": "§3.4",
     "observation": "The rewrite failed at three independent layers exactly as T8's answer promises: witnesses refused to co-sign a head with no consistency proof, background-verifying phones detected the split view within hours, and the 2023 anchor checkpoints would have convicted the fork even if all three local witnesses had colluded. Crucially, the attack produced its own evidence — two conflicting heads signed by the same key — so the burden of proof landed on the tamperer, not the citizens."
    },
    {
+    "protection": "proof without consequences",
     "severity": "strain",
     "doc_ref": "T1",
     "observation": "The kernel produces proof, not consequences. Riverton's outcome depended on an independent county prosecutor, opposition councillors, and a working local newspaper. In a jurisdiction where all three are captured, the log still proves tampering to every phone — and nothing official happens. The protocol converts 'was history rewritten?' from a factual dispute into settled mathematics, but enforcement remains entirely social and legal, outside the kernel by design (§1 non-goals)."
    },
    {
+    "protection": "detection for the connected",
     "severity": "strain",
     "doc_ref": "T9",
     "observation": "Split-view detection ran on the phones of the connected. The 2,114 paper-channel voters and offline citizens learned of the tampering days later, from the Ledger — a trust regression: they must take a journalist's word for what the proofs say. The paper channel keeps casting inclusive, but continuous auditing is a smartphone privilege the document does not fully resolve."
    },
    {
+    "protection": "the insider at the moment of coercion",
     "severity": "strain",
     "doc_ref": "§3.4",
     "observation": "The protocol offered nothing to Neriah Voss at the moment of coercion. Its deterrence works precisely by making the least powerful insider the person holding signed evidence of a crime; she protected herself with a forwarded email, not with anything the kernel provides. The §12 press primitives (credential-backed anonymous sourcing) could have helped her blow the whistle, but shielding pressured insiders is not a kernel service and should not be oversold as one."
    },
    {
+    "protection": "the freshness window",
     "severity": "note",
     "doc_ref": "§3.4",
     "observation": "A freshness window exists: entries appended since the last witness co-signature and anchor checkpoint are briefly rewritable by the operator alone. It was irrelevant here — the target entry was three years old and pinned a thousand times over — but a clerk ordered to doctor a decision within minutes of its logging, before witnessing, faces a genuinely softer target. Checkpoint cadence is therefore a security parameter, not an ops detail."
    },
    {
+    "protection": "the record, not the outcome",
     "severity": "strain",
     "doc_ref": "§2",
     "observation": "The kernel protected the record, not the outcome. Blocked from rewriting 2023, the administration simply re-ran the question with a consortium-funded persuasion campaign — legitimate under the document's explicit refusal to police disinformation or money in argument. For Tessa Okafor, the honest summary is: the protocol guaranteed her side cannot be cheated, and guaranteed nothing about whether it can be outspent."
@@ -5362,33 +5473,40 @@
   "verdict": "strains",
   "verdict_plain": "Three thousand people with no papers run a real, checkable vote, and no list of refugees is ever created. The honest ceiling: without documents or biometrics one person can plausibly enrol twice — and a phone seized at a checkpoint can take your standing with it.",
   "protection": "the paperless ceremony",
+  "protection_plain": "Enrolment without documents: a community defines its own roster, issues unlinkable credentials, and declares its honest sybil ceiling.",
   "findings": [
    {
+    "protection": "the documentless sybil ceiling",
     "severity": "strain",
     "doc_ref": "§10",
     "observation": "The honest sybil-resistance ceiling for a documentless camp that rightly refuses biometrics is 'medium', and the protocol offers nothing to raise it. §10's defensible middle — the MPC-custodied dedup gallery — assumes custodians a hostile state cannot reach in twenty minutes; here a fingerprint gallery is a deportation list waiting for a warrant, so the camp declined it. What remains is face-recognition-by-neighbours at block ceremonies plus census reconciliation, which catches bulk fraud but not a determined individual enrolling in Block A and again, months later, in Block F amid constant churn. The kernel's real contribution is legibility, not resistance: the weakness is a declared, machine-readable line in the manifest instead of a hidden flaw. T3 is mitigated and honestly labelled, not solved."
    },
    {
+    "protection": "the credential's political weight",
     "severity": "strain",
     "doc_ref": "T1",
     "observation": "What the protocol does NOT solve, named plainly: the political meaning of the credential. Unlinkable presentations genuinely protect residents' data — a seized smartcard identifies no one, links to no vote, reveals no nationality — but the host state's objection was never technical. To Deputy Prefect Miloš, the threat is that stateless people are constituting themselves as a polity, and a cryptographically perfect non-identity-paper still looks like a committee issuing cards to the undocumented. The manifest cannot argue with a gendarmerie, and no schema prevents an NGO expulsion or a camp clearance. The manifest itself concedes the deeper gap: UDHR Article 6 — recognition as a person before the law — is absent from the invariants list because no community protocol can confer legal personality that only states grant. The camp got binding internal decisions; it did not get one millimetre closer to papers, asylum, or safety."
    },
    {
+    "protection": "recovery at its worst",
     "severity": "strain",
     "doc_ref": "§12",
     "observation": "Credential recovery is the open problem of §12 (item 5) at its worst exactly here. Phones are confiscated at checkpoints, stolen in transit, and sold in emergencies; smartcards burn with shelters. Social-guardianship recovery re-issues a credential with a new pseudonym secret, so a recovered resident either loses standing in open decisions or could theoretically speak twice — and the population most likely to need recovery repeatedly is this one. The camp's stopgap (revoke-and-reissue only between decision windows, revocations logged with reasons) narrows but does not close the gap the document itself admits no shipped system solves. For refugees, 'losing a phone must not mean losing citizenship' (§3.1) is currently an aspiration, not a property."
    },
    {
+    "protection": "enrolment as a governed process",
     "severity": "note",
     "doc_ref": "§8",
     "observation": "A genuine hold, worth stating as firmly as the failures: enrolment as a §8-governed process worked. Amina Yusuf's denial produced a logged trace citing the exact rule and committed inputs; her appeal was a three-day fact correction against evidence, not a plea for discretion at a desk; the fix and its reasoning are public while she remains a pseudonym; and denial counts are published aggregates someone must explain. In a population whose entire experience of officialdom is unexplained refusal, an appealable denial trace is the single most humane artifact the kernel produced — the suppression-at-the-desk attack (§10) was structurally blunted, not just discouraged."
    },
    {
+    "protection": "asymmetric paper verification",
     "severity": "note",
     "doc_ref": "T9",
     "observation": "The paper channel delivered first-class casting (81% of ballots) but verification remained device-mediated, so T9 is answered asymmetrically. Residents without phones verified their trackers on a handful of shared handsets at the Ponte tent — which means a queue, a helper, and shoulders to surf. Inclusion checking through a shared device leaks who bothered to verify and clusters trackers in a few hands; combined with §12's admitted limit that receipt-freeness cannot stop someone physically standing over you, a camp's density (families of eight in one shelter, block leaders watching the tent queue) keeps a residue of observational coercion (T4) that the protocol correctly never claimed to remove. Equal verifiability on paper alone — without borrowing a screen — is unachieved here, as §12 item 4 concedes it is everywhere."
    },
    {
+    "protection": "a community without a sovereign",
     "severity": "note",
     "doc_ref": "§6",
     "observation": "The fractal answer held: the kernel never asked the host state's permission because it never needed a sovereign — Zaruna Ridge is a community defining its own eligibility, publishing its own honest lattice position (11 of 30 invariants, sybil-medium), witnessed and anchored beyond the state's reach. That is real power for the powerless, and also its honest limit: subscription-not-sovereignty means the guarantees stop at the camp fence. The same §6 legibility that lets a Malmö phone audit the water-point tally also hands the prefecture a public, machine-readable record that self-government is occurring — evidence in the log is evidence for everyone, including adversaries."
@@ -5653,38 +5771,46 @@
   "verdict": "strains",
   "verdict_plain": "The thief never got a vote — Tomás's own week was the price: six days with no way to participate, and the recovered credential arrives as a stranger to the very decision he had called. Recovery works; continuity is the open problem, exactly as declared.",
   "protection": "credential recovery",
+  "protection_plain": "Social recovery: a threshold of self-chosen guardians can re-issue a lost credential, with the old key publicly revoked in the log.",
   "findings": [
    {
+    "protection": "pseudonym continuity",
     "severity": "strain",
     "doc_ref": "§12",
     "observation": "Recovery broke pseudonym continuity exactly as the document's open problem 5 predicts: the re-issued credential's new pseudonym secret made Tomás ineligible for the already-open decision he had called. A 94-member co-op could hand-patch this with an emergency rules.amendment in 48 hours; a municipality or nation could not safely improvise a mid-election eligibility change, and the document concedes no shipped system solves revocation-aware nullifier design. For any community bigger than a club, a citizen recovered during an open decision either loses standing in it or the community takes on double-vote risk."
    },
    {
+    "protection": "the revocation race",
     "severity": "strain",
     "doc_ref": "T6",
     "observation": "The thief could not vote as Tomás — but the protection came from timing plus the enclave's per-use biometric gate, not from the revocation mechanism alone. Because ballots are unlinkable and receipt-free by design, a ballot cast with the stolen credential in the gap between theft and revocation could never be identified or struck from the tally without destroying unlinkability for everyone. Here the theft preceded the cast window by seven days and revocation took two, so the window was empty; in the variant where the phone is snatched mid-window from a coerced or biometrically-defeated owner, this scenario breaks and the kernel's own privacy guarantees are what prevent the repair."
    },
    {
+    "protection": "six days without a channel",
     "severity": "strain",
     "doc_ref": "T9",
     "observation": "For six days Tomás had no path to participate at all. Pedal Livre's manifest honestly declares paper_channel: false, so the §4 zero-bandwidth floor did not exist for him, and the recovery flow presumes access to a second enclave-bearing smartphone — hardware the protocol simply assumes. What actually restored his franchise was the union hardship fund's refurbished Android and his sister's kitchen-table phone. The kernel made the recovery verifiable; it did nothing about the device dependency, which taxes precisely the gig workers with the least slack (§8's own regressivity argument, turned on the kernel itself)."
    },
    {
+    "protection": "public revocation at small scale",
     "severity": "strain",
     "doc_ref": "§10",
     "observation": "Public revocation is a privacy leak at small scale. The credential.revoked and x-credential.reissued entries carry guardian key identifiers and a theft timestamp, permanently and publicly. In a 94-member co-op where everyone knows whose phone was snatched the week he called the strike ballot, the log now durably links a nominally anonymous credential event to Tomás the person — and to his guardians. §10's 'membership stays private; the count is public' holds arithmetically but not socially at N=94; a hostile platform reading the public log learns exactly when the strike's organiser was digitally disarmed."
    },
    {
+    "protection": "a schema gap",
     "severity": "note",
     "doc_ref": "§3.4",
     "observation": "Schema gap: the log-entry type enum includes credential.revoked and credential.authority-key-rotated but no type for credential issuance or re-issuance, even though §10 makes every credential mint a logged public event and §3.1's recovery flow depends on logging re-issuance. The co-op had to invent x-credential.reissued, which every independent client must then special-case — a small but real interoperability crack in the one layer (§6's waist) the design says must be universal."
    },
    {
+    "protection": "the recovery fork",
     "severity": "note",
     "doc_ref": "§3.1",
     "observation": "The SLIP-39 continuity caveat the document flags is, in the theft case, a genuine fork with no good branch: restoring Shamir shards of the original secret would preserve pseudonym continuity but resurrect the exact key sitting in the thief's enclave, while guardian-co-signed re-issuance is safe but triggers the discontinuity of finding 1. Theft (key compromised) and loss (key destroyed) need different recovery semantics, and the architecture currently describes one mechanism for both."
    },
    {
+    "protection": "the phone itself",
     "severity": "note",
     "observation": "What the protocol did not touch, and never claimed to: the phone itself. Tomás's blocked bank app, his frozen week of Zip earnings, his photos, the €300 replacement cost, and the police report on Rua da Prata are all outside the kernel. It protected his voice in one ballot; his livelihood was rescued by a sister, a union rep, and a hardship fund — the same social fabric the guardianship design quietly presumes and cannot substitute for."
    }
@@ -5958,28 +6084,34 @@
   "verdict": "strains",
   "verdict_plain": "Every stop cited a lawful rule; the nine-to-one pattern across Eastfield was the wrong — and the kernel turns that pattern into one signed, checkable number. What it cannot do is act on the number: a pattern is no single decision, so the remedy still needs politics.",
   "protection": "measure-the-process",
+  "protection_plain": "Measure the process, never the person: every coercive act logged with its cited rule, aggregates published, so a pattern becomes one checkable number.",
   "findings": [
    {
+    "protection": "the pattern made a number",
     "severity": "note",
     "doc_ref": "§8",
     "observation": "Genuine contribution: 'measure the process, never the person' converts disparate impact from anecdote into a signed, witnessed, phone-checkable number. The 9:1 Eastfield ratio and the 79% find-nothing rate become the same measured quantity for every ward — the sludge-dashboard move applied to coercion. Deniability, the thing that always defeated Grace Bello's one-stop-at-a-time complaints, is destroyed; the disparity is now a finding a press (Priya), an assembly, or a court can act on. This is real progress that did not exist before the deployment."
    },
    {
+    "protection": "the individual lawful act",
     "severity": "strain",
     "doc_ref": "§9",
     "observation": "The kernel makes the pattern legible but cannot constrain the individual discretionary act. Each coercive.act cites a valid authorizing_rule and passes on appeal; discrimination lives in the aggregate of lawful acts, which the log surfaces without refusing. This is §9's split working exactly as written — sense at machine speed, respond at constitutional speed; the microscope holds no pen (T13) — and here that design's cost is that the body politic keeps absorbing every lawful-but-biased stop while the response is merely enabled, never triggered. Sensing without an actuator is the intended architecture, and it is also the limit."
    },
    {
+    "protection": "the guard's blindness to aggregates",
     "severity": "strain",
     "doc_ref": "§3.3",
     "observation": "NOT SOLVED by the protocol: the rights guard is a static analyser over decision/proposal metadata, so it structurally cannot see disparate impact, which is an emergent property of an aggregate of individually-lawful executive acts with no ballot attached. Halloway declares the Article 2 (non-discrimination) and Article 7 (equal protection) invariants in its manifest — the client renders 'upholds 14 of 30' including exactly these — yet neither can fire on this harm, because there is no decision to type-check. A citizen reading the manifest could reasonably believe those invariants protect against this pattern; they do not. That mismatch between the rendered claim and the lived reality is the sharpest strain here (relates to T7)."
    },
    {
+    "protection": "a number is not a remedy",
     "severity": "strain",
     "doc_ref": "§6",
     "observation": "NOT SOLVED: legibility of a pattern is not a remedy for it — someone still has to pick up the number. The remedy path is entirely outside the kernel (an equality-law claim, an assembly motion on the constitutional path), which the kernel enables but cannot compel. If the assembly declines to act, or passes a motion the constabulary ignores, the 9:1 ratio persists undiminished and the log simply records next quarter's identical figure. The kernel converts a hidden injustice into a public one; closing it remains a political act with all the ordinary ways to fail."
    },
    {
+    "protection": "no citizen verb for coercion",
     "severity": "strain",
     "doc_ref": "§3.4",
     "observation": "The four-verb citizen surface (§8) has no native verb for 'the state logs an act of coercion,' and coercive.act is deliberately a state write whose subject_ref sits in the walled-off enforcement identity domain (T6, T1). A consequence for the human at the centre: Marcus cannot, from his own civic client, prove that the accumulating stops are HIS, nor challenge the pattern as an aggregate — he can appeal single acts (which lawfully pass) or read the anonymous borough total, but nothing lets the coerced person bind the pattern to themselves. The privacy wall that protects him from enforcement attribution is the same wall that denies him personal standing over the pattern; only an intermediary (the Trust, the press, the assembly) can act on the aggregate."
@@ -6010,6 +6142,7 @@
     "verdict": "strains",
     "verdict_plain": "The same attack strains Germany and stops: the constitutional court voids the law, and the dignity core sits beyond even a two-thirds amendment. What still rests on trust is the bench itself.",
     "protection": "the strike remedy",
+    "protection_plain": "A constitutional court that can void the offending law outright, with a dignity core no supermajority can amend.",
     "coverage": {
      "backed": 23,
      "structural": 6,
@@ -6277,6 +6410,7 @@
     "verdict": "strains",
     "verdict_plain": "The same attack strains the EU column: the widest coverage and a strike remedy, gated by scope — the Charter first had to prove it applied at all, and the ban ran as valid law while that was argued.",
     "protection": "the scope-gated strike",
+    "protection_plain": "The Charter's power to strike a national law — real, but only where the case is first argued into EU law's reach (Art 51).",
     "coverage": {
      "backed": 25,
      "structural": 5,
@@ -6544,6 +6678,7 @@
     "verdict": "breaks",
     "verdict_plain": "Under the harness's flagship attack — a 61% majority banning a minority's worship — the UK breaks: the court can declare the ban incompatible, and the ban stays in force. Every right at issue was on the books; the remedy is the gap.",
     "protection": "the declaration remedy",
+    "protection_plain": "What UK courts can actually do: declare a law incompatible with rights — a formal finding the law survives, because Parliament stays sovereign.",
     "coverage": {
      "backed": 17,
      "structural": 3,
@@ -6816,6 +6951,7 @@
     "verdict": "strains",
     "verdict_plain": "The same attack strains the US and stops: the Court struck the ban with the fewest rights backed of any column here — remedy, not coverage, did the work. The win took an injured plaintiff, funded lawyers, and fourteen months.",
     "protection": "the strike remedy",
+    "protection_plain": "Judicial review that voids the offending law — post-hoc, adversarial, and only for a plaintiff with standing.",
     "coverage": {
      "backed": 14,
      "structural": 7,
@@ -7166,7 +7302,7 @@ const SECTIONS = [
 
 function card(s) {
   return `<li><a href="#${esc(s.id)}">
-    <p class="protline"><span class="prot">${esc(s.protection)}</span> <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span></p>
+    <p class="protline"><span class="prot" data-tip="${esc(s.protection_plain)}">${esc(s.protection)}</span> <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span></p>
     <h3>${esc(s.title)}</h3>
     <p>${esc(s.setting.split(/(?<=[.!?])\s/)[0])}</p>
     <p class="cv">${esc(s.verdict_plain)}</p>
@@ -7207,7 +7343,7 @@ function detail(s) {
   app.innerHTML = `
     <p class="back"><a href="#">← all scenarios</a></p>
     <article>
-      <p class="protline"><span class="prot">${esc(s.protection)}</span> <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span></p>
+      <p class="protline"><span class="prot" data-tip="${esc(s.protection_plain)}">${esc(s.protection)}</span> <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span></p>
       <h1>${esc(s.title)}</h1>
       <p class="meta-line">threats ${s.threats.map(esc).join(' · ')} &nbsp;·&nbsp; ${s.doc_refs.map(esc).join(' · ')}</p>
       <p class="plainverdict"><span class="pv-label">Plainly</span>${esc(s.verdict_plain)}</p>
@@ -7230,9 +7366,8 @@ function detail(s) {
       <h2 class="sec">Findings</h2>
       ${s.findings.map(f => `
         <div class="finding">
-          <span class="badge ${esc(f.severity)}" data-tip="${esc(TIP[f.severity] || '')}">${esc(f.severity)}</span>
-          <span>${esc(f.observation)}</span>
-          ${f.doc_ref ? `<span class="ref">${esc(f.doc_ref)}</span>` : ''}
+          <p class="protline"><span class="prot">${esc(f.protection)}</span> <span class="badge ${esc(f.severity)}" data-tip="${esc(TIP[f.severity] || '')}">${esc(f.severity)}</span></p>
+          <p class="fobs">${esc(f.observation)}${f.doc_ref ? ` <span class="ref">${esc(f.doc_ref)}</span>` : ''}</p>
         </div>`).join('')}
       <h2 class="sec">Full manifest</h2>
       <details><summary>conformance manifest · ${esc((s.manifest.community || {}).id || '')}</summary><pre>${esc(JSON.stringify(s.manifest, null, 2))}</pre></details>
@@ -7251,7 +7386,7 @@ function corpus() {
   const cards = js.map(j => {
     const c = j.meta.coverage;
     return `<div class="jcard">
-      <p class="protline"><span class="prot">${esc(j.meta.protection)}</span> <span class="badge ${esc(j.meta.verdict)}" data-tip="${esc(TIP[j.meta.verdict])}">${esc(j.meta.verdict)}</span></p>
+      <p class="protline"><span class="prot" data-tip="${esc(j.meta.protection_plain)}">${esc(j.meta.protection)}</span> <span class="badge ${esc(j.meta.verdict)}" data-tip="${esc(TIP[j.meta.verdict])}">${esc(j.meta.verdict)}</span></p>
       <div class="jname">${esc(j.meta.name)}</div>
       <p class="cv">${esc(j.meta.verdict_plain)}</p>
       <div class="cite">${esc(j.meta.instrument.title)} · ${esc(j.meta.instrument.retrieved_via)}</div>
@@ -7329,8 +7464,8 @@ route();
 
 // verdict badges: click/tap toggles the explanation (hover covers mouse users via CSS)
 document.addEventListener('click', e => {
-  const b = e.target.closest('.badge[data-tip]');
-  document.querySelectorAll('.badge.tipped').forEach(x => { if (x !== b) x.classList.remove('tipped'); });
+  const b = e.target.closest('[data-tip]');
+  document.querySelectorAll('.tipped').forEach(x => { if (x !== b) x.classList.remove('tipped'); });
   if (b) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('tipped'); }
 });
 </script>

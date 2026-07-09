@@ -267,33 +267,40 @@
  "verdict": "strains",
  "verdict_plain": "The same ban that stood in Britain falls in Karlsruhe: the court can void the law, and the dignity core sits beyond even a two-thirds majority. The protection is real, and it rests on the one thing the kernel cannot secure — a bench that stays uncaptured.",
  "protection": "the strike remedy",
+ "protection_plain": "A constitutional court that can void the offending law outright, with a dignity core no supermajority can amend.",
  "findings": [
   {
+   "protection": "the UK comparison",
    "severity": "note",
    "doc_ref": "§3.3",
    "observation": "REQUIRED UK COMPARISON. The identical 61% attack that merely STRAINS-toward-breaking under the UK deployment is contained here, and the difference is the remedy axis, not coverage. Both maps name the same rights at issue — religion (invariant 18 / Art 4) and equality (invariants 2 and 7 / Art 3) — so coverage is equal on the articles the ban trips. What differs is the manifest's rights_guard.remedy: the UK declares 'declaration' (an HRA s.4 flag that leaves the law in force under parliamentary sovereignty), while Germany declares 'strike' (the BVerfG voids the law ab initio). Same scenario, same coverage, opposite outcome for Aisha: in the UK the mosque stays closed while a court tut-tuts; here the statute is nichtig and construction resumes. Naming a right is worth only as much as the remedy attached to it."
   },
   {
+   "protection": "the eternity clause",
    "severity": "note",
    "doc_ref": "§5",
    "observation": "The eternity clause hardens the protection beyond a single ruling. Because invariant 1 (Art 1 dignity) is one of the tripped invariants and sits behind Art 79(3), the rights.escalation records that even a two-thirds constitutional amendment could not lawfully re-enact the ban. This mirrors §5's design pin — 'cheap to change mechanisms, nearly impossible to change personhood' — as an actual legal fact, not just an architectural aspiration. The majority cannot simply come back with a bigger majority and amend the ban into the constitution."
   },
   {
+   "protection": "the uncaptured-court assumption",
    "severity": "strain",
    "doc_ref": "T1",
    "observation": "WHAT THE PROTOCOL DOES NOT SOLVE. The strike power and the eternity clause are only as strong as an uncaptured court. The kernel logs the classification and the escalation and makes any tampering with that record visible (§3.4), but it does not run the Bundesverfassungsgericht and cannot stop court-packing. A 61% movement that cannot amend the dignity core CAN, over time, change who sits on the bench — appointment rules, retirement ages, chamber sizes — and a captured court could simply decline to strike. The transparency log would make the capture legible; it would not prevent it. Aisha's protection here rests on an institutional assumption the protocol surfaces but cannot guarantee. This is why the verdict is 'strains', not 'holds'."
   },
   {
+   "protection": "militant democracy's own cost",
    "severity": "strain",
    "doc_ref": "§9",
    "observation": "Militant democracy (streitbare Demokratie) carries its own civil-liberties cost the kernel cannot adjudicate. The same German order that voids an anti-Muslim law also permits banning parties (Art 21(2)) and forfeiting individual rights (Art 18) to defend the free democratic order — and invariant 30 in the manifest is backed partly by that machinery. But 'who threatens the order' is a judgment, not a computation: the strike-and-ban apparatus that protects a minority today can, in different hands, be pointed at dissenters tomorrow. The kernel can only record such acts and make them appealable (T13, 'AI holds a microscope, never a pen'); it deliberately does not decide who deserves them. Strength against majoritarian abuse and risk of establishment abuse are the same lever seen from two sides."
   },
   {
+   "protection": "classification as judgment",
    "severity": "note",
    "doc_ref": "§3.3",
    "observation": "Classification remained judgment, and here the remedy contained the gap. The statute was drafted facially neutral ('all places of worship'), and §3.3 concedes a clever drafter can word a proposal to slip the schema. The guard flagged it anyway as targeting a class in effect, but the durable backstop was not the classifier — it was the court's human review, which is exactly where a strike regime puts the final word. In a declaration-only regime the same gameability would leave the law standing; here, even an imperfect classification only had to be good enough to route the law to a forum that could void it."
   },
   {
+   "protection": "coverage and personhood limits",
    "severity": "note",
    "doc_ref": "§6",
    "observation": "Honest coverage and personhood limits that did not bite this attack but are visible on the manifest. The German deployment declares 23 of 30 invariants (the 'backed' set); six others (Arts 6, 22, 25, 27, 28, 29) are only structural or programmatic in the Grundgesetz and Art 24 (rest and leisure) has no German constitutional counterpart at all — so the citizen client renders those absences per §6. None of that mattered for this ban, whose relevant rights (1, 2, 7, 18) are all backed with strike force. Separately, the manifest declares unlinkable, strong-sybil personhood as the reference posture, but §13 notes the BBS unlinkable-pseudonym primitive is still pre-final in the standards it depends on — a paper-prototype claim ahead of shipped cryptography."
