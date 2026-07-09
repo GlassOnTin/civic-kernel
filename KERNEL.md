@@ -2,9 +2,10 @@
 
 The normative core of the Civic Kernel on one page. The
 [essay](https://glassontin.github.io/civic-kernel/) argues it, the [schemas](schema/)
-define it, the [harness](https://glassontin.github.io/civic-kernel/scenarios.html)
-measures it, the [model](docs/functional-model.md) gives it dynamics — this page only
-states it. If a requirement is not here, it is rationale, evidence, or ecosystem.
+define it, the [prototype](proto/) runs it, the
+[harness](https://glassontin.github.io/civic-kernel/scenarios.html) measures it, the
+[model](docs/functional-model.md) gives it dynamics — this page only states it. If a
+requirement is not here, it is rationale, evidence, or ecosystem.
 
 > **Fourteen threats, four services, four verbs, two formats, one floor — and twelve refusals.**
 
@@ -92,7 +93,7 @@ history, regenerate the log heads, declare in the manifest that the log never ha
 and hand over a transcript on which every signature verifies and nothing internally
 disagrees. The witness set is therefore the one thing a verifier must hold out of band — from
 DID resolution and the witness ecosystem, never from the transcript under audit. A manifest
-cannot be its own standard (T8, T10).
+cannot be its own standard (§6, T8, T10).
 
 ## One floor (§5)
 
@@ -185,6 +186,12 @@ research program, not a trained system.
   plot-holders. Populations need the constant-size BBS presentation §13 tracks. The
   interface — `prove(eligible, decision_id) → pseudonym + proof` — was written against the
   abstraction, so swapping the proof system changes nothing else.
+- **T5's challenge and T4's silent re-vote compose — and decided the election.** In the
+  reference run, a compromised device that displayed one candidate while encrypting the
+  other was caught by a cast-or-audit challenge, logged (`x-ballot.audit-failed`), and
+  repaired by a silent recast. The repair decided it: an 8–6 win where the unrepaired
+  ballot would have made it 7–7 — and what the cheating device actually encrypted stays
+  sealed forever.
 - **19 scenarios**, each cross-validated against the waist schemas and each anchored to
   documented real-world precedents (46 verified citations — the schema requires them: no
   attack without a cited precedent): 15 strain, 3 break, 1 holds. The one hold is
@@ -205,6 +212,7 @@ cryptography is not yet shipped.
 *Every component named ships today; the composition is the contribution. The first running
 code is [`proto/`](proto/): the club vote end to end — all four verbs, waist-valid artifacts,
 anonymous ballots sealed to a trustee quorum and never individually opened, an independent
-verifier that catches twelve tampers by their named defences, and a manifest that declares
-its own subtractions. The rest is specification, harness, and corpus — see the
+verifier that catches twelve tampers by their named defences — [the same checks run in any
+browser](https://glassontin.github.io/civic-kernel/verifier.html) — and a manifest that
+declares its own subtractions. The rest is specification, harness, and corpus — see the
 [README](README.md).*
