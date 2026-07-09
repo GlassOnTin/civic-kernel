@@ -177,16 +177,17 @@ def main() -> int:
         "index.html": norm(re.search(r'<p class="standfirst">(.*?)</p>', essay_html, re.S).group(1)),
         "scenarios.html": norm(re.search(r'<p class="lede">(.*?)</p>', (ROOT / "scenarios.html").read_text(), re.S).group(1)),
         "proto/README.md": norm(re.search(r"# proto/[^\n]*\n\n([^.]*\.)", (ROOT / "proto" / "README.md").read_text()).group(1)),
+        "cast.html": norm(re.search(r'<p class="sub">([^.]*\.)', (ROOT / "cast.html").read_text(), re.S).group(1)),
     }
     xbad = []
     xrefs = re.findall(r'<a class="xref" href="([^"]+)" data-tip="([^"]*)"', ver)
     for href, tip in xrefs:
         if sources.get(href) != tip:
             xbad.append(href)
-    if len(xrefs) != 4 or xbad:
-        print(f"FAIL verifier footer previews out of step with their source documents: {xbad or 'expected 4 xrefs, found ' + str(len(xrefs))}", file=sys.stderr)
+    if len(xrefs) != 5 or xbad:
+        print(f"FAIL verifier footer previews out of step with their source documents: {xbad or 'expected 5 xrefs, found ' + str(len(xrefs))}", file=sys.stderr)
         return 1
-    print("verifier previews: 4 cross-document tips match their sources' own openers")
+    print("verifier previews: 5 cross-document tips match their sources' own openers")
     return 0
 
 

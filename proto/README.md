@@ -8,11 +8,14 @@ the election from those artifacts alone.
 
 ```sh
 ./test.sh          # the success test: run, verify, reproduce, verify a --real run, catch
-                   # 12 tampers, browser parity
+                   # 12 tampers, browser verifier parity, browser casting-page parity
 python3 clubvote.py run      # -> out/ (committed as the reference transcript)
 python3 verify.py out        # independent verification, exit 0 = verified
 python3 clubvote.py run mydir --real   # same election, OS randomness: secrets are real,
                                        # the verifier is identical, tampering refuses
+python3 clubvote.py collect out dst b.json   # committee side of an external ballot (e.g.
+                                             # from ../cast.html): add to the box, re-run
+                                             # tally/heads/anchor; verify.py is the judge
 ```
 
 The same checks run in any current browser: [`../verifier.html`](../verifier.html)
@@ -20,6 +23,19 @@ The same checks run in any current browser: [`../verifier.html`](../verifier.htm
 transcript, shows every check as it runs, and lets a voter look up their own ballot by its
 linking tag. `tools/verify-parity.mjs` (part of `test.sh`, and CI) holds its engine to
 `verify.py`'s verdicts.
+
+The voter's side runs in the browser too: [`../cast.html`](../cast.html)
+([live](https://glassontin.github.io/civic-kernel/cast.html)) generates an enrolment secret
+on the device (the issuer certifies only the public key), seals a choice to the election
+key, offers the Benaloh challenge before casting, and signs the ballot over the roster
+ring — emitting a ballot file for the committee to `collect`. `tools/cast-parity.mjs`
+(part of `test.sh`, and CI) asserts the whole loop: a ballot built by `cast.js`, collected
+into the reference transcript, must be accepted by `verify.py` and must move the tally
+(8–6 → 9–5: Derek's re-cast supersedes, nothing is stuffed). The collection channel is
+deliberately dumb — hand over a file, email it — because verification is from artifacts;
+the honest cost, declared on the page itself: whoever collects the files sees who sent
+which sealed ballot, so shadow-mode unlinkability holds against the world but not against
+the collector. A deployment uses an anonymous drop.
 
 Needs `cryptography` and `jsonschema` (`pip install -r ../requirements.txt`). The ballot
 group is RFC 3526 MODP-2048 over stdlib `pow` — auditable over compact; a production

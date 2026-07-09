@@ -52,6 +52,18 @@ parity() {
     record parity "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
+# The casting page (../cast.html) is held to the Python verifier the same way: a
+# ballot its engine builds, collected into the reference transcript, must verify
+# AND count — tally 8-6 -> 9-5, one voter switched, nothing stuffed.
+castpage() {
+  if command -v node > /dev/null 2>&1; then
+    if node ../tools/cast-parity.mjs > "$T/castpage.log" 2>&1
+    then record castpage "OK   a cast.js ballot, collected, verifies in verify.py and counts (8-6 -> 9-5)"
+    else record castpage "FAIL cast-page parity: $(grep -m1 FAIL "$T/castpage.log")"; fi
+  else
+    record castpage "OK   SKIPPED here — node not installed; CI runs this"
+  fi
+}
 # must_fail: the verifier must REJECT the tamper, and a FAIL line must match the defence
 # the design names. A tamper caught by the wrong check is a test that passes for the wrong
 # reason and would stay green if the named defence rotted.
@@ -70,7 +82,7 @@ must_fail() { # mode  want
 # Everything below reads out/ and nothing else — launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
-honest & reproduce & real & parity &
+honest & reproduce & real & parity & castpage &
 must_fail log        "head's root matches a strict prefix"                 &
 must_fail rehead     "co-signed by the log key and all"                    &
 must_fail unwitness  "manifest declares every witness"                     &
@@ -102,8 +114,9 @@ declare -A desc=(
   [count]="collude on rigged counts -> the recount refutes itself"
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
+  [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
 )
-ORDER="honest reproduce real parity log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
+ORDER="honest reproduce real parity castpage log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do

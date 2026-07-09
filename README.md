@@ -15,6 +15,10 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
 - **[Check the election in your browser →](https://glassontin.github.io/civic-kernel/verifier.html)**
   No install. Every check runs on your machine, against the committed election
   transcript or any transcript you drop on the page. Look up a ballot by its tag.
+- **[Cast a ballot of your own →](https://glassontin.github.io/civic-kernel/cast.html)**
+  The voter's side, in the browser: generate an enrolment secret, seal a choice,
+  challenge the device that sealed it, build the anonymous ballot file. What the page
+  produces, the independent Python verifier must count — CI holds it to that.
 - **[The architecture →](https://glassontin.github.io/civic-kernel/)**
   The essay: democracy restated as an engineering problem, and the smallest honest
   answer to it. Every section opens as one plain line; expand for the full argument.
@@ -59,8 +63,11 @@ first real communities teach will revise it again.
 
 ## Next
 
-A shadow-mode run alongside one real club's AGM — an enrolment/cast page on top of the
-prototype's `--real` mode, with the official result still decided by the show of hands.
+A shadow-mode run alongside one real club's AGM, with the official result still decided
+by the show of hands. The voter's half exists (`cast.html` + `clubvote.py collect`);
+what remains is the committee's half of a real run: keys that persist for a `--real`
+election, a roster built from page-enrolled members, two neighbouring societies as
+witnesses.
 
 ## The words, in plain speech
 
@@ -130,6 +137,11 @@ links back to this list.
   engine is held to `proto/verify.py`'s verdicts by `tools/verify-parity.mjs`, which
   CI runs; its standards (the ballot group, the two schemas) are pinned inside the
   file, never fetched.
+- **`cast.html`** + **`cast.js`** — the voter's side in the browser: generate an
+  enrolment secret (it never leaves the device; the issuer certifies only the public
+  key), seal a choice, challenge the device before casting (Benaloh), sign the ballot
+  over the roster ring. `tools/cast-parity.mjs` (CI) asserts a page-built ballot,
+  fed through `clubvote.py collect`, is accepted by `verify.py` — and moves the tally.
 - **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
 - **`schema/`** — the waist: the two universal formats, as JSON Schema (Draft 2020-12).
   - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act`

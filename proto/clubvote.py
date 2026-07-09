@@ -10,6 +10,11 @@ with verify.py, which shares no code with this file.
       --real draws every key and scalar from the OS instead: same artifact set, same
       verifier, real secrets — and no tampering, because the tampers below simulate
       insiders who hold the demo keys, which a --real transcript's insiders do not.
+  python3 clubvote.py collect <out> <dst> <ballot.json>...   the committee's side of a page
+      cast: copy the transcript, add externally built ballots (e.g. from cast.html) to the
+      box, then legitimately re-run everything downstream of it — box digest, tally,
+      heads, anchor. Ballots are accepted, not judged: verify.py is the judge, so run it
+      on <dst> afterwards. Demo-seed transcripts only (the committee keys must be held).
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
@@ -736,15 +741,61 @@ def forge_cds_outside(c1: int, c2_bad: int, h: int, m: int, r: int, ctx: str, la
     raise ValueError("no even challenge found in 200 grinds")
 
 
-def tamper(src: Path, dst: Path, mode: str):
-    # Every tamper simulates an insider who HOLDS keys — the log key at least, often a
-    # voter's ring secret. Those are re-derived here from the demo seed, so a --real
-    # transcript has no insider this file can play: refuse rather than mis-simulate.
+def require_demo_keys(src: Path, who: str):
+    # Both collect and every tamper act AS a key-holder — the committee or an insider.
+    # Those keys are re-derived from the demo seed, so on a --real transcript there is
+    # no one here to play: refuse rather than mis-simulate.
     trust = json.loads((src / "trust.json").read_text())
     if trust["keys"][ACTORS["log"][0]] != pub_b64(keypair("log")):
-        sys.exit(f"{src}: not a demo-seed transcript (--real?). The tampers simulate "
-                 "insiders holding the demo keys, and this transcript's keys are not "
-                 "derivable — there is no insider to play.")
+        sys.exit(f"{src}: not a demo-seed transcript (--real?). {who} holds the demo "
+                 "keys, and this transcript's keys are not derivable.")
+
+
+def reanchor(dst: Path):
+    """Republish the closing head after a legitimate re-run of the close: the anchor
+    receipt must cover the WHOLE final log, so anything that grows or re-signs history
+    ends by re-anchoring — the committee's last act, same as in run()."""
+    heads = [json.loads(l) for l in (dst / "heads.jsonl").read_text().splitlines()]
+    head = heads[-1]
+    receipt = {"log_id": COMMUNITY, "size": head["size"], "root": head["root"],
+               "published": "Sheffield Star public notices, reprinted after collection "
+                            "closed (simulated)"}
+    receipt["sig"] = sign_over(keypair("anchor"), ACTORS["anchor"][0], receipt)
+    (dst / "anchor.json").write_text(json.dumps({"receipts": [receipt]}, indent=1) + "\n")
+
+
+def collect(src: Path, dst: Path, ballot_paths: list[Path]):
+    """The committee's side of an externally cast ballot (cast.html, or any tool that
+    emits the ballot format): add it to the box and legitimately re-run everything the
+    box feeds — digest, tally, heads, anchor. This is the same machinery the colluding
+    tampers reuse, pointed at its honest purpose: even the committee cannot skip the
+    proofs, so a bad external ballot is not caught here — it is caught by verify.py,
+    which is the judge. Run it on <dst> afterwards."""
+    require_demo_keys(src, "collection re-runs the close, so the committee")
+    if dst.exists():
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+    incoming = [json.loads(p.read_text()) for p in ballot_paths]
+
+    def add(ballots):
+        have = {(b["nullifier"], b["seq"]) for b in ballots}
+        for b in incoming:
+            if b.get("decision_id") != DECISION:
+                sys.exit(f"ballot is for decision {b.get('decision_id')!r}, not {DECISION!r}")
+            if (b["nullifier"], b["seq"]) in have:
+                sys.exit(f"a ballot with tag {b['nullifier'][:16]}… and seq {b['seq']} is "
+                         "already in the box — a re-cast needs a higher attempt number")
+            ballots.append(b)
+        ballots.sort(key=lambda b: b["nullifier"])  # position must say nothing, as in run()
+    rewrite_box(dst, add, collude=True)
+    reanchor(dst)
+    print(f"collected {len(incoming)} ballot(s) -> {dst}")
+    print("  the box, tally, heads and anchor were re-run; verify.py is the judge:")
+    print(f"  python3 {Path(__file__).parent / 'verify.py'} {dst}")
+
+
+def tamper(src: Path, dst: Path, mode: str):
+    require_demo_keys(src, "the tampers simulate insiders, so each")
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst)
@@ -952,6 +1003,8 @@ if __name__ == "__main__":
     args = [a for a in args if a != "--real"]
     if args[:1] == ["run"]:
         run(Path(args[1]) if len(args) > 1 else Path(__file__).parent / "out")
+    elif args[:1] == ["collect"] and len(args) >= 4:
+        collect(Path(args[1]), Path(args[2]), [Path(a) for a in args[3:]])
     elif args[:1] == ["tamper"] and len(args) == 4:
         tamper(Path(args[1]), Path(args[2]), args[3])
     else:
