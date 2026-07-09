@@ -1,11 +1,11 @@
 # The Kernel
 
-The normative core of the Civic Kernel on one page. The
-[essay](https://glassontin.github.io/civic-kernel/) argues it, the [schemas](schema/)
-define it, the [prototype](proto/) runs it, the
-[harness](https://glassontin.github.io/civic-kernel/scenarios.html) measures it, the
-[model](docs/functional-model.md) gives it dynamics — this page only states it. If a
-requirement is not here, it is rationale, evidence, or ecosystem.
+The rules of the Civic Kernel, on one page. The
+[essay](https://glassontin.github.io/civic-kernel/) argues them, the
+[schemas](schema/) define them, the [prototype](proto/) runs them, the
+[harness](https://glassontin.github.io/civic-kernel/scenarios.html) measures them, the
+[model](docs/functional-model.md) gives them motion — this page only states them. If
+it is not here, it is not a rule: it is explanation, evidence, or the layer above.
 
 > **Fourteen threats, four services, four verbs, two formats, one floor — and twelve refusals.**
 
