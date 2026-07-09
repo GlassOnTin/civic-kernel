@@ -17,7 +17,7 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
   transcript or any transcript you drop on the page. Look up a ballot by its tag.
 - **[The architecture →](https://glassontin.github.io/civic-kernel/)**
   The essay: democracy restated as an engineering problem, and the smallest honest
-  answer to it.
+  answer to it. Every section opens as one plain line; expand for the full argument.
 - **[Real life against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)**
   19 stress-test stories, each machine-validated against the schemas.
 - **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**
