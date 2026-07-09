@@ -167,6 +167,26 @@ def main() -> int:
             return 1
         pl += len(links)
     print(f"part previews: {pl} Part-links match the model's own Plainly lines")
+
+    # the verifier footer's cross-document previews mirror each document's own opener
+    ver = (ROOT / "verifier.html").read_text()
+    def norm(s):
+        return " ".join(re.sub(r"<[^>]+>", "", s).split())
+    sources = {
+        "https://github.com/GlassOnTin/civic-kernel": norm(re.search(r"\*\*(Rules for running a vote.*?)\*\*", (ROOT / "README.md").read_text(), re.S).group(1)),
+        "index.html": norm(re.search(r'<p class="standfirst">(.*?)</p>', essay_html, re.S).group(1)),
+        "scenarios.html": norm(re.search(r'<p class="lede">(.*?)</p>', (ROOT / "scenarios.html").read_text(), re.S).group(1)),
+        "proto/README.md": norm(re.search(r"# proto/[^\n]*\n\n([^.]*\.)", (ROOT / "proto" / "README.md").read_text()).group(1)),
+    }
+    xbad = []
+    xrefs = re.findall(r'<a class="xref" href="([^"]+)" data-tip="([^"]*)"', ver)
+    for href, tip in xrefs:
+        if sources.get(href) != tip:
+            xbad.append(href)
+    if len(xrefs) != 4 or xbad:
+        print(f"FAIL verifier footer previews out of step with their source documents: {xbad or 'expected 4 xrefs, found ' + str(len(xrefs))}", file=sys.stderr)
+        return 1
+    print("verifier previews: 4 cross-document tips match their sources' own openers")
     return 0
 
 

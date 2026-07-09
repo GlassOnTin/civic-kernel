@@ -54,10 +54,11 @@
   #checks section { margin: .9rem 0; }
   #checks h3 { font-size: .95rem; margin: .6rem 0 .2rem; }
   .sectitle[data-tip] {
-    cursor: help; position: relative;
+    cursor: help;
     text-decoration: underline dotted; text-underline-offset: 3px;
   }
-  .sectitle[data-tip]::after {
+  .sectitle[data-tip], .xref[data-tip] { position: relative; }
+  .sectitle[data-tip]::after, .xref[data-tip]::after {
     content: attr(data-tip);
     position: absolute; left: 0; top: calc(100% + .4rem); z-index: 30;
     width: 21rem; max-width: 78vw;
@@ -68,7 +69,8 @@
     display: none;
   }
   .sectitle.tipped::after { display: block; }
-  @media (hover: hover) { .sectitle[data-tip]:hover::after { display: block; } }
+  @media (hover: hover) { .sectitle[data-tip]:hover::after, .xref[data-tip]:hover::after { display: block; } }
+  footer .xref[data-tip]::after { top: auto; bottom: calc(100% + .4rem); }
   .row { display: flex; gap: .5rem; padding: .18rem 0; font-size: .88rem; }
   .row .mark { flex: 0 0 1.1rem; text-align: center; }
   .row .what { flex: 1; min-width: 0; }
@@ -98,7 +100,7 @@
 files alone, in your browser. Nothing you load here is sent anywhere; this page makes no network
 request except, if you press the button, to fetch the reference files from this same site.</p>
 
-<p>This verifies a <a href="proto/README.md">clubvote</a> transcript: a sixty-member allotment
+<p>This verifies a <a class="xref" href="proto/README.md" data-tip="One election, run end to end with real cryptography, then attacked twelve ways.">clubvote</a> transcript: a sixty-member allotment
 society electing its treasurer with anonymous, sealed ballots. The verifier below re-does every
 check from scratch — the record's hashes and witness signatures, every ballot's membership and
 validity proofs, the count itself, and finally whether this history matches the copy the world
@@ -134,8 +136,8 @@ saw. If a single number were altered anywhere, a check turns red and says where.
 </div>
 
 <footer>
-  Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype —
-  <a href="index.html">the architecture</a> · <a href="scenarios.html">real life against the
+  Part of the <a class="xref" href="https://github.com/GlassOnTin/civic-kernel" data-tip="Rules for running a vote that nobody can rig and anybody can check — too small for anyone to own.">Civic Kernel</a> prototype —
+  <a class="xref" href="index.html" data-tip="A thin distributed service for a democracy that can evolve — verifiable on the phone in your pocket, joinable one person at a time, constrained by the rights of every person it serves, and too small to be worth capturing.">the architecture</a> · <a class="xref" href="scenarios.html" data-tip="The Civic Kernel is a design for democratic infrastructure — thin, verifiable on the phone in your pocket, hard to capture. To find out whether it holds up, we drop it into the hardest situations real people face and follow one person through, step by step. Each story below says plainly where the design holds, strains, or breaks.">real life against the
   protocol</a>. The independent Python verifier (<code>proto/verify.py</code>) makes the same
   checks; a parity test in CI holds this page to the same verdicts. Works at village scale —
   sixty members, seconds per check — and says so; a national roster needs the constant-size
