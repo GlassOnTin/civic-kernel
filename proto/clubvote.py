@@ -29,7 +29,10 @@ with verify.py, which shares no code with this file.
         agm tally-import <dir> <share.json>...   verify the trustees' answers; at quorum,
                                                  tally and cut the closing head
         agm witness-import <dir> <cosig.json>... attach the witnesses' answers; when the
-                                                 closing head completes, the anchor follows
+                                                 CLOSING head completes, emit
+                                                 anchor-request.json for the anchor
+        agm anchor-import <dir> <receipt.json>.. attach the anchors' receipts; when every
+                                                 required anchor holds this history, done
       The committee never reforges history (that is the tampers' move) — it only appends.
       Shadow-mode subtractions are declared in the emitted manifest, not hidden.
   python3 clubvote.py witness new <wdir> <key-id>    a witness, on the witness's OWN
@@ -48,6 +51,14 @@ with verify.py, which shares no code with this file.
         trustee share <tdir> <tally-request.json>         recompute the sum from the box
       in the request (never exponentiate a bare number — that is a decryption oracle)
       and answer with a Chaum-Pedersen-proven share of it.
+  python3 clubvote.py anchor new <adir> <key-id>     the anchor, on ITS OWN machine —
+      the newspaper's public notices as a tool. One key, one card, one memory: which
+      closing head it lodged for which log. Then:
+        anchor watch <adir> <community-id> <log-pub>    pin whom you anchor (out of band)
+        anchor lodge <adir> <anchor-request.json>       lodge the closing head and emit a
+      receipt. Lodging is ONCE per log: a different closing head for a log already
+      lodged is REFUSED — history changing after the close is the attack, and the
+      refusal to reprint is the anchor's entire job.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
@@ -917,18 +928,20 @@ def collect(src: Path, dst: Path, ballot_paths: list[Path]):
 # their devices and never appear on this machine — the roster holds only certified
 # public keys, so the issuer cannot link a ballot to a member even in principle.
 #
-# WITNESSES AND TRUSTEES ARE SEPARATE PARTIES. The committee's keys.json holds no
-# witness key and no trustee polynomial: at `agm new` each witness hands over a card
-# and each trustee a deal (public halves only, made by `witness new` / `trustee new`
-# on their own machines). Every command that grows the log cuts a PENDING head that
-# must come back co-signed (`witness sign` -> `agm witness-import`) before history
-# advances — a witness co-signs only what extends the history it remembers, so a
-# committee that rewrites cannot get witnessed. And the tally is not the committee's
-# to compute: `close` emits a request, each trustee answers from its own machine
-# (`trustee share` -> `agm tally-import`), and no machine anywhere can decrypt alone.
-# Shadow-mode subtractions, said in the manifest: the committee machine still holds
-# the issuer and anchor keys, and whoever collects ballot files sees who handed over
-# which.
+# WITNESSES, TRUSTEES AND THE ANCHOR ARE SEPARATE PARTIES. The committee's keys.json
+# holds no witness key, no trustee polynomial and no anchor key: at `agm new` each
+# hands over its public half (a card or a deal, made by `witness new` / `trustee new`
+# / `anchor new` on their own machines) — what remains with the committee is exactly
+# what is properly its own, the log key and the issuer's pen. Every command that grows
+# the log cuts a PENDING head that must come back co-signed (`witness sign` -> `agm
+# witness-import`) before history advances — a witness co-signs only what extends the
+# history it remembers, so a committee that rewrites cannot get witnessed. The tally
+# is not the committee's to compute: `close` emits a request, each trustee answers
+# from its own machine (`trustee share` -> `agm tally-import`), and no machine
+# anywhere can decrypt alone. And the closing head goes to the anchor (`anchor lodge`
+# -> `agm anchor-import`), which lodges it at most once per log — so history cannot
+# quietly change after the close. Shadow-mode subtraction, said on the cast page:
+# whoever collects ballot files sees who handed over which.
 
 def now_iso() -> str:
     from datetime import datetime, timezone
@@ -980,16 +993,21 @@ def agm_new(d: Path, card_paths: list[Path]):
     docs = [json.loads(p.read_text()) for p in card_paths]
     cards = [c for c in docs if "witness" in c]
     deals = [c for c in docs if "commitments" in c]
-    if len(cards) + len(deals) != len(docs):
-        sys.exit("unrecognized card: neither a witness card nor a trustee deal")
-    for c in cards:
-        if len(b64d(c["pub"])) != 32 or "#" not in c["witness"]:
-            sys.exit(f"malformed witness card: {c}")
+    anchor_cards = [c for c in docs if "anchor" in c]
+    if len(cards) + len(deals) + len(anchor_cards) != len(docs):
+        sys.exit("unrecognized card: not a witness card, a trustee deal, or an anchor card")
+    for c in cards + anchor_cards:
+        kid = c.get("witness") or c.get("anchor")
+        if len(b64d(c["pub"])) != 32 or "#" not in kid:
+            sys.exit(f"malformed card: {c}")
     if not cards:
         sys.exit("no witness cards — an unwitnessed log cannot defeat a records rewrite")
+    if not anchor_cards:
+        sys.exit("no anchor card — an unanchored log cannot refute a quietly erased ballot")
     if len({c["witness"].split('#')[0] for c in cards}) < len(cards):
         sys.exit("two cards from the same witness DID — witnesses must be independent parties")
     witness_dids = [c["witness"].split("#")[0] for c in cards]
+    anchor_dids = [c["anchor"].split("#")[0] for c in anchor_cards]
     # the trustees' PUBLIC deals: their own Feldman commitments, dealt on their own
     # machines (`trustee new`); the private cross-shares travelled trustee-to-trustee
     # and never came here. The committee holds no polynomial — it can derive everyone's
@@ -1037,15 +1055,17 @@ def agm_new(d: Path, card_paths: list[Path]):
     manifest["sig"] = sign_over(keypair("log"), COMMUNITY + "#manifest-1", manifest)
     (pub / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
 
-    # The committee's trust set holds NO witness private key — only the cards' public
-    # halves. keys.json below shrinks by exactly the witnesses: that is the separation.
-    keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ("log", "issuer", "anchor")}
+    # The committee's trust set holds NO witness, trustee or anchor private key — only
+    # the cards' public halves. keys.json below holds exactly the log and issuer keys,
+    # the two that ARE the committee's: that is the separation, complete.
+    keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ("log", "issuer")}
     keys[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
     for c in cards:
         keys[c["witness"]] = c["pub"]
+    for c in anchor_cards:
+        keys[c["anchor"]] = c["pub"]
     (pub / "trust.json").write_text(json.dumps(
-        {"keys": keys, "witnesses": witness_dids,
-         "anchors": ["did:web:sheffield-star.example"]}, indent=1) + "\n")
+        {"keys": keys, "witnesses": witness_dids, "anchors": anchor_dids}, indent=1) + "\n")
 
     (pub / "roster.json").write_text(json.dumps(
         {"community": COMMUNITY,
@@ -1060,10 +1080,11 @@ def agm_new(d: Path, card_paths: list[Path]):
         "note": "Shadow-mode run: real OS randomness, persistent committee keys, "
                 "enrolment secrets on voters' devices (cast.html), witnesses on their "
                 "own machines co-signing every checkpoint, trustees on their own "
-                "machines answering the tally; the issuer and anchor keys still sit "
-                "with the committee — declared, not hidden. The official result is "
-                "whatever the meeting decides by hand; this record exists so anyone "
-                "can check what a real run would have them check."}, ts,
+                "machines answering the tally, the anchor on its own machine lodging "
+                "the closing head once and forever; the committee holds only what is "
+                "properly its own — the log key and the issuer's pen. The official "
+                "result is whatever the meeting decides by hand; this record exists "
+                "so anyone can check what a real run would have them check."}, ts,
                head=False)
     log.append("x-trustees.published", {
         "trustees_digest": sha256_hex(canon(trustees_doc)), "threshold": "2-of-3",
@@ -1288,11 +1309,15 @@ def agm_witness_import(d: Path, cosig_paths: list[Path]):
     agm_write_log(pub, log)
     (d / "pending-head.json").unlink()
     (d / "witness-request.json").unlink(missing_ok=True)
-    reanchor(pub, "club newsletter / parish noticeboard (shadow mode: the anchor key is "
-                  "on the committee machine — simulated, declared)")
-    print(f"head at size {body['size']} co-signed by every witness; checkpoint published"
-          + (" — the election is fully witnessed and anchored"
-             if "decision.tally-proof" in agm_by_type(log) else ""))
+    print(f"head at size {body['size']} co-signed by every witness; checkpoint published")
+    if "decision.tally-proof" in agm_by_type(log):
+        # the CLOSING head: it goes to the anchor — the party whose job is to hold it
+        # beyond everyone who signs things, once, forever
+        (d / "anchor-request.json").write_text(json.dumps(
+            {"head": log.heads[-1]}, indent=1) + "\n")
+        print(f"  this is the closing head. Send {d / 'anchor-request.json'} to the "
+              "anchor(s) (`anchor lodge`),")
+        print(f"  then attach the receipts: agm anchor-import {d} <receipt.json>...")
 
 
 # ---------------------------------------------------------------- the witness
@@ -1463,6 +1488,122 @@ def trustee_answer(tdir: Path, request_path: Path):
         "share": hx(d_), "proof": proof}, indent=1) + "\n")
     print(f"decrypted my share of the sum of {len(latest)} counted ballots -> {out}")
     print("  (eyeball that number: does the turnout look like your club?)")
+
+
+# ---------------------------------------------------------------- the anchor
+# A fourth party on a fourth machine — the newspaper's public notices, as a tool. Its
+# entire job is ONE property: it lodges a community's closing head at most once, and
+# refuses a different head for the same log forever after. Witnesses stop history being
+# rewritten before the close; the anchor stops it quietly changing after. Reprinting
+# the same head is fine (receipts are additive); a different one is the drop attack
+# asking for a receipt, and the refusal is the defence.
+
+def anchor_load(adir: Path) -> dict:
+    return json.loads((adir / "anchor.json").read_text())
+
+
+def anchor_save(adir: Path, a: dict):
+    (adir / "anchor.json").write_text(json.dumps(a, indent=1) + "\n")
+    (adir / "anchor.json").chmod(0o600)
+
+
+def anchor_new(adir: Path, key_id: str):
+    if adir.exists():
+        sys.exit(f"{adir} already exists")
+    if "#" not in key_id:
+        sys.exit("the anchor key id should carry a key fragment, e.g. did:web:example.org#notices-1")
+    adir.mkdir(parents=True, mode=0o700)
+    from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat
+    priv = Ed25519PrivateKey.generate()
+    anchor_save(adir, {
+        "key_id": key_id,
+        "priv": priv.private_bytes(Encoding.Raw, PrivateFormat.Raw, NoEncryption()).hex(),
+        "watch": None, "lodged": {}})
+    (adir / "card.json").write_text(json.dumps(
+        {"anchor": key_id, "pub": pub_b64(priv)}, indent=1) + "\n")
+    print(f"anchor {key_id} -> {adir}")
+    print(f"  hand {adir / 'card.json'} to the committee; anchor.json stays here (0600)")
+    print(f"  then pin whom you anchor: anchor watch {adir} <community-id> <log-pub-b64>")
+
+
+def anchor_watch(adir: Path, community: str, log_pub: str):
+    a = anchor_load(adir)
+    if len(b64d(log_pub)) != 32:
+        sys.exit("that does not look like a raw Ed25519 public key (base64url)")
+    a["watch"] = {"community": community, "log_pub": log_pub}
+    anchor_save(adir, a)
+    print(f"anchoring {community}. The log key came to you out of band — never from the "
+          "request you are asked to lodge.")
+
+
+def anchor_lodge(adir: Path, request_path: Path):
+    a = anchor_load(adir)
+    if not a.get("watch"):
+        sys.exit("this anchor serves nobody yet — run anchor watch first")
+    req = json.loads(request_path.read_text())
+    head = req["head"]
+    body = {k: v for k, v in head.items() if k != "sigs"}
+    if body.get("log_id") != a["watch"]["community"]:
+        sys.exit(f"this head is from {body.get('log_id')!r}, not the community I anchor")
+    if not any(sig_ok(a["watch"]["log_pub"], s, body) for s in head.get("sigs", [])):
+        sys.exit("the head is not signed by the log key I was given — refusing to lodge")
+    prior = a["lodged"].get(body["log_id"])
+    if prior and (prior["size"] != body["size"] or prior["root"] != body["root"]):
+        sys.exit(f"REFUSED: I already lodged this log's closing head (size {prior['size']}, "
+                 f"root {prior['root'][:23]}…) and this is a DIFFERENT one (size "
+                 f"{body['size']}). History is trying to change after the close — "
+                 "refusing to reprint it is my entire job.")
+    receipt = {"log_id": body["log_id"], "size": body["size"], "root": body["root"],
+               "published": f"public notices archive, lodged copy ({a['key_id']})"}
+    receipt["sig"] = sign_over(
+        Ed25519PrivateKey.from_private_bytes(bytes.fromhex(a["priv"])), a["key_id"], receipt)
+    out = adir / f"receipt-{body['size']}.json"
+    out.write_text(json.dumps(receipt, indent=1) + "\n")
+    a["lodged"][body["log_id"]] = {"size": body["size"], "root": body["root"]}
+    anchor_save(adir, a)
+    print(("reprinted the receipt for the head I already hold -> " if prior else
+           f"lodged the closing head at size {body['size']} -> ") + str(out))
+    print("  from here on, a different closing head for this log will be refused")
+
+
+def agm_anchor_import(d: Path, receipt_paths: list[Path]):
+    pub, log = agm_load(d)
+    if "decision.tally-proof" not in agm_by_type(log):
+        sys.exit("the tally is not in the log yet — there is no closing head to anchor")
+    agm_require_witnessed(d, "anchor the close")
+    head = log.heads[-1]
+    if head["size"] != len(log.entries):
+        sys.exit("the latest witnessed head does not cover the whole log — nothing to anchor")
+    trust = json.loads((pub / "trust.json").read_text())
+    receipts = (json.loads((pub / "anchor.json").read_text()).get("receipts", [])
+                if (pub / "anchor.json").exists() else [])
+    for p in receipt_paths:
+        r = json.loads(p.read_text())
+        kid = r.get("sig", {}).get("key_id", "")
+        if kid not in trust["keys"]:
+            sys.exit(f"{p}: receipt from {kid!r}, a key the trust anchors do not name")
+        if not any(kid == a or kid.startswith(a + "#") for a in trust["anchors"]):
+            sys.exit(f"{p}: {kid!r} is not one of this election's required anchors")
+        if r.get("size") != head["size"] or r.get("root") != head["root"]:
+            sys.exit(f"{p}: the receipt covers size {r.get('size')}, not this log's closing "
+                     f"head (size {head['size']}) — the world's copy must be THIS history")
+        if not sig_ok(trust["keys"][kid], r["sig"], {k: v for k, v in r.items() if k != "sig"}):
+            sys.exit(f"{p}: the receipt's signature does not verify against {kid}'s card")
+        if any(x.get("sig", {}).get("key_id") == kid for x in receipts):
+            print(f"  {p}: a receipt from {kid} is already lodged — skipping duplicate")
+            continue
+        receipts.append(r)
+    (pub / "anchor.json").write_text(json.dumps({"receipts": receipts}, indent=1) + "\n")
+    covered = {x["sig"]["key_id"] for x in receipts}
+    waiting = [a for a in trust["anchors"]
+               if not any(k == a or k.startswith(a + "#") for k in covered)]
+    if waiting:
+        print(f"receipt(s) recorded; still waiting on {', '.join(waiting)}")
+        return
+    (d / "anchor-request.json").unlink(missing_ok=True)
+    print("every required anchor holds this exact history — the election is complete")
+    print(f"  publish {pub} and let anyone judge it:")
+    print(f"  python3 {Path(__file__).parent / 'verify.py'} {pub}")
 
 
 def tamper(src: Path, dst: Path, mode: str):
@@ -1704,5 +1845,13 @@ if __name__ == "__main__":
         trustee_receive(Path(args[2]), Path(args[3]), Path(args[4]))
     elif args[:2] == ["trustee", "share"] and len(args) == 4:
         trustee_answer(Path(args[2]), Path(args[3]))
+    elif args[:2] == ["agm", "anchor-import"] and len(args) >= 4:
+        agm_anchor_import(Path(args[2]), [Path(a) for a in args[3:]])
+    elif args[:2] == ["anchor", "new"] and len(args) == 4:
+        anchor_new(Path(args[2]), args[3])
+    elif args[:2] == ["anchor", "watch"] and len(args) == 5:
+        anchor_watch(Path(args[2]), args[3], args[4])
+    elif args[:2] == ["anchor", "lodge"] and len(args) == 4:
+        anchor_lodge(Path(args[2]), Path(args[3]))
     else:
         sys.exit(__doc__)

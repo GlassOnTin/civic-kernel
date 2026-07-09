@@ -66,9 +66,11 @@ first real communities teach will revise it again.
 A shadow-mode run alongside one real club's AGM, with the official result still decided
 by the show of hands. Every part now exists — `cast.html` for the voter, `clubvote.py
 agm` for the committee, `witness` for the neighbouring societies, `trustee` for the
-key-holders — each party on its own machine with its own keys, no machine able to
-decrypt alone (the runbook is in [`proto/README.md`](proto/README.md)). What remains is
-not code: a real club, a real season, and what it teaches.
+key-holders, `anchor` for the newspaper — each party on its own machine with its own
+keys; the committee ends holding only the log key and the issuer's pen, no machine can
+decrypt alone, and the closing head is lodged beyond everyone who signs (the runbook is
+in [`proto/README.md`](proto/README.md)). What remains is not code: a real club, a real
+season, and what it teaches.
 
 ## The words, in plain speech
 

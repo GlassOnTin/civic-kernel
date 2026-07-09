@@ -18,10 +18,11 @@ python3 clubvote.py collect out dst b.json   # committee side of an external bal
                                              # tally/heads/anchor; verify.py is the judge
 ```
 
-And a **real election the committee can run across days, with witnesses and trustees on
-their own machines** — persistent keys, OS randomness, an append-only public transcript
-whose every checkpoint must come back co-signed, and a tally no single machine can
-compute (this is the shadow-AGM runbook):
+And a **real election the committee can run across days, with witnesses, trustees and
+the anchor on their own machines** — persistent keys, OS randomness, an append-only
+public transcript whose every checkpoint must come back co-signed, a tally no single
+machine can compute, and a closing head lodged where the committee cannot reach it
+(this is the shadow-AGM runbook):
 
 ```sh
 # each witnessing society, on ITS OWN machine:
@@ -36,8 +37,12 @@ python3 clubvote.py trustee new t1 1        # deal your own polynomial -> t1/dea
 #   to trustee N only, directly — never via the committee); verify what the others send:
 python3 clubvote.py trustee receive t1 t2-deal.json t2-share-for-1.json   # Feldman check
 
-# the committee (holding NO witness key and NO trustee polynomial):
-python3 clubvote.py agm new myclub fed-card.json meers-card.json \
+# the anchor — the newspaper's public notices as a tool, on ITS OWN machine:
+python3 clubvote.py anchor new star did:web:the-star.example#notices-1   # -> star/card.json
+python3 clubvote.py anchor watch star <community-id> <log-pub>
+
+# the committee (holding NO witness, trustee or anchor key — only its own two):
+python3 clubvote.py agm new myclub fed-card.json meers-card.json star-card.json \
                                    t1-deal.json t2-deal.json t3-deal.json
 #   Every step that grows the log ends "head awaits its witnesses": email
 #   myclub/witness-request.json out; each witness runs
@@ -55,7 +60,10 @@ python3 clubvote.py agm close myclub        # commits the digests; emits tally-r
 python3 clubvote.py trustee share t1 tally-request.json   # each trustee, on its machine:
                                             # recompute the sum FROM THE BOX, prove a share
 python3 clubvote.py agm tally-import myclub t1-share-1.json t3-share-3.json  # 2-of-3 quorum
-                                            # -> tally; then the witness round; then anchor
+                                            # -> tally; then the witness round one last time
+python3 clubvote.py anchor lodge star anchor-request.json  # the anchor lodges the witnessed
+                                            # closing head — once per log, forever
+python3 clubvote.py agm anchor-import myclub star/receipt-N.json  # the election is complete
 python3 verify.py myclub/public             # anyone judges it from the published files alone
 ```
 
@@ -67,12 +75,15 @@ it last co-signed — a committee that rewrites the past cannot get its checkpoi
 witnessed, which is what witnessing is for. A trustee decrypts only a sum it recomputed
 itself from the box in the request — never a bare number, which would make it a
 decryption oracle for any single ballot — and its cross-shares travelled
-trustee-to-trustee, so no machine anywhere ever held the joint key
-(`tools/agm-flow.mjs` proves the refusals: a re-signed rewrite dies on the witness's
-memory, a corrupted cross-share on the Feldman check, a bogus tally share on its own
-Chaum-Pedersen proof). Shadow-mode subtractions are declared in the manifest it emits:
-the committee machine still holds the issuer and anchor keys, and whoever collects the
-ballot files sees who handed over which.
+trustee-to-trustee, so no machine anywhere ever held the joint key. And the anchor
+lodges a log's closing head at most once: asked later for a receipt over a *different*
+closing head — the drop attack, politely — it refuses on the one thing it remembers,
+which is what it already printed (`tools/agm-flow.mjs` proves all four refusals: a
+re-signed rewrite dies on the witness's memory, a corrupted cross-share on the Feldman
+check, a bogus tally share on its own Chaum-Pedersen proof, a rewritten close on the
+anchor's memory). The committee ends holding exactly what is properly its own — the log
+key and the issuer's pen. The declared residue, on the cast page itself: whoever
+collects the ballot files sees who handed over which.
 
 The same checks run in any current browser: [`../verifier.html`](../verifier.html)
 ([live](https://glassontin.github.io/civic-kernel/verifier.html)) loads or accepts a dropped
@@ -257,17 +268,18 @@ system would use an elliptic-curve group for kilobyte ballots.
   the OS, encryption randomness discarded at cast — and the verifier passes unchanged,
   which is the point: it never depended on where the secrets came from. What `--real`
   does *not* change: one process still plays every actor, so key custody and the
-  enrolment ceremony are still simulated. The `agm` flow then lifts custody for real
-  where it matters most: `x` is generated on the voter's device (cast.html) and the
-  issuer — who certifies `g^x` and never sees `x` — cannot link a ballot to a member
-  even in principle; the witnesses hold their own keys on their own machines,
-  co-signing checkpoints only when the history extends the one they remember; and the
-  trustees deal their own polynomials on their own machines, exchanging cross-shares
-  directly, so no machine anywhere holds the joint decryption key and the committee
-  cannot tally alone. What the committee machine still plays: issuer and anchor —
-  declared in the manifest it emits. The tamper suite refuses every real-randomness
-  transcript, `run --real` or `agm`, because its insiders' keys are no longer anyone's
-  to hold.
+  enrolment ceremony are still simulated. The `agm` flow then lifts custody for real,
+  party by party: `x` is generated on the voter's device (cast.html) and the issuer —
+  who certifies `g^x` and never sees `x` — cannot link a ballot to a member even in
+  principle; the witnesses hold their own keys on their own machines, co-signing
+  checkpoints only when the history extends the one they remember; the trustees deal
+  their own polynomials on their own machines, exchanging cross-shares directly, so no
+  machine anywhere holds the joint decryption key and the committee cannot tally
+  alone; and the anchor lodges the closing head on its own machine, once per log,
+  refusing forever after to reprint a different one. What remains with the committee
+  is exactly what is its own: the log key and the issuer's pen. The tamper suite
+  refuses every real-randomness transcript, `run --real` or `agm`, because its
+  insiders' keys are no longer anyone's to hold.
 - **What the box still shows.** How many distinct voters, how many re-voted and how many
   times (tags are equal or they are not), and that one device cheated. Not who. Cast
   order carries no identity: the reference run casts in a shuffled order and publishes the

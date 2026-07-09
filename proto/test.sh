@@ -64,15 +64,17 @@ castpage() {
     record castpage "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
-# A REAL election with SEPARATE witnesses and SEPARATE trustees: witness new/watch/sign,
-# trustee new/receive/share, agm new/enrol/open/collect/close/tally-import/witness-import
-# — across separate processes and directories, cast.js voters, verify.py the judge. The
-# named defences: a witness handed a re-signed rewrite refuses on its own memory; a
-# corrupted cross-share dies on the Feldman check; a bogus tally share on its CP proof.
+# A REAL election, every party separated: witnesses (new/watch/sign), trustees
+# (new/receive/share), the anchor (new/watch/lodge), the committee (agm ... plus
+# tally-import/witness-import/anchor-import) — across separate processes and
+# directories, cast.js voters, verify.py the judge. The named defences: a witness
+# handed a re-signed rewrite refuses on its memory; a corrupted cross-share dies on
+# the Feldman check; a bogus tally share on its CP proof; a rewritten close on the
+# anchor's memory of what it already printed.
 agmflow() {
   if command -v node > /dev/null 2>&1; then
     if node ../tools/agm-flow.mjs > "$T/agmflow.log" 2>&1
-    then record agmflow "OK   committee, witnesses, trustees each on their own keys: verified, counted; every refusal holds"
+    then record agmflow "OK   every party on its own keys; the committee ends with only its own two; every refusal holds"
     else record agmflow "FAIL agm flow: $(grep -m1 FAIL "$T/agmflow.log")"; fi
   else
     record agmflow "OK   SKIPPED here — node not installed; CI runs this"
@@ -129,7 +131,7 @@ declare -A desc=(
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
   [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
-  [agmflow]="a real election, three parties separated (agm + witness + trustee groups)"
+  [agmflow]="a real election, every party separated (agm + witness + trustee + anchor)"
 )
 ORDER="honest reproduce real parity castpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 

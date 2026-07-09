@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 // The full separation, end to end: a REAL election run across processes and
-// FIVE machines' worth of directories — the committee (agm), two witnesses
-// (witness new/watch/sign), three trustees (trustee new/receive/share) — with
-// cast.js playing three voters whose secrets never touch any of them. The
-// committee holds no witness key and no trustee polynomial; no machine can
-// decrypt alone. The independent Python verifier must certify the closed
-// transcript (Yes 2, No 1; 3 checkpointed heads), and the refusals must hold:
-// a witness handed a re-signed rewrite refuses on its memory, a trustee handed
-// a corrupted cross-share refuses on the Feldman check, and a bogus tally
-// share convicts itself at import.
+// SIX machines' worth of directories — the committee (agm), two witnesses
+// (witness new/watch/sign), three trustees (trustee new/receive/share), the
+// anchor (anchor new/watch/lodge) — with cast.js playing three voters whose
+// secrets never touch any of them. The committee holds exactly its own two
+// keys (log, issuer); no machine can decrypt alone; nobody can anchor but the
+// anchor. The independent Python verifier must certify the closed transcript
+// (Yes 2, No 1; 3 checkpointed heads), and the refusals must hold: a witness
+// handed a re-signed rewrite refuses on its memory, a trustee handed a
+// corrupted cross-share refuses on the Feldman check, a bogus tally share
+// convicts itself at import — and the anchor, asked to reprint a rewritten
+// close, refuses on the one thing it remembers: what it already printed.
 import { createRequire } from "module";
 import { execFileSync } from "child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "fs";
@@ -35,12 +37,15 @@ const pyFails = (args, wantRe) => {
 const tmp = mkdtempSync(path.join(tmpdir(), "agmflow-"));
 const DIR = path.join(tmp, "agm"), PUB = path.join(DIR, "public");
 const W1 = path.join(tmp, "w-fed"), W2 = path.join(tmp, "w-meers"), W3 = path.join(tmp, "w-stranger");
+const A1 = path.join(tmp, "a-star"), A2 = path.join(tmp, "a-stranger");
 const T = i => path.join(tmp, "t" + i);
 const REQ = path.join(DIR, "witness-request.json");
+const AREQ = path.join(DIR, "anchor-request.json");
 try {
-  // --- two witnesses and three trustees are born on their own "machines"
+  // --- two witnesses, three trustees and an anchor are born on their own "machines"
   py([CLUBVOTE, "witness", "new", W1, "did:web:sheffield-allotment-federation.example#w1"]);
   py([CLUBVOTE, "witness", "new", W2, "did:web:meersbrook-allotments.example#w1"]);
+  py([CLUBVOTE, "anchor", "new", A1, "did:web:sheffield-star.example#notices-1"]);
   for (const i of [1, 2, 3]) py([CLUBVOTE, "trustee", "new", T(i), String(i)]);
 
   // cross-shares travel trustee-to-trustee, never via the committee; each is
@@ -59,17 +64,18 @@ try {
 
   // --- the committee opens shop holding only public halves
   py([CLUBVOTE, "agm", "new", DIR,
-    path.join(W1, "card.json"), path.join(W2, "card.json"),
+    path.join(W1, "card.json"), path.join(W2, "card.json"), path.join(A1, "card.json"),
     path.join(T(1), "deal.json"), path.join(T(2), "deal.json"), path.join(T(3), "deal.json")]);
   const trust = JSON.parse(readFileSync(path.join(PUB, "trust.json"), "utf8"));
   const community = JSON.parse(readFileSync(path.join(PUB, "manifest.json"), "utf8")).community.id;
   const logPub = trust.keys[community + "#log-1"];
   const committeeKeys = JSON.parse(readFileSync(path.join(DIR, "private", "keys.json"), "utf8"));
-  say(!("witness-fed" in committeeKeys.keys) && !("witness-meers" in committeeKeys.keys)
+  say(Object.keys(committeeKeys.keys).sort().join(",") === "issuer,log"
     && Object.keys(committeeKeys.scalars).length === 0,
-    "the committee's keys.json holds NO witness key and NO trustee polynomial — the separation is real");
+    "the committee's keys.json holds exactly the log key and the issuer's pen — nothing borrowed");
   py([CLUBVOTE, "witness", "watch", W1, community, logPub]);
   py([CLUBVOTE, "witness", "watch", W2, community, logPub]);
+  py([CLUBVOTE, "anchor", "watch", A1, community, logPub]);
 
   // --- history cannot advance past an unwitnessed checkpoint
   say(pyFails([CLUBVOTE, "agm", "open", DIR, "x", "q", "a", "b"], /not yet co-signed/),
@@ -179,12 +185,54 @@ Path(${JSON.stringify(rewritten)}).write_text(json.dumps(req))
     /do not name/),
     "a co-signature from a key the trust anchors do not name is refused");
 
-  // --- the real witnesses sign the honest close; the anchor follows
+  // --- the real witnesses sign the honest close; the closing head goes to the anchor
   py([CLUBVOTE, "witness", "sign", W1, REQ]);
   py([CLUBVOTE, "witness", "sign", W2, REQ]);
   const done = py([CLUBVOTE, "agm", "witness-import", DIR,
     path.join(W1, "cosig-6.json"), path.join(W2, "cosig-6.json")]);
-  say(/fully witnessed and anchored/.test(done), "the closing head completes and the anchor follows it");
+  say(/closing head/.test(done) && /anchor lodge/.test(done),
+    "the closing head completes and is handed to the anchor — the committee cannot anchor it itself");
+
+  py([CLUBVOTE, "anchor", "lodge", A1, AREQ]);
+  const reprint = py([CLUBVOTE, "anchor", "lodge", A1, AREQ]);
+  say(/reprinted/.test(reprint), "re-lodging the SAME head is a reprint, not a refusal (receipts are additive)");
+
+  // --- THE anchor defence: after lodging, the committee rewrites history end to
+  // end (every signature genuine) and asks the anchor for a fresh receipt. The
+  // anchor's memory of what it printed is the drop defence, relocated to its owner.
+  const rewrittenClose = path.join(tmp, "rewritten-anchor-request.json");
+  execFileSync("python3", ["-c", `
+import json, sys
+from pathlib import Path
+sys.path.insert(0, ${JSON.stringify(path.join(ROOT, "proto"))})
+import clubvote as cv
+d = Path(${JSON.stringify(DIR)})
+cv.load_secrets(d / "private" / "keys.json")
+entries = [json.loads(l) for l in (d / "public" / "log.jsonl").read_text().splitlines()]
+e = next(x for x in entries if x["type"] == "decision.tally-proof")
+e["body"]["counts"] = {"Yes": 1, "No": 2}
+del e["sig"]
+e["sig"] = cv.sign_over(cv.keypair("log"), cv.ACTORS["log"][0], e)
+leaves = [cv.leaf_hash(cv.canon({k: v for k, v in x.items() if k != "sig"})) for x in entries]
+body = {"log_id": cv.COMMUNITY, "size": len(entries),
+        "root": "sha256:" + cv.merkle_root(leaves).hex(), "timestamp": entries[-1]["timestamp"]}
+req = {"head": {**body, "sigs": [cv.sign_over(cv.keypair("log"), cv.ACTORS["log"][0], body)]}}
+Path(${JSON.stringify(rewrittenClose)}).write_text(json.dumps(req))
+`], { stdio: "pipe" });
+  say(pyFails([CLUBVOTE, "anchor", "lodge", A1, rewrittenClose], /DIFFERENT|refusing to reprint/),
+    "the anchor handed a rewritten closing head refuses: it already lodged this log, once, forever");
+
+  // --- a stranger's receipt is refused at import (not in the trust anchors)
+  py([CLUBVOTE, "anchor", "new", A2, "did:web:somewhere-else.example#notices-1"]);
+  py([CLUBVOTE, "anchor", "watch", A2, community, logPub]);
+  py([CLUBVOTE, "anchor", "lodge", A2, AREQ]);
+  say(pyFails([CLUBVOTE, "agm", "anchor-import", DIR, path.join(A2, "receipt-6.json")],
+    /do not name/),
+    "a receipt from a key the trust anchors do not name is refused");
+
+  const complete = py([CLUBVOTE, "agm", "anchor-import", DIR, path.join(A1, "receipt-6.json")]);
+  say(/election is complete/.test(complete),
+    "the Star's receipt lands and the election is complete");
 
   // --- the judge: verify.py, from the published directory alone
   let verdict = "", ok = true;
@@ -217,4 +265,4 @@ if (failures) {
   console.log(failures + " agm-flow failure(s) — the separation does not hold");
   process.exit(1);
 }
-console.log("agm flow: committee, witnesses and trustees each on their own keys — verified from the published files");
+console.log("agm flow: committee, witnesses, trustees and the anchor each on their own keys — verified from the published files");
