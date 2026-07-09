@@ -77,8 +77,9 @@ Every term of art in this repo, one line each.
   upholds and what it leaves out.
 - **Subtraction** — anything in the full design a deployment doesn't do. Allowed —
   but only out loud, in the manifest.
-- **The waist** — the two formats every deployment must share (a log entry and a
-  manifest), kept deliberately narrow so anything can be compared with anything.
+- **The waist** — the narrow middle of the hourglass, in the sense the internet has
+  one (the IP packet): the two formats every deployment must share (a log entry and
+  a manifest), kept deliberately thin so anything can be compared with anything.
 - **Ring signature** — proof that *some member of a published list* signed, without
   revealing which one. How a ballot proves eligibility without a name.
 - **Linking tag** — a per-election tag derived from the voter's secret: vote twice

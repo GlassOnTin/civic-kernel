@@ -106,7 +106,7 @@ annex (T9). A surface this small has nowhere to hide burden (T12).
 ## Two formats — the waist (§6, [`schema/`](schema/))
 
 <details>
-<summary><b>Plainly</b> <i>Any group may run a weakened version, but its manifest must say so in a form anyone's phone can read. The one thing a manifest cannot vouch for is its own witnesses.</i></summary>
+<summary><b>Plainly</b> <i>The waist is the narrow middle everything must share to talk at all — for the internet that is the IP packet; here it is two file formats. Any group may run a weakened version, but its manifest must say so in a form anyone's phone can read — and the one thing a manifest cannot vouch for is its own witnesses.</i></summary>
 
 Thinner than the services: a [log entry](schema/log-entry.schema.json) and a
 [conformance manifest](schema/manifest.schema.json). Adoption is per-person subscription
