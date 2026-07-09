@@ -8,7 +8,7 @@ the election from those artifacts alone.
 
 ```sh
 ./test.sh          # the success test: run, verify, reproduce, verify a --real run, catch
-                   # 12 tampers, browser verifier parity, browser casting-page parity
+                   # 12 tampers, browser verifier parity, casting-page parity, agm flow
 python3 clubvote.py run      # -> out/ (committed as the reference transcript)
 python3 verify.py out        # independent verification, exit 0 = verified
 python3 clubvote.py run mydir --real   # same election, OS randomness: secrets are real,
@@ -17,6 +17,28 @@ python3 clubvote.py collect out dst b.json   # committee side of an external bal
                                              # from ../cast.html): add to the box, re-run
                                              # tally/heads/anchor; verify.py is the judge
 ```
+
+And a **real election the committee can run across days** — persistent keys, OS
+randomness, an append-only public transcript (this is the shadow-AGM runbook):
+
+```sh
+python3 clubvote.py agm new myclub          # keys -> myclub/private/keys.json (0600, guard it);
+                                            # transcript grows append-only in myclub/public/
+python3 clubvote.py agm enrol myclub "A. Member" <voter_pub>   # from cast.html step 1 —
+                                            # the member's secret never leaves their device
+python3 clubvote.py agm open myclub 2026-agm "Question?" "Yes" "No"  # pins the roster digest
+# members cast at cast.html (point it at the published myclub/public/) and hand over files
+python3 clubvote.py agm collect myclub ballot-*.json
+python3 clubvote.py agm close myclub        # digests, tally, final head, anchor
+python3 verify.py myclub/public             # anyone judges it from the published files alone
+```
+
+The committee never reforges history — `agm` only appends (rewriting is the tampers'
+move, and `tamper`/demo-`collect` refuse an agm transcript outright: its keys are
+nobody's to re-derive). Shadow-mode subtractions are declared in the manifest it emits:
+one machine still holds the log, issuer, witness, anchor and all three trustee keys —
+witness separation is the next rung — and whoever collects the ballot files sees who
+handed over which.
 
 The same checks run in any current browser: [`../verifier.html`](../verifier.html)
 ([live](https://glassontin.github.io/civic-kernel/verifier.html)) loads or accepts a dropped
@@ -201,10 +223,13 @@ system would use an elliptic-curve group for kilobyte ballots.
   the OS, encryption randomness discarded at cast — and the verifier passes unchanged,
   which is the point: it never depended on where the secrets came from. What `--real`
   does *not* change: one process still plays every actor, so key custody and the
-  enrolment ceremony are still simulated (a deployment generates `x` on the voter's
-  device, and then the issuer — who certified `g^x` and never saw `x` — cannot link a
-  ballot to a member either), and the tamper suite refuses such a transcript, because
-  its insiders' keys are no longer anyone's to hold.
+  enrolment ceremony are still simulated. The `agm` flow then lifts the enrolment half
+  for real: `x` is generated on the voter's device (cast.html) and the issuer — who
+  certifies `g^x` and never sees `x` — cannot link a ballot to a member even in
+  principle; its committee machine still plays log, issuer, witnesses, anchor and
+  trustees, declared in the manifest it emits. The tamper suite refuses every
+  real-randomness transcript, `run --real` or `agm`, because its insiders' keys are no
+  longer anyone's to hold.
 - **What the box still shows.** How many distinct voters, how many re-voted and how many
   times (tags are equal or they are not), and that one device cheated. Not who. Cast
   order carries no identity: the reference run casts in a shuffled order and publishes the

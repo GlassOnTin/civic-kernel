@@ -11,10 +11,20 @@ with verify.py, which shares no code with this file.
       verifier, real secrets — and no tampering, because the tampers below simulate
       insiders who hold the demo keys, which a --real transcript's insiders do not.
   python3 clubvote.py collect <out> <dst> <ballot.json>...   the committee's side of a page
-      cast: copy the transcript, add externally built ballots (e.g. from cast.html) to the
-      box, then legitimately re-run everything downstream of it — box digest, tally,
-      heads, anchor. Ballots are accepted, not judged: verify.py is the judge, so run it
-      on <dst> afterwards. Demo-seed transcripts only (the committee keys must be held).
+      cast INTO THE DEMO: copy the transcript, add externally built ballots (e.g. from
+      cast.html) to the box, then legitimately re-run everything downstream of it — box
+      digest, tally, heads, anchor. Ballots are accepted, not judged: verify.py is the
+      judge, so run it on <dst> afterwards. Demo-seed transcripts only.
+  python3 clubvote.py agm new <dir>              a REAL election the committee can run
+      across days: keys and trustee polynomials generated once from the OS and kept in
+      <dir>/private/keys.json (0600, the only file to guard); the publishable transcript
+      grows append-only in <dir>/public/. Then:
+        agm enrol <dir> "<member>" <voter_pub>   certify a page-enrolled public key
+        agm open <dir> <decision-id> "<question>" "<optA>" "<optB>"   pin the roster, open
+        agm collect <dir> <ballot.json>...       box ballots from cast.html as they arrive
+        agm close <dir>                          commit digests, tally, final head, anchor
+      The committee never reforges history (that is the tampers' move) — it only appends.
+      Shadow-mode subtractions are declared in the emitted manifest, not hidden.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
@@ -142,6 +152,34 @@ def rand_scalar(label: str) -> int:
         return _real[label]
     # all demo "randomness" derives from the public seed, so the run is byte-reproducible
     return int.from_bytes(hashlib.shake_256(SEED + b"|" + label.encode()).digest(64)) % Q
+
+
+def load_secrets(path: Path):
+    """agm: the committee's private material, one guarded file. Loading it makes labels
+    resolve across processes the way _real makes them resolve within one — an election
+    can span days of separate invocations and still be one election."""
+    global REAL
+    REAL = True
+    doc = json.loads(path.read_text())
+    for name, seed_hex in doc["keys"].items():
+        _real["key|" + name] = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(seed_hex))
+    for label, val_hex in doc["scalars"].items():
+        _real[label] = int(val_hex, 16)
+
+
+def save_secrets(path: Path):
+    """Written exactly once, by `agm new`: after it, no command ever creates a NEW
+    persistent secret — later invocations only load. Proof nonces stay ephemeral in
+    memory, as nonces must."""
+    from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat
+    keys, scalars = {}, {}
+    for label, v in _real.items():
+        if label.startswith("key|"):
+            keys[label[4:]] = v.private_bytes(Encoding.Raw, PrivateFormat.Raw, NoEncryption()).hex()
+        else:
+            scalars[label] = hx(v)
+    path.write_text(json.dumps({"keys": keys, "scalars": scalars}, indent=1) + "\n")
+    path.chmod(0o600)
 
 
 def enc(m: int, r: int, h: int) -> dict:
@@ -322,10 +360,12 @@ class Log:
         self.heads.append({**head, "sigs": sigs})
 
 
-def build_tally(box: list, present_indices: list[int]) -> dict:
+def build_tally(box: list, present_indices: list[int], decision_id: str = None,
+                options: list[str] = None) -> dict:
     """Homomorphically sum the counted set (last ballot per nullifier), threshold-decrypt
     the sum with the present trustees' shares, brute-force the small exponent. This is
     also what the colluding-committee tampers reuse: even they cannot skip the proofs."""
+    decision_id, options = decision_id or DECISION, options or OPTIONS
     latest = {}
     for b in sorted(box, key=lambda b: b["seq"]):
         latest[b["nullifier"]] = b
@@ -335,7 +375,7 @@ def build_tally(box: list, present_indices: list[int]) -> dict:
         C2 = C2 * int(b["ciphertext"]["c2"], 16) % P
     shares = []
     for i in present_indices:
-        d, proof = cp_prove(trustee_share(i), C1, i, DECISION)
+        d, proof = cp_prove(trustee_share(i), C1, i, decision_id)
         shares.append({"trustee": TRUSTEES[i - 1]["did"], "index": i,
                        "share": hx(d), "proof": proof})
     lagrange = {i: 1 for i in present_indices}
@@ -355,15 +395,16 @@ def build_tally(box: list, present_indices: list[int]) -> dict:
         acc = acc * G % P
     if T is None:
         raise ValueError("tally is not a small discrete log — a ciphertext was malformed")
-    counts = {OPTIONS[0]: T, OPTIONS[1]: len(latest) - T}
+    counts = {options[0]: T, options[1]: len(latest) - T}
     return {"latest": latest, "sum_ciphertext": {"c1": hx(C1), "c2": hx(C2)},
             "shares": shares, "counts": counts}
 
 
-def tally_body(box: list, box_digest: str, present_indices: list[int], note: str) -> dict:
-    t = build_tally(box, present_indices)
+def tally_body(box: list, box_digest: str, present_indices: list[int], note: str,
+               decision_id: str = None, options: list[str] = None) -> dict:
+    t = build_tally(box, present_indices, decision_id, options)
     return {
-        "decision_id": DECISION,
+        "decision_id": decision_id or DECISION,
         "method": "homomorphic exp-elgamal recount, 2-of-3 threshold decryption/v1 "
                   "(m=1 encodes options[0]; last ballot per nullifier counts)",
         "ballot_box_digest": box_digest,
@@ -751,15 +792,15 @@ def require_demo_keys(src: Path, who: str):
                  "keys, and this transcript's keys are not derivable.")
 
 
-def reanchor(dst: Path):
+def reanchor(dst: Path, published: str = "Sheffield Star public notices, reprinted after "
+                                         "collection closed (simulated)"):
     """Republish the closing head after a legitimate re-run of the close: the anchor
     receipt must cover the WHOLE final log, so anything that grows or re-signs history
     ends by re-anchoring — the committee's last act, same as in run()."""
     heads = [json.loads(l) for l in (dst / "heads.jsonl").read_text().splitlines()]
     head = heads[-1]
     receipt = {"log_id": COMMUNITY, "size": head["size"], "root": head["root"],
-               "published": "Sheffield Star public notices, reprinted after collection "
-                            "closed (simulated)"}
+               "published": published}
     receipt["sig"] = sign_over(keypair("anchor"), ACTORS["anchor"][0], receipt)
     (dst / "anchor.json").write_text(json.dumps({"receipts": [receipt]}, indent=1) + "\n")
 
@@ -792,6 +833,238 @@ def collect(src: Path, dst: Path, ballot_paths: list[Path]):
     print(f"collected {len(incoming)} ballot(s) -> {dst}")
     print("  the box, tally, heads and anchor were re-run; verify.py is the judge:")
     print(f"  python3 {Path(__file__).parent / 'verify.py'} {dst}")
+
+
+# ---------------------------------------------------------------- the committee (agm)
+# The committee's half of a REAL election: same actors as the demo, but every key and
+# trustee polynomial is generated once with OS randomness and kept in
+# <dir>/private/keys.json (0600), while the published transcript grows APPEND-ONLY in
+# <dir>/public/ across days of separate invocations. Nothing here ever reforges
+# history — rewriting is the tampers' move; the committee only appends and, at close,
+# anchors. Voters are cast.html: their secrets are born on their devices and never
+# appear on this machine — the roster holds only certified public keys, so the issuer
+# cannot link a ballot to a member even in principle. Shadow-mode subtractions, said
+# in the manifest: one machine still holds log, issuer, witness, anchor and all three
+# trustee keys (witness separation is the next rung), and whoever collects ballot
+# files sees who handed over which.
+
+def now_iso() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def agm_load(d: Path) -> tuple[Path, Log]:
+    load_secrets(d / "private" / "keys.json")
+    pub = d / "public"
+    log = Log(keypair("log"), None)
+    log.entries = [json.loads(l) for l in (pub / "log.jsonl").read_text().splitlines()]
+    log.heads = [json.loads(l) for l in (pub / "heads.jsonl").read_text().splitlines()]
+    return pub, log
+
+
+def agm_write_log(pub: Path, log: Log):
+    (pub / "log.jsonl").write_text("".join(json.dumps(e) + "\n" for e in log.entries))
+    (pub / "heads.jsonl").write_text("".join(json.dumps(h) + "\n" for h in log.heads))
+
+
+def agm_by_type(log: Log) -> dict:
+    return {e["type"]: e for e in log.entries}
+
+
+def agm_new(d: Path):
+    global REAL
+    if d.exists():
+        sys.exit(f"{d} already exists — one directory is one election")
+    REAL = True
+    (d / "private").mkdir(parents=True, mode=0o700)
+    pub = d / "public"
+    pub.mkdir()
+
+    # the trustees' DKG, exactly as in run() — with real polynomials this time
+    polys = dkg_polys()
+    comms = {j: [pow(G, a0, P), pow(G, a1, P)] for j, (a0, a1) in polys.items()}
+    for j, (a0, a1) in polys.items():
+        for i in (1, 2, 3):
+            assert pow(G, (a0 + a1 * i) % Q, P) == comms[j][0] * pow(comms[j][1], i, P) % P
+    trustees_doc = {
+        "community": COMMUNITY, "group": GROUP,
+        "threshold": {"required": THRESHOLD, "of": len(TRUSTEES)},
+        "trustees": [{**tr, "commitments": [hx(c) for c in comms[tr["index"]]]}
+                     for tr in TRUSTEES],
+        "note": "shadow-mode DKG: the polynomials are real and Feldman-verified, but all "
+                "three were dealt on the committee machine — trustee separation is a "
+                "declared subtraction of this run, not of the design",
+    }
+    (pub / "trustees.json").write_text(json.dumps(trustees_doc, indent=1) + "\n")
+
+    manifest = {
+        "v": "civic-kernel/manifest/v0",
+        "community": {"id": COMMUNITY, "name": "Heeley Bank Allotment Society, Sheffield (shadow-mode run)",
+                      "parent": "did:web:sheffield-allotment-federation.example"},
+        "services": {"personhood": True, "decisions": True, "rights_guard": False, "transparency_log": True},
+        "personhood": {"method": "platform-account",
+                       "issuer": "club secretary — page-enrolled: secrets born on voters' devices, "
+                                 "the issuer certifies only public keys",
+                       "unlinkable": True, "sybil_resistance": "weak",
+                       "eligibility_rules": "club-roster: one vote per enrolled member; "
+                                            "enrolment closes when the decision opens"},
+        "decisions": {"verifiable": True, "receipt_free": True, "cast_or_audit": True,
+                      "paper_channel": False, "coercion_resistance": "revote-silent",
+                      "trustee_quorum": "2-of-3 — all three keys on the committee machine "
+                                        "in shadow mode, declared"},
+        "transparency_log": {"log_id": COMMUNITY,
+                             "witnesses": ["did:web:sheffield-allotment-federation.example",
+                                           "did:web:meersbrook-allotments.example"]},
+        "decision_metadata": False,
+    }
+    manifest["sig"] = sign_over(keypair("log"), COMMUNITY + "#manifest-1", manifest)
+    (pub / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
+
+    keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ACTORS}
+    keys[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
+    (pub / "trust.json").write_text(json.dumps(
+        {"keys": keys, "witnesses": manifest["transparency_log"]["witnesses"],
+         "anchors": ["did:web:sheffield-star.example"]}, indent=1) + "\n")
+
+    (pub / "roster.json").write_text(json.dumps(
+        {"community": COMMUNITY,
+         "eligibility": "club-roster: one vote per enrolled member; enrolment closes "
+                        "when the decision opens",
+         "members": []}, indent=1) + "\n")
+
+    log = Log(keypair("log"), None)
+    ts = now_iso()
+    log.append("manifest.published", {
+        "manifest_digest": sha256_hex(canon({k: v for k, v in manifest.items() if k != "sig"})),
+        "note": "Shadow-mode run: real OS randomness, persistent committee keys, "
+                "enrolment secrets on voters' devices (cast.html), witness and trustee "
+                "keys still held on the committee machine — declared, not hidden. The "
+                "official result is whatever the meeting decides by hand; this record "
+                "exists so anyone can check what a real run would have them check."}, ts)
+    log.append("x-trustees.published", {
+        "trustees_digest": sha256_hex(canon(trustees_doc)), "threshold": "2-of-3",
+        "trustees": [tr["did"] for tr in TRUSTEES]}, ts)
+    agm_write_log(pub, log)
+    save_secrets(d / "private" / "keys.json")
+    print(f"new election -> {d}")
+    print(f"  private/keys.json holds every secret this election will ever need (0600); guard it")
+    print(f"  public/ is the transcript to publish; it grows append-only from here")
+    print(f"  next: agm enrol {d} \"<member name>\" <voter_pub from cast.html>")
+
+
+def agm_enrol(d: Path, name: str, pub_hex: str):
+    pub, log = agm_load(d)
+    if "decision.opened" in agm_by_type(log):
+        sys.exit("the decision is open and the logged roster digest pins the member list "
+                 "— enrolment is closed")
+    try:
+        y = int(pub_hex, 16)
+    except ValueError:
+        sys.exit("that is not a hex public key")
+    if not (1 < y < P and pow(y, Q, P) == 1):
+        sys.exit("that public key is not a prime-order subgroup element — refused at the "
+                 "door (the same input hygiene the verifier applies to the ring)")
+    doc = json.loads((pub / "roster.json").read_text())
+    if any(c["member"] == name for c in doc["members"]):
+        sys.exit(f"{name!r} is already enrolled")
+    if any(int(c["voter_pub"], 16) == y for c in doc["members"]):
+        sys.exit("that public key is already enrolled under another name — one key, one member")
+    cred = {"member": name, "voter_pub": hx(y)}
+    cred["issuer_sig"] = sign_over(keypair("issuer"), ACTORS["issuer"][0], cred)
+    doc["members"].append(cred)
+    (pub / "roster.json").write_text(json.dumps(doc, indent=1) + "\n")
+    print(f"enrolled {name} ({len(doc['members'])} member(s)). Their secret never came here; "
+          "only this public key did.")
+
+
+def agm_open(d: Path, decision_id: str, question: str, options: list[str]):
+    pub, log = agm_load(d)
+    if "decision.opened" in agm_by_type(log):
+        sys.exit("this election directory already opened its decision — one directory, "
+                 "one decision")
+    roster_doc = json.loads((pub / "roster.json").read_text())
+    if not roster_doc["members"]:
+        sys.exit("nobody is enrolled — a ring of zero keys can sign nothing")
+    digest = sha256_hex(canon(roster_doc))
+    ts = now_iso()
+    from datetime import datetime, timedelta, timezone
+    ends = (datetime.now(timezone.utc) + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    log.append("x-roster.published",
+               {"roster_digest": digest, "member_count": len(roster_doc["members"])}, ts)
+    log.append("decision.opened", {
+        "decision_id": decision_id, "question": question,
+        "question_hash": sha256_hex(question.encode()),
+        "options": options, "eligibility_rules": "roster " + digest,
+        "recast_policy": "last-ballot-counts",
+        "window": {"deliberation_ends": ts, "cast_ends": ends}}, ts)
+    (pub / "ballot-box.json").write_text(json.dumps(
+        {"decision_id": decision_id, "ballots": []}, indent=1) + "\n")
+    (pub / "audits.json").write_text(json.dumps(
+        {"decision_id": decision_id, "audits": []}, indent=1) + "\n")
+    agm_write_log(pub, log)
+    print(f"decision {decision_id!r} is open ({len(roster_doc['members'])} enrolled; "
+          f"window closes {ends})")
+    print(f"  members cast at cast.html?ref=<published {pub}> and hand over the ballot file")
+    print(f"  then: agm collect {d} <ballot.json>...   and finally: agm close {d}")
+
+
+def agm_collect(d: Path, ballot_paths: list[Path]):
+    pub, log = agm_load(d)
+    by = agm_by_type(log)
+    if "decision.opened" not in by:
+        sys.exit("no decision is open — nothing to collect into")
+    if "decision.closed" in by:
+        sys.exit("the decision closed and its box is committed by digest — a late ballot "
+                 "cannot enter, which is the point of the digest")
+    decision_id = by["decision.opened"]["body"]["decision_id"]
+    doc = json.loads((pub / "ballot-box.json").read_text())
+    have = {(b["nullifier"], b["seq"]) for b in doc["ballots"]}
+    for p in ballot_paths:
+        b = json.loads(p.read_text())
+        if b.get("decision_id") != decision_id:
+            sys.exit(f"{p}: ballot is for decision {b.get('decision_id')!r}, not {decision_id!r}")
+        if (b["nullifier"], b["seq"]) in have:
+            sys.exit(f"{p}: a ballot with this tag and seq {b['seq']} is already in the box "
+                     "— a re-cast needs a higher attempt number")
+        have.add((b["nullifier"], b["seq"]))
+        doc["ballots"].append(b)
+    doc["ballots"].sort(key=lambda b: b["nullifier"])  # position must say nothing
+    (pub / "ballot-box.json").write_text(json.dumps(doc, indent=1) + "\n")
+    print(f"collected {len(ballot_paths)} ballot(s); the box holds {len(doc['ballots'])}. "
+          "Ballots are accepted, not judged — verify.py judges the closed transcript.")
+
+
+def agm_close(d: Path):
+    pub, log = agm_load(d)
+    by = agm_by_type(log)
+    if "decision.opened" not in by:
+        sys.exit("no decision is open — nothing to close")
+    if "decision.closed" in by:
+        sys.exit("already closed — a close is once; that is what the anchor seals")
+    opened = by["decision.opened"]["body"]
+    box_doc = json.loads((pub / "ballot-box.json").read_text())
+    audits_doc = json.loads((pub / "audits.json").read_text())
+    box_digest = sha256_hex(canon(box_doc))
+    ts = now_iso()
+    log.append("decision.closed", {
+        "decision_id": opened["decision_id"], "ballot_box_digest": box_digest,
+        "ballots_recorded": len(box_doc["ballots"]),
+        "audits_digest": sha256_hex(canon(audits_doc)),
+        "commitments_audited": len(audits_doc["audits"]),
+        "audit_failures": sum(1 for a in audits_doc["audits"] if a["outcome"] == "MISMATCH"),
+        "rejected_at_cast": []}, ts)
+    body = tally_body(box_doc["ballots"], box_digest, [1, 3],
+                      "shadow-mode threshold decryption: quorum 2-of-3 exercised, all "
+                      "three keys on the committee machine — declared",
+                      opened["decision_id"], opened["options"])
+    log.append("decision.tally-proof", body, ts)
+    agm_write_log(pub, log)
+    reanchor(pub, "club newsletter / parish noticeboard (shadow mode: the anchor key is "
+                  "on the committee machine — simulated, declared)")
+    print(f"closed. tally: " + ", ".join(f"{k} {v}" for k, v in body["counts"].items()))
+    print(f"  ({body['distinct_voters']} counted, {body['superseded']} superseded)")
+    print(f"  publish {pub} and let anyone judge it:")
+    print(f"  python3 {Path(__file__).parent / 'verify.py'} {pub}")
 
 
 def tamper(src: Path, dst: Path, mode: str):
@@ -1007,5 +1280,15 @@ if __name__ == "__main__":
         collect(Path(args[1]), Path(args[2]), [Path(a) for a in args[3:]])
     elif args[:1] == ["tamper"] and len(args) == 4:
         tamper(Path(args[1]), Path(args[2]), args[3])
+    elif args[:2] == ["agm", "new"] and len(args) == 3:
+        agm_new(Path(args[2]))
+    elif args[:2] == ["agm", "enrol"] and len(args) == 5:
+        agm_enrol(Path(args[2]), args[3], args[4])
+    elif args[:2] == ["agm", "open"] and len(args) == 7:
+        agm_open(Path(args[2]), args[3], args[4], [args[5], args[6]])
+    elif args[:2] == ["agm", "collect"] and len(args) >= 4:
+        agm_collect(Path(args[2]), [Path(a) for a in args[3:]])
+    elif args[:2] == ["agm", "close"] and len(args) == 3:
+        agm_close(Path(args[2]))
     else:
         sys.exit(__doc__)

@@ -64,6 +64,18 @@ castpage() {
     record castpage "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
+# The committee's half of a REAL election: agm new/enrol/open/collect/close across
+# separate processes (persistent keys), cast.js voters, verify.py the judge, and the
+# demo-only tools refusing the real transcript.
+agmflow() {
+  if command -v node > /dev/null 2>&1; then
+    if node ../tools/agm-flow.mjs > "$T/agmflow.log" 2>&1
+    then record agmflow "OK   real election across processes: verified, counted, re-vote superseded; demo tools refuse it"
+    else record agmflow "FAIL agm flow: $(grep -m1 FAIL "$T/agmflow.log")"; fi
+  else
+    record agmflow "OK   SKIPPED here — node not installed; CI runs this"
+  fi
+}
 # must_fail: the verifier must REJECT the tamper, and a FAIL line must match the defence
 # the design names. A tamper caught by the wrong check is a test that passes for the wrong
 # reason and would stay green if the named defence rotted.
@@ -82,7 +94,7 @@ must_fail() { # mode  want
 # Everything below reads out/ and nothing else — launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
-honest & reproduce & real & parity & castpage &
+honest & reproduce & real & parity & castpage & agmflow &
 must_fail log        "head's root matches a strict prefix"                 &
 must_fail rehead     "co-signed by the log key and all"                    &
 must_fail unwitness  "manifest declares every witness"                     &
@@ -115,8 +127,9 @@ declare -A desc=(
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
   [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
+  [agmflow]="the committee's half of a real election (agm new/enrol/open/collect/close)"
 )
-ORDER="honest reproduce real parity castpage log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
+ORDER="honest reproduce real parity castpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do

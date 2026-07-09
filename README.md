@@ -64,10 +64,10 @@ first real communities teach will revise it again.
 ## Next
 
 A shadow-mode run alongside one real club's AGM, with the official result still decided
-by the show of hands. The voter's half exists (`cast.html` + `clubvote.py collect`);
-what remains is the committee's half of a real run: keys that persist for a `--real`
-election, a roster built from page-enrolled members, two neighbouring societies as
-witnesses.
+by the show of hands. Both halves now exist — `cast.html` for the voter, `clubvote.py
+agm` for the committee (persistent keys, append-only transcript, the runbook in
+[`proto/README.md`](proto/README.md)). What remains is people: a real club, and two
+neighbouring societies witnessing from their own machines rather than the committee's.
 
 ## The words, in plain speech
 
