@@ -286,6 +286,7 @@
   }
  ],
  "verdict": "breaks",
+ "verdict_plain": "The silent re-vote saves Amara from any coercer who leaves her one private hour — so Marek adapts: 'prove you did not re-vote' demands a proof the system was built never to produce, and he controls her hours. Against a coercer who owns your time, the design breaks.",
  "findings": [
   {
    "severity": "break",

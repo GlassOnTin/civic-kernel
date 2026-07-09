@@ -4,7 +4,7 @@
   "title": "Civic Kernel stress-test scenario",
   "description": "One imagined real-life human situation walked through the protocol. Test-harness format, not part of the waist. The embedded manifest and log-entry artifacts must additionally validate against the two waist schemas in ../schema/ — that cross-check is the test: can the waist express this situation? Enforced by tools/validate.py.",
   "type": "object",
-  "required": ["id", "title", "setting", "threats", "doc_refs", "precedents", "manifest", "walkthrough", "verdict", "findings"],
+  "required": ["id", "title", "setting", "threats", "doc_refs", "precedents", "manifest", "walkthrough", "verdict", "verdict_plain", "findings"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
@@ -47,6 +47,10 @@
       }
     },
     "verdict": { "enum": ["holds", "strains", "breaks"] },
+    "verdict_plain": {
+      "type": "string", "minLength": 40, "maxLength": 420,
+      "description": "The verdict in plain speech, one or two sentences: where the design lands and why. Rendered as the story's opening line and its card text."
+    },
     "findings": {
       "type": "array",
       "minItems": 2,

@@ -264,6 +264,7 @@
   }
  ],
  "verdict": "breaks",
+ "verdict_plain": "Every proof held: the vote is unforgeable, the defiance undeniable, the record permanent. The bulldozers came anyway. A decision binds only where power obeys the record, and no protocol can close that gap.",
  "findings": [
   {
    "severity": "break",
