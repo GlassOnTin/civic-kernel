@@ -100,6 +100,36 @@ def main() -> int:
     page.write_text(new)
     print(f"\n{len(scenarios)} scenario(s) valid; scenarios.html rebuilt")
 
+    # doc_ref previews: the essay's Plainly lines and threat register, injected
+    # as generated data so the page cannot drift from the essay
+    essay_html = (ROOT / "index.html").read_text()
+    plains = {}
+    for m in re.finditer(r'<p class="plain"><span class="plain-label">Plainly</span>(.*?)</p>', essay_html, re.S):
+        ids = re.findall(r'id="(s[0-9-]+|words)"', essay_html[: m.start()])
+        if ids and ids[-1] not in plains:
+            plains[ids[-1]] = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+    threats = {}
+    for m in re.finditer(r'<td class="tid">(T\d+)</td>\s*<td><span class="threat-name">(.*?)</span>(.*?)</td>', essay_html, re.S):
+        txt = re.sub(r"<[^>]+>", "", m.group(2) + m.group(3)).strip()
+        for ent, ch in (("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"), ("&quot;", '"')):
+            txt = txt.replace(ent, ch)
+        threats[m.group(1)] = txt
+    if len(threats) != 14:
+        print(f"FAIL preview data: expected 14 threats from the essay, got {len(threats)}", file=sys.stderr)
+        return 1
+    pblob = json.dumps({"sections": plains, "threats": threats}, ensure_ascii=False, indent=1).replace("</", "<\\/")
+    html = page.read_text()
+    new = re.sub(
+        r'(<script id="preview-data" type="application/json">).*?(</script>)',
+        lambda m: m.group(1) + "\n" + pblob + "\n" + m.group(2),
+        html, count=1, flags=re.S,
+    )
+    if new == html and '"threats"' not in html:
+        print("WARNING: preview-data block not found in scenarios.html", file=sys.stderr)
+    else:
+        page.write_text(new)
+        print(f"preview-data injected: {len(plains)} sections, {len(threats)} threats")
+
     # the glossary lives twice — README.md (the linkable canon) and the essay's
     # Appendix — so the two term sets must not drift
     gloss = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "README.md").read_text())
@@ -111,12 +141,6 @@ def main() -> int:
 
     # KERNEL.md's §-links carry the essay's Plainly lines as hover titles —
     # same anti-drift discipline as the glossary
-    html = (ROOT / "index.html").read_text()
-    plains = {}
-    for m in re.finditer(r'<p class="plain"><span class="plain-label">Plainly</span>(.*?)</p>', html, re.S):
-        ids = re.findall(r'id="(s[0-9-]+|words)"', html[: m.start()])
-        if ids and ids[-1] not in plains:
-            plains[ids[-1]] = re.sub(r"<[^>]+>", "", m.group(1)).strip()
     total = 0
     for name in ("KERNEL.md", "proto/README.md", "docs/functional-model.md", "docs/uk-trajectory.md"):
         doc = (ROOT / name).read_text()

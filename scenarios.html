@@ -68,9 +68,10 @@
     display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; font-style: normal;
     padding: .1rem .5rem; border-radius: 99px; border: 1px solid; cursor: help;
   }
-  .badge[data-tip], .prot[data-tip] { position: relative; }
+  .badge[data-tip], .prot[data-tip], .dref[data-tip] { position: relative; }
+  .dref[data-tip] { cursor: help; text-decoration: underline dotted; text-underline-offset: 3px; color: inherit; }
   .prot[data-tip] { cursor: help; text-decoration: underline dotted; text-underline-offset: 3px; }
-  .badge[data-tip]::after, .prot[data-tip]::after {
+  .badge[data-tip]::after, .prot[data-tip]::after, .dref[data-tip]::after {
     content: attr(data-tip);
     position: absolute; left: 0; top: calc(100% + .45rem); z-index: 30;
     width: 17rem; max-width: 76vw;
@@ -82,8 +83,8 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
     display: none;
   }
-  .badge.tipped::after, .prot.tipped::after { display: block; }
-  @media (hover: hover) { .badge[data-tip]:hover::after, .prot[data-tip]:hover::after { display: block; } }
+  .badge.tipped::after, .prot.tipped::after, .dref.tipped::after { display: block; }
+  @media (hover: hover) { .badge[data-tip]:hover::after, .prot[data-tip]:hover::after, .dref[data-tip]:hover::after { display: block; } }
   .badge.holds   { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
   .badge.strains { color: var(--amber);  background: var(--amber-soft);  border-color: var(--amber); }
   .badge.breaks  { color: var(--threat); background: var(--threat-soft); border-color: var(--threat); }
@@ -180,6 +181,48 @@
 <footer>Every manifest and log entry shown here validates against the <a href="schema/manifest.schema.json">two waist schemas</a> — that is the test. The stories are fiction anchored to fact: the people are invented, and every attack pattern cites a documented real-world precedent on its page. Verdicts are the harness's honest reading of the <a href="index.html">architecture document</a>'s own claims and limits, not endorsements. And the waist is not only for fiction: the prototype election validates against the same two schemas — <a href="verifier.html">check it in your browser</a>.</footer>
 </div>
 
+<script id="preview-data" type="application/json">
+{
+ "sections": {
+  "s1": "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.",
+  "s2": "List every way to break it before designing it. Fourteen attacks, each with a named answer — and two left unanswered on purpose, because the cure would be a ministry of truth.",
+  "s3": "The whole machine is four small parts: prove you may speak, decide things anyone can check, keep decisions inside human rights, keep a record nobody can rewrite.",
+  "s3-1": "Prove you are on the list and have not already spoken — without saying which name on the list you are. No file on anyone is ever built.",
+  "s3-2": "Your ballot is sealed before it leaves your hand and counted without being opened. You can check it was counted; you cannot prove to anyone how you voted.",
+  "s3-3": "A vote to strip someone's rights does not sail through at 51%. It is pushed onto a slower, louder, harder road — never silently blocked, never cheaply passed.",
+  "s3-4": "Every act lands in a public record that can only grow. Rewrite yesterday and the sums stop matching in every copy of today — and any phone can tell.",
+  "s4": "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.",
+  "s5": "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person.",
+  "s6": "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.",
+  "s7": "No test decides whose vote counts — whoever writes the test owns the electorate. The system offers time, summaries, and help to understand; it never checks whether you did.",
+  "s8": "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask.",
+  "s9": "The defences watch at machine speed but act only at the speed of law. AI gets a microscope, never a pen — and emergency powers expire on their own.",
+  "s10": "Joining is a physical event, witnessed and counted in public — the count, never the names. Minting fake voters shows up in the arithmetic; turning real ones away shows up in the same public record.",
+  "s11": "The machinery that runs a vote can run a benefit claim: your phone works out what you are owed, proves it without handing over your life, and any refusal must show its working.",
+  "s12": "What is excluded on purpose, and the six problems not yet solved — by this design or anyone's. Both lists in full.",
+  "s13": "Every piece of this already exists somewhere, well funded. Nobody is joining the pieces up, and no one has built the citizen's side — the phone that checks. That gap sets the plan.",
+  "s14": "A project like this outlives its founders only if institutions hold it: one named here for traction, one for standards, one for legitimacy — and the funding gap stated, not waved away.",
+  "s15": "Nobody installs an app out of civic virtue. Two things people already want: money they are owed and cannot find, and a club vote nobody can rig.",
+  "words": "Every term of art on this page, one line each — and the section where each earns its keep."
+ },
+ "threats": {
+  "T1": "State capture. A government turns the civic infrastructure into an instrument of control.",
+  "T2": "Vendor capture. One company's app becomes the de facto ballot box.",
+  "T3": "Sybil attack. Fake or duplicate persons inflate a faction's voice.",
+  "T4": "Coercion & vote buying. A boss, spouse, or buyer demands proof of how you voted.",
+  "T5": "Device compromise. Malware on the phone alters the ballot before encryption.",
+  "T6": "Surveillance chill. Participation is tracked, so people self-censor.",
+  "T7": "Majoritarian rights-stripping. 51% vote to strip rights from a minority.",
+  "T8": "Record tampering. Results, laws, or their history quietly rewritten after the fact.",
+  "T9": "Digital exclusion. The system quietly disenfranchises whoever lacks a device, connectivity, or trust in either.",
+  "T10": "Dilution & standards capture. Rivals ship weakened look-alikes (“kernel-compatible, minus the rights guard”) or committees water invariants down until the name means nothing.",
+  "T11": "Epistemic gating. “Verify understanding before the vote counts” — competence tests that become disenfranchisement, where whoever writes the test owns the electorate.",
+  "T12": "Complexity as policy (“sludge”). Deliberate procedural burden — obfuscated processes, redundant demands, deterrence by paperwork — as covert, deniable disenfranchisement that taxes those with least slack.",
+  "T13": "Autoimmune defense. A self-hardening system whose automated (or AI-driven) protective response becomes an unaccountable sovereign — emergency powers that never expire, defenses that attack the body politic.",
+  "T14": "Infrastructure denial. The network beneath the system is switched off — a state-ordered shutdown, a leaned-on carrier, a disaster — precisely during a decision window."
+ }
+}
+</script>
 <script id="scenario-data" type="application/json">
 [
  {
@@ -7240,6 +7283,18 @@
 
 <script>
 const DATA = JSON.parse(document.getElementById('scenario-data').textContent);
+const PREV = JSON.parse(document.getElementById('preview-data').textContent || '{}');
+function dref(tok) {
+  return esc(tok).replace(/§[\d.]+|T\d+/g, r => {
+    if (r.charAt(0) === '§') {
+      const sid = 's' + r.slice(1).replace('.', '-');
+      const tip = (PREV.sections || {})[sid];
+      return tip ? `<a class="dref" href="index.html#${sid}" data-tip="${esc(tip)}">${r}</a>` : r;
+    }
+    const tip = (PREV.threats || {})[r];
+    return tip ? `<span class="dref" data-tip="${esc(tip)}">${r}</span>` : r;
+  });
+}
 const CORPUS = JSON.parse(document.getElementById('corpus-data').textContent);
 const app = document.getElementById('app');
 const TIP = {
@@ -7345,7 +7400,7 @@ function detail(s) {
     <article>
       <p class="protline"><span class="prot" data-tip="${esc(s.protection_plain)}">${esc(s.protection)}</span> <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span></p>
       <h1>${esc(s.title)}</h1>
-      <p class="meta-line">threats ${s.threats.map(esc).join(' · ')} &nbsp;·&nbsp; ${s.doc_refs.map(esc).join(' · ')}</p>
+      <p class="meta-line">threats ${s.threats.map(dref).join(' · ')} &nbsp;·&nbsp; ${s.doc_refs.map(dref).join(' · ')}</p>
       <p class="plainverdict"><span class="pv-label">Plainly</span>${esc(s.verdict_plain)}</p>
       <div class="setting">${s.setting.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join('')}</div>
       ${s.precedents && s.precedents.length ? `<div class="precedents">
@@ -7367,7 +7422,7 @@ function detail(s) {
       ${s.findings.map(f => `
         <div class="finding">
           <p class="protline"><span class="prot">${esc(f.protection)}</span> <span class="badge ${esc(f.severity)}" data-tip="${esc(TIP[f.severity] || '')}">${esc(f.severity)}</span></p>
-          <p class="fobs">${esc(f.observation)}${f.doc_ref ? ` <span class="ref">${esc(f.doc_ref)}</span>` : ''}</p>
+          <p class="fobs">${esc(f.observation)}${f.doc_ref ? ` <span class="ref">${dref(f.doc_ref)}</span>` : ''}</p>
         </div>`).join('')}
       <h2 class="sec">Full manifest</h2>
       <details><summary>conformance manifest · ${esc((s.manifest.community || {}).id || '')}</summary><pre>${esc(JSON.stringify(s.manifest, null, 2))}</pre></details>
@@ -7466,7 +7521,9 @@ route();
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-tip]');
   document.querySelectorAll('.tipped').forEach(x => { if (x !== b) x.classList.remove('tipped'); });
-  if (b) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('tipped'); }
+  if (!b) return;
+  if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault(); e.stopPropagation(); b.classList.toggle('tipped');
 });
 </script>
 </body>
