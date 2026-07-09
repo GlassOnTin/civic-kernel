@@ -65,7 +65,7 @@
   .jcard .cv { font-style: italic; color: var(--muted); font-size: .85rem; margin: .45rem 0 .55rem; }
   .badge {
     display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em;
-    padding: .1rem .5rem; border-radius: 99px; border: 1px solid;
+    padding: .1rem .5rem; border-radius: 99px; border: 1px solid; cursor: help;
   }
   .badge.holds   { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
   .badge.strains { color: var(--amber);  background: var(--amber-soft);  border-color: var(--amber); }
@@ -78,6 +78,11 @@
   }
   /* detail */
   .back { font-family: var(--mono); font-size: .8rem; }
+  .back a {
+    display: inline-block; padding: .3rem .8rem; border: 1px solid var(--accent);
+    border-radius: 99px; color: var(--accent); text-decoration: none;
+  }
+  .back a:hover { background: var(--accent-soft); }
   article h1 { font-size: 1.6rem; line-height: 1.3; margin: .6rem 0 .4rem; }
   .meta-line { color: var(--muted); font-size: .85rem; font-family: var(--mono); margin-bottom: 1.2rem; }
   .setting p { margin: 0 0 1rem; }
@@ -7062,6 +7067,15 @@
 const DATA = JSON.parse(document.getElementById('scenario-data').textContent);
 const CORPUS = JSON.parse(document.getElementById('corpus-data').textContent);
 const app = document.getElementById('app');
+const TIP = {
+  holds:   "holds — the design keeps its promise in this situation: the protection worked.",
+  strains: "strains — the protection works here, but at a real cost or resting on something the design cannot guarantee; the findings name it.",
+  breaks:  "breaks — the protection fails the person in this situation: what the design promises is not delivered.",
+  hold:    "holds — the design keeps its promise in this situation: the protection worked.",
+  strain:  "strain — a real cost, or an assumption the design cannot secure.",
+  "break": "break — a point where the design fails outright.",
+  note:    "note — an observation for context or credit, not a defect.",
+};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 // what a citizen's verifier client would render from the manifest (§13, Form B)
@@ -7113,7 +7127,7 @@ const SECTIONS = [
 
 function card(s) {
   return `<li><a href="#${esc(s.id)}">
-    <span class="badge ${esc(s.verdict)}">${esc(s.verdict)}</span>
+    <span class="badge ${esc(s.verdict)}" title="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span>
     <h3>${esc(s.title)}</h3>
     <p>${esc(s.setting.split(/(?<=[.!?])\s/)[0])}</p>
     <p class="cv">${esc(s.verdict_plain)}</p>
@@ -7154,7 +7168,7 @@ function detail(s) {
   app.innerHTML = `
     <p class="back"><a href="#">← all scenarios</a></p>
     <article>
-      <span class="badge ${esc(s.verdict)}">${esc(s.verdict)}</span>
+      <span class="badge ${esc(s.verdict)}" title="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span>
       <h1>${esc(s.title)}</h1>
       <p class="meta-line">threats ${s.threats.map(esc).join(' · ')} &nbsp;·&nbsp; ${s.doc_refs.map(esc).join(' · ')}</p>
       <p class="plainverdict"><span class="pv-label">Plainly</span>${esc(s.verdict_plain)}</p>
@@ -7177,7 +7191,7 @@ function detail(s) {
       <h2 class="sec">Findings</h2>
       ${s.findings.map(f => `
         <div class="finding">
-          <span class="badge ${esc(f.severity)}">${esc(f.severity)}</span>
+          <span class="badge ${esc(f.severity)}" title="${esc(TIP[f.severity] || '')}">${esc(f.severity)}</span>
           <span>${esc(f.observation)}</span>
           ${f.doc_ref ? `<span class="ref">${esc(f.doc_ref)}</span>` : ''}
         </div>`).join('')}
@@ -7198,7 +7212,7 @@ function corpus() {
   const cards = js.map(j => {
     const c = j.meta.coverage;
     return `<div class="jcard">
-      <div class="jname">${esc(j.meta.name)} <span class="badge ${esc(j.meta.verdict)}">${esc(j.meta.verdict)}</span></div>
+      <div class="jname">${esc(j.meta.name)} <span class="badge ${esc(j.meta.verdict)}" title="${esc(TIP[j.meta.verdict])}">${esc(j.meta.verdict)}</span></div>
       <p class="cv">${esc(j.meta.verdict_plain)}</p>
       <div class="cite">${esc(j.meta.instrument.title)} · ${esc(j.meta.instrument.retrieved_via)}</div>
       <div class="jcov"><span class="present">${c.backed} backed</span> · ${c.structural} structural · <span class="absent">${c.none} none</span> (of 30)</div>
