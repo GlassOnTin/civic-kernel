@@ -53,6 +53,22 @@
   #verdict .big { font-size: 1.25rem; font-weight: 700; }
   #checks section { margin: .9rem 0; }
   #checks h3 { font-size: .95rem; margin: .6rem 0 .2rem; }
+  .sectitle[data-tip] {
+    cursor: help; position: relative;
+    text-decoration: underline dotted; text-underline-offset: 3px;
+  }
+  .sectitle[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute; left: 0; top: calc(100% + .4rem); z-index: 30;
+    width: 21rem; max-width: 78vw;
+    background: var(--panel); color: var(--fg);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: .5rem .7rem; font-size: .8rem; font-weight: 400; line-height: 1.5;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+    display: none;
+  }
+  .sectitle.tipped::after { display: block; }
+  @media (hover: hover) { .sectitle[data-tip]:hover::after { display: block; } }
   .row { display: flex; gap: .5rem; padding: .18rem 0; font-size: .88rem; }
   .row .mark { flex: 0 0 1.1rem; text-align: center; }
   .row .what { flex: 1; min-width: 0; }
@@ -163,9 +179,12 @@ async function maybeRun() {
   const t0 = Date.now();
 
   const res = await CivicVerifier.verify(files, {
-    onSection: (n, title) => {
+    onSection: (n, title, plain) => {
       const s = document.createElement("section");
-      s.innerHTML = "<h3>[" + n + "] " + title + "</h3>";
+      s.innerHTML = "<h3>[" + n + "] <span class='sectitle'></span></h3>";
+      const st = s.querySelector(".sectitle");
+      st.textContent = title;
+      if (plain) st.setAttribute("data-tip", plain);
       checksEl.appendChild(s); sectionEl = s;
       progressEl.textContent = "checking…";
     },
@@ -304,6 +323,12 @@ $("find").onclick = async () => {
     out.textContent = "Could not compute: " + e.message;
   }
 };
+
+document.addEventListener('click', e => {
+  const s = e.target.closest('.sectitle[data-tip]');
+  document.querySelectorAll('.sectitle.tipped').forEach(x => { if (x !== s) x.classList.remove('tipped'); });
+  if (s) s.classList.toggle('tipped');
+});
 </script>
 </body>
 </html>

@@ -274,7 +274,7 @@
 
   // ---------------------------------------------------------------- verify
   // files: { "manifest.json": text, ..., "log.jsonl": text, ... }
-  // hooks (all optional): onSection(numText, title), onCheck({section, ok, text, plain}),
+  // hooks (all optional): onSection(numText, title, plain), onCheck({section, ok, text, plain}),
   //                       onBallot(done, total), onSkip(numText, text)
   // `plain` is the check's meaning in plain speech; `text` stays the exact
   // technical statement (and carries failure detail after "::").
@@ -330,7 +330,7 @@
       const entries = need("log.jsonl").split("\n").filter(l => l.trim()).map(l => JSON.parse(l));
       const heads = need("heads.jsonl").split("\n").filter(l => l.trim()).map(l => JSON.parse(l));
 
-      onSection("1", "The paperwork matches the published formats");
+      onSection("1", "The paperwork matches the published formats", "Every file must fit the two published formats exactly, so any tool \u2014 not just this page \u2014 can read and check the same record.");
       const mErrs = schemaErrors(SCHEMAS["manifest"], manifest, SCHEMAS["manifest"], "manifest");
       check("1", mErrs.length === 0, "manifest validates against manifest.schema.json (" + mErrs.length + " errors)"
         + (mErrs.length ? " :: " + mErrs[0] : ""),
@@ -345,7 +345,7 @@
         + (eErrs.length ? " :: " + eErrs[0] : ""),
         "Every event in the record is in the promised format.");
 
-      onSection("2", "Every artifact is signed by a key the trust anchors name");
+      onSection("2", "Every artifact is signed by a key the trust anchors name", "Signatures tie each file to a known key \u2014 and the keys this page trusts are its own list, brought with it, never taken from the transcript under audit.");
       const mBody = stripKey(manifest, "sig");
       check("2", await sigOk(trust[manifest.sig.key_id] || "", manifest.sig, mBody), "manifest signature",
         "The declaration really was issued with this community's key.");
@@ -360,7 +360,7 @@
       check("2", ts.every((t, i) => i === 0 || ts[i - 1] <= t), "log timestamps are non-decreasing",
         "The record's clock only ever moves forward.");
 
-      onSection("3", "The record is append-only, witnessed, and commits to everything else");
+      onSection("3", "The record is append-only, witnessed, and commits to everything else", "The log is the spine: hash-chained so the past cannot be rewritten, co-signed by independent witnesses, and committing by digest to every other file here.");
       const leaves = [];
       for (const e of entries) leaves.push(await leafHash(canon(stripKey(e, "sig"))));
       let headsOk = true;
@@ -424,7 +424,7 @@
         "logged ballot-box digest matches the published box",
         "The ballot box is the exact one the record committed to.");
 
-      onSection("4", "Only enrolled members: the roster ring and the election key check out");
+      onSection("4", "Only enrolled members: the roster ring and the election key check out", "The member list and the election key are rebuilt from first principles: every credential checked, the key derived from the trustees' own commitments \u2014 nothing taken on assertion.");
       const issuerKey = rosterDoc.members.length
         ? (trust[rosterDoc.members[0].issuer_sig.key_id] || "") : "";
       let credsOk = true;
@@ -507,7 +507,7 @@
         return c === c0;
       }
 
-      onSection("5", "Device challenges (cast-or-audit) hold up");
+      onSection("5", "Device challenges (cast-or-audit) hold up", "Cast-or-audit: a voter may demand the device open the envelope it just sealed. Opened envelopes are evidence, never votes \u2014 and every failed test is on the public record.");
       const auditsDoc = JSON.parse(need("audits.json"));
       const audits = auditsDoc.audits;
       check("5", closed.audits_digest === await sha256hex(canon(auditsDoc)),
@@ -541,7 +541,7 @@
         return finish(null, rosterDoc, null);
       }
 
-      onSection("6", "Every ballot: anonymous, well-formed, provably from an enrolled member");
+      onSection("6", "Every ballot: anonymous, well-formed, provably from an enrolled member", "Each ballot proves it came from some enrolled member \u2014 without saying which \u2014 carries a per-election tag that blocks double voting, and encrypts a valid yes-or-no.");
       check("6", ring.every(inGroup),
         "all " + ring.length + " roster keys are prime-order subgroup elements (input hygiene on the "
         + "ring: no tamper reaches it, because a rewritten roster fails its logged digest first)",
@@ -577,7 +577,7 @@
         return finish(null, rosterDoc, null);
       }
 
-      onSection("7", "The count, recomputed from the sealed sum — no ballot is ever opened");
+      onSection("7", "The count, recomputed from the sealed sum — no ballot is ever opened", "The homomorphic tally: ballots are added while still sealed, and only the total is unsealed \u2014 by a quorum of key-holders, each proving their share. This page redoes the whole sum.");
       const tally = (byType["decision.tally-proof"] || {}).body || {};
       const latest = new Map();
       for (const b of [...ballots].sort((a, b2) => a.seq - b2.seq)) latest.set(b.nullifier, b);
@@ -660,7 +660,7 @@
         return finish(null, rosterDoc, null);
       }
 
-      onSection("8", "The closing head matches the copy the world saw (the anchor)");
+      onSection("8", "The closing head matches the copy the world saw (the anchor)", "The anchor: the record's final fingerprint, republished beyond the operator's reach, so a transcript that quietly dropped history cannot match the world's copy.");
       const receipts = typeof files["anchor.json"] === "string"
         ? (JSON.parse(files["anchor.json"]).receipts || []) : [];
       const requiredAnchors = anchors.anchors || [];
