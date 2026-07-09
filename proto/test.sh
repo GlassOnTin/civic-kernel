@@ -64,17 +64,17 @@ castpage() {
     record castpage "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
-# A REAL election, every party separated: witnesses (new/watch/sign), trustees
-# (new/receive/share), the anchor (new/watch/lodge), the committee (agm ... plus
-# tally-import/witness-import/anchor-import) — across separate processes and
-# directories, cast.js voters, verify.py the judge. The named defences: a witness
-# handed a re-signed rewrite refuses on its memory; a corrupted cross-share dies on
-# the Feldman check; a bogus tally share on its CP proof; a rewritten close on the
-# anchor's memory of what it already printed.
+# A REAL election, every party separated: the register (issuer new/certify), witnesses
+# (new/watch/sign), trustees (new/receive/share), the anchor (new/watch/lodge), and a
+# committee left holding one key — the log's (agm ... plus enrol-by-credential and the
+# three imports) — across separate processes and directories, cast.js voters, verify.py
+# the judge. The named defences: a phantom credential dies at enrol; a re-signed
+# rewrite on the witness's memory; a corrupted cross-share on the Feldman check; a
+# bogus tally share on its CP proof; a rewritten close on the anchor's memory.
 agmflow() {
   if command -v node > /dev/null 2>&1; then
     if node ../tools/agm-flow.mjs > "$T/agmflow.log" 2>&1
-    then record agmflow "OK   every party on its own keys; the committee ends with only its own two; every refusal holds"
+    then record agmflow "OK   every party on its own keys; the committee holds one (the log's); every refusal holds"
     else record agmflow "FAIL agm flow: $(grep -m1 FAIL "$T/agmflow.log")"; fi
   else
     record agmflow "OK   SKIPPED here — node not installed; CI runs this"
@@ -131,7 +131,7 @@ declare -A desc=(
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
   [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
-  [agmflow]="a real election, every party separated (agm + witness + trustee + anchor)"
+  [agmflow]="a real election, every party separated (issuer + witness + trustee + anchor + agm)"
 )
 ORDER="honest reproduce real parity castpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 

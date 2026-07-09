@@ -22,7 +22,8 @@ with verify.py, which shares no code with this file.
       trustees' deals — the committee holds NO witness key and NO trustee polynomial;
       every command that grows the log cuts a head that must come back co-signed before
       history can advance, and the tally waits for the trustees' answers. Then:
-        agm enrol <dir> "<member>" <voter_pub>   certify a page-enrolled public key
+        agm enrol <dir> <cert.json>              file a register-certified credential —
+                                                 the committee itself can certify nobody
         agm open <dir> <decision-id> "<question>" "<optA>" "<optB>"   pin the roster, open
         agm collect <dir> <ballot.json>...       box ballots from cast.html as they arrive
         agm close <dir>                          commit digests; emit tally-request.json
@@ -59,6 +60,13 @@ with verify.py, which shares no code with this file.
       receipt. Lodging is ONCE per log: a different closing head for a log already
       lodged is REFUSED — history changing after the close is the attack, and the
       refusal to reprint is the anchor's entire job.
+  python3 clubvote.py issuer new <idir> <key-id>     the register, on ITS OWN machine —
+      the plot book's pen. The committee can verify and file credentials but write
+      none: a phantom member needs the registrar, not the log-keeper. Then:
+        issuer certify <idir> "<member>" <voter_pub>    certify a member's public key
+      (from cast.html step 1) -> cert-<member>.json, for the committee's agm enrol.
+      Whom to certify is the register's human judgment — sybil resistance is exactly
+      as strong as that judgment, and the manifest says so.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
@@ -928,12 +936,14 @@ def collect(src: Path, dst: Path, ballot_paths: list[Path]):
 # their devices and never appear on this machine — the roster holds only certified
 # public keys, so the issuer cannot link a ballot to a member even in principle.
 #
-# WITNESSES, TRUSTEES AND THE ANCHOR ARE SEPARATE PARTIES. The committee's keys.json
-# holds no witness key, no trustee polynomial and no anchor key: at `agm new` each
-# hands over its public half (a card or a deal, made by `witness new` / `trustee new`
-# / `anchor new` on their own machines) — what remains with the committee is exactly
-# what is properly its own, the log key and the issuer's pen. Every command that grows
-# the log cuts a PENDING head that must come back co-signed (`witness sign` -> `agm
+# EVERY OTHER PARTY IS SEPARATE. The committee's keys.json holds ONE key — the log's:
+# at `agm new` the witnesses, trustees, anchor and issuer each hand over a public half
+# (a card or a deal, made by `witness new` / `trustee new` / `anchor new` /
+# `issuer new` on their own machines). The committee publishes, gates and assembles,
+# and can vouch for nothing by itself. Enrolment is the register's: `issuer certify`
+# signs a credential on the register's machine and `agm enrol` can only verify and
+# file it — a phantom member needs the registrar's pen. Every command that grows the
+# log cuts a PENDING head that must come back co-signed (`witness sign` -> `agm
 # witness-import`) before history advances — a witness co-signs only what extends the
 # history it remembers, so a committee that rewrites cannot get witnessed. The tally
 # is not the committee's to compute: `close` emits a request, each trustee answers
@@ -994,20 +1004,26 @@ def agm_new(d: Path, card_paths: list[Path]):
     cards = [c for c in docs if "witness" in c]
     deals = [c for c in docs if "commitments" in c]
     anchor_cards = [c for c in docs if "anchor" in c]
-    if len(cards) + len(deals) + len(anchor_cards) != len(docs):
-        sys.exit("unrecognized card: not a witness card, a trustee deal, or an anchor card")
-    for c in cards + anchor_cards:
-        kid = c.get("witness") or c.get("anchor")
+    issuer_cards = [c for c in docs if "issuer" in c]
+    if len(cards) + len(deals) + len(anchor_cards) + len(issuer_cards) != len(docs):
+        sys.exit("unrecognized card: not a witness card, a trustee deal, an anchor card "
+                 "or an issuer card")
+    for c in cards + anchor_cards + issuer_cards:
+        kid = c.get("witness") or c.get("anchor") or c.get("issuer")
         if len(b64d(c["pub"])) != 32 or "#" not in kid:
             sys.exit(f"malformed card: {c}")
     if not cards:
         sys.exit("no witness cards — an unwitnessed log cannot defeat a records rewrite")
     if not anchor_cards:
         sys.exit("no anchor card — an unanchored log cannot refute a quietly erased ballot")
+    if len(issuer_cards) != 1:
+        sys.exit("exactly one issuer card — the register that certifies members is one "
+                 "party, and it is not the committee")
     if len({c["witness"].split('#')[0] for c in cards}) < len(cards):
         sys.exit("two cards from the same witness DID — witnesses must be independent parties")
     witness_dids = [c["witness"].split("#")[0] for c in cards]
     anchor_dids = [c["anchor"].split("#")[0] for c in anchor_cards]
+    issuer_kid = issuer_cards[0]["issuer"]
     # the trustees' PUBLIC deals: their own Feldman commitments, dealt on their own
     # machines (`trustee new`); the private cross-shares travelled trustee-to-trustee
     # and never came here. The committee holds no polynomial — it can derive everyone's
@@ -1038,9 +1054,10 @@ def agm_new(d: Path, card_paths: list[Path]):
         "community": {"id": COMMUNITY, "name": "Heeley Bank Allotment Society, Sheffield (shadow-mode run)",
                       "parent": "did:web:sheffield-allotment-federation.example"},
         "services": {"personhood": True, "decisions": True, "rights_guard": False, "transparency_log": True},
-        "personhood": {"method": "platform-account",
-                       "issuer": "club secretary — page-enrolled: secrets born on voters' devices, "
-                                 "the issuer certifies only public keys",
+        "personhood": {"method": "ceremony",
+                       "issuer": issuer_kid + " — the club register on its own machine: "
+                                 "secrets born on voters' devices, the register certifies "
+                                 "only public keys, the committee can add nobody itself",
                        "unlinkable": True, "sybil_resistance": "weak",
                        "eligibility_rules": "club-roster: one vote per enrolled member; "
                                             "enrolment closes when the decision opens"},
@@ -1055,17 +1072,20 @@ def agm_new(d: Path, card_paths: list[Path]):
     manifest["sig"] = sign_over(keypair("log"), COMMUNITY + "#manifest-1", manifest)
     (pub / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
 
-    # The committee's trust set holds NO witness, trustee or anchor private key — only
-    # the cards' public halves. keys.json below holds exactly the log and issuer keys,
-    # the two that ARE the committee's: that is the separation, complete.
-    keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ("log", "issuer")}
+    # The committee's trust set holds NO other party's private key — only the cards'
+    # public halves. keys.json below holds exactly ONE key: the log's. Even the pen
+    # that certifies members is someone else's now; the committee can publish, gate
+    # and assemble, and can vouch for nothing by itself.
+    keys = {ACTORS["log"][0]: pub_b64(keypair("log"))}
     keys[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
+    keys[issuer_kid] = issuer_cards[0]["pub"]
     for c in cards:
         keys[c["witness"]] = c["pub"]
     for c in anchor_cards:
         keys[c["anchor"]] = c["pub"]
     (pub / "trust.json").write_text(json.dumps(
-        {"keys": keys, "witnesses": witness_dids, "anchors": anchor_dids}, indent=1) + "\n")
+        {"keys": keys, "issuer": issuer_kid,
+         "witnesses": witness_dids, "anchors": anchor_dids}, indent=1) + "\n")
 
     (pub / "roster.json").write_text(json.dumps(
         {"community": COMMUNITY,
@@ -1078,13 +1098,15 @@ def agm_new(d: Path, card_paths: list[Path]):
     log.append("manifest.published", {
         "manifest_digest": sha256_hex(canon({k: v for k, v in manifest.items() if k != "sig"})),
         "note": "Shadow-mode run: real OS randomness, persistent committee keys, "
-                "enrolment secrets on voters' devices (cast.html), witnesses on their "
-                "own machines co-signing every checkpoint, trustees on their own "
-                "machines answering the tally, the anchor on its own machine lodging "
-                "the closing head once and forever; the committee holds only what is "
-                "properly its own — the log key and the issuer's pen. The official "
-                "result is whatever the meeting decides by hand; this record exists "
-                "so anyone can check what a real run would have them check."}, ts,
+                "enrolment secrets on voters' devices (cast.html), the register "
+                "certifying members on its own machine, witnesses on their own "
+                "machines co-signing every checkpoint, trustees on their own machines "
+                "answering the tally, the anchor on its own machine lodging the "
+                "closing head once and forever. The committee holds one key: the "
+                "log's. It can publish, gate and assemble — and vouch for nothing by "
+                "itself. The official result is whatever the meeting decides by hand; "
+                "this record exists so anyone can check what a real run would have "
+                "them check."}, ts,
                head=False)
     log.append("x-trustees.published", {
         "trustees_digest": sha256_hex(canon(trustees_doc)), "threshold": "2-of-3",
@@ -1097,29 +1119,41 @@ def agm_new(d: Path, card_paths: list[Path]):
     agm_cut_head(d, log)
 
 
-def agm_enrol(d: Path, name: str, pub_hex: str):
+def agm_enrol(d: Path, cred_path: Path):
+    """The committee cannot certify anyone: it holds no issuer key. It VERIFIES a
+    credential the register signed on its own machine, and only then adds it to the
+    roster — a phantom member now needs the registrar's pen, not the log-keeper's."""
     pub, log = agm_load(d)
     if "decision.opened" in agm_by_type(log):
         sys.exit("the decision is open and the logged roster digest pins the member list "
                  "— enrolment is closed")
-    try:
-        y = int(pub_hex, 16)
-    except ValueError:
-        sys.exit("that is not a hex public key")
+    trust = json.loads((pub / "trust.json").read_text())
+    cred = json.loads(cred_path.read_text())
+    if set(cred) != {"member", "voter_pub", "issuer_sig"}:
+        sys.exit(f"{cred_path}: a credential is exactly member + voter_pub + issuer_sig "
+                 "— the roster stores what the register signed, byte for byte")
+    sig = cred.get("issuer_sig", {})
+    if sig.get("key_id") != trust["issuer"]:
+        sys.exit(f"{cred_path}: certified by {sig.get('key_id')!r}, not this election's "
+                 f"register ({trust['issuer']}) — the committee can add nobody itself")
+    if not sig_ok(trust["keys"][trust["issuer"]], sig,
+                  {k: v for k, v in cred.items() if k != "issuer_sig"}):
+        sys.exit(f"{cred_path}: the credential's signature does not verify against the "
+                 "register's card — not certified, not enrolled")
+    y = int(cred["voter_pub"], 16)
     if not (1 < y < P and pow(y, Q, P) == 1):
         sys.exit("that public key is not a prime-order subgroup element — refused at the "
                  "door (the same input hygiene the verifier applies to the ring)")
     doc = json.loads((pub / "roster.json").read_text())
-    if any(c["member"] == name for c in doc["members"]):
-        sys.exit(f"{name!r} is already enrolled")
+    if any(c["member"] == cred["member"] for c in doc["members"]):
+        sys.exit(f"{cred['member']!r} is already enrolled")
     if any(int(c["voter_pub"], 16) == y for c in doc["members"]):
         sys.exit("that public key is already enrolled under another name — one key, one member")
-    cred = {"member": name, "voter_pub": hx(y)}
-    cred["issuer_sig"] = sign_over(keypair("issuer"), ACTORS["issuer"][0], cred)
-    doc["members"].append(cred)
+    doc["members"].append({"member": cred["member"], "voter_pub": cred["voter_pub"],
+                           "issuer_sig": sig})
     (pub / "roster.json").write_text(json.dumps(doc, indent=1) + "\n")
-    print(f"enrolled {name} ({len(doc['members'])} member(s)). Their secret never came here; "
-          "only this public key did.")
+    print(f"enrolled {cred['member']} ({len(doc['members'])} member(s)) — certified by the "
+          "register; the committee only checked and filed it.")
 
 
 def agm_open(d: Path, decision_id: str, question: str, options: list[str]):
@@ -1606,6 +1640,53 @@ def agm_anchor_import(d: Path, receipt_paths: list[Path]):
     print(f"  python3 {Path(__file__).parent / 'verify.py'} {pub}")
 
 
+# ---------------------------------------------------------------- the issuer
+# A fifth party — the register, on its own machine: the plot book, the membership
+# ledger, whatever a community's "who belongs" actually is. It certifies a member's
+# public key with its own pen; the committee can verify and file a credential but can
+# write none, so a phantom member needs the registrar, not the log-keeper. Sybil
+# resistance is exactly as strong as this register's judgment, and the manifest says
+# so — the tool is the pen, the register is the person holding it.
+
+def issuer_new(idir: Path, key_id: str):
+    if idir.exists():
+        sys.exit(f"{idir} already exists")
+    if "#" not in key_id:
+        sys.exit("the issuer key id should carry a key fragment, e.g. did:web:example.org#roster-1")
+    idir.mkdir(parents=True, mode=0o700)
+    from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat
+    priv = Ed25519PrivateKey.generate()
+    (idir / "issuer.json").write_text(json.dumps({
+        "key_id": key_id,
+        "priv": priv.private_bytes(Encoding.Raw, PrivateFormat.Raw, NoEncryption()).hex()},
+        indent=1) + "\n")
+    (idir / "issuer.json").chmod(0o600)
+    (idir / "card.json").write_text(json.dumps(
+        {"issuer": key_id, "pub": pub_b64(priv)}, indent=1) + "\n")
+    print(f"issuer {key_id} -> {idir}")
+    print(f"  hand {idir / 'card.json'} to the committee; issuer.json stays here (0600)")
+    print("  certifying is YOUR judgment — the register is the person, this is only the pen")
+
+
+def issuer_certify(idir: Path, name: str, pub_hex: str):
+    i = json.loads((idir / "issuer.json").read_text())
+    try:
+        y = int(pub_hex, 16)
+    except ValueError:
+        sys.exit("that is not a hex public key")
+    if not (1 < y < P and pow(y, Q, P) == 1):
+        sys.exit("that public key is not a prime-order subgroup element — refused at the "
+                 "door; hand the member back to cast.html to generate a proper one")
+    cred = {"member": name, "voter_pub": hx(y)}
+    priv = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(i["priv"]))
+    cred["issuer_sig"] = sign_over(priv, i["key_id"], cred)
+    slug = "".join(c if c.isalnum() else "-" for c in name.lower()).strip("-")
+    out = idir / f"cert-{slug}.json"
+    out.write_text(json.dumps(cred, indent=1) + "\n")
+    print(f"certified {name} -> {out}")
+    print("  give it to the committee (agm enrol); the member's secret was never here")
+
+
 def tamper(src: Path, dst: Path, mode: str):
     require_demo_keys(src, "the tampers simulate insiders, so each")
     if dst.exists():
@@ -1821,8 +1902,8 @@ if __name__ == "__main__":
         tamper(Path(args[1]), Path(args[2]), args[3])
     elif args[:2] == ["agm", "new"] and len(args) >= 4:
         agm_new(Path(args[2]), [Path(a) for a in args[3:]])
-    elif args[:2] == ["agm", "enrol"] and len(args) == 5:
-        agm_enrol(Path(args[2]), args[3], args[4])
+    elif args[:2] == ["agm", "enrol"] and len(args) == 4:
+        agm_enrol(Path(args[2]), Path(args[3]))
     elif args[:2] == ["agm", "open"] and len(args) == 7:
         agm_open(Path(args[2]), args[3], args[4], [args[5], args[6]])
     elif args[:2] == ["agm", "collect"] and len(args) >= 4:
@@ -1853,5 +1934,9 @@ if __name__ == "__main__":
         anchor_watch(Path(args[2]), args[3], args[4])
     elif args[:2] == ["anchor", "lodge"] and len(args) == 4:
         anchor_lodge(Path(args[2]), Path(args[3]))
+    elif args[:2] == ["issuer", "new"] and len(args) == 4:
+        issuer_new(Path(args[2]), args[3])
+    elif args[:2] == ["issuer", "certify"] and len(args) == 5:
+        issuer_certify(Path(args[2]), args[3], args[4])
     else:
         sys.exit(__doc__)
