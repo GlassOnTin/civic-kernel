@@ -55,12 +55,15 @@ def main() -> int:
         elif scope not in ("unconditional", "conditional"):
             errs += 1
             print(f"FAIL rights-map {code}: meta.scope must be 'unconditional' or 'conditional', got {scope!r}", file=sys.stderr)
-        elif rmap["meta"].get("verdict") not in ("holds", "strains", "breaks") or len(rmap["meta"].get("verdict_plain", "")) < 40:
+        elif rmap["meta"].get("verdict") not in ("holds", "strains", "breaks") or len(rmap["meta"].get("verdict_plain", "")) < 40 or len(rmap["meta"].get("protection", "")) < 3:
             errs += 1
-            print(f"FAIL rights-map {code}: meta.verdict must be holds/strains/breaks with a verdict_plain of at least 40 chars", file=sys.stderr)
-        elif (ROOT / "scenarios" / f"majority-vs-minority-{code}.json").exists() and rmap["meta"]["verdict"] != json.loads((ROOT / "scenarios" / f"majority-vs-minority-{code}.json").read_text())["verdict"]:
+            print(f"FAIL rights-map {code}: meta.verdict must be holds/strains/breaks with verdict_plain (40+ chars) and protection", file=sys.stderr)
+        elif (ROOT / "scenarios" / f"majority-vs-minority-{code}.json").exists() and (
+            rmap["meta"]["verdict"],
+            rmap["meta"]["protection"],
+        ) != (lambda s: (s["verdict"], s["protection"]))(json.loads((ROOT / "scenarios" / f"majority-vs-minority-{code}.json").read_text())):
             errs += 1
-            print(f"FAIL rights-map {code}: meta.verdict contradicts the measured scenario majority-vs-minority-{code}.json", file=sys.stderr)
+            print(f"FAIL rights-map {code}: meta.verdict/protection contradict the measured scenario majority-vs-minority-{code}.json", file=sys.stderr)
         else:
             cov = rmap["meta"]["coverage"]
             print(f"ok   rights-map {code}  backed {cov['backed']} · structural {cov['structural']} · none {cov['none']} · remedy '{rmap['meta']['remedy']}' · scope '{scope}'")
