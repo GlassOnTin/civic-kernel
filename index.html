@@ -1113,14 +1113,36 @@
     tipFor = a;
   }
   function hideTip() { tip.style.display = 'none'; tipFor = null; pinned = false; }
+  function hoverTip(a) {
+    a.addEventListener('mouseenter', function () { if (!pinned) showTip(a); });
+    a.addEventListener('mouseleave', function () { if (!pinned) hideTip(); });
+  }
   document.querySelectorAll('a[href^="#w-"]').forEach(function (a) {
     if (a.closest('#words')) return;
     var d = defs[a.getAttribute('href').slice(1)];
     if (!d) return;
     a.classList.add('term');
     a.setAttribute('data-tip', d);
-    a.addEventListener('mouseenter', function () { if (!pinned) showTip(a); });
-    a.addEventListener('mouseleave', function () { if (!pinned) hideTip(); });
+    hoverTip(a);
+  });
+  // section cross-references (ToC entries, inline §N links, the diagram's boxes)
+  // preview their target's Plainly line on hover; clicking still navigates.
+  var plains = {};
+  document.querySelectorAll('p.plain').forEach(function (p) {
+    var host = p.closest('[id]');
+    if (!host) return;
+    var c = p.cloneNode(true);
+    var l = c.querySelector('.plain-label');
+    if (l) l.remove();
+    plains[host.id] = c.textContent.trim();
+  });
+  document.querySelectorAll('a').forEach(function (a) {
+    var h = a.getAttribute('href') || '';
+    if (h.charAt(0) !== '#' || a.hasAttribute('data-tip')) return;
+    var d = plains[h.slice(1)];
+    if (!d) return;
+    a.setAttribute('data-tip', d);
+    hoverTip(a);
   });
   document.addEventListener('click', function (e) {
     var t = e.target.closest('a.term');
