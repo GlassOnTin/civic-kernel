@@ -5,7 +5,9 @@ Shares NO code with clubvote.py — it reimplements canonicalization, the Merkle
 the group arithmetic, all three zero-knowledge proof verifications, and every check from
 the published artifacts plus the waist schemas in ../schema/. Trust anchors come from
 trust.json (in a real deployment: DID resolution and the witness ecosystem; here, a file
-you choose to trust). The ballot group is pinned BY NAME to this verifier's own
+you choose to trust) — including which external parties must hold a receipt for the
+closing log head, the one defence against a history that was quietly shortened rather
+than forged. The ballot group is pinned BY NAME to this verifier's own
 constants — a transcript that could supply its own group could supply a smooth one.
 
 The ballots are anonymous, and this verifier never learns who cast one. It checks that
@@ -393,6 +395,41 @@ def main(outdir: Path) -> int:
           and tally.get("superseded") == len(ballots) - len(latest),
           f"recast policy applied: {len(ballots)} valid ballots, {len(latest)} distinct linking tags "
           f"counted, {len(ballots) - len(latest)} silently superseded (last ballot counts)")
+
+    # A transcript in which every proof verifies can still be a lie of omission: total
+    # signature collusion cannot forge a ballot (everything above), but it can erase one
+    # and re-sign the shortened history — every artifact then genuine, nothing inside the
+    # transcript left to object. So the last check is against something outside it: the
+    # closing head, republished beyond the collusion's reach, by parties the trust anchors
+    # name (here a newspaper's pinned key stands in for its printed archive). The receipt
+    # must cover THIS exact history, whole: a shortened, rewritten or extended log all
+    # fail to match the head the world saw.
+    if FAILURES:
+        print("[8] not checked: the transcript did not verify, so no anchor can vouch for it")
+        return finish(None, roster_doc, None)
+
+    print("[8] the anchor: the world's copy of the closing head — history cannot quietly shorten")
+    anchor_file = outdir / "anchor.json"
+    receipts = json.loads(anchor_file.read_text()).get("receipts", []) if anchor_file.exists() else []
+    required_anchors = anchors.get("anchors", [])
+
+    def receipt_ok(r) -> bool:
+        body = {k: v for k, v in r.items() if k != "sig"}
+        return (sig_ok(trust.get(r.get("sig", {}).get("key_id", ""), ""), r.get("sig", {}), body)
+                and body.get("log_id") == manifest.get("community", {}).get("id")
+                and body.get("size") == len(entries)
+                and body.get("root") == "sha256:" + merkle_root(leaves).hex())
+
+    unanchored = [a for a in required_anchors if not any(
+        (r.get("sig", {}).get("key_id", "") == a or r.get("sig", {}).get("key_id", "").startswith(a + "#"))
+        and receipt_ok(r) for r in receipts)]
+    check(bool(required_anchors) and not unanchored,
+          f"the closing head is anchored outside the collusion set ({len(required_anchors)} required "
+          "anchor(s) hold a valid receipt for this exact history)"
+          + ("" if required_anchors else " :: the trust anchors name no external anchor, and an "
+             "unanchored log cannot refute a quietly erased ballot")
+          + ("" if not unanchored else f" :: no valid receipt from {unanchored} matches this log's "
+             "closing head — the history under audit is not the history the world saw"))
 
     return finish(counts_dec, roster_doc, latest)
 

@@ -163,8 +163,16 @@ research program, not a trained system.
   every hash and signature agreeing — and a rigged decryption, a rigged count, and an
   accepted double-vote are still each caught, by a Chaum-Pedersen share proof, a public
   recount, and a 0-or-1 ballot-validity proof respectively (mutation-tested: disable any
-  one check and its fraud certifies). Signature collusion can still *drop* history —
-  deniability, not forgery — which is the external anchor's job, not yet implemented.
+  one check and its fraud certifies). Signature collusion's last move was to *drop*
+  history — deniability, not forgery: erase one counted ballot, re-sign everything,
+  retally honestly, and nothing inside the transcript objects, because nothing in it is
+  forged. The external anchor closes it: the closing log head is republished beyond the
+  collusion's reach (a newspaper's public notices, simulated — refusal 5's notary of last
+  resort), and the erasure is caught by the anchor check alone (mutation-tested: disable
+  it and the erased history certifies). Declared residue: the anchor seals history at
+  close; suppression *before* the head is published is caught by the voter finding their
+  own tag missing from the public box — a check anonymity preserves, since only they
+  know the tag.
 - **So does the franchise, and it costs anonymity nothing.** A ballot carries no name: it
   proves membership of the roster's key ring (a linkable ring signature) and a per-decision
   pseudonym `H(decision_id)^nym_secret` — SVC-1's `nym_secret × context_id`, running. The
@@ -197,6 +205,6 @@ cryptography is not yet shipped.
 *Every component named ships today; the composition is the contribution. The first running
 code is [`proto/`](proto/): the club vote end to end — all four verbs, waist-valid artifacts,
 anonymous ballots sealed to a trustee quorum and never individually opened, an independent
-verifier that catches eleven tampers by their named defences, and a manifest that declares
+verifier that catches twelve tampers by their named defences, and a manifest that declares
 its own subtractions. The rest is specification, harness, and corpus — see the
 [README](README.md).*

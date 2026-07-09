@@ -5,7 +5,7 @@
 #
 # Verifying an anonymous ballot is O(roster) — a ring signature per ballot — so a single
 # verification is seconds and the whole suite would be minutes run end to end. But the
-# honest check, the reproducibility run and all eleven tampers only READ out/, so they
+# honest check, the reproducibility run and all twelve tampers only READ out/, so they
 # are independent: this script fans them across cores and aggregates the verdicts. The
 # assertions are unchanged; only the scheduling is parallel.
 set -u
@@ -58,7 +58,8 @@ must_fail doublevote "negated linking tag"                                 &
 must_fail smuggle    "ciphertext component not in the prime-order subgroup" &
 must_fail overvote   "validity proof"                                      &
 must_fail share      "Chaum-Pedersen"                                      &
-must_fail count      "announced counts match"                             &
+must_fail count      "announced counts match"                              &
+must_fail drop       "anchored outside the collusion set"                  &
 wait
 
 declare -A desc=(
@@ -75,8 +76,9 @@ declare -A desc=(
   [overvote]="encrypt two votes, committee accepts -> the 0-or-1 validity proof"
   [share]="collude on a rigged decryption -> the Chaum-Pedersen share proof"
   [count]="collude on rigged counts -> the recount refutes itself"
+  [drop]="erase the recast from history, nothing forged -> the anchored closing head"
 )
-ORDER="honest reproduce log rehead unwitness roster box stuff doublevote smuggle overvote share count"
+ORDER="honest reproduce log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do
@@ -88,7 +90,7 @@ done
 
 echo
 if [ "$fails" -eq 0 ]; then
-  echo "ALL GREEN: verified honest run, 11/11 tampers caught by their named defence, reproducible."
+  echo "ALL GREEN: verified honest run, 12/12 tampers caught by their named defence, reproducible."
 else
   echo "$fails FAILURE(S) — the reason is on each failing line above."
   exit 1

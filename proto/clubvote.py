@@ -15,8 +15,10 @@ with verify.py, which shares no code with this file.
       linking tag to vote twice), smuggle (slip a malformed, out-of-subgroup ciphertext past the
       CDS proof as a superseded ballot), overvote (encrypt 2 votes, committee accepts). Most
       of the vote attacks assume the committee AND both witnesses collude on a rewritten
-      history; the last two are pure tally lies under the same collusion: share (announce a
-      rigged decryption), count (announce rigged counts).
+      history; the next two are pure tally lies under the same collusion: share (announce a
+      rigged decryption), count (announce rigged counts). The last, drop, forges NOTHING:
+      the same collusion erases a counted ballot and re-signs the shortened history end to
+      end — deniability, not forgery — and only the externally anchored closing head objects.
 
 Ballots are anonymous. Eligibility is proven, not asserted: each ballot carries a linkable
 ring signature (LSAG, Liu-Wei-Wong 2004) over the whole published roster, proving the signer
@@ -238,6 +240,8 @@ ACTORS = {
     "issuer": (COMMUNITY + "#roster-1", "roster issuer (plot register, simulated)"),
     "witness-fed": ("did:web:sheffield-allotment-federation.example#w1", "witness"),
     "witness-meers": ("did:web:meersbrook-allotments.example#w1", "witness"),
+    "anchor": ("did:web:sheffield-star.example#notices-1",
+               "external anchor: the newspaper's public-notices column (simulated)"),
 }
 # Members hold no signing key at all: the ballot is signed by the RING, not by a name.
 # What the issuer certifies is a nym public key g^x — the entry in the anonymity set.
@@ -569,6 +573,21 @@ def run(outdir: Path):
     (out / "log.jsonl").write_text("".join(json.dumps(e) + "\n" for e in log.entries))
     (out / "heads.jsonl").write_text("".join(json.dumps(h_) + "\n" for h_ in log.heads))
 
+    # --- the anchor: the closing head, republished where neither the committee nor the
+    # witnesses can reach it. Everything above survives signature collusion because it is
+    # held up by proofs — but a proof can only convict what is PRESENT. A colluding
+    # committee's last move is subtraction: erase a ballot, re-sign the shortened history,
+    # retally honestly, and nothing inside the transcript objects. So the closing head
+    # goes outside: the treasurer pays for three lines in the Sheffield Star's public
+    # notices (the key here stands in for the printed page — in reality the receipt is
+    # the archive itself; a chain as notary of last resort is the same move, see the
+    # kernel's refusal 5). History can still be lied about; it can no longer quietly shorten.
+    head = log.heads[-1]
+    receipt = {"log_id": COMMUNITY, "size": head["size"], "root": head["root"],
+               "published": "Sheffield Star public notices, 2026-07-23 print edition (simulated)"}
+    receipt["sig"] = sign_over(keypair("anchor"), ACTORS["anchor"][0], receipt)
+    (out / "anchor.json").write_text(json.dumps({"receipts": [receipt]}, indent=1) + "\n")
+
     # --- trust anchors: what a verifier must already trust (in reality: DID resolution +
     # the witness ecosystem). `witnesses` is the bar the transcript cannot lower: the
     # manifest is signed by the log key, so it cannot vouch for its own witness count.
@@ -580,7 +599,8 @@ def run(outdir: Path):
     keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ACTORS}
     keys[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
     (out / "trust.json").write_text(json.dumps(
-        {"keys": keys, "witnesses": manifest["transparency_log"]["witnesses"]}, indent=1) + "\n")
+        {"keys": keys, "witnesses": manifest["transparency_log"]["witnesses"],
+         "anchors": ["did:web:sheffield-star.example"]}, indent=1) + "\n")
 
     counts = body["counts"]
     print(f"run complete -> {out}")
@@ -878,6 +898,21 @@ def tamper(src: Path, dst: Path, mode: str):
         a, b = body["counts"][OPTIONS[0]], body["counts"][OPTIONS[1]]
         body["counts"] = {OPTIONS[0]: b, OPTIONS[1]: a}
         reforge(dst, entries, with_witnesses=True)
+    elif mode == "drop":
+        # The end of the escalation, and the one tamper that forges NOTHING. The committee
+        # and both witnesses erase Plot-holder 23's kiosk recast — the ballot that repaired
+        # her compromised phone's lie — repair the box digest, re-decrypt the shortened sum
+        # honestly, and re-sign history end to end. Her phone's sealed vote for Keith
+        # quietly becomes her vote, and Sandra's 8-6 win a 7-7 tie. Every hash, signature
+        # and proof now agrees, because every artifact is genuine: this is the true record
+        # of an election minus one inconvenient ballot. Deniability, not forgery. The only
+        # artifact that still objects is the one the collusion cannot reprint: the closing
+        # log head, anchored outside it.
+        def drop(ballots):
+            tag = hx(link_tag(nym_secret("Plot-holder 23"), DECISION))
+            kiosk = max((b for b in ballots if b["nullifier"] == tag), key=lambda b: b["seq"])
+            ballots.remove(kiosk)
+        rewrite_box(dst, drop, collude=True)
     else:
         sys.exit(f"unknown tamper mode: {mode}")
     print(f"tampered ({mode}) -> {dst}")

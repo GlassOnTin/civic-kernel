@@ -6,7 +6,7 @@ end to end with real cryptography, emitting a transcript that an independent
 verifier — sharing no code with the runner — confirms from the artifacts alone.
 
 ```sh
-./test.sh          # the success test: run, verify, reproduce, catch 11 tampers
+./test.sh          # the success test: run, verify, reproduce, catch 12 tampers
 python3 clubvote.py run      # -> out/ (committed as the reference transcript)
 python3 verify.py out        # independent verification, exit 0 = verified
 ```
@@ -21,7 +21,7 @@ system would use an elliptic-curve group for kilobyte ballots.
 |---|---|
 | **prove** | the issuer certifies each plot-holder's nym key `g^x` into a published roster. A ballot then proves membership of that **ring** with a linkable ring signature (LSAG), and carries the per-decision pseudonym `nullifier = H(decision_id)^x` — §3.1's `nym_secret × context_id`, in the exponent. Which of the sixty keys signed, nothing says |
 | **cast / challenge** | the device encrypts the choice to a 2-of-3 trustee key (exponential ElGamal) and attaches a 0-or-1 validity proof (CDS); the voter may challenge it to open the encryption before casting (Benaloh — a cheating device cannot tell which is coming; a challenged ciphertext is a receipt by construction, so it is spoiled, never cast); sealed ciphertexts enter the box and are never individually opened; any later ballot with the same nullifier silently supersedes |
-| **verify** | `verify.py`: schemas, signatures, witnessed Merkle heads, digests, credentials, audits, per-ballot ring-membership and validity proofs, and the tally — recompute the homomorphic sum, check each trustee share's Chaum-Pedersen proof, combine, brute-force the small exponent, compare with the announcement |
+| **verify** | `verify.py`: schemas, signatures, witnessed Merkle heads, digests, credentials, audits, per-ballot ring-membership and validity proofs, the tally — recompute the homomorphic sum, check each trustee share's Chaum-Pedersen proof, combine, brute-force the small exponent, compare with the announcement — and last, the anchor: the closing head must match a receipt from outside the collusion set |
 | **read** | `out/log.jsonl` — seven kernel events, each validating against the waist |
 
 ## What makes it this project's prototype
@@ -45,7 +45,12 @@ system would use an elliptic-curve group for kilobyte ballots.
    and **one proof retired two identity checks**: where a ballot used to carry a voter's
    public key, the issuer's credential on it, and that voter's signature over it, it now
    carries a ring signature and a linking tag, and nobody — the issuer included — can say
-   who cast it.
+   who cast it; v5 anchored the closing head outside the collusion set — the last thing
+   total signature collusion could still do was *erase* history, and now the world holds
+   a copy. No manifest field flips for v5, and that is its lesson: the manifest is signed
+   by the log key, so it could never carry this bar — the requirement lives in the
+   verifier's trust anchors (`trust.json` names who must hold a receipt), where
+   `unwitness` taught such bars to live.
 3. **Every tamper is caught by the defence the design names for it** — and the test
    asserts *which* check fired, because a tamper caught by the wrong check is a test that
    passes for the wrong reason and would stay green if the named defence rotted. Each
@@ -53,7 +58,9 @@ system would use an elliptic-curve group for kilobyte ballots.
    was mutation-tested (disable it, and its tamper is certified or loses its named
    defence). The first four are one insider escalating; the rest are worse — the
    committee **and both witnesses** colluding on a rewritten history, every hash and
-   signature agreeing, so that only mathematics is left standing:
+   signature agreeing, so that only mathematics is left standing. The last is worst of
+   all, because even mathematics has nothing to convict: nothing is forged, the lie is
+   pure omission, and only the world's copy of the closing head objects:
 
    | tamper | who does what | what catches it |
    |---|---|---|
@@ -68,15 +75,21 @@ system would use an elliptic-curve group for kilobyte ballots.
    | `overvote` | an enrolled voter encrypts **2**; the corrupt committee counts it; witnesses co-sign | the 0-or-1 validity proof he cannot forge — it convicts his ballot, and the tally built on it falls with it |
    | `share` | committee + witnesses announce a rigged decryption, arithmetically consistent | the Chaum-Pedersen proof on each trustee share — the rigged share needs a secret nobody colluding holds |
    | `count` | same collusion, honest shares, lying counts | the recount — combine the proven shares, take the small exponent, and the announcement refutes itself |
+   | `drop` | same collusion **erases the kiosk recast** — the ballot that repaired the compromised phone — re-signs history end to end and retallies honestly: every artifact genuine, Sandra's 8–6 win now a 7–7 tie, nothing forged | the **anchored closing head** — the receipt in `anchor.json`, from a party `trust.json` requires and the collusion does not include, matches the history the world saw and not this one |
 
    `rehead` is the one the records-rewrite scenario is actually about. `share` and `count`
    are the trustee layer's independence result: **the tally survives everyone who signs
    things.** A rigged tally is caught by proof verification even when the log key and
    every witness co-sign the lie — and the election key itself cannot be swapped by that
    collusion, because every ballot's validity proof binds to it under a ring signature
-   only a plot-holder can make. What total collusion *can* still do is drop ballots from
-   history (deniability, not forgery); the design's answer there is the external anchor,
-   not implemented here.
+   only a plot-holder can make. `drop` is the attack that remained when all of that held:
+   proofs convict what is *present*, so the last collusion move is subtraction —
+   deniability, not forgery. The anchor answers it, and the check runs **last, gated
+   behind every internal check**, so its failure means exactly one thing: this transcript
+   is internally flawless and is still not the history that was published. The receipt
+   must cover the *whole, final* log — a shortened history fails the root, an extended
+   one fails the size (an appended entry would otherwise shadow the tally, since the
+   verifier reads the latest entry of each type), and a rewritten one fails both.
 
    `stuff` and `box` are two attacks answered by one check, and that is the point of the
    anonymity rung rather than a gap in it: eligibility used to be *asserted* by a
@@ -91,9 +104,9 @@ system would use an elliptic-curve group for kilobyte ballots.
    tally is unaffected and the announced result is exactly right. Each is caught by one
    subgroup check and nothing else.
 
-   Every check that anonymity added or repurposed was mutation-tested, and each is
-   *uniquely* load-bearing — disable it alone and the verifier reports `VERIFIED` on a
-   transcript it should reject:
+   Every check that anonymity added or repurposed, and the anchor check after them, was
+   mutation-tested, and each is *uniquely* load-bearing — disable it alone and the
+   verifier reports `VERIFIED` on a transcript it should reject:
 
    | disable this check | and this tamper | certifies |
    |---|---|---|
@@ -102,6 +115,7 @@ system would use an elliptic-curve group for kilobyte ballots.
    | nullifier subgroup membership | `doublevote` | "15 voted", one of them Derek twice |
    | ciphertext subgroup membership | `smuggle` | a transcript carrying a non-group-element ciphertext |
    | logged-roster digest | `roster` | the eligibility rule rewritten after the vote |
+   | anchored closing head | `drop` | a counted ballot erased from history — 7–7, announced and proven honestly, minus one voter's vote |
 
    (Ring-signature-off does *not* let `doublevote` through — the nullifier check still
    catches it; the two are independent.) Getting to *uniquely* load-bearing took work in
@@ -120,7 +134,7 @@ system would use an elliptic-curve group for kilobyte ballots.
    election**: Sandra wins 8–6, and the unrepaired phone ballot would have made it 7–7.
    What that phone actually encrypted stays sealed forever.
 
-## What v4 deliberately is not (the manifest is the source of truth)
+## What v5 deliberately is not (the manifest is the source of truth)
 
 - **`unlinkable: true` means the anonymity set is the roster, and the cost is linear in
   it.** A ballot is indistinguishable among the sixty enrolled keys — not among a
@@ -169,6 +183,16 @@ system would use an elliptic-curve group for kilobyte ballots.
   live observation, as the harness has always said. Anonymity adds one thing here and
   only one: a coercer who does not hold your nym secret can no longer read the public
   box to check whether you abstained.
+- **The anchor seals the close of history, not the window.** The Star's receipt pins the
+  final head: once printed, history can no longer shorten, stretch, or change. A ballot
+  suppressed *before* the head is published is not the anchor's to catch — that is the
+  voter's own check (recorded-as-cast): only she knows her tag, so only she can see it
+  missing from the public box, a check anonymity preserves rather than defeats. And an
+  anchor is one more party, not magic: a newspaper that colludes too is answered by a
+  second receipt — `trust.json` names as many anchors as the verifier requires, and
+  receipts are additive. In this simulation the pinned key stands in for the printed
+  page; in a deployment the receipt is the archive itself, or refusal 5's chain —
+  notary of last resort, never gatekeeper.
 - **The DKG has no hash-commitment round.** Each trustee deals their own
   Feldman-committed polynomial and no party ever holds the joint secret — but a
   trustee who waits to see the others' commitments before choosing their own could
@@ -186,13 +210,15 @@ system would use an elliptic-curve group for kilobyte ballots.
   tampers are handed a power no real attacker has — the seed, and so every voter's tag —
   precisely so they can aim at a named victim's ballot inside an anonymous box.
 - `trust.json` stands in for DID resolution and the witness ecosystem: it is the
-  verifier's explicit trust anchor set, naming both the keys it trusts and, in
-  `witnesses`, which parties it *requires* to co-sign every log head. That list has to
+  verifier's explicit trust anchor set, naming the keys it trusts, in `witnesses` the
+  parties it *requires* to co-sign every log head, and in `anchors` the external parties
+  that must hold a receipt for the closing one. Those lists have to
   live outside the transcript. The manifest declares its own witnesses, but the manifest
   is signed by the log key — so an insider holding that key can lower their own bar to
   zero, and did, until `unwitness` was written to prove it. A manifest cannot be its own
   standard. Correspondingly, `verify.py` declines to certify a log whose trust anchors
-  name no witness. It holds **no voter keys at all**, and that is the shape of the rung:
+  name no witness — or no external anchor, since an unanchored log cannot refute a
+  quietly erased ballot. It holds **no voter keys at all**, and that is the shape of the rung:
   a verifier trusts the ring, never a name. The trustees need no anchor either — their
   layer is held up by proofs, not signatures, which is why it survives the collusions
   that defeat the log.

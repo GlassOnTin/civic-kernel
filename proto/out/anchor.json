@@ -1,0 +1,15 @@
+{
+ "receipts": [
+  {
+   "log_id": "did:web:heeley-bank-allotments.example",
+   "size": 7,
+   "root": "sha256:bc5194f08121f57964ed42309f8a1b79fdcb95349f3191e68682b34361caac52",
+   "published": "Sheffield Star public notices, 2026-07-23 print edition (simulated)",
+   "sig": {
+    "key_id": "did:web:sheffield-star.example#notices-1",
+    "alg": "ed25519",
+    "value": "oRRRFiyvSXbIT83RBuouQTXLtYDSmGhdvnPd87SNeY72MXvBNsc1WFo1hACrthrTJxqtbZ_xyeup2DwNbyuIDA"
+   }
+  }
+ ]
+}
