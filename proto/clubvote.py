@@ -15,16 +15,28 @@ with verify.py, which shares no code with this file.
       cast.html) to the box, then legitimately re-run everything downstream of it — box
       digest, tally, heads, anchor. Ballots are accepted, not judged: verify.py is the
       judge, so run it on <dst> afterwards. Demo-seed transcripts only.
-  python3 clubvote.py agm new <dir>              a REAL election the committee can run
-      across days: keys and trustee polynomials generated once from the OS and kept in
-      <dir>/private/keys.json (0600, the only file to guard); the publishable transcript
-      grows append-only in <dir>/public/. Then:
+  python3 clubvote.py agm new <dir> <card.json>...   a REAL election the committee can
+      run across days: keys and trustee polynomials generated once from the OS and kept
+      in <dir>/private/keys.json (0600, the only file to guard); the publishable
+      transcript grows append-only in <dir>/public/. The cards are the witnesses' public
+      keys — the committee holds NO witness key, and every command that grows the log
+      cuts a head that must come back co-signed before history can advance. Then:
         agm enrol <dir> "<member>" <voter_pub>   certify a page-enrolled public key
         agm open <dir> <decision-id> "<question>" "<optA>" "<optB>"   pin the roster, open
         agm collect <dir> <ballot.json>...       box ballots from cast.html as they arrive
-        agm close <dir>                          commit digests, tally, final head, anchor
+        agm close <dir>                          commit digests, tally, cut the final head
+        agm witness-import <dir> <cosig.json>... attach the witnesses' answers; when the
+                                                 closing head completes, the anchor follows
       The committee never reforges history (that is the tampers' move) — it only appends.
       Shadow-mode subtractions are declared in the emitted manifest, not hidden.
+  python3 clubvote.py witness new <wdir> <key-id>    a witness, on the witness's OWN
+      machine: one key (private), one card (public, hand to the committee), one memory —
+      the last head it co-signed. Then:
+        witness watch <wdir> <community-id> <log-pub>   pin whom you watch; the log key
+                                                 arrives out of band — that is the ceremony
+        witness sign <wdir> <witness-request.json>      check the head roots the log it
+      came with AND extends the history already co-signed, then emit a cosig file. A
+      history that is not an extension is REFUSED — the witness's memory is the defence.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
       regenerate the heads, dropping the witness co-signatures they cannot forge) -> unwitness
@@ -87,6 +99,22 @@ def sha256_hex(b: bytes) -> str:
 
 def b64u(b: bytes) -> str:
     return base64.urlsafe_b64encode(b).decode().rstrip("=")
+
+
+def b64d(s: str) -> bytes:
+    return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
+
+
+def sig_ok(pub_b64: str, sig: dict, obj_minus_sig: dict) -> bool:
+    # actors checking each other's signatures (a witness checking the log key, the
+    # committee checking a returned co-signature) — the independent VERIFIER still
+    # lives in verify.py and shares none of this
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+    try:
+        Ed25519PublicKey.from_public_bytes(b64d(pub_b64)).verify(b64d(sig["value"]), canon(obj_minus_sig))
+        return True
+    except Exception:
+        return False
 
 
 def keypair(name: str) -> Ed25519PrivateKey:
@@ -342,18 +370,24 @@ class Log:
     def __init__(self, log_priv, ts):
         self.entries, self.heads, self.log_priv, self.ts = [], [], log_priv, ts
 
-    def append(self, type_, body, timestamp):
+    def append(self, type_, body, timestamp, head=True):
+        # head=False (agm): entries accumulate and a head is cut per COMMAND, as a
+        # checkpoint travelling to real witnesses — not per entry with local keys
         entry = {"v": "civic-kernel/log-entry/v0", "type": type_, "community": COMMUNITY,
                  "timestamp": timestamp, "body": body}
         entry["sig"] = sign_over(self.log_priv, ACTORS["log"][0], entry)
         self.entries.append(entry)
-        self._head(timestamp)
+        if head:
+            self._head(timestamp)
         return entry
 
-    def _head(self, timestamp):
+    def head_body(self, timestamp) -> dict:
         leaves = [leaf_hash(canon({k: v for k, v in e.items() if k != "sig"})) for e in self.entries]
-        head = {"log_id": COMMUNITY, "size": len(self.entries),
+        return {"log_id": COMMUNITY, "size": len(self.entries),
                 "root": "sha256:" + merkle_root(leaves).hex(), "timestamp": timestamp}
+
+    def _head(self, timestamp):
+        head = self.head_body(timestamp)
         sigs = [sign_over(self.log_priv, ACTORS["log"][0], head)]
         for w in ("witness-fed", "witness-meers"):
             sigs.append(sign_over(keypair(w), ACTORS[w][0], head))
@@ -840,13 +874,21 @@ def collect(src: Path, dst: Path, ballot_paths: list[Path]):
 # trustee polynomial is generated once with OS randomness and kept in
 # <dir>/private/keys.json (0600), while the published transcript grows APPEND-ONLY in
 # <dir>/public/ across days of separate invocations. Nothing here ever reforges
-# history — rewriting is the tampers' move; the committee only appends and, at close,
-# anchors. Voters are cast.html: their secrets are born on their devices and never
-# appear on this machine — the roster holds only certified public keys, so the issuer
-# cannot link a ballot to a member even in principle. Shadow-mode subtractions, said
-# in the manifest: one machine still holds log, issuer, witness, anchor and all three
-# trustee keys (witness separation is the next rung), and whoever collects ballot
-# files sees who handed over which.
+# history — rewriting is the tampers' move; the committee only appends and, once the
+# closing head is witnessed, anchors. Voters are cast.html: their secrets are born on
+# their devices and never appear on this machine — the roster holds only certified
+# public keys, so the issuer cannot link a ballot to a member even in principle.
+#
+# WITNESSES ARE SEPARATE PARTIES. The committee's keys.json holds no witness key: at
+# `agm new` each witness hands over a card (their public key, made by `witness new` on
+# their own machine), and every command that grows the log cuts a PENDING head that
+# must travel to them and come back co-signed (`witness sign` -> `agm witness-import`)
+# before history can advance. A witness co-signs only after checking the head against
+# its own memory of the log — so a committee that rewrites history cannot get its
+# heads witnessed, which is the property this separation exists to enforce.
+# Shadow-mode subtractions, said in the manifest: the committee machine still holds
+# the issuer, anchor and all three trustee keys, and whoever collects ballot files
+# sees who handed over which.
 
 def now_iso() -> str:
     from datetime import datetime, timezone
@@ -871,10 +913,37 @@ def agm_by_type(log: Log) -> dict:
     return {e["type"]: e for e in log.entries}
 
 
-def agm_new(d: Path):
+def agm_cut_head(d: Path, log: Log):
+    """Every command that grows the log ends here: a head over the whole log, signed by
+    the log key alone, waiting for the witnesses' co-signatures. History does not
+    advance past it until they answer."""
+    body = log.head_body(now_iso())
+    pending = {"head": body, "sigs": [sign_over(keypair("log"), ACTORS["log"][0], body)]}
+    (d / "pending-head.json").write_text(json.dumps(pending, indent=1) + "\n")
+    (d / "witness-request.json").write_text(json.dumps(
+        {"head": {**body, "sigs": pending["sigs"]}, "entries": log.entries}, indent=1) + "\n")
+    print(f"  head at size {body['size']} awaits its witnesses: send {d / 'witness-request.json'}")
+    print(f"  to each (they run `witness sign`), then: agm witness-import {d} <cosig.json>...")
+
+
+def agm_require_witnessed(d: Path, doing: str):
+    if (d / "pending-head.json").exists():
+        sys.exit(f"cannot {doing}: the previous head is not yet co-signed by every witness "
+                 f"— send {d / 'witness-request.json'} to them and run agm witness-import. "
+                 "History does not advance past an unwitnessed checkpoint.")
+
+
+def agm_new(d: Path, card_paths: list[Path]):
     global REAL
     if d.exists():
         sys.exit(f"{d} already exists — one directory is one election")
+    cards = [json.loads(p.read_text()) for p in card_paths]
+    for c in cards:
+        if len(b64d(c["pub"])) != 32 or "#" not in c["witness"]:
+            sys.exit(f"malformed witness card: {c}")
+    if len({c["witness"].split('#')[0] for c in cards}) < len(cards):
+        sys.exit("two cards from the same witness DID — witnesses must be independent parties")
+    witness_dids = [c["witness"].split("#")[0] for c in cards]
     REAL = True
     (d / "private").mkdir(parents=True, mode=0o700)
     pub = d / "public"
@@ -912,18 +981,20 @@ def agm_new(d: Path):
                       "paper_channel": False, "coercion_resistance": "revote-silent",
                       "trustee_quorum": "2-of-3 — all three keys on the committee machine "
                                         "in shadow mode, declared"},
-        "transparency_log": {"log_id": COMMUNITY,
-                             "witnesses": ["did:web:sheffield-allotment-federation.example",
-                                           "did:web:meersbrook-allotments.example"]},
+        "transparency_log": {"log_id": COMMUNITY, "witnesses": witness_dids},
         "decision_metadata": False,
     }
     manifest["sig"] = sign_over(keypair("log"), COMMUNITY + "#manifest-1", manifest)
     (pub / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
 
-    keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ACTORS}
+    # The committee's trust set holds NO witness private key — only the cards' public
+    # halves. keys.json below shrinks by exactly the witnesses: that is the separation.
+    keys = {ACTORS[a][0]: pub_b64(keypair(a)) for a in ("log", "issuer", "anchor")}
     keys[COMMUNITY + "#manifest-1"] = pub_b64(keypair("log"))
+    for c in cards:
+        keys[c["witness"]] = c["pub"]
     (pub / "trust.json").write_text(json.dumps(
-        {"keys": keys, "witnesses": manifest["transparency_log"]["witnesses"],
+        {"keys": keys, "witnesses": witness_dids,
          "anchors": ["did:web:sheffield-star.example"]}, indent=1) + "\n")
 
     (pub / "roster.json").write_text(json.dumps(
@@ -937,19 +1008,21 @@ def agm_new(d: Path):
     log.append("manifest.published", {
         "manifest_digest": sha256_hex(canon({k: v for k, v in manifest.items() if k != "sig"})),
         "note": "Shadow-mode run: real OS randomness, persistent committee keys, "
-                "enrolment secrets on voters' devices (cast.html), witness and trustee "
-                "keys still held on the committee machine — declared, not hidden. The "
+                "enrolment secrets on voters' devices (cast.html), witnesses on their "
+                "own machines co-signing every checkpoint; the issuer, anchor and "
+                "trustee keys still sit with the committee — declared, not hidden. The "
                 "official result is whatever the meeting decides by hand; this record "
-                "exists so anyone can check what a real run would have them check."}, ts)
+                "exists so anyone can check what a real run would have them check."}, ts,
+               head=False)
     log.append("x-trustees.published", {
         "trustees_digest": sha256_hex(canon(trustees_doc)), "threshold": "2-of-3",
-        "trustees": [tr["did"] for tr in TRUSTEES]}, ts)
+        "trustees": [tr["did"] for tr in TRUSTEES]}, ts, head=False)
     agm_write_log(pub, log)
     save_secrets(d / "private" / "keys.json")
-    print(f"new election -> {d}")
-    print(f"  private/keys.json holds every secret this election will ever need (0600); guard it")
+    print(f"new election -> {d}  ({len(cards)} witness card(s) pinned; no witness key is held here)")
+    print(f"  private/keys.json holds the committee's secrets (0600); guard it")
     print(f"  public/ is the transcript to publish; it grows append-only from here")
-    print(f"  next: agm enrol {d} \"<member name>\" <voter_pub from cast.html>")
+    agm_cut_head(d, log)
 
 
 def agm_enrol(d: Path, name: str, pub_hex: str):
@@ -982,6 +1055,7 @@ def agm_open(d: Path, decision_id: str, question: str, options: list[str]):
     if "decision.opened" in agm_by_type(log):
         sys.exit("this election directory already opened its decision — one directory, "
                  "one decision")
+    agm_require_witnessed(d, "open the decision")
     roster_doc = json.loads((pub / "roster.json").read_text())
     if not roster_doc["members"]:
         sys.exit("nobody is enrolled — a ring of zero keys can sign nothing")
@@ -990,13 +1064,14 @@ def agm_open(d: Path, decision_id: str, question: str, options: list[str]):
     from datetime import datetime, timedelta, timezone
     ends = (datetime.now(timezone.utc) + timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
     log.append("x-roster.published",
-               {"roster_digest": digest, "member_count": len(roster_doc["members"])}, ts)
+               {"roster_digest": digest, "member_count": len(roster_doc["members"])}, ts,
+               head=False)
     log.append("decision.opened", {
         "decision_id": decision_id, "question": question,
         "question_hash": sha256_hex(question.encode()),
         "options": options, "eligibility_rules": "roster " + digest,
         "recast_policy": "last-ballot-counts",
-        "window": {"deliberation_ends": ts, "cast_ends": ends}}, ts)
+        "window": {"deliberation_ends": ts, "cast_ends": ends}}, ts, head=False)
     (pub / "ballot-box.json").write_text(json.dumps(
         {"decision_id": decision_id, "ballots": []}, indent=1) + "\n")
     (pub / "audits.json").write_text(json.dumps(
@@ -1006,6 +1081,7 @@ def agm_open(d: Path, decision_id: str, question: str, options: list[str]):
           f"window closes {ends})")
     print(f"  members cast at cast.html?ref=<published {pub}> and hand over the ballot file")
     print(f"  then: agm collect {d} <ballot.json>...   and finally: agm close {d}")
+    agm_cut_head(d, log)
 
 
 def agm_collect(d: Path, ballot_paths: list[Path]):
@@ -1041,6 +1117,7 @@ def agm_close(d: Path):
         sys.exit("no decision is open — nothing to close")
     if "decision.closed" in by:
         sys.exit("already closed — a close is once; that is what the anchor seals")
+    agm_require_witnessed(d, "close the decision")
     opened = by["decision.opened"]["body"]
     box_doc = json.loads((pub / "ballot-box.json").read_text())
     audits_doc = json.loads((pub / "audits.json").read_text())
@@ -1052,19 +1129,129 @@ def agm_close(d: Path):
         "audits_digest": sha256_hex(canon(audits_doc)),
         "commitments_audited": len(audits_doc["audits"]),
         "audit_failures": sum(1 for a in audits_doc["audits"] if a["outcome"] == "MISMATCH"),
-        "rejected_at_cast": []}, ts)
+        "rejected_at_cast": []}, ts, head=False)
     body = tally_body(box_doc["ballots"], box_digest, [1, 3],
                       "shadow-mode threshold decryption: quorum 2-of-3 exercised, all "
                       "three keys on the committee machine — declared",
                       opened["decision_id"], opened["options"])
-    log.append("decision.tally-proof", body, ts)
+    log.append("decision.tally-proof", body, ts, head=False)
     agm_write_log(pub, log)
-    reanchor(pub, "club newsletter / parish noticeboard (shadow mode: the anchor key is "
-                  "on the committee machine — simulated, declared)")
     print(f"closed. tally: " + ", ".join(f"{k} {v}" for k, v in body["counts"].items()))
     print(f"  ({body['distinct_voters']} counted, {body['superseded']} superseded)")
-    print(f"  publish {pub} and let anyone judge it:")
+    print("  the anchor follows the witnessed closing head — after the import:")
     print(f"  python3 {Path(__file__).parent / 'verify.py'} {pub}")
+    agm_cut_head(d, log)
+
+
+def agm_witness_import(d: Path, cosig_paths: list[Path]):
+    pub, log = agm_load(d)
+    if not (d / "pending-head.json").exists():
+        sys.exit("no head is pending — nothing to import co-signatures for")
+    pending = json.loads((d / "pending-head.json").read_text())
+    body = pending["head"]
+    trust = json.loads((pub / "trust.json").read_text())
+    for p in cosig_paths:
+        c = json.loads(p.read_text())
+        sig, kid = c["sig"], c["sig"]["key_id"]
+        if kid not in trust["keys"]:
+            sys.exit(f"{p}: co-signature from {kid!r}, a key the trust anchors do not name")
+        if c["head"] != body:
+            sys.exit(f"{p}: co-signature is for a different head (size {c['head'].get('size')}, "
+                     f"pending is {body['size']})")
+        if not sig_ok(trust["keys"][kid], sig, body):
+            sys.exit(f"{p}: co-signature does not verify against {kid}'s card")
+        if not any(s["key_id"] == kid for s in pending["sigs"]):
+            pending["sigs"].append(sig)
+    covered = {s["key_id"].split("#")[0] for s in pending["sigs"]}
+    waiting = [w for w in trust["witnesses"] if w not in covered]
+    if waiting:
+        (d / "pending-head.json").write_text(json.dumps(pending, indent=1) + "\n")
+        print(f"head at size {body['size']}: still waiting on {', '.join(waiting)}")
+        return
+    log.heads.append({**body, "sigs": pending["sigs"]})
+    agm_write_log(pub, log)
+    (d / "pending-head.json").unlink()
+    (d / "witness-request.json").unlink(missing_ok=True)
+    reanchor(pub, "club newsletter / parish noticeboard (shadow mode: the anchor key is "
+                  "on the committee machine — simulated, declared)")
+    print(f"head at size {body['size']} co-signed by every witness; checkpoint published"
+          + (" — the election is fully witnessed and anchored"
+             if "decision.tally-proof" in agm_by_type(log) else ""))
+
+
+# ---------------------------------------------------------------- the witness
+# A separate party on a separate machine. It holds one key, remembers the last head it
+# co-signed, and signs a new head only if the history it is shown EXTENDS the history
+# it remembers — so a committee that rewrites the past cannot get its checkpoint
+# witnessed. The log key it checks against arrives out of band (`witness watch`): that
+# exchange, two secretaries swapping keys at a federation meeting, is the ceremony.
+
+def witness_load(wdir: Path) -> dict:
+    return json.loads((wdir / "witness.json").read_text())
+
+
+def witness_save(wdir: Path, w: dict):
+    (wdir / "witness.json").write_text(json.dumps(w, indent=1) + "\n")
+    (wdir / "witness.json").chmod(0o600)
+
+
+def witness_new(wdir: Path, key_id: str):
+    if wdir.exists():
+        sys.exit(f"{wdir} already exists")
+    if "#" not in key_id:
+        sys.exit("the witness key id should carry a key fragment, e.g. did:web:example.org#w1")
+    wdir.mkdir(parents=True, mode=0o700)
+    from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat
+    priv = Ed25519PrivateKey.generate()
+    witness_save(wdir, {
+        "key_id": key_id,
+        "priv": priv.private_bytes(Encoding.Raw, PrivateFormat.Raw, NoEncryption()).hex(),
+        "watch": None, "last": None})
+    (wdir / "card.json").write_text(json.dumps(
+        {"witness": key_id, "pub": pub_b64(priv)}, indent=1) + "\n")
+    print(f"witness {key_id} -> {wdir}")
+    print(f"  hand {wdir / 'card.json'} to the committee; witness.json stays here (0600)")
+    print(f"  then pin whom you watch: witness watch {wdir} <community-id> <log-pub-b64>")
+
+
+def witness_watch(wdir: Path, community: str, log_pub: str):
+    w = witness_load(wdir)
+    if len(b64d(log_pub)) != 32:
+        sys.exit("that does not look like a raw Ed25519 public key (base64url)")
+    w["watch"] = {"community": community, "log_pub": log_pub}
+    witness_save(wdir, w)
+    print(f"watching {community}. The log key came to you out of band — that exchange is "
+          "the ceremony; never take it from the request you are asked to sign.")
+
+
+def witness_sign(wdir: Path, request_path: Path):
+    w = witness_load(wdir)
+    if not w.get("watch"):
+        sys.exit("this witness watches nobody yet — run witness watch first")
+    req = json.loads(request_path.read_text())
+    head, entries = req["head"], req["entries"]
+    body = {k: v for k, v in head.items() if k != "sigs"}
+    if body.get("log_id") != w["watch"]["community"]:
+        sys.exit(f"this head is from {body.get('log_id')!r}, not the community I watch")
+    if not any(sig_ok(w["watch"]["log_pub"], s, body) for s in head.get("sigs", [])):
+        sys.exit("the head is not signed by the log key I was given at the ceremony — refusing")
+    leaves = [leaf_hash(canon({k: v for k, v in e.items() if k != "sig"})) for e in entries]
+    if body["size"] != len(entries) or body["root"] != "sha256:" + merkle_root(leaves).hex():
+        sys.exit("the head does not root the log that came with it — refusing")
+    if w["last"]:
+        if body["size"] < w["last"]["size"] or \
+           "sha256:" + merkle_root(leaves[:w["last"]["size"]]).hex() != w["last"]["root"]:
+            sys.exit(f"REFUSED: this history is not an extension of the history I co-signed "
+                     f"at size {w['last']['size']}. Append-only is violated — someone is "
+                     "asking me to witness a rewrite, and my memory is the defence.")
+    priv = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(w["priv"]))
+    out = wdir / f"cosig-{body['size']}.json"
+    out.write_text(json.dumps(
+        {"head": body, "sig": sign_over(priv, w["key_id"], body)}, indent=1) + "\n")
+    w["last"] = {"size": body["size"], "root": body["root"]}
+    witness_save(wdir, w)
+    print(f"co-signed head at size {body['size']} -> {out}")
+    print("  my memory now pins this history; I will refuse anything that does not extend it")
 
 
 def tamper(src: Path, dst: Path, mode: str):
@@ -1280,8 +1467,8 @@ if __name__ == "__main__":
         collect(Path(args[1]), Path(args[2]), [Path(a) for a in args[3:]])
     elif args[:1] == ["tamper"] and len(args) == 4:
         tamper(Path(args[1]), Path(args[2]), args[3])
-    elif args[:2] == ["agm", "new"] and len(args) == 3:
-        agm_new(Path(args[2]))
+    elif args[:2] == ["agm", "new"] and len(args) >= 4:
+        agm_new(Path(args[2]), [Path(a) for a in args[3:]])
     elif args[:2] == ["agm", "enrol"] and len(args) == 5:
         agm_enrol(Path(args[2]), args[3], args[4])
     elif args[:2] == ["agm", "open"] and len(args) == 7:
@@ -1290,5 +1477,13 @@ if __name__ == "__main__":
         agm_collect(Path(args[2]), [Path(a) for a in args[3:]])
     elif args[:2] == ["agm", "close"] and len(args) == 3:
         agm_close(Path(args[2]))
+    elif args[:2] == ["agm", "witness-import"] and len(args) >= 4:
+        agm_witness_import(Path(args[2]), [Path(a) for a in args[3:]])
+    elif args[:2] == ["witness", "new"] and len(args) == 4:
+        witness_new(Path(args[2]), args[3])
+    elif args[:2] == ["witness", "watch"] and len(args) == 5:
+        witness_watch(Path(args[2]), args[3], args[4])
+    elif args[:2] == ["witness", "sign"] and len(args) == 4:
+        witness_sign(Path(args[2]), Path(args[3]))
     else:
         sys.exit(__doc__)

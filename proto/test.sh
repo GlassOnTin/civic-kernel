@@ -64,13 +64,14 @@ castpage() {
     record castpage "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
-# The committee's half of a REAL election: agm new/enrol/open/collect/close across
-# separate processes (persistent keys), cast.js voters, verify.py the judge, and the
-# demo-only tools refusing the real transcript.
+# The committee's half of a REAL election with SEPARATE witnesses: witness new/watch,
+# agm new/enrol/open/collect/close, witness sign, witness-import — across separate
+# processes and directories, cast.js voters, verify.py the judge. The named defence:
+# a witness handed a re-signed rewritten history must refuse on its own memory.
 agmflow() {
   if command -v node > /dev/null 2>&1; then
     if node ../tools/agm-flow.mjs > "$T/agmflow.log" 2>&1
-    then record agmflow "OK   real election across processes: verified, counted, re-vote superseded; demo tools refuse it"
+    then record agmflow "OK   real election, witnesses on their own keys: verified, counted; a witnessed rewrite is refused"
     else record agmflow "FAIL agm flow: $(grep -m1 FAIL "$T/agmflow.log")"; fi
   else
     record agmflow "OK   SKIPPED here — node not installed; CI runs this"
@@ -127,7 +128,7 @@ declare -A desc=(
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
   [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
-  [agmflow]="the committee's half of a real election (agm new/enrol/open/collect/close)"
+  [agmflow]="a real election with separate witnesses (agm + witness command groups)"
 )
 ORDER="honest reproduce real parity castpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
