@@ -13,12 +13,20 @@ requirement is not here, it is rationale, evidence, or ecosystem.
 
 ## The problem (§1)
 
+<details>
+<summary><b>Plainly</b> <i>The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.</i></summary>
+
 A democracy must produce one output — decisions that losers accept as legitimate — under
 permanently adversarial conditions, for decades, while its own rules change underneath it.
 That is a distributed-systems problem with a hostile threat model. The kernel is the
 smallest set of guarantees that markets and communities cannot provide for themselves.
 
+</details>
+
 ## Goals, in priority order (§1)
+
+<details>
+<summary><b>Plainly</b> <i>Five promises, strongest first: know as little as possible about anyone, be too small to steal, keep every decision inside human rights, stay changeable, leave nobody out.</i></summary>
 
 1. **Freedom by default** — the system knows as little as possible about each person.
 2. **Capture resistance** — no state, vendor, or majority faction can seize the machinery.
@@ -27,7 +35,12 @@ smallest set of guarantees that markets and communities cannot provide for thems
 4. **Evolvability** — the rules amend through the system itself: versioned, staged, reversible.
 5. **Inclusion** — no smartphone, no sight, no trust in computers: still first-class.
 
+</details>
+
 ## The threats (§2)
+
+<details>
+<summary><b>Plainly</b> <i>Every way to break it, listed before designing it: fourteen attacks, each with a named answer — and two unanswered on purpose, because the cure would be a ministry of truth.</i></summary>
 
 Design runs from the attacks backwards. T1–T9 attack the machinery, T10–T12 the terms
 of participation, T13 the defense itself, T14 the wires beneath it all.
@@ -56,7 +69,12 @@ limit §12 concedes), and the `executive-ignores` run breaks on an enforcement g
 T-number owns — a decision binds only where power obeys the record. The register states
 what the design answers; the harness reports what survives.
 
+</details>
+
 ## Four services, and no fifth (§3)
+
+<details>
+<summary><b>Plainly</b> <i>The whole machine is four small parts: prove you may speak, decide things anyone can check, keep decisions inside human rights, keep a record nobody can rewrite.</i></summary>
 
 | service | guarantees | answers |
 |---|---|---|
@@ -70,7 +88,12 @@ provide it competitively **and** its absence breaks a §1 goal. Reputation, deli
 fact-checking, delegation registries all fail it — each embeds an opinion about how
 politics should work, and opinion lives above the kernel, where it can be abandoned.
 
+</details>
+
 ## Four verbs (§8)
+
+<details>
+<summary><b>Plainly</b> <i>Everything a citizen ever does is one of four moves — prove, cast, verify, read — in messages small enough to travel by radio, or on paper.</i></summary>
 
 **prove · cast/challenge · verify · read** — the entire citizen surface. Payloads are
 kilobytes, self-contained, valid whenever they arrive: transport-agnostic,
@@ -78,7 +101,12 @@ delay-tolerant, deliverable over mesh, radio, or sneakernet when IP dies (§4, T
 Paper is the zero-bandwidth floor — same protocol, same tally, same audit, not a legacy
 annex (T9). A surface this small has nowhere to hide burden (T12).
 
+</details>
+
 ## Two formats — the waist (§6, [`schema/`](schema/))
+
+<details>
+<summary><b>Plainly</b> <i>Any group may run a weakened version, but its manifest must say so in a form anyone's phone can read. The one thing a manifest cannot vouch for is its own witnesses.</i></summary>
 
 Thinner than the services: a [log entry](schema/log-entry.schema.json) and a
 [conformance manifest](schema/manifest.schema.json). Adoption is per-person subscription
@@ -95,7 +123,12 @@ disagrees. The witness set is therefore the one thing a verifier must hold out o
 DID resolution and the witness ecosystem, never from the transcript under audit. A manifest
 cannot be its own standard (§6, T8, T10).
 
+</details>
+
 ## One floor (§5)
+
+<details>
+<summary><b>Plainly</b> <i>Mechanisms stay cheap to change; a person's standing as free and equal is nearly impossible to change. That asymmetry is the whole design.</i></summary>
 
 The goals above and the thirty UDHR invariants are pinned beneath the amendment process:
 changeable only by near-consensus, while everything about mechanism stays cheap to amend —
@@ -104,7 +137,12 @@ personhood: the design in one sentence. Scope, precisely: the pin binds inside a
 subscribed to the full profile; across the lattice it is the reference posture adoption
 pressure pushes toward — elsewhere the kernel guarantees only that the gap is legible (§5–§6).
 
+</details>
+
 ## Twelve refusals
+
+<details>
+<summary><b>Plainly</b> <i>Twelve things the kernel will never do — each one a door capture could have walked through.</i></summary>
 
 Each closes a capture surface. The pointer is the argument.
 
@@ -131,7 +169,12 @@ Each closes a capture surface. The pointer is the argument.
     the heading is declared per domain, per community, revisably. The UDHR enters as
     coordinate frame and floor, never as telos. ([model](docs/functional-model.md), Part 7)
 
+</details>
+
 ## The dynamics ([model](docs/functional-model.md))
+
+<details>
+<summary><b>Plainly</b> <i>The maths of change: each policy area moves toward its own best, slowly, and flips only on durable shifts. The structure is solid; the numbers to tune it are honestly unknown.</i></summary>
 
 The OS-sense kernel induces a second, mathematical one: an operator on the space of
 democracies. State is a tensor over (community × policy-domain × axis); "better" is a
@@ -143,7 +186,12 @@ shifts). The floor constrains; it is never the target. Status, honestly: the str
 well-posed; the coefficients are radically underdetermined — a specification and a
 research program, not a trained system.
 
+</details>
+
 ## What is measured (July 2026)
+
+<details>
+<summary><b>Plainly</b> <i>Results, not promises: what held, what strained, what broke — and the one fraud only the world's copy of history catches.</i></summary>
 
 - **The remedy axis gates the flagship verdict.** One attack — a 61% majority banning a
   minority's worship — against four real rights settlements: the UK (remedy
@@ -200,12 +248,19 @@ research program, not a trained system.
   under live observation, an executive that ignores court orders, a remedy too weak to
   stop a majority.
 
+</details>
+
 ## What is not solved (§12)
+
+<details>
+<summary><b>Plainly</b> <i>Five problems nobody has solved — this design included. Named, not hidden.</i></summary>
 
 Enrolment still needs a physical ceremony. Remote voting and coercion resistance
 genuinely conflict. Rights classification is judgment with a human backstop, not
 computation. Credential recovery breaks pseudonym continuity. Post-quantum ballot
 cryptography is not yet shipped.
+
+</details>
 
 ---
 
