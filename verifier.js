@@ -274,8 +274,10 @@
 
   // ---------------------------------------------------------------- verify
   // files: { "manifest.json": text, ..., "log.jsonl": text, ... }
-  // hooks (all optional): onSection(numText, title), onCheck({section, ok, text}),
+  // hooks (all optional): onSection(numText, title), onCheck({section, ok, text, plain}),
   //                       onBallot(done, total), onSkip(numText, text)
+  // `plain` is the check's meaning in plain speech; `text` stays the exact
+  // technical statement (and carries failure detail after "::").
   async function verify(files, hooks = {}) {
     const checks = [];
     const failures = [];
@@ -284,8 +286,8 @@
     const onSection = hooks.onSection || (() => {});
     const onSkip = hooks.onSkip || (() => {});
 
-    function check(section, ok, text) {
-      const c = { section, ok, text };
+    function check(section, ok, text, plain) {
+      const c = { section, ok, text, plain: plain || text };
       checks.push(c);
       if (!ok) failures.push(text);
       onCheck(c);
@@ -331,7 +333,8 @@
       onSection("1", "The paperwork matches the published formats");
       const mErrs = schemaErrors(SCHEMAS["manifest"], manifest, SCHEMAS["manifest"], "manifest");
       check("1", mErrs.length === 0, "manifest validates against manifest.schema.json (" + mErrs.length + " errors)"
-        + (mErrs.length ? " :: " + mErrs[0] : ""));
+        + (mErrs.length ? " :: " + mErrs[0] : ""),
+        "The community's declaration of what it upholds is in the promised format.");
       const eErrs = [];
       entries.forEach((en, i) => {
         for (const e of schemaErrors(SCHEMAS["log-entry"], en, SCHEMAS["log-entry"], "entry")) {
@@ -339,19 +342,23 @@
         }
       });
       check("1", eErrs.length === 0, "all " + entries.length + " log entries validate against log-entry.schema.json"
-        + (eErrs.length ? " :: " + eErrs[0] : ""));
+        + (eErrs.length ? " :: " + eErrs[0] : ""),
+        "Every event in the record is in the promised format.");
 
       onSection("2", "Every artifact is signed by a key the trust anchors name");
       const mBody = stripKey(manifest, "sig");
-      check("2", await sigOk(trust[manifest.sig.key_id] || "", manifest.sig, mBody), "manifest signature");
+      check("2", await sigOk(trust[manifest.sig.key_id] || "", manifest.sig, mBody), "manifest signature",
+        "The declaration really was issued with this community's key.");
       const logKeyId = entries.length ? entries[0].sig.key_id : "?";
       let allSigs = true;
       for (const e of entries) {
         if (!(await sigOk(trust[e.sig.key_id] || "", e.sig, stripKey(e, "sig")))) { allSigs = false; break; }
       }
-      check("2", allSigs, "all log-entry signatures verify against " + logKeyId);
+      check("2", allSigs, "all log-entry signatures verify against " + logKeyId,
+        "Every event in the record was really written with the log's key.");
       const ts = entries.map(e => e.timestamp);
-      check("2", ts.every((t, i) => i === 0 || ts[i - 1] <= t), "log timestamps are non-decreasing");
+      check("2", ts.every((t, i) => i === 0 || ts[i - 1] <= t), "log timestamps are non-decreasing",
+        "The record's clock only ever moves forward.");
 
       onSection("3", "The record is append-only, witnessed, and commits to everything else");
       const leaves = [];
@@ -362,9 +369,11 @@
         if (h.root !== root) { headsOk = false; break; }
       }
       check("3", headsOk, "every published head's root matches a strict prefix of today's log "
-        + "(consistency, " + heads.length + " heads)");
+        + "(consistency, " + heads.length + " heads)",
+        "Every fingerprint ever published matches this record — the past has not been rewritten under it.");
       check("3", heads.length > 0 && heads[heads.length - 1].size === entries.length,
-        "the latest head covers the whole log");
+        "the latest head covers the whole log",
+        "The newest fingerprint covers the whole record — nothing slipped in after the last witness looked.");
       // Who co-signed matters more than whether signatures verify: an insider can
       // regenerate heads and drop the witnesses they cannot forge. The bar is the
       // verifier's trust anchors plus whatever the manifest declares.
@@ -387,27 +396,33 @@
         + (requiredWitnesses.length ? "" : " :: the trust anchors name no witness, and an unwitnessed "
           + "log cannot defeat a records rewrite")
         + (missing.length ? " :: head(s) at size [" + missing.join(", ") + "] lack a valid co-signature "
-          + "from every witness — the log key alone re-signed this history" : ""));
+          + "from every witness — the log key alone re-signed this history" : ""),
+        "Independent witnesses co-signed every fingerprint — the operator alone could not have produced this history.");
       check("3", requiredWitnesses.every(w => declared.includes(w)),
         "the manifest declares every witness the trust anchors require (the manifest is signed "
         + "by the log key, so it cannot be its own standard: a manifest that quietly drops a "
-        + "witness is a lying manifest)");
+        + "witness is a lying manifest)",
+        "The declaration names every witness this page insists on — it cannot quietly lower its own bar.");
 
       const byType = {};
       for (const e of entries) byType[e.type] = e;
       const pub = (byType["manifest.published"] || {}).body || {};
       check("3", pub.manifest_digest === await sha256hex(canon(mBody)),
         "logged manifest digest matches the published manifest (a manifest that lies is a "
-        + "consistency failure)");
+        + "consistency failure)",
+        "The declaration on file is the exact one the record committed to.");
       const rost = (byType["x-roster.published"] || {}).body || {};
       check("3", rost.roster_digest === await sha256hex(canon(rosterDoc)),
-        "logged roster digest matches the published roster (" + (rost.member_count ?? "?") + " members)");
+        "logged roster digest matches the published roster (" + (rost.member_count ?? "?") + " members)",
+        "The member list is the exact one the record committed to — nobody edited it after the vote.");
       const trst = (byType["x-trustees.published"] || {}).body || {};
       check("3", trst.trustees_digest === await sha256hex(canon(trusteesDoc)),
-        "logged trustee-setup digest matches the published setup");
+        "logged trustee-setup digest matches the published setup",
+        "The key-holder setup is the exact one the record committed to.");
       const closed = (byType["decision.closed"] || {}).body || {};
       check("3", closed.ballot_box_digest === await sha256hex(canon(boxDoc)),
-        "logged ballot-box digest matches the published box");
+        "logged ballot-box digest matches the published box",
+        "The ballot box is the exact one the record committed to.");
 
       onSection("4", "Only enrolled members: the roster ring and the election key check out");
       const issuerKey = rosterDoc.members.length
@@ -416,11 +431,13 @@
       for (const c of rosterDoc.members) {
         if (!(await sigOk(issuerKey, c.issuer_sig, stripKey(c, "issuer_sig")))) { credsOk = false; break; }
       }
-      check("4", credsOk, "all " + rosterDoc.members.length + " roster credentials verify against the issuer key");
+      check("4", credsOk, "all " + rosterDoc.members.length + " roster credentials verify against the issuer key",
+        "Everyone on the member list was certified by the enrolment authority.");
 
       check("4", trusteesDoc.group in KNOWN_GROUPS,
         "ballot group '" + trusteesDoc.group + "' is one this verifier pins "
-        + "(parameters are the verifier's own, never the transcript's)");
+        + "(parameters are the verifier's own, never the transcript's)",
+        "The election's arithmetic is one this page brought with it — a transcript never gets to choose its own maths.");
       if (!(trusteesDoc.group in KNOWN_GROUPS)) return finish(null, rosterDoc, null);
       const P = KNOWN_GROUPS[trusteesDoc.group];
       const Q = (P - B1) / B2, G = B2;
@@ -494,7 +511,8 @@
       const auditsDoc = JSON.parse(need("audits.json"));
       const audits = auditsDoc.audits;
       check("5", closed.audits_digest === await sha256hex(canon(auditsDoc)),
-        "logged audits digest matches the published audit file");
+        "logged audits digest matches the published audit file",
+        "The device-challenge evidence is the exact file the record committed to.");
       const reencrypts = a => {
         const m = a.opened_choice === options[0] ? B1 : B0;
         const r = fromHex(a.opened_r);
@@ -504,14 +522,17 @@
       const badAudit = audits.filter(a =>
         !reencrypts(a) || ((a.outcome === "match") !== (a.opened_choice === a.claimed_choice)));
       check("5", badAudit.length === 0, "all " + audits.length + " audit records re-encrypt to their "
-        + "opened choice (internally consistent evidence)");
+        + "opened choice (internally consistent evidence)",
+        "Every device challenge adds up: each opened test envelope contained what it claims.");
       const castCts = new Set(boxDoc.ballots.map(b => b.ciphertext.c1 + "|" + b.ciphertext.c2));
       check("5", !audits.some(a => castCts.has(a.ciphertext.c1 + "|" + a.ciphertext.c2)),
-        "no challenged (spoiled) ciphertext was ever cast");
+        "no challenged (spoiled) ciphertext was ever cast",
+        "No ballot opened as a test was ever counted — a test can never become a vote.");
       const auditFails = audits.filter(a => a.outcome === "MISMATCH");
       const afEntries = entries.filter(e => e.type === "x-ballot.audit-failed");
       check("5", afEntries.length === auditFails.length && auditFails.length === (closed.audit_failures ?? -1),
-        "every audit failure is a public log entry (" + auditFails.length + " cheating device caught)");
+        "every audit failure is a public log entry (" + auditFails.length + " cheating device caught)",
+        "Every device caught cheating is on the public record.");
 
       // Stage gate: verifying a ballot is O(roster); do not spend the ring on a
       // box the log has not earned the right to assert.
@@ -523,7 +544,8 @@
       onSection("6", "Every ballot: anonymous, well-formed, provably from an enrolled member");
       check("6", ring.every(inGroup),
         "all " + ring.length + " roster keys are prime-order subgroup elements (input hygiene on the "
-        + "ring: no tamper reaches it, because a rewritten roster fails its logged digest first)");
+        + "ring: no tamper reaches it, because a rewritten roster fails its logged digest first)",
+        "Every enrolment key passes the arithmetic hygiene check.");
       const ballots = [], problems = [];
       const onBallot = hooks.onBallot || (() => {});
       for (let i = 0; i < boxDoc.ballots.length; i++) {
@@ -547,7 +569,8 @@
       }
       check("6", problems.length === 0, "all " + boxDoc.ballots.length + " cast ballots are well-formed "
         + "anonymous votes (subgroup membership, ring-membership proof, 0-or-1 validity proof)"
-        + (problems.length ? " :: " + problems[0] : ""));
+        + (problems.length ? " :: " + problems[0] : ""),
+        "Every ballot is a sealed vote from an enrolled member — nobody outside the list, nobody twice, nothing malformed.");
 
       if (failures.length) {
         onSkip("7", "not checked: the ballots did not verify, so neither can their tally");
@@ -565,7 +588,8 @@
       }
       const sumCt = tally.sum_ciphertext || {};
       check("7", sumCt.c1 === hx(C1) && sumCt.c2 === hx(C2) && Object.keys(sumCt).length === 2,
-        "the logged sum ciphertext is the homomorphic product of the " + latest.size + " counted ballots");
+        "the logged sum ciphertext is the homomorphic product of the " + latest.size + " counted ballots",
+        "The sealed total really is all the counted ballots added together — this page redid the addition.");
 
       // Each share proves itself against a trustee key DERIVED from the
       // commitments: h_i = A0 * A1^i.
@@ -587,7 +611,8 @@
       }
       check("7", valid.length >= required,
         "a " + required + "-of-" + trusteesDoc.threshold.of + " trustee quorum proved the decryption ("
-        + valid.length + "/" + required + " required Chaum-Pedersen decryption proofs valid)");
+        + valid.length + "/" + required + " required Chaum-Pedersen decryption proofs valid)",
+        "Enough independent key-holders proved their part of the unsealing, honestly.");
 
       let countsDec = null, T = null;
       if (valid.length >= required) {
@@ -608,7 +633,8 @@
           if (acc === gT) { T = t_; break; }
           acc = (acc * G) % P;
         }
-        check("7", T !== null, "the combined decryption opens as a small exponent (the sum is well-formed)");
+        check("7", T !== null, "the combined decryption opens as a small exponent (the sum is well-formed)",
+        "The unsealed total is a sensible number of votes.");
         if (T !== null) {
           countsDec = {};
           countsDec[options[0]] = T;
@@ -618,11 +644,13 @@
       const announced = tally.counts || {};
       check("7", countsDec !== null && deepEq(announced, countsDec),
         "announced counts match the threshold decryption: "
-        + (countsDec ? Object.entries(countsDec).map(([k, v]) => k + " " + v).join(", ") : "(no decryption)"));
+        + (countsDec ? Object.entries(countsDec).map(([k, v]) => k + " " + v).join(", ") : "(no decryption)"),
+        "The announced result matches what this page just recomputed.");
       check("7", tally.distinct_voters === latest.size
         && tally.superseded === ballots.length - latest.size,
         "recast policy applied: " + ballots.length + " valid ballots, " + latest.size + " distinct linking "
-        + "tags counted, " + (ballots.length - latest.size) + " silently superseded (last ballot counts)");
+        + "tags counted, " + (ballots.length - latest.size) + " silently superseded (last ballot counts)",
+        "Where someone re-voted, only their last ballot counted.");
 
       // A transcript in which every proof verifies can still be a lie of
       // omission. The last check is against something outside it: the closing
@@ -660,7 +688,8 @@
         + (requiredAnchors.length ? "" : " :: the trust anchors name no external anchor, and an "
           + "unanchored log cannot refute a quietly erased ballot")
         + (unanchored.length ? " :: no valid receipt from [" + unanchored.join(", ") + "] matches this "
-          + "log's closing head — the history under audit is not the history the world saw" : ""));
+          + "log's closing head — the history under audit is not the history the world saw" : ""),
+        "The world's copy of the closing fingerprint matches this record — history was not quietly shortened after the close.");
 
       return finish(countsDec, rosterDoc, latest);
     } catch (e) {

@@ -53,8 +53,14 @@
   #verdict .big { font-size: 1.25rem; font-weight: 700; }
   #checks section { margin: .9rem 0; }
   #checks h3 { font-size: .95rem; margin: .6rem 0 .2rem; }
-  .row { display: flex; gap: .5rem; padding: .12rem 0; font-size: .88rem; }
+  .row { display: flex; gap: .5rem; padding: .18rem 0; font-size: .88rem; }
   .row .mark { flex: 0 0 1.1rem; text-align: center; }
+  .row .what { flex: 1; min-width: 0; }
+  .row .tech {
+    display: block; font-size: .74rem; color: var(--muted);
+    font-family: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+    overflow-wrap: anywhere;
+  }
   .row.ok .mark { color: var(--ok); } .row.bad .mark { color: var(--bad); font-weight: 700; }
   .row.bad { color: var(--bad); }
   .row.skip { color: var(--muted); font-style: italic; }
@@ -166,8 +172,10 @@ async function maybeRun() {
     onCheck: c => {
       const d = document.createElement("div");
       d.className = "row " + (c.ok ? "ok" : "bad");
-      d.innerHTML = "<span class='mark'>" + (c.ok ? "✓" : "✗") + "</span><span></span>";
-      d.lastChild.textContent = c.text;
+      d.innerHTML = "<span class='mark'>" + (c.ok ? "✓" : "✗")
+        + "</span><span class='what'><span class='plainline'></span><span class='tech'></span></span>";
+      d.querySelector(".plainline").textContent = c.plain || c.text;
+      d.querySelector(".tech").textContent = c.text;
       sectionEl.appendChild(d);
     },
     onSkip: (n, text) => {
