@@ -34,18 +34,18 @@ load-bearing, not decorative.
 
 A polity's configuration is a tensor **S** indexed by **(community × policy-domain × axis)**:
 
-- **community** — the fractal units of §6 (household … nation), nesting.
+- **community** — the fractal units of [§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.") (household … nation), nesting.
 - **policy-domain** — trade, family, criminal, environmental, … . *This index is the key
   upgrade.* The earlier sketch flattened it, and flattening is what makes "the EU is good
   for X" a category error: good configurations are domain-relative.
 - **axis** — the measurable dimensions of a rights/decision regime. So far: **coverage**
   (which of the 30 UDHR invariants are backed), **remedy** (none / declaration / escalate /
   strike), **scope** (unconditional / conditional), and — extending — **interaction-cost /
-  sludge** (§8), **inclusion** (§4), **capture-resistance** (§1).
+  sludge** ([§8](https://glassontin.github.io/civic-kernel/#s8 "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask.")), **inclusion** ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")), **capture-resistance** ([§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.")).
 
 We have **S** measured at four real coordinates (UK, US, Germany, EU) on the rights axes —
 coarsely, and domain-agnostically. Four points in a high-dimensional space: enough to see
-structure, nowhere near enough to fit dynamics (see Part 8).
+structure, nowhere near enough to fit dynamics (see [Part 8](#8--empirical-status--solid-specification-underdetermined-predictor "The skeleton is sound; the numbers to run it do not exist. Four measured systems, one run of history, a model that changes what it measures: a research programme, not a trained system.")).
 
 </details>
 
@@ -56,7 +56,7 @@ structure, nowhere near enough to fit dynamics (see Part 8).
 
 "Better" is not a scalar.
 
-- **Partial, not total.** On the axes, states form a partial order — the §6 [*lattice*](../README.md#w-lattice),
+- **Partial, not total.** On the axes, states form a partial order — the [§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.") [*lattice*](../README.md#w-lattice),
   literally. A state dominates another only if it is ≥ on every axis. The UK (higher
   coverage, weak remedy) and the US (lower coverage, strike) are **incomparable**; there is
   no global ranking, by design.
@@ -87,7 +87,7 @@ and it is genuinely apt.
 **But the weights are not learned; they are declared.** In an LLM, attention weights are fit
 to a loss by gradient descent. Here, `direction(reference_r)` and the per-domain objective
 inside `sim` are **democratic inputs** — chosen, per domain, per community, revisably. That
-is the entire safety property (Part 7), and the load-bearing difference between this model
+is the entire safety property ([Part 7](#7--the-safety-property--what-the-math-must-never-do "The rule above all the others: the maths may describe, steady, and illuminate; it may never decide what “better” means. People choose the direction — the model only makes the ground visible.")), and the load-bearing difference between this model
 and a technocracy.
 
 </details>
@@ -107,15 +107,15 @@ deliberation windows, parliamentary sovereignty — is a **damping coefficient**
 - **Critically damped:** the fastest response that does not overshoot — exactly "**as
   quickly as possible, or as slowly as needed**."
 
-Good damping is **domain-specific**: heavy on the constitutional core (§5's near-consensus
+Good damping is **domain-specific**: heavy on the constitutional core ([§5](https://glassontin.github.io/civic-kernel/#s5 "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person.")'s near-consensus
 pin), light on reversible policy. The UK's pathology is *uniform* damping — parliamentary
 sovereignty damps everything equally, so it over-damps rights-repair while under-damping
-ordinary law. §5's layered amendment speeds are this field in embryo; the model generalizes
+ordinary law. [§5](https://glassontin.github.io/civic-kernel/#s5 "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person.")'s layered amendment speeds are this field in embryo; the model generalizes
 it to a tunable damping tensor and hands it the standard tools of control theory (stability,
 phase margin, pole placement) as the language for tuning it.
 
 Damping governs *how fast* the state moves. It does nothing to stop a system flipping back
-and forth across a threshold — a distinct failure that needs a distinct tool (Part 5).
+and forth across a threshold — a distinct failure that needs a distinct tool ([Part 5](#5--hysteresis-continuous-voting-and-the-oscillation-attack "Anyone may change their vote at any moment; the law moves only on a settled, lasting shift. One narrow Thursday cannot flip a nation — and the stickiness must fade with time, or it protects the last change instead of stability.")).
 
 </details>
 
@@ -132,7 +132,7 @@ flip at all* near the boundary, and it is the piece the kernel lacks for decisio
 cheap to vote on but expensive to actuate. (Version control already uses it: a change
 matures on a branch — an isolated dead-band — before it may touch the shared trunk.
 Branch-then-merge is hysteresis for a codebase; a force-push that rewrites the trunk is the
-T8 record-tampering attack, and the distributed clones that would detect it are §3.4's
+T8 record-tampering attack, and the distributed clones that would detect it are [§3.4](https://glassontin.github.io/civic-kernel/#s3-4 "Every act lands in a public record that can only grow. Rewrite yesterday and the sums stop matching in every copy of today — and any phone can tell.")'s
 witnesses. The tool we build the kernel with is a working miniature of it.)
 
 **The mechanism: continuous vote, debounced actuator.** Split the system in two.
@@ -140,7 +140,7 @@ witnesses. The tool we build the kernel with is a working miniature of it.)
 - The **setpoint** P(t) is the electorate's preference, held *continuously and
   always-current* — any citizen may change their vote at any moment. This is not new: it is
   the `recast_policy` "any later ballot supersedes an earlier one" already in the decisions
-  service (§3.2), the same continuity that gives the coerced voter her escape. It must stay
+  service ([§3.2](https://glassontin.github.io/civic-kernel/#s3-2 "Your ballot is sealed before it leaves your hand and counted without being opened. You can check it was counted; you cannot prove to anyone how you voted.")), the same continuity that gives the coerced voter her escape. It must stay
   unrestricted — restrict it and you trade away coercion-resistance and responsiveness at
   once.
 - The **plant** L(t) is the *implemented* law. It does not track P(t) directly; it tracks a
@@ -166,7 +166,7 @@ cost though no position durably holds; in control terms, high-frequency injectio
 setpoint to wear the actuator, or driving it at resonance. The debounced actuator defeats it
 structurally: a transient flip never clears the dead-band or outlasts τ, so L does not move.
 And the attacker's cost to oscillate is **time and margin, never money** — the
-no-token-in-the-citizen's-path red line (§6) holds; stability is bought with cooling-off and
+no-token-in-the-citizen's-path red line ([§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.")) holds; stability is bought with cooling-off and
 supermajority-to-reverse, not gas.
 
 **Two dangers, because hysteresis cuts both ways.**
@@ -178,10 +178,10 @@ supermajority-to-reverse, not gas.
    cooling period, then the band relaxing back to symmetric, so the decision can be revisited
    on the merits. A permanent dead-band is a capture tool; a decaying one is a stabiliser.
 2. **Over-damping is the self-lock again.** Damping plus hysteresis trade responsiveness for
-   stability, and too much is exactly the sclerosis of Part 4. So band-width and τ are
-   **per-domain** (the subsidiarity of Part 2 — narrow and fast for reversible policy, wide
+   stability, and too much is exactly the sclerosis of [Part 4](#4--damping--the-control-theory-core-rate "How fast should law respond to opinion? Too fast and policy see-saws; too slow and nothing can be repaired. The right speed differs by area — the UK's flaw is one speed for everything."). So band-width and τ are
+   **per-domain** (the subsidiarity of [Part 2](#2--order--partial-and-per-domain "“Better” is not one number. Two democracies can each beat the other in different ways, and better-in-trade-law is not better-in-family-law. There is no single best democracy, by design.") — narrow and fast for reversible policy, wide
    and slow for the constitutional core), and *who sets them* is itself a capture surface
-   that must be declared and legible (§6 of the architecture), or the dead-band becomes a
+   that must be declared and legible ([§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.") of the architecture), or the dead-band becomes a
    silent instrument of whoever tuned it.
 
 </details>
@@ -194,8 +194,8 @@ supermajority-to-reverse, not gas.
 Multiple, local, context-dependent. The dynamics does not converge to one Best Democracy; it
 converges, per domain, toward the local Pareto frontier of the axes — the states where no axis can improve without another giving way — given that domain's
 declared objective — then stops, and leaves incomparable choices (adopt proportional
-representation? write a constitution?) to politics. The invariant [floor](../README.md#w-floor) — the §1 goals and
-the UDHR — is the operator's fixed constraint, never its target. Its scope is the §5–§6
+representation? write a constitution?) to politics. The invariant [floor](../README.md#w-floor) — the [§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.") goals and
+the UDHR — is the operator's fixed constraint, never its target. Its scope is the [§5](https://glassontin.github.io/civic-kernel/#s5 "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person.")–[§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.")
 settlement, stated exactly: inside a community subscribed to the full profile the floor is
 near-consensus-locked; across the lattice a decrease is never *prevented* — the kernel has
 no army — but always *witnessed*, a legible manifest-diff. **Never silently decreased** is
@@ -222,16 +222,16 @@ it holds exactly the power the kernel exists to distribute. This is the failure 
 graveyard behind it (Cybersyn; "social physics"; every over-mathematized governance scheme).
 
 So the objective is **exogenous**: declared per domain, per community, revisably, legibly —
-which is to say it stays §6 of the architecture. The operator's job is not to choose the
+which is to say it stays [§6](https://glassontin.github.io/civic-kernel/#s6 "Nobody has to adopt all of it. Any group may take the parts it wants — but must publish, in a form anyone's phone can read, exactly what it left out.") of the architecture. The operator's job is not to choose the
 heading but to **make the local field visible and the uphill moves cheap, reversible, and
 local**, so exit, comparison, and adoption do the moving. Gardener, not pilot.
 
 **Floor, not telos.** The sharp objection is: *but the UDHR is already in the model — isn't
 that an objective?* The distinction has to be exact. The UDHR enters as two legitimate things
 — the **coordinate frame** (the 30-axis spine every state is measured against) and the
-**floor** (the invariant never decreased, Part 6) — and never as a **telos**, a target to be
+**floor** (the invariant never decreased, [Part 6](#6--attractors "Each area of law settles toward its own good-enough frontier and stops. Rights are the floor the system must never sink through — not a summit it climbs toward.")) — and never as a **telos**, a target to be
 maximized. "Maximise match to the charter" fails twice over: it re-flattens the per-domain
-partial order (Part 2) back into a scalar, and it is empirically wrong — the UK backs the
+partial order ([Part 2](#2--order--partial-and-per-domain "“Better” is not one number. Two democracies can each beat the other in different ways, and better-in-trade-law is not better-in-family-law. There is no single best democracy, by design.")) back into a scalar, and it is empirically wrong — the UK backs the
 right at issue and still `breaks`; the win was remedy, not coverage. Above the floor there is
 no summit to climb toward: "an agreed optimal human state" is the contested political object
 itself, and asserting one hands whoever asserted it the capture-power the design exists to
@@ -267,11 +267,11 @@ the [stress-test harness](../scenarios.html): expensive and sparse, but real —
 <details>
 <summary><b>Plainly</b> <i>The buildable next steps, all with a human in the loop — richer measurement, declared preferences, declared speeds, and a hard no-autopilot rule. First test: walk the UK toward repair and watch where it jams.</i></summary>
 
-The honest, buildable path — each step inside the Part 7 safety property:
+The honest, buildable path — each step inside the [Part 7](#7--the-safety-property--what-the-math-must-never-do "The rule above all the others: the maths may describe, steady, and illuminate; it may never decide what “better” means. People choose the direction — the model only makes the ground visible.") safety property:
 
 1. **Make the state multi-dimensional.** Index the corpus by policy-domain, not just
    jurisdiction: a trade-law regime and a family-law regime get their own coordinates. (Undo
-   the flattening of Part 1.)
+   the flattening of [Part 1](#1--state "Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Four real systems are measured so far.").)
 2. **Represent the objective as declared, per-domain preference** in the [manifest](../README.md#w-manifest) —
    subsidiarity as a schema field ("toward thorough/central" vs "toward simple/local"), never
    a global loss.
@@ -282,11 +282,11 @@ The honest, buildable path — each step inside the Part 7 safety property:
 5. **Make the operator decision-support, human-in-the-loop:** it shows the local vector field
    and recommends dominated-improving or preference-aligned steps for approval, with
    control-theory tuning of per-domain damping. **Autopilot optimizing a global objective is
-   excluded** — on safety and §1 grounds both.
+   excluded** — on safety and [§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.") grounds both.
 
 The first concrete proof would be the **UK trajectory**: from its measured coordinate
 (`declaration / unconditional / 17-of-30 / breaks`) along the smallest individually-adoptable,
 reversible moves, harness re-run at each step — expected, honestly, to *stall* at the remedy
-step (the self-lock of Part 4 above), which is the interesting result.
+step (the self-lock of [Part 4](#4--damping--the-control-theory-core-rate "How fast should law respond to opinion? Too fast and policy see-saws; too slow and nothing can be repaired. The right speed differs by area — the UK's flaw is one speed for everything.") above), which is the interesting result.
 
 </details>

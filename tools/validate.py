@@ -118,7 +118,7 @@ def main() -> int:
         if ids and ids[-1] not in plains:
             plains[ids[-1]] = re.sub(r"<[^>]+>", "", m.group(1)).strip()
     total = 0
-    for name in ("KERNEL.md", "proto/README.md"):
+    for name in ("KERNEL.md", "proto/README.md", "docs/functional-model.md", "docs/uk-trajectory.md"):
         doc = (ROOT / name).read_text()
         klinks = re.findall(r'\[§[\d.]+\]\([^)"]*#(s[0-9-]+) "([^"]*)"\)', doc)
         bad = sorted({sid for sid, title in klinks if plains.get(sid) != title})
@@ -126,7 +126,23 @@ def main() -> int:
             print(f"FAIL {name} §-link previews out of step with the essay's Plainly lines: {bad or 'no links found'}", file=sys.stderr)
             return 1
         total += len(klinks)
-    print(f"section previews: {total} §-links across KERNEL.md and proto/README.md match the essay's Plainly lines")
+    print(f"section previews: {total} §-links across the markdown docs match the essay's Plainly lines")
+
+    # Part-links inside docs/ preview the model's own Plainly summaries
+    model = (ROOT / "docs" / "functional-model.md").read_text()
+    mparts = {}
+    for m in re.finditer(r"^## (\d+) ·.*?<summary><b>Plainly</b> <i>(.*?)</i></summary>", model, re.M | re.S):
+        mparts[m.group(1)] = m.group(2).strip()
+    pl = 0
+    for name in ("docs/functional-model.md", "docs/uk-trajectory.md"):
+        doc = (ROOT / name).read_text()
+        links = re.findall(r'\[Part (\d+)\]\([^)"]* "([^"]*)"\)', doc)
+        bad = sorted({n for n, title in links if mparts.get(n) != title})
+        if bad:
+            print(f"FAIL {name} Part-link previews out of step with the model's Plainly lines: {bad}", file=sys.stderr)
+            return 1
+        pl += len(links)
+    print(f"part previews: {pl} Part-links match the model's own Plainly lines")
     return 0
 
 

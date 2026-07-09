@@ -13,8 +13,8 @@ The attack is fixed throughout: a 61% majority banning a minority's worship (the
 | # | Move | remedy | scope | coverage | verdict | source |
 |---|------|--------|-------|----------|---------|--------|
 | S0 | **The UK today** — HRA 1998 | declaration | unconditional | 17/30 | **breaks** | measured (`majority-vs-minority-uk`) |
-| S1 | + adopt the transparency log (§3.4) | declaration | unconditional | 17/30 | breaks | inferred |
-| S2 | + verifiable ballots on the paper channel (§3.2) | declaration | unconditional | 17/30 | breaks | inferred |
+| S1 | + adopt the transparency log ([§3.4](https://glassontin.github.io/civic-kernel/#s3-4 "Every act lands in a public record that can only grow. Rewrite yesterday and the sums stop matching in every copy of today — and any phone can tell.")) | declaration | unconditional | 17/30 | breaks | inferred |
+| S2 | + verifiable ballots on the paper channel ([§3.2](https://glassontin.github.io/civic-kernel/#s3-2 "Your ballot is sealed before it leaves your hand and counted without being opened. You can check it was counted; you cannot prove to anyone how you voted.")) | declaration | unconditional | 17/30 | breaks | inferred |
 | S3 | **+ strengthen the remedy: declaration → strike** | strike | unconditional | 17/30 | **strains** | measured in-context (`majority-vs-minority-uk-strike`) — **but the UK cannot take this step** |
 
 **Why the intermediate moves don't flip it, and are worth taking anyway.** The
@@ -29,7 +29,7 @@ Real improvements, no political cost, verdict unchanged.
 **The stall.** S3 is the only move that flips `breaks → strains`, and it is the one a 51%
 Parliament will not make: strengthening the remedy from declaration to strike means the
 sovereign binding itself — a written constitution, or an entrenched, court-enforceable bill of
-rights. That is not a [lattice](../README.md#w-lattice)-move a transient majority takes; it is the self-lock (Part 4–5
+rights. That is not a [lattice](../README.md#w-lattice)-move a transient majority takes; it is the self-lock ([Part 4](functional-model.md#4--damping--the-control-theory-core-rate "How fast should law respond to opinion? Too fast and policy see-saws; too slow and nothing can be repaired. The right speed differs by area — the UK's flaw is one speed for everything.")–5
 of the model, the `executive-ignores` enforcement-gap generalised). The operator can make
 S0→S2 cheap and attractive, and can render S3 fully visible and available — and still not move
 it, because uphill runs against the sovereign's own incumbency. **Legibility ≠ availability ≠
