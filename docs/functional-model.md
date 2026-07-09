@@ -56,7 +56,7 @@ structure, nowhere near enough to fit dynamics (see Part 8).
 
 "Better" is not a scalar.
 
-- **Partial, not total.** On the axes, states form a partial order — the §6 *lattice*,
+- **Partial, not total.** On the axes, states form a partial order — the §6 [*lattice*](../README.md#w-lattice),
   literally. A state dominates another only if it is ≥ on every axis. The UK (higher
   coverage, weak remedy) and the US (lower coverage, strike) are **incomparable**; there is
   no global ranking, by design.
@@ -192,9 +192,9 @@ supermajority-to-reverse, not gas.
 <summary><b>Plainly</b> <i>Each area of law settles toward its own good-enough frontier and stops. Rights are the floor the system must never sink through — not a summit it climbs toward.</i></summary>
 
 Multiple, local, context-dependent. The dynamics does not converge to one Best Democracy; it
-converges, per domain, toward the local Pareto frontier of the axes given that domain's
+converges, per domain, toward the local Pareto frontier of the axes — the states where no axis can improve without another giving way — given that domain's
 declared objective — then stops, and leaves incomparable choices (adopt proportional
-representation? write a constitution?) to politics. The invariant floor — the §1 goals and
+representation? write a constitution?) to politics. The invariant [floor](../README.md#w-floor) — the §1 goals and
 the UDHR — is the operator's fixed constraint, never its target. Its scope is the §5–§6
 settlement, stated exactly: inside a community subscribed to the full profile the floor is
 near-consensus-locked; across the lattice a decrease is never *prevented* — the kernel has
@@ -251,10 +251,9 @@ Elegance blurs two claims that must stay separate.
   control-theoretic damping, hysteresis — well-posed, and three of them (subsidiarity,
   control theory, hysteresis) are battle-tested elsewhere.
 - **The coefficients are radically underdetermined.** A four-point, coarse, domain-agnostic
-  corpus; **one non-i.i.d. sample path** of history; no way to backprop through counterfactual
+  corpus; **one non-i.i.d. sample path** of history (one run, each step leaning on the last — nothing like the independent draws learning needs); no way to backprop through counterfactual
   polities; and **reflexivity** — the model changes the thing it models, which no frozen
-  training set does. Any scalar proxy for "better" becomes a Goodhart target the moment it is
-  optimized.
+  training set does. Any scalar proxy for "better" becomes a Goodhart target the moment it is optimized — Goodhart's law: when a measure becomes a target, it ceases to be a good measure.
 
 So this is a **model specification and a research program with a rigorous skeleton — not a
 trained system**, and must not be presented as one. The empirical instrument we do have is
@@ -273,10 +272,10 @@ The honest, buildable path — each step inside the Part 7 safety property:
 1. **Make the state multi-dimensional.** Index the corpus by policy-domain, not just
    jurisdiction: a trade-law regime and a family-law regime get their own coordinates. (Undo
    the flattening of Part 1.)
-2. **Represent the objective as declared, per-domain preference** in the manifest —
+2. **Represent the objective as declared, per-domain preference** in the [manifest](../README.md#w-manifest) —
    subsidiarity as a schema field ("toward thorough/central" vs "toward simple/local"), never
    a global loss.
-3. **Add the dynamics fields** the model needs and the waist lacks: per-domain damping
+3. **Add the dynamics fields** the model needs and the [waist](../README.md#w-waist) lacks: per-domain damping
    (τ) and hysteresis (dead-band + decay), declared and legible, so a citizen can see how
    stable each of their community's domains is and why.
 4. **Keep the harness as the evaluator** of any proposed move.

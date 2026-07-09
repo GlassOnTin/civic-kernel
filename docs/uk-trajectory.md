@@ -29,7 +29,7 @@ Real improvements, no political cost, verdict unchanged.
 **The stall.** S3 is the only move that flips `breaks → strains`, and it is the one a 51%
 Parliament will not make: strengthening the remedy from declaration to strike means the
 sovereign binding itself — a written constitution, or an entrenched, court-enforceable bill of
-rights. That is not a lattice-move a transient majority takes; it is the self-lock (Part 4–5
+rights. That is not a [lattice](../README.md#w-lattice)-move a transient majority takes; it is the self-lock (Part 4–5
 of the model, the `executive-ignores` enforcement-gap generalised). The operator can make
 S0→S2 cheap and attractive, and can render S3 fully visible and available — and still not move
 it, because uphill runs against the sovereign's own incumbency. **Legibility ≠ availability ≠

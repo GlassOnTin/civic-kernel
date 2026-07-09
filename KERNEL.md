@@ -49,14 +49,14 @@ of participation, T13 the defense itself, T14 the wires beneath it all.
 |---|---|---|
 | T1 | state capture | nothing worth capturing: thin kernel, distributed operators, forkable with history (§3, §5) |
 | T2 | vendor capture | open protocol, open clients, no remote attestation (§1, §4) |
-| T3 | sybils | ceremony-issued credentials; cryptographic uniqueness per decision (§3.1, §10) |
-| T4 | coercion & vote buying | receipt-free verifiable ballots; silent re-vote, last ballot counts (§3.2) |
-| T5 | device compromise | keys in enclaves, cast-or-audit challenges, second channel, paper path (§3.2, §4) |
-| T6 | surveillance chill | zero-knowledge eligibility, unlinkable pseudonyms, local-first data (§3.1, §4) |
+| T3 | [sybils](README.md#w-sybil) | ceremony-issued credentials; cryptographic uniqueness per decision (§3.1, §10) |
+| T4 | coercion & vote buying | [receipt-free](README.md#w-receipt-free) verifiable ballots; silent re-vote, last ballot counts (§3.2) |
+| T5 | device compromise | keys in enclaves, [cast-or-audit](README.md#w-cast-or-audit) challenges, second channel, paper path (§3.2, §4) |
+| T6 | surveillance chill | [zero-knowledge](README.md#w-zero-knowledge) eligibility, unlinkable pseudonyms, local-first data (§3.1, §4) |
 | T7 | majoritarian rights-stripping | rights guard re-routes to the constitutional path (§3.3) |
-| T8 | record tampering | witnessed append-only logs; any phone detects a rewritten past (§3.4) |
+| T8 | record tampering | [witnessed](README.md#w-witness) append-only logs; any phone detects a rewritten past (§3.4) |
 | T9 | digital exclusion | paper, kiosk, assisted — same protocol, same verifiability (§4) |
-| T10 | dilution & standards capture | signed conformance manifests; subtraction is legible (§6) |
+| T10 | dilution & standards capture | signed conformance [manifests](README.md#w-manifest); [subtraction](README.md#w-subtraction) is legible (§6) |
 | T11 | epistemic gating | no gate on the ballot path; scaffold everything, assess nothing (§7) |
 | T12 | sludge | four verbs, computable eligibility, cited demands, published interaction cost (§8) |
 | T13 | autoimmune defense | sense at machine speed, respond at constitutional speed (§9) |
@@ -79,7 +79,7 @@ what the design answers; the harness reports what survives.
 | service | guarantees | answers |
 |---|---|---|
 | **SVC-1 Personhood** | "eligible, and not already spoken in this decision," proven without revealing which person — unlinkable per-decision pseudonyms | T3 sybils, T6 surveillance |
-| **SVC-2 Decisions** | end-to-end verifiable ballots: cast-as-intended (cast-or-audit) *and* receipt-free; sortition as a publicly checkable claim | T4 coercion, T5 device compromise |
+| **SVC-2 Decisions** | end-to-end verifiable ballots: cast-as-intended (cast-or-audit) *and* receipt-free; [sortition](README.md#w-sortition) as a publicly checkable claim | T4 coercion, T5 device compromise |
 | **SVC-3 Rights guard** | every UDHR article a machine-checkable invariant over decision metadata; a tripped invariant re-routes to supermajority + deliberation + adversarial review — escalates, never vetoes | T7 rights-stripping |
 | **SVC-4 Transparency log** | append-only Merkle log, cross-witnessed; any phone proves inclusion and that today's log extends yesterday's | T8 tampering, T14 shutdown |
 
@@ -110,7 +110,7 @@ annex (T9). A surface this small has nowhere to hide burden (T12).
 
 Thinner than the services: a [log entry](schema/log-entry.schema.json) and a
 [conformance manifest](schema/manifest.schema.json). Adoption is per-person subscription
-on a lattice, not jurisdictional sovereignty. A community may sit anywhere below the full
+on a [lattice](README.md#w-lattice), not jurisdictional sovereignty. A community may sit anywhere below the full
 profile — but its manifest declares every subtraction machine-readably, and the citizen's
 client renders it. Dilution becomes legible, not lethal (T10); a manifest that lies is a
 consistency-proof failure, not a marketing dispute.
@@ -207,7 +207,7 @@ research program, not a trained system.
   movement.
 - **The tally survives everyone who signs things.** In [`proto/`](proto/), ballots are
   sealed to a distributively-generated 2-of-3 trustee key — no party ever holds the
-  joint secret — and only their homomorphic sum is ever decrypted. A
+  joint secret — and only their [homomorphic sum](README.md#w-homomorphic-tally) is ever decrypted. A
   committee that holds the log key *and* both witnesses' keys can rewrite history with
   every hash and signature agreeing — and a rigged decryption, a rigged count, and an
   accepted double-vote are still each caught, by a Chaum-Pedersen share proof, a public
@@ -215,7 +215,7 @@ research program, not a trained system.
   one check and its fraud certifies). Signature collusion's last move was to *drop*
   history — deniability, not forgery: erase one counted ballot, re-sign everything,
   retally honestly, and nothing inside the transcript objects, because nothing in it is
-  forged. The external anchor closes it: the closing log head is republished beyond the
+  forged. The external [anchor](README.md#w-anchor) closes it: the closing log head is republished beyond the
   collusion's reach (a newspaper's public notices, simulated — refusal 5's notary of last
   resort), and the erasure is caught by the anchor check alone (mutation-tested: disable
   it and the erased history certifies). Declared residue: the anchor seals history at
@@ -223,7 +223,7 @@ research program, not a trained system.
   own tag missing from the public box — a check anonymity preserves, since only they
   know the tag.
 - **So does the franchise, and it costs anonymity nothing.** A ballot carries no name: it
-  proves membership of the roster's key ring (a linkable ring signature) and a per-decision
+  proves membership of the roster's key ring (a linkable [ring signature](README.md#w-ring-signature)) and a per-decision
   pseudonym `H(decision_id)^nym_secret` — SVC-1's `nym_secret × context_id`, running. The
   same total collusion cannot mint a ballot or re-aim one, because eligibility is *proven*,
   not asserted by a credential the box carries; and no voter can vote twice, because the

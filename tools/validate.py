@@ -99,6 +99,15 @@ def main() -> int:
         return 1
     page.write_text(new)
     print(f"\n{len(scenarios)} scenario(s) valid; scenarios.html rebuilt")
+
+    # the glossary lives twice — README.md (the linkable canon) and the essay's
+    # Appendix — so the two term sets must not drift
+    gloss = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "README.md").read_text())
+    essay = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "index.html").read_text())
+    if set(gloss) != set(essay) or len(gloss) != len(set(gloss)):
+        print(f"FAIL glossary parity: README {sorted(set(gloss) ^ set(essay))} out of step with index.html", file=sys.stderr)
+        return 1
+    print(f"glossary parity: {len(gloss)} terms, README.md == index.html appendix")
     return 0
 
 

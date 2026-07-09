@@ -209,6 +209,9 @@
     color: var(--accent);
     margin-right: 0.55rem;
   }
+  ul.words { margin: 0; padding: 0; list-style: none; max-width: 42rem; }
+  ul.words li { padding: 0.5rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  ul.words li:last-child { border-bottom: none; }
   /* collapsible sections: the plain line is the always-visible surface */
   details.sec > summary {
     list-style: none;
@@ -449,6 +452,10 @@
     <li><span class="n">§14</span><a href="#s14">Stewardship — where this should live</a></li>
     <li><span class="n">§15</span><a href="#s15">The wedge — what a citizen gets on day one</a></li>
   </ol>
+  <div class="toc-part">Appendix</div>
+  <ol>
+    <li><span class="n">W</span><a href="#words">The words, in plain speech</a></li>
+  </ol>
   <p class="toc-controls">Each section shows its plain line; the full argument is a click away.
     <button type="button" data-sections="open">Expand the whole essay</button> ·
     <button type="button" data-sections="close">Collapse it</button></p>
@@ -506,26 +513,26 @@
         </tr>
         <tr>
           <td class="tid">T3</td>
-          <td><span class="threat-name">Sybil attack.</span> Fake or duplicate persons inflate a faction's voice.</td>
+          <td><span class="threat-name"><a href="#w-sybil">Sybil attack</a>.</span> Fake or duplicate persons inflate a faction's voice.</td>
           <td>Credentials issued only at a physical enrolment ceremony; cryptographic uniqueness per decision without identity disclosure.</td>
           <td class="ref"><a href="#s3-1">§3.1</a>, <a href="#s10">§10</a></td>
         </tr>
         <tr>
           <td class="tid">T4</td>
           <td><span class="threat-name">Coercion &amp; vote buying.</span> A boss, spouse, or buyer demands proof of how you voted.</td>
-          <td>Receipt-free end-to-end verifiable ballots: you can prove your vote was counted, never what it said.</td>
+          <td><a href="#w-receipt-free">Receipt-free</a> end-to-end verifiable ballots: you can prove your vote was counted, never what it said.</td>
           <td class="ref"><a href="#s3-2">§3.2</a>, <a href="#s12">§12</a></td>
         </tr>
         <tr>
           <td class="tid">T5</td>
           <td><span class="threat-name">Device compromise.</span> Malware on the phone alters the ballot before encryption.</td>
-          <td>Keys in hardware enclaves; cast-or-audit challenges; verification through a second channel; paper path always available.</td>
+          <td>Keys in hardware enclaves; <a href="#w-cast-or-audit">cast-or-audit</a> challenges; verification through a second channel; paper path always available.</td>
           <td class="ref"><a href="#s3-2">§3.2</a>, <a href="#s4">§4</a></td>
         </tr>
         <tr>
           <td class="tid">T6</td>
           <td><span class="threat-name">Surveillance chill.</span> Participation is tracked, so people self-censor.</td>
-          <td>Zero-knowledge eligibility proofs; unlinkable per-decision pseudonyms; citizen data local-first on the citizen's device.</td>
+          <td><a href="#w-zero-knowledge">Zero-knowledge</a> eligibility proofs; unlinkable per-decision pseudonyms; citizen data local-first on the citizen's device.</td>
           <td class="ref"><a href="#s3-1">§3.1</a>, <a href="#s4">§4</a></td>
         </tr>
         <tr>
@@ -549,13 +556,13 @@
         <tr>
           <td class="tid">T10</td>
           <td><span class="threat-name">Dilution &amp; standards capture.</span> Rivals ship weakened look-alikes (“kernel-compatible, minus the rights guard”) or committees water invariants down until the name means nothing.</td>
-          <td>Person-level adoption plus signed conformance manifests: variants are free to exist, but every deployment's subtractions are machine-readable and rendered on the citizen's client — dilution becomes legible, not lethal.</td>
+          <td>Person-level adoption plus signed <a href="#w-manifest">conformance manifests</a>: variants are free to exist, but every deployment's <a href="#w-subtraction">subtractions</a> are machine-readable and rendered on the citizen's client — dilution becomes legible, not lethal.</td>
           <td class="ref"><a href="#s6">§6</a></td>
         </tr>
         <tr>
           <td class="tid">T11</td>
           <td><span class="threat-name">Epistemic gating.</span> “Verify understanding before the vote counts” — competence tests that become disenfranchisement, where whoever writes the test owns the electorate.</td>
-          <td>The kernel never assesses understanding; it guarantees the opportunity for it — deliberation windows, decision metadata, private self-assessment, delegation, sortition — and keeps every gate off the ballot path.</td>
+          <td>The kernel never assesses understanding; it guarantees the opportunity for it — deliberation windows, decision metadata, private self-assessment, delegation, <a href="#w-sortition">sortition</a> — and keeps every gate off the ballot path.</td>
           <td class="ref"><a href="#s7">§7</a></td>
         </tr>
         <tr>
@@ -725,14 +732,14 @@
   <p class="plain"><span class="plain-label">Plainly</span>The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.</p>
   </summary>
   <p>Five billion people carry a hardware security module with a screen. The architecture leans on three properties of the modern phone: an enclave that generates and holds keys no app or thief can extract; a personal, always-carried display for casting and challenging ballots; and enough compute to <em>verify</em> — inclusion proofs, tally proofs, log consistency — rather than trust. Verification is the deeper role. Casting happens a few times a year; auditing is continuous. A civic client that checks the log's consistency in the background turns millions of phones into a passive audit fleet: tampering anywhere raises alarms everywhere, and silencing them means compromising every independently built client at once.</p>
-  <p>One caveat belongs here, not in a footnote, because <a href="#s1">§1</a> makes it a goal and T9 makes it a threat: <strong>the phone is the richest endpoint, never a required one</strong> — a polling booth alongside paper and kiosk, but the only one that also audits. Everything the kernel guarantees about the <em>outcome</em> — that the count is right, the record unrewritten, the process honest — it guarantees to every citizen equally; the paper voter's pre-printed encrypted ballot enters the same homomorphic tally and the same risk-limiting audit as any phone's. What the phone adds on top is <em>personal</em>: it lets whoever holds one audit continuously, for themselves, instead of trusting someone to do it for them. The citizen without a phone is not disenfranchised — their vote counts identically and is checked by the same mathematics — but that check runs on their behalf, through the audit fleet and the risk-limiting audit, rather than in their own hand. That is more than the old paper box, where officials were trusted outright; it is honestly less than a phone confers; and the asymmetry is in <em>who verifies</em>, never in <em>whose vote counts</em>. The inclusion requirement below (T9) is how the equal half is engineered — a §1 goal, not a UI afterthought.</p>
+  <p>One caveat belongs here, not in a footnote, because <a href="#s1">§1</a> makes it a goal and T9 makes it a threat: <strong>the phone is the richest endpoint, never a required one</strong> — a polling booth alongside paper and kiosk, but the only one that also audits. Everything the kernel guarantees about the <em>outcome</em> — that the count is right, the record unrewritten, the process honest — it guarantees to every citizen equally; the paper voter's pre-printed encrypted ballot enters the same <a href="#w-homomorphic-tally">homomorphic tally</a> and the same <a href="#w-risk-limiting-audit">risk-limiting audit</a> as any phone's. What the phone adds on top is <em>personal</em>: it lets whoever holds one audit continuously, for themselves, instead of trusting someone to do it for them. The citizen without a phone is not disenfranchised — their vote counts identically and is checked by the same mathematics — but that check runs on their behalf, through the audit fleet and the risk-limiting audit, rather than in their own hand. That is more than the old paper box, where officials were trusted outright; it is honestly less than a phone confers; and the asymmetry is in <em>who verifies</em>, never in <em>whose vote counts</em>. The inclusion requirement below (T9) is how the equal half is engineered — a §1 goal, not a UI afterthought.</p>
   <p>Citizen data is local-first: the credential, participation history, and drafts live on the device, not in a cloud account. The kernel's services see only what protocols require — an unlinkable proof, an encrypted ballot — never a profile (T6).</p>
   <p>And deliberately, <strong>no remote attestation</strong>. The temptation is to demand phones prove they run approved software; it would help against T5 and it is refused, because it hands a platform vendor a veto over civic participation (T2) and outlaws the independently built clients that keep the reference implementation honest. Ballot integrity comes from the protocol — cast-or-audit works <em>because</em> the device can't tell a real ballot from a challenge — not from trusting the endpoint.</p>
 
   <div class="service">
     <h3><span class="svc-id">TRANSPORT</span>The network is part of the threat surface</h3>
     <p class="plain"><span class="plain-label">Plainly</span>Switching off the internet is the cheapest attack. So nothing here needs much internet: every message is kilobytes, valid whenever it arrives — and paper needs no network at all.</p>
-    <p>Everything above assumes packets arrive, and that assumption is an attack: the cheapest strike against a decision is not forging ballots but switching off the network under them — a state-ordered shutdown, a leaned-on carrier, a disaster with convenient timing (T14). Election-window shutdowns are <a href="https://www.accessnow.org/keepiton/">documented state practice</a>, not a hypothetical. The kernel's defence is a property it already had, now stated as a requirement: <strong>the thin kernel is thin on the wire.</strong> The four verbs move kilobytes — an eligibility proof, an encrypted ballot, a log head, a manifest digest — and each payload is self-contained: encrypted, signed, nullifier-bearing, valid whenever it arrives, because the protocol never trusted the transport in the first place. So the specification demands what the design already permits: every kernel message must be deliverable delay-tolerantly, store-and-forward, over any channel of a few bits per second, and no citizen verb may require an interactive round trip beyond the citizen's own device. The restraint argued for capture resistance in <a href="#s1">§1</a> pays a second dividend: a protocol too small to capture is also too small to strangle.</p>
+    <p>Everything above assumes packets arrive, and that assumption is an attack: the cheapest strike against a decision is not forging ballots but switching off the network under them — a state-ordered shutdown, a leaned-on carrier, a disaster with convenient timing (T14). Election-window shutdowns are <a href="https://www.accessnow.org/keepiton/">documented state practice</a>, not a hypothetical. The kernel's defence is a property it already had, now stated as a requirement: <strong>the thin kernel is thin on the wire.</strong> The four verbs move kilobytes — an eligibility proof, an encrypted ballot, a log head, a manifest digest — and each payload is self-contained: encrypted, signed, <a href="#w-linking-tag">nullifier</a>-bearing, valid whenever it arrives, because the protocol never trusted the transport in the first place. So the specification demands what the design already permits: every kernel message must be deliverable delay-tolerantly, store-and-forward, over any channel of a few bits per second, and no citizen verb may require an interactive round trip beyond the citizen's own device. The restraint argued for capture resistance in <a href="#s1">§1</a> pays a second dividend: a protocol too small to capture is also too small to strangle.</p>
     <p>Shipped mesh stacks make this concrete. <a href="https://reticulum.network/">Reticulum</a> builds encrypted, self-configuring networks over LoRa, packet radio, serial links and IP, from self-generated cryptographic identities with no registration and no source addresses on packets — <em>subscription, not sovereignty, at the physical layer</em> — over any half-duplex channel above 5 bits per second. That budget fits the kernel exactly: witnesses gossiping co-signed log heads (<a href="#s3-4">§3.4</a>) spend kilobytes a day, the same arithmetic <a href="#s6">§6</a>'s anchor relies on; a community mesh is the independent second channel that T5's verification wants and the split-view attack (T8) fears; encrypted ballots ride store-and-forward with no new trust assumptions. Honest limits: Reticulum is <a href="https://github.com/markqvist/Reticulum">not externally security-audited</a>, by its own documentation; its licence is custom rather than OSI-approved (a line item for §14's DPG milestone); its destination hashes persist, so per-decision unlinkability stays in the kernel layer, never delegated to transport; radio transmissions can be direction-found, so physical-layer anonymity is weaker than the IP layer's (T6); phone support is real on Android, constrained on iOS; and no mesh helps against coercion (T4). The zero-bandwidth floor remains paper.</p>
     <p class="stack"><b>Shipped tech:</b> Reticulum RNS 1.3.x + LXMF store-and-forward (actively maintained; unaudited — a declared caveat, not a footnote) · LoRa/RNode, packet radio, TCP, I2P · paper as the zero-bandwidth floor</p>
   </div>
@@ -820,7 +827,7 @@
   <p>A kernel this load-bearing must be stable and immune — continuously self-tested, hardened against an adversarial world that now includes machine-speed attackers. But the immune metaphor carries its own warning: biology calls an over-empowered defense <em>autoimmune disease</em>, and constitutional history calls it <em>emergency powers that never expire</em>. A defense system able to act autonomously on the kernel — auto-patching, auto-revoking, auto-quarantining — is an unaccountable sovereign inside the walls, and an AI-driven one is a tireless sovereign whose threat model nobody voted on (T13). The design resolves strength against flexibility with one strict split: <strong>sense at machine speed; respond at constitutional speed.</strong></p>
   <p><strong>Sensing is unlimited.</strong> Continuous fuzzing, public intrusion tests with bounties (Swiss Post's practice, verified in <a href="#s13">§13</a>), independent red teams, anomaly detection over the logs, and the §4 audit fleet — millions of phones checking consistency proofs in the background, which is the innate immune system this architecture already had: alarms everywhere, actuators nowhere. AI belongs here without restriction, reviewing code, probing protocols, hunting anomalies — under one structural rule that makes runaway defense impossible rather than merely forbidden: <strong>AI holds a microscope, never a pen.</strong> Its findings are entries in the transparency log; keys, actuators, and authority never leave constitutional hands. Machine intelligence proposes; the polity disposes.</p>
   <p><strong>Response is governed, with a pre-legislated fast path.</strong> Ordinary hardening — patches, rule updates, credential rotations — travels §5's amendment road: staged, canaried, witnessed. For genuine emergencies, <em>break-glass constitutionalism</em>: a threshold of trustees may suspend a component under a procedure that was itself enacted in advance through the rights-guard path, executes in public (logged, witnessed), <strong>auto-expires by sunset</strong> unless actively renewed, and obliges a public post-mortem. Speed without sovereignty — the emergency power dies on its own, inverting the historical default in which emergencies outlive their causes.</p>
-  <p><strong>Immunity comes from diversity and smallness, not armor.</strong> Monoculture is the systemic risk: plural client implementations, plural log operators, and the §6 lattice mean any exploit — and equally any runaway defense — has a blast radius of one community, never the species; the fragmentation adopted against dilution turns out to be the containment vessel here too. And the kernel's waist — four verbs, two formats — is deliberately small enough for formal verification and reproducible builds, which is where immunity is <em>real</em> rather than aspirational. Against AI-empowered attackers this is also the scaling answer: a forged inclusion proof fails no matter how brilliant the intelligence that forged it. Verification is the one immune mechanism that cannot be out-argued.</p>
+  <p><strong>Immunity comes from diversity and smallness, not armor.</strong> Monoculture is the systemic risk: plural client implementations, plural log operators, and the §6 <a href="#w-lattice">lattice</a> mean any exploit — and equally any runaway defense — has a blast radius of one community, never the species; the fragmentation adopted against dilution turns out to be the containment vessel here too. And the kernel's <a href="#w-waist">waist</a> — four verbs, two formats — is deliberately small enough for formal verification and reproducible builds, which is where immunity is <em>real</em> rather than aspirational. Against AI-empowered attackers this is also the scaling answer: a forged inclusion proof fails no matter how brilliant the intelligence that forged it. Verification is the one immune mechanism that cannot be out-argued.</p>
   <p><strong>And the system remembers.</strong> Every incident becomes a permanent, public test case in the regression suite — immunological memory as institutional memory, so that each attack survived leaves the kernel measurably, witnessably harder. Growth in an adversarial world is then not an arms race of cleverness but an accretion of proofs: the adversary must be original every time; the kernel only has to remember.</p>
   </details>
 </section>
@@ -1013,6 +1020,35 @@
   <p><strong>Wedge two: the club vote.</strong> §6's fractal argument, pointed downward and delivered through Form C: <a href="verifier.html">the co-op election nobody can rig</a>, the residents' association budget everyone can check, the provably fair raffle — invoked by a link in the group chat the community already has. Stakes low enough that <em>personhood: platform account</em> suffices; frequency high enough to make the verbs habitual. Every club that couples in normalizes the primitives before any government is in the room, and its members arrive at the first municipal deployment already knowing what a verifiable decision feels like. The prototype is this wedge in embryo: an allotment society's election, checkable by anyone with the link.</p>
   <p>Both wedges compress to sound bites, and the register matters — one per audience. Citizens: <em>find out what you're owed; prove it; keep your privacy.</em> Communities: <em>decisions your members can check, on the phones they already have.</em> Institutions: <em>DNS-plus-TLS for democracy — four services, too small to capture.</em></p>
   <p>The honest tension, stated before it bites: wedge products are ecosystem-layer artifacts by this document's own taxonomy (§3, §12). A benefit-finder or a club-vote app that became <em>the</em> door into the kernel would be a new single point of capture wearing a friendly face — the platform mistake §1 rejects, rebuilt by its own advocates. The discipline is the same as everywhere above the waist: reference implementations, open protocol, plural clients, abandonable by design. The wedge exists to make the kernel wanted, never to become the kernel.</p>
+  </details>
+</section>
+
+<section id="words">
+  <details class="sec">
+  <summary>
+  <span class="sec-label">Appendix · Plain words</span>
+  <h2>The words, in plain speech</h2>
+  <p class="plain"><span class="plain-label">Plainly</span>Every term of art on this page, one line each — and the section where each earns its keep.</p>
+  </summary>
+  <ul class="words">
+    <li id="w-transparency-log"><b>Transparency log</b> — the public record: append-only, each entry hash-chained to the one before, so changing yesterday breaks every copy of today. <a href="#s3-4">§3.4</a></li>
+    <li id="w-witness"><b>Witness</b> — an independent party that co-signs the log's published fingerprints (its <em>heads</em>); rewriting history means getting every witness to re-sign the lie. <a href="#s3-4">§3.4</a></li>
+    <li id="w-anchor"><b>Anchor</b> — a copy of the log's closing fingerprint lodged beyond everyone who signs things (think a newspaper's public notices), so history cannot quietly shorten after the close. <a href="#s6">§6</a></li>
+    <li id="w-manifest"><b>Manifest</b> — a deployment's signed, machine-readable declaration of what it upholds and what it leaves out. <a href="#s6">§6</a></li>
+    <li id="w-subtraction"><b>Subtraction</b> — anything in the full design a deployment doesn't do. Allowed — but only out loud, in the manifest. <a href="#s6">§6</a></li>
+    <li id="w-waist"><b>The waist</b> — the narrow middle of the hourglass, in the sense the internet has one (the IP packet): the two formats every deployment must share, kept deliberately thin so anything can be compared with anything. <a href="#s6">§6</a></li>
+    <li id="w-lattice"><b>The lattice</b> — the ladder of honest partial versions: the full design at the top, every weaker deployment below it, each manifest saying exactly where on the ladder it sits. <a href="#s6">§6</a></li>
+    <li id="w-ring-signature"><b>Ring signature</b> — proof that <em>some member of a published list</em> signed, without revealing which one. How a ballot proves eligibility without a name. <a href="#s3-1">§3.1</a></li>
+    <li id="w-linking-tag"><b>Linking tag</b> (the literature says <em>nullifier</em>) — a per-election tag derived from the voter's secret: vote twice and the tags match, so double votes show — but names never do. <a href="#s3-1">§3.1</a></li>
+    <li id="w-zero-knowledge"><b>Zero-knowledge proof</b> — a proof that a statement is true which reveals nothing beyond that: the system learns you are on the roster, never which name you are. <a href="#s3-1">§3.1</a></li>
+    <li id="w-homomorphic-tally"><b>Homomorphic tally</b> — ballots are added up while still encrypted; only the total is ever decrypted, never a ballot. <a href="#s3-2">§3.2</a></li>
+    <li id="w-receipt-free"><b>Receipt-free</b> — you can check that your vote counted, but you cannot prove to anyone else how you voted. Nothing to sell; nothing a coercer can demand afterwards. <a href="#s3-2">§3.2</a></li>
+    <li id="w-cast-or-audit"><b>Cast-or-audit</b> — before casting, you may challenge the device to open the encryption it just made. A cheating device cannot tell a test from a real cast, so cheating gets caught. <a href="#s3-2">§3.2</a></li>
+    <li id="w-risk-limiting-audit"><b>Risk-limiting audit</b> — hand-count enough randomly chosen paper ballots to confirm the announced winner — or, failing that, force a full recount. <a href="#s4">§4</a></li>
+    <li id="w-sortition"><b>Sortition</b> — choosing decision-makers by lottery, the way juries are chosen: a random, representative panel of citizens deliberates on behalf of everyone. <a href="#s3-2">§3.2</a></li>
+    <li id="w-sybil"><b>Sybil attack</b> — one person pretending to be many people, to multiply their voice. <em>Sybil resistance</em> is how hard the system makes that. <a href="#s10">§10</a></li>
+    <li id="w-floor"><b>The floor</b> — the thirty rights of the Universal Declaration of Human Rights, treated as constraints no decision may cross, whatever its majority. <a href="#s5">§5</a></li>
+  </ul>
   </details>
 </section>
 

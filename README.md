@@ -64,36 +64,58 @@ real-randomness mode, with the official result still decided by the show of hand
 
 ## The words, in plain speech
 
-Every term of art in this repo, one line each.
+Every term of art in this repo, one line each. Jargon elsewhere in these documents
+links back to this list.
 
-- **Transparency log** — the public record: append-only, each entry hash-chained to
-  the one before, so changing yesterday breaks every copy of today.
-- **Witness** — an independent party that co-signs the log's published fingerprints;
-  rewriting history means getting every witness to re-sign the lie.
-- **Anchor** — a copy of the log's closing fingerprint lodged beyond everyone who
-  signs things (think a newspaper's public notices), so history cannot quietly
-  shorten after the close.
-- **Manifest** — a deployment's signed, machine-readable declaration of what it
-  upholds and what it leaves out.
-- **Subtraction** — anything in the full design a deployment doesn't do. Allowed —
-  but only out loud, in the manifest.
-- **The waist** — the narrow middle of the hourglass, in the sense the internet has
-  one (the IP packet): the two formats every deployment must share (a log entry and
-  a manifest), kept deliberately thin so anything can be compared with anything.
-- **Ring signature** — proof that *some member of a published list* signed, without
-  revealing which one. How a ballot proves eligibility without a name.
-- **Linking tag** — a per-election tag derived from the voter's secret: vote twice
-  and the tags match, so double votes show — but names never do. Also how you find
-  your own ballot in the public box.
-- **Homomorphic tally** — ballots are added up while still encrypted; only the total
-  is ever decrypted, never a ballot.
-- **Receipt-free** — you can check that your vote counted, but you cannot prove to
-  anyone else how you voted. Nothing to sell; nothing a coercer can demand afterwards.
-- **Cast-or-audit** — before casting, you may challenge the device to open the
-  encryption it just made. A cheating device cannot tell a test from a real cast, so
-  cheating gets caught.
-- **The floor** — the thirty rights of the Universal Declaration of Human Rights,
-  treated as constraints no decision may cross, whatever its majority.
+- <a id="w-transparency-log"></a>**Transparency log** — the public record: append-only,
+  each entry hash-chained to the one before, so changing yesterday breaks every copy
+  of today.
+- <a id="w-witness"></a>**Witness** — an independent party that co-signs the log's
+  published fingerprints (its *heads*); rewriting history means getting every witness
+  to re-sign the lie.
+- <a id="w-anchor"></a>**Anchor** — a copy of the log's closing fingerprint lodged
+  beyond everyone who signs things (think a newspaper's public notices), so history
+  cannot quietly shorten after the close.
+- <a id="w-manifest"></a>**Manifest** — a deployment's signed, machine-readable
+  declaration of what it upholds and what it leaves out.
+- <a id="w-subtraction"></a>**Subtraction** — anything in the full design a deployment
+  doesn't do. Allowed — but only out loud, in the manifest.
+- <a id="w-waist"></a>**The waist** — the narrow middle of the hourglass, in the sense
+  the internet has one (the IP packet): the two formats every deployment must share
+  (a log entry and a manifest), kept deliberately thin so anything can be compared
+  with anything.
+- <a id="w-lattice"></a>**The lattice** — the ladder of honest partial versions: the
+  full design at the top, every weaker deployment below it, each manifest saying
+  exactly where on the ladder it sits.
+- <a id="w-ring-signature"></a>**Ring signature** — proof that *some member of a
+  published list* signed, without revealing which one. How a ballot proves
+  eligibility without a name.
+- <a id="w-linking-tag"></a>**Linking tag** (the literature says *nullifier*) — a
+  per-election tag derived from the voter's secret: vote twice and the tags match, so
+  double votes show — but names never do. Also how you find your own ballot in the
+  public box.
+- <a id="w-zero-knowledge"></a>**Zero-knowledge proof** — a proof that a statement is
+  true which reveals nothing beyond that: the system learns you are on the roster,
+  never which name you are.
+- <a id="w-homomorphic-tally"></a>**Homomorphic tally** — ballots are added up while
+  still encrypted; only the total is ever decrypted, never a ballot.
+- <a id="w-receipt-free"></a>**Receipt-free** — you can check that your vote counted,
+  but you cannot prove to anyone else how you voted. Nothing to sell; nothing a
+  coercer can demand afterwards.
+- <a id="w-cast-or-audit"></a>**Cast-or-audit** — before casting, you may challenge
+  the device to open the encryption it just made. A cheating device cannot tell a
+  test from a real cast, so cheating gets caught.
+- <a id="w-risk-limiting-audit"></a>**Risk-limiting audit** — hand-count enough
+  randomly chosen paper ballots to confirm the announced winner — or, failing that,
+  force a full recount.
+- <a id="w-sortition"></a>**Sortition** — choosing decision-makers by lottery, the way
+  juries are chosen: a random, representative panel of citizens deliberates on behalf
+  of everyone.
+- <a id="w-sybil"></a>**Sybil attack** — one person pretending to be many people, to
+  multiply their voice. *Sybil resistance* is how hard the system makes that.
+- <a id="w-floor"></a>**The floor** — the thirty rights of the Universal Declaration
+  of Human Rights, treated as constraints no decision may cross, whatever its
+  majority.
 
 ## Layout
 

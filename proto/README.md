@@ -29,10 +29,10 @@ system would use an elliptic-curve group for kilobyte ballots.
 
 | verb | where |
 |---|---|
-| **prove** | the issuer certifies each plot-holder's nym key `g^x` into a published roster. A ballot then proves membership of that **ring** with a linkable ring signature (LSAG), and carries the per-decision pseudonym `nullifier = H(decision_id)^x` — §3.1's `nym_secret × context_id`, in the exponent. Which of the sixty keys signed, nothing says |
-| **cast / challenge** | the device encrypts the choice to a 2-of-3 trustee key (exponential ElGamal) and attaches a 0-or-1 validity proof (CDS); the voter may challenge it to open the encryption before casting (Benaloh — a cheating device cannot tell which is coming; a challenged ciphertext is a receipt by construction, so it is spoiled, never cast); sealed ciphertexts enter the box and are never individually opened; any later ballot with the same nullifier silently supersedes |
-| **verify** | `verify.py`: schemas, signatures, witnessed Merkle heads, digests, credentials, audits, per-ballot ring-membership and validity proofs, the tally — recompute the homomorphic sum, check each trustee share's Chaum-Pedersen proof, combine, brute-force the small exponent, compare with the announcement — and last, the anchor: the closing head must match a receipt from outside the collusion set |
-| **read** | `out/log.jsonl` — seven kernel events, each validating against the waist |
+| **prove** | the issuer certifies each plot-holder's nym key `g^x` into a published roster. A ballot then proves membership of that **ring** with a [linkable ring signature](../README.md#w-ring-signature) (LSAG), and carries the [per-decision pseudonym](../README.md#w-linking-tag) `nullifier = H(decision_id)^x` — §3.1's `nym_secret × context_id`, in the exponent. Which of the sixty keys signed, nothing says |
+| **cast / challenge** | the device encrypts the choice to a 2-of-3 trustee key (exponential ElGamal) and attaches a 0-or-1 validity proof (CDS); the voter may challenge it to open the encryption before casting ([Benaloh](../README.md#w-cast-or-audit) — a cheating device cannot tell which is coming; a challenged ciphertext is a receipt by construction, so it is spoiled, never cast); sealed ciphertexts enter the box and are never individually opened; any later ballot with the same nullifier silently supersedes |
+| **verify** | `verify.py`: schemas, signatures, [witnessed](../README.md#w-witness) Merkle heads, digests, credentials, audits, per-ballot ring-membership and validity proofs, the tally — recompute the [homomorphic sum](../README.md#w-homomorphic-tally), check each trustee share's Chaum-Pedersen proof, combine, brute-force the small exponent, compare with the announcement — and last, the [anchor](../README.md#w-anchor): the closing head must match a receipt from outside the collusion set |
+| **read** | `out/log.jsonl` — seven kernel events, each validating against the [waist](../README.md#w-waist) |
 
 </details>
 
@@ -41,14 +41,14 @@ system would use an elliptic-curve group for kilobyte ballots.
 <details>
 <summary><b>Plainly</b> <i>Three claims made good: the spec's two formats are what the code actually emits, every weakness is declared in the manifest — and each of the twelve frauds is caught by the exact check the design names for it, proven by switching that check off.</i></summary>
 
-1. **The waist is executable.** Every log entry validates against
+1. **The [waist](../README.md#w-waist) is executable.** Every log entry validates against
    [`schema/log-entry.schema.json`](../schema/log-entry.schema.json) and the manifest
    against [`schema/manifest.schema.json`](../schema/manifest.schema.json) — the same
    schemas the fiction validates against. Spec and code meet at the same two formats.
-2. **The manifest declares the subtractions.** The prototype is honestly weak, and says
+2. **The [manifest](../README.md#w-manifest) declares the [subtractions](../README.md#w-subtraction).** The prototype is honestly weak, and says
    so machine-readably: `sybil_resistance: weak`, `rights_guard: false`,
    `coercion_resistance: revote-silent`, `paper_channel: false`.
-   The first implementation is a lattice point, subject to its own anti-dilution rule —
+   The first implementation is a [lattice](../README.md#w-lattice) point, subject to its own anti-dilution rule —
    and the climb is legible, one manifest field at a time, each flip backed by a working
    mechanism: v1 implemented the Benaloh challenge (`cast_or_audit: false → true`); v2
    sealed the ballots behind a 2-of-3 trustee key and a homomorphic tally
@@ -189,7 +189,7 @@ system would use an elliptic-curve group for kilobyte ballots.
   table with two tellers; his ballot carries no `channel` field and no teller's
   countersignature, because one `assisted` label in a ring of sixty names him. T9 promises
   he can vote and have it verified like anyone's — not that the record says he needed help.
-- **Sybil resistance is unchanged and still `weak`.** The ring proves *a* plot-holder
+- **[Sybil resistance](../README.md#w-sybil) is unchanged and still `weak`.** The ring proves *a* plot-holder
   cast this ballot, exactly once. It cannot know whether two roster entries are one human.
   That was always the issuer's job, and unlinkability neither helps nor hurts it.
 - **`receipt_free: true` holds at the transcript level, with a named behavioural edge.**
@@ -198,7 +198,7 @@ system would use an elliptic-curve group for kilobyte ballots.
   that *retains* its encryption randomness can reconstruct a receipt (the Helios
   caveat), so the protocol requires — and `clubvote.py` literally does — discarding `r`
   the moment a ballot is cast. Challenged ciphertexts, whose `r` is public by design,
-  are spoiled and never cast. Receipt-freeness against a coercer who seizes the device
+  are spoiled and never cast. [Receipt-freeness](../README.md#w-receipt-free) against a coercer who seizes the device
   *before* casting remains `coercion_resistance: revote-silent`, and breaks against
   live observation, as the harness has always said. Anonymity adds one thing here and
   only one: a coercer who does not hold your nym secret can no longer read the public
@@ -213,7 +213,7 @@ system would use an elliptic-curve group for kilobyte ballots.
   receipts are additive. In this simulation the pinned key stands in for the printed
   page; in a deployment the receipt is the archive itself, or refusal 5's chain —
   notary of last resort, never gatekeeper.
-- **The DKG has no hash-commitment round.** Each trustee deals their own
+- **The DKG (distributed key generation) has no hash-commitment round.** Each trustee deals their own
   Feldman-committed polynomial and no party ever holds the joint secret — but a
   trustee who waits to see the others' commitments before choosing their own could
   bias the key's *distribution* (the rushing attack, Gennaro et al. 2007). The fix is
