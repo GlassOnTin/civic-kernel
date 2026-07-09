@@ -12,8 +12,8 @@ with verify.py, which shares no code with this file.
       (and rewrite the manifest to declare there were never any witnesses) -> roster (rewrite
       the eligibility rule in the published register). Attacks on the vote: box (swap a cast
       ciphertext), stuff (mint an extra ballot), doublevote (an enrolled voter negates his own
-      linking tag to vote twice), negate (a saboteur voter warps his own ciphertext out of the
-      group), overvote (an enrolled voter encrypts 2 votes, and the committee accepts it). Most
+      linking tag to vote twice), smuggle (slip a malformed, out-of-subgroup ciphertext past the
+      CDS proof as a superseded ballot), overvote (encrypt 2 votes, committee accepts). Most
       of the vote attacks assume the committee AND both witnesses collude on a rewritten
       history; the last two are pure tally lies under the same collusion: share (announce a
       rigged decryption), count (announce rigged counts).
@@ -669,6 +669,33 @@ def find_by_tag(ballots: list, name: str) -> dict:
     return next(b for b in ballots if b["nullifier"] == tag)
 
 
+def forge_cds_outside(c1: int, c2_bad: int, h: int, m: int, r: int, ctx: str, label: str) -> dict:
+    """A CDS 0-or-1 proof for a ciphertext whose c2 is OUTSIDE the prime-order subgroup.
+    prove01 for an honest c2 works because c2 = g^m·h^r; here c2 has been negated, so the
+    real branch's h-equation picks up a factor (-1)^challenge that the honest prover never
+    sees. But p is a safe prime — (-1)^even = 1 — so grind the nonce until the real-branch
+    challenge is even and the factor vanishes. The proof then verifies over a ciphertext
+    that is not a well-formed group element at all: precisely what the per-ballot subgroup
+    check, and nothing else, refuses to wave through."""
+    f = 1 - m
+    cf, zf = det_scalar(label + "|cf"), det_scalar(label + "|zf")
+    uf = c2_bad * pow(pow(G, f, P), -1, P) % P
+    af = pow(G, zf, P) * pow(c1, -cf, P) % P
+    bf = pow(h, zf, P) * pow(uf, -cf, P) % P
+    for i in range(200):
+        w = det_scalar(f"{label}|w|{i}")
+        a = {m: (pow(G, w, P), pow(h, w, P)), f: (af, bf)}
+        stmt = {"t": "cds01", "ctx": ctx, "h": hx(h), "c1": hx(c1), "c2": hx(c2_bad),
+                "a0": hx(a[0][0]), "b0": hx(a[0][1]), "a1": hx(a[1][0]), "b1": hx(a[1][1])}
+        ct_ = (fs_challenge(stmt) - cf) % Q
+        if ct_ % 2 == 0:                                 # (-1)^ct_ == 1: the real branch closes
+            zt = (w + ct_ * r) % Q
+            cc, zz = {m: ct_, f: cf}, {m: (w + ct_ * r) % Q, f: zf}
+            return {"a0": stmt["a0"], "b0": stmt["b0"], "a1": stmt["a1"], "b1": stmt["b1"],
+                    "c0": hx(cc[0]), "c1": hx(cc[1]), "z0": hx(zz[0]), "z1": hx(zz[1])}
+    raise ValueError("no even challenge found in 200 grinds")
+
+
 def tamper(src: Path, dst: Path, mode: str):
     if dst.exists():
         shutil.rmtree(dst)
@@ -787,21 +814,32 @@ def tamper(src: Path, dst: Path, mode: str):
                     return
             raise ValueError("no even challenge found in 64 grinds")
         rewrite_box(dst, doublevote, collude=True)
-    elif mode == "negate":
-        # A saboteur VOTER (enrolled — it is Derek) warps his own ciphertext out of the
-        # prime-order subgroup: c2 -> -c2, validly re-proved with his own ring secret. The
-        # committee logs it without complaint — it does not check subgroup membership, only
-        # the verifier does — so the box digest is consistent and the witnesses co-sign the
-        # heads over it. But the homomorphic sum now decrypts to no small exponent at all,
-        # so no honest tally can even be announced (retally=False: the stale one is left,
-        # and gated away). The election is griefed — UNLESS the verifier checks group
-        # membership per ballot, which pins the sabotage to THIS ballot rather than leaving
-        # an unattributable dead tally. That per-ballot check is the whole defence here.
-        def negate(ballots):
-            b = find_by_tag(ballots, "Derek Wainwright")
-            b["ciphertext"]["c2"] = hx(P - int(b["ciphertext"]["c2"], 16))
-            resign_ballot(dst, b, "Derek Wainwright", "tamper|negate")
-        rewrite_box(dst, negate, collude=True, retally=False)
+    elif mode == "smuggle":
+        # The proof that the ciphertext subgroup check is load-bearing on its OWN, not as a
+        # spare for the CDS proof beside it. A saboteur (Derek) smuggles a malformed group
+        # element into the box: c2 negated to -c2, which lies outside the prime-order
+        # subgroup, wrapped in a FRESH 0-or-1 proof forged through the even-challenge grind
+        # above — so the CDS check accepts it — and a valid ring signature over his own key.
+        # He gives it a low seq under his real ballot, so it is superseded and never counted:
+        # the tally decrypts honestly, the announced result is exactly right, and only the
+        # box itself now contains an element that is not a group element. The committee and
+        # witnesses collude to log it consistently. Every other check passes. Turn off the
+        # subgroup line and the verifier CERTIFIES a transcript carrying malformed
+        # ciphertext — the small-subgroup foothold this check exists to deny.
+        def smuggle(ballots):
+            x = nym_secret("Derek Wainwright")
+            ring, index, rd = ring_of(dst)
+            r = det_scalar("tamper-smuggle")
+            ct = enc(0, r, election_pub())
+            c1, c2_bad = int(ct["c1"], 16), P - int(ct["c2"], 16)   # -c2: out of the subgroup
+            b = {"decision_id": DECISION, "seq": 0,                 # below his real ballot -> superseded
+                 "nullifier": hx(link_tag(x, DECISION)),
+                 "ciphertext": {"c1": ct["c1"], "c2": hx(c2_bad)},
+                 "proof": forge_cds_outside(c1, c2_bad, election_pub(), 0, r, DECISION, "smuggle")}
+            b["ring_sig"], _ = ring_sign(ring, index[pow(G, x, P)], x, DECISION,
+                                         sha256_hex(canon(b)), rd, "tamper|smuggle")
+            ballots.append(b)
+        rewrite_box(dst, smuggle, collude=True)
     elif mode == "overvote":
         # An enrolled voter (Derek again) encrypts m=2 — two votes for Sandra in one
         # ballot — proves membership validly, and the corrupt committee ACCEPTS it: box

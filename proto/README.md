@@ -63,8 +63,8 @@ system would use an elliptic-curve group for kilobyte ballots.
    | `roster` | rewrites the *eligibility rule* in the published register after the vote | the logged, witnessed roster digest — every credential still verifies, and it is still a lie |
    | `box` | re-aims Sandra's own sealed ballot at Keith — fresh valid 0-or-1 proof to match, digests repaired, witnesses co-sign — taking her 8–6 win to a 7–7 tie | the ring signature, which covers the ballot — they can re-encrypt and re-prove, but not re-prove *membership* |
    | `stuff` | mints an extra ballot for Keith: real ciphertext, real 0-or-1 proof, fresh tag, digests repaired, witnesses co-sign | the same ring signature — there is no credential left to steal, and they cannot prove membership of a ring they hold no key to |
-   | `doublevote` | an enrolled voter **negates his own linking tag** and grinds his nonce until the ring closes: one secret, two tags, two votes | the nullifier's subgroup membership — the single check unlinkability makes load-bearing |
-   | `negate` | a saboteur voter warps his own *ciphertext* out of the group, poisoning the sum | subgroup membership, per ballot — which *attributes* the sabotage instead of leaving an unexplainable dead tally |
+   | `doublevote` | an enrolled voter **negates his own linking tag** and grinds his nonce until the ring closes: one secret, two tags, two votes | the *nullifier's* subgroup membership — negated, the tag `-T` leaves the subgroup |
+   | `smuggle` | slips a malformed ciphertext (c2 negated, **out of the subgroup**) into the box behind a forged-but-valid 0-or-1 proof and a real ring signature, riding in as a superseded ballot | the *ciphertext's* subgroup membership, per ballot — the only check that examines the group, and nothing else catches it |
    | `overvote` | an enrolled voter encrypts **2**; the corrupt committee counts it; witnesses co-sign | the 0-or-1 validity proof he cannot forge — it convicts his ballot, and the tally built on it falls with it |
    | `share` | committee + witnesses announce a rigged decryption, arithmetically consistent | the Chaum-Pedersen proof on each trustee share — the rigged share needs a secret nobody colluding holds |
    | `count` | same collusion, honest shares, lying counts | the recount — combine the proven shares, take the small exponent, and the announcement refutes itself |
@@ -81,28 +81,38 @@ system would use an elliptic-curve group for kilobyte ballots.
    `stuff` and `box` are two attacks answered by one check, and that is the point of the
    anonymity rung rather than a gap in it: eligibility used to be *asserted* by a
    credential the box carried, and is now *proven* by a signature only a ring member can
-   produce. There is nothing left to steal. `doublevote` is the check the rung had to
-   add, and it is not decoration: `p` is a safe prime, so `-1` is a quadratic non-residue
-   and the negated tag `-T` lies outside the prime-order subgroup. The ring signature
-   still closes on it whenever the challenge at the signer's own index happens to be even
-   — two grinds, on average. Exactly two tags exist per secret (`±T`), and the subgroup
-   check deletes the second.
+   produce. There is nothing left to steal. `doublevote` and `smuggle` are the two checks
+   the rung had to add, and both turn on the same fact: `p` is a safe prime, so `-1` is a
+   quadratic non-residue and negating an element pushes it *out* of the prime-order
+   subgroup — while a Fiat–Shamir proof written over it still closes whenever the relevant
+   challenge comes out even (two grinds, on average, since `(-1)^even = 1`). `doublevote`
+   negates the *linking tag* to forge a second identity; `smuggle` negates the *ciphertext*
+   and wraps it in a freshly-forged 0-or-1 proof, then rides in superseded so the honest
+   tally is unaffected and the announced result is exactly right. Each is caught by one
+   subgroup check and nothing else.
 
-   Both new checks were mutation-tested, and both are load-bearing — disable one, and a
-   verifier that reports `VERIFIED` on a rigged election:
+   Every check that anonymity added or repurposed was mutation-tested, and each is
+   *uniquely* load-bearing — disable it alone and the verifier reports `VERIFIED` on a
+   transcript it should reject:
 
-   | mutation | tamper | result |
+   | disable this check | and this tamper | certifies |
    |---|---|---|
-   | ring-signature verification always returns true | `box` | **certifies** — Sandra's 8–6 win recorded as a 7–7 tie |
-   | ring-signature verification always returns true | `stuff` | **certifies** — "15 voted", one of them nobody |
-   | ring-signature verification always returns true | `doublevote` | still caught, by the nullifier check: the two are independent |
-   | nullifier subgroup check removed | `doublevote` | **certifies** — "15 voted", and one of them is Derek twice |
-   | logged-roster-digest check removed | `roster` | **certifies** — the eligibility rule rewritten after the vote |
+   | ring-signature verification | `box` | Sandra's 8–6 win recorded as a 7–7 tie |
+   | ring-signature verification | `stuff` | "15 voted", one of them nobody |
+   | nullifier subgroup membership | `doublevote` | "15 voted", one of them Derek twice |
+   | ciphertext subgroup membership | `smuggle` | a transcript carrying a non-group-element ciphertext |
+   | logged-roster digest | `roster` | the eligibility rule rewritten after the vote |
 
-   The `box` row is why the tamper had to be sharpened: an earlier version swapped a
-   ciphertext without re-proving it, and the 0-or-1 proof caught it even with the ring
-   signature disabled. It looked like a passing test for the ring signature and was not
-   one. A tamper the *wrong* check can also catch does not prove the right check.
+   (Ring-signature-off does *not* let `doublevote` through — the nullifier check still
+   catches it; the two are independent.) Getting to *uniquely* load-bearing took work in
+   two places. `box` was sharpened: an earlier version swapped a ciphertext without
+   re-proving it, so the 0-or-1 proof caught it even with the ring signature disabled — a
+   test that passed for the wrong reason. And `smuggle` replaced a cruder tamper (`negate`)
+   that merely flipped a *counted* ballot's ciphertext: that poisons the homomorphic sum,
+   so the tally recount already refuses to decrypt it — meaning the subgroup check looked
+   redundant. Riding in *superseded* keeps the sum clean, so the malformed element reaches
+   the box and only the subgroup check stands between it and a `VERIFIED`. A tamper another
+   check also catches is not evidence for the check you are claiming.
 
    And in the reference transcript itself, a compromised device that displayed Sandra
    while encrypting Keith is caught by a challenge, logged (`x-ballot.audit-failed`),

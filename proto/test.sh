@@ -55,7 +55,7 @@ must_fail roster     "logged roster digest matches"                        &
 must_fail box        "ring signature does not verify"                      &
 must_fail stuff      "ring signature does not verify"                      &
 must_fail doublevote "negated linking tag"                                 &
-must_fail negate     "ciphertext component not in the prime-order subgroup" &
+must_fail smuggle    "ciphertext component not in the prime-order subgroup" &
 must_fail overvote   "validity proof"                                      &
 must_fail share      "Chaum-Pedersen"                                      &
 must_fail count      "announced counts match"                             &
@@ -71,12 +71,12 @@ declare -A desc=(
   [box]="re-aim Sandra's ballot at Keith (7-7) -> the ring signature covers it"
   [stuff]="mint an extra ballot under full collusion -> no ring membership to prove"
   [doublevote]="negate a linking tag to vote twice -> the nullifier's subgroup check"
-  [negate]="warp a ciphertext out of the group -> per-ballot subgroup membership"
+  [smuggle]="slip a malformed ciphertext in past the CDS proof -> ciphertext subgroup check"
   [overvote]="encrypt two votes, committee accepts -> the 0-or-1 validity proof"
   [share]="collude on a rigged decryption -> the Chaum-Pedersen share proof"
   [count]="collude on rigged counts -> the recount refutes itself"
 )
-ORDER="honest reproduce log rehead unwitness roster box stuff doublevote negate overvote share count"
+ORDER="honest reproduce log rehead unwitness roster box stuff doublevote smuggle overvote share count"
 
 echo; fails=0
 for name in $ORDER; do
