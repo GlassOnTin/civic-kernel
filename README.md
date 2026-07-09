@@ -1,11 +1,37 @@
 # The Civic Kernel
 
-**A thin, capture-resistant protocol for democratic decision-making** — with a
-machine-checked stress-test suite and a comparative-law corpus that hold the design
-against real situations and real legal systems.
+**Rules for running a vote that nobody can rig and anybody can check — too small for
+anyone to own.** Technically: a thin, capture-resistant protocol for democratic
+decision-making — four services, four verbs, two message formats, and the UDHR as a
+measured floor. Small enough to state on one page ([`KERNEL.md`](KERNEL.md)).
 
-**Start with [`KERNEL.md`](KERNEL.md)** — the whole kernel distilled to one page:
-four services, four verbs, two formats, one floor, twelve refusals, and what is measured.
+The claim: **anyone can check the process that governs them from the published record
+alone** — no trust in the server, the committee, or the software that produced it. The
+running prototype is a sixty-member allotment society electing its treasurer: every
+ballot anonymous yet provably cast by an enrolled member, no ballot ever opened — only
+the encrypted sum is decrypted — and an independent verifier that confirms the election
+from the artifacts alone, then rejects all twelve ways we tried to rig it, up to a
+committee and both witnesses colluding to rewrite history, and finally to erase one
+inconvenient ballot from it. When everything holds, the verifier's closing line is:
+*"nobody had to trust the shed."* (`proto/test.sh` runs the lot in about a minute.)
+
+Who it's for, in the end: the member who can see her own ballot counted without anyone
+learning her vote; the club or co-op whose election nobody can rig; one day — the long
+game — the household that learns what it is owed without telling anyone it asked. Today
+it is a research prototype at village scale, and says so: every deployment declares in
+a machine-readable manifest what it upholds *and what it subtracts* — subtraction
+declared, never silent.
+
+What it is not: not a product, not a platform, not a blockchain — no token in any
+citizen's path, ever. And not finished, by design: this repo treats its own documents
+the way the kernel treats law — the architecture essay is at rev. 3 because evidence
+already revised it twice, and what the code and the first real communities teach will
+revise it again.
+
+**Next:** an in-browser verifier — drop a transcript on a static page, watch every
+check run, find your own ballot by its tag. Then: a shadow-mode run alongside one real
+club's AGM; the essay's rev. 4 (fold in what the prototype proved, and give every
+claim a plain-speech line).
 
 ### Read it live
 
