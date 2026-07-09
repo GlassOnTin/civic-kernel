@@ -6,10 +6,16 @@ end to end with real cryptography, emitting a transcript that an independent
 verifier — sharing no code with the runner — confirms from the artifacts alone.
 
 ```sh
-./test.sh          # the success test: run, verify, reproduce, catch 12 tampers
+./test.sh          # the success test: run, verify, reproduce, catch 12 tampers, browser parity
 python3 clubvote.py run      # -> out/ (committed as the reference transcript)
 python3 verify.py out        # independent verification, exit 0 = verified
 ```
+
+The same checks run in any current browser: [`../verifier.html`](../verifier.html)
+([live](https://glassontin.github.io/civic-kernel/verifier.html)) loads or accepts a dropped
+transcript, shows every check as it runs, and lets a voter look up their own ballot by its
+linking tag. `tools/verify-parity.mjs` (part of `test.sh`, and CI) holds its engine to
+`verify.py`'s verdicts.
 
 Needs `cryptography` and `jsonschema` (`pip install -r ../requirements.txt`). The ballot
 group is RFC 3526 MODP-2048 over stdlib `pow` — auditable over compact; a production

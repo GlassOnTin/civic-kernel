@@ -29,6 +29,18 @@ reproduce() {
   then record reproduce "OK   a second run is byte-identical"
   else record reproduce "FAIL a second run is not byte-reproducible"; fi
 }
+# The same checks ship as a browser page (../verifier.html). Its engine must reach
+# the same verdicts as verify.py, and its pinned copies of the waist schemas must
+# equal the repo's — tools/verify-parity.mjs asserts both. Needs node (CI has it).
+parity() {
+  if command -v node > /dev/null 2>&1; then
+    if node ../tools/verify-parity.mjs > "$T/parity.log" 2>&1
+    then record parity "OK   verifier.js reaches the same verdicts on the same checks; embedded schemas match"
+    else record parity "FAIL browser-verifier parity: $(grep -m1 FAIL "$T/parity.log")"; fi
+  else
+    record parity "OK   SKIPPED here — node not installed; CI runs this"
+  fi
+}
 # must_fail: the verifier must REJECT the tamper, and a FAIL line must match the defence
 # the design names. A tamper caught by the wrong check is a test that passes for the wrong
 # reason and would stay green if the named defence rotted.
@@ -47,7 +59,7 @@ must_fail() { # mode  want
 # Everything below reads out/ and nothing else — launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
-honest & reproduce &
+honest & reproduce & parity &
 must_fail log        "head's root matches a strict prefix"                 &
 must_fail rehead     "co-signed by the log key and all"                    &
 must_fail unwitness  "manifest declares every witness"                     &
@@ -77,8 +89,9 @@ declare -A desc=(
   [share]="collude on a rigged decryption -> the Chaum-Pedersen share proof"
   [count]="collude on rigged counts -> the recount refutes itself"
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
+  [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
 )
-ORDER="honest reproduce log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
+ORDER="honest reproduce parity log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do

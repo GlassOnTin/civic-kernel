@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check the election yourself — Civic Kernel</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b6b6b; --line: #e2e2e2;
+    --ok: #1a7f37; --bad: #c0392b; --warn: #9a6700;
+    --okbg: #e6f4ea; --badbg: #fdecea; --warnbg: #fff8e1; --panel: #f7f7f7;
+    --accent: #234a70;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121417; --fg: #e6e6e6; --muted: #9a9a9a; --line: #2c3036;
+      --ok: #4cc38a; --bad: #ef6a5a; --warn: #d4a72c;
+      --okbg: #10281c; --badbg: #331713; --warnbg: #2e2410; --panel: #1a1e23;
+      --accent: #7fb0da;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 46rem;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  h1 { font-size: 1.6rem; margin: .4rem 0 .2rem; }
+  h2 { font-size: 1.05rem; margin: 1.6rem 0 .4rem; }
+  p  { margin: .5rem 0; }
+  .sub { color: var(--muted); }
+  a { color: var(--accent); }
+  button {
+    font: inherit; padding: .5rem .9rem; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:disabled { opacity: .5; cursor: default; }
+  #drop {
+    margin-top: .8rem; padding: 1rem; border: 2px dashed var(--line);
+    border-radius: 10px; color: var(--muted);
+  }
+  #drop.over { border-color: var(--accent); color: var(--fg); }
+  #drop input { display: none; }
+  #filestate { font-size: .85rem; color: var(--muted); margin-top: .4rem; }
+  #verdict {
+    display: none; margin: 1.2rem 0; padding: .9rem 1rem; border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  #verdict.ok   { display: block; background: var(--okbg);   border-color: var(--ok); }
+  #verdict.bad  { display: block; background: var(--badbg);  border-color: var(--bad); }
+  #verdict.warn { display: block; background: var(--warnbg); border-color: var(--warn); }
+  #verdict .big { font-size: 1.25rem; font-weight: 700; }
+  #checks section { margin: .9rem 0; }
+  #checks h3 { font-size: .95rem; margin: .6rem 0 .2rem; }
+  .row { display: flex; gap: .5rem; padding: .12rem 0; font-size: .88rem; }
+  .row .mark { flex: 0 0 1.1rem; text-align: center; }
+  .row.ok .mark { color: var(--ok); } .row.bad .mark { color: var(--bad); font-weight: 700; }
+  .row.bad { color: var(--bad); }
+  .row.skip { color: var(--muted); font-style: italic; }
+  #progress { color: var(--muted); font-size: .88rem; margin: .3rem 0; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: .9rem 1rem; margin-top: .8rem; }
+  input[type=text] {
+    font: inherit; width: 100%; padding: .45rem .6rem; margin: .3rem 0;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg);
+  }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em; }
+  .small { font-size: .85rem; }
+  footer { margin-top: 2.5rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: .8rem; }
+</style>
+</head>
+<body>
+
+<h1>Check the election yourself</h1>
+<p class="sub">No account, no permission, no trust required — the check runs from the published
+files alone, in your browser. Nothing you load here is sent anywhere; this page makes no network
+request except, if you press the button, to fetch the reference files from this same site.</p>
+
+<p>This verifies a <a href="proto/README.md">clubvote</a> transcript: a sixty-member allotment
+society electing its treasurer with anonymous, sealed ballots. The verifier below re-does every
+check from scratch — the record's hashes and witness signatures, every ballot's membership and
+validity proofs, the count itself, and finally whether this history matches the copy the world
+saw. If a single number were altered anywhere, a check turns red and says where.</p>
+
+<p>
+  <button id="loadref" class="primary">Load the reference election</button>
+</p>
+<div id="drop">
+  Or drop a transcript here (the nine files from <code>proto/out/</code>, or the folder itself)
+  — or <label style="text-decoration: underline; cursor: pointer;">choose files<input type="file" id="picker" multiple></label>.
+  <div id="filestate"></div>
+</div>
+
+<div id="verdict"><span class="big" id="verdict-line"></span><div id="verdict-detail" class="small"></div></div>
+<div id="progress"></div>
+<div id="checks"></div>
+
+<div class="panel" id="findpanel">
+  <h2 style="margin-top:0">Find your own ballot</h2>
+  <p class="small">Voters hold a secret their device generated at enrolment. From it, this page
+  recomputes your ballot's <em>linking tag</em> for this decision and looks it up in the public
+  box — so you can see your vote was recorded, without the record ever naming you. The secret
+  stays in this page; nothing is transmitted.</p>
+  <p class="small sub">This demo election is deliberately reproducible, so every "secret" is
+  public — that is a declared property of the demo, not of the design. Try
+  <button id="try-derek" class="small">Derek's secret</button> or
+  <button id="try-nalini" class="small">Nalini's — she changed her mind and re-voted</button>.
+  In a real election only you would know yours, and this lookup would name nobody.</p>
+  <input type="text" id="secret" class="mono" placeholder="your nym secret (hex)" spellcheck="false">
+  <button id="find">Look up my ballot</button>
+  <div id="findresult" class="small" style="margin-top:.5rem"></div>
+</div>
+
+<footer>
+  Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype —
+  <a href="index.html">the architecture</a> · <a href="scenarios.html">real life against the
+  protocol</a>. The independent Python verifier (<code>proto/verify.py</code>) makes the same
+  checks; a parity test in CI holds this page to the same verdicts. Works at village scale —
+  sixty members, seconds per check — and says so; a national roster needs the constant-size
+  proofs the architecture tracks.
+</footer>
+
+<script src="verifier.js"></script>
+<script>
+"use strict";
+const REQUIRED = ["manifest.json", "roster.json", "trustees.json", "ballot-box.json",
+                  "audits.json", "log.jsonl", "heads.jsonl", "trust.json", "anchor.json"];
+const files = {};
+let running = false;
+
+const $ = id => document.getElementById(id);
+const filestate = $("filestate"), checksEl = $("checks"), progressEl = $("progress");
+
+function setFileState() {
+  const have = REQUIRED.filter(f => f in files);
+  const missing = REQUIRED.filter(f => !(f in files));
+  filestate.textContent = have.length
+    ? "Loaded " + have.length + "/" + REQUIRED.length +
+      (missing.length ? " — still missing: " + missing.join(", ") : "")
+    : "";
+}
+
+function addFile(name, text) {
+  const base = name.split("/").pop();
+  if (REQUIRED.includes(base)) files[base] = text;
+}
+
+async function maybeRun() {
+  if (running) return;
+  if (!REQUIRED.every(f => f in files)) { setFileState(); return; }
+  setFileState();
+  running = true;
+  $("loadref").disabled = true;
+  checksEl.innerHTML = "";
+  const v = $("verdict"); v.className = ""; v.style.display = "none";
+  let sectionEl = null;
+  const t0 = Date.now();
+
+  const res = await CivicVerifier.verify(files, {
+    onSection: (n, title) => {
+      const s = document.createElement("section");
+      s.innerHTML = "<h3>[" + n + "] " + title + "</h3>";
+      checksEl.appendChild(s); sectionEl = s;
+      progressEl.textContent = "checking…";
+    },
+    onCheck: c => {
+      const d = document.createElement("div");
+      d.className = "row " + (c.ok ? "ok" : "bad");
+      d.innerHTML = "<span class='mark'>" + (c.ok ? "✓" : "✗") + "</span><span></span>";
+      d.lastChild.textContent = c.text;
+      sectionEl.appendChild(d);
+    },
+    onSkip: (n, text) => {
+      const s = document.createElement("section");
+      s.innerHTML = "<h3>[" + n + "]</h3>";
+      const d = document.createElement("div");
+      d.className = "row skip";
+      d.innerHTML = "<span class='mark'>–</span><span></span>";
+      d.lastChild.textContent = text;
+      s.appendChild(d);
+      checksEl.appendChild(s);
+    },
+    onBallot: (done, total) => {
+      const per = (Date.now() - t0) / 1000 / done;
+      progressEl.textContent = "checking ballot " + done + " of " + total +
+        " — each one proves membership of the whole 60-key ring" +
+        (done < total ? " (about " + Math.ceil(per * (total - done)) + "s left)" : "");
+    },
+  });
+
+  progressEl.textContent = "";
+  const line = $("verdict-line"), detail = $("verdict-detail");
+  if (res.verdict === "VERIFIED") {
+    v.className = "ok";
+    line.textContent = "VERIFIED — every check passed.";
+  } else if (res.verdict === "CANNOT VERIFY HERE") {
+    v.className = "warn";
+    line.textContent = "CANNOT VERIFY HERE";
+  } else {
+    v.className = "bad";
+    line.textContent = "NOT VERIFIED — this transcript should not be believed.";
+  }
+  detail.textContent = res.summary + "  (" + (res.elapsedMs / 1000).toFixed(1) + " s in this browser)";
+  v.scrollIntoView({ behavior: "smooth", block: "start" });
+  running = false;
+  $("loadref").disabled = false;
+}
+
+// --- loading: reference fetch, drag-drop (files or a folder), file picker
+// ?ref=some/dir loads a different hosted transcript — so a club can publish its
+// files next to this page and hand members one link that verifies them.
+const REF_DIR = (new URLSearchParams(location.search).get("ref") || "proto/out")
+  .replace(/[^A-Za-z0-9_\/.-]/g, "").replace(/\.\.+/g, ".").replace(/\/+$/, "");
+$("loadref").onclick = async () => {
+  $("loadref").disabled = true;
+  filestate.textContent = "fetching transcript from " + REF_DIR + "/ …";
+  try {
+    for (const f of REQUIRED) {
+      const r = await fetch(REF_DIR + "/" + f);
+      if (!r.ok) throw new Error(f + ": HTTP " + r.status);
+      files[f] = await r.text();
+    }
+  } catch (e) {
+    filestate.textContent = "Could not fetch the reference files (" + e.message + "). " +
+      "If you opened this page from disk, serve the repo (python3 -m http.server) or drop the files here.";
+    $("loadref").disabled = false;
+    return;
+  }
+  $("loadref").disabled = false;
+  maybeRun();
+};
+
+const drop = $("drop");
+drop.ondragover = e => { e.preventDefault(); drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = async e => {
+  e.preventDefault(); drop.classList.remove("over");
+  const items = [...e.dataTransfer.items];
+  const readEntry = entry => new Promise(resolve => {
+    if (entry.isFile) {
+      entry.file(f => f.text().then(t => { addFile(f.name, t); resolve(); }));
+    } else if (entry.isDirectory) {
+      entry.createReader().readEntries(async es => {
+        for (const sub of es) await readEntry(sub);
+        resolve();
+      });
+    } else resolve();
+  });
+  for (const it of items) {
+    const entry = it.webkitGetAsEntry && it.webkitGetAsEntry();
+    if (entry) await readEntry(entry);
+    else { const f = it.getAsFile(); if (f) addFile(f.name, await f.text()); }
+  }
+  maybeRun();
+};
+$("picker").onchange = async e => {
+  for (const f of e.target.files) addFile(f.name, await f.text());
+  maybeRun();
+};
+
+// --- find my ballot
+const DEMO_SECRETS = {
+  derek: "d4b128310c83f38cc4f3c64ae534757c90a7719d00c1126660debc2e2a17bec6c8c4e15ff338b8837d03bcf85c289a6709434f818abeee434ea2c812029715b8",
+  nalini: "25163641b9a22b7816eac5d8eaecf17483aaf6e5bd3c5c32afd4e0b39dc8fe8db54d22e505f8e54c273de54e7a4567a47a8b22f047dde90fc64bf2f970b9629b",
+};
+$("try-derek").onclick = () => { $("secret").value = DEMO_SECRETS.derek; $("findresult").textContent = ""; };
+$("try-nalini").onclick = () => { $("secret").value = DEMO_SECRETS.nalini; $("findresult").textContent = ""; };
+$("secret").oninput = () => { $("findresult").textContent = ""; };
+$("find").onclick = async () => {
+  const out = $("findresult");
+  const needed = ["trustees.json", "ballot-box.json", "roster.json", "log.jsonl"];
+  if (!needed.every(f => f in files)) {
+    out.textContent = "Load a transcript first (the button above, or drop the files).";
+    return;
+  }
+  try {
+    const r = await CivicVerifier.findBallot(files, $("secret").value);
+    let html = "";
+    if (r.enrolled) {
+      html += "This secret belongs to an enrolled member — the demo roster openly names them: <b></b>. ";
+    } else {
+      html += "This secret does not match any enrolled key — it could not have cast a ballot. ";
+    }
+    out.innerHTML = html + "<div class='mono sub'>linking tag " + r.tag.slice(0, 24) + "…</div>";
+    if (r.enrolled) out.querySelector("b").textContent = r.memberName;
+    if (r.ballots.length === 0) {
+      out.innerHTML += "<div>No ballot in the box carries this tag" +
+        (r.enrolled ? " — this member did not vote (or their ballot was suppressed: that is exactly what this check is for)." : ".") + "</div>";
+    } else {
+      for (const b of r.ballots) {
+        out.innerHTML += "<div>• ballot with sequence " + b.seq + " — " +
+          (b.counted ? "<b>counted</b>" : "superseded by a later re-vote, sealed forever") + "</div>";
+      }
+    }
+  } catch (e) {
+    out.textContent = "Could not compute: " + e.message;
+  }
+};
+</script>
+</body>
+</html>

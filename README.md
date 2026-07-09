@@ -28,13 +28,14 @@ the way the kernel treats law — the architecture essay is at rev. 3 because ev
 already revised it twice, and what the code and the first real communities teach will
 revise it again.
 
-**Next:** an in-browser verifier — drop a transcript on a static page, watch every
-check run, find your own ballot by its tag. Then: a shadow-mode run alongside one real
-club's AGM; the essay's rev. 4 (fold in what the prototype proved, and give every
-claim a plain-speech line).
+**Next:** a shadow-mode run alongside one real club's AGM — an enrolment/cast page and
+a real-randomness mode, with the official result still decided by the show of hands;
+and the essay's rev. 4 (fold in what the prototype proved, and give every claim a
+plain-speech line).
 
 ### Read it live
 
+- **[Check the election in your browser →](https://glassontin.github.io/civic-kernel/verifier.html)**  every check runs client-side on the reference transcript — or on any transcript you drop on the page; find your own ballot by its tag
 - **[The architecture →](https://glassontin.github.io/civic-kernel/)**  the proposal: a thin waist, four services, rights as invariants
 - **[Real life against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)**  19 stress-test stories, each machine-validated against the schemas
 - **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**  the same 30 rights across the UK, Germany, the US, and the EU Charter
@@ -45,6 +46,10 @@ claim a plain-speech line).
 - **`index.html`** — the architecture document.
 - **`proto/`** — the first running code: the club-vote election end to end (all four verbs, real
   signatures, real Merkle log, independent verifier, committed reference transcript). `proto/test.sh` is the success test.
+- **`verifier.html`** + **`verifier.js`** — the same checks in the browser: load or drop a
+  transcript, watch every check run, look up your own ballot by its linking tag. The engine is
+  held to `proto/verify.py`'s verdicts by `tools/verify-parity.mjs`, which CI runs; its standards
+  (the ballot group, the two schemas) are pinned inside the file, never fetched.
 - **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
 - **`schema/`** — the "waist": the two universal formats, as JSON Schema (Draft 2020-12).
   - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act` type,
