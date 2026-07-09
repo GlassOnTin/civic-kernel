@@ -61,6 +61,7 @@
   .cards a:hover { border-color: var(--accent); }
   .cards h3 { font-size: 1.02rem; margin: .5rem 0 .35rem; line-height: 1.35; }
   .cards p { font-size: .85rem; color: var(--muted); margin: 0; }
+  .cards p.cv { margin-top: .5rem; font-style: italic; }
   .badge {
     display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em;
     padding: .1rem .5rem; border-radius: 99px; border: 1px solid;
@@ -7105,7 +7106,8 @@ function card(s) {
   return `<li><a href="#${esc(s.id)}">
     <span class="badge ${esc(s.verdict)}">${esc(s.verdict)}</span>
     <h3>${esc(s.title)}</h3>
-    <p>${esc(s.verdict_plain)}</p>
+    <p>${esc(s.setting.split(/(?<=[.!?])\s/)[0])}</p>
+    <p class="cv">${esc(s.verdict_plain)}</p>
   </a></li>`;
 }
 
