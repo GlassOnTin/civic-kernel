@@ -212,6 +212,17 @@
   ul.words { margin: 0; padding: 0; list-style: none; max-width: 42rem; }
   ul.words li { padding: 0.5rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
   ul.words li:last-child { border-bottom: none; }
+  /* glossary terms: definition popover in place; the link itself still reaches the appendix */
+  a.term { text-decoration-style: dotted; cursor: help; }
+  .termtip {
+    position: absolute; z-index: 30; display: none;
+    width: 19rem; max-width: 76vw;
+    background: var(--card); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 0.5rem 0.7rem;
+    font-family: var(--serif); font-size: 0.82rem; line-height: 1.5;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  }
   /* collapsible sections: the plain line is the always-visible surface */
   details.sec > summary {
     list-style: none;
@@ -1080,6 +1091,46 @@
   addEventListener('hashchange', reveal);
   reveal();
   addEventListener('beforeprint', function () { all(true); });
+  // glossary terms: popover fed from the appendix's own definitions (one source of
+  // truth). One shared tip element on <body> escapes scroll-container clipping;
+  // hover shows it transiently, a plain click/tap pins it; modified clicks and
+  // no-JS still navigate to the appendix.
+  var defs = {};
+  document.querySelectorAll('#words li[id]').forEach(function (li) {
+    defs[li.id] = li.textContent.replace(/\s*§[\d.]+\s*$/, '').trim();
+  });
+  var tip = document.createElement('div');
+  tip.className = 'termtip';
+  document.body.appendChild(tip);
+  var tipFor = null, pinned = false;
+  function showTip(a) {
+    tip.textContent = a.getAttribute('data-tip');
+    tip.style.display = 'block';
+    var r = a.getBoundingClientRect();
+    var x = Math.min(r.left + scrollX, scrollX + document.documentElement.clientWidth - tip.offsetWidth - 8);
+    tip.style.left = Math.max(scrollX + 8, x) + 'px';
+    tip.style.top = (r.bottom + scrollY + 6) + 'px';
+    tipFor = a;
+  }
+  function hideTip() { tip.style.display = 'none'; tipFor = null; pinned = false; }
+  document.querySelectorAll('a[href^="#w-"]').forEach(function (a) {
+    if (a.closest('#words')) return;
+    var d = defs[a.getAttribute('href').slice(1)];
+    if (!d) return;
+    a.classList.add('term');
+    a.setAttribute('data-tip', d);
+    a.addEventListener('mouseenter', function () { if (!pinned) showTip(a); });
+    a.addEventListener('mouseleave', function () { if (!pinned) hideTip(); });
+  });
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('a.term');
+    if (!t) { hideTip(); return; }
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    if (pinned && tipFor === t) { hideTip(); }
+    else { showTip(t); pinned = true; }
+  });
+  addEventListener('scroll', function () { if (tip.style.display === 'block') hideTip(); }, { passive: true });
 })();
 </script>
 
