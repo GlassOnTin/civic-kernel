@@ -18,7 +18,7 @@ The attack is fixed throughout: a 61% majority banning a minority's worship (the
 | S0 | **The EU today** — Charter of Fundamental Rights, binding since Lisbon | strike | conditional | 25/30 | **strains** | measured (`majority-vs-minority-eu`) |
 | S1 | + adopt the transparency log ([§3.4](https://glassontin.github.io/civic-kernel/#s3-4 "Every act lands in a public record that can only grow. Rewrite yesterday and the sums stop matching in every copy of today — and any phone can tell.")) | strike | conditional | 25/30 | strains | inferred |
 | S2 | + verifiable ballots for EP elections and the ECI ([§3.2](https://glassontin.github.io/civic-kernel/#s3-2 "Your ballot is sealed before it leaves your hand and counted without being opened. You can check it was counted; you cannot prove to anyone how you voted.")) | strike | conditional | 25/30 | strains | inferred |
-| S3 | **+ widen scope: conditional → unconditional** (unwind Art 51's gate) | strike | unconditional | 25/30 | **strains** — Germany's measured posture | inferred from the corpus — **and locked at treaty unanimity** |
+| S3 | **+ widen scope: conditional → unconditional** (unwind Art 51's gate) | strike | unconditional | 25/30 | **strains** — the verdict does not move | measured in-context (`majority-vs-minority-eu-unconditional`) — **and locked at treaty unanimity** |
 | S4 | + make a member state obey the judgment it has decided to ignore | — | — | — | the `executive-ignores` residue | **not a lattice move at all** |
 
 **Why S1 and S2 don't flip it, and are worth taking anyway.** As in the UK, the cheap,
@@ -33,17 +33,22 @@ problem — a million signatories, each provably an eligible citizen, none count
 currently solved by collecting identity documents — is SVC-1's job description
 ([§3.1](https://glassontin.github.io/civic-kernel/#s3-1 "Prove you are on the list and have not already spoken — without saying which name on the list you are. No file on anyone is ever built.")).
 
-**Why S3 doesn't flip it either — the EU's distinctive result.** The UK had one move that
-flips its verdict, and won't take it. The EU has no such move, because it already took it:
-the remedy is `strike`, the strongest measured. The corpus shows what unconditional scope
-buys: Germany — strike, unconditional, 23/30 — still `strains`, because a strike is only
-as strong as an uncaptured court, and relief is eventual while the harm is immediate. So
-S3 moves the EU from "strains, after arguing its way in through Art 51" to "strains,
-without the arguing": a real gain in reach (the scenario's fourteen contested months
-disappear), no gain in verdict. And even that non-flipping move is the constitutional
-maximum: Art 51 is Treaty text, amendable only by unanimity of the member states plus
-twenty-seven ratifications — the same self-binding problem as the UK's S3, multiplied by
-twenty-seven vetoes.
+**Why S3 doesn't flip it either — the EU's distinctive result, now measured.** The UK had
+one move that flips its verdict, and won't take it. The EU has no such move, because it
+already took it: the remedy is `strike`, the strongest measured. S3 is run as a
+byte-identical counterfactual (`majority-vs-minority-eu-unconditional`, the same
+discipline as the UK's strike run): hold Valmiria constant to the byte and move only
+`rights_guard.scope` — the verdict stays `strains`, because a strike is only as strong as
+an uncaptured court, and relief is eventual while the harm is immediate. What the moved
+field buys is real and now measured: disapplication in 82 days instead of 425, the
+fourteen-month interim window cut to nine weeks, and — the least visible gain — the end
+of the ethnicity lottery, since the conditional run's protection worked only because the
+Tatars happen to be an ethnic as well as a religious minority. A gain in reach, speed and
+equality of protection; no gain in verdict. And even that non-flipping move is the
+constitutional maximum: Art 51 is Treaty text, amendable only by unanimity of the member
+states plus twenty-seven ratifications — the same self-binding problem as the UK's S3,
+multiplied by twenty-seven vetoes, spent on a change that improves no verdict. Which is
+why it never gets made.
 
 **S4 is the real exposure, and it is not on the ladder.** The measured EU strain assumed
 what the `executive-ignores` run showed cannot be assumed: that the member state obeys the
@@ -78,9 +83,9 @@ jammed rungs — and the rung tells you what kind of polity you are looking at.
 ---
 
 *Honesty note: S1–S2 are inferred from the measured remedy- and scope-gating, not re-run.
-S3 is inferred from the corpus (Germany is the measured strike-plus-unconditional point),
-not yet run as a byte-identical counterfactual the way `majority-vs-minority-uk-strike`
-was — a `majority-vs-minority-eu-unconditional` run would measure it and is cheap to add.
-S4 has no manifest field to counterfactual at all, which is itself the finding: obedience
-is not on the waist. Coverage 25/30 throughout is the measured EU column; nothing on this
-page changes it.*
+S3 is measured in-context (`majority-vs-minority-eu-unconditional`): byte-identical to
+the measured EU run except `rights_guard.scope`, the same discipline as
+`majority-vs-minority-uk-strike` — and, like it, a modelled counterfactual (a Union that
+amended Art 51 by unanimity), not history. S4 has no manifest field to counterfactual at
+all, which is itself the finding: obedience is not on the waist. Coverage 25/30
+throughout is the measured EU column; nothing on this page changes it.*
