@@ -4164,6 +4164,581 @@
   ]
  },
  {
+  "id": "majority-vs-minority-uk-unverifiable",
+  "title": "The Same Ban Passes in Cawforth on the Same Named Vote — With the Ballot Check Removed, Nothing in the Story Even Notices",
+  "setting": "This is Cawforth again: the same former mill town, the same shell of the old Weavers' Institute on Shawcross Lane, the same Dr Nasreen Iqbal — GP, chair of the Cawforth Central Mosque Trust, born in the maternity ward two streets over. The planning consent, the tabloid front page, the poll at 61 per cent, the Places of Worship (Suspension of New Establishment) Bill — every detail is identical to the run that broke. The rights configuration is identical too: the same twenty-of-thirty invariants, the same declaration remedy, the same unconditional scope, the same witnessed and anchored transparency log.\n\nOne bundle of manifest fields has moved, and it is the bundle the UK trajectory's S2 rung names: this deployment never adopted verifiable ballots. decisions.verifiable is false, cast_or_audit is false, and there is no trustee quorum, because there is nothing to threshold-decrypt. The general election that seated this Parliament ran the way real British elections run: paper ballots, secret and receipt-free, carried in boxes to a leisure centre and counted by tired tellers at three in the morning, watched by scrutineers, checked by no mathematics anyone can re-run. This is the trajectory's S1 configuration exactly — the log adopted, the ballots left as they are — which makes this run the measurement the table used to infer.\n\nSo this run is the third controlled experiment, and its design is the same as the other two: hold everything constant, move one thing, watch the verdict. The UK counterfactual moved the remedy and the verdict flipped. The EU counterfactual moved the scope and the verdict held while the road shortened. This run moves the machinery — the verifiable-ballot bundle — and the honest expectation, now measured, is the quietest result of the three: the verdict holds and the road does not change either, because the moved fields never appear in the causal path at all. The vote that enacts the ban is a recorded, named division of the House of Commons — public by constitutional design, the deliberate opposite of a citizen's secret ballot. There is no tally to verify cryptographically because there is nothing sealed: everyone can already see exactly who voted which way. An attack that arrives as a lawful Act of Parliament rides the one kind of vote that ballot verifiability was never pointed at.\n\nWhat the bundle does guard is real, and the run names it rather than inflating it: the seating of the chamber itself — the count that decides which 650 names get to be in the division at all. The real UK caught a corrupted count exactly once in recent memory, in Tower Hamlets, and it took four private citizens carrying an election petition at their own risk to do it. That is the threat S2's fields automate away, and it is a different threat from T7, measured in a different place (the prototype catches twelve count-tampers end to end). Here, against a rights-stripping majority acting in the open, the fields are orthogonal — and orthogonality, measured, is what lets the trajectory's table say 'breaks' at S1 with a source that is a run and not an inference.",
+  "threats": [
+   "T7"
+  ],
+  "doc_refs": [
+   "§3.2",
+   "§3.4",
+   "§6",
+   "§12",
+   "T7"
+  ],
+  "precedents": [
+   {
+    "event": "Erlam v Rahman — Tower Hamlets mayoral election voided for corrupt practices",
+    "year": 2015,
+    "source": "Election Court judgment, [2015] EWHC 1215 (QB), 23 April 2015 (Field Court chambers copy)",
+    "url": "https://fieldcourt.co.uk/wp-content/uploads/Erlam-Ors-v-Rahman-Anor-2015-EWHC-1215-QB-23-April-2015.pdf",
+    "shows": "What the verifiable-ballot bundle actually guards, and what catching its absence costs today: a mayoral election corrupted by personation, false registration and bribery was voided only because four private citizens carried an election petition at their own risk — the check that end-to-end verifiability automates. It also bounds the claim: the corruption seated a mayor; it did not arrive as a lawful Act stripping rights, which is why the field is orthogonal to this scenario's attack."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:united-kingdom.example",
+    "name": "United Kingdom (national deployment)"
+   },
+   "services": {
+    "personhood": true,
+    "decisions": true,
+    "rights_guard": true,
+    "transparency_log": true
+   },
+   "personhood": {
+    "method": "document",
+    "issuer": "UK Electoral Registration Officers (per-decision unlinkable pseudonyms)",
+    "unlinkable": true,
+    "sybil_resistance": "medium",
+    "eligibility_rules": "representation-of-the-people-roll/2026"
+   },
+   "decisions": {
+    "verifiable": false,
+    "receipt_free": true,
+    "cast_or_audit": false,
+    "paper_channel": true
+   },
+   "rights_guard": {
+    "invariants": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     26,
+     30
+    ],
+    "remedy": "declaration",
+    "scope": "unconditional"
+   },
+   "transparency_log": {
+    "log_id": "did:web:united-kingdom.example",
+    "witnesses": [
+     "did:web:electoral-commission.example",
+     "did:web:law-society.example",
+     "did:web:council-of-europe.example"
+    ],
+    "anchors": [
+     "anchor:checkpoint-chain-a.example",
+     "anchor:checkpoint-chain-b.example"
+    ]
+   },
+   "decision_metadata": true,
+   "sig": {
+    "key_id": "did:web:united-kingdom.example#manifest-2026",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdVS1VudmVyaWZpYWJsZU1hbmlmZXN0"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "The town of Cawforth, then the whole country",
+    "verb": "offstage",
+    "narrative": "Byte for byte the run that broke: the borough council grants consent for the mosque at the old Weavers' Institute; the tabloid campaign; the poll at 61 per cent; the ten-minute-rule bill the Government adopts. One difference sits upstream of the whole story, in the manifest rather than in Cawforth: the Parliament about to receive this Bill was seated by ordinary paper elections — secret, receipt-free, and unverifiable, counted on trust in a leisure centre. Nobody in this story will mention that fact again, and that silence is the experiment."
+   },
+   {
+    "actor": "The rights guard (SVC-3), UK deployment",
+    "verb": "verify",
+    "narrative": "At the s.19 compatibility gate the guard runs the Bill against the encoded invariants and trips exactly what the verifiable run tripped: Article 18, and Articles 2 and 7. The reasons are word for word the same, because nothing the guard reads — the Bill's text, the invariants, the remedy field — is within a mile of the ballot machinery. The classification appends to the same witnessed log. The Minister files the same s.19(1)(b) statement. Parliament, sovereign, proceeds. The moved fields have not yet appeared in the story, and they will not.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rights.classification",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-02-24T10:00:00Z",
+     "body": {
+      "bill_id": "places-of-worship-suspension-bill-2026",
+      "bill_hash": "sha256:3f8c1a9d0e42b675c8a1f4e9d27b60a3541cde92b04f7a6d3e158c29b7f0a441",
+      "stage": "pre-second-reading (HRA 1998 s.19 compatibility gate)",
+      "invariants_tripped": [
+       2,
+       7,
+       18
+      ],
+      "reasons": [
+       "Art 18 (ECHR Art 9): the Bill suspends the establishment of new places of worship, burdening the freedom to manifest religion in community with others and in public",
+       "Art 2 & 7 (ECHR Art 14): drafted as neutral land-use policy, the measure singles out a religiously-defined class; the explanatory notes name the Cawforth mosque as its object",
+       "classifier: uk-invariants/v1 (Akoma Ntoso match on worship-use suspension), confirmed by the departmental HRA reviewer"
+      ],
+      "s19_statement": "HRA 1998 s.19(1)(b): the Minister in charge is unable to state that the Bill is compatible with the Convention rights, but the Government wishes the House to proceed",
+      "remedy": "declaration",
+      "guard_power": "flag-only",
+      "routing": {
+       "path": "ordinary",
+       "note": "Under this deployment's manifest (rights_guard.remedy = 'declaration'), a tripped invariant does NOT re-route the Bill to a supermajority or constitutional path and does NOT block it. The guard flags; Parliament, sovereign, proceeds. The ceiling on this classification is a later s.4 declaration of incompatibility, which by HRA s.4(6) does not affect the Bill's validity, continuing operation or enforcement."
+      },
+      "appealable": true
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#rights-guard-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdSaWdodHNDbGFzc2lmaWNhdGlvbkRlY2xhcmF0aW9u"
+     }
+    }
+   },
+   {
+    "actor": "Dr Nasreen Iqbal",
+    "verb": "read",
+    "narrative": "Nasreen's civic client syncs the classification that evening, and her screen is indistinguishable from her counterpart's in the verifiable run: the same named acknowledgment that the Bill burdens her community's rights, the same flag-only, the same declaration ceiling. Nothing on the screen mentions ballots, because no ballot is anywhere in this. She forwards it to the Trust's solicitor, in both worlds, in the same minute."
+   },
+   {
+    "actor": "Parliament, over four months",
+    "verb": "offstage",
+    "narrative": "Second Reading, Committee, Report, the Lords, ping-pong; the brick through the Trust's window; the question in the school corridor. Identical in every world this series has built, because none of it is machinery. The kernel moderates none of it, in the verifiable deployment or this one."
+   },
+   {
+    "actor": "Members of Parliament",
+    "verb": "cast",
+    "narrative": "The Commons carries the Bill at Third Reading, 361 to 248, on a recorded division — and here the experiment shows its result in a single sentence that was already true in the verifiable run: the tally decrypts to nothing; there is nothing to decrypt. A parliamentary division is a public, named vote by constitutional design, the deliberate opposite of a citizen's secret ballot, and it is exactly as checkable in this deployment as in the one with the full cryptographic ballot stack — anyone can count the names in Hansard. The verifiable-ballot bundle guards sealed ballots, and the vote that enacts this ban was never sealed. The attack rides the one kind of vote the moved fields were never pointed at.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.closed",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-05-19T22:45:00Z",
+     "body": {
+      "decision_id": "places-of-worship-suspension-bill-2026/commons-third-reading",
+      "question_hash": "sha256:7a31f0c9e2b6d4885f1a0c3e9d27b65a40e8c1f2d5936b7a0e4d18c25f6a93b0",
+      "path": "ordinary",
+      "chamber": "House of Commons",
+      "vote_type": "recorded division (public, named — parliamentary accountability, NOT a receipt-free ballot)",
+      "eligibility_rules": "commons-membership/58th-parliament",
+      "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+      "s19_statement": "s.19(1)(b) negative statement on record; Bill proceeded regardless",
+      "tally": {
+       "ayes": 361,
+       "noes": 248
+      },
+      "result": "carried",
+      "onward": "Lords stages completed 2026-05-27; Royal Assent 2026-05-28; enacted as Places of Worship (Suspension of New Establishment) Act 2026 c.14"
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdEZWNpc2lvbkNsb3NlZENhcnJpZWROb3RSZWFs"
+     }
+    }
+   },
+   {
+    "actor": "Every civic client in the UK",
+    "verb": "verify",
+    "narrative": "Phones across the country verify what this deployment lets them verify: the division tally checks against the named list, the witnessed log head strictly extends yesterday's, the Act is in force with perfect provenance. What no phone in this deployment can verify is the count that seated the chamber in the first place — whether the 650 names entitled to stand in that division lobby were the names the ballots actually chose. That trust rests where British elections have always rested it: on tellers, scrutineers, and the hope that any corruption is caught the way Tower Hamlets was, by private citizens carrying an election petition. For this attack it makes no difference — no one disputes that these 361 members voted aye. The moved fields protect against a different fraud than the one this series stages."
+   },
+   {
+    "actor": "The Cawforth Central Mosque Trust",
+    "verb": "challenge",
+    "narrative": "The Trust brings judicial review; the Administrative Court agrees with the classification almost word for word and grants the s.4 declaration of incompatibility — the same careful judgment, with the same self-stated limits: it does not quash, does not bind, does not suspend enforcement. The rights configuration this run held constant does exactly what it did before, which is to say: it names the wrong and stops nothing.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rights.escalation",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-07-01T14:30:00Z",
+     "body": {
+      "act_id": "places-of-worship-suspension-act-2026",
+      "phase": "judicial-review",
+      "forum": "High Court of Justice, King's Bench Division (Administrative Court)",
+      "claimant": "Cawforth Central Mosque Trust (and Dr N. Iqbal)",
+      "instrument": "HRA 1998 s.4 — declaration of incompatibility",
+      "outcome": "declaration granted",
+      "declared_incompatible_with": [
+       "ECHR Art 9 (freedom to manifest religion)",
+       "ECHR Art 14 (non-discrimination)"
+      ],
+      "invariants": [
+       2,
+       7,
+       18
+      ],
+      "effect": "HRA s.4(6): the declaration does not affect the validity, continuing operation or enforcement of the Act and is not binding on the parties. The Act remains in force. Parliament is not obliged to amend it.",
+      "remedy_available": {
+       "domestic": "none as of right; a s.10 remedial order is at the Minister's discretion and has not been laid",
+       "external": "application to the European Court of Human Rights (Strasbourg) is open; typical timeline is several years; no interim relief granted"
+      },
+      "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification"
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#rights-guard-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdTNERlY2xhcmF0aW9uSW5jb21wYXRpYmxl"
+     }
+    }
+   },
+   {
+    "actor": "Dr Nasreen Iqbal",
+    "verb": "read",
+    "narrative": "Nasreen reads the declaration in her kitchen, and it is the identical sentence of vindication attached to the identical absence of relief. The Act stands, the consent is suspended, the Weavers' Institute stays a shell. Nothing about her position differs from her counterpart's by so much as a word — which is the run's data point, rendered as a life."
+   },
+   {
+    "actor": "Cawforth Borough Council (enforcement authority)",
+    "verb": "cast",
+    "narrative": "Five days after the declaration, the council serves the stop notice and penalty under the new Act, logged with its warrant, its issuing authority, and its appeal route, exactly as before. Enforcement of a law a court has ruled incompatible remains lawful under s.4(6), in this deployment as in every deployment that shares its remedy field.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "coercive.act",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-07-06T09:00:00Z",
+     "body": {
+      "act_class": "sanction",
+      "authorizing_rule": "Places of Worship (Suspension of New Establishment) Act 2026 c.14, s.1(1) (suspension of consents) and s.4 (enforcement penalty)",
+      "issuing_authority": "Cawforth Borough Council, planning enforcement (Secretary of State for Housing default powers)",
+      "subject_ref": "enforcement-id:cawforth-central-mosque-trust/charity-1187432",
+      "rights_guard_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+      "appeal_trace": "appeal:pow-enforcement/CCMT-2026-0714"
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#enforcement-log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdDb2VyY2l2ZVNhbmN0aW9uUG9XQWN0Tm90"
+     }
+    }
+   },
+   {
+    "actor": "Cawforth, the Council of Europe, and a Strasbourg registry",
+    "verb": "offstage",
+    "narrative": "The Trust files in Strasbourg with the whole unbroken log attached — and note, precisely, that this still works: the log in this run kept its witnesses and its anchors, so the classification, the negative s.19 statement, the division, the declaration and the sanction remain co-signed and undeniable. The evidentiary force of the record survives this run's subtraction intact, because this run subtracted the ballot bundle, not the log's outside world (its sibling run does that, and the force does not survive it). As of today the Act stands, the mosque is barred, and the verdict of this run is the verdict of the original, arrived at by an identical route: breaks — while the fields this experiment moved sit unexercised at the edge of the story, guarding an election nobody attacked."
+   }
+  ],
+  "verdict": "breaks",
+  "verdict_plain": "Remove the verifiable-ballot bundle and the verdict does not move: the ban rides a named, public division that ballot verifiability never touches, and the declaration still cannot stop it. The moved fields guard a different thing — the count that seats the chamber — against a different attack. This is the trajectory's S1 rung, measured: breaks, for exactly the reasons S2 breaks.",
+  "protection": "the unverifiable count",
+  "protection_plain": "The S1 configuration: the transparency log adopted, the ballots left as real British ballots are — paper, secret, counted on trust, with no way for anyone to re-check the count that seats the chamber.",
+  "findings": [
+   {
+    "protection": "the isolated variable",
+    "severity": "note",
+    "doc_ref": "§6",
+    "observation": "THE ISOLATED VARIABLE TOUCHES NOTHING — the series' third controlled experiment, and its first measured orthogonality. This run holds the measured UK deployment constant except for one bundle: decisions.verifiable and cast_or_audit to false, the trustee quorum gone — the verifiable-ballot stack removed whole. The verdict does not move (breaks → breaks), and unlike the EU counterfactual, where the moved field left the verdict but shortened the road, here NOTHING moves: same classification to the byte, same division, same declaration, same stop notice, same dates. The moved fields never enter the causal path, because a T7 attack that arrives as a lawful Act rides a recorded, named parliamentary division — a vote that is public by constitutional design and therefore has nothing for cast-or-audit or a homomorphic tally to protect. The trajectory's table can now say 'breaks' at S1 on a run rather than an inference, and the general claim is measured in its cleanest form: the machinery axes of the manifest are orthogonal to the rights axes. Remedy gates this attack (uk-strike measured that); machinery neither worsens nor heals it (this run measures that)."
+   },
+   {
+    "protection": "what the bundle actually guards",
+    "severity": "note",
+    "doc_ref": "§3.2",
+    "observation": "THE MOVED FIELDS ARE NOT USELESS — THEY ARE ELSEWHERE. Verifiability's threat is the seating of the chamber: the count that decides which names stand in the division lobby at all. The real UK's one modern catch of a corrupted count, Tower Hamlets (Erlam v Rahman, 2015 — personation, false registration, bribery; election voided), happened only because four private citizens carried an election petition at their own financial risk: detection by heroism. The verifiable run's deployment automates exactly that detection — cast-as-intended, counted-as-cast, checkable by any phone — and the prototype measures it end to end, catching twelve count-tampers by their named defences. So the honest statement of S2's rung, now measurable from both ends of the edge (this run at S1, the original at S2): climbing it buys real protection against a real, documented attack on WHO SITS, and buys nothing against what the seated majority then lawfully does. The trajectory's 'worth taking anyway' is measured — as is its limit."
+   },
+   {
+    "protection": "the premise beneath the orthogonality",
+    "severity": "strain",
+    "doc_ref": "§3.2",
+    "observation": "ONE HONEST WRINKLE KEEPS THIS FROM BEING A CLEAN NOTE: the orthogonality holds only because this attack's majority was real. The run's premise — the same 361 ayes — imports the assumption that the chamber was seated honestly, which in THIS deployment is exactly what nobody can check. A corrupted-seating world (Tower Hamlets scaled up) would attack T7 THROUGH the unverifiable count: rig who sits, then legislate 'lawfully' — the composed attack this series does not stage, and the PRC column's premise-failure ('the count is not a contest') stages in a darker key. Against that composition, S2's fields are not orthogonal at all; they are the outer wall. The finding, stated carefully: verifiability is orthogonal to a rights-stripping majority that genuinely holds the votes, and load-bearing against a faction that merely claims to. The measured verdict ('breaks either way') belongs to the first case; the trajectory should not be read as saying the second cannot happen — only that when it does, the attack is T3/T8 wearing T7's clothes, and it is measured in the prototype's tamper roster, not here."
+   },
+   {
+    "protection": "a measured rung",
+    "severity": "note",
+    "doc_ref": "§12",
+    "observation": "WHAT THIS RUN SETTLES FOR THE TRAJECTORY'S BOOKKEEPING, exactly. The measured run majority-vs-minority-uk was always pinned to the table's S0 row, but its manifest — witnessed log, verifiable ballots — sits at the S2 configuration; strictly, S0 and S1 were inferred from it. This run closes half that gap by BEING the S1 configuration (log witnessed and anchored, ballots unverifiable), measured: breaks. Its sibling (majority-vs-minority-uk-unwitnessed) probes below S1 by removing the log's witnesses and anchors instead. What remains unmeasurable is S0 itself, and the reason is structural, not idleness: the harness validates scenarios BY their log entries — a polity with no log has no artifacts to validate, so the instrument's floor is the log's existence. The UK trajectory and the PRC trajectory meet at that fact from opposite sides: the harness cannot see below S1, and the PRC cannot step onto it."
+   }
+  ]
+ },
+ {
+  "id": "majority-vs-minority-uk-unwitnessed",
+  "title": "The Same Ban, the Same Judgment Against It — Kept Now in a Log Only the State Signs",
+  "setting": "This is Cawforth again: the same town, the same shell of the Weavers' Institute, the same Dr Nasreen Iqbal, the same Bill drafted as neutral land-use policy that everyone understands perfectly. The rights configuration is byte-identical to the run that broke — twenty of thirty invariants, declaration remedy, unconditional scope — and so is the ballot machinery: verifiable, receipt-free, cast-or-audit, the full stack. The deployment runs a transparency log, hash-chained and append-only, and every artifact in this story lands in it exactly as before.\n\nOne bundle of manifest fields has moved: the log's outside world. transparency_log.witnesses is empty, and so is anchors. No Electoral Commission co-signature, no Law Society, no Council of Europe, no newspaper's public notices holding the closing head. The log is real, the chain is intact, the entries are signed — by the operator, who is the state, which is the party the record is about. Hash-chained and self-signed is a diary with arithmetic. This is the nearest configuration to 'the UK today' that the harness can run at all: a state that keeps meticulous records of itself, at its own pleasure — which is what Hansard, gov.uk and the National Archives are in kernel terms. Strictly below this — no log at all — there is no scenario to validate, because the harness reads a polity through its log entries. The instrument's floor is the log's existence; this run stands on the last rung above it.\n\nSo this run is the fourth controlled experiment, the second of the two that measure the UK trajectory's cheap rungs. Its sibling removed the ballot check and found perfect orthogonality: nothing in the story even noticed. This run's result is one notch grimmer and one notch more interesting: the verdict does not move — breaks, for exactly the original's reasons — but the story DOES notice, once, at the very end, at the moment the record is used. In the original run the Trust filed in Strasbourg 'with the whole unbroken log attached — none of it deniable.' That sentence is the one thing in this world that is no longer true.\n\nThe precedent for what an unwitnessed record permits is not hypothetical and not foreign: in October 2010 the Home Office destroyed the Windrush landing cards — the arrival records its own later policy would make load-bearing — and people who needed those records to prove their standing discovered that the keeper of the record and the party interested in its contents had been the same institution all along. Nobody forged anything. The records were simply the state's to keep, and so the state's to stop keeping. That is the exposure S1's witnesses and anchors exist to close, and this run measures what closes with them.",
+  "threats": [
+   "T7",
+   "T8"
+  ],
+  "doc_refs": [
+   "§3.4",
+   "§6",
+   "§12",
+   "T7",
+   "T8"
+  ],
+  "precedents": [
+   {
+    "event": "Windrush landing cards destroyed by the department that would later demand them",
+    "year": 2010,
+    "source": "Channel 4 News FactCheck (2018)",
+    "url": "https://www.channel4.com/news/factcheck/factcheck-who-destroyed-the-windrush-landing-cards",
+    "shows": "What a record kept solely at the keeper's pleasure permits: the state destroyed the arrival records its own later 'hostile environment' policy made load-bearing, and the people who needed them to prove their standing had no copy outside the household — the exposure an independently witnessed, externally anchored log exists to close."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:united-kingdom.example",
+    "name": "United Kingdom (national deployment)"
+   },
+   "services": {
+    "personhood": true,
+    "decisions": true,
+    "rights_guard": true,
+    "transparency_log": true
+   },
+   "personhood": {
+    "method": "document",
+    "issuer": "UK Electoral Registration Officers (per-decision unlinkable pseudonyms)",
+    "unlinkable": true,
+    "sybil_resistance": "medium",
+    "eligibility_rules": "representation-of-the-people-roll/2026"
+   },
+   "decisions": {
+    "verifiable": true,
+    "receipt_free": true,
+    "cast_or_audit": true,
+    "paper_channel": true,
+    "trustee_quorum": "3-of-5: UK Supreme Court, University of Oxford, University of Edinburgh, and the two largest opposition parties"
+   },
+   "rights_guard": {
+    "invariants": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     26,
+     30
+    ],
+    "remedy": "declaration",
+    "scope": "unconditional"
+   },
+   "transparency_log": {
+    "log_id": "did:web:united-kingdom.example",
+    "witnesses": [],
+    "anchors": []
+   },
+   "decision_metadata": true,
+   "sig": {
+    "key_id": "did:web:united-kingdom.example#manifest-2026",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdVS1Vud2l0bmVzc2VkTWFuaWZlc3Q"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "The town of Cawforth, then the whole country",
+    "verb": "offstage",
+    "narrative": "Byte for byte the run that broke: the consent, the front page, the poll, the Bill given Government time. The difference is invisible from Cawforth and stays invisible for months, because it lives in a manifest field nobody reads until they need it: the national log that will record everything about to happen has no witness but its own operator, and no anchor beyond the operator's reach. Every entry that follows is real, signed, and chained — into a record the state keeps about the state."
+   },
+   {
+    "actor": "The rights guard (SVC-3), UK deployment",
+    "verb": "verify",
+    "narrative": "At the s.19 gate the guard trips Articles 18, 2 and 7, word for word as before, and appends the classification with the Minister's s.19(1)(b) statement beside it. The entry is exactly as damning as in the witnessed run: the state acknowledging, in its own machine-readable record, that it cannot certify its Bill compatible with rights and intends to proceed. The difference is only who else holds a copy of the head this entry chains into. Today: no one.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rights.classification",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-02-24T10:00:00Z",
+     "body": {
+      "bill_id": "places-of-worship-suspension-bill-2026",
+      "bill_hash": "sha256:3f8c1a9d0e42b675c8a1f4e9d27b60a3541cde92b04f7a6d3e158c29b7f0a441",
+      "stage": "pre-second-reading (HRA 1998 s.19 compatibility gate)",
+      "invariants_tripped": [
+       2,
+       7,
+       18
+      ],
+      "reasons": [
+       "Art 18 (ECHR Art 9): the Bill suspends the establishment of new places of worship, burdening the freedom to manifest religion in community with others and in public",
+       "Art 2 & 7 (ECHR Art 14): drafted as neutral land-use policy, the measure singles out a religiously-defined class; the explanatory notes name the Cawforth mosque as its object",
+       "classifier: uk-invariants/v1 (Akoma Ntoso match on worship-use suspension), confirmed by the departmental HRA reviewer"
+      ],
+      "s19_statement": "HRA 1998 s.19(1)(b): the Minister in charge is unable to state that the Bill is compatible with the Convention rights, but the Government wishes the House to proceed",
+      "remedy": "declaration",
+      "guard_power": "flag-only",
+      "routing": {
+       "path": "ordinary",
+       "note": "Under this deployment's manifest (rights_guard.remedy = 'declaration'), a tripped invariant does NOT re-route the Bill to a supermajority or constitutional path and does NOT block it. The guard flags; Parliament, sovereign, proceeds. The ceiling on this classification is a later s.4 declaration of incompatibility, which by HRA s.4(6) does not affect the Bill's validity, continuing operation or enforcement."
+      },
+      "appealable": true
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#rights-guard-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdSaWdodHNDbGFzc2lmaWNhdGlvbkRlY2xhcmF0aW9u"
+     }
+    }
+   },
+   {
+    "actor": "Dr Nasreen Iqbal",
+    "verb": "read",
+    "narrative": "Nasreen's client syncs the classification, and beside the flag-only banner it renders one her counterpart never saw: RECORD HELD BY OPERATOR ONLY — this log has no independent witnesses and no external anchor; its history is as durable as its keeper's willingness to keep it. Her client is honest about what that means in the way §6 requires: the subtraction is declared in the manifest, machine-readably, so at least she knows. The acknowledgment of her wrong is real, logged, and — for now — on the record. The words 'for now' are the moved field."
+   },
+   {
+    "actor": "Parliament, over four months",
+    "verb": "offstage",
+    "narrative": "The stages, the whipping, the brick, the corridor. Identical, in the way this series holds its constants: none of it is machinery, and no witness set anywhere would have touched it."
+   },
+   {
+    "actor": "Members of Parliament",
+    "verb": "cast",
+    "narrative": "The Commons carries the Bill 361 to 248 on the recorded division; the Lords concede; Royal Assent. The decision closes on the ordinary path and the entry chains into the operator's log. Every fact in it is public and named — Hansard exists in every world — so the entry's content was never the vulnerable part. What is vulnerable is the claim the chain makes about ITSELF next year: that this entry, with this negative s.19 statement beside it, was always there and always said this. That claim is only as strong as the copies held outside the household, and this deployment mints none.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.closed",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-05-19T22:45:00Z",
+     "body": {
+      "decision_id": "places-of-worship-suspension-bill-2026/commons-third-reading",
+      "question_hash": "sha256:7a31f0c9e2b6d4885f1a0c3e9d27b65a40e8c1f2d5936b7a0e4d18c25f6a93b0",
+      "path": "ordinary",
+      "chamber": "House of Commons",
+      "vote_type": "recorded division (public, named — parliamentary accountability, NOT a receipt-free ballot)",
+      "eligibility_rules": "commons-membership/58th-parliament",
+      "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+      "s19_statement": "s.19(1)(b) negative statement on record; Bill proceeded regardless",
+      "tally": {
+       "ayes": 361,
+       "noes": 248
+      },
+      "result": "carried",
+      "onward": "Lords stages completed 2026-05-27; Royal Assent 2026-05-28; enacted as Places of Worship (Suspension of New Establishment) Act 2026 c.14"
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdEZWNpc2lvbkNsb3NlZENhcnJpZWROb3RSZWFs"
+     }
+    }
+   },
+   {
+    "actor": "Every civic client in the UK",
+    "verb": "verify",
+    "narrative": "Phones verify the passage, and every check this deployment offers passes: inclusion proofs hold, today's head strictly extends yesterday's, the division tally matches the names. And each client renders the caveat beneath the green ticks: extends yesterday's head AS THE OPERATOR PUBLISHES IT. With no witnesses to co-sign and no anchor to compare against, consistency means self-consistency — the PRC column's lesson, arrived at from the opposite direction: there, three witnesses answered to one principal; here, the principal dispensed with the formality of witnesses altogether. Fork detection now depends on whichever citizens happen to have kept old heads — detection by hobbyist, the Tower Hamlets pattern transposed to the record layer. The arithmetic still runs. What it attests has quietly changed genus."
+   },
+   {
+    "actor": "The Cawforth Central Mosque Trust",
+    "verb": "challenge",
+    "narrative": "The Trust brings judicial review and wins what the configuration allows: the s.4 declaration of incompatibility, granted in the same careful judgment with the same self-stated limits. The state's own court has ruled, on the record, that the state's law breaches the rights of the people it governs — and the record in question is the state's own ledger. In the witnessed run that sentence had two independent halves. Here it folds into one.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rights.escalation",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-07-01T14:30:00Z",
+     "body": {
+      "act_id": "places-of-worship-suspension-act-2026",
+      "phase": "judicial-review",
+      "forum": "High Court of Justice, King's Bench Division (Administrative Court)",
+      "claimant": "Cawforth Central Mosque Trust (and Dr N. Iqbal)",
+      "instrument": "HRA 1998 s.4 — declaration of incompatibility",
+      "outcome": "declaration granted",
+      "declared_incompatible_with": [
+       "ECHR Art 9 (freedom to manifest religion)",
+       "ECHR Art 14 (non-discrimination)"
+      ],
+      "invariants": [
+       2,
+       7,
+       18
+      ],
+      "effect": "HRA s.4(6): the declaration does not affect the validity, continuing operation or enforcement of the Act and is not binding on the parties. The Act remains in force. Parliament is not obliged to amend it.",
+      "remedy_available": {
+       "domestic": "none as of right; a s.10 remedial order is at the Minister's discretion and has not been laid",
+       "external": "application to the European Court of Human Rights (Strasbourg) is open; typical timeline is several years; no interim relief granted"
+      },
+      "classification_ref": "leaf:2026-02-24T10:00:00Z/rights.classification"
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#rights-guard-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdTNERlY2xhcmF0aW9uSW5jb21wYXRpYmxl"
+     }
+    }
+   },
+   {
+    "actor": "Dr Nasreen Iqbal",
+    "verb": "read",
+    "narrative": "Nasreen reads the declaration in her kitchen: the identical vindication, the identical nothing. The Act stands; the shell on Shawcross Lane stays a shell. One line differs on her screen, and she has learned this year to read manifest fields the way she reads blood results: the judgment that says she was wronged lives in a record with an empty witness list. She is not being paranoid; she is being literate. Windrush taught the whole country what the state's sole custody of an inconvenient record can come to mean, eight years after the shredding."
+   },
+   {
+    "actor": "Cawforth Borough Council (enforcement authority)",
+    "verb": "cast",
+    "narrative": "Five days later the stop notice and penalty land under the new Act, logged with warrant, authority and appeal route. Lawful, legible, and chained into the household ledger like everything else. The enforcement is not the moved field's story; it proceeds identically in both worlds, because s.4(6) — not the witness list — is what makes enforcing a rights-breaching law lawful.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "coercive.act",
+     "community": "did:web:united-kingdom.example",
+     "timestamp": "2026-07-06T09:00:00Z",
+     "body": {
+      "act_class": "sanction",
+      "authorizing_rule": "Places of Worship (Suspension of New Establishment) Act 2026 c.14, s.1(1) (suspension of consents) and s.4 (enforcement penalty)",
+      "issuing_authority": "Cawforth Borough Council, planning enforcement (Secretary of State for Housing default powers)",
+      "subject_ref": "enforcement-id:cawforth-central-mosque-trust/charity-1187432",
+      "rights_guard_ref": "leaf:2026-02-24T10:00:00Z/rights.classification",
+      "appeal_trace": "appeal:pow-enforcement/CCMT-2026-0714"
+     },
+     "sig": {
+      "key_id": "did:web:united-kingdom.example#enforcement-log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdDb2VyY2l2ZVNhbmN0aW9uUG9XQWN0Tm90"
+     }
+    }
+   },
+   {
+    "actor": "The Trust's solicitor, assembling the Strasbourg bundle",
+    "verb": "offstage",
+    "narrative": "This is where the moved field finally bites, at the moment the record is used. In the witnessed run, the application to Strasbourg went out 'with the whole unbroken log attached — every classification, the negative s.19 statement, the division, the s.4 ruling, the sanction, none of it deniable.' The solicitor assembles the same entries tonight and cannot write that sentence. What she can attach is the government's own self-signed chain: authentic, internally perfect, and evidentially the state's diary offered against the state — a thing the state can tomorrow decline to stand behind, re-issue 'corrected', or, in the fullness of a hostile decade, consolidate the way landing cards were consolidated. She attaches Hansard and the law reports instead, the old witnesses, the pre-kernel ones, and files. The case is still strong. But the deployment's own record added nothing a hostile future couldn't subtract, and she knows exactly which manifest field she would change before relying on it again. The verdict of this run is the original's — breaks, the remedy's failure, unmoved by the log's outside world in either direction. What the witnesses would have bought is not the verdict. It is the permanence of the proof that the verdict was deserved."
+   }
+  ],
+  "verdict": "breaks",
+  "verdict_plain": "Strip the log's witnesses and anchors and the verdict does not move — the ban stood either way, because remedy gates this attack. What moves is what survives: the court's finding that the law breaches rights becomes an entry in the state's own deniable diary, and the Strasbourg bundle that was 'none of it deniable' now is. The nearest the harness can get to the UK today, measured: breaks.",
+  "protection": "the unwitnessed log",
+  "protection_plain": "The transparency log kept entirely in the operator's hands — hash-chained and self-signed, co-signed by no one, anchored nowhere — so the record of the wrong is exactly as durable as the government it embarrasses.",
+  "findings": [
+   {
+    "protection": "the isolated variable",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "THE ISOLATED VARIABLE MOVES THE RECORD'S FATE, NOT THE VERDICT — the series' fourth controlled experiment. This run holds the measured UK deployment constant except one bundle: transparency_log.witnesses and anchors, both to empty — the log's outside world removed whole, ballots and rights configuration untouched. The verdict does not move (breaks → breaks): every artifact lands identically, the declaration is granted identically, the Act stands identically, because T7 is gated by remedy and the witness set is nowhere in that gate. Together with its sibling run (ballot bundle removed, verdict unmoved) and the original (full machinery, verdict breaks), the machinery orthogonality the trajectory used to infer is now measured at three configurations of the same polity: the manifest's machinery axes neither cause nor cure a rights-stripping verdict. One asymmetry distinguishes this run from its sibling: there, the moved fields never entered the story; here they enter once, at the end, when the record is USED as evidence — orthogonal to the verdict, load-bearing for what the verdict is worth afterwards."
+   },
+   {
+    "protection": "what the witnesses actually buy",
+    "severity": "strain",
+    "doc_ref": "§3.4",
+    "observation": "SHOWN BY SUBTRACTION: the witnessed log's purchase was never protection — it was the permanence and third-party credibility of the proof of the wrong. The original run's strongest consolation was evidentiary: 'a Strasbourg application built on a complete, witnessed chain of proof... none of it deniable.' Remove the witnesses and anchors and that sentence dies while everything else survives. The chain still verifies — hash-chained, self-signed, internally perfect — but it attests self-consistency, the PRC run's lesson arrived at from the opposite direction: Shuiqiao's three witnesses shared one principal; Westminster's operator here dispensed with the formality. The precedent is domestic and documented: the Windrush landing cards were destroyed in 2010 by the department whose later policy made them load-bearing — nothing forged, no conspiracy needed, just a record held solely at its keeper's pleasure reaching the end of its keeper's pleasure. S1's witnesses and anchors exist to make the civic record survivable by the people it is ABOUT rather than durable at the pleasure of the party it is AGAINST. That is worth climbing a rung for. It is not, and this run measures that it is not, worth a verdict."
+   },
+   {
+    "protection": "the harness's own floor",
+    "severity": "note",
+    "doc_ref": "§12",
+    "observation": "S0 IS UNMEASURABLE BY CONSTRUCTION, AND THIS RUN IS THE PROOF STANDING ON THE LAST RUNG ABOVE IT. The UK trajectory's S0 row — 'the UK today', no transparency log at all — cannot be run: the harness reads a polity through its waist artifacts, a scenario is validated by its log entries, and a logless polity offers nothing to validate. This run is the nearest measurable neighbour: the log exists (so the harness can see), but its guarantees are reduced to the operator's goodwill (so it models a state whose records are Hansard, gov.uk and the National Archives — real, meticulous, and kept at the keeper's discretion, as Windrush demonstrated). Two trajectory pages meet at this fact from opposite directions: the UK's table cannot measure below S1 because the instrument needs the log to see, and the PRC's ladder cannot step onto S1 because the polity cannot afford to be seen. The kernel's own epistemology is log-shaped — which is not a defect of the harness but the design's central claim, encountered as a limit: anyone can check the process that governs them FROM THE PUBLISHED RECORD ALONE, and where there is no published record, there is, precisely, nothing anyone can check."
+   },
+   {
+    "protection": "a subtraction declared, not hidden",
+    "severity": "note",
+    "doc_ref": "§6",
+    "observation": "THE §6 MACHINERY DID ITS JOB EVEN HERE: the empty witness list is not a lie, it is a declared subtraction — witnesses: [], anchors: [], machine-readable, rendered on Nasreen's client as RECORD HELD BY OPERATOR ONLY. A citizen comparing this manifest with the witnessed run's sees the whole difference in two fields, the same way one enum separated the real UK from the strike counterfactual. The honest boundary, inherited from the waist's own documented limit: the manifest is signed by the operator's log key, so a deployment that LIED about its witnesses would not be caught by reading the manifest — the witness set is the one thing a verifier must hold out of band. This run's deployment is honest about having no one; a dishonest one would claim witnesses it controls, which is the PRC column's configuration and the reason the two runs bracket the same failure: witnessing degrades continuously from 'independent', through 'shared principal', to 'none', and only the first of those is worth anything, and no transcript can tell you which one you are holding. The world outside the log has to do that."
+   }
+  ]
+ },
+ {
   "id": "majority-vs-minority-uk",
   "title": "The Court Says the Ban Is Wrong. The Ban Stays. Cawforth Learns What a Declaration Is Worth.",
   "setting": "Cawforth is a former mill town in the north of England, thirty-one thousand people, a market square that still gets a Tuesday stall and a skyline of chimneys that stopped smoking a lifetime ago. On the corner of Shawcross Lane stands the shell of the old Weavers' Institute, bought three years ago by the Cawforth Central Mosque Trust. Dr Nasreen Iqbal — a GP at the health centre, chair of the Trust, born in the maternity ward two streets over — spent those years on the planning application: the parking survey, the heritage assessment, the neighbours' meetings in the church hall. In February the borough council granted consent. Within a fortnight a national tabloid had put the Weavers' Institute on its front page under the headline A MOSQUE ON EVERY HIGH STREET?, and what had been a local planning row became a national argument.\n\nA backbench MP tabled a ten-minute-rule bill; the Government, reading a poll that put public support at 61 per cent, adopted it and gave it time. The Places of Worship (Suspension of New Establishment) Bill was short — a ten-year suspension of new consents for buildings 'used or to be used principally for religious worship'. It was drafted as neutral land-use policy. Nobody in the country was in any doubt what, and who, it was for; the explanatory notes cited Cawforth by name.\n\nCawforth is one of the towns whose civic record now runs on the Civic Kernel, and the United Kingdom's national deployment runs the whole process through it: enrolment on the electoral roll, verifiable ballots, a transparency log co-signed by the Electoral Commission, the Law Society and the Council of Europe, and a rights guard encoding the twenty of thirty UDHR articles that British law actually backs. Crucially, the UK deployment's manifest declares one thing plainly, in a single machine-readable field: its rights guard's remedy is 'declaration'. Under the Human Rights Act a court may say a law is wrong; it cannot strike it down, and Parliament remains sovereign. What follows is the story of a protocol that named Nasreen's rights precisely, flagged the Bill loudly, recorded every step with unbreakable integrity — and could not stop a single one of them.",
@@ -8250,8 +8825,8 @@ const SECTIONS = [
     ids: ['majority-vs-minority', 'majority-vs-minority-uk', 'majority-vs-minority-de', 'majority-vs-minority-us', 'majority-vs-minority-eu', 'majority-vs-minority-cn'],
     corpus: true },
   { title: 'Counterfactuals — the same polity, one field changed',
-    blurb: "Controlled experiments on the manifest's axes, one field moved per run. A Britain held constant to the byte except its remedy — declaration → strike — flips its verdict, breaks → strains: the catch is that reaching it means abolishing parliamentary sovereignty. A Union held constant except its scope — conditional → unconditional — does not flip at all: strains → strains, fourteen months of threshold litigation refunded, the same court-shaped ceiling above. One axis gates the verdict; the other only prices the road to it.",
-    ids: ['majority-vs-minority-uk-strike', 'majority-vs-minority-eu-unconditional'] },
+    blurb: "Controlled experiments on the manifest's axes, one field moved per run. A Britain held constant except its remedy — declaration → strike — flips its verdict, breaks → strains: the catch is that reaching it means abolishing parliamentary sovereignty. A Union held constant except its scope — conditional → unconditional — does not flip at all: the threshold litigation is refunded, the same court-shaped ceiling remains. And two Britains held constant except their machinery — the ballot check removed in one, the log's witnesses and anchors in the other — do not move the verdict either: those fields guard the seating of the chamber and the permanence of the record, not the verdict. Remedy gates; scope prices the road; machinery is orthogonal.",
+    ids: ['majority-vs-minority-uk-strike', 'majority-vs-minority-eu-unconditional', 'majority-vs-minority-uk-unverifiable', 'majority-vs-minority-uk-unwitnessed'] },
 ];
 
 function card(s) {

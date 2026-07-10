@@ -208,8 +208,9 @@ research program, not a trained system.
   ([corpus](https://glassontin.github.io/civic-kernel/scenarios.html#corpus))
 - **The UK improvement path stalls at the remedy step**
   ([trajectory](docs/uk-trajectory.md)). The cheap, sovereignty-free moves — adopt the
-  log, verifiable ballots — are worth taking and don't flip the verdict; the one move
-  that flips it requires the sovereign to bind itself. Legibility ≠ availability ≠
+  log, verifiable ballots — are worth taking and don't flip the verdict (measured, not
+  inferred: three machinery configurations of the same polity, one verdict); the one
+  move that flips it requires the sovereign to bind itself. Legibility ≠ availability ≠
   movement.
 - **Three polities, three jammed rungs.** The EU path
   ([trajectory](docs/eu-trajectory.md)) has no verdict-flipping move at all: already at
@@ -254,13 +255,15 @@ research program, not a trained system.
   repaired by a silent recast. The repair decided it: an 8–6 win where the unrepaired
   ballot would have made it 7–7 — and what the cheating device actually encrypted stays
   sealed forever.
-- **21 scenarios**, each cross-validated against the waist schemas and each anchored to
-  documented real-world precedents (53 verified citations — the schema requires them: no
-  attack without a cited precedent): 16 strain, 4 break, 1 holds. The one hold is
+- **23 scenarios**, each cross-validated against the waist schemas and each anchored to
+  documented real-world precedents (55 verified citations — the schema requires them: no
+  attack without a cited precedent): 16 strain, 6 break, 1 holds. The one hold is
   `records-rewrite` — the log defeating tampering, the mechanism the design leans on
-  hardest. The four breaks are the named limits meeting unaccountable power: coercion
-  under live observation, an executive that ignores court orders, a remedy too weak to
-  stop a majority — and a remedy absent altogether, the ban reviewed by its author.
+  hardest. The breaks are four named limits meeting unaccountable power — coercion under
+  live observation, an executive that ignores court orders, a remedy too weak to stop a
+  majority, a remedy absent altogether — plus the UK break re-measured at two lower
+  machinery rungs (ballot check removed; witnesses removed), where it neither worsens
+  nor heals: machinery is orthogonal to remedy.
 
 </details>
 
