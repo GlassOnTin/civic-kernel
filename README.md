@@ -69,7 +69,9 @@ the club register, `witness` for the neighbouring societies, `trustee` for the
 key-holders, `anchor` for the newspaper, and `clubvote.py agm` for a committee left
 holding exactly one key, the log's: it publishes, gates and assembles, and can vouch
 for nothing by itself (the runbook is in [`proto/README.md`](proto/README.md)). What
-remains is not code: a real club, a real season, and what it teaches.
+remains is not code: a real club, a real season, and what it teaches. The invitation a
+club actually receives is drafted, in the open, honest limits included:
+[`docs/shadow-agm-invitation.md`](docs/shadow-agm-invitation.md).
 
 ## The words, in plain speech
 
