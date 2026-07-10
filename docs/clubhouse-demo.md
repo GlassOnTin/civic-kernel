@@ -19,8 +19,12 @@ quoted here.*
   ```sh
   git clone https://github.com/GlassOnTin/civic-kernel && cd civic-kernel
   pip install -r requirements.txt
-  ./proto/test.sh          # ~a minute; ALL GREEN = the demo will work
+  ./proto/test.sh          # one to three minutes; ALL GREEN = the demo will work
   ```
+
+  On newer systems `pip` may refuse with *externally-managed-environment*. Then:
+  `python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt`
+  — and keep that terminal (with the venv active) for all the demo commands.
 
 - **If the clubhouse has wifi:** use the live pages
   ([verifier](https://glassontin.github.io/civic-kernel/verifier.html),
@@ -57,9 +61,10 @@ No slides. The demo is the talk.
 
 **Do:** verifier tab → **Load the reference election**.
 
-**Expect:** checks turn green section by section; the whole run takes about 15–25
-seconds in the browser. Narrate over it, one plain line per section as it lands — each
-section heading already carries its own plain-speech line (hover or tap it):
+**Expect:** checks turn green section by section; the whole run takes 8–25 seconds
+depending on the machine (8.4 s at the last rehearsal — be ready for it to finish
+before you do). Narrate over it, one plain line per section as it lands — each section
+heading already carries its own plain-speech line (hover or tap it):
 
 **Say, roughly:** "Sixty members, sealed ballots. It's checking the paperwork is in
 the published format… that every event was signed… that the history was never
@@ -155,9 +160,12 @@ python3 proto/clubvote.py tamper proto/out /tmp/demo-erased drop
 
 Drag `/tmp/demo-erased` onto the verifier.
 
-**Expect:** green all the way down — until the last check:
+**Expect:** every row green — twenty-six of them at the last rehearsal — until the
+single red one at the very end:
 *"no valid receipt from ['did:web:sheffield-star.example'] matches this log's closing
 head — the history under audit is not the history the world saw."*
+
+Let the green rows land in silence before the red one. That pause is the beat.
 
 **Say:** "Everything inside the record agreed, because everything inside the record
 was genuine — minus one inconvenient ballot. The only thing that objected is the copy
@@ -197,5 +205,9 @@ verifier, the cast page, the architecture.
   stays 8–6 (their ballot was superseded by Derek's earlier one, seq 5 beats seq 1 —
   last *ballot* counts, not last *timestamp*). Recover in one line: it's a live
   demonstration of the re-vote rule — then cast again at 6.
+- Watch the downloads bar after **Cast it**: a browser meeting this site for the first
+  time can silently swallow the file. If nothing appeared, allow downloads for the
+  site, then **Seal my choice** and **Cast it** again — the same attempt number is
+  fine; only one file gets handed in.
 - Reset between rehearsals: `rm -rf /tmp/demo-*`. Nothing in the demo modifies the
   repo or `proto/out`.
