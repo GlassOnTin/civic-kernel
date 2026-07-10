@@ -98,7 +98,9 @@ Ten minutes with a cup of tea, in any current browser:
   of art has a one-line definition in the project README.
 
 If the committee is willing, we would start with a half-hour chat and a demonstration
-at the clubhouse. If it is not, we would genuinely value hearing why — that is a
-finding too.
+at the clubhouse — one where you vote in a real (demo) election and then watch us try
+to rig it and get caught; the run sheet is public too:
+[`clubhouse-demo.md`](clubhouse-demo.md). If the committee is not willing, we would
+genuinely value hearing why — that is a finding too.
 
 *[name, contact]*
