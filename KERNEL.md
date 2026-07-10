@@ -193,18 +193,30 @@ research program, not a trained system.
 <details>
 <summary><b>Plainly</b> <i>Results, not promises: what held, what strained, what broke — and the one fraud only the world's copy of history catches.</i></summary>
 
-- **The remedy axis gates the flagship verdict.** One attack — a 61% majority banning a
-  minority's worship — against four real rights settlements: the UK (remedy
-  `declaration`) **breaks**; Germany, the US, and the EU (remedy `strike`; the EU's scope
-  conditional under Art 51) **strain**. All four back the religion right (invariant 18) —
-  the flip is remedy, not coverage. A byte-identical UK counterfactual with `strike`
-  flips `breaks → strains`.
+- **The remedy axis gates the flagship verdict — and now bottoms out.** One attack — a
+  61% majority banning a minority's worship — against five real rights settlements: the
+  UK (remedy `declaration`) and the PRC (remedy `none`, the first column at the axis's
+  floor: no court may carry the constitution, and review of a law belongs to the organ
+  that enacted it) **break**; Germany, the US, and the EU (remedy `strike`; the EU's
+  scope conditional under Art 51) **strain**. All five back the religion right
+  (invariant 18) — the flip is remedy, not coverage. A byte-identical UK counterfactual
+  with `strike` flips `breaks → strains`. The PRC run also loses the series' premise:
+  its 61% has no observable counterpart, because no independent count of support may
+  exist — the count is not a contest.
   ([corpus](https://glassontin.github.io/civic-kernel/scenarios.html#corpus))
 - **The UK improvement path stalls at the remedy step**
   ([trajectory](docs/uk-trajectory.md)). The cheap, sovereignty-free moves — adopt the
   log, verifiable ballots — are worth taking and don't flip the verdict; the one move
   that flips it requires the sovereign to bind itself. Legibility ≠ availability ≠
   movement.
+- **Three polities, three jammed rungs.** The EU path
+  ([trajectory](docs/eu-trajectory.md)) has no verdict-flipping move at all: already at
+  the strike ceiling, its two soft spots — Art 51's scope gate, member-state obedience —
+  are locked at treaty unanimity or not on the lattice at all. The PRC path
+  ([trajectory](docs/cn-trajectory.md)) stalls at the first rung, the transparency log
+  itself: publication is sovereignty-free in Westminster and sovereignty-ending in
+  Beijing, so the ladder's cheapest move is the forbidden one — and the ladder climbed
+  to its end only reaches the UK's starting point. Where a polity jams is diagnostic.
 - **The tally survives everyone who signs things.** In [`proto/`](proto/), ballots are
   sealed to a distributively-generated 2-of-3 trustee key — no party ever holds the
   joint secret — and only their [homomorphic sum](README.md#w-homomorphic-tally) is ever decrypted. A
@@ -240,13 +252,13 @@ research program, not a trained system.
   repaired by a silent recast. The repair decided it: an 8–6 win where the unrepaired
   ballot would have made it 7–7 — and what the cheating device actually encrypted stays
   sealed forever.
-- **19 scenarios**, each cross-validated against the waist schemas and each anchored to
-  documented real-world precedents (46 verified citations — the schema requires them: no
-  attack without a cited precedent): 15 strain, 3 break, 1 holds. The one hold is
+- **20 scenarios**, each cross-validated against the waist schemas and each anchored to
+  documented real-world precedents (51 verified citations — the schema requires them: no
+  attack without a cited precedent): 15 strain, 4 break, 1 holds. The one hold is
   `records-rewrite` — the log defeating tampering, the mechanism the design leans on
-  hardest. The three breaks are the named limits meeting unaccountable power: coercion
+  hardest. The four breaks are the named limits meeting unaccountable power: coercion
   under live observation, an executive that ignores court orders, a remedy too weak to
-  stop a majority.
+  stop a majority — and a remedy absent altogether, the ban reviewed by its author.
 
 </details>
 

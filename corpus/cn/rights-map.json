@@ -1,0 +1,273 @@
+{
+  "$comment": "People's Republic of China column — the Constitution of the PRC (1982, as amended to 2018), text retrieved verbatim from the State Council's official English translation (english.www.gov.cn). What this column is for: the first measurement at the BOTTOM of the remedy axis — the manifest schema has always allowed remedy 'none', and no column used it until now. HONEST FINDING surfaced by building it: coverage is not where this legal order fails. 19 of 30 UDHR articles have quotable constitutional text — more than the US column's 14 — including rest-and-leisure (Art 43), an article only the EU Charter otherwise reaches. The column's real findings live in meta, not coverage: (1) remedy 'none' — no court may apply the Constitution against legislation (the Supreme People's Court withdrew its one constitutional-litigation precedent, the 2001 Qi Yuling reply, in 2008), and constitutional oversight belongs to the NPC and its Standing Committee (Arts 62(2), 67(1)): the enacting organ reviews itself. (2) Scope is unconditional in the emptiest sense — the instrument reaches every decision and stops none; the EU column showed scope gating a strong remedy, this one shows unconditional scope with no remedy to gate. (3) The floor is inverted: Art 51 subordinates every right to 'the interests of the state, society or collectives' — UDHR 29's limitation clause run backwards — and Art 1 (2018) entrenches Party leadership as the defining feature of the system. The kernel's one-sentence design (mechanism cheap to change, personhood nearly impossible) exists here with the signs flipped: what is pinned beneath amendment is the Party's standing, not the person's.",
+  "meta": {
+    "code": "cn",
+    "name": "People's Republic of China",
+    "instrument": {
+      "title": "Constitution of the People's Republic of China (1982, as amended to 2018)",
+      "id": "prc-constitution-1982a2018",
+      "uri": "https://english.www.gov.cn/archive/lawsregulations/201911/20/content_WS5ed8856ec6d0b3f0e9499913.html",
+      "retrieved_via": "english.www.gov.cn (State Council official English translation), web"
+    },
+    "remedy": "none",
+    "remedy_note": "No court may apply the Constitution against legislation: there is no constitutional court, and the Supreme People's Court withdrew its single constitutional-litigation precedent (the 2001 Qi Yuling reply) in 2008. Constitutional oversight belongs to the NPC itself (Art 62(2)) and its Standing Committee (Art 67(1)) — the organs that make the laws are the organs that review them. Recording-and-review (Art 67(7)-(8) + the Legislation Law) can revoke sub-statutory instruments — administrative regulations, local regulations, judicial interpretations — and reports its outcomes in aggregate; laws and NPCSC decisions are not reviewable objects at all. For a national law the remedy is not weak, as the UK's declaration is weak; it is absent by design. 'None' is the measured value — the first column at the bottom of the axis the manifest schema always modelled.",
+    "scope": "unconditional",
+    "scope_note": "Unconditional, in the emptiest sense: Chapter II binds every state organ everywhere — no jurisdictional gate like EU Charter Art 51. The PRC's own Article 51 is a different creature entirely: a substantive override subordinating every right to 'the interests of the state, society or collectives', not a scope condition. The EU column showed scope gating a strong remedy; this column shows the reverse — an instrument that reaches every decision and stops none. Scope without remedy measures paper, not protection.",
+    "verdict": "breaks",
+    "verdict_plain": "The PRC column breaks a step before the UK's: nineteen of thirty rights are on the books — more than the US column backs — but no court may apply the Constitution against a law, and the only review channel belongs to the organ that enacted the ban. The remedy axis reaches its floor here, 'none', and the guard's flag is delivered to the author of the ban.",
+    "protection": "recording and review",
+    "protection_plain": "The PRC's one formal rights check: any citizen may suggest that a regulation be reviewed against the Constitution — by the legislature's own commission, which publishes outcomes in aggregate and cannot review the laws the legislature itself passed.",
+    "coverage": {
+      "backed": 19,
+      "structural": 6,
+      "none": 5
+    },
+    "proto_rights_guard": {
+      "provision": "Recording and review (备案审查) — Const. Art 67(7)-(8) + Legislation Law, Ch. V",
+      "uri": "https://npcobserver.com/recording-review/",
+      "note": "A real, shipped review channel: every administrative regulation, local regulation and judicial interpretation must be filed with the NPCSC; any citizen may suggest review (more than seventeen thousand suggestions since 2018); the Legislative Affairs Commission reports annually — SVC-3's intake, running at national scale. Its two subtractions define the column: laws made by the NPC and its Standing Committee are not reviewable objects — the guard reviews everything except its author — and outcomes are published as aggregate counts and selected 'typical cases', so the flag a citizen can see is statistical, not per-decision. One famous success bounds the ceiling: Sun Zhigang (2003) ended the custody-and-repatriation system — an administrative regulation, repealed by its own maker under national publicity, not struck by any reviewer."
+    }
+  },
+  "invariants": [
+    {
+      "invariant": 1,
+      "udhr": "Art 1 — free and equal in dignity and rights",
+      "right": "(foundational; Art 33 human-rights clause + Art 38 dignity)",
+      "citation": "PRC Const. Arts 33, 38",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 2,
+      "udhr": "Art 2 — non-discrimination",
+      "right": "Const. Art 33 (equality before the law) + Art 4 (ethnic equality) + Art 48 (women)",
+      "citation": "PRC Const. Arts 33, 4, 48",
+      "status": "backed",
+      "text": "All ethnic groups of the People’s Republic of China are equal. The state shall protect the lawful rights and interests of all ethnic minorities and uphold and promote relations of equality, unity, mutual assistance and harmony among all ethnic groups. Discrimination against and oppression of any ethnic group are prohibited"
+    },
+    {
+      "invariant": 3,
+      "udhr": "Art 3 — life, liberty, security",
+      "right": "Const. Art 37 — personal freedom (no right-to-life clause anywhere in the text)",
+      "citation": "PRC Const. Art 37",
+      "status": "backed",
+      "text": "The personal freedom of citizens of the People’s Republic of China shall not be violated."
+    },
+    {
+      "invariant": 4,
+      "udhr": "Art 4 — no slavery",
+      "right": "(no prohibition; Art 42 makes work a right and an obligation)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 5,
+      "udhr": "Art 5 — no torture",
+      "right": "(nearest text: Art 38 personal dignity; no torture clause — the ban on coerced confessions lives in ordinary statute)",
+      "citation": "PRC Const. Art 38",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 6,
+      "udhr": "Art 6 — recognition before the law",
+      "right": "(definitional; Art 33 citizenship and equality)",
+      "citation": "PRC Const. Art 33",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 7,
+      "udhr": "Art 7 — equal protection of the law",
+      "right": "Const. Art 33 — equality before the law; the human-rights clause (2004)",
+      "citation": "PRC Const. Art 33",
+      "status": "backed",
+      "text": "All citizens of the People’s Republic of China are equal before the law. The state shall respect and protect human rights."
+    },
+    {
+      "invariant": 8,
+      "udhr": "Art 8 — effective remedy",
+      "right": "Const. Art 41 — complaints and charges against state organs; state compensation",
+      "citation": "PRC Const. Art 41",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall have the right to criticize and make suggestions regarding any state organ or state employee, and have the right to file with relevant state organs complaints, charges or reports against any state organ or state employee for violations of the law or dereliction of duty"
+    },
+    {
+      "invariant": 9,
+      "udhr": "Art 9 — no arbitrary arrest",
+      "right": "Const. Art 37 — arrest gated by procuratorate approval or court decision (the procuratorate is a prosecutor, not a judge)",
+      "citation": "PRC Const. Art 37",
+      "status": "backed",
+      "text": "No citizen shall be arrested unless with the approval or by the decision of a people’s procuratorate or by the decision of a people’s court, and arrests must be made by a public security organ. Unlawful detention, or the unlawful deprivation or restriction of a citizen’s personal freedom by other means, is prohibited"
+    },
+    {
+      "invariant": 10,
+      "udhr": "Art 10 — fair and public hearing",
+      "right": "Const. Art 130 (public trial, right of defense) + Art 131 (adjudication free of interference by administrative organs, social organizations and individuals — the list does not include the Party)",
+      "citation": "PRC Const. Arts 130, 131",
+      "status": "backed",
+      "text": "Except in special circumstances as prescribed by law, all cases in the people’s courts shall be tried in public. The accused shall have the right to defense."
+    },
+    {
+      "invariant": 11,
+      "udhr": "Art 11 — presumption of innocence; no retroactive law",
+      "right": "(no constitutional clause; both live in ordinary statute — Criminal Procedure Law Art 12, Criminal Law Arts 3 and 12 — amendable by simple majority)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 12,
+      "udhr": "Art 12 — privacy, family, home, correspondence",
+      "right": "Const. Arts 39 (home) + 40 (correspondence — with the security carve-out written into the same sentence) + 38 (reputation)",
+      "citation": "PRC Const. Arts 39, 40, 38",
+      "status": "backed",
+      "text": "Freedom and confidentiality of correspondence of citizens of the People’s Republic of China shall be protected by law. Except in cases necessary for national security or criminal investigation, when public security organs or procuratorial organs shall examine correspondence in accordance with procedures prescribed by law, no organization or individual shall infringe on a citizen’s freedom and confidentiality of correspondence for any reason."
+    },
+    {
+      "invariant": 13,
+      "udhr": "Art 13 — freedom of movement",
+      "right": "(no movement clause since the 1954 text; residence is governed by the hukou household-registration system, a statute-level regime)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 14,
+      "udhr": "Art 14 — asylum",
+      "right": "Const. Art 32 — the state MAY grant asylum: a discretion of the state, not a right of the person",
+      "citation": "PRC Const. Art 32",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 15,
+      "udhr": "Art 15 — nationality",
+      "right": "(definitional only; Art 33 says who is a citizen — no right to acquire or keep nationality)",
+      "citation": "PRC Const. Art 33",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 16,
+      "udhr": "Art 16 — marriage and family",
+      "right": "Const. Art 49 — marriage, family, mothers and children protected; freedom of marriage (the same article makes family planning a spousal obligation)",
+      "citation": "PRC Const. Art 49",
+      "status": "backed",
+      "text": "Marriage, families, mothers and children shall be protected by the state. Both husband and wife shall have the obligation to practice family planning."
+    },
+    {
+      "invariant": 17,
+      "udhr": "Art 17 — property",
+      "right": "Const. Art 13 — lawful private property inviolable (the qualifier is 'lawful'; land is publicly owned, Art 10)",
+      "citation": "PRC Const. Art 13",
+      "status": "backed",
+      "text": "Citizens’ lawful private property is inviolable. The state shall protect the right of citizens to own and inherit private property in accordance with the provisions of law."
+    },
+    {
+      "invariant": 18,
+      "udhr": "Art 18 — thought, conscience, religion",
+      "right": "Const. Art 36 — freedom of religious BELIEF; the state protects 'normal' religious activities (the adjective is the door)",
+      "citation": "PRC Const. Art 36",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall enjoy freedom of religious belief. No state organ, social organization or individual shall coerce citizens to believe in or not to believe in any religion, nor shall they discriminate against citizens who believe in or do not believe in any religion. The state shall protect normal religious activities."
+    },
+    {
+      "invariant": 19,
+      "udhr": "Art 19 — freedom of expression",
+      "right": "Const. Art 35 — speech and the press (exercised subject to Art 51's override and Art 1's prohibition on damaging the socialist system)",
+      "citation": "PRC Const. Art 35",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall enjoy freedom of speech, the press, assembly, association, procession and demonstration."
+    },
+    {
+      "invariant": 20,
+      "udhr": "Art 20 — assembly and association",
+      "right": "Const. Art 35 — assembly, association, procession, demonstration (prior-approval regimes live in statute)",
+      "citation": "PRC Const. Art 35",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall enjoy freedom of speech, the press, assembly, association, procession and demonstration."
+    },
+    {
+      "invariant": 21,
+      "udhr": "Art 21 — take part in government; free elections",
+      "right": "Const. Art 34 (vote and stand at 18) + Art 2 (all power belongs to the people, exercised through the congresses); direct election reaches only the county level, by statute",
+      "citation": "PRC Const. Arts 34, 2",
+      "status": "backed",
+      "text": "All citizens of the People’s Republic of China who have reached the age of 18, regardless of ethnicity, race, gender, occupation, family background, religious belief, level of education, property status or length of residence, shall have the right to vote and stand for election"
+    },
+    {
+      "invariant": 22,
+      "udhr": "Art 22 — social security",
+      "right": "Const. Art 45 (material assistance when aged, ill or unable to work; social insurance) + Art 44 (retirement)",
+      "citation": "PRC Const. Arts 45, 44",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall have the right to material assistance from the state and society when they are aged, ill or have lost the capacity to work. The state shall develop the social insurance, social relief, and medical and health services necessary for citizens to enjoy this right."
+    },
+    {
+      "invariant": 23,
+      "udhr": "Art 23 — work, fair pay, unions",
+      "right": "Const. Art 42 — work and remuneration (work is also an obligation; the free-trade-union element has no counterpart — one statutory federation)",
+      "citation": "PRC Const. Art 42",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall have the right and the obligation to work. The state shall, in various ways, create employment opportunities, strengthen worker protections, improve working conditions and, based on the development of production, increase remuneration for work and work-related benefits."
+    },
+    {
+      "invariant": 24,
+      "udhr": "Art 24 — rest and leisure",
+      "right": "Const. Art 43 — the right to rest ('working people', not everyone)",
+      "citation": "PRC Const. Art 43",
+      "status": "backed",
+      "text": "Working people in the People’s Republic of China shall have the right to rest. The state shall develop rest and recuperation facilities for working people and stipulate systems for employee working hours and vacations."
+    },
+    {
+      "invariant": 25,
+      "udhr": "Art 25 — adequate standard of living, health",
+      "right": "Const. Art 45 — assistance in old age, illness and disability; no general adequate-standard-of-living right",
+      "citation": "PRC Const. Art 45",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall have the right to material assistance from the state and society when they are aged, ill or have lost the capacity to work."
+    },
+    {
+      "invariant": 26,
+      "udhr": "Art 26 — education",
+      "right": "Const. Art 46 — the right AND the obligation to receive education",
+      "citation": "PRC Const. Art 46",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall have the right and the obligation to receive education. The state shall foster the all-round moral, intellectual and physical development of young adults, youths and children."
+    },
+    {
+      "invariant": 27,
+      "udhr": "Art 27 — cultural life",
+      "right": "Const. Art 47 — freedom of scientific research, literary and artistic creation, and other cultural pursuits",
+      "citation": "PRC Const. Art 47",
+      "status": "backed",
+      "text": "Citizens of the People’s Republic of China shall enjoy the freedom to engage in scientific research, literary and artistic creation, and other cultural pursuits."
+    },
+    {
+      "invariant": 28,
+      "udhr": "Art 28 — social and international order",
+      "right": "(programmatic; no justiciable counterpart)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    },
+    {
+      "invariant": 29,
+      "udhr": "Art 29 — duties; limits of rights",
+      "right": "Const. Art 51 — the limitation clause runs the OTHER way: rights yield to 'the interests of the state, society or collectives', with no democratic-society test and no 'solely'",
+      "citation": "PRC Const. Art 51",
+      "status": "structural",
+      "text": null
+    },
+    {
+      "invariant": 30,
+      "udhr": "Art 30 — no destruction of rights",
+      "right": "(no abuse-of-rights clause; the nearest text — Art 51 plus Art 1's prohibition on damaging the socialist system — protects the system from the rights, not the rights from the system)",
+      "citation": null,
+      "status": "none",
+      "text": null
+    }
+  ]
+}

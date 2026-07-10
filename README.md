@@ -23,9 +23,9 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
   The essay: democracy restated as an engineering problem, and the smallest honest
   answer to it. Every section opens as one plain line; expand for the full argument.
 - **[Real life against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)**
-  19 stress-test stories, each machine-validated against the schemas.
+  20 stress-test stories, each machine-validated against the schemas.
 - **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**
-  The same 30 rights across the UK, Germany, the US, and the EU Charter.
+  The same 30 rights across the UK, Germany, the US, the EU Charter, and the PRC.
 
 Or run everything locally — the election, its verification, and twelve attempts to rig
 it — in about a minute: [`proto/test.sh`](proto/).

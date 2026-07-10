@@ -19,7 +19,8 @@ The attack is fixed throughout: a 61% majority banning a minority's worship (the
 
 **Why the intermediate moves don't flip it, and are worth taking anyway.** The
 four-jurisdiction series established that this verdict is gated by *remedy*: `declaration →
-breaks`, `strike → strains`, holding the named rights constant. S1 and S2 don't touch remedy,
+breaks`, `strike → strains`, holding the named rights constant (the fifth column, the PRC
+at remedy `none`, later extended the same gating to the axis's floor). S1 and S2 don't touch remedy,
 so their verdict is *inferred* (not re-measured) to stay `breaks`. But they are exactly the
 cheap, reversible, sovereignty-free moves the operator would surface first: after S1 the ban,
 its rights-classification, and the declaration of incompatibility are unrewritable and public
@@ -37,6 +38,11 @@ movement**, on the UK's own coordinate.
 
 That stall is the interesting result: the model predicts exactly where a real democracy's
 improvement path jams, and it is not where the engineering is hard but where the politics is.
+
+The same walk has since been taken for two more polities, and each jams at a different
+rung: the [EU](eu-trajectory.md) has no verdict-flipping move left on the ladder, and the
+[PRC](cn-trajectory.md) cannot take even the first step, because there the transparency
+log itself is not a sovereignty-free move.
 
 ---
 

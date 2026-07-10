@@ -30,7 +30,7 @@ load-bearing, not decorative.
 ## 1 · State
 
 <details>
-<summary><b>Plainly</b> <i>Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Four real systems are measured so far.</i></summary>
+<summary><b>Plainly</b> <i>Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Five real systems are measured so far.</i></summary>
 
 A polity's configuration is a tensor **S** indexed by **(community × policy-domain × axis)**:
 
@@ -43,9 +43,10 @@ A polity's configuration is a tensor **S** indexed by **(community × policy-dom
   strike), **scope** (unconditional / conditional), and — extending — **interaction-cost /
   sludge** ([§8](https://glassontin.github.io/civic-kernel/#s8 "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask.")), **inclusion** ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")), **capture-resistance** ([§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.")).
 
-We have **S** measured at four real coordinates (UK, US, Germany, EU) on the rights axes —
-coarsely, and domain-agnostically. Four points in a high-dimensional space: enough to see
-structure, nowhere near enough to fit dynamics (see [Part 8](#8--empirical-status--solid-specification-underdetermined-predictor "The skeleton is sound; the numbers to run it do not exist. Four measured systems, one run of history, a model that changes what it measures: a research programme, not a trained system.")).
+We have **S** measured at five real coordinates (UK, US, Germany, EU, PRC) on the rights axes —
+coarsely, and domain-agnostically; the PRC point is the first at the remedy axis's floor
+(`none`). Five points in a high-dimensional space: enough to see
+structure, nowhere near enough to fit dynamics (see [Part 8](#8--empirical-status--solid-specification-underdetermined-predictor "The skeleton is sound; the numbers to run it do not exist. Five measured systems, one run of history, a model that changes what it measures: a research programme, not a trained system.")).
 
 </details>
 
@@ -243,14 +244,14 @@ optimise toward a maximum.
 ## 8 · Empirical status — solid specification, underdetermined predictor
 
 <details>
-<summary><b>Plainly</b> <i>The skeleton is sound; the numbers to run it do not exist. Four measured systems, one run of history, a model that changes what it measures: a research programme, not a trained system.</i></summary>
+<summary><b>Plainly</b> <i>The skeleton is sound; the numbers to run it do not exist. Five measured systems, one run of history, a model that changes what it measures: a research programme, not a trained system.</i></summary>
 
 Elegance blurs two claims that must stay separate.
 
 - **The structure is solid.** State tensor, partial order, subsidiarity vector field,
   control-theoretic damping, hysteresis — well-posed, and three of them (subsidiarity,
   control theory, hysteresis) are battle-tested elsewhere.
-- **The coefficients are radically underdetermined.** A four-point, coarse, domain-agnostic
+- **The coefficients are radically underdetermined.** A five-point, coarse, domain-agnostic
   corpus; **one non-i.i.d. sample path** of history (one run, each step leaning on the last — nothing like the independent draws learning needs); no way to backprop through counterfactual
   polities; and **reflexivity** — the model changes the thing it models, which no frozen
   training set does. Any scalar proxy for "better" becomes a Goodhart target the moment it is optimized — Goodhart's law: when a measure becomes a target, it ceases to be a good measure.
@@ -271,7 +272,7 @@ The honest, buildable path — each step inside the [Part 7](#7--the-safety-prop
 
 1. **Make the state multi-dimensional.** Index the corpus by policy-domain, not just
    jurisdiction: a trade-law regime and a family-law regime get their own coordinates. (Undo
-   the flattening of [Part 1](#1--state "Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Four real systems are measured so far.").)
+   the flattening of [Part 1](#1--state "Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Five real systems are measured so far.").)
 2. **Represent the objective as declared, per-domain preference** in the [manifest](../README.md#w-manifest) —
    subsidiarity as a schema field ("toward thorough/central" vs "toward simple/local"), never
    a global loss.
