@@ -20,7 +20,7 @@ The attack is fixed throughout: a 61% majority banning a minority's worship (the
 | S0 | **The US today** — Constitution, Marbury, Lukumi | strike | unconditional | 14/30 | **strains** | measured (`majority-vs-minority-us`) |
 | S1 | + adopt the transparency log ([§3.4](https://glassontin.github.io/civic-kernel/#s3-4 "Every act lands in a public record that can only grow. Rewrite yesterday and the sums stop matching in every copy of today — and any phone can tell.")) | strike | unconditional | 14/30 | strains | inferred — machinery orthogonality measured on the UK pair |
 | S2 | + verifiable ballots ([§3.2](https://glassontin.github.io/civic-kernel/#s3-2 "Your ballot is sealed before it leaves your hand and counted without being opened. You can check it was counted; you cannot prove to anyone how you voted.")) | strike | unconditional | 14/30 | strains | inferred — same basis; the least hypothetical rung in the corpus |
-| S3 | + pre-enforcement review (close the standing gate) | strike | unconditional | 14/30 | strains, with the interim window closed | **locked at Article III** — case-or-controversy forbids abstract review |
+| S3 | + pre-enforcement review (close the standing gate) | strike | unconditional | 14/30 | **strains**, with the interim window closed | **measured** (`majority-vs-minority-us-abstract`) — and the rung itself stays **locked at Article III** |
 | S4 | + coverage 14 → 20+ (socio-economic) | strike | unconditional | 20+/30 | strains | **locked at Article V** (two-thirds + three-quarters) — and orthogonal to this attack anyway |
 
 **The measured strain is the interim, and the interim is doctrine.** The US run's
@@ -36,7 +36,15 @@ the US's S3 — a pre-enactment gate, the guard's flag with somewhere to go
 polity would have to amend the founding text to let anyone sue before someone is hurt.
 The rung the German column gets from its constitution, the US constitution forbids.
 Fourteen months, funded lawyers, and a revoked permit is what the same enum value costs
-when the gate is welded shut — the run measured all three.
+when the gate is welded shut — the run measured all three. S3 is now also measured from
+the counterfactual side (`majority-vs-minority-us-abstract`): grant the amendment and the
+same Act falls in 152 days instead of 439, stayed on referral before any permit is
+touched — the coercive entry never lands, and the escalation's `dependent_acts_voided`
+is an empty list by design. The verdict stays `strains` on the same bench-shaped residue,
+brought forward rather than removed: record-less review concentrates the capture prize it
+does not dilute. And the run's second result is the series' first invisible variable: the
+two Americas' manifests are byte-identical, signature included — timing has no field on
+the waist.
 
 **Tenure: the same enum, a different half-life.** Nothing in the waist distinguishes
 Germany's strike from America's, and everything in the two runs does. Germany's rests on
@@ -81,12 +89,14 @@ the jam tells you what kind of polity you are looking at.
 
 ---
 
-*Honesty note: S0 is measured; nothing else on this page is a run. S1–S2 are inferred
-from the machinery orthogonality measured on the UK pair, transposed to a different
-polity and labelled as the weaker inference it is. S3's verdict cell ("strains, with the
-interim window closed") is a modelled expectation, not a run — a
-`majority-vs-minority-us-abstract` counterfactual in the uk-strike discipline would
-measure it and is cheap to add if wanted. S4 is inferred from the corpus (higher-coverage
-strike columns still strain) and is doubly locked: Article V, and orthogonality to this
-attack. The December 2024 German court-entrenchment amendment referenced for contrast is
-real-world fact, not a corpus measurement.*
+*Honesty note: S0 and S3 are measured; S1–S2 are inferred from the machinery
+orthogonality measured on the UK pair, transposed to a different polity and labelled as
+the weaker inference it is. S3's run (`majority-vs-minority-us-abstract`) is a modelled
+counterfactual in the uk-strike discipline — an America that amended Article III, which
+the real one has refused since Muskrat (1911) — and its moved variable is the first in
+the series with no manifest field: the run's manifests are byte-identical, which is
+itself the finding (timing, like entrenchment, is a candidate axis for the model, not yet
+on the waist). S4 is inferred from the corpus (higher-coverage strike columns still
+strain) and is doubly locked: Article V, and orthogonality to this attack. The December
+2024 German court-entrenchment amendment referenced for contrast is real-world fact, not
+a corpus measurement.*

@@ -202,7 +202,10 @@ research program, not a trained system.
   (invariant 18) — the flip is remedy, not coverage. A byte-identical UK counterfactual
   with `strike` flips `breaks → strains`; a byte-identical EU counterfactual with scope
   `unconditional` does not flip at all — 343 days refunded, same verdict: scope gates,
-  remedy is the ceiling. The PRC run also loses the series' premise:
+  remedy is the ceiling. A US counterfactual that opens a pre-enforcement route stays
+  `strains` too — 287 days refunded, the coercive entry never lands — and its moved
+  variable has no manifest field at all: the waist cannot see timing. The PRC run also
+  loses the series' premise:
   its 61% has no observable counterpart, because no independent count of support may
   exist — the count is not a contest.
   ([corpus](https://glassontin.github.io/civic-kernel/scenarios.html#corpus))
@@ -262,9 +265,9 @@ research program, not a trained system.
   repaired by a silent recast. The repair decided it: an 8–6 win where the unrepaired
   ballot would have made it 7–7 — and what the cheating device actually encrypted stays
   sealed forever.
-- **23 scenarios**, each cross-validated against the waist schemas and each anchored to
-  documented real-world precedents (55 verified citations — the schema requires them: no
-  attack without a cited precedent): 16 strain, 6 break, 1 holds. The one hold is
+- **24 scenarios**, each cross-validated against the waist schemas and each anchored to
+  documented real-world precedents (57 verified citations — the schema requires them: no
+  attack without a cited precedent): 17 strain, 6 break, 1 holds. The one hold is
   `records-rewrite` — the log defeating tampering, the mechanism the design leans on
   hardest. The breaks are four named limits meeting unaccountable power — coercion under
   live observation, an executive that ignores court orders, a remedy too weak to stop a
