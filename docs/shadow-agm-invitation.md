@@ -1,7 +1,8 @@
 # A shadow ballot at your AGM — an invitation
 
-*To the committee of [club name]. This is a letter, kept in the open like everything
-else in this project: [github.com/GlassOnTin/civic-kernel](https://github.com/GlassOnTin/civic-kernel).*
+*To the committee of Heeley Bank Allotment Society, Sheffield. This is a letter, kept
+in the open like everything else in this project:
+[github.com/GlassOnTin/civic-kernel](https://github.com/GlassOnTin/civic-kernel).*
 
 We would like to run a **shadow ballot** alongside one vote at your AGM — the treasurer
 election, or any motion you choose. Your meeting runs exactly as it always has, and the
@@ -11,6 +12,14 @@ decides nothing. Afterwards, anyone — a member, a rival, a stranger on the int
 can check the whole shadow election from the published record and see that nobody could
 have rigged it. We want to learn what confuses real people and what breaks in a real
 season; you get to watch a vote checked to the bottom, and you keep the tools.
+
+One admission before anything else: you will notice the demonstration club in every
+page linked below is called *Heeley Bank Allotment Society*. It is imaginary — its
+sixty members, its treasurer race, its little scandals were all invented when this
+prototype was first built, and the name was borrowed from the neighbourhood. Nothing
+in it is about your society or any real person. Now that we are writing to the real
+Heeley Bank, we owe you that up front — and if the borrowing is unwelcome, we will
+happily rename the fiction.
 
 ## What it would look like
 
@@ -103,4 +112,6 @@ to rig it and get caught; the run sheet is public too:
 [`clubhouse-demo.md`](clubhouse-demo.md). If the committee is not willing, we would
 genuinely value hearing why — that is a finding too.
 
-*[name, contact]*
+*Ian Williams — everything in this letter, including the letter, lives at
+[github.com/GlassOnTin/civic-kernel](https://github.com/GlassOnTin/civic-kernel);
+direct contact details come with the copy we hand you.*
