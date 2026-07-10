@@ -74,11 +74,14 @@ is being decided now, in the Architecture Reference Framework's revisions — th
 current legislative process anywhere that could move a whole column's personhood posture
 in either direction.
 
-That is the shape of the EU's stall, and it completes a triptych the UK page opened: the
+That is the shape of the EU's stall, part of a set the UK page opened — five now: the
 UK's path stalls at the **remedy** (a sovereign that will not bind itself), the EU's at
-**scope and obedience** (a treaty that cannot cheaply widen, a judgment that cannot compel),
-and the [PRC's](cn-trajectory.md) at the **record itself**. Same ladder, three different
-jammed rungs — and the rung tells you what kind of polity you are looking at.
+**scope and obedience** (a treaty that cannot cheaply widen, a judgment that cannot
+compel), the [PRC's](cn-trajectory.md) at the **record itself**,
+[Germany's](de-trajectory.md) at **nothing** — the measured ceiling held, the bench the
+residue — and the [US's](us-trajectory.md) at its **founding text** (Articles III and V).
+Same ladder, five different jams — and the jam tells you what kind of polity you are
+looking at.
 
 ---
 

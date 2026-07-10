@@ -49,10 +49,13 @@ movement**, on the UK's own coordinate.
 That stall is the interesting result: the model predicts exactly where a real democracy's
 improvement path jams, and it is not where the engineering is hard but where the politics is.
 
-The same walk has since been taken for two more polities, and each jams at a different
-rung: the [EU](eu-trajectory.md) has no verdict-flipping move left on the ladder, and the
-[PRC](cn-trajectory.md) cannot take even the first step, because there the transparency
-log itself is not a sovereignty-free move.
+The same walk has since been taken for four more polities, and each jams somewhere
+different: the [EU](eu-trajectory.md) has no verdict-flipping move left on the ladder;
+the [PRC](cn-trajectory.md) cannot take even the first step, because there the
+transparency log itself is not a sovereignty-free move; [Germany](de-trajectory.md)
+stands on the measured ceiling with nothing left to climb, its residue the bench rather
+than any rung; and the [US](us-trajectory.md) holds the same strike by precedent, its
+remaining rungs locked in the founding text.
 
 ---
 

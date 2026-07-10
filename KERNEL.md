@@ -212,14 +212,21 @@ research program, not a trained system.
   inferred: three machinery configurations of the same polity, one verdict); the one
   move that flips it requires the sovereign to bind itself. Legibility ≠ availability ≠
   movement.
-- **Three polities, three jammed rungs.** The EU path
+- **Five polities, five different jams.** The EU path
   ([trajectory](docs/eu-trajectory.md)) has no verdict-flipping move at all: already at
   the strike ceiling, its two soft spots — Art 51's scope gate, member-state obedience —
   are locked at treaty unanimity or not on the lattice at all. The PRC path
   ([trajectory](docs/cn-trajectory.md)) stalls at the first rung, the transparency log
   itself: publication is sovereignty-free in Westminster and sovereignty-ending in
   Beijing, so the ladder's cheapest move is the forbidden one — and the ladder climbed
-  to its end only reaches the UK's starting point. Where a polity jams is diagnostic.
+  to its end only reaches the UK's starting point. Germany
+  ([trajectory](docs/de-trajectory.md)) holds the measured ceiling — strike, eternity
+  clause — with nothing left to climb: its residue is the bench, a tenure the remedy
+  enum cannot express, and its one live real-world move (entrenching the court's own
+  structure, 2024) landed exactly there. The US ([trajectory](docs/us-trajectory.md))
+  holds the same enum by precedent rather than text, with both remaining rungs locked in
+  the founding document — pre-enforcement review at Article III, coverage at Article V.
+  Where a polity jams is diagnostic.
 - **The tally survives everyone who signs things.** In [`proto/`](proto/), ballots are
   sealed to a distributively-generated 2-of-3 trustee key — no party ever holds the
   joint secret — and only their [homomorphic sum](README.md#w-homomorphic-tally) is ever decrypted. A

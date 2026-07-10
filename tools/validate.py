@@ -142,7 +142,7 @@ def main() -> int:
     # KERNEL.md's §-links carry the essay's Plainly lines as hover titles —
     # same anti-drift discipline as the glossary
     total = 0
-    for name in ("KERNEL.md", "proto/README.md", "docs/functional-model.md", "docs/uk-trajectory.md", "docs/eu-trajectory.md", "docs/cn-trajectory.md"):
+    for name in ("KERNEL.md", "proto/README.md", "docs/functional-model.md", "docs/uk-trajectory.md", "docs/eu-trajectory.md", "docs/cn-trajectory.md", "docs/de-trajectory.md", "docs/us-trajectory.md"):
         doc = (ROOT / name).read_text()
         klinks = re.findall(r'\[§[\d.]+\]\([^)"]*#(s[0-9-]+) "([^"]*)"\)', doc)
         bad = sorted({sid for sid, title in klinks if plains.get(sid) != title})
