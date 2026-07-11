@@ -79,7 +79,8 @@ polity — a weaker inference than an in-context run and labelled as such. S4 is
 from the EU column (25/30, still strains). S3 is not an inference but an observation
 about the axis: the enum has no value above strike. The December 2024 court-entrenchment
 amendment is real-world fact, not a corpus measurement — the corpus has no axis for
-tenure, which is the point of citing it. The candidate axis this page and the
-[US trajectory](us-trajectory.md) jointly motivate — entrenchment: what holds the remedy
-in place — is noted for the functional model and deliberately not added to the schema
-here.*
+tenure, which is the point of citing it. The axis this page and the
+[US trajectory](us-trajectory.md) jointly motivated — entrenchment: what holds the remedy
+in place — is now on the model's axis list ([functional model](functional-model.md),
+Part 1, with the five coordinates' values tabulated), and deliberately still not on the
+waist: no manifest field declares it.*

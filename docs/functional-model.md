@@ -30,7 +30,7 @@ load-bearing, not decorative.
 ## 1 · State
 
 <details>
-<summary><b>Plainly</b> <i>Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Five real systems are measured so far.</i></summary>
+<summary><b>Plainly</b> <i>Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, on what terms, when the remedy can arrive, and what holds it in place. Five real systems are measured so far.</i></summary>
 
 A polity's configuration is a tensor **S** indexed by **(community × policy-domain × axis)**:
 
@@ -40,13 +40,40 @@ A polity's configuration is a tensor **S** indexed by **(community × policy-dom
   for X" a category error: good configurations are domain-relative.
 - **axis** — the measurable dimensions of a rights/decision regime. So far: **coverage**
   (which of the 30 UDHR invariants are backed), **remedy** (none / declaration / escalate /
-  strike), **scope** (unconditional / conditional), and — extending — **interaction-cost /
+  strike), **scope** (unconditional / conditional), **entrenchment** (what holds the
+  remedy in place — the process that could remove it: none / statute / doctrine /
+  constitutional text / treaty / eternity clause; motivated by the DE–US pair, whose
+  identical `strike` is held by an eternity clause in one and by precedent in the other),
+  **timing** (when the remedy can arrive relative to the harm: pre-enactment /
+  pre-enforcement / post-enforcement; measured by `majority-vs-minority-us-abstract`,
+  whose moved variable turned out to have no waist field at all), and — extending —
+  **interaction-cost /
   sludge** ([§8](https://glassontin.github.io/civic-kernel/#s8 "Paperwork can quietly take a right away. So: four verbs, nowhere to hide an extra step, and every demanded field must name the rule that lets it ask.")), **inclusion** ([§4](https://glassontin.github.io/civic-kernel/#s4 "The phone in your pocket is a polling booth that can also keep checking, all year, that nobody has touched the record. No phone? Your vote counts identically — the same maths checks it on your behalf.")), **capture-resistance** ([§1](https://glassontin.github.io/civic-kernel/#s1 "The job: keep producing decisions the losers still accept, while everyone — the operators included — has a reason to cheat.")).
 
 We have **S** measured at five real coordinates (UK, US, Germany, EU, PRC) on the rights axes —
 coarsely, and domain-agnostically; the PRC point is the first at the remedy axis's floor
 (`none`). Five points in a high-dimensional space: enough to see
 structure, nowhere near enough to fit dynamics (see [Part 8](#8--empirical-status--solid-specification-underdetermined-predictor "The skeleton is sound; the numbers to run it do not exist. Five measured systems, one run of history, a model that changes what it measures: a research programme, not a trained system.")).
+
+On the two newest axes, the five coordinates (plus the reference kernel) read from the
+same instruments and runs that measured the first three:
+
+| coordinate | entrenchment — what holds the remedy | timing — when it arrives |
+|---|---|---|
+| UK | **statute** — the HRA is an ordinary Act, one Parliament from repeal: the weak remedy is also weakly held | post-enforcement — and the arrival binds nothing (s.4(6)) |
+| Germany | **eternity clause** — Art 79(3); the court's own structure entrenched since 2024 | pre-enforcement — abstract review; the measured statute never operated |
+| US | **doctrine** — Marbury applied through Lukumi, held by whoever holds the bench | post-enforcement, measured (injury is the price of standing); pre-enforcement measured counterfactually at 152 vs 439 days |
+| EU | **treaty** — unanimity in both directions | post-enforcement — the ban ran the fourteen months the Art 51 fight took |
+| PRC | vacuous — no remedy to hold; what Art 1 entrenches is the other thing | vacuous — nothing arrives |
+| reference kernel | the amendment process itself — [§5](https://glassontin.github.io/civic-kernel/#s5 "The rules can change — in stages, with expiry dates unless renewed. The one thing nearly impossible to change: each member's standing as a free and equal person.")'s pin | pre-enactment — the guard routes the proposal before the decision closes |
+
+Two riders keep these honest. Neither axis is totally ordered — kinds, not ranks: US
+doctrine has outlived every statute in the table and can be re-read by one bench without
+a vote, so "stronger" is exactly the partial-order judgment the model refuses to make
+globally. And both are **model axes, not waist fields**: no manifest declares either —
+two byte-identical manifests described two different Americas in the measuring run — so
+the legibility gap the counterfactual exposed stands until a deliberate waist revision,
+which this page records but does not make.
 
 </details>
 
@@ -272,7 +299,7 @@ The honest, buildable path — each step inside the [Part 7](#7--the-safety-prop
 
 1. **Make the state multi-dimensional.** Index the corpus by policy-domain, not just
    jurisdiction: a trade-law regime and a family-law regime get their own coordinates. (Undo
-   the flattening of [Part 1](#1--state "Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, and on what terms. Five real systems are measured so far.").)
+   the flattening of [Part 1](#1--state "Where a democracy stands, written as numbers: for each community and each area of law, which rights are backed, what a court can do about a breach, on what terms, when the remedy can arrive, and what holds it in place. Five real systems are measured so far.").)
 2. **Represent the objective as declared, per-domain preference** in the [manifest](../README.md#w-manifest) —
    subsidiarity as a schema field ("toward thorough/central" vs "toward simple/local"), never
    a global loss.
