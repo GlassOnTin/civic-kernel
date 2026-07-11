@@ -94,6 +94,15 @@ club, a real season, and what it teaches. The invitation a club actually receive
 drafted, in the open, honest limits included:
 [`docs/shadow-agm-invitation.md`](docs/shadow-agm-invitation.md).
 
+And behind it, the wedge the essay itself calls the bigger want — *find out what you
+are owed, without telling anyone you asked*. The club vote is the entry point; it
+proves the machinery on a group's count, but it borrows its members' standing from
+the club register rather than giving anyone new standing. The plan for the first
+artifact that is about a person — a rules corpus with every question citing its
+authorizing rule, computed on your device, answered with a trace you can carry into
+a real claim — is drafted, success test first:
+[`docs/wedge-one-v0.md`](docs/wedge-one-v0.md).
+
 ## The words, in plain speech
 
 Every term of art in this repo, one line each. Jargon elsewhere in these documents
