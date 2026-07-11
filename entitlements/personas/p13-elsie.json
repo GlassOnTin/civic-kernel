@@ -1,0 +1,20 @@
+{
+  "name": "Elsie — 76, already receives Pension Credit",
+  "note": "The passport landing: 75-plus and Pension Credit in payment means the TV licence fee is waived. The page's own Pension Credit answer agrees she qualifies.",
+  "as_of": "2026-07-12",
+  "checked": "Concession conditions against gov.uk/free-discount-tv-licence (75+ and Pension Credit, holder or live-in partner), 2026-07-12.",
+  "answers": {
+    "dob": "1950-03-03", "has_partner": false,
+    "weekly_state_pension": 15000, "weekly_other_pensions": 0,
+    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 0,
+    "gets_disability_benefit": false, "other_adults": false,
+    "carer_paid_for_you": false, "you_get_ca": false,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": false, "aa_night": false, "aa_six_months": false,
+    "gets_pc": true
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 8800 },
+    "tv-licence-over-75": { "verdict": "appears-eligible", "weekly": null }
+  }
+}

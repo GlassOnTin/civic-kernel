@@ -1,0 +1,19 @@
+{
+  "name": "Arthur — born 10 May 1960, reached State Pension age two days ago",
+  "note": "The same table, other side: 66 years 2 months lands on 10 July 2026 — two days before this battery's as-of date. The gate opens.",
+  "as_of": "2026-07-12",
+  "checked": "Pensions Act 1995 Sch 4 para 1 Table 3 row (66y2m for 6 May–5 Jun 1960 births), legislation.gov.uk revised text, 2026-07-11.",
+  "answers": {
+    "dob": "1960-05-10", "has_partner": false,
+    "weekly_state_pension": 22000, "weekly_other_pensions": 0,
+    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 0,
+    "gets_disability_benefit": false, "other_adults": false,
+    "carer_paid_for_you": false, "you_get_ca": false,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": false, "aa_night": false, "aa_six_months": false,
+    "gets_pc": false
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 1800 }
+  }
+}

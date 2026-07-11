@@ -1,0 +1,23 @@
+{
+  "name": "Derek and Lin — mixed-age couple",
+  "note": "Derek is 67; Lin is 56. Since 15 May 2019 a couple cannot get Pension Credit until both reach State Pension age — the s.4(1A) gate fires before any arithmetic.",
+  "as_of": "2026-07-12",
+  "checked": "Gate checked against SPC Act 2002 s.4(1A) (legislation.gov.uk revised text) and gov.uk/pension-credit/eligibility, 2026-07-12.",
+  "answers": {
+    "dob": "1959-02-10", "has_partner": true, "partner_dob": "1970-01-01",
+    "partner_hb_pension_age": false,
+    "weekly_state_pension": 0, "weekly_other_pensions": 0,
+    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 0,
+    "gets_disability_benefit": false, "partner_gets_disability_benefit": false,
+    "other_adults": false, "carer_paid_for_you": false,
+    "you_get_ca": false, "partner_gets_ca": false,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": false, "aa_night": false, "aa_six_months": false,
+    "gets_pc": false
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "not-eligible", "weekly": null },
+    "attendance-allowance": { "verdict": "not-eligible", "weekly": null },
+    "tv-licence-over-75": { "verdict": "not-eligible", "weekly": null }
+  }
+}

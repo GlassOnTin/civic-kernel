@@ -6,6 +6,11 @@ wedge one — a page that tells you what you are owed, computed on your device,
 where every question cites the rule that lets it ask. Drafted before the code,
 like everything here: the success test first, the subtractions declared up front.
 
+**Status (2026-07-12): built.** [`owed.html`](https://glassontin.github.io/civic-kernel/owed.html)
+implements this plan; `entitlements/` is the corpus; the done-bar below runs in CI as
+test.sh's `owedpage` job. This document remains the plan of record for what v0 is and
+is not.
+
 The sentence the page must earn: **find out what you are owed, without telling
 anyone you asked.** In Great Britain an estimated £24 billion of income-related
 support goes unclaimed each year — over seven million households missing at

@@ -1,0 +1,21 @@
+{
+  "v": "civic-kernel/spa-table/v0",
+  "rule": "Pensions Act 1995, Schedule 4, paragraph 1 (as amended by the Pensions Act 2011 s.1 and the Pensions Act 2014 s.26)",
+  "uri": "https://www.legislation.gov.uk/ukpga/1995/26/schedule/4",
+  "note": "The statutory pensionable-age rules, as data both engines read. `before` is sufficient for this corpus's era: anyone born before 6 April 1960 has a pensionable age of 66 or under, and every such date had passed before this corpus's earliest as-of date, so 66 answers 'reached?' correctly. Month arithmetic follows the calendar convention (day-of-month preserved, clamped to month length). Beyond `after.until` the rise to 68 (Pensions Act 2007) is out of this corpus's horizon and the engines refuse rather than guess.",
+  "before": { "born": "1960-04-06", "years": 66 },
+  "table": [
+    { "born_from": "1960-04-06", "born_to": "1960-05-05", "years": 66, "months": 1 },
+    { "born_from": "1960-05-06", "born_to": "1960-06-05", "years": 66, "months": 2 },
+    { "born_from": "1960-06-06", "born_to": "1960-07-05", "years": 66, "months": 3 },
+    { "born_from": "1960-07-06", "born_to": "1960-08-05", "years": 66, "months": 4 },
+    { "born_from": "1960-08-06", "born_to": "1960-09-05", "years": 66, "months": 5 },
+    { "born_from": "1960-09-06", "born_to": "1960-10-05", "years": 66, "months": 6 },
+    { "born_from": "1960-10-06", "born_to": "1960-11-05", "years": 66, "months": 7 },
+    { "born_from": "1960-11-06", "born_to": "1960-12-05", "years": 66, "months": 8 },
+    { "born_from": "1960-12-06", "born_to": "1961-01-05", "years": 66, "months": 9 },
+    { "born_from": "1961-01-06", "born_to": "1961-02-05", "years": 66, "months": 10 },
+    { "born_from": "1961-02-06", "born_to": "1961-03-05", "years": 66, "months": 11 }
+  ],
+  "after": { "born": "1961-03-06", "years": 67, "until": "1977-04-05" }
+}

@@ -188,6 +188,45 @@ def main() -> int:
         print(f"FAIL verifier footer previews out of step with their source documents: {xbad or 'expected 5 xrefs, found ' + str(len(xrefs))}", file=sys.stderr)
         return 1
     print("verifier previews: 5 cross-document tips match their sources' own openers")
+
+    # the entitlement rules validate against their schema, and owed.html's
+    # embedded corpus is regenerated from them — generated, never trusted
+    # (string splice, never re.sub: replacement-escape processing once
+    # corrupted an embedded schema)
+    rules_schema = json.loads((ROOT / "entitlements" / "rules.schema.json").read_text())
+    v_rules = Draft202012Validator(rules_schema)
+    uk = ROOT / "entitlements" / "uk"
+    spa = None
+    ents = []
+    efails = 0
+    for p in sorted(uk.glob("*.json")):
+        doc = json.loads(p.read_text())
+        errs = [f"{e.message} at {'/'.join(map(str, e.path))}" for e in v_rules.iter_errors(doc)]
+        if errs:
+            efails += 1
+            print(f"FAIL {p.name}: {errs[0]}" + (f" (+{len(errs)-1} more)" if len(errs) > 1 else ""), file=sys.stderr)
+            continue
+        if doc.get("v") == "civic-kernel/spa-table/v0":
+            spa = doc
+        else:
+            ents.append(doc)
+            print(f"ok   entitlement {doc['id']}  ({doc['kind']}, {doc['effective']['tax_year']}, "
+                  f"{len(doc['questions'])} cited questions)")
+    if efails or spa is None or not ents:
+        print("FAIL entitlements corpus did not validate", file=sys.stderr)
+        return 1
+    owed_page = ROOT / "owed.html"
+    html = owed_page.read_text()
+    start = html.find("//OWED-CORPUS-START")
+    end = html.find("//OWED-CORPUS-END")
+    if start < 0 or end < 0:
+        print("FAIL owed.html corpus markers not found", file=sys.stderr)
+        return 1
+    blob = json.dumps({"spa": spa, "entitlements": ents}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    new = html[:start] + "//OWED-CORPUS-START\nconst CORPUS = " + blob + ";\n" + html[end:]
+    if new != html:
+        owed_page.write_text(new)
+    print(f"entitlements: {len(ents)} rule files + the pensionable-age table valid; owed.html corpus rebuilt")
     return 0
 
 

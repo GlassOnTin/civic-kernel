@@ -1,0 +1,69 @@
+{
+  "v": "civic-kernel/entitlement-rules/v0",
+  "id": "tv-licence-over-75",
+  "title": "Free TV licence at 75",
+  "jurisdiction": "United Kingdom",
+  "kind": "passported",
+  "effective": {
+    "tax_year": "2026-27",
+    "checked": "2026-07-12"
+  },
+  "plainly": "The annual TV licence fee is waived from 75 — but only for households on Pension Credit. It exists here to show what a passport is: one entitlement unlocking another.",
+  "questions": [
+    {
+      "id": "dob",
+      "label": "Your date of birth",
+      "help": "Only used to check the age condition — it never leaves this page.",
+      "type": "date",
+      "rule": "BBC over-75s concession (Communications Act 2003 s.365A, inserted by Digital Economy Act 2017 s.89): aged 75 or over",
+      "uri": "https://www.legislation.gov.uk/ukpga/2017/30/section/89"
+    },
+    {
+      "id": "gets_pc",
+      "label": "Do you — or a partner you live with — get Pension Credit?",
+      "help": "If the Pension Credit answer above says you appear eligible, claim that first: it is the key to this one.",
+      "type": "bool",
+      "rule": "BBC over-75s concession under Communications Act 2003 s.365A (in force 1 August 2020): the licence holder, or their partner at the same address, must receive Pension Credit",
+      "uri": "https://www.gov.uk/free-discount-tv-licence"
+    }
+  ],
+  "values": [],
+  "gates": [],
+  "verdicts": [
+    {
+      "when": { "and": [ { "age_at_least": { "dob": { "get": "dob" }, "years": 75 } }, { "get": "gets_pc" } ] },
+      "verdict": "appears-eligible",
+      "because": "Aged 75 or over and on Pension Credit: the annual licence fee is waived — apply to TV Licensing (you can apply from 74).",
+      "rule": "BBC over-75s concession under Communications Act 2003 s.365A",
+      "uri": "https://www.gov.uk/free-discount-tv-licence"
+    },
+    {
+      "when": { "age_at_least": { "dob": { "get": "dob" }, "years": 75 } },
+      "verdict": "not-eligible",
+      "because": "Over 75, but since August 2020 the free licence needs Pension Credit in the household. If Pension Credit above says you appear eligible, claim it — this comes with it.",
+      "rule": "BBC over-75s concession under Communications Act 2003 s.365A (replacing the age-only concession in the Communications (Television Licensing) Regulations 2004 reg 6)",
+      "uri": "https://www.legislation.gov.uk/ukpga/2017/30/section/89"
+    },
+    {
+      "when": { "num": 1 },
+      "verdict": "not-eligible",
+      "because": "The concession starts at 75 (you can apply from 74).",
+      "rule": "BBC over-75s concession under Communications Act 2003 s.365A",
+      "uri": "https://www.gov.uk/free-discount-tv-licence"
+    }
+  ],
+  "not_asked": [
+    "your name",
+    "your address",
+    "your TV licence number"
+  ],
+  "not_encoded": [
+    "residential care and blind concessions (Communications (Television Licensing) Regulations 2004)",
+    "the fee amount itself (it changes annually; the concession waives whatever it is)"
+  ],
+  "passports": [],
+  "sources_checked": [
+    { "what": "75+ and Pension Credit (you or a live-in partner) — the concession's two conditions", "where": "gov.uk/free-discount-tv-licence", "date": "2026-07-12" },
+    { "what": "The legal chain: BBC determines the concession from 1 June 2020 under Communications Act 2003 s.365A; the 2004 Regs' age-only concession (reg 6) is the superseded route", "where": "Digital Economy Act 2017 s.89; S.I. 2004/692 reg 6 (legislation.gov.uk)", "date": "2026-07-12" }
+  ]
+}

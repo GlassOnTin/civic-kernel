@@ -1,0 +1,21 @@
+{
+  "name": "June — born 15 August 1960, not yet at State Pension age",
+  "note": "The phasing table's middle: born 6 Aug – 5 Sep 1960 means pensionable age 66 years 5 months — 15 January 2027, six months away. Both gates say not yet.",
+  "as_of": "2026-07-12",
+  "checked": "Pensions Act 1995 Sch 4 para 1 Table 3 row (66y5m for 6 Aug–5 Sep 1960 births), legislation.gov.uk revised text, 2026-07-11.",
+  "answers": {
+    "dob": "1960-08-15", "has_partner": false,
+    "weekly_state_pension": 0, "weekly_other_pensions": 0,
+    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 0,
+    "gets_disability_benefit": false, "other_adults": false,
+    "carer_paid_for_you": false, "you_get_ca": false,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": true, "aa_night": false, "aa_six_months": true,
+    "gets_pc": false
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "not-eligible", "weekly": null },
+    "attendance-allowance": { "verdict": "not-eligible", "weekly": null },
+    "tv-licence-over-75": { "verdict": "not-eligible", "weekly": null }
+  }
+}

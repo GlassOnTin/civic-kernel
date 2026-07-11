@@ -1,0 +1,139 @@
+{
+  "v": "civic-kernel/entitlement-rules/v0",
+  "id": "attendance-allowance",
+  "title": "Attendance Allowance",
+  "jurisdiction": "England and Wales (in Scotland this is Pension Age Disability Payment)",
+  "kind": "assessment-gated",
+  "effective": {
+    "tax_year": "2026-27",
+    "uprating": "The Social Security Benefits Up-rating Order 2026 (S.I. 2026/148)",
+    "checked": "2026-07-12"
+  },
+  "plainly": "A weekly payment for people over State Pension age who need help or watching-over because of illness or disability. Not means-tested: savings and income are irrelevant — and it is not counted as income by Pension Credit; it can raise it.",
+  "questions": [
+    {
+      "id": "dob",
+      "label": "Your date of birth",
+      "help": "Only used to work out whether you have reached State Pension age — it never leaves this page.",
+      "type": "date",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.64(1) (attendance allowance is for people of pensionable age)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    },
+    {
+      "id": "scotland",
+      "label": "Do you live in Scotland?",
+      "type": "bool",
+      "rule": "Social Security (Scotland) Act 2018; Pension Age Disability Payment replaces Attendance Allowance in Scotland",
+      "uri": "https://www.gov.uk/attendance-allowance"
+    },
+    {
+      "id": "aa_excluded",
+      "label": "Do you already get PIP or ADP daily living, the middle or higher care rate of DLA, Pension Age Disability Payment, or Scottish Adult DLA?",
+      "type": "bool",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.64(1) (no attendance allowance on top of these)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    },
+    {
+      "id": "aa_day",
+      "label": "By day, do you need frequent help with personal care (washing, dressing, eating, medication), or continual supervision to avoid danger?",
+      "help": "The statute's words: “frequent attention throughout the day in connection with bodily functions, or continual supervision throughout the day in order to avoid substantial danger”. You do not need to actually have a carer.",
+      "type": "bool",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.64(2) (the day attendance condition)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    },
+    {
+      "id": "aa_night",
+      "label": "At night, do you need prolonged or repeated help, or someone awake to watch over you?",
+      "help": "The statute's words: “prolonged or repeated attention … or, to avoid substantial danger, another person awake for a prolonged period or at frequent intervals”.",
+      "type": "bool",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.64(3) (the night attendance condition)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    },
+    {
+      "id": "aa_six_months",
+      "label": "Have you needed this help for at least 6 months?",
+      "type": "bool",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.65(1)(b) (the qualifying period)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/65"
+    }
+  ],
+  "values": [
+    {
+      "id": "aa_rate",
+      "plainly": "The rate your answers point to (2026–27: £76.70 where one of the day or night conditions holds, £114.60 where both do).",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.65(3), Sch 4 Part III, as uprated by S.I. 2026/148",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/65",
+      "expr": { "if": [ { "and": [ { "get": "aa_day" }, { "get": "aa_night" } ] }, { "num": 11460 }, { "if": [ { "or": [ { "get": "aa_day" }, { "get": "aa_night" } ] }, { "num": 7670 }, { "num": 0 } ] } ] }
+    }
+  ],
+  "gates": [
+    {
+      "when": { "get": "scotland" },
+      "verdict": "signpost",
+      "because": "In Scotland this benefit is Pension Age Disability Payment, claimed from Social Security Scotland — the conditions are close cousins, but this file encodes the England-and-Wales rules.",
+      "rule": "Social Security (Scotland) Act 2018; gov.uk/pension-age-disability-payment",
+      "uri": "https://www.gov.uk/attendance-allowance"
+    },
+    {
+      "when": { "not": { "spa_reached": { "dob": { "get": "dob" } } } },
+      "verdict": "not-eligible",
+      "because": "Attendance Allowance starts at State Pension age. Under it, the equivalent is PIP (or ADP in Scotland).",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.64(1)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    },
+    {
+      "when": { "get": "aa_excluded" },
+      "verdict": "not-eligible",
+      "because": "Attendance Allowance cannot be paid on top of PIP, ADP, DLA care, PADP or Scottish Adult DLA — you already have the equivalent.",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.64(1)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    }
+  ],
+  "verdicts": [
+    {
+      "when": { "and": [ { "or": [ { "get": "aa_day" }, { "get": "aa_night" } ] }, { "get": "aa_six_months" } ] },
+      "verdict": "assessment-gated",
+      "weekly": { "val": "aa_rate" },
+      "because": "Whether your care needs meet the conditions is a human decision-maker's judgment on your claim form — not this page's, and not a computer's. On your answers, the rate would be the weekly amount shown. Attendance Allowance is not means-tested, and getting it can add the severe-disability amount to Pension Credit.",
+      "rule": "Social Security Contributions and Benefits Act 1992 ss.64–65",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    },
+    {
+      "when": { "or": [ { "get": "aa_day" }, { "get": "aa_night" } ] },
+      "verdict": "not-eligible",
+      "because": "Not yet: the need normally must have lasted 6 months before the claim. (A terminal illness is fast-tracked with no waiting period — s.66.)",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.65(1)(b); s.66 (terminal illness)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/65"
+    },
+    {
+      "when": { "num": 1 },
+      "verdict": "not-eligible",
+      "because": "Attendance Allowance is for people who need personal care or supervision because of illness or disability. If your needs grow, come back — the six-month clock starts when the need starts, not when you claim.",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.64(2)–(3)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/64"
+    }
+  ],
+  "not_asked": [
+    "your name",
+    "your National Insurance number",
+    "your address",
+    "your diagnosis or medical records",
+    "your income or savings — they are irrelevant to this benefit"
+  ],
+  "not_encoded": [
+    "the terminal-illness fast track (s.66: no qualifying period, higher rate — claim immediately)",
+    "the renal dialysis rules (prescribed circumstances under s.64(4))",
+    "residence and presence conditions (s.65(1)(a))",
+    "hospital and care-home payment rules (payment usually stops after 28 days funded care)"
+  ],
+  "passports": [
+    { "name": "Pension Credit severe-disability amount", "note": "getting Attendance Allowance is the usual doorway to it — £86.05 a week on top, if you live alone and nobody is paid Carer's Allowance for you." },
+    { "name": "Carer's Allowance for the person who looks after you", "note": "35+ hours of care for someone on Attendance Allowance can entitle them." }
+  ],
+  "sources_checked": [
+    { "what": "Rates £76.70 / £114.60 (2026–27)", "where": "gov.uk/attendance-allowance — consistent with SSCBA 1992 Sch 4 Part III as uprated by S.I. 2026/148", "date": "2026-07-11" },
+    { "what": "Day and night conditions, exclusions for PIP/ADP/DLA-care/PADP/SADLA", "where": "SSCBA 1992 s.64 (legislation.gov.uk revised text)", "date": "2026-07-11" },
+    { "what": "Six-month qualifying period; rate structure", "where": "SSCBA 1992 s.65(1)(b), s.65(3) (legislation.gov.uk revised text)", "date": "2026-07-11" },
+    { "what": "Scotland: Pension Age Disability Payment replaces AA", "where": "gov.uk/attendance-allowance", "date": "2026-07-11" }
+  ]
+}

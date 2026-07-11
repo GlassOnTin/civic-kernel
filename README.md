@@ -12,6 +12,13 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
 
 ## What's here for you
 
+- **You want to know what you are owed.**
+  [What are you owed? →](https://glassontin.github.io/civic-kernel/owed.html)
+  Pension Credit, Attendance Allowance and what they open — worked out on your device,
+  from rules that cite the law they encode, with nothing sent anywhere. Change an
+  answer and watch the amounts move. An estimated £24 billion of support goes
+  unclaimed in Great Britain each year; find out if some of it is yours, without
+  telling anyone you asked.
 - **You have a vote coming — a club, a co-op, a society.** Run a shadow ballot beside
   the show of hands: members cast sealed ballots from their phones, the hands still
   decide, and afterwards anyone can check from the published record that nobody could
@@ -97,11 +104,15 @@ drafted, in the open, honest limits included:
 And behind it, the wedge the essay itself calls the bigger want — *find out what you
 are owed, without telling anyone you asked*. The club vote is the entry point; it
 proves the machinery on a group's count, but it borrows its members' standing from
-the club register rather than giving anyone new standing. The plan for the first
-artifact that is about a person — a rules corpus with every question citing its
-authorizing rule, computed on your device, answered with a trace you can carry into
-a real claim — is drafted, success test first:
-[`docs/wedge-one-v0.md`](docs/wedge-one-v0.md).
+the club register rather than giving anyone new standing. The first rung of the
+bigger wedge now runs:
+[`owed.html`](https://glassontin.github.io/civic-kernel/owed.html) works out Pension
+Credit, Attendance Allowance and what they open, on your device, every question
+citing its rule, held to an independent judge in CI — implementing
+[`docs/wedge-one-v0.md`](docs/wedge-one-v0.md), which was drafted success-test-first
+and remains the plan of record. Next on that road: more corpus (Housing Benefit,
+Winter Fuel), the circumstances file, and — when the attestation ecosystem ships —
+proving without revealing.
 
 ## The words, in plain speech
 
@@ -178,6 +189,17 @@ links back to this list.
   key), seal a choice, challenge the device before casting (Benaloh), sign the ballot
   over the roster ring. `tools/cast-parity.mjs` (CI) asserts a page-built ballot,
   fed through `clubvote.py collect`, is accepted by `verify.py` — and moves the tally.
+- **`owed.html`** + **`owed.js`** — wedge one, v0: what you are owed, computed on
+  your device. The form is generated from the rules corpus, so a question that cannot
+  cite its authorizing rule cannot exist; the answer is a claim-trace — every step
+  with its rule, what was demanded, what was deliberately not asked. No network API
+  exists in the page or its engine, asserted in CI.
+- **`entitlements/`** — the rules corpus behind it: `rules.schema.json` (the record
+  format), `uk/` (Pension Credit Guarantee Credit, Attendance Allowance, the over-75
+  TV licence, a Council Tax Reduction signpost — and the statutory pensionable-age
+  table as data), `personas/` (13 hand-checked households, sources dated), and
+  `judge.py`, the independent second engine. `tools/owed-parity.mjs` (CI) holds the
+  page and the judge to identical claim-traces over the battery.
 - **`witness.html`** + **`witness.js`** — the witnessing society's side in the
   browser: make a witness key, pin whom you watch (the ceremony — the log key arrives
   out of band, never from a request), co-sign checkpoints, and refuse any history that

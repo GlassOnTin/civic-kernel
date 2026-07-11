@@ -1,0 +1,38 @@
+{
+  "v": "civic-kernel/entitlement-rules/v0",
+  "id": "council-tax-reduction",
+  "title": "Council Tax Reduction",
+  "jurisdiction": "England, Wales and Scotland — but every council runs its own scheme",
+  "kind": "local",
+  "effective": {
+    "tax_year": "2026-27",
+    "checked": "2026-07-12"
+  },
+  "plainly": "Help with council tax, sometimes down to nothing. Real and large — and honestly not computable here, because it is claimed through, and varies by, your council. This entry exists to say so instead of guessing.",
+  "questions": [],
+  "values": [],
+  "gates": [],
+  "verdicts": [
+    {
+      "when": { "num": 1 },
+      "verdict": "signpost",
+      "because": "For pension-age households the core rules are nationally prescribed, but the scheme is your council's: the claim, the forms and the local variations all live there. If Pension Credit (Guarantee Credit) applies above, you would usually get the maximum reduction.",
+      "rule": "Local Government Finance Act 1992 s.13A; Council Tax Reduction Schemes (Prescribed Requirements) (England) Regulations 2012 (S.I. 2012/2885)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/14/section/13A"
+    }
+  ],
+  "not_asked": [
+    "anything — this entry only points you to the right door"
+  ],
+  "not_encoded": [
+    "everything: each authority's scheme differs, and pretending otherwise would be a guess wearing arithmetic"
+  ],
+  "passports": [],
+  "signpost": {
+    "text": "Find and apply through your council",
+    "url": "https://www.gov.uk/apply-council-tax-reduction"
+  },
+  "sources_checked": [
+    { "what": "s.13A schemes; pension-age prescribed requirements exist nationally (England)", "where": "LGFA 1992 s.13A; S.I. 2012/2885 (legislation.gov.uk)", "date": "2026-07-12" }
+  ]
+}

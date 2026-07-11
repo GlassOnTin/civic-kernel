@@ -1,0 +1,19 @@
+{
+  "name": "Rosa — single, part-time job, underlying Carer's Allowance entitlement",
+  "note": "Two carer effects at once: the £48.15 addition, and the earnings disregard rising from £5 to £20 (Sch 6 para 3). Her Carer's Allowance is an underlying entitlement — not in payment, so nothing to count as income.",
+  "as_of": "2026-07-12",
+  "checked": "Arithmetic hand-worked against SPC Regs 2002 Sch 6 paras 3/4A/5 and reg 6(8), 2026-07-12.",
+  "answers": {
+    "dob": "1954-12-25", "has_partner": false,
+    "weekly_state_pension": 17000, "weekly_other_pensions": 0,
+    "weekly_earnings": 3000, "weekly_other_income": 0, "capital": 300000,
+    "gets_disability_benefit": false, "other_adults": false,
+    "carer_paid_for_you": false, "you_get_ca": true,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": false, "aa_night": false, "aa_six_months": false,
+    "gets_pc": false
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 10615 }
+  }
+}

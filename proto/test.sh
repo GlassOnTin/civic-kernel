@@ -78,6 +78,20 @@ collectpage() {
     record collectpage "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
+# The entitlements page (../owed.html) is held to its independent judge: two engines
+# (owed.js, entitlements/judge.py) share the rules corpus and nothing else, and must
+# produce identical claim-traces over the persona battery; the corpus embedded in the
+# page must equal the files; no network API may appear in the page or engine at all;
+# and a stale tax year fails loudly unless acknowledged.
+owedpage() {
+  if command -v node > /dev/null 2>&1; then
+    if node ../tools/owed-parity.mjs > "$T/owedpage.log" 2>&1
+    then record owedpage "OK   two engines, one corpus, identical traces over the battery; no network API exists in the page"
+    else record owedpage "FAIL owed parity: $(grep -m1 FAIL "$T/owedpage.log")"; fi
+  else
+    record owedpage "OK   SKIPPED here — node not installed; CI runs this"
+  fi
+}
 # The witness page (../witness.html) is held to `clubvote.py witness` the same way:
 # a real agm election runs with one witness on the browser engine — its card, its
 # co-signatures and its witness FILE must be interchangeable with the Python
@@ -127,7 +141,7 @@ must_fail() { # mode  want
 # Everything below reads out/ and nothing else — launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
-honest & reproduce & real & parity & castpage & collectpage & witnesspage & agmflow &
+honest & reproduce & real & parity & castpage & collectpage & witnesspage & owedpage & agmflow &
 must_fail log        "head's root matches a strict prefix"                 &
 must_fail rehead     "co-signed by the log key and all"                    &
 must_fail unwitness  "manifest declares every witness"                     &
@@ -162,9 +176,10 @@ declare -A desc=(
   [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
   [collectpage]="the verifier page's hand-in step -> same outcomes as collect + verify.py"
   [witnesspage]="the witness page's engine -> interchangeable with clubvote.py witness, rewrite refused"
+  [owedpage]="the entitlements page's engine -> identical traces to the independent judge; no network API"
   [agmflow]="a real election, every party separated (issuer + witness + trustee + anchor + agm)"
 )
-ORDER="honest reproduce real parity castpage collectpage witnesspage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
+ORDER="honest reproduce real parity castpage collectpage witnesspage owedpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do

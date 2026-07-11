@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glassontin.github.io/civic-kernel/entitlements/rules.schema.json",
+  "title": "Civic Kernel entitlement rules",
+  "description": "What this schema is for: the record format for a machine-runnable entitlement — its questions (each citing the rule that lets it ask, per T12), its logic (a small declarative expression tree both engines interpret), its gates and verdicts (each citing the rule that decides), and its declared honesty (kind, not_asked, not_encoded). One file is one entitlement; owed.js and entitlements/judge.py share these files and nothing else. Amounts are integer pence. A second document shape, spa-table/v0, carries the statutory pensionable-age table both engines read.",
+  "oneOf": [
+    { "$ref": "#/$defs/entitlement" },
+    { "$ref": "#/$defs/spa_table_doc" }
+  ],
+  "$defs": {
+    "entitlement": {
+      "type": "object",
+      "required": ["v", "id", "title", "jurisdiction", "kind", "effective", "plainly", "questions", "values", "gates", "verdicts", "not_asked", "not_encoded", "sources_checked"],
+      "additionalProperties": false,
+      "properties": {
+        "v": { "const": "civic-kernel/entitlement-rules/v0" },
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "title": { "type": "string" },
+        "jurisdiction": { "type": "string", "description": "Where these rules apply, in plain speech; the page shows it." },
+        "kind": {
+          "enum": ["computable", "assessment-gated", "passported", "local"],
+          "description": "The honesty enum. computable = the verdict is arithmetic over the answers. assessment-gated = the computable parts compute, but the deciding judgment is a human's and the verdict says so. passported = eligibility chains from another entitlement. local = the rules vary by authority; the only honest output is a signpost."
+        },
+        "effective": {
+          "type": "object",
+          "required": ["tax_year", "checked"],
+          "additionalProperties": false,
+          "properties": {
+            "tax_year": { "type": "string", "pattern": "^20[0-9]{2}-[0-9]{2}$", "description": "The tax year whose amounts this file encodes. The page shows it; CI fails loudly when it goes stale." },
+            "uprating": { "type": "string", "description": "The uprating instrument that set this year's amounts, cited." },
+            "checked": { "type": "string", "pattern": "^20[0-9]{2}-[0-9]{2}-[0-9]{2}$", "description": "When a human last checked the amounts and rules against their sources." },
+            "stale_acknowledged": { "type": "string", "description": "Set (with a dated reason) to let CI pass while the corpus lags the current tax year. Loud staleness is the rule; this is the explicit override." }
+          }
+        },
+        "plainly": { "type": "string", "description": "One plain-speech line: what this entitlement is. The page's first line for it." },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "type", "rule", "uri"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9_]+$", "description": "Shared across entitlements on purpose: the page asks each id once." },
+              "label": { "type": "string", "description": "The question, in plain speech." },
+              "type": { "enum": ["date", "money", "bool"] },
+              "help": { "type": "string" },
+              "rule": { "type": "string", "description": "The rule that lets this question be asked. A question with no rule cannot exist (T12)." },
+              "uri": { "type": "string", "format": "uri" },
+              "when": { "$ref": "#/$defs/expr", "description": "Only ask when this holds (e.g. partner questions when has_partner)." }
+            }
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "Named intermediate computations, evaluated in order; each becomes a trace step.",
+          "items": {
+            "type": "object",
+            "required": ["id", "plainly", "rule", "uri", "expr"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+              "plainly": { "type": "string" },
+              "rule": { "type": "string" },
+              "uri": { "type": "string", "format": "uri" },
+              "expr": { "$ref": "#/$defs/expr" }
+            }
+          }
+        },
+        "gates": {
+          "type": "array",
+          "description": "Checked in order before the verdicts; the first that fires ends the evaluation.",
+          "items": {
+            "type": "object",
+            "required": ["when", "verdict", "because", "rule", "uri"],
+            "additionalProperties": false,
+            "properties": {
+              "when": { "$ref": "#/$defs/expr" },
+              "verdict": { "enum": ["not-eligible", "signpost"] },
+              "because": { "type": "string", "description": "The refusal or redirection, in plain speech." },
+              "rule": { "type": "string" },
+              "uri": { "type": "string", "format": "uri" }
+            }
+          }
+        },
+        "verdicts": {
+          "type": "array",
+          "description": "Checked in order after the gates; the first whose condition holds is the verdict.",
+          "items": {
+            "type": "object",
+            "required": ["when", "verdict", "because", "rule", "uri"],
+            "additionalProperties": false,
+            "properties": {
+              "when": { "$ref": "#/$defs/expr" },
+              "verdict": { "enum": ["appears-eligible", "assessment-gated", "not-eligible", "signpost"] },
+              "weekly": { "$ref": "#/$defs/expr", "description": "Weekly amount in pence, when one is computable." },
+              "because": { "type": "string" },
+              "rule": { "type": "string" },
+              "uri": { "type": "string", "format": "uri" }
+            }
+          }
+        },
+        "not_asked": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What a real claim demands that this page deliberately does not ask."
+        },
+        "not_encoded": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Rules that exist and are not encoded — each one a reason the true answer could differ, said out loud."
+        },
+        "passports": {
+          "type": "array",
+          "description": "What this entitlement opens. Entries with an id chain into another encoded entitlement; entries with only a name are information.",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "signpost": {
+          "type": "object",
+          "description": "For kind: local — where to actually go.",
+          "additionalProperties": false,
+          "required": ["text", "url"],
+          "properties": { "text": { "type": "string" }, "url": { "type": "string", "format": "uri" } }
+        },
+        "sources_checked": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["what", "where", "date"],
+            "additionalProperties": false,
+            "properties": {
+              "what": { "type": "string" },
+              "where": { "type": "string" },
+              "date": { "type": "string", "pattern": "^20[0-9]{2}-[0-9]{2}-[0-9]{2}$" }
+            }
+          }
+        }
+      }
+    },
+    "spa_table_doc": {
+      "type": "object",
+      "required": ["v", "rule", "uri", "before", "table", "after"],
+      "additionalProperties": false,
+      "properties": {
+        "v": { "const": "civic-kernel/spa-table/v0" },
+        "rule": { "type": "string" },
+        "uri": { "type": "string", "format": "uri" },
+        "note": { "type": "string" },
+        "before": {
+          "type": "object",
+          "description": "Anyone born before `born` has pensionable age `years` (sufficient for this corpus's era).",
+          "required": ["born", "years"],
+          "additionalProperties": false,
+          "properties": { "born": { "type": "string" }, "years": { "type": "integer" } }
+        },
+        "table": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["born_from", "born_to", "years", "months"],
+            "additionalProperties": false,
+            "properties": {
+              "born_from": { "type": "string" },
+              "born_to": { "type": "string" },
+              "years": { "type": "integer" },
+              "months": { "type": "integer" }
+            }
+          }
+        },
+        "after": {
+          "type": "object",
+          "description": "Anyone born on or after `born` (up to `until`, beyond this corpus's horizon) has pensionable age `years`.",
+          "required": ["born", "years", "until"],
+          "additionalProperties": false,
+          "properties": { "born": { "type": "string" }, "years": { "type": "integer" }, "until": { "type": "string" } }
+        }
+      }
+    },
+    "expr": {
+      "description": "The whole expression language: literals, answers, named values, arithmetic on integer pence, comparison, boolean logic, and two date operations. Small on purpose — both engines implement exactly this and nothing more.",
+      "oneOf": [
+        { "type": "object", "required": ["num"], "additionalProperties": false, "properties": { "num": { "type": "integer" } } },
+        { "type": "object", "required": ["get"], "additionalProperties": false, "properties": { "get": { "type": "string" } } },
+        { "type": "object", "required": ["val"], "additionalProperties": false, "properties": { "val": { "type": "string" } } },
+        { "type": "object", "required": ["add"], "additionalProperties": false, "properties": { "add": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["sub"], "additionalProperties": false, "properties": { "sub": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["mul"], "additionalProperties": false, "properties": { "mul": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["max"], "additionalProperties": false, "properties": { "max": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["min"], "additionalProperties": false, "properties": { "min": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["ceil_div"], "additionalProperties": false, "properties": { "ceil_div": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["gt"], "additionalProperties": false, "properties": { "gt": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["gte"], "additionalProperties": false, "properties": { "gte": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["lt"], "additionalProperties": false, "properties": { "lt": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["lte"], "additionalProperties": false, "properties": { "lte": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["eq"], "additionalProperties": false, "properties": { "eq": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["and"], "additionalProperties": false, "properties": { "and": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["or"], "additionalProperties": false, "properties": { "or": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["not"], "additionalProperties": false, "properties": { "not": { "$ref": "#/$defs/expr" } } },
+        { "type": "object", "required": ["if"], "additionalProperties": false, "properties": { "if": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/expr" } } } },
+        { "type": "object", "required": ["age_at_least"], "additionalProperties": false, "properties": { "age_at_least": { "type": "object", "required": ["dob", "years"], "additionalProperties": false, "properties": { "dob": { "$ref": "#/$defs/expr" }, "years": { "type": "integer" } } } } },
+        { "type": "object", "required": ["spa_reached"], "additionalProperties": false, "properties": { "spa_reached": { "type": "object", "required": ["dob"], "additionalProperties": false, "properties": { "dob": { "$ref": "#/$defs/expr" } } } } }
+      ]
+    }
+  }
+}
