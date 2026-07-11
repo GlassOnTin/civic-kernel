@@ -70,7 +70,9 @@
     30
    ],
    "remedy": "declaration",
-   "scope": "unconditional"
+   "scope": "unconditional",
+   "entrenchment": "statute",
+   "timing": "post-enforcement"
   },
   "transparency_log": {
    "log_id": "did:web:united-kingdom.example",

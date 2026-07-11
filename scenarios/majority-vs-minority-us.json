@@ -76,7 +76,9 @@
     21
    ],
    "remedy": "strike",
-   "scope": "unconditional"
+   "scope": "unconditional",
+   "entrenchment": "doctrine",
+   "timing": "post-enforcement"
   },
   "transparency_log": {
    "log_id": "did:web:united-states.example",

@@ -81,7 +81,9 @@
     30
    ],
    "remedy": "strike",
-   "scope": "unconditional"
+   "scope": "unconditional",
+   "entrenchment": "constitutional-text",
+   "timing": "post-enforcement"
   },
   "transparency_log": {
    "log_id": "did:web:united-kingdom.example",

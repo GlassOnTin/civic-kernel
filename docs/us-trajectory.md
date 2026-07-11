@@ -42,9 +42,10 @@ same Act falls in 152 days instead of 439, stayed on referral before any permit 
 touched — the coercive entry never lands, and the escalation's `dependent_acts_voided`
 is an empty list by design. The verdict stays `strains` on the same bench-shaped residue,
 brought forward rather than removed: record-less review concentrates the capture prize it
-does not dilute. And the run's second result is the series' first invisible variable: the
-two Americas' manifests are byte-identical, signature included — timing has no field on
-the waist.
+does not dilute. And the run's second result was the series' first invisible variable: the
+two Americas' manifests were byte-identical, signature included — timing had no field on
+the waist. The revision the run motivated has since added one (`rights_guard.timing`),
+and the two manifests now differ by exactly that declared value.
 
 **Tenure: the same enum, a different half-life.** Nothing in the waist distinguishes
 Germany's strike from America's, and everything in the two runs does. Germany's rests on
@@ -59,8 +60,8 @@ says `strike` the day it stops meaning one. This is the compression the remedy f
 cannot express, and the German page arrives at it from the opposite side: **entrenchment
 — what holds the remedy in place — is now an axis of the model**
 ([functional model](functional-model.md), Part 1), motivated jointly by the pair the way
-the EU run motivated `scope` — and deliberately not a waist field: no manifest declares
-it.
+the EU run motivated `scope` — and now a waist field too: `rights_guard.entrenchment`,
+declared `eternity-clause` by the German column and `doctrine` by this one.
 
 **Coverage, narrow and deep — orthogonal here, decisive elsewhere.** 14/30 is the
 thinnest coverage of any measured column: no socio-economic rights at all, no federal
@@ -94,10 +95,11 @@ the jam tells you what kind of polity you are looking at.
 orthogonality measured on the UK pair, transposed to a different polity and labelled as
 the weaker inference it is. S3's run (`majority-vs-minority-us-abstract`) is a modelled
 counterfactual in the uk-strike discipline — an America that amended Article III, which
-the real one has refused since Muskrat (1911) — and its moved variable is the first in
-the series with no manifest field: the run's manifests are byte-identical, which is
-itself the finding (timing, like entrenchment, is now on the model's axis list — Part 1
-tabulates both at all five coordinates — and still not on the waist). S4 is inferred from the corpus (higher-coverage strike columns still
+the real one has refused since Muskrat (1911) — and its moved variable was, when measured, the first in
+the series with no manifest field: the run's manifests were byte-identical, which is
+itself the finding (timing, like entrenchment, now sits on the model's axis list — Part 1
+tabulates both at all five coordinates — and on the waist: `rights_guard.timing` is the
+run's motivated repair, and the two manifests now differ by exactly that value). S4 is inferred from the corpus (higher-coverage strike columns still
 strain) and is doubly locked: Article V, and orthogonality to this attack. The December
 2024 German court-entrenchment amendment referenced for contrast is real-world fact, not
 a corpus measurement.*

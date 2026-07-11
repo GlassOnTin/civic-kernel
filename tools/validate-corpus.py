@@ -22,6 +22,8 @@ from jsonschema import Draft202012Validator
 ROOT = Path(__file__).resolve().parent.parent
 LOG = Draft202012Validator(json.loads((ROOT / "schema" / "log-entry.schema.json").read_text()))
 STATUSES = {"backed", "structural", "none"}
+ENTRENCHMENTS = {"none", "statute", "doctrine", "constitutional-text", "treaty", "eternity-clause"}
+TIMINGS = {"pre-enactment", "pre-enforcement", "post-enforcement"}
 
 
 def main() -> int:
@@ -55,6 +57,14 @@ def main() -> int:
         elif scope not in ("unconditional", "conditional"):
             errs += 1
             print(f"FAIL rights-map {code}: meta.scope must be 'unconditional' or 'conditional', got {scope!r}", file=sys.stderr)
+        elif rmap["meta"].get("remedy") != "none" and (
+            rmap["meta"].get("entrenchment") not in ENTRENCHMENTS or rmap["meta"].get("timing") not in TIMINGS
+        ):
+            errs += 1
+            print(f"FAIL rights-map {code}: where a remedy exists, meta.entrenchment must be one of {sorted(ENTRENCHMENTS)} and meta.timing one of {sorted(TIMINGS)}", file=sys.stderr)
+        elif rmap["meta"].get("remedy") == "none" and ("entrenchment" in rmap["meta"] or "timing" in rmap["meta"]):
+            errs += 1
+            print(f"FAIL rights-map {code}: entrenchment/timing are vacuous where remedy is 'none' — omit the value fields (the _note fields may explain the absence)", file=sys.stderr)
         elif rmap["meta"].get("verdict") not in ("holds", "strains", "breaks") or len(rmap["meta"].get("verdict_plain", "")) < 40 or len(rmap["meta"].get("protection", "")) < 3:
             errs += 1
             print(f"FAIL rights-map {code}: meta.verdict must be holds/strains/breaks with verdict_plain (40+ chars) and protection", file=sys.stderr)
@@ -62,12 +72,21 @@ def main() -> int:
             rmap["meta"]["verdict"],
             rmap["meta"]["protection"],
             rmap["meta"].get("protection_plain"),
-        ) != (lambda s: (s["verdict"], s["protection"], s["protection_plain"]))(json.loads((ROOT / "scenarios" / f"majority-vs-minority-{code}.json").read_text())):
+            rmap["meta"].get("entrenchment"),
+            rmap["meta"].get("timing"),
+        ) != (lambda s: (
+            s["verdict"],
+            s["protection"],
+            s["protection_plain"],
+            s["manifest"]["rights_guard"].get("entrenchment"),
+            s["manifest"]["rights_guard"].get("timing"),
+        ))(json.loads((ROOT / "scenarios" / f"majority-vs-minority-{code}.json").read_text())):
             errs += 1
-            print(f"FAIL rights-map {code}: meta.verdict/protection contradict the measured scenario majority-vs-minority-{code}.json", file=sys.stderr)
+            print(f"FAIL rights-map {code}: meta.verdict/protection/entrenchment/timing contradict the measured scenario majority-vs-minority-{code}.json", file=sys.stderr)
         else:
             cov = rmap["meta"]["coverage"]
-            print(f"ok   rights-map {code}  backed {cov['backed']} · structural {cov['structural']} · none {cov['none']} · remedy '{rmap['meta']['remedy']}' · scope '{scope}'")
+            axes = f"remedy '{rmap['meta']['remedy']}' · scope '{scope}' · entrenchment '{rmap['meta'].get('entrenchment', '—')}' · timing '{rmap['meta'].get('timing', '—')}'"
+            print(f"ok   rights-map {code}  backed {cov['backed']} · structural {cov['structural']} · none {cov['none']} · {axes}")
             jurisdictions.append(rmap)
 
     if errs:

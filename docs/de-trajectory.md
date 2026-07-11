@@ -82,5 +82,5 @@ amendment is real-world fact, not a corpus measurement — the corpus has no axi
 tenure, which is the point of citing it. The axis this page and the
 [US trajectory](us-trajectory.md) jointly motivated — entrenchment: what holds the remedy
 in place — is now on the model's axis list ([functional model](functional-model.md),
-Part 1, with the five coordinates' values tabulated), and deliberately still not on the
-waist: no manifest field declares it.*
+Part 1, with the five coordinates' values tabulated) and on the waist itself:
+`rights_guard.entrenchment`, which Germany's column declares as `eternity-clause`.*

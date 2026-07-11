@@ -70,10 +70,12 @@ same instruments and runs that measured the first three:
 Two riders keep these honest. Neither axis is totally ordered — kinds, not ranks: US
 doctrine has outlived every statute in the table and can be re-read by one bench without
 a vote, so "stronger" is exactly the partial-order judgment the model refuses to make
-globally. And both are **model axes, not waist fields**: no manifest declares either —
-two byte-identical manifests described two different Americas in the measuring run — so
-the legibility gap the counterfactual exposed stands until a deliberate waist revision,
-which this page records but does not make.
+globally. And both are now **waist fields as well**: `rights_guard.entrenchment` and
+`rights_guard.timing` entered the manifest schema by the same run-motivated lifecycle
+that added `scope` — the corpus columns declare them, the validator enforces both the
+values and their vacuousness where remedy is `none`, and the measuring run's two
+Americas, byte-identical when it ran, now differ by exactly one declared field. The
+legibility gap the counterfactual exposed is closed by what it motivated.
 
 </details>
 

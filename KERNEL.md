@@ -204,7 +204,9 @@ research program, not a trained system.
   `unconditional` does not flip at all — 343 days refunded, same verdict: scope gates,
   remedy is the ceiling. A US counterfactual that opens a pre-enforcement route stays
   `strains` too — 287 days refunded, the coercive entry never lands — and its moved
-  variable has no manifest field at all: the waist cannot see timing. The PRC run also
+  variable had no manifest field at all when measured: the waist could not see timing,
+  and that run is why it now can (`rights_guard.timing`, with `entrenchment` beside it —
+  the scope lifecycle, repeated). The PRC run also
   loses the series' premise:
   its 61% has no observable counterpart, because no independent count of support may
   exist — the count is not a contest.
@@ -225,8 +227,9 @@ research program, not a trained system.
   to its end only reaches the UK's starting point. Germany
   ([trajectory](docs/de-trajectory.md)) holds the measured ceiling — strike, eternity
   clause — with nothing left to climb: its residue is the bench, a tenure the remedy
-  enum cannot express, and its one live real-world move (entrenching the court's own
-  structure, 2024) landed exactly there. The US ([trajectory](docs/us-trajectory.md))
+  enum alone could not express (the manifest's entrenchment field now carries it), and
+  its one live real-world move (entrenching the court's own structure, 2024) landed
+  exactly there. The US ([trajectory](docs/us-trajectory.md))
   holds the same enum by precedent rather than text, with both remaining rungs locked in
   the founding document — pre-enforcement review at Article III, coverage at Article V.
   Where a polity jams is diagnostic.

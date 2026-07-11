@@ -89,7 +89,9 @@
     30
    ],
    "remedy": "strike",
-   "scope": "conditional"
+   "scope": "conditional",
+   "entrenchment": "treaty",
+   "timing": "post-enforcement"
   },
   "transparency_log": {
    "log_id": "did:web:valmiria.example",
