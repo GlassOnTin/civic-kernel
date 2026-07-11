@@ -25,8 +25,10 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
 - **You want to try it.**
   [Cast a ballot of your own →](https://glassontin.github.io/civic-kernel/cast.html)
   The voter's side, in the browser: generate an enrolment secret, seal a choice,
-  challenge the device that sealed it, build the anonymous ballot file. What the page
-  produces, the independent Python verifier must count — CI holds it to that.
+  challenge the device that sealed it, build the anonymous ballot file — then
+  [hand it in on the verifier page](https://glassontin.github.io/civic-kernel/verifier.html#handpanel)
+  and watch the count move, no committee needed. What the pages build and count, the
+  independent Python verifier must accept and match — CI holds them to that.
 - **You met a word.** *Receipt-free*, *ring signature*, *linking tag* —
   [every term in this repo, one plain line each](#the-words-in-plain-speech).
 - **You want to know where your rights stand.**
@@ -83,6 +85,12 @@ for nothing by itself (the runbook is in [`proto/README.md`](proto/README.md)). 
 remains is not code: a real club, a real season, and what it teaches. The invitation a
 club actually receives is drafted, in the open, honest limits included:
 [`docs/shadow-agm-invitation.md`](docs/shadow-agm-invitation.md).
+
+Queued behind that: `witness.html` — the witnessing society's five minutes in the
+browser (check that the new fingerprint extends the history you remember, countersign
+it, hand the signature back), held to `clubvote.py witness` by the same CI parity
+discipline as the casting and verifying pages. Today that favour needs Python on the
+witness's own machine; when a club says yes, it shouldn't.
 
 ## The words, in plain speech
 
@@ -148,10 +156,12 @@ links back to this list.
   verbs, real signatures, real Merkle log, independent verifier, committed reference
   transcript). `proto/test.sh` is the success test.
 - **`verifier.html`** + **`verifier.js`** — the same checks in the browser: load or
-  drop a transcript, watch every check run, look up a ballot by its linking tag. The
-  engine is held to `proto/verify.py`'s verdicts by `tools/verify-parity.mjs`, which
-  CI runs; its standards (the ballot group, the two schemas) are pinned inside the
-  file, never fetched.
+  drop a transcript, watch every check run, look up a ballot by its linking tag — and,
+  on the demo election only, hand in a ballot and watch the count move (the demo
+  publishes its unsealing secret; a real election's page can judge, never count). The
+  engine is held to `proto/verify.py`'s verdicts by `tools/verify-parity.mjs` and
+  `tools/collect-parity.mjs`, which CI runs; its standards (the ballot group, the two
+  schemas) are pinned inside the file, never fetched.
 - **`cast.html`** + **`cast.js`** — the voter's side in the browser: generate an
   enrolment secret (it never leaves the device; the issuer certifies only the public
   key), seal a choice, challenge the device before casting (Benaloh), sign the ballot

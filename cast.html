@@ -307,9 +307,10 @@ $("castbtn").onclick = async () => {
     download(name, JSON.stringify(ballot, null, 1));
     $("result").innerHTML = "<div class='status ok small'><b>Cast built: <code></code></b> — hand this file to " +
       "whoever collects ballots. It proves an enrolled member voted, exactly once, without naming you; " +
-      "nobody — including you — can prove from it what the choice was. After the box is published, " +
-      "find it by its tag on the <a href='verifier.html'>verifier page</a> (paste your secret there). " +
-      "Its linking tag: <span class='mono'></span>…</div>";
+      "nobody — including you — can prove from it what the choice was. On the demo election you can be " +
+      "the committee too: <a href='verifier.html#handpanel'>hand the file in on the verifier page</a> and " +
+      "watch the count move. After a box is published, find your ballot there by its tag (paste your " +
+      "secret). Its linking tag: <span class='mono'></span>…</div>";
     $("result").querySelector("code").textContent = name;
     $("result").querySelector(".mono").textContent = ballot.nullifier.slice(0, 24);
     $("sealed").style.display = "none";

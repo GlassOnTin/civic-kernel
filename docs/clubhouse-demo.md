@@ -103,15 +103,31 @@ nothing to sell and nothing a bully can demand afterwards."
 2. The page shows: *Enrolled… you are Derek Wainwright.*
 3. Pick **Sandra Okafor** (Derek originally voted Keith — the count will visibly move).
 4. **Set the attempt number to 6** — Derek has cast before; a later ballot must carry a
-   higher number, and the page says so. *(Forget this and the new ballot is silently
-   superseded by his old one — the demo still verifies, but the count won't move.)*
+   higher number, and the page says so. *(Forget this and the hand-in panel will say so
+   out loud — "in the box, but superseded" — and the count won't move.)*
 5. **Seal my choice** → the sealed envelope appears. Ask the room: "cast it, or test
    the device first?" If they say test: **Challenge** — the envelope opens, is spoiled
    forever, and you explain a lying phone gets caught exactly here. Seal again.
-6. **Cast it** → a ballot file downloads. Get it to the laptop (email works; that's
-   the point — the collection channel can be dumb).
+6. **Cast it** → a ballot file downloads.
 
-**Do (presenter, terminal):**
+**Do (volunteer, same device):** open the
+[verifier page](https://glassontin.github.io/civic-kernel/verifier.html), **Load the
+reference election**, and give the downloaded ballot file to **Hand in a ballot —
+watch the count move** (drop it, or "choose it" on a phone).
+
+**Expect (~2 s):** *Counted. The total was Sandra Okafor 8, Keith Bramall 6 — it is
+now Sandra Okafor 9, Keith Bramall 5.* The volunteer's own device just did the
+committee's collect step and the unsealing, alone.
+
+**Say:** "Your envelope replaced Derek's old one. Nobody watching the box — including
+me — can tell which envelope changed, or what either one said. And the total moved by
+exactly one. Your phone could unseal that total only because this demo publishes every
+secret on purpose — in your real season, unsealing takes two of the three key-holders,
+each on their own machine."
+
+**Fallback (no wifi, or an ancient phone):** get the file to the laptop (email works;
+that's the point — the collection channel can be dumb) and run the committee's real
+path in the terminal:
 
 ```sh
 python3 proto/clubvote.py collect proto/out /tmp/demo-yourvote ballot-*.json
@@ -121,10 +137,6 @@ python3 proto/verify.py /tmp/demo-yourvote
 **Expect (~15 s):** green to the bottom, the counts now
 **Sandra Okafor 9, Keith Bramall 5** (they were 8–6), and the recast line reading
 *"17 valid ballots, 14 distinct linking tags counted, 3 silently superseded."*
-
-**Say:** "Your envelope replaced Derek's old one. Nobody watching the box — including
-me — can tell which envelope changed, or what either one said. And the total moved by
-exactly one."
 
 ### 18–24 min — now we rig it, twice
 
@@ -201,10 +213,11 @@ verifier, the cast page, the architecture.
   is similar (~15 s).
 - Casting on phones needs the live (https) pages, hence internet. No internet → laptop
   only; the demonstration is unchanged.
-- If the volunteer forgets attempt number 6, the verify still passes but the count
-  stays 8–6 (their ballot was superseded by Derek's earlier one, seq 5 beats seq 1 —
-  last *ballot* counts, not last *timestamp*). Recover in one line: it's a live
-  demonstration of the re-vote rule — then cast again at 6.
+- If the volunteer forgets attempt number 6, the hand-in panel says so out loud —
+  *"in the box, but superseded — re-cast with a higher attempt number"* — and the count
+  stays 8–6 (seq 5 beats seq 1: last *ballot* counts, not last *timestamp*). That is a
+  live demonstration of the re-vote rule; cast again at 6. Re-using exactly 5 is
+  refused as a duplicate, on the page and the terminal path alike.
 - Watch the downloads bar after **Cast it**: a browser meeting this site for the first
   time can silently swallow the file. If nothing appeared, allow downloads for the
   site, then **Seal my choice** and **Cast it** again — the same attempt number is

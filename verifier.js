@@ -6,6 +6,8 @@
  * waist schemas, and the external-anchor check. Runs in a browser (script tag,
  * used by verifier.html) or in Node >= 20 (used by tools/verify-parity.mjs,
  * which asserts in CI that this file and verify.py reach the same verdicts).
+ * Also carries collectBallot(), the demo-only hand-in step — held to
+ * `clubvote.py collect` + verify.py by tools/collect-parity.mjs, also in CI.
  *
  * The standards are pinned INSIDE the verifier — the ballot group by name and
  * the two schemas by value — because a verifier that takes its standards from
@@ -272,6 +274,91 @@
     return bytesToBig(await sha256(canon(stmt))) % Q;
   }
 
+  // ------------------------------------------------------ per-ballot checks
+  // Shared by verify()'s section 6 and collectBallot(), so the page cannot
+  // judge a handed-in ballot more kindly than the box it would join.
+  function inGroup(x, P, Q) { return x > B0 && x < P && modpow(x, Q, P) === B1; }
+
+  async function contextGen(ctx, P) {
+    for (let i = 0; i < 64; i++) {
+      const c = bytesToBig(await sha256(te.encode("civic-kernel/ctx|" + ctx + "|" + i))) % P;
+      if (c > B1 && modpow(c, B2, P) !== B1) return modpow(c, B2, P);
+    }
+    throw new Error("no context generator");
+  }
+
+  // Everything the per-ballot checks need, rebuilt from digest-committed
+  // artifacts: the group this file pins, the election key derived from the
+  // trustees' own Feldman commitments (asserted by nobody), the roster ring,
+  // and the per-decision generator.
+  async function ballotEnv(rosterDoc, trusteesDoc, decisionId) {
+    const P = KNOWN_GROUPS[trusteesDoc.group];
+    const Q = (P - B1) / B2, G = B2;
+    const A = [B1, B1];
+    for (const tr of trusteesDoc.trustees) {
+      A[0] = (A[0] * fromHex(tr.commitments[0])) % P;
+      A[1] = (A[1] * fromHex(tr.commitments[1])) % P;
+    }
+    const ring = rosterDoc.members.map(c => fromHex(c.voter_pub));
+    const ringDigest = await sha256hex(canon(rosterDoc.members.map(c => c.voter_pub)));
+    const hl = await contextGen(decisionId, P);
+    return { P, Q, G, A, h: A[0], hl, ring, ringDigest, decisionId };
+  }
+
+  async function cdsOk(ct, prf, env) {
+    // disjunctive Chaum-Pedersen: ct encrypts g^0 or g^1 under h
+    const { P, Q, G, h, decisionId } = env;
+    const c1 = fromHex(ct.c1), c2 = fromHex(ct.c2);
+    const stmt = { t: "cds01", ctx: decisionId, h: hx(h), c1: ct.c1, c2: ct.c2,
+                   a0: prf.a0, b0: prf.b0, a1: prf.a1, b1: prf.b1 };
+    const cc = [fromHex(prf.c0), fromHex(prf.c1)];
+    const zz = [fromHex(prf.z0), fromHex(prf.z1)];
+    if ((cc[0] + cc[1]) % Q !== await fsChallenge(stmt, Q)) return false;
+    for (let i = 0; i <= 1; i++) {
+      const a_i = fromHex(prf["a" + i]), b_i = fromHex(prf["b" + i]);
+      if (modpow(G, zz[i], P) !== (a_i * modpow(c1, cc[i], P)) % P) return false;
+      const u = (c2 * modinv(modpow(G, BigInt(i), P), P)) % P; // c2 / g^i
+      if (modpow(h, zz[i], P) !== (b_i * modpow(u, cc[i], P)) % P) return false;
+    }
+    return true;
+  }
+
+  async function lsagOk(b, env) {
+    // The ring closes only if some ring key signed THIS ballot with THIS tag.
+    const { P, G, hl, ring, ringDigest, decisionId } = env;
+    const sig = b.ring_sig || {};
+    const s = (sig.s || []).map(fromHex);
+    if (s.length !== ring.length) return false;
+    const tag = fromHex(b.nullifier), c0 = fromHex(sig.c0 || "0");
+    const msg = await sha256hex(canon(stripKey(b, "ring_sig")));
+    let c = c0;
+    for (let i = 0; i < ring.length; i++) {
+      const z1 = (modpow(G, s[i], P) * modpow(ring[i], c, P)) % P;
+      const z2 = (modpow(hl, s[i], P) * modpow(tag, c, P)) % P;
+      c = bytesToBig(await sha256(canon(
+        { t: "lsag", ring: ringDigest, ctx: decisionId, msg, tag: hx(tag), z1: hx(z1), z2: hx(z2) })));
+    }
+    return c === c0;
+  }
+
+  // One ballot, judged exactly as the box is judged. Returns null, or the
+  // reason it fails — the same strings verify() reports.
+  async function ballotProblem(b, env) {
+    const tag = fromHex(b.nullifier);
+    if (b.decision_id !== env.decisionId) {
+      return "wrong decision";
+    } else if (!(inGroup(tag, env.P, env.Q) && tag !== B1)) {
+      return "nullifier is not in the prime-order subgroup (a negated linking tag votes twice)";
+    } else if (!(inGroup(fromHex(b.ciphertext.c1), env.P, env.Q) && inGroup(fromHex(b.ciphertext.c2), env.P, env.Q))) {
+      return "ciphertext component not in the prime-order subgroup";
+    } else if (!(await lsagOk(b, env))) {
+      return "ring signature does not verify (no roster member signed this ballot with this nullifier)";
+    } else if (!(await cdsOk(b.ciphertext, b.proof, env))) {
+      return "ballot validity proof does not verify (not a 0-or-1 encryption)";
+    }
+    return null;
+  }
+
   // ---------------------------------------------------------------- verify
   // files: { "manifest.json": text, ..., "log.jsonl": text, ... }
   // hooks (all optional): onSection(numText, title, plain), onCheck({section, ok, text, plain}),
@@ -439,73 +526,17 @@
         + "(parameters are the verifier's own, never the transcript's)",
         "The election's arithmetic is one this page brought with it — a transcript never gets to choose its own maths.");
       if (!(trusteesDoc.group in KNOWN_GROUPS)) return finish(null, rosterDoc, null);
-      const P = KNOWN_GROUPS[trusteesDoc.group];
-      const Q = (P - B1) / B2, G = B2;
-      // DKG: the election key and every trustee key derive from the product of
-      // the per-trustee Feldman commitments — asserted by nobody.
-      const A = [B1, B1];
-      for (const tr of trusteesDoc.trustees) {
-        A[0] = (A[0] * fromHex(tr.commitments[0])) % P;
-        A[1] = (A[1] * fromHex(tr.commitments[1])) % P;
-      }
-      const h = A[0];
-
-      const inGroup = x => x > B0 && x < P && modpow(x, Q, P) === B1;
 
       const opened = (byType["decision.opened"] || {}).body || {};
       const decisionId = opened.decision_id;
       const options = opened.options || [];
 
-      async function cdsOk(ct, prf) {
-        // disjunctive Chaum-Pedersen: ct encrypts g^0 or g^1 under h
-        const c1 = fromHex(ct.c1), c2 = fromHex(ct.c2);
-        const stmt = { t: "cds01", ctx: decisionId, h: hx(h), c1: ct.c1, c2: ct.c2,
-                       a0: prf.a0, b0: prf.b0, a1: prf.a1, b1: prf.b1 };
-        const cc = [fromHex(prf.c0), fromHex(prf.c1)];
-        const zz = [fromHex(prf.z0), fromHex(prf.z1)];
-        if ((cc[0] + cc[1]) % Q !== await fsChallenge(stmt, Q)) return false;
-        for (let i = 0; i <= 1; i++) {
-          const a_i = fromHex(prf["a" + i]), b_i = fromHex(prf["b" + i]);
-          if (modpow(G, zz[i], P) !== (a_i * modpow(c1, cc[i], P)) % P) return false;
-          const u = (c2 * modinv(modpow(G, BigInt(i), P), P)) % P; // c2 / g^i
-          if (modpow(h, zz[i], P) !== (b_i * modpow(u, cc[i], P)) % P) return false;
-        }
-        return true;
-      }
-
-      // The anonymity set: the roster's keys in the roster's order, and a
-      // per-decision generator — both recomputed from digest-committed artifacts.
-      const ring = rosterDoc.members.map(c => fromHex(c.voter_pub));
-      const ringDigest = await sha256hex(canon(rosterDoc.members.map(c => c.voter_pub)));
-
-      async function contextGen(ctx) {
-        for (let i = 0; i < 64; i++) {
-          const c = bytesToBig(await sha256(te.encode("civic-kernel/ctx|" + ctx + "|" + i))) % P;
-          if (c > B1 && modpow(c, B2, P) !== B1) return modpow(c, B2, P);
-        }
-        throw new Error("no context generator");
-      }
-      const hl = await contextGen(decisionId);
-
-      async function ringChallenge(msg, tag, z1, z2) {
-        return bytesToBig(await sha256(canon(
-          { t: "lsag", ring: ringDigest, ctx: decisionId, msg, tag: hx(tag), z1: hx(z1), z2: hx(z2) })));
-      }
-      async function lsagOk(b) {
-        // The ring closes only if some ring key signed THIS ballot with THIS tag.
-        const sig = b.ring_sig || {};
-        const s = (sig.s || []).map(fromHex);
-        if (s.length !== ring.length) return false;
-        const tag = fromHex(b.nullifier), c0 = fromHex(sig.c0 || "0");
-        const msg = await sha256hex(canon(stripKey(b, "ring_sig")));
-        let c = c0;
-        for (let i = 0; i < ring.length; i++) {
-          const z1 = (modpow(G, s[i], P) * modpow(ring[i], c, P)) % P;
-          const z2 = (modpow(hl, s[i], P) * modpow(tag, c, P)) % P;
-          c = await ringChallenge(msg, tag, z1, z2);
-        }
-        return c === c0;
-      }
+      // The ballot-checking environment (see ballotEnv): the election key and
+      // every trustee key derive from the product of the per-trustee Feldman
+      // commitments — asserted by nobody; the anonymity set is the roster's
+      // keys in the roster's order — recomputed from digest-committed artifacts.
+      const env = await ballotEnv(rosterDoc, trusteesDoc, decisionId);
+      const { P, Q, G, A, h, ring } = env;
 
       onSection("5", "Device challenges (cast-or-audit) hold up", "Cast-or-audit: a voter may demand the device open the envelope it just sealed. Opened envelopes are evidence, never votes \u2014 and every failed test is on the public record.");
       const auditsDoc = JSON.parse(need("audits.json"));
@@ -542,7 +573,7 @@
       }
 
       onSection("6", "Every ballot: anonymous, well-formed, provably from an enrolled member", "Each ballot proves it came from some enrolled member \u2014 without saying which \u2014 carries a per-election tag that blocks double voting, and encrypts a valid yes-or-no.");
-      check("6", ring.every(inGroup),
+      check("6", ring.every(k => inGroup(k, P, Q)),
         "all " + ring.length + " roster keys are prime-order subgroup elements (input hygiene on the "
         + "ring: no tamper reaches it, because a rewritten roster fails its logged digest first)",
         "Every enrolment key passes the arithmetic hygiene check.");
@@ -550,19 +581,7 @@
       const onBallot = hooks.onBallot || (() => {});
       for (let i = 0; i < boxDoc.ballots.length; i++) {
         const b = boxDoc.ballots[i];
-        const tag = fromHex(b.nullifier);
-        let why = null;
-        if (b.decision_id !== decisionId) {
-          why = "wrong decision";
-        } else if (!(inGroup(tag) && tag !== B1)) {
-          why = "nullifier is not in the prime-order subgroup (a negated linking tag votes twice)";
-        } else if (!(inGroup(fromHex(b.ciphertext.c1)) && inGroup(fromHex(b.ciphertext.c2)))) {
-          why = "ciphertext component not in the prime-order subgroup";
-        } else if (!(await lsagOk(b))) {
-          why = "ring signature does not verify (no roster member signed this ballot with this nullifier)";
-        } else if (!(await cdsOk(b.ciphertext, b.proof))) {
-          why = "ballot validity proof does not verify (not a 0-or-1 encryption)";
-        }
+        const why = await ballotProblem(b, env);
         if (why) problems.push("ballot[" + i + "] " + why);
         else ballots.push(b);
         onBallot(i + 1, boxDoc.ballots.length);
@@ -599,7 +618,7 @@
       for (const s of shares) {
         const idx = s.index, d = fromHex(s.share || "0");
         if (!Number.isInteger(idx) || idx < 1 || idx > trusteesDoc.threshold.of) continue;
-        if (valid.some(v => v[0] === idx) || !inGroup(d)) continue;
+        if (valid.some(v => v[0] === idx) || !inGroup(d, P, Q)) continue;
         const h_i = (A[0] * modpow(A[1], BigInt(idx), P)) % P;
         const prf = s.proof || {};
         const stmt = { t: "cp", ctx: decisionId, index: idx, h_i: hx(h_i),
@@ -713,11 +732,7 @@
     if (!(trusteesDoc.group in KNOWN_GROUPS)) throw new Error("unknown ballot group");
     const P = KNOWN_GROUPS[trusteesDoc.group];
     const x = fromHex(secretHex.trim().replace(/^0x/, ""));
-    let hl = null;
-    for (let i = 0; i < 64 && hl === null; i++) {
-      const c = bytesToBig(await sha256(te.encode("civic-kernel/ctx|" + decisionId + "|" + i))) % P;
-      if (c > B1 && modpow(c, B2, P) !== B1) hl = modpow(c, B2, P);
-    }
+    const hl = await contextGen(decisionId, P);
     const tag = hx(modpow(hl, x, P));
     const pub = hx(modpow(B2, x, P));
     const member = rosterDoc.members.find(m => m.voter_pub === pub) || null;
@@ -731,5 +746,101 @@
     };
   }
 
-  return { verify, findBallot, edSupported, _internals: { canonStr, schemaErrors, SCHEMAS } };
+  // ------------------------------------------------------ hand in a ballot
+  // The committee's `collect` step, replayed in the page — for the DEMO
+  // transcript only. One externally built ballot is judged with the exact
+  // checks the box gets (ballotProblem, shared with verify()), the re-vote
+  // rule is applied, the sealed sum re-added, and the new total unsealed.
+  // Unsealing needs the joint decryption secret, which only the demo
+  // publishes (every scalar in the reference run derives from a public
+  // seed) — so this refuses any transcript whose committed election key is
+  // not g^jointSecret: on a real election this page can judge a ballot,
+  // never count one; that takes two trustees on their own machines.
+  // Nothing is signed and nothing is written: the published record is not
+  // this page's to grow. tools/collect-parity.mjs holds this to the verdicts
+  // of `clubvote.py collect` + `verify.py`, the Python judge.
+  async function collectBallot(files, ballotText, jointSecretHex) {
+    const rosterDoc = JSON.parse(files["roster.json"]);
+    const trusteesDoc = JSON.parse(files["trustees.json"]);
+    const boxDoc = JSON.parse(files["ballot-box.json"]);
+    const entries = files["log.jsonl"].split("\n").filter(l => l.trim()).map(l => JSON.parse(l));
+    const opened = entries.filter(e => e.type === "decision.opened").pop();
+    if (!opened) throw new Error("no decision.opened entry in the log");
+    const decisionId = opened.body.decision_id;
+    const options = opened.body.options;
+    if (!(trusteesDoc.group in KNOWN_GROUPS)) throw new Error("unknown ballot group");
+    const env = await ballotEnv(rosterDoc, trusteesDoc, decisionId);
+    const { P, Q, G, h } = env;
+
+    // The demo gate: the transcript itself decides whether its unsealing
+    // secret is public — g^x must equal the election key derived from the
+    // trustees' committed polynomials.
+    const x = fromHex(String(jointSecretHex).trim());
+    if (modpow(G, x, P) !== h) return { demo: false };
+
+    let b;
+    try {
+      b = typeof ballotText === "string" ? JSON.parse(ballotText) : ballotText;
+      if (!b || typeof b !== "object" || Array.isArray(b)) throw new Error("not a ballot object");
+    } catch (e) {
+      return { demo: true, accepted: false, why: "not a ballot file: " + e.message };
+    }
+
+    // collect's own gates, in collect's order: right decision, then no exact
+    // (tag, seq) duplicate — a re-cast needs a higher attempt number.
+    let why = null, duplicate = false;
+    try {
+      if (b.decision_id !== decisionId) {
+        why = "wrong decision";
+      } else if (boxDoc.ballots.some(o => o.nullifier === b.nullifier && o.seq === b.seq)) {
+        duplicate = true;
+        why = "a ballot with this tag and attempt number " + b.seq
+          + " is already in the box — a re-cast needs a higher attempt number";
+      } else {
+        why = await ballotProblem(b, env);
+      }
+    } catch (e) {
+      why = "malformed ballot: " + (e && e.message ? e.message : String(e));
+    }
+    if (why) return { demo: true, accepted: false, duplicate, why };
+
+    // The counted set (last ballot per tag) and its sealed sum, before and
+    // after — decrypted directly with the demo joint secret and opened by
+    // brute-forcing the small exponent, exactly the arithmetic the trustees'
+    // shares prove in a real close.
+    function tallyOf(all) {
+      const latest = new Map();
+      for (const bb of [...all].sort((p, q) => p.seq - q.seq)) latest.set(bb.nullifier, bb);
+      let C1 = B1, C2 = B1;
+      for (const bb of latest.values()) {
+        C1 = (C1 * fromHex(bb.ciphertext.c1)) % P;
+        C2 = (C2 * fromHex(bb.ciphertext.c2)) % P;
+      }
+      const gT = (C2 * modinv(modpow(C1, x, P), P)) % P;
+      let T = null, acc = B1;
+      for (let t_ = 0; t_ <= latest.size; t_++) {
+        if (acc === gT) { T = t_; break; }
+        acc = (acc * G) % P;
+      }
+      if (T === null) throw new Error("the sum does not open as a small exponent — verify this transcript first");
+      const counts = {};
+      counts[options[0]] = T;
+      counts[options[1]] = latest.size - T;
+      return { counts, voters: latest.size, superseded: all.length - latest.size,
+               countedSeq: latest.get(b.nullifier) ? latest.get(b.nullifier).seq : null };
+    }
+    const before = tallyOf(boxDoc.ballots);
+    const after = tallyOf([...boxDoc.ballots, b]);
+    const priorSeqs = boxDoc.ballots.filter(o => o.nullifier === b.nullifier)
+      .map(o => o.seq).sort((p, q) => p - q);
+    return {
+      demo: true, accepted: true, why: null,
+      tag: b.nullifier, seq: b.seq, priorSeqs,
+      counted: after.countedSeq === b.seq,
+      before: { counts: before.counts, voters: before.voters, superseded: before.superseded },
+      after: { counts: after.counts, voters: after.voters, superseded: after.superseded },
+    };
+  }
+
+  return { verify, findBallot, collectBallot, edSupported, _internals: { canonStr, schemaErrors, SCHEMAS } };
 });

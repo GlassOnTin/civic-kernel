@@ -36,12 +36,14 @@
   }
   button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
   button:disabled { opacity: .5; cursor: default; }
-  #drop {
+  #drop, #handdrop {
     margin-top: .8rem; padding: 1rem; border: 2px dashed var(--line);
     border-radius: 10px; color: var(--muted);
   }
-  #drop.over { border-color: var(--accent); color: var(--fg); }
-  #drop input { display: none; }
+  #drop.over, #handdrop.over { border-color: var(--accent); color: var(--fg); }
+  #drop input, #handdrop input { display: none; }
+  #handresult .ok { color: var(--ok); } #handresult .bad { color: var(--bad); }
+  #handresult .warn { color: var(--warn); }
   #filestate { font-size: .85rem; color: var(--muted); margin-top: .4rem; }
   #verdict {
     display: none; margin: 1.2rem 0; padding: .9rem 1rem; border-radius: 10px;
@@ -133,6 +135,24 @@ saw. If a single number were altered anywhere, a check turns red and says where.
   <input type="text" id="secret" class="mono" placeholder="your nym secret (hex)" spellcheck="false">
   <button id="find">Look up my ballot</button>
   <div id="findresult" class="small" style="margin-top:.5rem"></div>
+</div>
+
+<div class="panel" id="handpanel">
+  <h2 style="margin-top:0">Hand in a ballot — watch the count move</h2>
+  <p class="small">Cast a ballot on <a href="cast.html">the casting page</a>, then drop the
+  downloaded <code>ballot-….json</code> here. This page judges it exactly as it judges the
+  box — membership, tag, validity — applies the re-vote rule, adds it to the sealed sum,
+  and unseals the new total, in your browser. This is the committee's <em>collect</em> step
+  replayed for you; a parity test in CI holds it to the Python judge's verdicts.</p>
+  <p class="small sub">Unsealing here is possible only because this demo publishes every
+  secret, the trustees' included. In a real election this page could judge your ballot but
+  never count it — that takes two of the three trustees, each on their own machine, which
+  is the point. Nothing you drop here changes the published record.</p>
+  <div id="handdrop">
+    Drop your ballot file here — or
+    <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="handpicker"></label>.
+  </div>
+  <div id="handresult" class="small" style="margin-top:.5rem"></div>
 </div>
 
 <footer>
@@ -324,6 +344,69 @@ $("find").onclick = async () => {
   } catch (e) {
     out.textContent = "Could not compute: " + e.message;
   }
+};
+
+// --- hand in a ballot (the demo transcript unseals in the browser; a real one never can)
+const DEMO_JOINT_SECRET =
+  "20081ab70fd9bbc8e40d7a94f1cf3404c5f4b93632eb8c538de4a012807a66f650e7e904b1c0e8cf41cd901a7e3d8d93225cdceb1c0054cf9a8ec3a6fb2386c1a";
+const fmtCounts = c => Object.entries(c).map(([k, v]) => k + " " + v).join(", ");
+async function handIn(text) {
+  const out = $("handresult");
+  const needed = ["roster.json", "trustees.json", "ballot-box.json", "log.jsonl"];
+  if (!needed.every(f => f in files)) {
+    out.textContent = "Load a transcript first (the button at the top, or drop its files there).";
+    return;
+  }
+  out.textContent = "judging your ballot — it proves membership of the whole ring, so give it a second…";
+  try {
+    const r = await CivicVerifier.collectBallot(files, text, DEMO_JOINT_SECRET);
+    if (!r.demo) {
+      out.innerHTML = "<span class='warn'><b>This is not the demo transcript, so this page cannot count.</b></span> " +
+        "Its unsealing secret is not public — good: that is the design. This page can still judge a ballot " +
+        "for a real election; counting it takes a trustee quorum, on their own machines.";
+      return;
+    }
+    if (!r.accepted) {
+      out.innerHTML = r.duplicate
+        ? "<span class='warn'><b>Not taken:</b></span> <span class='dup'></span> — cast again with a higher attempt number."
+        : "<span class='bad'><b>Refused, exactly as the box would refuse it:</b></span> <span class='why'></span> " +
+          "Nothing was counted. The page that just caught this shares no code with the page that built it.";
+      const slot = out.querySelector(r.duplicate ? ".dup" : ".why");
+      if (slot) slot.textContent = r.why;
+      return;
+    }
+    let html = "";
+    if (r.counted) {
+      html += "<span class='ok'><b>Counted.</b></span> The total was <b>" + fmtCounts(r.before.counts) +
+        "</b> — it is now <b>" + fmtCounts(r.after.counts) + "</b>. ";
+      html += r.priorSeqs.length
+        ? "Your ballot silently superseded the earlier one with your tag (attempt " +
+          r.priorSeqs[r.priorSeqs.length - 1] + " → " + r.seq + "); nobody watching the box can tell which envelope changed."
+        : "A new voter joined the count: " + r.after.voters + " voted, up from " + r.before.voters + ".";
+    } else {
+      html += "<span class='warn'><b>In the box, but superseded</b></span> — a ballot with your tag already " +
+        "carries a higher attempt number (yours: " + r.seq + "; counted: " +
+        r.priorSeqs[r.priorSeqs.length - 1] + "). The total stays <b>" + fmtCounts(r.after.counts) +
+        "</b>. Re-cast with a higher attempt number to change your vote — this is the re-vote rule doing its job.";
+    }
+    html += "<div class='mono sub'>linking tag " + r.tag.slice(0, 24) + "… — paste your secret above to find it</div>";
+    out.innerHTML = html;
+  } catch (e) {
+    out.textContent = "Could not count: " + e.message;
+  }
+}
+const handdrop = $("handdrop");
+handdrop.ondragover = e => { e.preventDefault(); handdrop.classList.add("over"); };
+handdrop.ondragleave = () => handdrop.classList.remove("over");
+handdrop.ondrop = async e => {
+  e.preventDefault(); handdrop.classList.remove("over");
+  const f = [...e.dataTransfer.files][0];
+  if (f) handIn(await f.text());
+};
+$("handpicker").onchange = async e => {
+  const f = e.target.files[0];
+  if (f) handIn(await f.text());
+  e.target.value = "";
 };
 
 document.addEventListener('click', e => {

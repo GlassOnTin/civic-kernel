@@ -100,7 +100,13 @@ The same checks run in any current browser: [`../verifier.html`](../verifier.htm
 ([live](https://glassontin.github.io/civic-kernel/verifier.html)) loads or accepts a dropped
 transcript, shows every check as it runs, and lets a voter look up their own ballot by its
 linking tag. `tools/verify-parity.mjs` (part of `test.sh`, and CI) holds its engine to
-`verify.py`'s verdicts.
+`verify.py`'s verdicts. On the reference transcript — and only there, because only the demo
+publishes its trustees' joint secret — the page also takes a handed-in ballot and replays
+`collect` in the browser: judged with the box's own checks, the re-vote rule applied, the
+new total unsealed in front of the voter. `tools/collect-parity.mjs` (ditto) holds all four
+outcomes — counted, superseded, duplicate, forged — to `collect` + `verify.py`'s; the page
+refuses to count any transcript whose committed election key is not `g^(its pinned secret)`,
+which is every real one.
 
 The voter's side runs in the browser too: [`../cast.html`](../cast.html)
 ([live](https://glassontin.github.io/civic-kernel/cast.html)) generates an enrolment secret

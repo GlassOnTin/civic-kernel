@@ -64,6 +64,20 @@ castpage() {
     record castpage "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
+# The verifier page's hand-in step (collectBallot) is held to the committee's real
+# path the same way: four ballots — a proper re-cast, a stale attempt number, an
+# exact duplicate, a forged one — must meet the same outcome in the browser engine
+# as in `clubvote.py collect` + verify.py, and the page's pinned demo joint secret
+# must equal the election key the trustee commitments derive.
+collectpage() {
+  if command -v node > /dev/null 2>&1; then
+    if node ../tools/collect-parity.mjs > "$T/collectpage.log" 2>&1
+    then record collectpage "OK   the page's hand-in step matches collect + verify.py on all four outcomes"
+    else record collectpage "FAIL collect-page parity: $(grep -m1 FAIL "$T/collectpage.log")"; fi
+  else
+    record collectpage "OK   SKIPPED here — node not installed; CI runs this"
+  fi
+}
 # A REAL election, every party separated: the register (issuer new/certify), witnesses
 # (new/watch/sign), trustees (new/receive/share), the anchor (new/watch/lodge), and a
 # committee left holding one key — the log's (agm ... plus enrol-by-credential and the
@@ -98,7 +112,7 @@ must_fail() { # mode  want
 # Everything below reads out/ and nothing else — launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
-honest & reproduce & real & parity & castpage & agmflow &
+honest & reproduce & real & parity & castpage & collectpage & agmflow &
 must_fail log        "head's root matches a strict prefix"                 &
 must_fail rehead     "co-signed by the log key and all"                    &
 must_fail unwitness  "manifest declares every witness"                     &
@@ -131,9 +145,10 @@ declare -A desc=(
   [drop]="erase the recast from history, nothing forged -> the anchored closing head"
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
   [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
+  [collectpage]="the verifier page's hand-in step -> same outcomes as collect + verify.py"
   [agmflow]="a real election, every party separated (issuer + witness + trustee + anchor + agm)"
 )
-ORDER="honest reproduce real parity castpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
+ORDER="honest reproduce real parity castpage collectpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do
