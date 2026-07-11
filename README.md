@@ -10,22 +10,33 @@ fourteen threats, four services, four verbs, two message formats, one floor, twe
 refusals. The floor is the Universal Declaration of Human Rights, measured rather than
 recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
 
-## See it work
+## What's here for you
 
-- **[Check the election in your browser →](https://glassontin.github.io/civic-kernel/verifier.html)**
+- **You have a vote coming — a club, a co-op, a society.** Run a shadow ballot beside
+  the show of hands: members cast sealed ballots from their phones, the hands still
+  decide, and afterwards anyone can check from the published record that nobody could
+  have rigged it. [The invitation a committee receives](docs/shadow-agm-invitation.md)
+  says what it would look like, honest limits included; the committee's runbook is
+  [`proto/README.md`](proto/README.md).
+- **You'd rather check than believe.**
+  [Check the election in your browser →](https://glassontin.github.io/civic-kernel/verifier.html)
   No install. Every check runs on your machine, against the committed election
   transcript or any transcript you drop on the page. Look up a ballot by its tag.
-- **[Cast a ballot of your own →](https://glassontin.github.io/civic-kernel/cast.html)**
+- **You want to try it.**
+  [Cast a ballot of your own →](https://glassontin.github.io/civic-kernel/cast.html)
   The voter's side, in the browser: generate an enrolment secret, seal a choice,
   challenge the device that sealed it, build the anonymous ballot file. What the page
   produces, the independent Python verifier must count — CI holds it to that.
-- **[The architecture →](https://glassontin.github.io/civic-kernel/)**
-  The essay: democracy restated as an engineering problem, and the smallest honest
-  answer to it. Every section opens as one plain line; expand for the full argument.
-- **[Real life against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)**
-  24 stress-test stories, each machine-validated against the schemas.
-- **[Real legal systems, compared →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)**
-  The same 30 rights across the UK, Germany, the US, the EU Charter, and the PRC.
+- **You met a word.** *Receipt-free*, *ring signature*, *linking tag* —
+  [every term in this repo, one plain line each](#the-words-in-plain-speech).
+- **You want to know where your rights stand.**
+  [The same 30 rights across the UK, Germany, the US, the EU Charter, and the PRC →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)
+- **You want the argument.**
+  [The architecture →](https://glassontin.github.io/civic-kernel/)
+  Democracy restated as an engineering problem, and the smallest honest answer to it.
+  Every section opens as one plain line; expand for the full argument. Then watch
+  [real life run against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)
+  — 24 stress-test stories, each machine-validated against the schemas.
 
 Or run everything locally — the election, its verification, and twelve attempts to rig
 it — in about a minute: [`proto/test.sh`](proto/).
