@@ -25,7 +25,9 @@ machine can compute, and a closing head lodged where the committee cannot reach 
 (this is the shadow-AGM runbook):
 
 ```sh
-# each witnessing society, on ITS OWN machine:
+# each witnessing society, on ITS OWN machine — or in its own BROWSER, no install:
+# ../witness.html is the same witness (same file, card, co-signature, refusals;
+# tools/witness-parity.mjs holds the two to each other across a whole election):
 python3 clubvote.py witness new fed did:web:the-federation.example#w1   # -> fed/card.json
 #   hand card.json to the committee; get the community id + log key back OUT OF BAND
 #   (two secretaries at a federation meeting — that exchange is the ceremony):

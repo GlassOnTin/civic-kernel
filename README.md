@@ -29,6 +29,12 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
   [hand it in on the verifier page](https://glassontin.github.io/civic-kernel/verifier.html#handpanel)
   and watch the count move, no committee needed. What the pages build and count, the
   independent Python verifier must accept and match — CI holds them to that.
+- **A club asked you to witness its election.**
+  [The witness page →](https://glassontin.github.io/civic-kernel/witness.html)
+  Your five minutes, in the browser: co-sign the club's checkpoint only if the history
+  you are shown extends the history you remember — that is what stops a rewrite. One
+  small file holds your key and your memory, and the command-line witness reads the
+  same file.
 - **You met a word.** *Receipt-free*, *ring signature*, *linking tag* —
   [every term in this repo, one plain line each](#the-words-in-plain-speech).
 - **You want to know where your rights stand.**
@@ -77,20 +83,16 @@ first real communities teach will revise it again.
 ## Next
 
 A shadow-mode run alongside one real club's AGM, with the official result still decided
-by the show of hands. Every part now exists — `cast.html` for the voter, `issuer` for
-the club register, `witness` for the neighbouring societies, `trustee` for the
-key-holders, `anchor` for the newspaper, and `clubvote.py agm` for a committee left
-holding exactly one key, the log's: it publishes, gates and assembles, and can vouch
-for nothing by itself (the runbook is in [`proto/README.md`](proto/README.md)). What
-remains is not code: a real club, a real season, and what it teaches. The invitation a
-club actually receives is drafted, in the open, honest limits included:
+by the show of hands. Every part now exists — `cast.html` for the voter,
+[`witness.html`](https://glassontin.github.io/civic-kernel/witness.html) for the
+neighbouring societies (the same witness as `clubvote.py witness`: one file, either
+tool), `issuer` for the club register, `trustee` for the key-holders, `anchor` for the
+newspaper, and `clubvote.py agm` for a committee left holding exactly one key, the
+log's: it publishes, gates and assembles, and can vouch for nothing by itself (the
+runbook is in [`proto/README.md`](proto/README.md)). What remains is not code: a real
+club, a real season, and what it teaches. The invitation a club actually receives is
+drafted, in the open, honest limits included:
 [`docs/shadow-agm-invitation.md`](docs/shadow-agm-invitation.md).
-
-Queued behind that: `witness.html` — the witnessing society's five minutes in the
-browser (check that the new fingerprint extends the history you remember, countersign
-it, hand the signature back), held to `clubvote.py witness` by the same CI parity
-discipline as the casting and verifying pages. Today that favour needs Python on the
-witness's own machine; when a club says yes, it shouldn't.
 
 ## The words, in plain speech
 
@@ -167,6 +169,13 @@ links back to this list.
   key), seal a choice, challenge the device before casting (Benaloh), sign the ballot
   over the roster ring. `tools/cast-parity.mjs` (CI) asserts a page-built ballot,
   fed through `clubvote.py collect`, is accepted by `verify.py` — and moves the tally.
+- **`witness.html`** + **`witness.js`** — the witnessing society's side in the
+  browser: make a witness key, pin whom you watch (the ceremony — the log key arrives
+  out of band, never from a request), co-sign checkpoints, and refuse any history that
+  does not extend the one your memory pins. Interchangeable with `clubvote.py witness`
+  — same witness file, same card, same co-signature, same refusals —
+  `tools/witness-parity.mjs` (CI) proves it across a whole election, alternating the
+  file between the two implementations.
 - **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
 - **`schema/`** — the waist: the two universal formats, as JSON Schema (Draft 2020-12).
   - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act`

@@ -33,9 +33,9 @@ just as a plot number; their choice, yours to offer.
 
 **Three small favours from outside the committee.** Two neighbouring societies (or the
 federation) act as *witnesses*: three times during the season, someone there spends five
-minutes checking and countersigning a fingerprint of the record — that is what makes it
-impossible for anyone, including us and including your committee, to quietly rewrite
-history. Three people act as *trustees*, holding the keys that unseal the final total —
+minutes checking and countersigning a fingerprint of the record, on a web page with
+nothing to install — that is what makes it impossible for anyone, including us and
+including your committee, to quietly rewrite history. Three people act as *trustees*, holding the keys that unseal the final total —
 any two suffice, and no one of them (and no computer anywhere) can unseal anything
 alone. And your newsletter or noticeboard prints three lines after the close: the
 record's final fingerprint, which is what stops history quietly changing afterwards.

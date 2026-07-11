@@ -78,6 +78,21 @@ collectpage() {
     record collectpage "OK   SKIPPED here — node not installed; CI runs this"
   fi
 }
+# The witness page (../witness.html) is held to `clubvote.py witness` the same way:
+# a real agm election runs with one witness on the browser engine — its card, its
+# co-signatures and its witness FILE must be interchangeable with the Python
+# witness's (the file is alternated between the two implementations), verify.py must
+# certify the result, and the re-signed-rewrite refusal must hold in the browser on
+# the same memory, with the same reason.
+witnesspage() {
+  if command -v node > /dev/null 2>&1; then
+    if node ../tools/witness-parity.mjs > "$T/witnesspage.log" 2>&1
+    then record witnesspage "OK   the browser witness and the Python witness are the same witness (card, cosigs, file, refusals)"
+    else record witnesspage "FAIL witness-page parity: $(grep -m1 FAIL "$T/witnesspage.log")"; fi
+  else
+    record witnesspage "OK   SKIPPED here — node not installed; CI runs this"
+  fi
+}
 # A REAL election, every party separated: the register (issuer new/certify), witnesses
 # (new/watch/sign), trustees (new/receive/share), the anchor (new/watch/lodge), and a
 # committee left holding one key — the log's (agm ... plus enrol-by-credential and the
@@ -112,7 +127,7 @@ must_fail() { # mode  want
 # Everything below reads out/ and nothing else — launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
-honest & reproduce & real & parity & castpage & collectpage & agmflow &
+honest & reproduce & real & parity & castpage & collectpage & witnesspage & agmflow &
 must_fail log        "head's root matches a strict prefix"                 &
 must_fail rehead     "co-signed by the log key and all"                    &
 must_fail unwitness  "manifest declares every witness"                     &
@@ -146,9 +161,10 @@ declare -A desc=(
   [parity]="the in-browser verifier (verifier.html) agrees with verify.py"
   [castpage]="a ballot built by the casting page (cast.html) -> collected, verified, counted"
   [collectpage]="the verifier page's hand-in step -> same outcomes as collect + verify.py"
+  [witnesspage]="the witness page's engine -> interchangeable with clubvote.py witness, rewrite refused"
   [agmflow]="a real election, every party separated (issuer + witness + trustee + anchor + agm)"
 )
-ORDER="honest reproduce real parity castpage collectpage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
+ORDER="honest reproduce real parity castpage collectpage witnesspage agmflow log rehead unwitness roster box stuff doublevote smuggle overvote share count drop"
 
 echo; fails=0
 for name in $ORDER; do
