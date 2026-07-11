@@ -39,7 +39,7 @@ for (const f of readdirSync(UK).sort()) {
   const doc = JSON.parse(readFileSync(path.join(UK, f), "utf8"));
   if (doc.v === "civic-kernel/entitlement-rules/v0") ents.push(doc);
 }
-say(ents.length === 4, "corpus loaded: " + ents.length + " entitlements + the pensionable-age table");
+say(ents.length === 5, "corpus loaded: " + ents.length + " entitlements + the pensionable-age table");
 
 // --- no network API anywhere in the page or its engine, by construction
 for (const f of ["owed.js", "owed.html"]) {

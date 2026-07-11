@@ -1,0 +1,20 @@
+{
+  "name": "Vi — single, £17,000.01 savings, renting; the pennies that unlock the rent",
+  "note": "Housing Benefit's £16,000 limit shuts the door — but her income is £3.00 a week below the guarantee, so Pension Credit appears due. Claim those £3: on Guarantee Credit the £16,000 limit is disregarded and her rent question reopens at maximum. The chain is the lesson.",
+  "as_of": "2026-07-12",
+  "checked": "HB capital gate against HB (SPC) Regs reg 43 with the reg 26 exception; PC tariff hand-worked: £7,000.01 excess → 15 units → £15.00 deemed, income £235.00 vs £238.00 guarantee. 2026-07-12.",
+  "answers": {
+    "dob": "1951-07-07", "has_partner": false,
+    "weekly_state_pension": 22000, "weekly_other_pensions": 0,
+    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 1700001,
+    "gets_disability_benefit": false, "other_adults": false,
+    "carer_paid_for_you": false, "you_get_ca": false,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": false, "aa_night": false, "aa_six_months": false,
+    "gets_pc": false, "pays_rent": true, "weekly_rent": 8000
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 300 },
+    "housing-benefit-pension-age": { "verdict": "not-eligible", "weekly": null }
+  }
+}

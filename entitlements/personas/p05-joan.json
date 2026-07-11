@@ -4,16 +4,30 @@
   "as_of": "2026-07-12",
   "checked": "Arithmetic hand-worked against SPC Regs 2002 reg 15(6) (excess over £10,000 only), 2026-07-12.",
   "answers": {
-    "dob": "1952-05-05", "has_partner": false,
-    "weekly_state_pension": 23000, "weekly_other_pensions": 0,
-    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 1000000,
-    "gets_disability_benefit": false, "other_adults": false,
-    "carer_paid_for_you": false, "you_get_ca": false,
-    "scotland": false, "aa_excluded": false,
-    "aa_day": false, "aa_night": false, "aa_six_months": false,
-    "gets_pc": false
+    "dob": "1952-05-05",
+    "has_partner": false,
+    "weekly_state_pension": 23000,
+    "weekly_other_pensions": 0,
+    "weekly_earnings": 0,
+    "weekly_other_income": 0,
+    "capital": 1000000,
+    "gets_disability_benefit": false,
+    "other_adults": false,
+    "carer_paid_for_you": false,
+    "you_get_ca": false,
+    "scotland": false,
+    "aa_excluded": false,
+    "aa_day": false,
+    "aa_night": false,
+    "aa_six_months": false,
+    "gets_pc": false,
+    "pays_rent": false,
+    "weekly_rent": 0
   },
   "expect": {
-    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 800 }
+    "pension-credit-guarantee": {
+      "verdict": "appears-eligible",
+      "weekly": 800
+    }
   }
 }

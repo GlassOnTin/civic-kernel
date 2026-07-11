@@ -1,0 +1,22 @@
+{
+  "name": "Stan and Peg — couple, £400 income, £95 rent, no Pension Credit",
+  "note": "The taper by hand: £36.75 of excess income; 65% of it is £23.89 (rounded up a penny, conservatively); £95.00 − £23.89 = £71.11 of rent still covered.",
+  "as_of": "2026-07-12",
+  "checked": "Taper arithmetic hand-worked against HB (SPC) Regs 2006 regs 50–51 (65%) and Sch 3 couple allowance £363.25, 2026-07-12.",
+  "answers": {
+    "dob": "1952-02-02", "has_partner": true, "partner_dob": "1950-10-10",
+    "partner_hb_pension_age": false,
+    "weekly_state_pension": 40000, "weekly_other_pensions": 0,
+    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 800000,
+    "gets_disability_benefit": false, "partner_gets_disability_benefit": false,
+    "other_adults": false, "carer_paid_for_you": false,
+    "you_get_ca": false, "partner_gets_ca": false,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": false, "aa_night": false, "aa_six_months": false,
+    "gets_pc": false, "pays_rent": true, "weekly_rent": 9500
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "not-eligible", "weekly": null },
+    "housing-benefit-pension-age": { "verdict": "appears-eligible", "weekly": 7111 }
+  }
+}

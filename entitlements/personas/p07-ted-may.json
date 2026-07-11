@@ -4,18 +4,34 @@
   "as_of": "2026-07-12",
   "checked": "Arithmetic hand-worked against SPC Regs 2002 reg 6(8) (£48.15) and SPC Act 2002 s.2(8), 2026-07-12.",
   "answers": {
-    "dob": "1949-04-04", "has_partner": true, "partner_dob": "1951-09-09",
+    "dob": "1949-04-04",
+    "has_partner": true,
+    "partner_dob": "1951-09-09",
     "partner_hb_pension_age": false,
-    "weekly_state_pension": 31000, "weekly_other_pensions": 2000,
-    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 500000,
-    "gets_disability_benefit": false, "partner_gets_disability_benefit": false,
-    "other_adults": false, "carer_paid_for_you": true,
-    "you_get_ca": true, "partner_gets_ca": false,
-    "scotland": false, "aa_excluded": false,
-    "aa_day": false, "aa_night": false, "aa_six_months": false,
-    "gets_pc": false
+    "weekly_state_pension": 31000,
+    "weekly_other_pensions": 2000,
+    "weekly_earnings": 0,
+    "weekly_other_income": 0,
+    "capital": 500000,
+    "gets_disability_benefit": false,
+    "partner_gets_disability_benefit": false,
+    "other_adults": false,
+    "carer_paid_for_you": true,
+    "you_get_ca": true,
+    "partner_gets_ca": false,
+    "scotland": false,
+    "aa_excluded": false,
+    "aa_day": false,
+    "aa_night": false,
+    "aa_six_months": false,
+    "gets_pc": false,
+    "pays_rent": false,
+    "weekly_rent": 0
   },
   "expect": {
-    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 8140 }
+    "pension-credit-guarantee": {
+      "verdict": "appears-eligible",
+      "weekly": 8140
+    }
   }
 }

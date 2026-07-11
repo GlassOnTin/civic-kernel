@@ -257,7 +257,7 @@
     { "name": "Winter Fuel Payment", "note": "linked to Pension Credit in England and Wales; the rules have moved twice in two years — check the current position when you claim." },
     { "name": "Warm Home Discount", "note": "Guarantee Credit is the core qualifying group." },
     { "name": "Free NHS dental treatment, sight tests and help with health costs", "note": "via Guarantee Credit." },
-    { "name": "Housing Benefit and maximum Council Tax Reduction", "note": "Guarantee Credit usually passports to the maximum." }
+    { "id": "housing-benefit-pension-age", "name": "Maximum Housing Benefit", "note": "on Guarantee Credit, income and savings are disregarded and rent is normally covered in full — worked out below." }
   ],
   "sources_checked": [
     { "what": "Standard minimum guarantee £238.00 / £363.25; severe-disability £86.05 / £172.10; carer £48.15 (2026–27)", "where": "SPC Regulations 2002 reg 6 as in force (legislation.gov.uk revised text) — cross-checked against gov.uk/pension-credit/what-youll-get", "date": "2026-07-11" },

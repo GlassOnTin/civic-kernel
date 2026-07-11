@@ -4,17 +4,34 @@
   "as_of": "2026-07-12",
   "checked": "AA conditions checked against SSCBA 1992 s.64(2)-(3), s.65 and gov.uk rates (£114.60 higher), 2026-07-12; PC arithmetic against SPC Regs reg 6.",
   "answers": {
-    "dob": "1946-02-28", "has_partner": false,
-    "weekly_state_pension": 24500, "weekly_other_pensions": 0,
-    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 200000,
-    "gets_disability_benefit": false, "other_adults": false,
-    "carer_paid_for_you": false, "you_get_ca": false,
-    "scotland": false, "aa_excluded": false,
-    "aa_day": true, "aa_night": true, "aa_six_months": true,
-    "gets_pc": false
+    "dob": "1946-02-28",
+    "has_partner": false,
+    "weekly_state_pension": 24500,
+    "weekly_other_pensions": 0,
+    "weekly_earnings": 0,
+    "weekly_other_income": 0,
+    "capital": 200000,
+    "gets_disability_benefit": false,
+    "other_adults": false,
+    "carer_paid_for_you": false,
+    "you_get_ca": false,
+    "scotland": false,
+    "aa_excluded": false,
+    "aa_day": true,
+    "aa_night": true,
+    "aa_six_months": true,
+    "gets_pc": false,
+    "pays_rent": false,
+    "weekly_rent": 0
   },
   "expect": {
-    "pension-credit-guarantee": { "verdict": "not-eligible", "weekly": null },
-    "attendance-allowance": { "verdict": "assessment-gated", "weekly": 11460 }
+    "pension-credit-guarantee": {
+      "verdict": "not-eligible",
+      "weekly": null
+    },
+    "attendance-allowance": {
+      "verdict": "assessment-gated",
+      "weekly": 11460
+    }
   }
 }

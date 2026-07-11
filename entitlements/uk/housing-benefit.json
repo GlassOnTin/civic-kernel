@@ -1,0 +1,308 @@
+{
+  "v": "civic-kernel/entitlement-rules/v0",
+  "id": "housing-benefit-pension-age",
+  "title": "Housing Benefit (pension age)",
+  "jurisdiction": "England, Wales and Scotland (pension-age claims; working-age rent help is Universal Credit)",
+  "kind": "computable",
+  "effective": {
+    "tax_year": "2026-27",
+    "uprating": "The Social Security Benefits Up-rating Order 2026 (S.I. 2026/148)",
+    "checked": "2026-07-12"
+  },
+  "plainly": "Help with rent for people over State Pension age. The passport that matters: on Pension Credit (Guarantee Credit), income and savings are disregarded entirely and Housing Benefit is normally your full eligible rent.",
+  "questions": [
+    {
+      "id": "dob",
+      "label": "Your date of birth",
+      "help": "Only used to work out whether you have reached State Pension age — it never leaves this page.",
+      "type": "date",
+      "rule": "Housing Benefit (SPC) Regulations 2006 (S.I. 2006/214) reg 5 (these are the pension-age rules); under State Pension age, rent help is Universal Credit",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214"
+    },
+    {
+      "id": "has_partner",
+      "label": "Do you live with a partner (married, civil partner, or as a couple)?",
+      "type": "bool",
+      "rule": "Housing Benefit (SPC) Regulations 2006: a couple's income, capital and applicable amount are assessed together",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214"
+    },
+    {
+      "id": "partner_dob",
+      "label": "Your partner's date of birth",
+      "type": "date",
+      "when": { "get": "has_partner" },
+      "rule": "New pension-age Housing Benefit claims need both partners over State Pension age (since 15 May 2019; S.I. 2019/37)",
+      "uri": "https://www.legislation.gov.uk/uksi/2019/37"
+    },
+    {
+      "id": "partner_hb_pension_age",
+      "label": "If one of you is under State Pension age: do you get pension-age Housing Benefit as a couple?",
+      "help": "Couples already claiming before 15 May 2019 keep transitional protection. If unsure, answer no.",
+      "type": "bool",
+      "when": { "get": "has_partner" },
+      "rule": "Welfare Reform Act 2012 (Commencement No. 31 etc.) Order 2019 (S.I. 2019/37), savings provisions; gov.uk Housing Benefit eligibility",
+      "uri": "https://www.legislation.gov.uk/uksi/2019/37"
+    },
+    {
+      "id": "pays_rent",
+      "label": "Do you pay rent for the home you live in?",
+      "help": "Housing Benefit is for rent. Homeowners with a mortgage cannot get it — the equivalent is Support for Mortgage Interest, a different scheme.",
+      "type": "bool",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.130(1)(a) (liability to make payments in respect of a dwelling occupied as the home)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/130"
+    },
+    {
+      "id": "weekly_rent",
+      "label": "Your weekly eligible rent",
+      "help": "Social tenants: usually your actual rent. Private tenants: capped at your area's Local Housing Allowance rate, which this page cannot know — look yours up at lha-direct.voa.gov.uk and enter the lower of the two. Some service charges are not eligible.",
+      "type": "money",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 50 (maximum housing benefit starts from the eligible rent)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/50"
+    },
+    {
+      "id": "gets_pc",
+      "label": "Do you — or a partner you live with — get Pension Credit?",
+      "help": "If the Pension Credit answer above says you appear eligible, claim that first: on Guarantee Credit your income and savings are disregarded here entirely.",
+      "type": "bool",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 26 (claimant in receipt of guarantee credit: whole income and capital disregarded)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/26"
+    },
+    {
+      "id": "weekly_state_pension",
+      "label": "Your weekly State Pension (and your partner's, added together)",
+      "help": "Enter 0 if none.",
+      "type": "money",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 29 (meaning of income: retirement pension income)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/29"
+    },
+    {
+      "id": "weekly_other_pensions",
+      "label": "Weekly income from workplace or private pensions and annuities (both of you)",
+      "help": "Enter 0 if none.",
+      "type": "money",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 29 (meaning of income)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/29"
+    },
+    {
+      "id": "weekly_earnings",
+      "label": "Weekly earnings from work, after tax (both of you)",
+      "help": "Enter 0 if none. A small amount is disregarded — the working-out below shows it.",
+      "type": "money",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 29; Sch 4 (sums disregarded from earnings)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/29"
+    },
+    {
+      "id": "weekly_other_income",
+      "label": "Other weekly income that counts — for example Carer's Allowance or Working Tax Credit (both of you)",
+      "help": "Do NOT include Attendance Allowance, DLA, PIP, Pension Age Disability Payment or Housing Benefit itself. Enter 0 if none.",
+      "type": "money",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 29 (which income counts)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/29"
+    },
+    {
+      "id": "capital",
+      "label": "Total savings and investments (both of you) — not your home",
+      "help": "Over £16,000 normally ends entitlement — unless you get Guarantee Credit, when savings are disregarded entirely.",
+      "type": "money",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 43 (capital limit); reg 29(2) (deemed income from capital)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/43"
+    },
+    {
+      "id": "gets_disability_benefit",
+      "label": "Do you get Attendance Allowance, the daily-living part of PIP or ADP, the middle or higher care rate of DLA, or Pension Age Disability Payment?",
+      "type": "bool",
+      "rule": "Housing Benefit (SPC) Regulations 2006 Sch 3 para 6 (severe disability premium)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/schedule/3"
+    },
+    {
+      "id": "partner_gets_disability_benefit",
+      "label": "Does your partner get one of those benefits too?",
+      "type": "bool",
+      "when": { "get": "has_partner" },
+      "rule": "Housing Benefit (SPC) Regulations 2006 Sch 3 para 6 (a couple's severe disability premium needs both to qualify)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/schedule/3"
+    },
+    {
+      "id": "other_adults",
+      "label": "Apart from your partner, do any other adults (18 or over) normally live with you?",
+      "type": "bool",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 55 (non-dependant deductions) and Sch 3 para 6 (severe disability premium)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/55"
+    },
+    {
+      "id": "carer_paid_for_you",
+      "label": "Does anyone get Carer's Allowance (or Scotland's carer support payment) for looking after you or your partner?",
+      "type": "bool",
+      "rule": "Housing Benefit (SPC) Regulations 2006 Sch 3 para 6 (no severe disability premium while a carer is paid for the care)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/schedule/3"
+    },
+    {
+      "id": "you_get_ca",
+      "label": "Are you entitled to Carer's Allowance (or carer support payment) for looking after someone else?",
+      "help": "Answer yes even if it is not actually paid because of your State Pension (an “underlying entitlement” still counts).",
+      "type": "bool",
+      "rule": "Housing Benefit (SPC) Regulations 2006 Sch 3 para 9 (carer premium)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/schedule/3"
+    },
+    {
+      "id": "partner_gets_ca",
+      "label": "Is your partner entitled to Carer's Allowance (or carer support payment)?",
+      "type": "bool",
+      "when": { "get": "has_partner" },
+      "rule": "Housing Benefit (SPC) Regulations 2006 Sch 3 para 9 (carer premium, each carer)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/schedule/3"
+    }
+  ],
+  "values": [
+    {
+      "id": "hb_applicable_amount",
+      "plainly": "Your applicable amount: the personal allowance (2026–27: £238.00 single, £363.25 couple) plus any premiums — the same shapes as Pension Credit's minimum guarantee.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 22, Sch 3 Pt 1 para 1 and Pt 4 (as uprated 1 April 2026 by S.I. 2026/148)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/schedule/3",
+      "expr": { "add": [
+        { "if": [ { "get": "has_partner" }, { "num": 36325 }, { "num": 23800 } ] },
+        { "if": [ { "and": [ { "get": "has_partner" }, { "get": "gets_disability_benefit" }, { "get": "partner_gets_disability_benefit" }, { "not": { "get": "other_adults" } }, { "not": { "get": "carer_paid_for_you" } } ] }, { "num": 17210 },
+          { "if": [ { "and": [ { "not": { "get": "has_partner" } }, { "get": "gets_disability_benefit" }, { "not": { "get": "other_adults" } }, { "not": { "get": "carer_paid_for_you" } } ] }, { "num": 8605 }, { "num": 0 } ] } ] },
+        { "if": [ { "get": "you_get_ca" }, { "num": 4815 }, { "num": 0 } ] },
+        { "if": [ { "and": [ { "get": "has_partner" }, { "get": "partner_gets_ca" } ] }, { "num": 4815 }, { "num": 0 } ] }
+      ] }
+    },
+    {
+      "id": "hb_earnings_disregard",
+      "plainly": "Earnings ignored each week: £20 where a carer premium applies, otherwise £10 for a couple, £5 single.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 Sch 4 (sums disregarded from earnings)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/schedules",
+      "expr": { "if": [ { "or": [ { "get": "you_get_ca" }, { "and": [ { "get": "has_partner" }, { "get": "partner_gets_ca" } ] } ] }, { "num": 2000 }, { "if": [ { "get": "has_partner" }, { "num": 1000 }, { "num": 500 } ] } ] }
+    },
+    {
+      "id": "hb_tariff_income",
+      "plainly": "Deemed weekly income from savings above £10,000: £1 per £500 or part.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 29(2)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/29",
+      "expr": { "mul": [ { "num": 100 }, { "ceil_div": [ { "max": [ { "num": 0 }, { "sub": [ { "get": "capital" }, { "num": 1000000 } ] } ] }, { "num": 50000 } ] } ] }
+    },
+    {
+      "id": "hb_counted_income",
+      "plainly": "Income that counts — or nothing at all on Guarantee Credit, where the whole of your income and capital is disregarded.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 26 (on guarantee credit); reg 29 otherwise",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/26",
+      "expr": { "if": [ { "get": "gets_pc" }, { "num": 0 },
+        { "add": [ { "get": "weekly_state_pension" }, { "get": "weekly_other_pensions" },
+          { "max": [ { "num": 0 }, { "sub": [ { "get": "weekly_earnings" }, { "val": "hb_earnings_disregard" } ] } ] },
+          { "get": "weekly_other_income" }, { "val": "hb_tariff_income" } ] } ] }
+    },
+    {
+      "id": "hb_excess_income",
+      "plainly": "Income above your applicable amount (nil on Guarantee Credit).",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 51",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/51",
+      "expr": { "max": [ { "num": 0 }, { "sub": [ { "val": "hb_counted_income" }, { "val": "hb_applicable_amount" } ] } ] }
+    },
+    {
+      "id": "hb_taper",
+      "plainly": "The taper: 65p of Housing Benefit is withdrawn for each £1 of excess income (rounded up to the next penny here — up to 1p a week conservative).",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 51 (65%)",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/51",
+      "expr": { "ceil_div": [ { "mul": [ { "val": "hb_excess_income" }, { "num": 65 } ] }, { "num": 100 } ] }
+    },
+    {
+      "id": "hb_award",
+      "plainly": "Housing Benefit: your eligible rent, less the taper.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 regs 50–51",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/50",
+      "expr": { "max": [ { "num": 0 }, { "sub": [ { "get": "weekly_rent" }, { "val": "hb_taper" } ] } ] }
+    }
+  ],
+  "gates": [
+    {
+      "when": { "not": { "spa_reached": { "dob": { "get": "dob" } } } },
+      "verdict": "not-eligible",
+      "because": "These are the pension-age Housing Benefit rules and you have not yet reached State Pension age. Rent help under it is Universal Credit's housing element.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 5; gov.uk Housing Benefit eligibility",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214"
+    },
+    {
+      "when": { "and": [ { "get": "has_partner" }, { "not": { "spa_reached": { "dob": { "get": "partner_dob" } } } }, { "not": { "get": "partner_hb_pension_age" } } ] },
+      "verdict": "not-eligible",
+      "because": "A couple cannot start a pension-age Housing Benefit claim while one partner is under State Pension age (couples claiming since before 15 May 2019 keep protection). Until then, rent help is Universal Credit.",
+      "rule": "S.I. 2019/37 (mixed-age couples, from 15 May 2019)",
+      "uri": "https://www.legislation.gov.uk/uksi/2019/37"
+    },
+    {
+      "when": { "not": { "get": "pays_rent" } },
+      "verdict": "not-eligible",
+      "because": "Housing Benefit is help with rent. Homeowners cannot get it — help with mortgage interest is a separate scheme (Support for Mortgage Interest).",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.130(1)(a)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/130"
+    },
+    {
+      "when": { "and": [ { "not": { "get": "gets_pc" } }, { "gt": [ { "get": "capital" }, { "num": 1600000 } ] } ] },
+      "verdict": "not-eligible",
+      "because": "Savings over £16,000 end entitlement — unless you get Guarantee Credit, when savings are disregarded entirely. If the Pension Credit answer above applies, claim it first and this gate disappears.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 43; reg 26",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/43"
+    }
+  ],
+  "verdicts": [
+    {
+      "when": { "and": [ { "get": "gets_pc" }, { "not": { "get": "other_adults" } } ] },
+      "verdict": "appears-eligible",
+      "weekly": { "get": "weekly_rent" },
+      "because": "On Pension Credit your income and savings are disregarded entirely: maximum Housing Benefit, normally your full eligible rent. Claim through your council.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 regs 26 and 50",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/26"
+    },
+    {
+      "when": { "get": "gets_pc" },
+      "verdict": "appears-eligible",
+      "because": "On Pension Credit you get maximum Housing Benefit — but a deduction applies for each other adult living with you, sized by their income (not encoded here), so the award will be below your full rent. Claim through your council.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 regs 26, 50 and 55",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/55"
+    },
+    {
+      "when": { "and": [ { "gt": [ { "val": "hb_award" }, { "num": 0 } ] }, { "not": { "get": "other_adults" } } ] },
+      "verdict": "appears-eligible",
+      "weekly": { "val": "hb_award" },
+      "because": "Your income is above your applicable amount, but 65p per £1 of the excess still leaves some of your rent covered. And if the Pension Credit answer above applies, claim it first — it would make this maximum.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 regs 50–51",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/51"
+    },
+    {
+      "when": { "gt": [ { "val": "hb_award" }, { "num": 0 } ] },
+      "verdict": "appears-eligible",
+      "because": "Some rent appears covered after the 65% taper — but a deduction applies for each other adult living with you, sized by their income (not encoded here). Claim through your council and expect the award below the working-out shown.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 regs 50–51, 55",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/55"
+    },
+    {
+      "when": { "num": 1 },
+      "verdict": "not-eligible",
+      "because": "65p of each £1 of income above your applicable amount exceeds your eligible rent, so the taper reaches zero. Close cases are worth claiming anyway — and a Pension Credit award of even pennies would flip this to maximum Housing Benefit.",
+      "rule": "Housing Benefit (SPC) Regulations 2006 reg 51",
+      "uri": "https://www.legislation.gov.uk/uksi/2006/214/regulation/51"
+    }
+  ],
+  "not_asked": [
+    "your name",
+    "your National Insurance number",
+    "your address or landlord's details",
+    "your tenancy agreement",
+    "your bank details"
+  ],
+  "not_encoded": [
+    "non-dependant deductions (reg 55: a deduction per other adult in the home, sized by their income — where they apply, the flagged award will be lower)",
+    "Local Housing Allowance caps for private tenants (the eligible rent may be below the contractual rent; look up your area at lha-direct.voa.gov.uk)",
+    "ineligible service charges (heating, meals and some others come out of the eligible rent)",
+    "the Savings-Credit-only case (reg 27: a partial disregard — this file's Guarantee Credit passport assumes Guarantee Credit)",
+    "temporary absence, two homes, and care-home rules",
+    "Discretionary Housing Payments (a council top-up worth asking about when Housing Benefit falls short)"
+  ],
+  "passports": [
+    { "name": "Maximum Council Tax Reduction usually travels with it", "note": "claimed through the same council form in most areas." }
+  ],
+  "sources_checked": [
+    { "what": "Personal allowances £238.00 / £363.25; severe disability premium £86.05 / £172.10; carer premium £48.15 (uprated 1 April 2026 by S.I. 2026/148)", "where": "HB (SPC) Regulations 2006 Sch 3 Pts 1 and 4 (legislation.gov.uk revised text)", "date": "2026-07-12" },
+    { "what": "On guarantee credit: whole income and capital disregarded (reg 26); maximum HB (reg 50); 65% taper (reg 51); £16,000 capital limit (reg 43); tariff £1/£500 over £10,000 (reg 29(2))", "where": "HB (SPC) Regulations 2006 (legislation.gov.uk contents and revised text)", "date": "2026-07-12" },
+    { "what": "New-claim conditions: pension age, mixed-age exclusion with pre-2019 protection, £16,000 limit with Guarantee Credit exception, owner-occupiers excluded (SMI instead)", "where": "gov.uk/housing-benefit/eligibility", "date": "2026-07-12" }
+  ]
+}
