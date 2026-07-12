@@ -116,6 +116,10 @@
         const dob = parseDate(answerString(e.age_at_least.dob));
         return cmpDate(addYearsMonths(dob, e.age_at_least.years, 0), asOf) <= 0 ? 1 : 0;
       }
+      if ("born_on_or_before" in e) {
+        const dob = parseDate(answerString(e.born_on_or_before.dob));
+        return cmpDate(dob, parseDate(e.born_on_or_before.date)) <= 0 ? 1 : 0;
+      }
       if ("spa_reached" in e) {
         return cmpDate(spaDate(answerString(e.spa_reached.dob), spa), asOf) <= 0 ? 1 : 0;
       }

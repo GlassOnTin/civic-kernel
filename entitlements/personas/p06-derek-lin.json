@@ -26,7 +26,9 @@
     "aa_six_months": false,
     "gets_pc": false,
     "pays_rent": false,
-    "weekly_rent": 0
+    "weekly_rent": 0,
+    "income_over_35k": false,
+    "partner_income_over_35k": false
   },
   "expect": {
     "pension-credit-guarantee": {

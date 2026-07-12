@@ -1,0 +1,160 @@
+{
+  "v": "civic-kernel/entitlement-rules/v0",
+  "id": "winter-fuel-payment",
+  "title": "Winter Fuel Payment",
+  "jurisdiction": "England and Wales (Scotland has Pension Age Winter Heating Payment; Northern Ireland runs a mirror scheme)",
+  "kind": "computable",
+  "effective": {
+    "tax_year": "2026-27",
+    "uprating": "The Social Fund Winter Fuel Payment Regulations 2025 (S.I. 2025/969); winter 2026–27 dates per gov.uk",
+    "checked": "2026-07-12"
+  },
+  "plainly": "£200 or £300 towards winter heating, paid automatically to pension-age households — the rules moved twice in two years, and this file encodes the current ones: paid to all who qualify by age, then recovered through tax from anyone whose own income is over £35,000.",
+  "questions": [
+    {
+      "id": "dob",
+      "label": "Your date of birth",
+      "help": "Only used against the qualifying dates — it never leaves this page.",
+      "type": "date",
+      "rule": "Social Fund Winter Fuel Payment Regulations 2025 (S.I. 2025/969): pension age by the qualifying week — for winter 2026–27, born before 28 June 1960",
+      "uri": "https://www.legislation.gov.uk/uksi/2025/969"
+    },
+    {
+      "id": "scotland",
+      "label": "Do you live in Scotland?",
+      "type": "bool",
+      "rule": "Winter heating support is devolved: Pension Age Winter Heating Payment, from Social Security Scotland",
+      "uri": "https://www.gov.uk/winter-fuel-payment"
+    },
+    {
+      "id": "has_partner",
+      "label": "Do you live with a partner (married, civil partner, or as a couple)?",
+      "type": "bool",
+      "rule": "S.I. 2025/969: the payment is shared between qualifying members of a household",
+      "uri": "https://www.legislation.gov.uk/uksi/2025/969"
+    },
+    {
+      "id": "partner_dob",
+      "label": "Your partner's date of birth",
+      "type": "date",
+      "when": { "get": "has_partner" },
+      "rule": "S.I. 2025/969: whether your partner qualifies, and the higher amount where someone was born before 28 September 1946",
+      "uri": "https://www.legislation.gov.uk/uksi/2025/969"
+    },
+    {
+      "id": "income_over_35k",
+      "label": "Is your own taxable income over £35,000 a year?",
+      "help": "Your partner's income does not count towards yours — the recovery is individual.",
+      "type": "bool",
+      "rule": "gov.uk Winter Fuel Payment: HMRC recovers the payment from anyone whose own taxable income is over £35,000; you can opt out of receiving it instead",
+      "uri": "https://www.gov.uk/winter-fuel-payment"
+    },
+    {
+      "id": "partner_income_over_35k",
+      "label": "Is your partner's own taxable income over £35,000 a year?",
+      "type": "bool",
+      "when": { "get": "has_partner" },
+      "rule": "gov.uk Winter Fuel Payment: recovery applies per person, to each person's own share",
+      "uri": "https://www.gov.uk/winter-fuel-payment"
+    }
+  ],
+  "values": [
+    {
+      "id": "wfp_you_qualify",
+      "plainly": "You qualify if you were born before 28 June 1960 — pension age by the qualifying week of winter 2026–27.",
+      "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment (winter 2026–27 qualifying date)",
+      "uri": "https://www.gov.uk/winter-fuel-payment",
+      "expr": { "born_on_or_before": { "dob": { "get": "dob" }, "date": "1960-06-27" } }
+    },
+    {
+      "id": "wfp_partner_qualifies",
+      "plainly": "Whether your partner qualifies by the same date.",
+      "rule": "S.I. 2025/969",
+      "uri": "https://www.legislation.gov.uk/uksi/2025/969",
+      "expr": { "and": [ { "get": "has_partner" }, { "born_on_or_before": { "dob": { "get": "partner_dob" }, "date": "1960-06-27" } } ] }
+    },
+    {
+      "id": "wfp_any_80",
+      "plainly": "Whether a qualifying member of the household was born before 28 September 1946 — the higher-amount band (80 or over by the qualifying week).",
+      "rule": "S.I. 2025/969; gov.uk 'how much you'll get' (winter 2026–27 dates)",
+      "uri": "https://www.gov.uk/winter-fuel-payment/how-much-youll-get",
+      "expr": { "or": [
+        { "and": [ { "val": "wfp_you_qualify" }, { "born_on_or_before": { "dob": { "get": "dob" }, "date": "1946-09-27" } } ] },
+        { "and": [ { "val": "wfp_partner_qualifies" }, { "born_on_or_before": { "dob": { "get": "partner_dob" }, "date": "1946-09-27" } } ] }
+      ] }
+    },
+    {
+      "id": "wfp_household_amount",
+      "plainly": "The household's winter total: £300 where someone qualifying was born before 28 September 1946, otherwise £200. How it is split between you varies (halves for a qualifying couple; one payment where Pension Credit is claimed jointly) — the total does not.",
+      "rule": "S.I. 2025/969; gov.uk 'how much you'll get'",
+      "uri": "https://www.gov.uk/winter-fuel-payment/how-much-youll-get",
+      "expr": { "if": [ { "val": "wfp_any_80" }, { "num": 30000 }, { "num": 20000 } ] }
+    }
+  ],
+  "gates": [
+    {
+      "when": { "get": "scotland" },
+      "verdict": "signpost",
+      "because": "In Scotland this is Pension Age Winter Heating Payment, paid by Social Security Scotland under its own rules — this file encodes the England-and-Wales scheme.",
+      "rule": "Devolved: Social Security Scotland, Pension Age Winter Heating Payment",
+      "uri": "https://www.mygov.scot/pension-age-winter-heating-payment"
+    },
+    {
+      "when": { "not": { "val": "wfp_you_qualify" } },
+      "verdict": "not-eligible",
+      "because": "Born on or after 28 June 1960: not yet pension age by this winter's qualifying week (21–27 September 2026). If your partner was born before that date, the payment is theirs to receive. Next winter's date moves with State Pension age.",
+      "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment (winter 2026–27)",
+      "uri": "https://www.gov.uk/winter-fuel-payment"
+    }
+  ],
+  "verdicts": [
+    {
+      "when": { "and": [ { "val": "wfp_any_80" }, { "not": { "or": [ { "get": "income_over_35k" }, { "and": [ { "get": "has_partner" }, { "get": "partner_income_over_35k" } ] } ] } } ] },
+      "verdict": "appears-eligible",
+      "because": "£300 for your household this winter (someone was born before 28 September 1946), paid automatically in November or December — no claim needed for most people, and nothing is recovered at your incomes.",
+      "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment",
+      "uri": "https://www.gov.uk/winter-fuel-payment/how-much-youll-get"
+    },
+    {
+      "when": { "val": "wfp_any_80" },
+      "verdict": "appears-eligible",
+      "because": "£300 for your household this winter (someone was born before 28 September 1946), paid automatically — but HMRC recovers the share of anyone whose own taxable income is over £35,000, through PAYE or Self Assessment. You can opt out of receiving it instead.",
+      "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment (recovery over £35,000)",
+      "uri": "https://www.gov.uk/winter-fuel-payment"
+    },
+    {
+      "when": { "not": { "or": [ { "get": "income_over_35k" }, { "and": [ { "get": "has_partner" }, { "get": "partner_income_over_35k" } ] } ] } },
+      "verdict": "appears-eligible",
+      "because": "£200 for your household this winter, paid automatically in November or December — no claim needed for most people, and nothing is recovered at your incomes.",
+      "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment",
+      "uri": "https://www.gov.uk/winter-fuel-payment/how-much-youll-get"
+    },
+    {
+      "when": { "num": 1 },
+      "verdict": "appears-eligible",
+      "because": "£200 for your household this winter, paid automatically — but HMRC recovers the share of anyone whose own taxable income is over £35,000, through PAYE or Self Assessment. You can opt out of receiving it instead.",
+      "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment (recovery over £35,000)",
+      "uri": "https://www.gov.uk/winter-fuel-payment"
+    }
+  ],
+  "not_asked": [
+    "your name",
+    "your National Insurance number",
+    "your income, beyond one yes-or-no threshold question",
+    "your bank details — payment usually arrives where your State Pension does"
+  ],
+  "not_encoded": [
+    "care-home residents (excluded where in a care home through the qualifying week AND on Pension Credit or another income-related benefit; self-funders still qualify)",
+    "the per-person split of the household amount (halves for a qualifying couple; one payment where Pension Credit, Universal Credit or ESA is claimed jointly; the total is what this file computes)",
+    "hospital (over 52 weeks), prison, and living-abroad exclusions",
+    "the exact recovery mechanics over £35,000 (PAYE code adjustment or Self Assessment) and the opt-out procedure",
+    "a history worth remembering: universal until 2024, Pension-Credit-only for winter 2024–25 (S.I. 2024/869), universal-with-recovery since 2025 (S.I. 2025/969) — the rules have moved twice in two years, which is why this file pins its winter and shows its checked date"
+  ],
+  "passports": [],
+  "sources_checked": [
+    { "what": "Winter 2026–27 qualifying date (born before 28 June 1960) — cross-checked against the statutory arithmetic: pension age by a qualifying week of 21–27 September 2026 under the Pensions Act 1995 Sch 4 table gives exactly this cutoff", "where": "gov.uk/winter-fuel-payment; PA 1995 Sch 4 para 1", "date": "2026-07-12" },
+    { "what": "Amounts and shares: £200/£300 household totals by the born-before-28-September-1946 band; per-person splits vary, totals do not", "where": "gov.uk/winter-fuel-payment/how-much-youll-get (winter 2026–27 table)", "date": "2026-07-12" },
+    { "what": "£35,000 individual taxable-income recovery (partner's income does not count); opt-out exists", "where": "gov.uk/winter-fuel-payment", "date": "2026-07-12" },
+    { "what": "Current regulations: S.I. 2025/969 (replacing the Pension-Credit-only S.I. 2024/869); Northern Ireland mirror NISR 2025/142", "where": "legislation.gov.uk title search", "date": "2026-07-12" }
+  ]
+}

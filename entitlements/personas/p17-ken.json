@@ -4,17 +4,35 @@
   "as_of": "2026-07-12",
   "checked": "Non-dependant deduction existence against HB (SPC) Regs 2006 reg 55 (amounts not encoded by design), 2026-07-12.",
   "answers": {
-    "dob": "1949-11-11", "has_partner": false,
-    "weekly_state_pension": 16000, "weekly_other_pensions": 0,
-    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 100000,
-    "gets_disability_benefit": false, "other_adults": true,
-    "carer_paid_for_you": false, "you_get_ca": false,
-    "scotland": false, "aa_excluded": false,
-    "aa_day": false, "aa_night": false, "aa_six_months": false,
-    "gets_pc": true, "pays_rent": true, "weekly_rent": 11000
+    "dob": "1949-11-11",
+    "has_partner": false,
+    "weekly_state_pension": 16000,
+    "weekly_other_pensions": 0,
+    "weekly_earnings": 0,
+    "weekly_other_income": 0,
+    "capital": 100000,
+    "gets_disability_benefit": false,
+    "other_adults": true,
+    "carer_paid_for_you": false,
+    "you_get_ca": false,
+    "scotland": false,
+    "aa_excluded": false,
+    "aa_day": false,
+    "aa_night": false,
+    "aa_six_months": false,
+    "gets_pc": true,
+    "pays_rent": true,
+    "weekly_rent": 11000,
+    "income_over_35k": false
   },
   "expect": {
-    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 7800 },
-    "housing-benefit-pension-age": { "verdict": "appears-eligible", "weekly": null }
+    "pension-credit-guarantee": {
+      "verdict": "appears-eligible",
+      "weekly": 7800
+    },
+    "housing-benefit-pension-age": {
+      "verdict": "appears-eligible",
+      "weekly": null
+    }
   }
 }

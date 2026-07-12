@@ -135,6 +135,9 @@ class Eval:
         if "age_at_least" in e:
             dob = parse_date(self.date_operand(e["age_at_least"]["dob"]))
             return int(add_years_months(dob, e["age_at_least"]["years"], 0) <= self.as_of)
+        if "born_on_or_before" in e:
+            dob = parse_date(self.date_operand(e["born_on_or_before"]["dob"]))
+            return int(dob <= parse_date(e["born_on_or_before"]["date"]))
         if "spa_reached" in e:
             return int(spa_date(self.date_operand(e["spa_reached"]["dob"]), self.spa) <= self.as_of)
         sys.exit(f"unknown expression: {json.dumps(e)[:60]}")

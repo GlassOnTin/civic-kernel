@@ -254,7 +254,6 @@
   ],
   "passports": [
     { "id": "tv-licence-over-75", "name": "Free TV licence at 75", "note": "Pension Credit is the qualifying condition." },
-    { "name": "Winter Fuel Payment", "note": "linked to Pension Credit in England and Wales; the rules have moved twice in two years — check the current position when you claim." },
     { "name": "Warm Home Discount", "note": "Guarantee Credit is the core qualifying group." },
     { "name": "Free NHS dental treatment, sight tests and help with health costs", "note": "via Guarantee Credit." },
     { "id": "housing-benefit-pension-age", "name": "Maximum Housing Benefit", "note": "on Guarantee Credit, income and savings are disregarded and rent is normally covered in full — worked out below." }

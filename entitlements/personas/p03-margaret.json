@@ -22,7 +22,8 @@
     "aa_six_months": true,
     "gets_pc": false,
     "pays_rent": false,
-    "weekly_rent": 0
+    "weekly_rent": 0,
+    "income_over_35k": false
   },
   "expect": {
     "pension-credit-guarantee": {
@@ -36,6 +37,10 @@
     "tv-licence-over-75": {
       "verdict": "not-eligible",
       "weekly": null
+    },
+    "winter-fuel-payment": {
+      "verdict": "appears-eligible",
+      "because": "£300 for your household this winter (someone was born before 28 September 1946), paid automatically in November or December — no claim needed for most people, and nothing is recovered at your incomes."
     }
   }
 }

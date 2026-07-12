@@ -22,7 +22,8 @@
     "aa_six_months": true,
     "gets_pc": false,
     "pays_rent": false,
-    "weekly_rent": 0
+    "weekly_rent": 0,
+    "income_over_35k": false
   },
   "expect": {
     "pension-credit-guarantee": {
@@ -32,6 +33,9 @@
     "attendance-allowance": {
       "verdict": "signpost",
       "weekly": null
+    },
+    "winter-fuel-payment": {
+      "verdict": "signpost"
     }
   }
 }
