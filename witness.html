@@ -52,6 +52,10 @@
     background: var(--focus); color: var(--focus-fg); box-shadow: 0 2px 0 var(--focus-fg);
   }
   button:disabled { opacity: .5; cursor: default; }
+  .q { margin: 1rem 0; }
+  .q label { display: block; font-weight: 700; }
+  details { margin: .7rem 0; }
+  summary { cursor: pointer; color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
   .dropzone {
     margin-top: .9rem; padding: 1rem; border: 2px dashed var(--fg);
     border-radius: 0; color: var(--fg);
@@ -107,10 +111,20 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
     Done this before? Drop your <code>witness.json</code> here — or
     <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="statepicker"></label>.
   </div>
-  <p class="small" style="margin-top:.8rem">First time? Type a name for your society. The tools
-  share an address-like form — copy the example and change the name, or ask the committee to
-  write the line for you:</p>
-  <input type="text" id="keyid" class="mono" placeholder="did:web:your-society.example#w1" spellcheck="false" autocomplete="off">
+  <p class="small" style="margin-top:.8rem">First time? Just type your society's name — the
+  page turns it into the technical form the tools share, so you never have to:</p>
+  <div class="q">
+    <label for="socname">Your society's name</label>
+    <input type="text" id="socname" placeholder="e.g. Meersbrook Allotments" spellcheck="false" autocomplete="off">
+  </div>
+  <div class="q">
+    <label for="socsite">Your society's website, if it has one <span class="sub" style="font-weight:400">(optional — makes the name tidier)</span></label>
+    <input type="text" id="socsite" placeholder="e.g. meersbrook-allotments.org.uk" spellcheck="false" autocomplete="off">
+  </div>
+  <details class="small">
+    <summary>The committee gave you an exact signing name? Paste it here instead</summary>
+    <input type="text" id="keyid" class="mono" placeholder="did:web:your-society.example#w1" spellcheck="false" autocomplete="off">
+  </details>
   <p>
     <button id="gen" class="primary">Create my witness file</button>
     <button id="dlcard" style="display:none">Download the card (card.json)</button>
@@ -119,7 +133,9 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
   <div id="genout" class="small" style="display:none">Two files just downloaded. Hand
   <code>card.json</code> to the club's committee — it is public, and it is how their election
   learns to require your signature. Keep <code>witness.json</code> private: anyone who holds
-  it can sign as you.</div>
+  it can sign as you. Your signing name is <code id="madeid"></code> — just a unique name on
+  the paperwork; nothing on the internet looks it up.</div>
+  <div id="generr" class="status bad small" style="display:none"></div>
   <div id="statebox" style="display:none">
     <div class="small" style="margin-top:.6rem"><b>This witness:</b></div>
     <div class="secretbox" id="statesummary"></div>
@@ -215,20 +231,37 @@ function render() {
 }
 
 // --- step 1: make or load the witness file
+// The signing name is composed FOR the user: a plain society name (or its
+// website domain) becomes the did:web form the tools share. Nothing resolves
+// it — it only has to be unique and stable — so the machine format is the
+// page's job, never the secretary's. A committee-supplied exact line wins.
+function composeKeyId() {
+  const exact = $("keyid").value.trim();
+  if (exact) return exact;
+  const site = $("socsite").value.trim().toLowerCase()
+    .replace(/^https?:\/\//, "").replace(/\/.*$/, "");
+  if (site) return "did:web:" + site + "#w1";
+  const slug = $("socname").value.trim().toLowerCase()
+    .replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  if (!slug) throw new Error("type your society's name first (or paste an exact signing name)");
+  return "did:web:" + slug + ".example#w1";
+}
 $("gen").onclick = async () => {
   $("genout").style.display = "none";
+  $("generr").style.display = "none";
   try {
-    const born = await CivicWitness.newWitness($("keyid").value.trim());
+    const born = await CivicWitness.newWitness(composeKeyId());
     state = born.state;
     downloads.card = JSON.stringify(born.card, null, 1) + "\n";
     $("dlcard").style.display = "inline-block";
     $("genout").style.display = "block";
+    $("madeid").textContent = state.key_id;
     render();
     download("card.json", downloads.card);
     download("witness.json", stateText());
   } catch (e) {
-    $("genout").style.display = "block";
-    $("genout").textContent = "Cannot make a key: " + e.message;
+    $("generr").style.display = "block";
+    $("generr").textContent = "Cannot create it yet: " + e.message;
   }
 };
 $("dlcard").onclick = () => download("card.json", downloads.card);
