@@ -5,56 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Check the election yourself — Civic Kernel</title>
 <style>
+  /* The gov.uk discipline, shared with owed.html: white page, near-black large
+     type, underlined links, the yellow focus state, square corners, colour
+     spent only on meaning. The verdict borrows gov.uk's two strongest shapes:
+     VERIFIED is the solid-green confirmation panel, NOT VERIFIED the
+     red-bordered error summary. Dark variant kept at the same contrast rules. */
   :root {
-    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b6b6b; --line: #e2e2e2;
-    --ok: #1a7f37; --bad: #c0392b; --warn: #9a6700;
-    --okbg: #e6f4ea; --badbg: #fdecea; --warnbg: #fff8e1; --panel: #f7f7f7;
-    --accent: #234a70;
+    --bg: #ffffff; --fg: #0b0c0c; --muted: #505a5f; --line: #b1b4b6;
+    --ok: #00703c; --bad: #d4351c; --warn: #996c00;
+    --panel: #f3f2f1; --accent: #1d70b8; --focus: #ffdd00; --focus-fg: #0b0c0c;
+    --verdict-ok-fg: #ffffff;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #121417; --fg: #e6e6e6; --muted: #9a9a9a; --line: #2c3036;
+      --bg: #0b0c0c; --fg: #f3f2f1; --muted: #b1b4b6; --line: #505a5f;
       --ok: #4cc38a; --bad: #ef6a5a; --warn: #d4a72c;
-      --okbg: #10281c; --badbg: #331713; --warnbg: #2e2410; --panel: #1a1e23;
-      --accent: #7fb0da;
+      --panel: #1d2021; --accent: #7fb0da;
+      --verdict-ok-fg: #0b0c0c;
     }
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 46rem;
+    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 44rem;
     background: var(--bg); color: var(--fg);
-    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font: 1.1875rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
-  h1 { font-size: 1.6rem; margin: .4rem 0 .2rem; }
-  h2 { font-size: 1.05rem; margin: 1.6rem 0 .4rem; }
-  p  { margin: .5rem 0; }
+  @media (max-width: 40rem) { body { font-size: 1rem; } }
+  h1 { font-size: 2rem; line-height: 1.15; margin: .6rem 0 .4rem; }
+  h2 { font-size: 1.4rem; margin: 1.8rem 0 .5rem; }
+  p  { margin: .6rem 0; }
   .sub { color: var(--muted); }
-  a { color: var(--accent); }
-  button {
-    font: inherit; padding: .5rem .9rem; border-radius: 8px; cursor: pointer;
-    border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
+  a:focus, .skip:focus {
+    background: var(--focus); color: var(--focus-fg);
+    outline: 3px solid var(--focus); outline-offset: 0;
+    box-shadow: 0 3px 0 var(--focus-fg); text-decoration: none;
   }
-  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { position: static; display: inline-block; padding: .2rem .5rem; }
+  button {
+    font: inherit; font-weight: 600; padding: .5rem 1rem; cursor: pointer;
+    border: 2px solid transparent; border-radius: 0;
+    background: var(--panel); color: var(--fg); box-shadow: 0 2px 0 var(--line);
+  }
+  button.primary { background: var(--ok); color: #ffffff; box-shadow: 0 2px 0 #002d18; }
+  button:hover { filter: brightness(1.08); }
+  button:focus {
+    outline: 3px solid var(--focus); outline-offset: 0;
+    background: var(--focus); color: var(--focus-fg); box-shadow: 0 2px 0 var(--focus-fg);
+  }
   button:disabled { opacity: .5; cursor: default; }
   #drop, #handdrop {
-    margin-top: .8rem; padding: 1rem; border: 2px dashed var(--line);
-    border-radius: 10px; color: var(--muted);
+    margin-top: .9rem; padding: 1rem; border: 2px dashed var(--fg);
+    border-radius: 0; color: var(--fg);
   }
-  #drop.over, #handdrop.over { border-color: var(--accent); color: var(--fg); }
+  #drop.over, #handdrop.over { border-color: var(--accent); background: var(--panel); }
   #drop input, #handdrop input { display: none; }
-  #handresult .ok { color: var(--ok); } #handresult .bad { color: var(--bad); }
-  #handresult .warn { color: var(--warn); }
-  #filestate { font-size: .85rem; color: var(--muted); margin-top: .4rem; }
+  #handresult .ok { color: var(--ok); font-weight: 700; } #handresult .bad { color: var(--bad); font-weight: 700; }
+  #handresult .warn { color: var(--warn); font-weight: 700; }
+  #filestate { font-size: 1rem; color: var(--muted); margin-top: .4rem; }
   #verdict {
-    display: none; margin: 1.2rem 0; padding: .9rem 1rem; border-radius: 10px;
-    border: 1px solid var(--line);
+    display: none; margin: 1.4rem 0; padding: 1rem 1.2rem; border-radius: 0;
+    border: 0;
   }
-  #verdict.ok   { display: block; background: var(--okbg);   border-color: var(--ok); }
-  #verdict.bad  { display: block; background: var(--badbg);  border-color: var(--bad); }
-  #verdict.warn { display: block; background: var(--warnbg); border-color: var(--warn); }
-  #verdict .big { font-size: 1.25rem; font-weight: 700; }
-  #checks section { margin: .9rem 0; }
-  #checks h3 { font-size: .95rem; margin: .6rem 0 .2rem; }
+  #verdict.ok   { display: block; background: var(--ok); color: var(--verdict-ok-fg); }
+  #verdict.bad  { display: block; background: none; border: 5px solid var(--bad); }
+  #verdict.bad .big { color: var(--bad); }
+  #verdict.warn { display: block; background: none; border: 5px solid var(--warn); }
+  #verdict .big { font-size: 1.4rem; font-weight: 700; }
+  #checks section { margin: 1.1rem 0; }
+  #checks h3 { font-size: 1.2rem; margin: .8rem 0 .3rem; }
   .sectitle[data-tip] {
     cursor: help;
     text-decoration: underline dotted; text-underline-offset: 3px;
@@ -63,39 +83,44 @@
   .sectitle[data-tip]::after, .xref[data-tip]::after {
     content: attr(data-tip);
     position: absolute; left: 0; top: calc(100% + .4rem); z-index: 30;
-    width: 21rem; max-width: 78vw;
-    background: var(--panel); color: var(--fg);
-    border: 1px solid var(--line); border-radius: 8px;
-    padding: .5rem .7rem; font-size: .8rem; font-weight: 400; line-height: 1.5;
+    width: 23rem; max-width: 78vw;
+    background: var(--bg); color: var(--fg);
+    border: 2px solid var(--fg); border-radius: 0;
+    padding: .5rem .7rem; font-size: 1rem; font-weight: 400; line-height: 1.5;
     box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
     display: none;
   }
   .sectitle.tipped::after { display: block; }
   @media (hover: hover) { .sectitle[data-tip]:hover::after, .xref[data-tip]:hover::after { display: block; } }
   footer .xref[data-tip]::after { top: auto; bottom: calc(100% + .4rem); }
-  .row { display: flex; gap: .5rem; padding: .18rem 0; font-size: .88rem; }
-  .row .mark { flex: 0 0 1.1rem; text-align: center; }
+  .row { display: flex; gap: .6rem; padding: .25rem 0; font-size: 1rem; }
+  .row .mark { flex: 0 0 1.2rem; text-align: center; }
   .row .what { flex: 1; min-width: 0; }
   .row .tech {
-    display: block; font-size: .74rem; color: var(--muted);
+    display: block; font-size: .9375rem; color: var(--muted);
     font-family: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
     overflow-wrap: anywhere;
   }
-  .row.ok .mark { color: var(--ok); } .row.bad .mark { color: var(--bad); font-weight: 700; }
+  .row.ok .mark { color: var(--ok); font-weight: 700; } .row.bad .mark { color: var(--bad); font-weight: 700; }
   .row.bad { color: var(--bad); }
   .row.skip { color: var(--muted); font-style: italic; }
-  #progress { color: var(--muted); font-size: .88rem; margin: .3rem 0; }
-  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: .9rem 1rem; margin-top: .8rem; }
+  #progress { color: var(--muted); font-size: 1rem; margin: .3rem 0; }
+  .panel { margin-top: 2.2rem; border-top: 2px solid var(--line); padding-top: 1rem; }
   input[type=text] {
-    font: inherit; width: 100%; padding: .45rem .6rem; margin: .3rem 0;
-    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg);
+    font: inherit; width: 100%; padding: .4rem .5rem; margin: .3rem 0;
+    border: 2px solid var(--fg); border-radius: 0; background: var(--bg); color: var(--fg);
   }
-  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em; }
-  .small { font-size: .85rem; }
-  footer { margin-top: 2.5rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: .8rem; }
+  input[type=text]:focus {
+    outline: 3px solid var(--focus); outline-offset: 0; box-shadow: inset 0 0 0 2px var(--fg);
+  }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+  .small { font-size: 1rem; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
 
 <h1>Check the election yourself</h1>
 <p class="sub">No account, no permission, no trust required — the check runs from the published
@@ -163,6 +188,7 @@ saw. If a single number were altered anywhere, a check turns red and says where.
   sixty members, seconds per check — and says so; a national roster needs the constant-size
   proofs the architecture tracks.
 </footer>
+</main>
 
 <script src="verifier.js"></script>
 <script>

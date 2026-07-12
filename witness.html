@@ -5,63 +5,85 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Witness an election — Civic Kernel</title>
 <style>
+  /* The gov.uk discipline, shared with owed.html: white page, near-black large
+     type, underlined links, the yellow focus state, 2px input borders, square
+     corners, colour spent only on semantic borders. Dark variant kept at the
+     same contrast rules. */
   :root {
-    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b6b6b; --line: #e2e2e2;
-    --ok: #1a7f37; --bad: #c0392b; --warn: #9a6700;
-    --okbg: #e6f4ea; --badbg: #fdecea; --warnbg: #fff8e1; --panel: #f7f7f7;
-    --accent: #234a70;
+    --bg: #ffffff; --fg: #0b0c0c; --muted: #505a5f; --line: #b1b4b6;
+    --ok: #00703c; --bad: #d4351c; --warn: #996c00;
+    --panel: #f3f2f1; --accent: #1d70b8; --focus: #ffdd00; --focus-fg: #0b0c0c;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #121417; --fg: #e6e6e6; --muted: #9a9a9a; --line: #2c3036;
+      --bg: #0b0c0c; --fg: #f3f2f1; --muted: #b1b4b6; --line: #505a5f;
       --ok: #4cc38a; --bad: #ef6a5a; --warn: #d4a72c;
-      --okbg: #10281c; --badbg: #331713; --warnbg: #2e2410; --panel: #1a1e23;
-      --accent: #7fb0da;
+      --panel: #1d2021; --accent: #7fb0da;
     }
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 46rem;
+    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 44rem;
     background: var(--bg); color: var(--fg);
-    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font: 1.1875rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
-  h1 { font-size: 1.6rem; margin: .4rem 0 .2rem; }
-  h2 { font-size: 1.05rem; margin: 0 0 .4rem; }
-  p  { margin: .5rem 0; }
+  @media (max-width: 40rem) { body { font-size: 1rem; } }
+  h1 { font-size: 2rem; line-height: 1.15; margin: .6rem 0 .4rem; }
+  h2 { font-size: 1.4rem; margin: 0 0 .5rem; }
+  p  { margin: .6rem 0; }
   .sub { color: var(--muted); }
-  a { color: var(--accent); }
-  button {
-    font: inherit; padding: .5rem .9rem; border-radius: 8px; cursor: pointer;
-    border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
+  a:focus, .skip:focus {
+    background: var(--focus); color: var(--focus-fg);
+    outline: 3px solid var(--focus); outline-offset: 0;
+    box-shadow: 0 3px 0 var(--focus-fg); text-decoration: none;
   }
-  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { position: static; display: inline-block; padding: .2rem .5rem; }
+  button {
+    font: inherit; font-weight: 600; padding: .5rem 1rem; cursor: pointer;
+    border: 2px solid transparent; border-radius: 0;
+    background: var(--panel); color: var(--fg); box-shadow: 0 2px 0 var(--line);
+  }
+  button.primary { background: var(--ok); color: #ffffff; box-shadow: 0 2px 0 #002d18; }
+  button:hover { filter: brightness(1.08); }
+  button:focus {
+    outline: 3px solid var(--focus); outline-offset: 0;
+    background: var(--focus); color: var(--focus-fg); box-shadow: 0 2px 0 var(--focus-fg);
+  }
   button:disabled { opacity: .5; cursor: default; }
   .dropzone {
-    margin-top: .8rem; padding: 1rem; border: 2px dashed var(--line);
-    border-radius: 10px; color: var(--muted);
+    margin-top: .9rem; padding: 1rem; border: 2px dashed var(--fg);
+    border-radius: 0; color: var(--fg);
   }
-  .dropzone.over { border-color: var(--accent); color: var(--fg); }
+  .dropzone.over { border-color: var(--accent); background: var(--panel); }
   .dropzone input { display: none; }
-  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: .9rem 1rem; margin-top: 1rem; }
+  .panel { margin-top: 2.2rem; border-top: 2px solid var(--line); padding-top: 1rem; }
   input[type=text] {
-    font: inherit; padding: .45rem .6rem; margin: .3rem 0; width: 100%;
-    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg);
+    font: inherit; padding: .4rem .5rem; margin: .3rem 0; width: 100%;
+    border: 2px solid var(--fg); border-radius: 0; background: var(--bg); color: var(--fg);
   }
-  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em; }
-  .small { font-size: .85rem; }
+  input[type=text]:focus {
+    outline: 3px solid var(--focus); outline-offset: 0; box-shadow: inset 0 0 0 2px var(--fg);
+  }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+  .small { font-size: 1rem; }
   .secretbox {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .78em;
-    overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line);
-    border-radius: 8px; padding: .5rem .7rem; margin: .4rem 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em;
+    overflow-wrap: anywhere; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 0; padding: .5rem .7rem; margin: .4rem 0;
   }
-  .status { margin: .6rem 0; padding: .6rem .8rem; border-radius: 8px; border: 1px solid var(--line); }
-  .status.ok   { background: var(--okbg);   border-color: var(--ok); }
-  .status.bad  { background: var(--badbg);  border-color: var(--bad); }
-  .status.warn { background: var(--warnbg); border-color: var(--warn); }
-  footer { margin-top: 2.5rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: .8rem; }
+  .status { margin: .8rem 0; padding: .4rem 0 .4rem 1rem; border-left: .4rem solid var(--line);
+            border-radius: 0; background: none; }
+  .status.ok   { border-left-color: var(--ok); }
+  .status.bad  { border-left-color: var(--bad); }
+  .status.warn { border-left-color: var(--warn); }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
 
 <h1>Witness an election</h1>
 <p class="sub">The neighbouring society's five minutes: co-sign a club's checkpoint only if the
@@ -154,6 +176,7 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
   the same file, the same co-signature, the same refusals — a parity test in CI holds this page
   to the Python witness across a whole election.
 </footer>
+</main>
 
 <script src="witness.js"></script>
 <script>
