@@ -1,38 +1,307 @@
 {
   "v": "civic-kernel/entitlement-rules/v0",
   "id": "council-tax-reduction",
-  "title": "Council Tax Reduction",
-  "jurisdiction": "England, Wales and Scotland — but every council runs its own scheme",
-  "kind": "local",
+  "title": "Council Tax Reduction (pension age)",
+  "jurisdiction": "England, pension age — these rules are nationally prescribed and every council's scheme must include them; Wales and Scotland run close-cousin national schemes",
+  "kind": "computable",
   "effective": {
     "tax_year": "2026-27",
+    "uprating": "The Council Tax Reduction Schemes (Prescribed Requirements) (England) (Amendment) Regulations 2026 (S.I. 2026/27)",
     "checked": "2026-07-12"
   },
-  "plainly": "Help with council tax, sometimes down to nothing. Real and large — and honestly not computable here, because it is claimed through, and varies by, your council. This entry exists to say so instead of guessing.",
-  "questions": [],
-  "values": [],
-  "gates": [],
+  "plainly": "Help with the council tax bill, claimed through your council — but for pension-age households the rules are national law, so they compute here: on Guarantee Credit the bill is normally covered in full, and otherwise 20p of each £1 of spare income comes off the help.",
+  "questions": [
+    {
+      "id": "dob",
+      "label": "Your date of birth",
+      "help": "Only used to work out whether you have reached State Pension age — it never leaves this page.",
+      "type": "date",
+      "rule": "SI 2012/2885 reg 3 (these prescribed rules apply to pensioners; working-age reduction is each council's own scheme)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/regulation/3"
+    },
+    {
+      "id": "scotland",
+      "label": "Do you live in Scotland?",
+      "type": "bool",
+      "rule": "Scotland runs its own national Council Tax Reduction scheme",
+      "uri": "https://www.mygov.scot/council-tax-reduction"
+    },
+    {
+      "id": "has_partner",
+      "label": "Do you live with a partner (married, civil partner, or as a couple)?",
+      "type": "bool",
+      "rule": "SI 2012/2885: a couple's income, capital and applicable amount are assessed together",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885"
+    },
+    {
+      "id": "partner_dob",
+      "label": "Your partner's date of birth",
+      "type": "date",
+      "when": { "get": "has_partner" },
+      "rule": "SI 2012/2885 reg 3: a mixed-age couple is treated under the council's working-age scheme unless protected",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/regulation/3"
+    },
+    {
+      "id": "partner_hb_pension_age",
+      "label": "If one of you is under State Pension age: do you get pension-age Housing Benefit as a couple?",
+      "help": "Couples protected since before 15 May 2019. If unsure, answer no.",
+      "type": "bool",
+      "when": { "get": "has_partner" },
+      "rule": "S.I. 2019/37 savings; SI 2012/2885 reg 3",
+      "uri": "https://www.legislation.gov.uk/uksi/2019/37"
+    },
+    {
+      "id": "weekly_council_tax",
+      "label": "Your weekly council tax — the annual bill for your home, after any discounts, divided by 52",
+      "help": "Use the bill after discounts such as the 25% single-person discount. Enter 0 if you have not looked it up yet.",
+      "type": "money",
+      "rule": "Local Government Finance Act 1992 s.13A; SI 2012/2885 Sch 1 para 7 (the maximum reduction is set from the liability)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "id": "gets_pc",
+      "label": "Do you — or a partner you live with — get Pension Credit?",
+      "help": "If the Pension Credit answer above says you appear eligible, claim that first: on Guarantee Credit your income and savings are disregarded here entirely.",
+      "type": "bool",
+      "rule": "SI 2012/2885 Sch 1 para 13 (guarantee credit: the whole of the applicant's capital and income must be disregarded)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "id": "weekly_state_pension",
+      "label": "Your weekly State Pension (and your partner's, added together)",
+      "help": "Enter 0 if none.",
+      "type": "money",
+      "rule": "SI 2012/2885 Sch 1 Part 6 (income for pensioners)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "id": "weekly_other_pensions",
+      "label": "Weekly income from workplace or private pensions and annuities (both of you)",
+      "help": "Enter 0 if none.",
+      "type": "money",
+      "rule": "SI 2012/2885 Sch 1 Part 6 (income for pensioners)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "id": "weekly_earnings",
+      "label": "Weekly earnings from work, after tax (both of you)",
+      "help": "Enter 0 if none. A small amount is disregarded — the working-out below shows it.",
+      "type": "money",
+      "rule": "SI 2012/2885 Sch 1 Part 6 and its earnings disregards",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "id": "weekly_other_income",
+      "label": "Other weekly income that counts — for example Carer's Allowance or Working Tax Credit (both of you)",
+      "help": "Do NOT include Attendance Allowance, DLA, PIP, Pension Age Disability Payment or Housing Benefit. Enter 0 if none.",
+      "type": "money",
+      "rule": "SI 2012/2885 Sch 1 Part 6 (which income counts)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "id": "capital",
+      "label": "Total savings and investments (both of you) — not your home",
+      "help": "Over £16,000 normally ends the help — unless you get Guarantee Credit, when savings are disregarded entirely.",
+      "type": "money",
+      "rule": "SI 2012/2885 Sch 1 para 37 (tariff income: £1 per £500 above £10,000, up to the £16,000 ceiling); para 13 (guarantee credit exception)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1/paragraph/37"
+    },
+    {
+      "id": "gets_disability_benefit",
+      "label": "Do you get Attendance Allowance, the daily-living part of PIP or ADP, the middle or higher care rate of DLA, or Pension Age Disability Payment?",
+      "type": "bool",
+      "rule": "SI 2012/2885 Sch 2 (severe disability premium)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/2"
+    },
+    {
+      "id": "partner_gets_disability_benefit",
+      "label": "Does your partner get one of those benefits too?",
+      "type": "bool",
+      "when": { "get": "has_partner" },
+      "rule": "SI 2012/2885 Sch 2 (a couple's severe disability premium needs both to qualify)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/2"
+    },
+    {
+      "id": "other_adults",
+      "label": "Apart from your partner, do any other adults (18 or over) normally live with you?",
+      "type": "bool",
+      "rule": "SI 2012/2885 Sch 1 para 8 (non-dependant deductions) and Sch 2 (severe disability premium)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "id": "carer_paid_for_you",
+      "label": "Does anyone get Carer's Allowance (or Scotland's carer support payment) for looking after you or your partner?",
+      "type": "bool",
+      "rule": "SI 2012/2885 Sch 2 (no severe disability premium while a carer is paid for the care)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/2"
+    },
+    {
+      "id": "you_get_ca",
+      "label": "Are you entitled to Carer's Allowance (or carer support payment) for looking after someone else?",
+      "help": "Answer yes even if it is not actually paid because of your State Pension (an “underlying entitlement” still counts).",
+      "type": "bool",
+      "rule": "SI 2012/2885 Sch 2 (carer premium)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/2"
+    },
+    {
+      "id": "partner_gets_ca",
+      "label": "Is your partner entitled to Carer's Allowance (or carer support payment)?",
+      "type": "bool",
+      "when": { "get": "has_partner" },
+      "rule": "SI 2012/2885 Sch 2 (carer premium, each carer)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/2"
+    }
+  ],
+  "values": [
+    {
+      "id": "ctr_applicable_amount",
+      "plainly": "Your applicable amount: the personal allowance (2026–27: £238.00 single, £363.25 couple) plus any premiums — the same shapes as Pension Credit's minimum guarantee.",
+      "rule": "SI 2012/2885 Sch 2 Parts 1 and 3–4, as uprated from April 2026 by S.I. 2026/27",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/2",
+      "expr": { "add": [
+        { "if": [ { "get": "has_partner" }, { "num": 36325 }, { "num": 23800 } ] },
+        { "if": [ { "and": [ { "get": "has_partner" }, { "get": "gets_disability_benefit" }, { "get": "partner_gets_disability_benefit" }, { "not": { "get": "other_adults" } }, { "not": { "get": "carer_paid_for_you" } } ] }, { "num": 17210 },
+          { "if": [ { "and": [ { "not": { "get": "has_partner" } }, { "get": "gets_disability_benefit" }, { "not": { "get": "other_adults" } }, { "not": { "get": "carer_paid_for_you" } } ] }, { "num": 8605 }, { "num": 0 } ] } ] },
+        { "if": [ { "get": "you_get_ca" }, { "num": 4815 }, { "num": 0 } ] },
+        { "if": [ { "and": [ { "get": "has_partner" }, { "get": "partner_gets_ca" } ] }, { "num": 4815 }, { "num": 0 } ] }
+      ] }
+    },
+    {
+      "id": "ctr_earnings_disregard",
+      "plainly": "Earnings ignored each week: £20 where a carer premium applies, otherwise £10 for a couple, £5 single.",
+      "rule": "SI 2012/2885 Sch 1 Part 6 earnings disregards (the pension-age standard amounts)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1",
+      "expr": { "if": [ { "or": [ { "get": "you_get_ca" }, { "and": [ { "get": "has_partner" }, { "get": "partner_gets_ca" } ] } ] }, { "num": 2000 }, { "if": [ { "get": "has_partner" }, { "num": 1000 }, { "num": 500 } ] } ] }
+    },
+    {
+      "id": "ctr_tariff_income",
+      "plainly": "Deemed weekly income from savings above £10,000: £1 per £500 or part.",
+      "rule": "SI 2012/2885 Sch 1 para 37",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1/paragraph/37",
+      "expr": { "mul": [ { "num": 100 }, { "ceil_div": [ { "max": [ { "num": 0 }, { "sub": [ { "get": "capital" }, { "num": 1000000 } ] } ] }, { "num": 50000 } ] } ] }
+    },
+    {
+      "id": "ctr_counted_income",
+      "plainly": "Income that counts — or nothing at all on Guarantee Credit, where the whole of your income and capital must be disregarded.",
+      "rule": "SI 2012/2885 Sch 1 para 13 (guarantee credit); Part 6 otherwise",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1",
+      "expr": { "if": [ { "get": "gets_pc" }, { "num": 0 },
+        { "add": [ { "get": "weekly_state_pension" }, { "get": "weekly_other_pensions" },
+          { "max": [ { "num": 0 }, { "sub": [ { "get": "weekly_earnings" }, { "val": "ctr_earnings_disregard" } ] } ] },
+          { "get": "weekly_other_income" }, { "val": "ctr_tariff_income" } ] } ] }
+    },
+    {
+      "id": "ctr_excess_income",
+      "plainly": "Income above your applicable amount (nil on Guarantee Credit).",
+      "rule": "SI 2012/2885 Sch 1 para 10",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1",
+      "expr": { "max": [ { "num": 0 }, { "sub": [ { "val": "ctr_counted_income" }, { "val": "ctr_applicable_amount" } ] } ] }
+    },
+    {
+      "id": "ctr_taper",
+      "plainly": "The taper: 20p of help is withdrawn for each £1 of excess income. (The statute writes it daily — 2 6/7 per cent of the weekly excess against the daily bill — which is the same thing weekly; rounded up to the next penny here, up to 1p a week conservative.)",
+      "rule": "SI 2012/2885 Sch 1 para 10",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1",
+      "expr": { "ceil_div": [ { "mul": [ { "val": "ctr_excess_income" }, { "num": 20 } ] }, { "num": 100 } ] }
+    },
+    {
+      "id": "ctr_award",
+      "plainly": "Council Tax Reduction: your weekly bill, less the taper.",
+      "rule": "SI 2012/2885 Sch 1 paras 7 and 10",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1",
+      "expr": { "max": [ { "num": 0 }, { "sub": [ { "get": "weekly_council_tax" }, { "val": "ctr_taper" } ] } ] }
+    }
+  ],
+  "gates": [
+    {
+      "when": { "get": "scotland" },
+      "verdict": "signpost",
+      "because": "Scotland runs its own national Council Tax Reduction scheme, claimed through your council — close-cousin rules, but not the ones encoded here.",
+      "rule": "Council Tax Reduction (Scotland) Regulations",
+      "uri": "https://www.mygov.scot/council-tax-reduction"
+    },
+    {
+      "when": { "not": { "spa_reached": { "dob": { "get": "dob" } } } },
+      "verdict": "signpost",
+      "because": "Under State Pension age, Council Tax Reduction is your council's own working-age scheme — genuinely local rules this page cannot compute. Apply through your council anyway; the help is real.",
+      "rule": "Local Government Finance Act 1992 s.13A(2); SI 2012/2885 reg 3 (the prescribed rules cover pensioners only)",
+      "uri": "https://www.gov.uk/apply-council-tax-reduction"
+    },
+    {
+      "when": { "and": [ { "get": "has_partner" }, { "not": { "spa_reached": { "dob": { "get": "partner_dob" } } } }, { "not": { "get": "partner_hb_pension_age" } } ] },
+      "verdict": "signpost",
+      "because": "A couple with one partner under State Pension age is treated under the council's working-age scheme — local rules this page cannot compute. Apply through your council anyway.",
+      "rule": "SI 2012/2885 reg 3; S.I. 2019/37",
+      "uri": "https://www.gov.uk/apply-council-tax-reduction"
+    },
+    {
+      "when": { "and": [ { "not": { "get": "gets_pc" } }, { "gt": [ { "get": "capital" }, { "num": 1600000 } ] } ] },
+      "verdict": "not-eligible",
+      "because": "Savings over £16,000 end the help — unless you get Guarantee Credit, when savings are disregarded entirely. If the Pension Credit answer above applies, claim it first and this gate disappears.",
+      "rule": "SI 2012/2885 Sch 1 para 37 (the £16,000 ceiling) and para 13 (the guarantee credit exception)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1/paragraph/37"
+    }
+  ],
   "verdicts": [
     {
+      "when": { "and": [ { "get": "gets_pc" }, { "not": { "get": "other_adults" } } ] },
+      "verdict": "appears-eligible",
+      "weekly": { "get": "weekly_council_tax" },
+      "because": "On Pension Credit your income and savings are disregarded entirely: maximum reduction — normally the whole bill. Claim through your council (often the same form as Housing Benefit).",
+      "rule": "SI 2012/2885 Sch 1 paras 13 and 7",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "when": { "get": "gets_pc" },
+      "verdict": "appears-eligible",
+      "because": "On Pension Credit you get maximum reduction — but a deduction applies for each other adult living with you, sized by their income (not encoded here), so the help will be below your full bill. Claim through your council.",
+      "rule": "SI 2012/2885 Sch 1 paras 13, 7 and 8",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "when": { "and": [ { "gt": [ { "val": "ctr_award" }, { "num": 0 } ] }, { "not": { "get": "other_adults" } } ] },
+      "verdict": "appears-eligible",
+      "weekly": { "val": "ctr_award" },
+      "because": "What is left of your bill after 20p per £1 of income above your applicable amount — where your income is at or below it, that is the whole bill. And if the Pension Credit answer above applies, claim it first: it makes this maximum.",
+      "rule": "SI 2012/2885 Sch 1 para 10 (classes A and B)",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
+      "when": { "gt": [ { "val": "ctr_award" }, { "num": 0 } ] },
+      "verdict": "appears-eligible",
+      "because": "Some of the bill appears covered after the 20% taper — but a deduction applies for each other adult living with you, sized by their income (not encoded here). Claim through your council and expect less than the working-out shown.",
+      "rule": "SI 2012/2885 Sch 1 paras 10 and 8",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
+    },
+    {
       "when": { "num": 1 },
-      "verdict": "signpost",
-      "because": "For pension-age households the core rules are nationally prescribed, but the scheme is your council's: the claim, the forms and the local variations all live there. If Pension Credit (Guarantee Credit) applies above, you would usually get the maximum reduction.",
-      "rule": "Local Government Finance Act 1992 s.13A; Council Tax Reduction Schemes (Prescribed Requirements) (England) Regulations 2012 (S.I. 2012/2885)",
-      "uri": "https://www.legislation.gov.uk/ukpga/1992/14/section/13A"
+      "verdict": "not-eligible",
+      "because": "20p of each £1 of income above your applicable amount exceeds your weekly bill, so the taper reaches zero. Close cases are worth claiming anyway — and a Pension Credit award of even pennies would flip this to the whole bill.",
+      "rule": "SI 2012/2885 Sch 1 para 10",
+      "uri": "https://www.legislation.gov.uk/uksi/2012/2885/schedule/1"
     }
   ],
   "not_asked": [
-    "anything — this entry only points you to the right door"
+    "your name",
+    "your National Insurance number",
+    "your address or council — the claim is your council's; the pension-age rules it must apply are national law, and those are what computed here",
+    "your council tax band",
+    "your bank details"
   ],
   "not_encoded": [
-    "everything: each authority's scheme differs, and pretending otherwise would be a guess wearing arithmetic"
+    "non-dependant deductions (Sch 1 para 8: a deduction per other adult in the home, sized by their income — where they apply, the flagged amount will be lower)",
+    "the second-adult rebate (class C: up to 25% where other adults on low incomes live with you — ask your council to work out both and give the higher)",
+    "councils may be MORE generous than these prescribed rules (LGFA 1992 s.13A(1)(c) discretion) — this file computes the national floor, never your council's ceiling",
+    "discounts and exemptions themselves (the 25% single-person discount, severe mental impairment, and others — enter your bill after them; if you have not claimed them, that is more money again)",
+    "Wales's default national scheme (a close cousin of these rules, not verified line by line here)",
+    "war pension income disregards (locally discretionary)"
   ],
   "passports": [],
-  "signpost": {
-    "text": "Find and apply through your council",
-    "url": "https://www.gov.uk/apply-council-tax-reduction"
-  },
   "sources_checked": [
-    { "what": "s.13A schemes; pension-age prescribed requirements exist nationally (England)", "where": "LGFA 1992 s.13A; S.I. 2012/2885 (legislation.gov.uk)", "date": "2026-07-12" }
+    { "what": "On guarantee credit the whole of capital and income must be disregarded (verbatim)", "where": "SI 2012/2885 Sch 1 para 13 (legislation.gov.uk revised text) — cross-checked against Age UK ('you may even get your Council Tax paid in full')", "date": "2026-07-12" },
+    { "what": "The taper: class B deducts 2 6/7 per cent of the weekly excess against the daily liability — exactly 20 per cent in weekly terms", "where": "SI 2012/2885 Sch 1 para 10 (legislation.gov.uk revised text)", "date": "2026-07-12" },
+    { "what": "Tariff income £1 per £500 (or part) above £10,000, up to the £16,000 ceiling (verbatim)", "where": "SI 2012/2885 Sch 1 para 37 (legislation.gov.uk revised text) — £16,000 limit cross-checked against Age UK", "date": "2026-07-12" },
+    { "what": "Applicable amounts £238.00 / £363.25; severe disability premium £86.05 / £172.10; carer premium £48.15 (April 2026, uprated by S.I. 2026/27)", "where": "SI 2012/2885 Sch 2 (legislation.gov.uk revised text)", "date": "2026-07-12" },
+    { "what": "Pensioner definition and the working-age/mixed-age boundary", "where": "SI 2012/2885 reg 3", "date": "2026-07-12" }
   ]
 }

@@ -298,7 +298,7 @@
     "Discretionary Housing Payments (a council top-up worth asking about when Housing Benefit falls short)"
   ],
   "passports": [
-    { "name": "Maximum Council Tax Reduction usually travels with it", "note": "claimed through the same council form in most areas." }
+    { "id": "council-tax-reduction", "name": "Maximum Council Tax Reduction usually travels with it", "note": "the same council form in most areas — worked out below." }
   ],
   "sources_checked": [
     { "what": "Personal allowances £238.00 / £363.25; severe disability premium £86.05 / £172.10; carer premium £48.15 (uprated 1 April 2026 by S.I. 2026/148)", "where": "HB (SPC) Regulations 2006 Sch 3 Pts 1 and 4 (legislation.gov.uk revised text)", "date": "2026-07-12" },

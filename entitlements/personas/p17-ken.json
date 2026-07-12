@@ -27,7 +27,8 @@
     "cares_35h": false,
     "cared_for_gets_qualifying": false,
     "own_earnings": 0,
-    "own_state_pension": 16000
+    "own_state_pension": 16000,
+    "weekly_council_tax": 3100
   },
   "expect": {
     "pension-credit-guarantee": {
@@ -35,6 +36,10 @@
       "weekly": 7800
     },
     "housing-benefit-pension-age": {
+      "verdict": "appears-eligible",
+      "weekly": null
+    },
+    "council-tax-reduction": {
       "verdict": "appears-eligible",
       "weekly": null
     }

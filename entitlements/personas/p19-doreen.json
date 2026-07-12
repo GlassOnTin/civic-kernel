@@ -4,20 +4,41 @@
   "as_of": "2026-07-12",
   "checked": "Overlap against gov.uk/carers-allowance/eligibility ('increased Pension Credit instead') and S.I. 1979/597; PC carer addition against SPC Regs reg 6(8). 2026-07-12.",
   "answers": {
-    "dob": "1948-02-14", "has_partner": false,
-    "weekly_state_pension": 19000, "weekly_other_pensions": 0,
-    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 500000,
-    "gets_disability_benefit": false, "other_adults": false,
-    "carer_paid_for_you": false, "you_get_ca": true,
-    "scotland": false, "aa_excluded": false,
-    "aa_day": false, "aa_night": false, "aa_six_months": false,
-    "gets_pc": false, "pays_rent": false, "weekly_rent": 0,
+    "dob": "1948-02-14",
+    "has_partner": false,
+    "weekly_state_pension": 19000,
+    "weekly_other_pensions": 0,
+    "weekly_earnings": 0,
+    "weekly_other_income": 0,
+    "capital": 500000,
+    "gets_disability_benefit": false,
+    "other_adults": false,
+    "carer_paid_for_you": false,
+    "you_get_ca": true,
+    "scotland": false,
+    "aa_excluded": false,
+    "aa_day": false,
+    "aa_night": false,
+    "aa_six_months": false,
+    "gets_pc": false,
+    "pays_rent": false,
+    "weekly_rent": 0,
     "income_over_35k": false,
-    "cares_35h": true, "cared_for_gets_qualifying": true,
-    "own_earnings": 0, "own_state_pension": 19000
+    "cares_35h": true,
+    "cared_for_gets_qualifying": true,
+    "own_earnings": 0,
+    "own_state_pension": 19000,
+    "weekly_council_tax": 3000
   },
   "expect": {
-    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 9615 },
-    "carers-allowance": { "verdict": "appears-eligible", "weekly": null, "because": "Entitled — but not paid: your State Pension is at least the £86.45 rate, and the two overlap. Claim anyway. An underlying entitlement is exactly what the Pension Credit carer question above means: it adds the £48.15 carer addition and raises the earnings disregard to £20 — in gov.uk's own words, people with higher pensions get increased Pension Credit instead. And unpaid entitlement does not touch the cared-for person's own benefits." }
+    "pension-credit-guarantee": {
+      "verdict": "appears-eligible",
+      "weekly": 9615
+    },
+    "carers-allowance": {
+      "verdict": "appears-eligible",
+      "weekly": null,
+      "because": "Entitled — but not paid: your State Pension is at least the £86.45 rate, and the two overlap. Claim anyway. An underlying entitlement is exactly what the Pension Credit carer question above means: it adds the £48.15 carer addition and raises the earnings disregard to £20 — in gov.uk's own words, people with higher pensions get increased Pension Credit instead. And unpaid entitlement does not touch the cared-for person's own benefits."
+    }
   }
 }

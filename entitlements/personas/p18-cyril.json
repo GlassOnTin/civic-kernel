@@ -27,7 +27,8 @@
     "cares_35h": false,
     "cared_for_gets_qualifying": false,
     "own_earnings": 0,
-    "own_state_pension": 23000
+    "own_state_pension": 23000,
+    "weekly_council_tax": 3000
   },
   "expect": {
     "pension-credit-guarantee": {
@@ -37,6 +38,10 @@
     "winter-fuel-payment": {
       "verdict": "appears-eligible",
       "because": "£200 for your household this winter, paid automatically — but HMRC recovers the share of anyone whose own taxable income is over £35,000, through PAYE or Self Assessment. You can opt out of receiving it instead."
+    },
+    "council-tax-reduction": {
+      "verdict": "not-eligible",
+      "weekly": null
     }
   }
 }

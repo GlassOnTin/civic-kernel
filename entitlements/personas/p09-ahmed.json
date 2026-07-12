@@ -27,7 +27,8 @@
     "cares_35h": false,
     "cared_for_gets_qualifying": false,
     "own_earnings": 0,
-    "own_state_pension": 24500
+    "own_state_pension": 24500,
+    "weekly_council_tax": 3000
   },
   "expect": {
     "pension-credit-guarantee": {
