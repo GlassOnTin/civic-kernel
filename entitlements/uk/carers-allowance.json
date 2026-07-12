@@ -1,0 +1,150 @@
+{
+  "v": "civic-kernel/entitlement-rules/v0",
+  "id": "carers-allowance",
+  "title": "Carer's Allowance",
+  "jurisdiction": "England and Wales (in Scotland this is Carer Support Payment)",
+  "kind": "computable",
+  "effective": {
+    "tax_year": "2026-27",
+    "uprating": "The Social Security Benefits Up-rating Order 2026 (S.I. 2026/148); earnings limit pegged to 16 hours at the National Living Wage (16 × £12.75 = £204)",
+    "checked": "2026-07-12"
+  },
+  "plainly": "£86.45 a week for caring 35 hours or more for someone on a disability benefit. Over State Pension age the two usually overlap and nothing is paid — but claim anyway: the entitlement itself adds £48.15 a week to Pension Credit.",
+  "questions": [
+    {
+      "id": "dob",
+      "label": "Your date of birth",
+      "help": "Only used against the age condition — it never leaves this page.",
+      "type": "date",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70: aged 16 or over",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/70"
+    },
+    {
+      "id": "scotland",
+      "label": "Do you live in Scotland?",
+      "type": "bool",
+      "rule": "Carer's assistance is devolved: Carer Support Payment, from Social Security Scotland",
+      "uri": "https://www.gov.uk/carers-allowance"
+    },
+    {
+      "id": "cares_35h",
+      "label": "Do you spend 35 hours or more a week caring for someone?",
+      "help": "Add it all up — helping with washing, meals, medication, appointments, keeping them safe. It does not need to be one block, or under one roof.",
+      "type": "bool",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70(1)(a) (regularly and substantially engaged in caring); Invalid Care Allowance Regulations 1976 (S.I. 1976/409) reg 4 (35 hours)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/70"
+    },
+    {
+      "id": "cared_for_gets_qualifying",
+      "label": "Does the person you care for get Attendance Allowance, PIP or ADP daily living, DLA care (middle or higher), Pension Age Disability Payment, or Child Disability Payment (middle or higher)?",
+      "help": "If they have not claimed theirs yet, that claim comes first — yours chains from it (the Attendance Allowance answer above may help them).",
+      "type": "bool",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70(2) (caring for a severely disabled person, defined by receipt of a qualifying benefit)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/70"
+    },
+    {
+      "id": "own_earnings",
+      "label": "Your own weekly earnings, after tax, National Insurance and allowable expenses (not your partner's)",
+      "help": "Enter 0 if none. Some costs are deducted before the test — half of pension contributions, some care costs while you work.",
+      "type": "money",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70(1)(b); Invalid Care Allowance Regulations 1976 reg 8 (the earnings limit: £204 for 2026–27)",
+      "uri": "https://www.gov.uk/carers-allowance/eligibility"
+    },
+    {
+      "id": "own_state_pension",
+      "label": "Your own weekly State Pension (not your partner's)",
+      "help": "The same figure as your State Pension above if you are single; 0 if you do not get one yet.",
+      "type": "money",
+      "rule": "Social Security (Overlapping Benefits) Regulations 1979 (S.I. 1979/597): Carer's Allowance and State Pension overlap — one is set against the other",
+      "uri": "https://www.legislation.gov.uk/uksi/1979/597"
+    }
+  ],
+  "values": [
+    {
+      "id": "ca_rate",
+      "plainly": "The Carer's Allowance rate (2026–27: £86.45 a week).",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70(5), Sch 4 Part III, as uprated by S.I. 2026/148",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/70",
+      "expr": { "num": 8645 }
+    },
+    {
+      "id": "ca_payable",
+      "plainly": "What would actually be paid: the rate, less your own State Pension (they overlap — you cannot be paid both in full).",
+      "rule": "Social Security (Overlapping Benefits) Regulations 1979 reg 4",
+      "uri": "https://www.legislation.gov.uk/uksi/1979/597",
+      "expr": { "max": [ { "num": 0 }, { "sub": [ { "val": "ca_rate" }, { "get": "own_state_pension" } ] } ] }
+    }
+  ],
+  "gates": [
+    {
+      "when": { "get": "scotland" },
+      "verdict": "signpost",
+      "because": "In Scotland this is Carer Support Payment, claimed from Social Security Scotland — close cousin rules, and moving between the two schemes has a 13-week grace period.",
+      "rule": "Devolved: Social Security Scotland, Carer Support Payment",
+      "uri": "https://www.mygov.scot/carer-support-payment"
+    },
+    {
+      "when": { "not": { "age_at_least": { "dob": { "get": "dob" }, "years": 16 } } },
+      "verdict": "not-eligible",
+      "because": "Carer's Allowance starts at 16.",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70; gov.uk Carer's Allowance eligibility",
+      "uri": "https://www.gov.uk/carers-allowance/eligibility"
+    }
+  ],
+  "verdicts": [
+    {
+      "when": { "and": [ { "get": "cares_35h" }, { "get": "cared_for_gets_qualifying" }, { "lte": [ { "get": "own_earnings" }, { "num": 20400 } ] }, { "gt": [ { "val": "ca_payable" }, { "num": 0 } ] } ] },
+      "verdict": "appears-eligible",
+      "weekly": { "val": "ca_payable" },
+      "because": "The amount shown is what would be paid after your State Pension is set against the £86.45 rate — the two overlap. It counts as income for Pension Credit, and it brings the carer addition with it. One check first: payment of Carer's Allowance can end a severe-disability amount in the benefits of the person you care for — where they get one, take advice before claiming.",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70; S.I. 1979/597",
+      "uri": "https://www.gov.uk/carers-allowance"
+    },
+    {
+      "when": { "and": [ { "get": "cares_35h" }, { "get": "cared_for_gets_qualifying" }, { "lte": [ { "get": "own_earnings" }, { "num": 20400 } ] } ] },
+      "verdict": "appears-eligible",
+      "because": "Entitled — but not paid: your State Pension is at least the £86.45 rate, and the two overlap. Claim anyway. An underlying entitlement is exactly what the Pension Credit carer question above means: it adds the £48.15 carer addition and raises the earnings disregard to £20 — in gov.uk's own words, people with higher pensions get increased Pension Credit instead. And unpaid entitlement does not touch the cared-for person's own benefits.",
+      "rule": "S.I. 1979/597 (overlap); State Pension Credit Act 2002 s.2(8) (the addition an entitlement earns)",
+      "uri": "https://www.gov.uk/carers-allowance/eligibility"
+    },
+    {
+      "when": { "and": [ { "get": "cares_35h" }, { "get": "cared_for_gets_qualifying" } ] },
+      "verdict": "not-eligible",
+      "because": "Your earnings are over the £204 weekly limit — and it is a cliff edge: a penny over loses the whole allowance. Before giving up, check what counts: the test is after tax, National Insurance, half of any pension contributions, and some care costs while you work.",
+      "rule": "Invalid Care Allowance Regulations 1976 reg 8 (the earnings limit, 2026–27: £204)",
+      "uri": "https://www.gov.uk/carers-allowance/eligibility"
+    },
+    {
+      "when": { "num": 1 },
+      "verdict": "not-eligible",
+      "because": "Carer's Allowance turns on two facts: 35 or more hours of care a week, for someone who gets a qualifying disability benefit. If the person you care for has not claimed theirs yet, start there — the Attendance Allowance answer above may be the first link in the chain.",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70(1)(a), (2)",
+      "uri": "https://www.legislation.gov.uk/ukpga/1992/4/section/70"
+    }
+  ],
+  "not_asked": [
+    "your name",
+    "your National Insurance number",
+    "the name of the person you care for — only whether they get a qualifying benefit",
+    "your relationship to them",
+    "your bank details"
+  ],
+  "not_encoded": [
+    "the interaction warning, in full: while Carer's Allowance is IN PAYMENT for someone's care, that person's severe-disability amounts stop (Pension Credit and Housing Benefit both encode that rule above) — where they have one, the household can be worse off; take advice first. An unpaid underlying entitlement causes no such loss",
+    "full-time education (21 or more hours of supervised study a week disqualifies — not asked because it is rare over State Pension age; if it applies to you, it applies)",
+    "breaks in care (hospital stays, respite — up to 4 weeks in 26 can be ignored, 12 in hospital)",
+    "residence and presence conditions",
+    "backdating (up to 3 months) and Carer's Credit (the National Insurance protection for under-35-hour or over-limit carers)",
+    "only one person can be paid for one cared-for person, and one carer cannot double the award by caring for two"
+  ],
+  "passports": [
+    { "name": "Pension Credit carer addition (£48.15 a week)", "note": "earned by the entitlement itself, paid or not — answer yes to the carer question above and watch it appear." },
+    { "name": "Housing Benefit carer premium", "note": "the same £48.15 shape, in the rent calculation above." }
+  ],
+  "sources_checked": [
+    { "what": "Rate £86.45 and earnings limit £204 (2026–27) — internally consistent twice over: £83.30 × the 3.8% uprating, and 16 hours × £12.75 National Living Wage", "where": "gov.uk/carers-allowance and /eligibility", "date": "2026-07-12" },
+    { "what": "Qualifying benefits list; 35 hours; aged 16+; full-time education exclusion", "where": "gov.uk/carers-allowance/eligibility; SSCBA 1992 s.70", "date": "2026-07-12" },
+    { "what": "The overlap and its consolation: State Pension at or above the rate means nothing is paid, and 'increased Pension Credit instead'", "where": "gov.uk/carers-allowance/eligibility; S.I. 1979/597", "date": "2026-07-12" },
+    { "what": "Scotland: Carer Support Payment, 13-week transition on moving", "where": "gov.uk/carers-allowance", "date": "2026-07-12" }
+  ]
+}

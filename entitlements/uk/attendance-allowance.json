@@ -128,7 +128,7 @@
   ],
   "passports": [
     { "name": "Pension Credit severe-disability amount", "note": "getting Attendance Allowance is the usual doorway to it — £86.05 a week on top, if you live alone and nobody is paid Carer's Allowance for you." },
-    { "name": "Carer's Allowance for the person who looks after you", "note": "35+ hours of care for someone on Attendance Allowance can entitle them." }
+    { "id": "carers-allowance", "name": "Carer's Allowance for the person who looks after you", "note": "35+ hours of care for someone on Attendance Allowance can entitle them — worked out below." }
   ],
   "sources_checked": [
     { "what": "Rates £76.70 / £114.60 (2026–27)", "where": "gov.uk/attendance-allowance — consistent with SSCBA 1992 Sch 4 Part III as uprated by S.I. 2026/148", "date": "2026-07-11" },

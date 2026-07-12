@@ -1,6 +1,6 @@
 {
-  "name": "Ted and May — couple, Ted has Carer's Allowance for May",
-  "note": "One carer addition (£48.15). Ted being paid Carer's Allowance for May also answers 'is anyone paid for caring for you or your partner' — true — which would block a severe-disability amount, though none applies here anyway.",
+  "name": "Ted and May — couple; Ted's Carer's Allowance is entitlement without payment",
+  "note": "May gets Attendance Allowance; Ted cares for her 35+ hours. His own State Pension (£160) exceeds the £86.45 rate, so Carer's Allowance is an underlying entitlement — nothing in payment, nothing counted as income, nobody's severe-disability amount blocked — and it still earns the £48.15 carer addition in Pension Credit.",
   "as_of": "2026-07-12",
   "checked": "Arithmetic hand-worked against SPC Regs 2002 reg 6(8) (£48.15) and SPC Act 2002 s.2(8), 2026-07-12.",
   "answers": {
@@ -14,9 +14,9 @@
     "weekly_other_income": 0,
     "capital": 500000,
     "gets_disability_benefit": false,
-    "partner_gets_disability_benefit": false,
+    "partner_gets_disability_benefit": true,
     "other_adults": false,
-    "carer_paid_for_you": true,
+    "carer_paid_for_you": false,
     "you_get_ca": true,
     "partner_gets_ca": false,
     "scotland": false,
@@ -28,12 +28,20 @@
     "pays_rent": false,
     "weekly_rent": 0,
     "income_over_35k": false,
-    "partner_income_over_35k": false
+    "partner_income_over_35k": false,
+    "cares_35h": true,
+    "cared_for_gets_qualifying": true,
+    "own_earnings": 0,
+    "own_state_pension": 16000
   },
   "expect": {
     "pension-credit-guarantee": {
       "verdict": "appears-eligible",
       "weekly": 8140
+    },
+    "carers-allowance": {
+      "verdict": "appears-eligible",
+      "weekly": null
     }
   }
 }

@@ -23,7 +23,11 @@
     "gets_pc": false,
     "pays_rent": false,
     "weekly_rent": 0,
-    "income_over_35k": false
+    "income_over_35k": false,
+    "cares_35h": false,
+    "cared_for_gets_qualifying": false,
+    "own_earnings": 0,
+    "own_state_pension": 17645
   },
   "expect": {
     "pension-credit-guarantee": {

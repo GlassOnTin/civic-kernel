@@ -1,0 +1,25 @@
+{
+  "name": "Priti — 67, cares for her husband, earns a penny over the limit",
+  "note": "The cliff edge: £204.01 of weekly earnings loses the whole allowance — no taper, no shortfall, nothing. The verdict names the cliff and the deductions worth checking before giving up. Her carer answer to Pension Credit is honestly no: over the limit there is no entitlement, underlying or otherwise.",
+  "as_of": "2026-07-12",
+  "checked": "Earnings limit (£204, cliff-edge, allowable deductions) against gov.uk/carers-allowance/eligibility, 2026-07-12.",
+  "answers": {
+    "dob": "1958-09-09", "has_partner": true, "partner_dob": "1957-03-03",
+    "partner_hb_pension_age": false,
+    "weekly_state_pension": 21000, "weekly_other_pensions": 0,
+    "weekly_earnings": 20401, "weekly_other_income": 0, "capital": 400000,
+    "gets_disability_benefit": false, "partner_gets_disability_benefit": true,
+    "other_adults": false, "carer_paid_for_you": false,
+    "you_get_ca": false, "partner_gets_ca": false,
+    "scotland": false, "aa_excluded": false,
+    "aa_day": false, "aa_night": false, "aa_six_months": false,
+    "gets_pc": false, "pays_rent": false, "weekly_rent": 0,
+    "income_over_35k": false, "partner_income_over_35k": false,
+    "cares_35h": true, "cared_for_gets_qualifying": true,
+    "own_earnings": 20401, "own_state_pension": 10500
+  },
+  "expect": {
+    "pension-credit-guarantee": { "verdict": "not-eligible", "weekly": null },
+    "carers-allowance": { "verdict": "not-eligible", "weekly": null, "because": "Your earnings are over the £204 weekly limit — and it is a cliff edge: a penny over loses the whole allowance. Before giving up, check what counts: the test is after tax, National Insurance, half of any pension contributions, and some care costs while you work." }
+  }
+}

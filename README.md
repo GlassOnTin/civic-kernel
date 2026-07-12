@@ -196,9 +196,10 @@ links back to this list.
   with its rule, what was demanded, what was deliberately not asked. No network API
   exists in the page or its engine, asserted in CI.
 - **`entitlements/`** — the rules corpus behind it: `rules.schema.json` (the record
-  format), `uk/` (Pension Credit Guarantee Credit, Attendance Allowance, the over-75
+  format), `uk/` (seven rule files — Pension Credit Guarantee Credit, Housing
+  Benefit, Attendance Allowance, Carer's Allowance, Winter Fuel Payment, the over-75
   TV licence, a Council Tax Reduction signpost — and the statutory pensionable-age
-  table as data), `personas/` (13 hand-checked households, sources dated), and
+  table as data), `personas/` (21 hand-checked households, sources dated), and
   `judge.py`, the independent second engine. `tools/owed-parity.mjs` (CI) holds the
   page and the judge to identical claim-traces over the battery.
 - **`witness.html`** + **`witness.js`** — the witnessing society's side in the

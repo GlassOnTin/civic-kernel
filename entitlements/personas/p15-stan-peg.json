@@ -28,7 +28,11 @@
     "pays_rent": true,
     "weekly_rent": 9500,
     "income_over_35k": false,
-    "partner_income_over_35k": false
+    "partner_income_over_35k": false,
+    "cares_35h": false,
+    "cared_for_gets_qualifying": false,
+    "own_earnings": 0,
+    "own_state_pension": 20000
   },
   "expect": {
     "pension-credit-guarantee": {
