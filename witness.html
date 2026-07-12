@@ -86,10 +86,11 @@
 <main id="main">
 
 <h1>Witness an election</h1>
-<p class="sub">The neighbouring society's five minutes: co-sign a club's checkpoint only if the
-history you are shown extends the history you remember — that is what stops anyone, the club's
-own committee included, from quietly rewriting the record. Everything runs in this page; your
-key and your memory live in one small file you keep. Nothing you load or make here is sent
+<p class="sub">A club nearby has asked you to help keep their election honest. The favour is
+small: a few times a season, this page checks that the record they show you is the same one
+you saw last time — nothing rewritten, nothing quietly missing — and adds your signature to
+its fingerprint. That signature is what stops anyone, their own committee included, from
+changing the past. Five minutes, nothing to install, and nothing you do here is sent
 anywhere.</p>
 
 <div id="nosign" class="status warn" style="display:none"><b>CANNOT SIGN HERE.</b> This browser
@@ -98,25 +99,27 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
 
 <div class="panel">
   <h2>1 · Your witness file</h2>
-  <p class="small">A witness holds one signing key and one memory — the last checkpoint it
-  co-signed. Both live in <code>witness.json</code>. Make one here, or drop the one you already
-  have; a file made by <code>proto/clubvote.py witness</code> is the same file, and either tool
-  can carry it on.</p>
+  <p class="small">Being a witness needs one small file. It is two things at once: your
+  signature stamp, and your memory of what you have signed so far. Make one here — the page
+  gives you two downloads: a <b>card</b> to hand to the club's committee (that part is public),
+  and your <b>witness file</b> to keep (that part is yours alone).</p>
   <div class="dropzone" id="statedrop">
-    Returning? Drop your <code>witness.json</code> here — or
+    Done this before? Drop your <code>witness.json</code> here — or
     <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="statepicker"></label>.
   </div>
-  <p class="small" style="margin-top:.8rem">New? Pick your key id — your society's name, with a
-  key fragment — then:</p>
+  <p class="small" style="margin-top:.8rem">First time? Type a name for your society. The tools
+  share an address-like form — copy the example and change the name, or ask the committee to
+  write the line for you:</p>
   <input type="text" id="keyid" class="mono" placeholder="did:web:your-society.example#w1" spellcheck="false" autocomplete="off">
   <p>
-    <button id="gen" class="primary">Make my witness key</button>
-    <button id="dlcard" style="display:none">Download card.json</button>
-    <button id="dlstate" style="display:none">Download witness.json</button>
+    <button id="gen" class="primary">Create my witness file</button>
+    <button id="dlcard" style="display:none">Download the card (card.json)</button>
+    <button id="dlstate" style="display:none">Download my witness file</button>
   </p>
-  <div id="genout" class="small" style="display:none">Hand <code>card.json</code> to the club's
-  committee — it is public, and it is how their <code>agm new</code> learns to require you.
-  Keep <code>witness.json</code> private: whoever holds it can sign in your name.</div>
+  <div id="genout" class="small" style="display:none">Two files just downloaded. Hand
+  <code>card.json</code> to the club's committee — it is public, and it is how their election
+  learns to require your signature. Keep <code>witness.json</code> private: anyone who holds
+  it can sign as you.</div>
   <div id="statebox" style="display:none">
     <div class="small" style="margin-top:.6rem"><b>This witness:</b></div>
     <div class="secretbox" id="statesummary"></div>
@@ -124,32 +127,34 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
 </div>
 
 <div class="panel">
-  <h2>2 · The ceremony — pin whom you watch (once)</h2>
-  <p class="small">Enter the community id and the log's public key. Both must reach you
-  <b>out of band</b> — two secretaries at a federation meeting, a phone call, paper — and never
-  from the request you are asked to sign: a request that could name its own judge would always
-  pass. This is the ceremony; everything after it is arithmetic.</p>
-  <input type="text" id="community" class="mono" placeholder="community id, e.g. did:web:heeley-bank-allotments.example" spellcheck="false" autocomplete="off">
-  <input type="text" id="logpub" class="mono" placeholder="the log's public key (base64url, 32 bytes)" spellcheck="false" autocomplete="off">
-  <p><button id="pin" class="primary">Pin whom I watch</button></p>
+  <h2>2 · The handshake — once, in person or by phone</h2>
+  <p class="small">The committee gives you two lines to paste in: their club's name (in the same
+  address-like form as yours) and their record's public key. Take them <b>face to face, by
+  phone, or on paper</b> — never from the email that asks you to sign something. The reason is
+  simple: a request that could introduce its own judge would always pass. This handshake happens
+  once; everything after it is checking.</p>
+  <input type="text" id="community" class="mono" placeholder="their club's name, e.g. did:web:heeley-bank-allotments.example" spellcheck="false" autocomplete="off">
+  <input type="text" id="logpub" class="mono" placeholder="their record's public key (the second line they give you)" spellcheck="false" autocomplete="off">
+  <p><button id="pin" class="primary">Save the two lines</button></p>
   <div id="pinout"></div>
 </div>
 
 <div class="panel">
-  <h2>3 · Co-sign a checkpoint</h2>
-  <p class="small">The committee sends you <code>witness-request.json</code> whenever their log
-  grows. Drop it here. The page checks four things: the head is from the community you watch;
-  it is signed by the log key from the ceremony; it roots the log that came with it; and that
-  history <em>extends</em> the one your memory pins. All four hold — you get
-  <code>cosig-N.json</code> to send back, and an updated <code>witness.json</code> to keep.
-  Any of them fails — you get the reason, and nothing is signed.</p>
+  <h2>3 · Sign their record's fingerprint</h2>
+  <p class="small">A few times a season, the committee emails you a small file:
+  <code>witness-request.json</code>. Drop it here. The page checks four things in plain terms:
+  it really is the club from your handshake; it really was sent with their key; the fingerprint
+  really matches the record that came with it; and today's record still contains everything you
+  signed before, unchanged. If all four hold, you get a <b>signed slip</b> to email back and an
+  <b>updated witness file</b> to keep. If any of them fails, nothing is signed — and the page
+  tells you exactly which one, because that refusal is the whole job.</p>
   <div class="dropzone" id="reqdrop">
-    Drop <code>witness-request.json</code> here — or
+    Drop the request file here — or
     <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="reqpicker"></label>.
   </div>
   <p>
-    <button id="dlcosig" style="display:none">Download the co-signature</button>
-    <button id="dlstate2" style="display:none">Download your updated witness.json</button>
+    <button id="dlcosig" style="display:none">Download the signed slip</button>
+    <button id="dlstate2" style="display:none">Download my updated witness file</button>
   </p>
   <div id="signout"></div>
 </div>
@@ -157,16 +162,15 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
 <div class="panel">
   <h2>What this page cannot protect you from — said plainly</h2>
   <p class="small">
-  <b>Losing the file:</b> <code>witness.json</code> is the key <em>and</em> the memory. Lose it
-  and this witness is gone — tell the committee, make a new one, redo the ceremony. And whoever
-  holds a copy can sign in your name: treat it like the society's chequebook.
-  <b>A stale memory:</b> after co-signing, keep the <em>new</em> file. Sign with an old one and
-  you will still refuse rewrites — but your memory pins less history than you actually vouched
-  for.
+  <b>Losing the file:</b> your witness file is the stamp <em>and</em> the memory. Lose it and
+  this witness is gone — tell the committee, make a new one, redo the handshake. And anyone who
+  holds a copy can sign as you: treat it like the society's chequebook.
+  <b>An old copy:</b> after signing, keep the <em>newest</em> file. An old one still refuses
+  rewrites — but it remembers less than you have actually vouched for.
   <b>This machine:</b> a compromised browser could sign something other than what it shows you.
-  The request and the co-signature are small JSON files — anyone can re-check them with
-  <code>proto/clubvote.py witness</code>, which is the same witness, and two witnesses on two
-  machines is the whole point.</p>
+  The request and the signed slip are small files anyone can re-check with the command-line
+  witness (<code>proto/clubvote.py witness</code> — the same witness) — and two witnesses on
+  two machines is the whole point of asking two societies.</p>
 </div>
 
 <footer>
@@ -199,10 +203,10 @@ function render() {
   $("statebox").style.display = "block";
   $("statesummary").textContent =
     state.key_id
-    + "\nwatching: " + (state.watch ? state.watch.community : "nobody yet — do the ceremony")
+    + "\nwatching: " + (state.watch ? state.watch.community : "nobody yet — do the handshake below")
     + "\nmemory:   " + (state.last
-        ? "size " + state.last.size + ", " + state.last.root.slice(0, 28) + "…"
-        : "nothing co-signed yet");
+        ? "their record at length " + state.last.size + ", fingerprint " + state.last.root.slice(7, 27) + "…"
+        : "nothing signed yet");
   $("dlstate").style.display = "inline-block";
   if (state.watch) {
     $("community").value = state.watch.community;
@@ -251,9 +255,10 @@ $("pin").onclick = () => {
   try {
     state = CivicWitness.watch(state, $("community").value, $("logpub").value.trim());
     render();
-    out.innerHTML = "<div class='status ok small'>Watching <b></b>. Your file changed — keep the new "
-      + "<code>witness.json</code> that just downloaded. The key came to you out of band; never "
-      + "take it from a request.</div>";
+    out.innerHTML = "<div class='status ok small'>Handshake saved — you are now watching <b></b>. "
+      + "Your witness file changed, so a fresh copy just downloaded: keep that one. And remember "
+      + "the rule the handshake exists for — those two lines come from a person, never from a "
+      + "request.</div>";
     out.querySelector("b").textContent = state.watch.community;
     download("witness.json", stateText());
   } catch (e) {
@@ -276,10 +281,11 @@ async function handleRequest(text) {
     downloads.cosig = { name, text: JSON.stringify(r.cosig, null, 1) + "\n" };
     $("dlcosig").style.display = "inline-block";
     $("dlstate2").style.display = "inline-block";
-    out.innerHTML = "<div class='status ok small'><b>Co-signed the checkpoint at size "
-      + r.cosig.head.size + ".</b> Send <code>" + name + "</code> back to the committee. "
-      + "Your memory now pins this history — <b>replace your old <code>witness.json</code> with "
-      + "the new download</b>; the old file forgets what you just vouched for.</div>";
+    out.innerHTML = "<div class='status ok small'><b>Signed — their record checks out.</b> "
+      + "It is the same story you saw before, now " + r.cosig.head.size + " entries long. "
+      + "Two downloads: email <code>" + name + "</code> back to the committee, and <b>keep the "
+      + "new <code>witness.json</code></b> — your memory now includes today, and the old copy "
+      + "has already forgotten it.</div>";
     download(name, downloads.cosig.text);
     download("witness.json", stateText());
   } catch (e) {
