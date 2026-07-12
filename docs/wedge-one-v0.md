@@ -185,10 +185,11 @@ the product; the page is one client of it; both are abandonable by design.
 
 ## The ladder up (not v0)
 
-- **v1 — the circumstances file.** Your answers as a small file you keep and
-  re-drop (the witness.json pattern: a file, not an account), so re-checking
-  after a rule change is one drop. This is the first personhood artifact: a
-  person's own portable state.
+- **v1 — the circumstances file** *(built 2026-07-12)*. Your answers as a
+  small file you keep and re-drop (the witness.json pattern: a file, not an
+  account), so re-checking after a rule change is one drop. Deliberately
+  persona-shaped: `entitlements/judge.py` runs your own file unchanged. This
+  is the first personhood artifact: a person's own portable state.
 - **v2 — attestations, when the ecosystem ships.** Real issuers (council,
   GP, employer) replacing self-declaration field by field; prove-without-
   revealing arrives here, not before.

@@ -76,8 +76,22 @@ if (m) {
   }
 }
 
-// --- both engines, every persona: expectations hold and the full traces agree
+// --- the circumstances file: what the page saves, the page and the judge reload
+// identically — persona-shaped on purpose
 const PERSONAS = path.join(ROOT, "entitlements", "personas");
+{
+  let rt = true, why = "";
+  for (const f of readdirSync(PERSONAS).sort()) {
+    const p = JSON.parse(readFileSync(path.join(PERSONAS, f), "utf8"));
+    const doc = JSON.parse(JSON.stringify(Owed.circumstancesFile(p.answers, p.as_of)));
+    if (canon(Owed.circumstancesAnswers(doc)) !== canon(p.answers)) { rt = false; why = f; break; }
+    if (doc.v !== "civic-kernel/circumstances/v0" || !/KEEP PRIVATE/.test(doc.note)) { rt = false; why = f + " (envelope)"; break; }
+  }
+  say(rt, "circumstances files round-trip every persona's answers identically, privacy note included"
+    + (why ? " :: " + why : ""));
+}
+
+// --- both engines, every persona: expectations hold and the full traces agree
 for (const f of readdirSync(PERSONAS).sort()) {
   const persona = JSON.parse(readFileSync(path.join(PERSONAS, f), "utf8"));
   const js = {};

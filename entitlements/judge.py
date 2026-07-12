@@ -18,6 +18,9 @@ length.
 Usage:
   judge.py <entitlements-uk-dir> --persona <persona.json> [--json]
     --json prints {entitlement_id: trace} and skips expectation checks
+
+A circumstances file saved by owed.html is persona-shaped and runs here
+unchanged — your own file, through the independent judge.
 """
 import json
 import math

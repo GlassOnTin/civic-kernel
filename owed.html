@@ -67,6 +67,12 @@
   .banner { margin: .8rem 0; padding: .5rem .8rem; border-radius: 8px; border: 1px solid var(--line);
             font-size: .85rem; color: var(--muted); }
   .banner.stale { background: var(--warnbg); border-color: var(--warn); color: var(--fg); }
+  .dropzone {
+    margin-top: .8rem; padding: 1rem; border: 2px dashed var(--line);
+    border-radius: 10px; color: var(--muted); font-size: .9rem;
+  }
+  .dropzone.over { border-color: var(--accent); color: var(--fg); }
+  .dropzone input { display: none; }
   footer { margin-top: 2.5rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: .8rem; }
 </style>
 </head>
@@ -86,6 +92,23 @@ question below names the rule that lets it ask; every answer shows its working.<
   amounts move. That is the point: try "what if I claimed Attendance Allowance?" before you
   decide anything.</p>
   <div id="form"></div>
+</div>
+
+<div class="panel">
+  <h2>Keep your answers — a file, not an account</h2>
+  <p class="small">Nothing you typed is stored anywhere, so here is the alternative: your
+  answers as a small file you keep. The rules change — every April, and lately oftener — and
+  when they do, drop the file back and everything recomputes in one go. The independent judge
+  accepts the same file, unchanged:
+  <code>python3 entitlements/judge.py entitlements/uk --persona circumstances.json --json</code>.</p>
+  <p class="small sub">The file holds what you typed — date of birth, income, savings, care
+  needs. Keep it as private as you would keep those.</p>
+  <p><button id="circsave">Download my circumstances</button></p>
+  <div class="dropzone" id="circdrop">
+    Returning? Drop your <code>circumstances.json</code> here — or
+    <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="circpicker"></label>.
+  </div>
+  <div id="circout" class="small" style="margin-top:.5rem"></div>
 </div>
 
 <div id="results"></div>
@@ -272,6 +295,51 @@ function recompute() {
 }
 $("form").addEventListener("input", recompute);
 recompute();
+
+// --- the circumstances file: your answers as a file you keep, not an account
+$("circsave").onclick = () => {
+  const doc = CivicOwed.circumstancesFile(readAnswers(), todayIso());
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(doc, null, 1) + "\n"], { type: "application/json" }));
+  a.download = "circumstances.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  $("circout").textContent = "Saved. Keep it private — and keep it: one drop recomputes everything after the next rule change.";
+};
+function loadCircumstances(text) {
+  const out = $("circout");
+  try {
+    const doc = JSON.parse(text);
+    const answers = CivicOwed.circumstancesAnswers(doc);
+    let applied = 0;
+    for (const q of QUESTIONS) {
+      if (!(q.id in answers)) continue;
+      const el = $("q-" + q.id), v = answers[q.id];
+      if (q.type === "date") el.value = String(v);
+      else if (q.type === "money") el.value = String(v / 100);
+      else el.value = v ? "1" : "0";
+      applied++;
+    }
+    recompute();
+    out.textContent = "Loaded " + applied + " answers" + (doc.saved ? " saved on " + doc.saved : "")
+      + " — everything above recomputed against today's rules. Check anything that has changed since.";
+  } catch (e) {
+    out.textContent = "Could not load: " + e.message;
+  }
+}
+const circdrop = $("circdrop");
+circdrop.ondragover = e => { e.preventDefault(); circdrop.classList.add("over"); };
+circdrop.ondragleave = () => circdrop.classList.remove("over");
+circdrop.ondrop = async e => {
+  e.preventDefault(); circdrop.classList.remove("over");
+  const f = [...e.dataTransfer.files][0];
+  if (f) loadCircumstances(await f.text());
+};
+$("circpicker").onchange = async e => {
+  const f = e.target.files[0];
+  if (f) loadCircumstances(await f.text());
+  e.target.value = "";
+};
 </script>
 </body>
 </html>

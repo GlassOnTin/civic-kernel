@@ -110,8 +110,10 @@ bigger wedge now runs:
 Credit, Attendance Allowance and what they open, on your device, every question
 citing its rule, held to an independent judge in CI — implementing
 [`docs/wedge-one-v0.md`](docs/wedge-one-v0.md), which was drafted success-test-first
-and remains the plan of record. Next on that road: more corpus, the circumstances
-file, and — when the attestation ecosystem ships — proving without revealing.
+and remains the plan of record. Your answers can leave as a *circumstances file* — a
+file you keep, not an account — and come back in one drop when the rules change; the
+independent judge runs the same file unchanged. Next on that road: more corpus, and —
+when the attestation ecosystem ships — proving without revealing.
 
 ## The words, in plain speech
 

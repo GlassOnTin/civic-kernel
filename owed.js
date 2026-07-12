@@ -190,5 +190,35 @@
     return "£" + (p / 100).toFixed(2);
   }
 
-  return { evaluate, demanded, spaDate, poundsFromPence, _internals: { makeEval, addYearsMonths, parseDate } };
+  // ------------------------------------------------------ circumstances file
+  /* The household's answers as a small file the person keeps — a file, not
+   * an account (the witness.json pattern). Deliberately the same shape as a
+   * persona: entitlements/judge.py runs a saved circumstances file
+   * unchanged. The page always recomputes against today; `as_of` is kept in
+   * the file so the independent judge can reproduce what the page showed on
+   * the day it was saved. */
+  function circumstancesFile(answers, savedIso) {
+    return {
+      v: "civic-kernel/circumstances/v0",
+      name: "my circumstances",
+      note: "KEEP PRIVATE. This file holds what you told the page — date of birth, "
+        + "income, savings, care needs. It is yours: nothing was stored anywhere else. "
+        + "Drop it back on the page after a rule change and everything recomputes; "
+        + "entitlements/judge.py accepts it as a persona, unchanged.",
+      saved: savedIso,
+      as_of: savedIso,
+      answers: answers,
+    };
+  }
+  function circumstancesAnswers(doc) {
+    if (!doc || typeof doc !== "object" || !doc.answers || typeof doc.answers !== "object"
+      || Array.isArray(doc.answers)) {
+      throw new Error("not a circumstances file: it should hold an answers object");
+    }
+    // survive serialization on purpose: what comes back is what was written down
+    return JSON.parse(JSON.stringify(doc.answers));
+  }
+
+  return { evaluate, demanded, spaDate, poundsFromPence, circumstancesFile, circumstancesAnswers,
+           _internals: { makeEval, addYearsMonths, parseDate } };
 });
