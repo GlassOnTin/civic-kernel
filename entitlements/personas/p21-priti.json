@@ -33,7 +33,8 @@
     "cared_for_gets_qualifying": true,
     "own_earnings": 20401,
     "own_state_pension": 10500,
-    "weekly_council_tax": 3000
+    "weekly_council_tax": 3000,
+    "padp_excluded": false
   },
   "expect": {
     "pension-credit-guarantee": {

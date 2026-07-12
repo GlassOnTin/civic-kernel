@@ -1,0 +1,26 @@
+{
+  "name": "Eilidh — 81, Glasgow, needs help day and night",
+  "note": "The first fully Scottish story: her Attendance Allowance card signposts across the border, and Pension Age Disability Payment computes — higher rate, both conditions. Pension Credit still computes for her too (it is Great-Britain-wide), and getting the payment would add the severe-disability amount there.",
+  "as_of": "2026-07-12",
+  "checked": "Rates and conditions against mygov.scot/pension-age-disability-payment and S.S.I. 2024/166 reg 5 (day/night, 26 weeks), 2026-07-12.",
+  "answers": {
+    "dob": "1944-11-30", "has_partner": false,
+    "weekly_state_pension": 17000, "weekly_other_pensions": 0,
+    "weekly_earnings": 0, "weekly_other_income": 0, "capital": 300000,
+    "gets_disability_benefit": false, "other_adults": false,
+    "carer_paid_for_you": false, "you_get_ca": false,
+    "scotland": true, "aa_excluded": false, "padp_excluded": false,
+    "aa_day": true, "aa_night": true, "aa_six_months": true,
+    "gets_pc": false, "pays_rent": false, "weekly_rent": 0,
+    "income_over_35k": false,
+    "cares_35h": false, "cared_for_gets_qualifying": false,
+    "own_earnings": 0, "own_state_pension": 17000,
+    "weekly_council_tax": 2900
+  },
+  "expect": {
+    "pension-age-disability-payment": { "verdict": "assessment-gated", "weekly": 11460 },
+    "attendance-allowance": { "verdict": "signpost", "weekly": null },
+    "pension-credit-guarantee": { "verdict": "appears-eligible", "weekly": 6800 },
+    "council-tax-reduction": { "verdict": "signpost", "weekly": null }
+  }
+}

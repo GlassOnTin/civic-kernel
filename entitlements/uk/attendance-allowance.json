@@ -70,9 +70,9 @@
     {
       "when": { "get": "scotland" },
       "verdict": "signpost",
-      "because": "In Scotland this benefit is Pension Age Disability Payment, claimed from Social Security Scotland — the conditions are close cousins, but this file encodes the England-and-Wales rules.",
-      "rule": "Social Security (Scotland) Act 2018; gov.uk/pension-age-disability-payment",
-      "uri": "https://www.gov.uk/attendance-allowance"
+      "because": "In Scotland this benefit is Pension Age Disability Payment — worked out in its own answer below. The conditions are deliberate twins; only the door differs.",
+      "rule": "Social Security (Scotland) Act 2018; S.S.I. 2024/166",
+      "uri": "https://www.mygov.scot/pension-age-disability-payment"
     },
     {
       "when": { "not": { "spa_reached": { "dob": { "get": "dob" } } } },

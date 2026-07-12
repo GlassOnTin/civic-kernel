@@ -28,7 +28,8 @@
     "cared_for_gets_qualifying": false,
     "own_earnings": 0,
     "own_state_pension": 19000,
-    "weekly_council_tax": 2900
+    "weekly_council_tax": 2900,
+    "padp_excluded": false
   },
   "expect": {
     "pension-credit-guarantee": {
@@ -45,6 +46,10 @@
     "council-tax-reduction": {
       "verdict": "signpost",
       "weekly": null
+    },
+    "pension-age-disability-payment": {
+      "verdict": "assessment-gated",
+      "weekly": 7670
     }
   }
 }
