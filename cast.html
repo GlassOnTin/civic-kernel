@@ -89,6 +89,8 @@
   .choice input { width: 1.7rem; height: 1.7rem; margin: 0; accent-color: var(--fg); cursor: pointer; flex: none; }
   .choice input:focus { outline: 3px solid var(--focus); outline-offset: 1px; }
   .choice:has(input:checked) { border-color: var(--fg); }
+  details { margin: .5rem 0; }
+  summary { cursor: pointer; color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
   #progress { color: var(--muted); font-size: 1rem; margin: .3rem 0; min-height: 1.2rem; }
   footer { margin-top: 3rem; color: var(--muted); font-size: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; }
 </style>
@@ -156,8 +158,8 @@ with the <a href="verifier.html">verifier page</a>.</p>
     <br>attempt number <input type="number" id="seq" value="1" min="1"></p>
     <p><button id="sealbtn" class="primary">Seal my choice</button></p>
     <div id="sealed" style="display:none">
-      <div class="small">Sealed. The envelope (nobody can read a choice from it):</div>
-      <div class="secretbox" id="cthex"></div>
+      <div class="small">Sealed — your choice is now a number nobody can read anything from.</div>
+      <details class="small"><summary>Show the sealed number</summary><div class="secretbox" id="cthex"></div></details>
       <p>
         <button id="castbtn" class="primary">Cast it</button>
         <button id="chalbtn">No — open it: challenge this device</button>

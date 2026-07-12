@@ -101,6 +101,10 @@
     font-family: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
     overflow-wrap: anywhere;
   }
+  /* minimalism: the plain line is the content; the technical statement shows
+     only where it is the point — on a failure — or when asked for */
+  .row.ok .tech { display: none; }
+  body.techdetail .row.ok .tech { display: block; }
   .row.ok .mark { color: var(--ok); font-weight: 700; } .row.bad .mark { color: var(--bad); font-weight: 700; }
   .row.bad { color: var(--bad); }
   .row.skip { color: var(--muted); font-style: italic; }
@@ -144,6 +148,8 @@ saw. If a single number were altered anywhere, a check turns red and says where.
 
 <div id="verdict"><span class="big" id="verdict-line"></span><div id="verdict-detail" class="small"></div></div>
 <div id="progress"></div>
+<label class="small sub" id="techtoggle" style="display:none"><input type="checkbox" id="showtech">
+Show the technical line behind every check</label>
 <div id="checks"></div>
 
 <div class="panel" id="findpanel">
@@ -221,6 +227,7 @@ async function maybeRun() {
   setFileState();
   running = true;
   $("loadref").disabled = true;
+  $("techtoggle").style.display = "block";
   checksEl.innerHTML = "";
   const v = $("verdict"); v.className = ""; v.style.display = "none";
   let sectionEl = null;
@@ -434,6 +441,8 @@ $("handpicker").onchange = async e => {
   if (f) handIn(await f.text());
   e.target.value = "";
 };
+
+$("showtech").onchange = e => document.body.classList.toggle("techdetail", e.target.checked);
 
 document.addEventListener('click', e => {
   const s = e.target.closest('.sectitle[data-tip]');

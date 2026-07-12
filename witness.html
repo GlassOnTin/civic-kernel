@@ -136,10 +136,8 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
   it can sign as you. Your signing name is <code id="madeid"></code> — just a unique name on
   the paperwork; nothing on the internet looks it up.</div>
   <div id="generr" class="status bad small" style="display:none"></div>
-  <div id="statebox" style="display:none">
-    <div class="small" style="margin-top:.6rem"><b>This witness:</b></div>
-    <div class="secretbox" id="statesummary"></div>
-  </div>
+  <p id="statebox" class="small" style="display:none; margin-top:.9rem"><b>This witness:</b>
+  <span id="statesummary"></span></p>
 </div>
 
 <div class="panel">
@@ -219,10 +217,10 @@ function render() {
   $("statebox").style.display = "block";
   $("statesummary").textContent =
     state.key_id
-    + "\nwatching: " + (state.watch ? state.watch.community : "nobody yet — do the handshake below")
-    + "\nmemory:   " + (state.last
-        ? "their record at length " + state.last.size + ", fingerprint " + state.last.root.slice(7, 27) + "…"
-        : "nothing signed yet");
+    + (state.watch ? " — watching " + state.watch.community : " — not watching anyone yet; do the handshake below")
+    + (state.last
+        ? ". You have signed their record up to " + state.last.size + " entries."
+        : ". Nothing signed yet.");
   $("dlstate").style.display = "inline-block";
   if (state.watch) {
     $("community").value = state.watch.community;
