@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three failures, checked — Civic Kernel</title>
+<style>
+  /* The same gov.uk discipline as owed.html: white page, near-black large type,
+     grey only where it still passes contrast, underlined links, the yellow focus
+     state, square corners, and colour spent only on meaning — blue for what the
+     protocol could do, gold for where it stops, green for what you can do. */
+  :root {
+    --bg: #ffffff; --fg: #0b0c0c; --muted: #505a5f; --line: #b1b4b6;
+    --ok: #00703c; --bad: #d4351c; --warn: #996c00;
+    --panel: #f3f2f1; --accent: #1d70b8; --focus: #ffdd00; --focus-fg: #0b0c0c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b0c0c; --fg: #f3f2f1; --muted: #b1b4b6; --line: #505a5f;
+      --ok: #4cc38a; --bad: #ef6a5a; --warn: #d4a72c;
+      --panel: #1d2021; --accent: #7fb0da;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 44rem;
+    background: var(--bg); color: var(--fg);
+    font: 1.1875rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (max-width: 40rem) { body { font-size: 1rem; } }
+  h1 { font-size: 2rem; line-height: 1.15; margin: .6rem 0 .4rem; text-wrap: balance; }
+  h2 { font-size: 1.4rem; margin: 0 0 .5rem; text-wrap: balance; }
+  p  { margin: .6rem 0; }
+  .sub { color: var(--muted); }
+  .small { font-size: 1rem; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
+  a:hover { text-decoration-thickness: 3px; }
+  a:focus, .skip:focus {
+    background: var(--focus); color: var(--focus-fg);
+    outline: 3px solid var(--focus); outline-offset: 0;
+    box-shadow: 0 3px 0 var(--focus-fg); text-decoration: none;
+  }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { position: static; display: inline-block; padding: .2rem .5rem; }
+
+  .lede { font-size: 1.25rem; color: var(--muted); margin: .4rem 0 0; }
+  .lede strong { color: var(--fg); font-weight: 600; }
+  @media (max-width: 40rem) { .lede { font-size: 1.0625rem; } }
+
+  /* a case — the same top-rule card as owed.html */
+  .case { border-top: 2px solid var(--line); padding: 1.4rem 0 .5rem; margin-top: 2rem; }
+  .theme { display: block; font-size: .8rem; font-weight: 700; letter-spacing: .07em;
+           text-transform: uppercase; color: var(--accent); margin-bottom: .35rem; }
+
+  /* the real-world quote — the same left-border idiom as owed's .banner */
+  blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: .4rem solid var(--line); }
+  blockquote p { margin: 0 0 .3rem; }
+  blockquote cite { display: block; font-style: normal; font-size: .9375rem; color: var(--muted); }
+
+  /* the honest triad — the same coloured left-border as owed's .verdict */
+  .triad { margin-top: 1.2rem; }
+  .facet { margin: .85rem 0; padding: .1rem 0 .1rem 1rem; border-left: .4rem solid var(--line); }
+  .facet .flabel { display: block; font-size: .8rem; font-weight: 700; letter-spacing: .04em;
+                   text-transform: uppercase; margin-bottom: .2rem; }
+  .facet p { margin: 0; }
+  .facet.could { border-left-color: var(--accent); }
+  .facet.could .flabel { color: var(--accent); }
+  .facet.stops { border-left-color: var(--warn); }
+  .facet.stops .flabel { color: var(--warn); }
+  .facet.act { border-left-color: var(--ok); }
+  .facet.act .flabel { color: var(--ok); }
+  .facet.act strong { font-weight: 700; }
+  .aside { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--muted); }
+
+  .more { margin-top: 1.1rem; font-weight: 600; }
+
+  .panel { margin-top: 2.6rem; }
+  .deeper { list-style: none; margin: 1rem 0 0; padding: 0; display: flex;
+            flex-direction: column; gap: 1rem; }
+  .deeper a { font-weight: 700; }
+  .hint { display: block; color: var(--muted); font-size: 1rem; margin-top: .1rem; }
+
+  footer { margin-top: 3rem; color: var(--muted); font-size: 1rem;
+           border-top: 1px solid var(--line); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+
+<h1>When the system fails you, what could a protocol anyone can check actually do?</h1>
+<p class="lede">Three real UK cases the <strong>Good Law Project</strong> has fought, run against the
+Civic Kernel — a thin protocol for public decisions that nobody can rig and anybody can check. For
+each: what happened, what a checkable record would — and wouldn&rsquo;t — change, and what helps
+today. No jargon; every link goes deeper.</p>
+
+<article class="case">
+  <span class="theme">Records</span>
+  <h2>Decisions taken where no one can read them</h2>
+  <p>During the pandemic, government business ran on private, auto-deleting messaging. The UK
+  Covid-19 Inquiry found records were <em>&ldquo;not retained&hellip; some deliberately.&rdquo;</em>
+  One health minister spelled out the tactic in a group chat:</p>
+  <blockquote>
+    <p>&ldquo;I&rsquo;m deleting the messages in this group. They can be captured in an FOI&hellip;&rdquo;</p>
+    <cite>— evidence to the UK Covid-19 Inquiry</cite>
+  </blockquote>
+  <div class="triad">
+    <div class="facet could">
+      <span class="flabel">What a checkable record could do</span>
+      <p>A transparency log is a record no one can quietly rewrite: change yesterday and the figures
+      stop matching every copy of today, and any phone can tell.</p>
+    </div>
+    <div class="facet stops">
+      <span class="flabel">Where it stops</span>
+      <p>It can guarantee a record isn&rsquo;t altered. It cannot force a decision to be written down
+      in the first place. Here the real decision never entered any record — it was destroyed at
+      source. A tamper-proof log around an empty space is still empty.</p>
+    </div>
+    <div class="facet act">
+      <span class="flabel">What you can do</span>
+      <p>Use <strong>Freedom of Information</strong> — and treat <em>&ldquo;no information
+      held&rdquo;</em> as a finding, not a dead end: it is evidence that business was kept off the
+      record. Back records-retention duties, and the Inquiry&rsquo;s own recommendation that
+      government run on approved, retained channels.</p>
+    </div>
+  </div>
+  <p class="more"><a href="scenarios.html#government-by-whatsapp">See this case checked against the protocol, step by step →</a></p>
+</article>
+
+<article class="case">
+  <span class="theme">Public money</span>
+  <h2>Every contract was lawful. The lane was not.</h2>
+  <p>In the pandemic, firms referred by ministers, MPs and officials were routed to a
+  &ldquo;high-priority lane.&rdquo; They were about <strong>ten times</strong> more likely to win a
+  PPE contract — roughly one in ten, against one in a hundred — and <strong>£3.8&nbsp;billion</strong>
+  of contracts went through it. The High Court ruled the lane unlawful, then found the firms would
+  &ldquo;likely have been awarded contracts anyway,&rdquo; cancelled none, and declined to publish
+  the money wasted. Working out the pattern took the National Audit Office about two years.</p>
+  <div class="triad">
+    <div class="facet could">
+      <span class="flabel">What a checkable record could do</span>
+      <p>Every award can be logged with who referred it and by which route. A privileged lane stops
+      being a two-year investigation and becomes a signed number anyone can check — while it is
+      happening, not years later.</p>
+    </div>
+    <div class="facet stops">
+      <span class="flabel">Where it stops</span>
+      <p>A number is not a remedy. Even after a court called the lane unlawful, no contract was
+      cancelled and no money came back. And whether a price was fair is a judgement a record
+      can&rsquo;t make — only the pattern testifies.</p>
+    </div>
+    <div class="facet act">
+      <span class="flabel">What you can do</span>
+      <p>Ask for contracts to be published <strong>as they are signed</strong> — who won, by what
+      route, for how much. The wrong is rarely in any single contract; it lives in the pattern, so
+      push for the pattern to be visible in real time.</p>
+    </div>
+  </div>
+  <p class="more"><a href="scenarios.html#procurement-vip-lane">See this case checked against the protocol, step by step →</a></p>
+</article>
+
+<article class="case">
+  <span class="theme">The vote</span>
+  <h2>A document check that turns real people away</h2>
+  <p>Photo ID at polling stations turned away about <strong>14,000</strong> people at the May 2023
+  elections — and many more went uncounted, because the law barred staff from recording who was
+  refused. It fell hardest on disabled, unemployed, younger and poorer voters. A minister later
+  admitted it was a &ldquo;clever scheme&rdquo; that &ldquo;came back to bite&rdquo; his own party.</p>
+  <div class="triad">
+    <div class="facet could">
+      <span class="flabel">What a checkable protocol could do</span>
+      <p>Prove you are allowed to vote without showing a document at the booth — eligibility proven
+      by maths, not a passport. The identity check happens once, when you enrol, and never again at
+      the ballot box.</p>
+    </div>
+    <div class="facet stops">
+      <span class="flabel">Where it stops</span>
+      <p>It moves the gate; it does not remove it. And it can&rsquo;t decide who is eligible — that
+      is a political choice a protocol must carry out, not overrule. A rule designed to exclude can
+      still exclude, but now it must be argued in the open, not slipped in as routine admin.</p>
+    </div>
+    <div class="facet act">
+      <span class="flabel">What you can do <span class="aside">(Great Britain, today)</span></span>
+      <p>If you don&rsquo;t hold accepted photo ID, apply for a <strong>free Voter Authority
+      Certificate</strong> — it exists for exactly this. Check the accepted-ID list before an
+      election, and help someone who might otherwise be turned away.</p>
+    </div>
+  </div>
+  <p class="more"><a href="scenarios.html#voter-id">See this case checked against the protocol, step by step →</a></p>
+</article>
+
+<section class="panel">
+  <h2>Part of something larger</h2>
+  <p>These three are drawn from a wider set: real situations walked through the protocol step by
+  step, each machine-checked against the same rules, each honest about where it holds, strains, or
+  breaks.</p>
+  <ul class="deeper">
+    <li><a href="scenarios.html">All the stress-tests →</a><span class="hint">Real cases run against the protocol — the holds and the breaks alike.</span></li>
+    <li><a href="index.html">The architecture →</a><span class="hint">Democracy restated as an engineering problem, and the smallest honest answer to it.</span></li>
+    <li><a href="verifier.html">Check it yourself →</a><span class="hint">Verify an election in your browser: no install, and nothing to take on trust.</span></li>
+    <li><a href="owed.html">What are you owed? →</a><span class="hint">Work out the support you can claim, on your device, telling no one you asked.</span></li>
+  </ul>
+</section>
+
+<footer>
+  None of these is fixed by technology alone — a protocol anyone can check makes injustice visible
+  and harder to hide, but acting on it stays with courts, campaigners and voters. That is the point,
+  not a flaw: a tool that decided outcomes for you would be one someone else could capture. Part of
+  the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype; the cases are
+  drawn from the <a href="https://goodlawproject.org">Good Law Project</a>.
+</footer>
+</main>
+</body>
+</html>

@@ -46,6 +46,12 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
   [every term in this repo, one plain line each](#the-words-in-plain-speech).
 - **You want to know where your rights stand.**
   [The same 30 rights across the UK, Germany, the US, the EU Charter, and the PRC →](https://glassontin.github.io/civic-kernel/scenarios.html#corpus)
+- **You want to see what it's for, in plain terms.**
+  [Three failures, checked →](https://glassontin.github.io/civic-kernel/findings.html)
+  Three real cases the Good Law Project fights — decisions kept off the record, a
+  procurement VIP lane, voter ID — and what a protocol anyone can check could and could
+  not do about each, with what actually helps today. Every case links through to its full
+  stress-test.
 - **You want the argument.**
   [The architecture →](https://glassontin.github.io/civic-kernel/)
   Democracy restated as an engineering problem, and the smallest honest answer to it.
