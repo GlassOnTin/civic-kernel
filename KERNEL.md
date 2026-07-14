@@ -279,6 +279,16 @@ research program, not a trained system.
   nothing compels you to write it — integrity without completeness) — plus the UK break
   re-measured at two lower machinery rungs (ballot check removed; witnesses removed),
   where it neither worsens nor heals: machinery is orthogonal to remedy.
+- **The waist grew an entry the harness demanded.** Two runs —
+  `government-by-whatsapp` and `procurement-vip-lane` — hit the same gap: `coercive.act`
+  compels the state's force to cite its warrant, but nothing compelled its purse to. So
+  the log-entry schema gained an `executive.act` type — required `act_class` and
+  `authorizing_rule`, a native `provenance` field for the referral — the
+  purse-and-patronage twin of the warrant; the vip-lane awards are now that native type,
+  not a local extension. The limit both runs still map: the type compels the citation,
+  never the entry — a decision or spend kept off the log entirely evades it, closed only
+  by a governance rule that an unlogged act is void, which lives in public-records law,
+  not the schema.
 
 </details>
 

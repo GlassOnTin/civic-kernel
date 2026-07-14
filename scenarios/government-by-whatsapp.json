@@ -236,7 +236,7 @@
      "outcome": "information-not-held",
      "reason": "Deliberation conducted on a private messaging channel with 24-hour auto-deletion; the cited rationale note was never created as a retained record.",
      "retention_rule_cited": false,
-     "note": "Unlike a coercive.act, which the schema will not accept without an authorizing_rule, an omission has no field the waist can force: the log can record that the record is missing, not compel it to have existed."
+     "note": "Unlike a coercive.act or executive.act, which the schema will not accept without an authorizing_rule, an omission has no field the waist can force: the log can record that the record is missing, not compel it to have existed."
     },
     "sig": {
      "key_id": "did:web:ashcombe.example#log-1",
@@ -283,13 +283,13 @@
    "protection": "no threat number owns omission",
    "severity": "strain",
    "doc_ref": "§2",
-   "observation": "The attack has no home in the register. T8 answers rewriting the record; there is no T-number for never writing it — the same shape as the executive-ignores run breaking on an enforcement gap no T-number owns. The log vocabulary compounds it: there is a required-warrant field for a coercive.act but no analogous compelled entry for an executive decision, so the waist can force a search to cite its power and cannot force a 4.2 million pound award to record its reasons. The gap is structural, not an oversight to patch cheaply."
+   "observation": "The attack has no home in the register. T8 answers rewriting the record; there is no T-number for never writing it — the same shape as the executive-ignores run breaking on an enforcement gap no T-number owns. The log vocabulary no longer compounds it: the waist now carries an executive.act entry with a required authorizing_rule (this run and procurement-vip-lane motivated adding it), so it can force an award to cite its power just as it forces a search to. What it cannot force is the entry to be made at all — the compelled field bites only on records that exist, and this attack makes none. The gap that survives is completeness, not vocabulary, and it is structural, not an oversight to patch cheaply."
   },
   {
    "protection": "the remedy is public-records law",
    "severity": "strain",
    "doc_ref": "§1",
-   "observation": "Closing the gap lives outside the kernel, by design. Forcing government business onto approved, retained channels is public-records and FOI law, a standards inquiry, and ultimately the ballot box — the Covid Inquiry's own recommendation, not a protocol guarantee. The constructive residue the kernel could reach is narrow and worth naming: a regime where an executive act with no corresponding log entry is treated as void — coercive.act's 'no act without a cited warrant' generalised to 'no decision without a logged trace' — would make omission detectable, though never make the destroyed reasons recoverable. Legible, not prevented: the honest edge this scenario maps, and the one design question it hands back to the essay."
+   "observation": "Closing the gap lives outside the kernel, by design. Forcing government business onto approved, retained channels is public-records and FOI law, a standards inquiry, and ultimately the ballot box — the Covid Inquiry's own recommendation, not a protocol guarantee. The waist has since grown the vocabulary this run called for — an executive.act entry with a required authorizing_rule, added on the strength of this scenario and procurement-vip-lane — so the kernel can now express a logged spending or administrative act and the power behind it. What stays outside it, and always will, is compelling the entry to be made: only a governance rule that an unlogged act is void turns 'can be logged' into 'must be', and that rule lives in public-records law, not the schema. The primitive shipped; the completeness it would enable is still governance. Legible, not prevented: the honest edge this scenario maps."
   }
  ]
 }

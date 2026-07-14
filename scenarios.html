@@ -2531,7 +2531,7 @@
       "outcome": "information-not-held",
       "reason": "Deliberation conducted on a private messaging channel with 24-hour auto-deletion; the cited rationale note was never created as a retained record.",
       "retention_rule_cited": false,
-      "note": "Unlike a coercive.act, which the schema will not accept without an authorizing_rule, an omission has no field the waist can force: the log can record that the record is missing, not compel it to have existed."
+      "note": "Unlike a coercive.act or executive.act, which the schema will not accept without an authorizing_rule, an omission has no field the waist can force: the log can record that the record is missing, not compel it to have existed."
      },
      "sig": {
       "key_id": "did:web:ashcombe.example#log-1",
@@ -2578,13 +2578,13 @@
     "protection": "no threat number owns omission",
     "severity": "strain",
     "doc_ref": "§2",
-    "observation": "The attack has no home in the register. T8 answers rewriting the record; there is no T-number for never writing it — the same shape as the executive-ignores run breaking on an enforcement gap no T-number owns. The log vocabulary compounds it: there is a required-warrant field for a coercive.act but no analogous compelled entry for an executive decision, so the waist can force a search to cite its power and cannot force a 4.2 million pound award to record its reasons. The gap is structural, not an oversight to patch cheaply."
+    "observation": "The attack has no home in the register. T8 answers rewriting the record; there is no T-number for never writing it — the same shape as the executive-ignores run breaking on an enforcement gap no T-number owns. The log vocabulary no longer compounds it: the waist now carries an executive.act entry with a required authorizing_rule (this run and procurement-vip-lane motivated adding it), so it can force an award to cite its power just as it forces a search to. What it cannot force is the entry to be made at all — the compelled field bites only on records that exist, and this attack makes none. The gap that survives is completeness, not vocabulary, and it is structural, not an oversight to patch cheaply."
    },
    {
     "protection": "the remedy is public-records law",
     "severity": "strain",
     "doc_ref": "§1",
-    "observation": "Closing the gap lives outside the kernel, by design. Forcing government business onto approved, retained channels is public-records and FOI law, a standards inquiry, and ultimately the ballot box — the Covid Inquiry's own recommendation, not a protocol guarantee. The constructive residue the kernel could reach is narrow and worth naming: a regime where an executive act with no corresponding log entry is treated as void — coercive.act's 'no act without a cited warrant' generalised to 'no decision without a logged trace' — would make omission detectable, though never make the destroyed reasons recoverable. Legible, not prevented: the honest edge this scenario maps, and the one design question it hands back to the essay."
+    "observation": "Closing the gap lives outside the kernel, by design. Forcing government business onto approved, retained channels is public-records and FOI law, a standards inquiry, and ultimately the ballot box — the Covid Inquiry's own recommendation, not a protocol guarantee. The waist has since grown the vocabulary this run called for — an executive.act entry with a required authorizing_rule, added on the strength of this scenario and procurement-vip-lane — so the kernel can now express a logged spending or administrative act and the power behind it. What stays outside it, and always will, is compelling the entry to be made: only a governance rule that an unlogged act is void turns 'can be logged' into 'must be', and that rule lives in public-records law, not the schema. The primitive shipped; the completeness it would enable is still governance. Legible, not prevented: the honest edge this scenario maps."
    }
   ]
  },
@@ -6755,7 +6755,7 @@
    {
     "actor": "Wessex Health Authority procurement office",
     "verb": "cast",
-    "narrative": "The emergency programme is opened on the transparency log, citing the extreme-urgency power the law provides, and — because the core waist has no entry for an executive award — declaring the local extension the Authority added: every contract will be logged as x-procurement.award carrying the referral that brought the supplier in. The existence of a high-priority lane, hidden in the real scandal for two years, is on the public record here on day one.",
+    "narrative": "The emergency programme is opened on the transparency log, citing the extreme-urgency power the law provides, and declaring that every contract will be logged as an executive.act — the waist's entry for a spending decision, the purse-and-patronage twin of the coercive.act's warrant — carrying the referral that brought the supplier in. The existence of a high-priority lane, hidden in the real scandal for two years, is on the public record here on day one.",
     "artifact": {
      "v": "civic-kernel/log-entry/v0",
      "type": "decision.opened",
@@ -6771,7 +6771,7 @@
        "open-competition"
       ],
       "provenance_required": true,
-      "note": "Local waist extension: each award is logged as x-procurement.award citing its referral provenance. The core waist has a required warrant for a coercive.act but no compelled executive-award entry; this deployment adds one."
+      "note": "Each award is logged as an executive.act, citing its authorizing power and its referral provenance — the waist's spending-act entry, the purse-and-patronage twin of the coercive.act's required warrant."
      },
      "sig": {
       "key_id": "did:web:wessex-health.example#log-1",
@@ -6786,22 +6786,27 @@
     "narrative": "The Harlow award lands as an executive award entry: 34 million pounds, the emergency power cited, and the provenance field naming the referral — high-priority lane, referred by the health minister's office. Read on its own, the entry is unimpeachable: a lawful award, its warrant and its route attached. What the record now holds that no record held in the real scandal is the one field that distinguishes this contract from a clean one — not a judgement, just a fact: how the supplier got in the door.",
     "artifact": {
      "v": "civic-kernel/log-entry/v0",
-     "type": "x-procurement.award",
+     "type": "executive.act",
      "community": "did:web:wessex-health.example",
      "timestamp": "2026-03-07T15:00:00Z",
      "body": {
-      "award_id": "2026-ppe-0148",
-      "supplier": "Harlow Medical Supplies Ltd",
-      "supplier_ref": "companies-house:0X-fictional-148",
-      "contract_value_gbp": 34000000,
+      "act_class": "award",
       "authorizing_rule": "uk-pcr-2015:reg.32(2)(c); wessex-emergency-procurement-scheme/v1",
-      "referral_provenance": {
-       "lane": "high-priority",
+      "issuing_authority": "Wessex Health Authority, emergency delegated powers",
+      "counterparty": {
+       "name": "Harlow Medical Supplies Ltd",
+       "ref": "companies-house:0X-fictional-148"
+      },
+      "provenance": {
+       "route": "high-priority",
        "referred_by": "Office of the Wessex Health Minister",
        "referrer_role": "ministerial-office",
-       "date_referred": "2026-03-03"
+       "referred_on": "2026-03-03"
       },
-      "competing_offers_on_file": 3
+      "value": {
+       "amount": 34000000,
+       "currency": "GBP"
+      }
      },
      "sig": {
       "key_id": "did:web:wessex-health.example#log-1",
@@ -6816,21 +6821,26 @@
     "narrative": "A week later an open-lane award is logged the same way: Tor Bay Textiles, no referral, provenance 'open-competition'. Two lawful awards now sit in the record, and the difference between them — the thing the real inquiry had to reconstruct from prised-loose emails — is a single machine-readable field, not a secret. The kernel has not judged either award. It has made how each supplier reached the table a fact anyone can read.",
     "artifact": {
      "v": "civic-kernel/log-entry/v0",
-     "type": "x-procurement.award",
+     "type": "executive.act",
      "community": "did:web:wessex-health.example",
      "timestamp": "2026-03-14T11:00:00Z",
      "body": {
-      "award_id": "2026-ppe-0203",
-      "supplier": "Tor Bay Textiles Ltd",
-      "supplier_ref": "companies-house:0X-fictional-203",
-      "contract_value_gbp": 9600000,
+      "act_class": "award",
       "authorizing_rule": "uk-pcr-2015:reg.32(2)(c); wessex-emergency-procurement-scheme/v1",
-      "referral_provenance": {
-       "lane": "open-competition",
+      "issuing_authority": "Wessex Health Authority, emergency delegated powers",
+      "counterparty": {
+       "name": "Tor Bay Textiles Ltd",
+       "ref": "companies-house:0X-fictional-203"
+      },
+      "provenance": {
+       "route": "open-competition",
        "referred_by": null,
        "referrer_role": null
       },
-      "competing_offers_on_file": 11
+      "value": {
+       "amount": 9600000,
+       "currency": "GBP"
+      }
      },
      "sig": {
       "key_id": "did:web:wessex-health.example#log-1",
@@ -6925,7 +6935,7 @@
     "protection": "the individual award is lawful",
     "severity": "strain",
     "doc_ref": "§2",
-    "observation": "The wrong lives in the lane, not in any award, and the kernel can only ever surface acts. Each x-procurement.award cites a valid urgency power and survives challenge on the merits — as the open-lane bidder's challenge does here, and as it should. This is the same structure as stop-and-search: discrimination that is an emergent property of an aggregate of individually-lawful acts, appealable one act at a time and therefore never reached that way. Provenance shows the access was skewed; it cannot promote 'skewed access' into 'this contract was unlawful', which is exactly why the real court could void the lane and leave every payment standing."
+    "observation": "The wrong lives in the lane, not in any award, and the kernel can only ever surface acts. Each executive.act cites a valid urgency power and survives challenge on the merits — as the open-lane bidder's challenge does here, and as it should. This is the same structure as stop-and-search: discrimination that is an emergent property of an aggregate of individually-lawful acts, appealable one act at a time and therefore never reached that way. Provenance shows the access was skewed; it cannot promote 'skewed access' into 'this contract was unlawful', which is exactly why the real court could void the lane and leave every payment standing."
    },
    {
     "protection": "value for money is offstage",
@@ -6934,10 +6944,10 @@
     "observation": "The log holds who was referred and by whom; it does not and cannot hold whether the price was fair or the goods fit for purpose. Whether 34 million pounds bought usable masks is commercial and technical judgement, which the kernel refuses the way it refuses every substantive judgement (the surname case, a policy's wisdom). A consequence worth stating plainly: at the level of a single contract the protocol cannot distinguish a legitimate emergency fast-track from a favour — only the aggregate testifies. Transparency of provenance is necessary and nowhere near sufficient to call an award corrupt."
    },
    {
-    "protection": "no compelled award entry in the waist",
-    "severity": "strain",
+    "protection": "the waist grew a spending-act entry",
+    "severity": "note",
     "doc_ref": "§6",
-    "observation": "This worked only because Wessex extended the waist with an x-procurement.award type carrying required provenance. The core waist ships a coercive.act with a required authorizing_rule but no executive-award entry with required provenance — so the very legibility this scenario turns on is a local addition, not a kernel guarantee, and a less scrupulous authority simply would not add it. This is the same gap government-by-whatsapp found from the other side: there the decision never reached the log; here the award reaches it only because a good actor chose to make it. Two Good Law Project cases now converge on one missing primitive — a compelled executive-act log entry, 'no decision and no spend without a logged trace' (coercive.act's required warrant, generalised). The design lead is no longer hypothetical; it has two witnesses."
+    "observation": "Closed — and this run is why. This scenario and government-by-whatsapp both found the waist carried a required warrant for a coercive.act but no compelled entry for a spending decision; that motivated adding executive.act to the log-entry schema — a required act_class and authorizing_rule, with a native provenance field for the referral. The awards above are logged as that native type; an earlier draft carried them as a local x-procurement.award extension, exactly the subtraction §6 exists to make legible. The honest residue is government-by-whatsapp's from the other side: the type compels the citation, never the entry — a determined authority can still route the substance off the log entirely, which is that scenario's break, not this one. The waist can now name a lane; it still cannot force an award to be logged at all."
    },
    {
     "protection": "the guard would be blind anyway",

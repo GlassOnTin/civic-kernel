@@ -28,7 +28,8 @@
             "anchor.checkpoint",
             "process.denial-trace",
             "process.cost-aggregate",
-            "coercive.act"
+            "coercive.act",
+            "executive.act"
           ]
         },
         { "type": "string", "pattern": "^x-[a-z0-9-]+(\\.[a-z0-9-]+)*$" }
@@ -56,6 +57,13 @@
       "then": {
         "description": "A coercive.act entry logs an exercise of the state's monopoly on force — an arrest, search, surveillance authorization, sanction, use of force (§ law-and-order). It must cite its authority: an act with no authorizing_rule is a schema violation, not a policy dispute — §8's 'every demanded field cites its authorizing rule' generalised to 'every coercive act cites its warrant'. The kernel does not wield this power; it makes its exercise legible and appealable.",
         "properties": { "body": { "$ref": "#/$defs/coercive_body" } }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "executive.act" } } },
+      "then": {
+        "description": "An executive.act entry logs an exercise of delegated administrative or spending power — a contract award, grant, appointment, licence, or disposal of public assets. Like a coercive.act it must cite its authority: an act with no authorizing_rule is a schema violation — §8's 'every demanded field cites its authorizing rule' generalised to 'every executive act cites its power', the purse-and-patronage counterpart to the warrant. A native provenance field makes a referral or privileged lane legible per act (procurement-vip-lane). The type compels the citation, never the entry: a decision kept off the log entirely still evades it (government-by-whatsapp), closed only by a governance rule that an unlogged act is void.",
+        "properties": { "body": { "$ref": "#/$defs/executive_body" } }
       }
     }
   ],
@@ -86,6 +94,55 @@
         "sealed_body_digest": { "type": "string", "description": "Hash commitment to the sealed content, published now so the later reveal cannot be altered." },
         "rights_guard_ref": { "type": "string", "description": "If the act tripped a UDHR invariant (Art. 5, 9, 11, 12…), the rights.classification entry that escalated it (§3.3)." },
         "appeal_trace": { "type": "string", "description": "Pointer to the appealable computation trace — the right to reasons and to challenge, made machine-checkable (§8, §11)." }
+      }
+    },
+    "executive_body": {
+      "type": "object",
+      "required": ["act_class", "authorizing_rule"],
+      "additionalProperties": false,
+      "properties": {
+        "act_class": {
+          "enum": ["award", "contract", "grant", "appointment", "licence", "disposal", "payment", "direction"],
+          "description": "The kind of executive act — an exercise of delegated administrative or spending power, distinct from a coercive.act (the monopoly on force) and a decision.* (a ballot)."
+        },
+        "authorizing_rule": {
+          "type": "string",
+          "description": "Citation of the power, rule, or delegation that authorizes this act. REQUIRED — an executive act with no cited authority cannot be logged validly: §8's warrant rule generalised from force to the purse."
+        },
+        "issuing_authority": { "type": "string", "description": "The body or office exercising the power." },
+        "counterparty": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "The named beneficiary or supplier — public, unlike a coercive.act's walled-off subject: a company awarded a public contract is a matter of record.",
+          "properties": {
+            "name": { "type": "string" },
+            "ref": { "type": "string", "description": "Stable public reference, e.g. a companies-register id." }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "How this act came to be considered — its route and, where there was one, the referral that initiated it. A privileged lane is a pattern in this field made legible per act (procurement-vip-lane); 'open-competition' when there was none.",
+          "properties": {
+            "route": { "type": "string", "description": "The channel, e.g. 'open-competition', 'high-priority', 'direct-award'." },
+            "referred_by": { "type": ["string", "null"], "description": "Who initiated or referred the act, in the administrative identity domain — never a civic unlinkable pseudonym (T6, T1)." },
+            "referrer_role": { "type": ["string", "null"], "description": "The referrer's role, e.g. 'ministerial-office'." },
+            "referred_on": { "type": "string", "format": "date" }
+          }
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "The quantum of the act, if it has one — a contract value, a grant amount.",
+          "properties": {
+            "amount": { "type": "number" },
+            "currency": { "type": "string" }
+          }
+        },
+        "sealed_until": { "type": "string", "format": "date-time", "description": "Commit-now-reveal-later, as coercive_body: existence and timing logged immediately, terms revealed after this time or by order — for genuine commercial confidentiality, not to hide the act. The unseal key is a trusted party, not a cryptographic guarantee." },
+        "sealed_body_digest": { "type": "string", "description": "Hash commitment to the sealed terms, published now so the later reveal cannot be altered." },
+        "rights_guard_ref": { "type": "string", "description": "If the act tripped a UDHR invariant, the rights.classification entry that escalated it (§3.3)." },
+        "appeal_trace": { "type": "string", "description": "Pointer to the appealable computation trace — the right to reasons and to challenge (§8, §11)." }
       }
     },
     "signature": {

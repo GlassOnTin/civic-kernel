@@ -212,8 +212,9 @@ links back to this list.
   file between the two implementations.
 - **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
 - **`schema/`** — the waist: the two universal formats, as JSON Schema (Draft 2020-12).
-  - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act`
-    type, whose body must cite its authorizing rule).
+  - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act` and
+    `executive.act` types — the state's force and its purse — whose bodies must each cite
+    an authorizing rule).
   - `manifest.schema.json` — a community's conformance manifest: which services and
     which of the 30 UDHR invariants it upholds, its `decisions.coercion_resistance`,
     and its `rights_guard.remedy`.
