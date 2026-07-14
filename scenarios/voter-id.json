@@ -1,0 +1,314 @@
+{
+ "id": "voter-id",
+ "title": "No Passport, Still a Vote: The Gate Moves From the Booth to the Door",
+ "setting": "Vera Skelton is seventy-nine and has not owned a valid document with her photograph on it since her passport lapsed in 2014. She never drove; the bus pass in her purse has her name but no picture the law will take. In the next county over, at last spring's elections, that made her exactly the person turned away at the polling station — one of the roughly fourteen thousand the Electoral Commission counted, and the far larger number nobody could count, because the law forbade the staff from writing down who they refused. Her grandson Reuben, nineteen and between jobs, is the other kind: young, no driving licence, never voted before, precisely the profile the same research found least likely to hold any accepted ID. In the county, neither of them votes. In Marsh Brydon, which runs its district elections on the Civic Kernel, both of them do — and the story is what that costs and what it does not.\n\nThe reason is structural, not generous. Marsh Brydon's ballot has no identity check at the point of casting to fail: a voter proves eligibility with a ring signature over the enrolled roster — 'some member of this list, not already voted' — not by producing a card. The gate voter ID installs at the booth simply is not there, and cannot be added to the cast without tearing up SVC-1. But the identity requirement has not vanished. It has moved once, upstream, to a single enrolment ceremony where Vera had to appear in person before a clerk and two neighbours drawn by lottery — and that door, unlike the booth, is a place a determined council could still put a lock. In June, a faction on that council tries to. This scenario is about a franchise the kernel protects at the booth and cannot simply guarantee at the door, and about what its refusal to decide who belongs is worth when someone means to narrow the roll.",
+ "threats": [
+  "T9",
+  "T3",
+  "T7"
+ ],
+ "doc_refs": [
+  "§3.1",
+  "§3.3",
+  "§4",
+  "§7",
+  "§10",
+  "§5",
+  "T3",
+  "T7",
+  "T9"
+ ],
+ "precedents": [
+  {
+   "event": "Electoral Commission: Voter ID at the May 2023 local elections in England (interim analysis)",
+   "year": 2023,
+   "source": "Electoral Commission",
+   "url": "https://www.electoralcommission.org.uk/research-reports-and-data/our-reports-and-data-past-elections-and-referendums/voter-id-may-2023-local-elections-england-interim-analysis",
+   "shows": "About 0.25% of those who tried to vote (roughly 14,000) were not issued a ballot for want of accepted ID and around 0.7% were initially turned away; disabled, unemployed, younger and minority-ethnic voters were disproportionately affected — and the excluded could not be reliably counted because the law barred collecting their demographics: documentary exclusion at the point of casting, statistically dark by design."
+  },
+  {
+   "event": "Jacob Rees-Mogg says voter ID was an attempt to 'gerrymander' elections",
+   "year": 2023,
+   "source": "Byline Times (National Conservatism conference remarks)",
+   "url": "https://bylinetimes.com/2023/05/15/jacob-rees-mogg-says-voter-id-was-attempt-to-gerrymander-elections-for-the-conservatives/",
+   "shows": "A minister from the government that introduced voter ID called it a 'clever scheme' that came back to bite them — direct evidence that a documentary franchise rule is chosen to shape who votes, the exact adversarial input refusal 10 will not second-guess."
+  },
+  {
+   "event": "London Assembly: 28% of Londoners turned away over ID did not return to vote (2024 General Election)",
+   "year": 2024,
+   "source": "London Assembly (Greater London Authority)",
+   "url": "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-members/len-duvall/voter-ID-1-in-4-Londoners-turned-away-do-not-return-to-vote",
+   "shows": "More than a quarter of those turned away at the booth for lacking ID never came back — the documentary gate converting not to friction but to lost votes, concentrated in the same groups."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:marsh-brydon.example",
+   "name": "Marsh Brydon District Council",
+   "parent": "did:web:brydon-county.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "district registrar plus two VRF-selected resident observers, 2-of-3 co-signature; no documentary identity demanded",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "marsh-brydon-roll/v2"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-safe-space",
+   "trustee_quorum": "3-of-5: Brydon County electoral services, two neighbouring district clerks, Brydon University, the county reform society"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    7,
+    9,
+    10,
+    12,
+    19,
+    20,
+    21,
+    29
+   ],
+   "remedy": "escalate",
+   "scope": "unconditional"
+  },
+  "transparency_log": {
+   "log_id": "did:web:marsh-brydon.example",
+   "witnesses": [
+    "did:web:brydon-county.example",
+    "did:web:brydon-university.example",
+    "did:web:county-reform-society.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "assisted-enrolment-in-person",
+    "steps": 4,
+    "fields": 2,
+    "median_seconds": 720,
+    "abandonment_rate": 0.02
+   },
+   {
+    "process": "cast-paper-in-person",
+    "steps": 3,
+    "fields": 0,
+    "median_seconds": 200,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:marsh-brydon.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Vera Skelton and Reuben Skelton, and the county next door",
+   "verb": "offstage",
+   "narrative": "The backdrop is a real disenfranchisement the kernel does not touch. In neighbouring Brydon County, run on ordinary rules, Vera is turned away for having no photographic ID and Reuben never attends, certain he lacks the right paper — the two exact profiles the Electoral Commission found least likely to hold accepted ID. That a minister later admitted the document rule was a 'clever scheme' to shape the electorate is politics, above the protocol. What Marsh Brydon can change is not the politics. It is where, and how visibly, the identity check falls."
+  },
+  {
+   "actor": "Vera Skelton, with two lottery-drawn resident observers",
+   "verb": "prove",
+   "narrative": "Enrolment Saturday, in the Marsh Brydon assembly rooms. No document is asked for, because the ceremony itself is the check (§10): Vera appears in person before the registrar and two neighbours drawn by verifiable lottery the night before, people who know her face. Her credential is generated on a smartcard and handed to her; Reuben enrols onto his phone in the same session. The log records the counts — credentials issued, and the two applicants refused that day for living outside the boundary, each refusal an appealable trace citing the rule — never a name. The identity requirement Vera could never satisfy at a booth, she satisfies once, socially, at a door.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-enrolment.ceremony",
+    "community": "did:web:marsh-brydon.example",
+    "timestamp": "2026-04-11T10:00:00Z",
+    "body": {
+     "ceremony_id": "2026-04-11-marsh-brydon-assembly",
+     "location": "Marsh Brydon Assembly Rooms",
+     "officiant": "district-registrar",
+     "observers": 2,
+     "credentials_issued": 63,
+     "assisted_enrolments": 19,
+     "refusals": 2,
+     "refusal_traces": "each cites marsh-brydon-roll/v2#residency and names a 14-day appeal path",
+     "credential_medium": {
+      "phone-enclave": 44,
+      "smartcard": 19
+     }
+    },
+    "sig": {
+     "key_id": "did:web:marsh-brydon.example#log-1",
+     "alg": "ed25519",
+     "value": "RW5yb2xtZW50Q2VyZW1vbnlNYXJzaEJyeWRvbk5vdFJlYWxDcnlwdG8wMQ"
+    }
+   }
+  },
+  {
+   "actor": "Marsh Brydon District Council",
+   "verb": "cast",
+   "narrative": "The district election opens on the log: paper channel in every ward hall, phone for those who prefer it, and — stated in the entry because it is the whole point — no identity document required to cast in either channel. Eligibility at the booth is proven, not shown: a ring signature says 'one enrolled member, not yet voted' without saying which member. There is no counter at which a Vera can be turned away, because there is no document for anyone to demand.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:marsh-brydon.example",
+    "timestamp": "2026-05-01T08:00:00Z",
+    "body": {
+     "decision_id": "2026-marsh-brydon-council",
+     "question_hash": "sha256:5a8c1e4d7b0f3a6c9e2d5b8f1a4c7e0d3b6f9a2c5e8d1b4f7a0c3e6d9b2f5a8c",
+     "eligibility_rules": "marsh-brydon-roll/v2",
+     "channels": [
+      "paper-in-person",
+      "phone"
+     ],
+     "cast_identity_document_required": false,
+     "window": {
+      "deliberation_ends": "2026-05-15T20:00:00Z",
+      "cast_ends": "2026-05-21T22:00:00Z"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:marsh-brydon.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVjaXNpb25PcGVuZWRNYXJzaEJyeWRvbk5vdFJlYWxDcnlwdG8wMg"
+    }
+   }
+  },
+  {
+   "actor": "Vera and Reuben Skelton",
+   "verb": "cast",
+   "narrative": "Vera casts a pre-printed paper ballot behind a plywood screen, touches her smartcard to the reader once to prove one-eligible-person-one-ballot, and drops paper in a box — no card shown, no name given, nothing demanded. Reuben casts on his phone from the job centre. Both vote in an election where, one county over, both were excluded for the documents they do not carry. The prevention is total and it is silent: nothing was measured, nobody was turned away, because the mechanism that turns people away was never built."
+  },
+  {
+   "actor": "Dana Okoro, county reform society",
+   "verb": "read",
+   "narrative": "Dana reads the enrolment aggregates and the closed poll against the county's published turn-away figures next door. The contrast is stark and, unusually, symmetrical: Marsh Brydon's two enrolment refusals are on the record, cited and appealable, while the county's booth exclusions are a number the Electoral Commission itself said could not be properly counted. The kernel did not just avoid the gate; it made the one gate it kept — enrolment — legible in exactly the way the statutory scheme kept its own exclusions dark."
+  },
+  {
+   "actor": "Councillor Miles Harrow and the 'electoral integrity' group",
+   "verb": "cast",
+   "narrative": "In June a council faction moves to amend the roll's eligibility rule to require documentary photo-ID at enrolment — voter ID, lifted off the booth and bolted to the door. The kernel does exactly what refusal 10 says it must: it accepts the proposal as a logged rules.amendment and does not veto it, because who counts as a member is governance, not something the protocol decides. For a moment the machinery is entirely at the service of the people trying to narrow it.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rules.amendment",
+    "community": "did:web:marsh-brydon.example",
+    "timestamp": "2026-06-15T09:00:00Z",
+    "body": {
+     "amendment_id": "2026-roll-v3-proposed",
+     "targets": "marsh-brydon-roll/v2#enrolment-eligibility",
+     "proposed_change": "require a government-issued photographic identity document at the enrolment ceremony",
+     "proposer": "electoral-integrity group",
+     "rationale_claimed": "fraud prevention",
+     "status": "proposed",
+     "note": "The kernel enforces a membership boundary and never decides one (refusal 10): this proposal is accepted into the process, not blocked. Whether it may pass, and by what majority, is the next entry."
+    },
+    "sig": {
+     "key_id": "did:web:marsh-brydon.example#log-1",
+     "alg": "ed25519",
+     "value": "UnVsZXNBbWVuZG1lbnRSb2xsVjNQcm9wb3NlZE5vdFJlYWxDcnlwdG8wMw"
+    }
+   }
+  },
+  {
+   "actor": "The rights guard",
+   "verb": "verify",
+   "narrative": "Here the difference from the executive cases bites in the kernel's favour. A stop or a contract is executive discretion the guard cannot see; an eligibility amendment is a decision on the ballot path, so the guard has something to type-check — and it does. The change narrows the franchise on a documentary criterion with a known disparate impact, tripping the take-part-in-government invariant and non-discrimination. The guard routes it off the ordinary path and onto the constitutional one: supermajority, a mandatory deliberation window, adversarial review. The document gate cannot be reinstated as a quiet administrative tweak; it has to be argued for, loudly, in the open.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.escalation",
+    "community": "did:web:marsh-brydon.example",
+    "timestamp": "2026-06-15T14:00:00Z",
+    "body": {
+     "escalation_of": "2026-roll-v3-proposed",
+     "tripped_invariants": [
+      21,
+      2
+     ],
+     "reason": "Amendment narrows the franchise on a documentary criterion with documented disparate impact on protected groups (UDHR 21 participation, 2 non-discrimination).",
+     "routed_to": "constitutional-path: supermajority + deliberation window + sortition-selected adversarial review",
+     "posture": "escalate, not veto: the guard raises the bar and makes the change public; it cannot itself block a determined supermajority."
+    },
+    "sig": {
+     "key_id": "did:web:marsh-brydon.example#log-1",
+     "alg": "ed25519",
+     "value": "UmlnaHRzRXNjYWxhdGlvbkZyYW5jaGlzZU5vdFJlYWxDcnlwdG8wNA"
+    }
+   }
+  },
+  {
+   "actor": "Marsh Brydon, through the summer",
+   "verb": "read",
+   "narrative": "The amendment becomes the fight the faction did not want: a public, versioned, witnessed rule change on the constitutional path, with the reform society, two neighbouring clerks and a sortition panel all reading the same escalation entry on their own devices. Rees-Mogg's 'clever scheme' worked precisely because a booth gate could be presented as mere administration; the kernel denies that cover, because narrowing who may enrol is legible as what it is — a change to the franchise — and priced accordingly. Whether it passes is now a question of votes and argument, not of a returning officer's counter."
+  },
+  {
+   "actor": "The council, and the honest ceiling",
+   "verb": "offstage",
+   "narrative": "And the ceiling is honest. The guard escalates; it does not veto (§3.3). A determined supermajority in Marsh Brydon could still pass the documentary rule, and a real sovereign sits lower still — the actual UK's rights remedy is a declaration Parliament may ignore, the majority-vs-minority-uk break. If the rule passes, refusal 10 binds again in the other direction: the kernel will enforce the narrowed roll as faithfully as it enforced the open one. The protocol dragged the exclusion into the light and made it expensive. It cannot promise the light wins."
+  },
+  {
+   "actor": "Vera Skelton, next spring",
+   "verb": "offstage",
+   "narrative": "One residue no vote fixes: the gate that moved to the door is still a door. Enrolment is a physical ceremony, and physical presence is its own barrier for the housebound, the itinerant, the person with no fixed address and no confidence to face a clerk — the very groups voter ID hit hardest. Vera reached the assembly rooms this year on her neighbour's arm; a frailer version of her would not, and the kernel's inclusion floor — paper, assisted, no device — answers the cast, not the one-time in-person enrolment its own documentation lists as unsolved. The booth is ungated. Membership is not."
+  },
+  {
+   "actor": "Anyone, reading the roll's history",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: it moved the identity check from every election at the booth, where voter ID weaponised it invisibly, to once at enrolment, where it is witnessed, counted, appealable, and — when someone tries to harden it — routed to a constitutional fight in full public view. What it will not do is decide who belongs. That stays with the polity, which is the point and also the exposure: the same refusal that stops the kernel becoming a machine for excluding people is what leaves it enforcing whatever roll the people who run it can lawfully agree on."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "Voter ID turns people away at the booth for want of a document; the kernel has no booth gate to fail — eligibility is proven by ring signature, not shown by passport, so Vera votes where the next county turns her away. It cannot abolish the identity check, only move it once to enrolment; and refusing to decide who may enrol, it meets a faction importing the gate there with escalation, not a veto.",
+ "protection": "casting without documents",
+ "protection_plain": "Proving eligibility to vote without producing a document: the kernel gates the cast on a ring signature, not photo ID, so the booth check that turns people away is absent — but the identity requirement only relocates to enrolment, and who may enrol is governance the kernel refuses to decide.",
+ "findings": [
+  {
+   "protection": "the booth gate is structurally absent",
+   "severity": "note",
+   "doc_ref": "§3.1",
+   "observation": "The mechanism voter ID uses to exclude — a documentary check at the point of casting — does not exist in the kernel and cannot be added to the cast without tearing up SVC-1: eligibility is proven by a ring signature over the roster, not asserted by producing a card. Vera Skelton, ten years without photo ID, casts where the Electoral Commission found roughly 14,000 people were refused a ballot at the May 2023 locals, disproportionately the old, disabled, unemployed and young. This is the first scenario in the corpus where the design forecloses the wrong rather than measuring it after the fact — prevention, not legibility, and total for the enrolled."
+  },
+  {
+   "protection": "the gate only relocates",
+   "severity": "strain",
+   "doc_ref": "§3.1",
+   "observation": "The identity requirement is not abolished, only moved once upstream. SVC-1 needs a credential; a credential needs an enrolment ceremony; and a polity set on documentary exclusion can write the same requirement into the enrolment rule. The kernel converts an every-election booth gate into a one-time enrolment gate — a real reduction in how often and how visibly the check bites, and it separates the check cleanly from the cast, which voter ID deliberately did not. But what the booth gate did, a hardened eligibility rule can still do at the door. The design changed where the fight over the franchise happens, not whether it can be lost."
+  },
+  {
+   "protection": "who may enrol is not the kernel's to decide",
+   "severity": "strain",
+   "doc_ref": "§10",
+   "observation": "Refusal 10 is load-bearing and double-edged: the kernel enforces a membership boundary and never decides one, so whatever eligibility rule the polity sets — inclusive or gerrymandered — it applies faithfully, and with the full legitimacy of a witnessed, cited, appealable process. Rees-Mogg's admission that voter ID was a 'clever scheme' to shape the electorate is exactly the adversarial input refusal 10 will not second-guess. The protocol's neutrality about who counts is precisely the surface a determined actor exploits; its only structural answer is to make the rule public and route a narrowing one to the constitutional path — it raises the cost of exclusion and strips its disguise, but does not claim the right to forbid it."
+  },
+  {
+   "protection": "escalate is not veto",
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "When the faction moved to require documents at enrolment, the rights guard did fire — and that it could is itself the fresh result: unlike a stop-and-search pattern or a procurement lane, an eligibility amendment is a decision on the ballot path, so there is something to type-check. It routed the franchise-narrowing to supermajority plus deliberation plus adversarial review on invariants 21 and 2. But SVC-3 escalates and never vetoes: a determined supermajority can still narrow the roll, and a real sovereign sits lower again — the actual UK's remedy is a declaration of incompatibility Parliament may ignore (majority-vs-minority-uk breaks on exactly this). The guard makes disenfranchisement loud, slow and expensive. It does not make it impossible, and the scenario would be dishonest to imply otherwise."
+  },
+  {
+   "protection": "the ceremony is its own barrier",
+   "severity": "strain",
+   "doc_ref": "§4",
+   "observation": "The relocated gate lands on a physical enrolment ceremony, which is itself a barrier for exactly voter ID's victims: the housebound, the itinerant, those with no fixed address or no confidence to face officialdom. Vera reached the assembly rooms on a neighbour's arm; a frailer person would not, and the kernel's inclusion floor (paper, assisted, no device) answers the cast, not the one-time in-person enrolment, which KERNEL.md itself lists among the unsolved problems. A design that refuses to gate the cast on presence still gates membership on it — and remote enrolment that resists sybils is genuinely unsolved, so this is a named limit, not an oversight."
+  },
+  {
+   "protection": "the refusals are counted",
+   "severity": "note",
+   "doc_ref": "§10",
+   "observation": "One thing the kernel adds that the statutory scheme structurally lacked: enrolment refusals are counted in public — the count, never the names (§10) — and each denial is an appealable trace citing the rule that fired, the move refugee-enrolment leaned on. The Electoral Commission could not reliably measure who voter ID excluded, because the law barred polling staff from recording demographics of the turned-away; the kernel makes exclusion-at-enrolment a visible, contestable number rather than a dark one. Legibility does not re-enfranchise anyone wrongly refused, but it denies the exclusion the invisibility that let the booth version run for years uncorrected."
+  }
+ ]
+}
