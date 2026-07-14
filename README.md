@@ -51,7 +51,7 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
   Democracy restated as an engineering problem, and the smallest honest answer to it.
   Every section opens as one plain line; expand for the full argument. Then watch
   [real life run against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)
-  — 25 stress-test stories, each machine-validated against the schemas.
+  — 26 stress-test stories, each machine-validated against the schemas.
 
 Or run everything locally — the election, its verification, and twelve attempts to rig
 it — in about a minute: [`proto/test.sh`](proto/).

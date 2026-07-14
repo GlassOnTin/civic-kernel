@@ -6674,6 +6674,280 @@
   ]
  },
  {
+  "id": "procurement-vip-lane",
+  "title": "Every Contract Was Lawful. The Lane Was Not.",
+  "setting": "The Wessex Health Authority runs one kernel service and only one: a witnessed transparency log for how it spends. It adopted it after the PPE years, on a single promise to the region — that emergency spending would be legible while it happened, not two years afterward. In the winter of 2026 a respiratory surge empties the mask stores, and the Authority must buy fast under the extreme-urgency power the law provides. Within days a familiar shape forms. Offers arriving through a minister's office, an MP, a senior clinician are routed to a small, better-resourced team that answers the same day; everyone else joins a queue. Harlow Medical Supplies Ltd, referred by the office of the Wessex health minister and run by a former ministerial adviser, is contracted for 34 million pounds of masks inside a week. Two open-lane bids at a lower unit price are still waiting.\n\nThis is where the deployment made its one demand of the protocol. The core waist has no entry for an executive award — it can force a search to cite its warrant, but not a contract to cite anything — so the Authority extended it: every award is logged as it is signed, citing the power that authorised it and, the part that matters, the referral that brought the supplier in. Each entry on its own is impeccable, a lawful award with its warrant and its provenance attached, indistinguishable from a clean one but for a single field. The wrong lives in none of the awards. It lives in the space between them, in the lane — and for the first time the lane has an address. At the quarter's close the Authority must publish what that field adds up to: offers referred by the powerful winning at about ten times the open rate. The figure the real National Audit Office needed two years and a statutory investigation to prise loose is here in ninety days, signed and witnessed. Three people are about to meet it, and so, eventually, is a court that will agree the lane was unlawful and change nothing about who was paid.",
+  "threats": [
+   "T1",
+   "T12"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§6",
+   "§1",
+   "§2",
+   "T1",
+   "T12"
+  ],
+  "precedents": [
+   {
+    "event": "High Court finds the PPE 'VIP lane' unlawful (Good Law Project & EveryDoctor v SoS Health)",
+    "year": 2022,
+    "source": "Good Law Project (High Court judgment, 12 January 2022)",
+    "url": "https://goodlawproject.org/update/high-court-vip-lane-ppe-unlawful/",
+    "shows": "The court held the High Priority Lane 'in breach of the obligation of equal treatment', then found the favoured firms would 'likely have been awarded contracts anyway', cancelled nothing, and declined to publish the money wasted — unlawful process, no remedy: each award lawful, the wrong in the differential lane."
+   },
+   {
+    "event": "NAO, Investigation into the management of PPE contracts",
+    "year": 2022,
+    "source": "National Audit Office (30 March 2022)",
+    "url": "https://www.nao.org.uk/wp-content/uploads/2022/03/Investigation-into-the-management-of-PPE-contracts.pdf",
+    "shows": "493 suppliers were referred to the high-priority lane by ministers' offices, MPs and officials; referred offers were about ten times likelier to win (roughly 10% against 1%), 51 VIP suppliers took 115 contracts worth 3.8 billion pounds — the differential-success disparity this scenario's aggregate models, computed only two years later by compulsory audit."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:wessex-health.example",
+    "name": "Wessex Health Authority (emergency-procurement transparency pilot)",
+    "parent": "did:web:wessex.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:wessex-health.example",
+    "witnesses": [
+     "did:web:wessex-audit.example",
+     "did:web:wessex-university.example",
+     "did:web:transparency-trust.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "procurement-award-challenge",
+     "steps": 8,
+     "fields": 26,
+     "median_seconds": 18000,
+     "abandonment_rate": 0.68
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:wessex-health.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "The office of the Wessex health minister, and the referral network",
+    "verb": "offstage",
+    "narrative": "The lane forms in the ordinary way. A supplier known to a minister's office, another vouched for by an MP, a third by a senior clinician — their offers are passed to a small team that is better resourced and answers the same day, while open bids queue. Who gets fast-tracked, and on whose word, is human and discretionary; the kernel has no reach into the decision to favour, and does not pretend to. This deployment made one demand of it, and only one."
+   },
+   {
+    "actor": "Wessex Health Authority procurement office",
+    "verb": "cast",
+    "narrative": "The emergency programme is opened on the transparency log, citing the extreme-urgency power the law provides, and — because the core waist has no entry for an executive award — declaring the local extension the Authority added: every contract will be logged as x-procurement.award carrying the referral that brought the supplier in. The existence of a high-priority lane, hidden in the real scandal for two years, is on the public record here on day one.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:wessex-health.example",
+     "timestamp": "2026-03-02T09:00:00Z",
+     "body": {
+      "decision_id": "2026-emergency-ppe-procurement",
+      "decision_class": "executive-procurement-programme",
+      "authorizing_rule": "uk-pcr-2015:reg.32(2)(c) extreme-urgency negotiated procedure without prior publication; wessex-emergency-procurement-scheme/v1",
+      "issuing_authority": "Wessex Health Authority, emergency delegated powers",
+      "lanes_declared": [
+       "high-priority",
+       "open-competition"
+      ],
+      "provenance_required": true,
+      "note": "Local waist extension: each award is logged as x-procurement.award citing its referral provenance. The core waist has a required warrant for a coercive.act but no compelled executive-award entry; this deployment adds one."
+     },
+     "sig": {
+      "key_id": "did:web:wessex-health.example#log-1",
+      "alg": "ed25519",
+      "value": "UHJvZ3JhbW1lT3BlbmVkV2Vzc2V4UFBFTm90UmVhbENyeXB0bzAx"
+     }
+    }
+   },
+   {
+    "actor": "Wessex Health Authority procurement office",
+    "verb": "cast",
+    "narrative": "The Harlow award lands as an executive award entry: 34 million pounds, the emergency power cited, and the provenance field naming the referral — high-priority lane, referred by the health minister's office. Read on its own, the entry is unimpeachable: a lawful award, its warrant and its route attached. What the record now holds that no record held in the real scandal is the one field that distinguishes this contract from a clean one — not a judgement, just a fact: how the supplier got in the door.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-procurement.award",
+     "community": "did:web:wessex-health.example",
+     "timestamp": "2026-03-07T15:00:00Z",
+     "body": {
+      "award_id": "2026-ppe-0148",
+      "supplier": "Harlow Medical Supplies Ltd",
+      "supplier_ref": "companies-house:0X-fictional-148",
+      "contract_value_gbp": 34000000,
+      "authorizing_rule": "uk-pcr-2015:reg.32(2)(c); wessex-emergency-procurement-scheme/v1",
+      "referral_provenance": {
+       "lane": "high-priority",
+       "referred_by": "Office of the Wessex Health Minister",
+       "referrer_role": "ministerial-office",
+       "date_referred": "2026-03-03"
+      },
+      "competing_offers_on_file": 3
+     },
+     "sig": {
+      "key_id": "did:web:wessex-health.example#log-1",
+      "alg": "ed25519",
+      "value": "VklQTGFuZUF3YXJkSGFybG93Tm90UmVhbENyeXB0bzAy"
+     }
+    }
+   },
+   {
+    "actor": "Wessex Health Authority procurement office",
+    "verb": "cast",
+    "narrative": "A week later an open-lane award is logged the same way: Tor Bay Textiles, no referral, provenance 'open-competition'. Two lawful awards now sit in the record, and the difference between them — the thing the real inquiry had to reconstruct from prised-loose emails — is a single machine-readable field, not a secret. The kernel has not judged either award. It has made how each supplier reached the table a fact anyone can read.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-procurement.award",
+     "community": "did:web:wessex-health.example",
+     "timestamp": "2026-03-14T11:00:00Z",
+     "body": {
+      "award_id": "2026-ppe-0203",
+      "supplier": "Tor Bay Textiles Ltd",
+      "supplier_ref": "companies-house:0X-fictional-203",
+      "contract_value_gbp": 9600000,
+      "authorizing_rule": "uk-pcr-2015:reg.32(2)(c); wessex-emergency-procurement-scheme/v1",
+      "referral_provenance": {
+       "lane": "open-competition",
+       "referred_by": null,
+       "referrer_role": null
+      },
+      "competing_offers_on_file": 11
+     },
+     "sig": {
+      "key_id": "did:web:wessex-health.example#log-1",
+      "alg": "ed25519",
+      "value": "T3BlbkxhbmVBd2FyZFRvckJheU5vdFJlYWxDcnlwdG8wMw"
+     }
+    }
+   },
+   {
+    "actor": "Wessex Health Authority transparency office",
+    "verb": "cast",
+    "narrative": "At the quarter's close the Authority must publish what the provenance field adds up to: referred offers won at about ten times the open rate — roughly one in ten against one in a hundred — with the lane carrying 340 million pounds of the spend. Anonymous, signed, witnessed, checkpointed. This is §8's measure-the-process move turned on spending: the disparity the National Audit Office reconstructed two years after the fact is here contemporaneously, the same computed quantity for every lane. The lane is no longer a rumour or an FOI battle. It is the Authority's own number.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:wessex-health.example",
+     "timestamp": "2026-07-01T09:00:00Z",
+     "body": {
+      "process": "emergency-procurement-award",
+      "period": "2026-Q1",
+      "unit": "share of offers in the lane resulting in an award",
+      "lanes": [
+       {
+        "lane": "high-priority",
+        "offers": 210,
+        "awards": 21,
+        "award_rate": 0.1,
+        "contract_value_gbp": 340000000
+       },
+       {
+        "lane": "open-competition",
+        "offers": 4100,
+        "awards": 41,
+        "award_rate": 0.01,
+        "contract_value_gbp": 190000000
+       }
+      ],
+      "disparity_ratio": 10.0,
+      "note": "Anonymous aggregate. Every underlying award cites a valid authorizing_rule and its referral provenance; no supplier identifiers here. Measure the process, never the person (§8). Referred offers won at about ten times the open rate — the pattern, not any single lawful award, is the finding."
+     },
+     "sig": {
+      "key_id": "did:web:wessex-health.example#log-1",
+      "alg": "ed25519",
+      "value": "TGFuZURpc3Bhcml0eUFnZ3JlZ2F0ZU5vdFJlYWxDcnlwdG8wNA"
+     }
+    }
+   },
+   {
+    "actor": "Nadia Frost, the Wessex Ledger",
+    "verb": "read",
+    "narrative": "Nadia pulls the aggregate and verifies its inclusion in the log against a witnessed head, so the figure cannot be quietly revised after she runs the story. For the first time the ten-to-one lane is not a leaked memo or a two-year investigation; it is the Authority's own signed record, and any reader's phone can re-check her quotation of it. She has gained no new power. The Authority has lost the defence that always worked before — that every single award was lawful, which was true, and answered nothing."
+   },
+   {
+    "actor": "Kestrel PPE Ltd, an unsuccessful open-lane bidder",
+    "verb": "challenge",
+    "narrative": "Kestrel challenges the Harlow award through its logged trace. The kernel does exactly what it promises at the level of the act: it surfaces the cited power and the provenance, and the challenge resolves that this award was lawful — the urgency power existed, the process such as it was ran. The individual challenge fails on the merits, and it should, because the individual award was lawful. This is the trap made concrete, the same wall Grace Bello met over stop-and-search: contesting the awards one at a time can never reach the lane."
+   },
+   {
+    "actor": "A regional public inquiry and the courts",
+    "verb": "offstage",
+    "narrative": "So the fight moves where remedies live. On the strength of the signed disparity a claimant brings judicial review, and the court agrees the lane breached the duty of equal treatment — and then finds the favoured suppliers would likely have been awarded anyway, cancels no contract, and declines to publish what the rushed assurance wasted. The strongest legibility the protocol can produce, plus a court ruling of illegality, returns no money and unwinds no deal. The remedy is a declaration, and it lives entirely outside the kernel — which senses at machine speed and, once more, holds no pen (§9)."
+   },
+   {
+    "actor": "The Authority's commercial director",
+    "verb": "offstage",
+    "narrative": "One thing the number still cannot settle: whether Harlow's masks were worth 34 million pounds, or would have failed the same technical assurance the real contracts skipped. The log holds who was referred and by whom; it does not hold whether the price was fair or the goods were fit — that is commercial judgement, which the kernel refuses the way it refuses to overrule a judge. Provenance can show that access was skewed. It cannot, at the level of one contract, tell a legitimate fast-track from a favour."
+   },
+   {
+    "actor": "Anyone, reading the log after",
+    "verb": "read",
+    "narrative": "The kernel turned a two-year investigation into a ninety-day signed number and made a secret lane impossible to keep secret — a real gain, and the exact one the region adopted it for. What it did not do is call any single award wrong, price the value for money, or make the number a remedy; and it managed even the legibility only because the Authority extended a waist that, as shipped, has no entry to compel. Legible in time. Not judged, not priced, not returned — and not yet demanded by the core."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Every award cited a lawful power and might have been made anyway; the wrong was the lane — referred offers winning at roughly ten times the open rate. The kernel turns that lane from a two-year investigation into a signed, contemporaneous number. What it cannot do is call one award wrong, price value for money, or make the number a remedy — the court did the first and returned nothing.",
+  "protection": "the procurement log's reach",
+  "protection_plain": "Whether the transparency log can hold executive spending to account — forcing each award's power and referral onto the record, turning a hidden lane into a signed contemporaneous number, but reaching only legibility, short of remedy or a judgement of value for money.",
+  "findings": [
+   {
+    "protection": "what the log makes legible",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "Genuine contribution, and a large one: the provenance field on every award converts a privileged lane from a two-year forensic reconstruction into a contemporaneous, signed, phone-checkable number. The real National Audit Office needed a statutory investigation and roughly two years to establish that referred suppliers won at about ten times the open rate; the deployment produces the same disparity at the quarter's close. Deniability — 'every single award was lawful', which was true — is destroyed, because the wrong was never in a single award. This is the sludge-dashboard move (§8) turned on spending, and it is real progress that did not exist before."
+   },
+   {
+    "protection": "a number is not a remedy",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "Confirmed by the precedent, not merely argued: the High Court held the real VIP lane unlawful for breach of equal treatment, then found the favoured firms would likely have been awarded anyway, cancelled no contract, and refused to publish the money wasted. Legibility at its strongest, plus a court ruling of illegality, returned nothing. The kernel converts hidden favouritism into a public, checkable figure; picking that figure up is an equality-law claim, a public inquiry, an election — all outside the protocol, all with the ordinary ways to fail. The log made the injustice undeniable; it did not make it remediable."
+   },
+   {
+    "protection": "the individual award is lawful",
+    "severity": "strain",
+    "doc_ref": "§2",
+    "observation": "The wrong lives in the lane, not in any award, and the kernel can only ever surface acts. Each x-procurement.award cites a valid urgency power and survives challenge on the merits — as the open-lane bidder's challenge does here, and as it should. This is the same structure as stop-and-search: discrimination that is an emergent property of an aggregate of individually-lawful acts, appealable one act at a time and therefore never reached that way. Provenance shows the access was skewed; it cannot promote 'skewed access' into 'this contract was unlawful', which is exactly why the real court could void the lane and leave every payment standing."
+   },
+   {
+    "protection": "value for money is offstage",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The log holds who was referred and by whom; it does not and cannot hold whether the price was fair or the goods fit for purpose. Whether 34 million pounds bought usable masks is commercial and technical judgement, which the kernel refuses the way it refuses every substantive judgement (the surname case, a policy's wisdom). A consequence worth stating plainly: at the level of a single contract the protocol cannot distinguish a legitimate emergency fast-track from a favour — only the aggregate testifies. Transparency of provenance is necessary and nowhere near sufficient to call an award corrupt."
+   },
+   {
+    "protection": "no compelled award entry in the waist",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "This worked only because Wessex extended the waist with an x-procurement.award type carrying required provenance. The core waist ships a coercive.act with a required authorizing_rule but no executive-award entry with required provenance — so the very legibility this scenario turns on is a local addition, not a kernel guarantee, and a less scrupulous authority simply would not add it. This is the same gap government-by-whatsapp found from the other side: there the decision never reached the log; here the award reaches it only because a good actor chose to make it. Two Good Law Project cases now converge on one missing primitive — a compelled executive-act log entry, 'no decision and no spend without a logged trace' (coercive.act's required warrant, generalised). The design lead is no longer hypothetical; it has two witnesses."
+   },
+   {
+    "protection": "the guard would be blind anyway",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "Worth naming so no reader over-trusts a fuller deployment: even had Wessex run the rights guard, it would not fire here. The guard is a static analyser over decision and proposal metadata entering a ballot, not over executive procurement discretion — the same blindness stop-and-search recorded. Equal treatment as an invariant has no decision to type-check when the harm is a pattern across lawful administrative awards. The transparency log, not the rights guard, is the only service with any purchase on this wrong, and its purchase stops at legibility."
+   }
+  ]
+ },
+ {
   "id": "records-rewrite",
   "title": "The Vote That Would Not Stay Buried: How Riverton's Stadium Deal Ran Into Its Own Ledger",
   "setting": "In May 2023, the city of Riverton tore itself in half over forty hectares of riverside allotments and flood meadow called the Delcote Flats. Developers wanted mixed commercial zoning; the allotment holders, led by a retired pharmacist named Tessa Okafor, wanted the protective designation kept. After a bruising spring the referendum went 9,412 to 8,687 — 52 to 48 — to retain the protection. The losers were furious, but the tally proof checked out on anyone's phone, the paper-ballot audit confirmed it, and the result went into Riverton's public transparency log, co-signed that night by the town clerks of neighbouring Harwick and Stonebridge and by Lakeshore University, and checkpointed the next morning to two public blockchains. People moved on.\n\nThree years later Vincent Odell is mayor, elected on jobs, and Meridian Arena Group wants the Flats for a 22,000-seat stadium. Odell's lawyers deliver bad news: the 2023 decision binds unless a new referendum overturns it, and the polling on a rematch is ugly. In late May 2026 the mayor's deputy chief of staff, Kester Blane, walks down to the records office and tells the municipal clerk, Neriah Voss, that the 2023 record needs \"correcting\" — the question, he says, had always been understood to carry a three-year sunset clause, and the archived entry should reflect that understanding. He follows up by email, which will matter later. Voss, twenty-two years in the job and four from her pension, understands exactly what she is being asked to do, and that the person asking controls her department's budget.\n\nAn IT contractor is brought in quietly over the first weekend of June. He restores the log database from a 2023 snapshot, edits the body of entry 48,207 — the tally-proof for the Delcote decision — to include the sunset clause, rebuilds the hash tree, and has the municipal log server sign and publish the new head. On paper it is a perfect forgery: correctly signed by the city's own log key, internally consistent, indistinguishable from truth to anyone who only trusts City Hall. The question this scenario tests is why that is not enough — and what happens to Blane, Voss, and Odell once the mathematics starts talking.",
