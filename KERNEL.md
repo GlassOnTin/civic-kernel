@@ -268,15 +268,17 @@ research program, not a trained system.
   repaired by a silent recast. The repair decided it: an 8–6 win where the unrepaired
   ballot would have made it 7–7 — and what the cheating device actually encrypted stays
   sealed forever.
-- **24 scenarios**, each cross-validated against the waist schemas and each anchored to
-  documented real-world precedents (57 verified citations — the schema requires them: no
-  attack without a cited precedent): 17 strain, 6 break, 1 holds. The one hold is
+- **25 scenarios**, each cross-validated against the waist schemas and each anchored to
+  documented real-world precedents (60 verified citations — the schema requires them: no
+  attack without a cited precedent): 17 strain, 7 break, 1 holds. The one hold is
   `records-rewrite` — the log defeating tampering, the mechanism the design leans on
-  hardest. The breaks are four named limits meeting unaccountable power — coercion under
+  hardest. The breaks are five named limits meeting unaccountable power — coercion under
   live observation, an executive that ignores court orders, a remedy too weak to stop a
-  majority, a remedy absent altogether — plus the UK break re-measured at two lower
-  machinery rungs (ballot check removed; witnesses removed), where it neither worsens
-  nor heals: machinery is orthogonal to remedy.
+  majority, a remedy absent altogether, and a decision kept off the log entirely
+  (`government-by-whatsapp`, records-rewrite's mirror: you cannot rewrite the log, but
+  nothing compels you to write it — integrity without completeness) — plus the UK break
+  re-measured at two lower machinery rungs (ballot check removed; witnesses removed),
+  where it neither worsens nor heals: machinery is orthogonal to remedy.
 
 </details>
 

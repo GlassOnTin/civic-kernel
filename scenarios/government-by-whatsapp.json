@@ -1,0 +1,295 @@
+{
+ "id": "government-by-whatsapp",
+ "title": "The Award That Kept Its Reasons Off the Record",
+ "setting": "The Borough of Ashcombe runs the full kernel. After a neighbouring council's records scandal it adopted everything — a witnessed transparency log, two anchors, the whole reference profile — on one promise to its residents: the decisions that govern you land on a record nobody can quietly change. In February 2026 the river takes the Riverside ward, and the council must award a 4.2 million pound emergency clean-up and temporary-housing contract in days, not the usual months. Deputy leader Councillor Damian Roe and two officers settle who gets it in a WhatsApp group set to clear its messages after twenty-four hours. The winner is Tidewell Facilities Ltd, whose director once ran a company with Roe, at half again the next-lowest of three bids. Into the group, before the vote is minuted anywhere, an officer types the quiet part: 'delete after — if anyone FOIs it we can say it was captured.'\n\nWhat the kernel receives is impeccable. The procurement is opened and closed on the transparency log, each entry citing the emergency power the law actually provides, co-signed overnight by three neighbouring witnesses and pinned to two anchors by dawn — a record that, thanks to the very mechanism that defeated Riverton's rewrite, can now never be altered by anyone, the council included. That is the trap, and it is the exact inverse of records-rewrite. There, an administration tried to change what the log already held, and failed at the witnesses, at the phones, and at the anchor. Here nobody changes anything. The decision that mattered simply never enters the log, and the reasons that would show the favouritism are auto-deleted at source that same night. A year on, when a reporter and the borough's own auditor come asking why Tidewell, the log answers every question about what was decided — the power, the sum, the supplier, the witnessed timeline — perfectly and unrewritably, and nothing at all about why. Because the why was engineered never to be written down.",
+ "threats": [
+  "T8",
+  "T1"
+ ],
+ "doc_refs": [
+  "§3.4",
+  "§2",
+  "§1",
+  "§6",
+  "§8",
+  "T8",
+  "T1"
+ ],
+ "precedents": [
+  {
+   "event": "Foxglove/Good Law Project: first day in court on government WhatsApp deletion",
+   "year": 2022,
+   "source": "Foxglove",
+   "url": "https://www.foxglove.org.uk/2022/03/22/1st-day-in-court-whatsapp-deletion/",
+   "shows": "Evidence in open court that UK government policy was conducted over WhatsApp with messages deleted and public records lost — decision-making held off the official, retainable record, which is the omission this scenario turns on rather than a rewrite of it."
+  },
+  {
+   "event": "High Court finds the PPE 'VIP lane' unlawful",
+   "year": 2022,
+   "source": "Good Law Project (High Court judgment, R (Good Law Project) v SoS Health)",
+   "url": "https://goodlawproject.org/update/high-court-vip-lane-ppe-unlawful/",
+   "shows": "Emergency-procurement favouritism that was invisible in the contemporaneous record and surfaced only through litigation — the substance kept off the transparent path, the same shape as an award whose reasons never reach the log."
+  },
+  {
+   "event": "'Government by WhatsApp': the Covid Inquiry on ephemeral messaging and deletion",
+   "year": 2025,
+   "source": "The Political Quarterly",
+   "url": "https://politicalquarterly.org.uk/blog/government-by-whatsapp-covid-transparency-and-government-by-text/",
+   "shows": "Documents substantive government decisions migrating to auto-deleting private messaging and being destroyed to evade FOI — 'I'm deleting the messages in this group. They can be captured in an FOI' (Vaughan Gething) — the deliberate non-retention this scenario models."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:ashcombe.example",
+   "name": "Borough of Ashcombe",
+   "parent": "did:web:westmarch-county.example"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "ceremony",
+   "issuer": "Ashcombe municipal registrar (enrolment at the town hall and two library branches)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "ashcombe-electoral-roll/v3"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-silent",
+   "trustee_quorum": "3-of-5: Westmarch County court, Ashcombe University, the diocesan trust, and the two council opposition groups"
+  },
+  "rights_guard": {
+   "invariants": [
+    1,
+    2,
+    3,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    19,
+    20,
+    21,
+    25,
+    29
+   ],
+   "remedy": "declaration",
+   "scope": "unconditional",
+   "entrenchment": "statute"
+  },
+  "transparency_log": {
+   "log_id": "did:web:ashcombe.example",
+   "witnesses": [
+    "did:web:harwick.example",
+    "did:web:westmarch-county.example",
+    "did:web:ashcombe-university.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "decision_metadata": true,
+  "interaction_cost": [
+   {
+    "process": "freedom-of-information-request",
+    "steps": 7,
+    "fields": 12,
+    "median_seconds": 1200,
+    "abandonment_rate": 0.41
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:ashcombe.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Councillor Damian Roe and two borough officers",
+   "verb": "offstage",
+   "narrative": "The real decision, in the auto-deleting group chat. Which supplier, at what price, on whose say-so — all of it is settled here, in messages timed to vanish, with the winner chosen before anything is minuted anywhere. One officer writes 'delete after — if anyone FOIs it we can say it was captured.' This is the room the protocol is built to stay out of, and it is also where the whole decision actually happens. The kernel touches none of it."
+  },
+  {
+   "actor": "Ashcombe borough procurement office",
+   "verb": "cast",
+   "narrative": "The procurement is opened on the transparency log, citing the emergency power the law provides. This much is honest and it is exactly what the kernel asks for: the existence of the decision, and the rule that authorises it, are now on a record no one can rewrite. What the entry cannot carry — because nothing in it was ever meant to — is why the answer was already known before the decision opened.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:ashcombe.example",
+    "timestamp": "2026-02-10T09:00:00Z",
+    "body": {
+     "decision_id": "2026-emergency-procurement-riverside-flood",
+     "decision_class": "executive-procurement",
+     "authorizing_rule": "uk-pcr-2015:reg.32(2)(c) extreme-urgency negotiated procedure without prior publication; ashcombe-emergency-scheme-of-delegation/v2",
+     "issuing_authority": "Ashcombe Borough Council, emergency delegated powers",
+     "subject_matter_hash": "sha256:3f1c9a7e0b2d4658c1f0a9e3d6b5c4a71e8f0d2b3c4a5e6f70819a2b3c4d5e6f",
+     "estimated_value_gbp": 4200000
+    },
+    "sig": {
+     "key_id": "did:web:ashcombe.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVjaXNpb25PcGVuZWRBc2hjb21iZUZsb29kTm90UmVhbENyeXB0bzAx"
+    }
+   }
+  },
+  {
+   "actor": "Ashcombe borough procurement office",
+   "verb": "cast",
+   "narrative": "The award lands as a closed decision: Tidewell Facilities Ltd, 4.2 million pounds, the power cited, three bids on the file. The entry is complete in form and empty of reasons — it even names an award-rationale reference, as good practice demands, pointing to a delegated-decision note. Nothing the schema requires is missing. Nothing the schema requires is the thing that matters. It records that a choice was made and under what authority; it does not, and cannot, record that the choice was made in a chat set to erase itself.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.closed",
+    "community": "did:web:ashcombe.example",
+    "timestamp": "2026-02-11T17:00:00Z",
+    "body": {
+     "decision_id": "2026-emergency-procurement-riverside-flood",
+     "outcome": "awarded",
+     "supplier": "Tidewell Facilities Ltd",
+     "contract_value_gbp": 4200000,
+     "authorizing_rule": "uk-pcr-2015:reg.32(2)(c); ashcombe-emergency-scheme-of-delegation/v2",
+     "competing_bids": 3,
+     "award_rationale_ref": "ashcombe:delegated-decision-note:2026-02-11-DR"
+    },
+    "sig": {
+     "key_id": "did:web:ashcombe.example#log-1",
+     "alg": "ed25519",
+     "value": "QXdhcmRDbG9zZWRUaWRld2VsbEZhY2lsaXRpZXNOb3RSZWFsQ3J5cHRvMDI"
+    }
+   }
+  },
+  {
+   "actor": "Witnesses in Harwick, Westmarch, and Ashcombe University",
+   "verb": "verify",
+   "narrative": "Overnight the three witnesses each confirm the new log head strictly extends the last one they signed, and co-sign it. The award is now pinned exactly as Riverton's honest count was pinned — same mechanism, same rigour. The machinery that caught the rewrite works flawlessly, on a record that was hollow before it was ever signed. This is the scenario's quiet horror: every guarantee fires correctly, and none of them reaches the wrong."
+  },
+  {
+   "actor": "The borough anchor job",
+   "verb": "verify",
+   "narrative": "At dawn the co-signed root hash is checkpointed to Bitcoin via OpenTimestamps and to a registry contract on an Ethereum L2. From this morning the award record is beyond anyone's power to alter, the council's included. Integrity is now permanent — and so is the omission it locks in. The log has made a sanitised decision immortal.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "anchor.checkpoint",
+    "community": "did:web:ashcombe.example",
+    "timestamp": "2026-02-12T06:00:00Z",
+    "body": {
+     "tree_size": 20443,
+     "root_hash": "sha256:a1b4c7d0e3f6091b2a5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4",
+     "witness_cosignatures": [
+      "did:web:harwick.example#witness-1",
+      "did:web:westmarch-county.example#witness-1",
+      "did:web:ashcombe-university.example#witness-2"
+     ],
+     "anchors": [
+      {
+       "target": "opentimestamps:bitcoin-mainnet",
+       "proof_ref": "ots:sha256:6b9c2d5e8f1a4b7c0d3e6f9a2b5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c"
+      },
+      {
+       "target": "eth:base-mainnet:0xC1v1cAnch0rRegistry",
+       "tx": "0x2a5c8d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c"
+      }
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:ashcombe.example#log-1",
+     "alg": "ed25519",
+     "value": "QW5jaG9yQ2hlY2twb2ludEFzaGNvbWJlTm90UmVhbENyeXB0bzAz"
+    }
+   }
+  },
+  {
+   "actor": "Councillor Roe's phone",
+   "verb": "offstage",
+   "narrative": "At nine that evening the auto-delete fires and the deliberation is gone at source. Nothing in the kernel changes, because nothing in the kernel ever held it. Records-rewrite's attacker had to defeat witnesses, thousands of background-verifying phones, and an anchor pinned to two chains; Roe had to defeat none of it. He simply never used the road they guard."
+  },
+  {
+   "actor": "Marta Kean, Ashcombe Ledger",
+   "verb": "read",
+   "narrative": "A year on, the reporter reads the log. Every question about what was decided answers instantly and verifiably — the power, the sum, the supplier, the witnessed timeline, all beyond dispute. Every question about why hits a wall the record's own completeness disguises: why Tidewell, at half again the next bid, whose director once ran a company with the deputy leader. A perfectly kept ledger of a decision whose reasons were engineered never to exist on it reads, to a trusting citizen, exactly like a clean one."
+  },
+  {
+   "actor": "Marta Kean and the borough auditor",
+   "verb": "challenge",
+   "narrative": "She files an FOI for the deliberation and the award-rationale note the closed entry cited. The response is logged as a denial trace: information not held, messages not retained, and — tellingly — no retention rule to cite for the destruction. Here, and only here, the kernel does something. The erasure stops being a shrug and becomes a signed, checkable public event: the record now proves the reasons were asked for and are gone. It cannot recover them. It can refuse to let their absence stay quiet.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.denial-trace",
+    "community": "did:web:ashcombe.example",
+    "timestamp": "2026-11-20T12:00:00Z",
+    "body": {
+     "request_id": "foi-2026-1187",
+     "requested": "All deliberation underlying award 2026-emergency-procurement-riverside-flood, including the note at award_rationale_ref ashcombe:delegated-decision-note:2026-02-11-DR",
+     "responding_authority": "Ashcombe Borough Council information rights team",
+     "outcome": "information-not-held",
+     "reason": "Deliberation conducted on a private messaging channel with 24-hour auto-deletion; the cited rationale note was never created as a retained record.",
+     "retention_rule_cited": false,
+     "note": "Unlike a coercive.act, which the schema will not accept without an authorizing_rule, an omission has no field the waist can force: the log can record that the record is missing, not compel it to have existed."
+    },
+    "sig": {
+     "key_id": "did:web:ashcombe.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVuaWFsVHJhY2VJbmZvcm1hdGlvbk5vdEhlbGROb3RSZWFsQ3J5cHRvMDQ"
+    }
+   }
+  },
+  {
+   "actor": "The Information Commissioner and a council standards inquiry",
+   "verb": "offstage",
+   "narrative": "Where the remedy lives. Forcing government business onto approved, retained channels is public-records and FOI law, a standards investigation, and in the end the ballot box — the Covid Inquiry's own recommendation, not a protocol guarantee. The kernel can make the omission legible; it cannot make Roe have written the truth down, by the same logic that keeps it from overruling a judge. Sensing without a pen, one more time (§9)."
+  },
+  {
+   "actor": "Anyone, reading the log after",
+   "verb": "read",
+   "narrative": "The log tells an honest story about a dishonest process. It proves the award happened, proves it was never altered, and — through the denial trace — proves its reasons were destroyed. What it cannot do is the thing Ashcombe's residents believed it did: guarantee that the decisions governing them reach the record at all. Integrity it delivers in full. Completeness was never in its gift."
+  }
+ ],
+ "verdict": "breaks",
+ "verdict_plain": "In records-rewrite the log wins because someone tries to change the past and cannot. Here no one changes anything: the decision that mattered is taken in an auto-deleting chat to stay off the record, and only a sanitised award — witnessed, anchored, unrewritable — ever reaches the log. The design's strongest mechanism guarantees the integrity of a record it cannot compel anyone to fill honestly.",
+ "protection": "the record's completeness",
+ "protection_plain": "Whether the decisions that govern you actually reach the transparency log. The witnessed log guarantees that entries placed in it cannot be altered — never that the substance was placed there rather than destroyed off-record.",
+ "findings": [
+  {
+   "protection": "what the log still holds",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The integrity guarantee is intact and real: the award that was logged cannot be altered, and records-rewrite's three-layer defence would defeat any later attempt to change it. More than that, the kernel does convert the destruction from a shrug into a record — the denial trace signs the fact that the reasons were requested and are gone, the measure-the-process move (§8) applied to an omission. What the log holds, it holds honestly; the failure is one of reach, not of integrity."
+  },
+  {
+   "protection": "integrity is not completeness",
+   "severity": "break",
+   "doc_ref": "§3.4",
+   "observation": "The core limit, and the reason this breaks where records-rewrite holds. The witnessed log guarantees the integrity of what is committed to it; it cannot guarantee the completeness of what gets committed. Officials ran the substantive decision on a private, auto-deleting channel precisely to keep it off the log, and committed only a formal award emptied of its reasons. Records-rewrite holds because the attacker must change the record and fails at every layer; this breaks because the attacker changes nothing — the road the witnesses, phones and anchor guard was simply never travelled. The design's most-relied-on mechanism rests on a floor it cannot itself secure: something must place the honest record in the log, and the kernel can no more compel that than it can compel a judge (precedent: Gething, 'I'm deleting the messages... they can be captured in an FOI')."
+  },
+  {
+   "protection": "integrity worn as a costume",
+   "severity": "break",
+   "doc_ref": "§6",
+   "observation": "Worse than silence: the witnessed log lends its authority to the hollow record. A resident reading Ashcombe's manifest — transparency_log upheld, Article 19 among the invariants — reasonably believes the decisions that govern them sit on a record no one can quietly change, and is right about integrity and wrong about completeness. It is the same mismatch stop-and-search found between the rendered manifest claim and the lived reality, sharper here because the log's genuineness makes the sanitised award look more trustworthy, not less. A real guarantee, pointed at the wrong noun, becomes cover for the evasion it cannot see."
+  },
+  {
+   "protection": "no threat number owns omission",
+   "severity": "strain",
+   "doc_ref": "§2",
+   "observation": "The attack has no home in the register. T8 answers rewriting the record; there is no T-number for never writing it — the same shape as the executive-ignores run breaking on an enforcement gap no T-number owns. The log vocabulary compounds it: there is a required-warrant field for a coercive.act but no analogous compelled entry for an executive decision, so the waist can force a search to cite its power and cannot force a 4.2 million pound award to record its reasons. The gap is structural, not an oversight to patch cheaply."
+  },
+  {
+   "protection": "the remedy is public-records law",
+   "severity": "strain",
+   "doc_ref": "§1",
+   "observation": "Closing the gap lives outside the kernel, by design. Forcing government business onto approved, retained channels is public-records and FOI law, a standards inquiry, and ultimately the ballot box — the Covid Inquiry's own recommendation, not a protocol guarantee. The constructive residue the kernel could reach is narrow and worth naming: a regime where an executive act with no corresponding log entry is treated as void — coercive.act's 'no act without a cited warrant' generalised to 'no decision without a logged trace' — would make omission detectable, though never make the destroyed reasons recoverable. Legible, not prevented: the honest edge this scenario maps, and the one design question it hands back to the essay."
+  }
+ ]
+}
