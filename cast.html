@@ -10,17 +10,19 @@
      radios for the ballot, square corners, colour spent only on semantic
      borders. Dark variant kept at the same contrast rules. */
   :root {
+    color-scheme: light;
     --bg: #ffffff; --fg: #0b0c0c; --muted: #505a5f; --line: #b1b4b6;
     --ok: #00703c; --bad: #d4351c; --warn: #996c00;
     --panel: #f3f2f1; --accent: #1d70b8; --focus: #ffdd00; --focus-fg: #0b0c0c;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0b0c0c; --fg: #f3f2f1; --muted: #b1b4b6; --line: #505a5f;
-      --ok: #4cc38a; --bad: #ef6a5a; --warn: #d4a72c;
-      --panel: #1d2021; --accent: #7fb0da;
-    }
-  }
+  .home { display:block; margin:0 0 1.5rem; padding:.2rem 0 .85rem;
+    border-bottom:1px solid var(--line);
+    font-family:ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;
+    font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); }
+  .home b { color:var(--fg); font-weight:700; letter-spacing:.2em; }
+  .home:hover b { text-decoration:underline; text-underline-offset:.14em; }
+  .home:focus { background:var(--focus); color:var(--focus-fg); outline:3px solid var(--focus); box-shadow:0 3px 0 var(--focus-fg); text-decoration:none; }
   * { box-sizing: border-box; }
   body {
     margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 44rem;
@@ -97,6 +99,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
+<a class="home" href="index.html"><b>Civic&nbsp;Kernel</b> <span>a thin protocol for public decisions</span></a>
 <main id="main">
 
 <h1>Cast a ballot</h1>
