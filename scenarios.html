@@ -8390,6 +8390,265 @@
   ]
  },
  {
+  "id": "revolving-door-lobbying",
+  "title": "The Door With No Record: A Revolving Door Made Visible as It Turns",
+  "setting": "Halcyon Capital is a supply-chain finance firm with a single genuine asset: proximity. Its founder, Lucian Harrow, was brought into the Kingsmere government years ago as a 'crown representative', an unpaid adviser role that placed him, without a contract or a competition, at the centre of how the state buys and pays. The official who brought him in, Chief Commercial Officer Gethin Rowntree, later took a paid part-time advisory role with Halcyon — while still in his government post, and without the propriety clearance the rules require. And when the pandemic hit and Halcyon wanted into the emergency financing scheme it did not qualify for, a former minister, Lord Aldous Vane, made the case directly to the Chancellor: some by recorded meeting, much of it by private text and call.\n\nEvery one of these acts was, taken alone, lawful. That is the whole difficulty, and it is the real one: when the Greensill affair broke, a 141-page review concluded that no lobbying rules had been broken — and that this only showed how weak the rules were. The wrong was never in any single appointment or any single message. It was in the door: the quiet, unrecorded traffic between a firm and the public office that served it, reconstructed only afterward, at length, by an inquiry. Kingsmere is the one government that runs its propriety register on a kernel transparency log — appointments, secondary employments, and formal lobbying contacts posted with their provenance as they happen. This scenario is about how much of that door the log can light, and the part of it that stays, deliberately and structurally, in the dark.",
+  "threats": [
+   "T1",
+   "T12"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§6",
+   "§1",
+   "§2",
+   "§12",
+   "T1",
+   "T12"
+  ],
+  "precedents": [
+   {
+    "event": "David Cameron's lobbying for Greensill; the Boardman Review",
+    "year": 2021,
+    "source": "Boardman Review (Cabinet Office) / House of Commons Treasury Committee",
+    "url": "https://en.wikipedia.org/wiki/Greensill_scandal",
+    "shows": "A former prime minister texted and phoned the Chancellor and ministers to get Greensill into a Covid financing scheme; the 141-page Boardman Review concluded he broke no lobbying rules and acted lawfully, and the Treasury Committee found this reflected the insufficient strength of the rules — privileged access that is lawful, informal, and largely off any record."
+   },
+   {
+    "event": "Bill Crothers: a serving civil servant took a Greensill advisory role without consulting ACOBA",
+    "year": 2021,
+    "source": "House of Commons Public Administration and Constitutional Affairs Committee (PACAC), 'Propriety of Governance in Light of Greensill'",
+    "url": "https://publications.parliament.uk/pa/cm5802/cmselect/cmpubadm/59/5907.htm",
+    "shows": "The government's Chief Commercial Officer, who had brought Lex Greensill into government as a crown representative, took a paid part-time advisory role with Greensill Capital while still a civil servant and did not consult ACOBA as the Business Appointment Rules required — the revolving door turning inside public office, surfaced only after the fact."
+   },
+   {
+    "event": "ACOBA's advisory status and the unenforceability of the Business Appointment Rules",
+    "year": 2021,
+    "source": "GOV.UK (ACOBA) / Boardman Review recommendations",
+    "url": "https://www.gov.uk/government/publications/crothers-bill-government-chief-commercial-officer-cabinet-office-acoba-recommendation",
+    "shows": "The Advisory Committee on Business Appointments can only advise; the rules governing post-government and secondary employment carry limited enforceability, and the Boardman Review had to recommend legally binding restrictions — so making a conflict visible is necessary but nowhere near sufficient, because no body can reliably act on it."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:kingsmere-propriety.example",
+    "name": "Kingsmere Cabinet Office (propriety-register transparency pilot)",
+    "parent": "did:web:kingsmere.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:kingsmere-propriety.example",
+    "witnesses": [
+     "did:web:kingsmere-audit.example",
+     "did:web:kingsmere-standards-authority.example",
+     "did:web:kingsmere-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-propriety-register",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 25,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:kingsmere-propriety.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Westminster, the Greensill affair, and the door no one recorded",
+    "verb": "offstage",
+    "narrative": "The backdrop is the real one, and its wrong is a chain of lawful acts left off the record. A former prime minister texted the Chancellor for a finance firm; the government's own chief commercial officer took a paid advisory role with that firm while still in post, without the propriety clearance the rules required; and a 141-page review concluded, correctly, that no lobbying rules had been broken — which only proved the rules were too weak. Whether any of it was improper is a propriety judgment, ACOBA's and Parliament's, and the kernel decides none of it (refusal 11). What it can change is not the propriety. It is whether the door turns in the light or the dark."
+   },
+   {
+    "actor": "Kingsmere Cabinet Office",
+    "verb": "cast",
+    "narrative": "Kingsmere opens its propriety register on the log with one rule: senior appointments, crown-representative roles, officials' secondary employments, and formal lobbying contacts are all posted as they happen, each citing its authority and the route by which it came about. The commitment binds the government's own record. It cannot reach into a minister's private phone, and the register says so on its first entry — the light it offers is real, and it has a known edge.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:kingsmere-propriety.example",
+     "timestamp": "2025-01-15T09:00:00Z",
+     "body": {
+      "decision_id": "2025-propriety-register",
+      "decision_class": "propriety-transparency-commitment",
+      "authorizing_rule": "kingsmere-propriety-code/v2; kingsmere-business-appointment-rules/v2",
+      "issuing_authority": "Kingsmere Cabinet Office",
+      "commitment": "Appointments, crown-representative roles, officials' secondary employments and formal lobbying contacts posted with provenance as they occur",
+      "known_gap": "The register covers logged acts only. Informal contact — a private text or call to a minister — cannot be compelled onto it (the government-by-whatsapp completeness gap).",
+      "note": "The register raises the propriety question by making the acts visible; it never answers it. Whether an appointment or a contact is improper stays with the propriety committee (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:kingsmere-propriety.example#log-1",
+      "alg": "ed25519",
+      "value": "UHJvcHJpZXR5UmVnaXN0ZXJLaW5nc21lcmVOb3RSZWFsMDE"
+     }
+    }
+   },
+   {
+    "actor": "Kingsmere Cabinet Office",
+    "verb": "cast",
+    "narrative": "Lucian Harrow, Halcyon's founder, is appointed a crown representative. This is a genuine executive.act — the state exercising an appointment power — and the log records it as such: the power cited, the office issuing it, and, in the provenance field, the fact that the referral came from the Chief Commercial Officer himself. The access Halcyon buys with proximity is, from this moment, a matter of public record with its introducer named — where in the real affair the same relationship took an inquiry to establish.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "executive.act",
+     "community": "did:web:kingsmere-propriety.example",
+     "timestamp": "2025-03-12T11:00:00Z",
+     "body": {
+      "act_class": "appointment",
+      "authorizing_rule": "kingsmere-crown-representative-scheme/v1; cabinet-office delegated appointment power",
+      "issuing_authority": "Kingsmere Cabinet Office",
+      "counterparty": {
+       "name": "Lucian Harrow (founder, Halcyon Capital)",
+       "ref": "companies-house:0X-fictional-556"
+      },
+      "provenance": {
+       "route": "direct-appointment",
+       "referred_by": "Chief Commercial Officer",
+       "referrer_role": "senior-official",
+       "referred_on": "2025-03-10"
+      }
+     },
+     "sig": {
+      "key_id": "did:web:kingsmere-propriety.example#log-1",
+      "alg": "ed25519",
+      "value": "Q3Jvd25SZXBBcHBvaW50SGFsY3lvbktpbmdzbWVyZU5vdFJlYWwwMg"
+     }
+    }
+   },
+   {
+    "actor": "Kingsmere Cabinet Office, propriety register",
+    "verb": "cast",
+    "narrative": "Months later the door turns the other way, and here the waist reaches its edge. Gethin Rowntree — the official who brought Harrow in — takes a paid advisory role with Halcyon while still in his government post. This is not the state appointing anyone; it is an official's outward move, which executive.act's appointment class does not cover, so the register logs it as an x-propriety.secondary-employment extension. Being an extension, it can carry what the strict type cannot: that the role is concurrent with public office, and that the propriety clearance the rules demand was never sought. The revolving door is on the record the moment it opens — flagged, dated, and cited — instead of six years and one inquiry later.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-propriety.secondary-employment",
+     "community": "did:web:kingsmere-propriety.example",
+     "timestamp": "2025-09-20T14:00:00Z",
+     "body": {
+      "declaration_id": "2025-rowntree-halcyon",
+      "official_role": "Chief Commercial Officer (in post)",
+      "engaging_party": {
+       "name": "Halcyon Capital",
+       "ref": "companies-house:0X-fictional-556"
+      },
+      "role": "paid part-time advisory",
+      "concurrent_with_public_office": true,
+      "propriety_clearance": "not-sought",
+      "authorizing_rule": "kingsmere-business-appointment-rules/v2#secondary-employment (prior clearance required)",
+      "note": "The revolving door recorded as it turns: a serving official's paid role with a firm he introduced to government, flagged as taken without the required clearance. The register makes the conflict visible and contestable; it does not decide whether it is improper, and cannot block it. executive.act.appointment covers the state appointing inward; the official's outward move is this extension — a candidate primitive if it recurs."
+     },
+     "sig": {
+      "key_id": "did:web:kingsmere-propriety.example#log-1",
+      "alg": "ed25519",
+      "value": "U2Vjb25kYXJ5RW1wbG95bWVudFJvd250cmVlTm90UmVhbENyeXB0bzAz"
+     }
+    }
+   },
+   {
+    "actor": "Lord Aldous Vane, and the Kingsmere Treasury",
+    "verb": "cast",
+    "narrative": "The pandemic arrives and Halcyon wants into an emergency financing scheme it does not qualify for. Lord Vane, a former minister, makes the case. One channel is a recorded meeting with the Treasury, and the register logs it as a formal lobbying contact naming the interest it serves. The other channel is a series of private texts and calls to the Chancellor — and those are not here, and cannot be, because no register can reach into a minister's phone. The log captures the meeting Vane was content to have recorded. It does not capture the ones he was not, which in the real affair were where the access actually ran.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-lobbying.contact",
+     "community": "did:web:kingsmere-propriety.example",
+     "timestamp": "2026-04-05T10:00:00Z",
+     "body": {
+      "contact_id": "2026-vane-treasury-0203",
+      "on_behalf_of": {
+       "name": "Halcyon Capital",
+       "ref": "companies-house:0X-fictional-556"
+      },
+      "lobbyist": "Lord Aldous Vane (former minister)",
+      "target": "Kingsmere Treasury, Chancellor's office",
+      "subject": "Access for Halcyon to the emergency corporate financing facility",
+      "channel": "recorded-meeting",
+      "authorizing_rule": "kingsmere-lobbying-transparency-rules/v1",
+      "known_gap": "Formal contact only. Private texts and calls on the same matter are off the register and cannot be compelled onto it — the Cameron pattern, and the completeness gap where much real access lives."
+     },
+     "sig": {
+      "key_id": "did:web:kingsmere-propriety.example#log-1",
+      "alg": "ed25519",
+      "value": "TG9iYnlpbmdDb250YWN0VmFuZUtpbmdzbWVyZU5vdFJlYWwwNA"
+     }
+    }
+   },
+   {
+    "actor": "The Kingsmere Standards Authority",
+    "verb": "read",
+    "narrative": "The standards committee reads the register and sees, contemporaneously, the chain that the real Boardman review needed 141 pages to reconstruct: an unpaid crown-representative role introduced by an official, that same official's later paid advisory role with the firm taken without clearance, and a former minister's formal approach on the firm's behalf. No single entry is a scandal, and the committee knows it. But laid end to end, dated and cited, the traffic through the door is a legible pattern rather than a suspicion — and it is legible now, while the scheme is live, not in an inquiry two years after the money has moved."
+   },
+   {
+    "actor": "A defender of the appointments",
+    "verb": "challenge",
+    "narrative": "Halcyon's counsel challenges the entries, and the kernel does exactly what it promises at the level of the single act: it surfaces each one's cited authority and provenance, and every challenge resolves that the act was lawful. The crown-representative appointment was within the power; the advisory role broke no criminal law; the recorded meeting followed the rules. As with Cameron, nothing was unlawful — which is precisely the point and the trap. Contesting the appointments one at a time can never reach the door, because the door is not any of them. It is the pattern they compose."
+   },
+   {
+    "actor": "The Standards Authority, and the honest ceiling",
+    "verb": "offstage",
+    "narrative": "So the pattern goes where remedies live, and meets their weakness. Whether the concurrent advisory role was improper is a propriety judgment — the standards committee's, ACOBA's real counterpart — and in the actual affair that machinery could only advise, could not enforce, and had to be told by a review to acquire teeth it still largely lacks. The register raised the question, loudly and in time; answering it is somebody else's under-powered job. And the deeper gap stands open: the informal channel. The kernel compels a logged contact to name its interest; it cannot compel the private text to be logged, and a determined actor keeps the real conversation off the register entirely — the same wall government-by-whatsapp records, at the very place access is most valuable."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it turned the revolving door from a 141-page after-the-fact reconstruction into a contemporaneous, itemised, public chain — each appointment and formal contact citing its authority and its introducer, the concurrent-office conflict flagged at the moment it opened. What it did not do is judge whether any of it was improper, block a single appointment, compel the informal texts onto the log, or lend the propriety watchdog the enforcement it lacks. It made the door visible as it turned; walking through remained lawful, the private word remained private, and stopping anyone remained the toothless committee's job. Legibility in time, and no further — which, honestly stated, is a great deal and not nearly enough."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "The revolving door works through individually-lawful acts kept off the record; a review of the real affair found no rules broken, only rules too weak. The kernel logs each appointment and formal contact with its provenance, so the door is a visible chain as it opens, not a reconstruction. But it cannot log the informal text, judge whether an appointment is improper, or strengthen rules a watchdog cannot enforce.",
+  "protection": "the revolving door on the record",
+  "protection_plain": "Whether logging appointments and formal lobbying contacts with their provenance makes the revolving door visible as it happens, not reconstructed years later. It does, for what is logged; it cannot capture the informal text, judge propriety, or strengthen rules a toothless watchdog cannot enforce.",
+  "findings": [
+   {
+    "protection": "the revolving door, contemporaneous",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The real gain, and executive.act's appointment class getting its first outing: senior appointments and crown-representative roles are logged with provenance as they happen, so a relationship that took the Boardman Review 141 pages to reconstruct is a dated, cited entry at the moment it forms. The introducer is named in the provenance field; the chain from appointment to access is legible while the scheme is live, not two years after the money has moved. Turning a forensic reconstruction into a contemporaneous record is a genuine shift in what accountability can reach."
+   },
+   {
+    "protection": "the conflict is flagged, and the class has an edge",
+    "severity": "note",
+    "doc_ref": "§6",
+    "observation": "The stress-test found the boundary of the appointment class, honestly. executive.act.appointment covers the state appointing inward — Harrow as crown representative — cleanly. But an official's outward move, Rowntree taking a paid role with a firm he introduced, is not the state exercising a power, so it is logged as an x-propriety.secondary-employment extension. Being an extension, it carries what the strict type cannot: that the role is concurrent with office and that clearance was never sought, flagged on the record as it opens. That is a candidate primitive — a native 'official's-interest' declaration — if a second case converges, exactly as executive.act itself was earned."
+   },
+   {
+    "protection": "informal access stays off the log",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The government-by-whatsapp gap, at the place it costs most. The kernel compels a logged lobbying contact to name the interest it serves — real progress over an unrecorded word — but it cannot compel the private text or call onto the register, and that informal channel is exactly where the Cameron-style access ran. Formal contact becomes legible; the corridor conversation does not. A determined lobbyist logs the meeting he was content to have recorded and keeps the rest off the book entirely, and the register can promise nothing about what was never entered."
+   },
+   {
+    "protection": "propriety is offstage, and a number is not a remedy",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "Whether a concurrent advisory role or a lobbying approach is improper is a substantive propriety judgment — the standards committee's, ACOBA's — which the kernel declines the way it declines every judgment of merit (refusal 11). And the precedent sets the ceiling exactly: Boardman found no rules broken because the rules were too weak, and the watchdog that should act could only advise. Legibility of the door does not strengthen the rules, grant the committee teeth, or block the walk-through. The kernel makes the conflict undeniable and in time; picking it up is an under-powered propriety system's job, with all its ways to fail."
+   },
+   {
+    "protection": "the single appointment is lawful",
+    "severity": "strain",
+    "doc_ref": "§2",
+    "observation": "Each act cites a lawful authority and survives challenge on the merits — the appointment within the power, the advisory role no crime, the recorded meeting within the rules — precisely as the real review found Cameron and the appointments lawful. The wrong lives in the pattern the acts compose, reachable only in aggregate: the identical structure as the procurement lane's individually-lawful awards and stop-and-search's individually-lawful stops. Provenance shows the door turning; it cannot promote 'a revolving door' into 'this appointment was unlawful', which is why the pattern needs a political and supervisory remedy the protocol does not hold."
+   }
+  ]
+ },
+ {
   "id": "stolen-phone",
   "title": "Snatched on Rua da Prata: The Strike Vote That Almost Went Ahead Without the Man Who Called It",
   "setting": "Tomás Ferreira, 31, has delivered food by e-bike in Lisbon for six years, the last three as a member of Cooperativa Pedal Livre — a 94-rider co-operative that contracts collectively with the delivery platforms. When the largest platform, Zip, cut the per-drop rate by 22 cents in June, it was Tomás who stood up at the Tuesday assembly in Arroios and demanded a strike ballot. The board agreed: a formal, verifiable vote of the whole membership, opening for casting on 29 June, closing 3 July, strike on the 8th if it carries. Two years earlier, at the co-op's enrolment ceremony, Tomás had tapped through a screen he barely read: choose three guardians in case you lose your phone. He picked his sister Marta, a nurse at Santa Maria hospital; Bruno Cardoso, his rep at the Sindicato dos Estafetas; and the Junta de Freguesia de Arroios, the municipal parish office. Any two of the three could help him recover. He never thought about it again.\n\nOn the evening of 22 June, waiting at a light on Rua da Prata with the phone in his hand — unlocked, the delivery app open — a kid on a scooter took it in one clean movement and was gone toward Terreiro do Paço. In that phone's secure enclave sits the private key behind Tomás's co-op credential: the thing that proves, without naming him, that he is one of the 94 people entitled to vote in the ballot he himself forced onto the agenda. Also in that phone: his banking app, a week of undelivered earnings, his photos. The ballot opens in seven days.\n\nThe stakes are not abstract. If Tomás cannot vote, the loudest voice for the strike is silent in its own ballot. If the thief can somehow vote as Tomás, a stranger holds a rider's voice in a decision about riders' wages. And Pedal Livre is exactly the kind of small, honest, mid-lattice community the Civic Kernel says it serves: physical enrolment at assemblies but no biometric deduplication, verifiable receipt-free ballots but no paper channel, a transparency log witnessed by the union, the co-op federation, and a university lab — and no rights guard at all, a subtraction its manifest declares in the open. What follows is seven days in which the protocol's social-recovery machinery is raced against a casting window, and wins — but only with luck, an emergency patch, and a union hardship fund the protocol knows nothing about.",
