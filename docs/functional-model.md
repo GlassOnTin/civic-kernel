@@ -3,7 +3,7 @@
 **Status: v0, exploratory — a speculative companion to the deployed thesis.** Plainly:
 this document tries to write the kernel's politics as mathematics — where a democracy
 stands, which way is better, how fast its law should move — and names every place the
-maths runs out. The deployed argument is [`index.html`](../index.html); the one-page
+maths runs out. The deployed argument is [`architecture.html`](../architecture.html); the one-page
 statement of both is [`KERNEL.md`](../KERNEL.md). What follows writes down, as precisely
 as honesty allows, what it would mean to treat the Civic Kernel not only as a thin
 service core but as a *mathematical operator* that maps a starting democracy toward an

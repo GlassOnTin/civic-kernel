@@ -180,7 +180,7 @@ links back to this list.
 
 - **`KERNEL.md`** — the distilled normative core: goals, threats, services, verbs,
   waist, refusals, measured status.
-- **`index.html`** — the architecture document.
+- **`architecture.html`** — the architecture document.
 - **`proto/`** — the first running code: the club-vote election end to end (all four
   verbs, real signatures, real Merkle log, independent verifier, committed reference
   transcript). `proto/test.sh` is the success test.

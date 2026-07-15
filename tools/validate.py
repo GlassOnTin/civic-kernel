@@ -102,7 +102,7 @@ def main() -> int:
 
     # doc_ref previews: the essay's Plainly lines and threat register, injected
     # as generated data so the page cannot drift from the essay
-    essay_html = (ROOT / "index.html").read_text()
+    essay_html = (ROOT / "architecture.html").read_text()
     plains = {}
     for m in re.finditer(r'<p class="plain"><span class="plain-label">Plainly</span>(.*?)</p>', essay_html, re.S):
         ids = re.findall(r'id="(s[0-9-]+|words)"', essay_html[: m.start()])
@@ -133,11 +133,11 @@ def main() -> int:
     # the glossary lives twice — README.md (the linkable canon) and the essay's
     # Appendix — so the two term sets must not drift
     gloss = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "README.md").read_text())
-    essay = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "index.html").read_text())
+    essay = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "architecture.html").read_text())
     if set(gloss) != set(essay) or len(gloss) != len(set(gloss)):
-        print(f"FAIL glossary parity: README {sorted(set(gloss) ^ set(essay))} out of step with index.html", file=sys.stderr)
+        print(f"FAIL glossary parity: README {sorted(set(gloss) ^ set(essay))} out of step with architecture.html", file=sys.stderr)
         return 1
-    print(f"glossary parity: {len(gloss)} terms, README.md == index.html appendix")
+    print(f"glossary parity: {len(gloss)} terms, README.md == architecture.html appendix")
 
     # KERNEL.md's §-links carry the essay's Plainly lines as hover titles —
     # same anti-drift discipline as the glossary
@@ -174,7 +174,7 @@ def main() -> int:
         return " ".join(re.sub(r"<[^>]+>", "", s).split())
     sources = {
         "https://github.com/GlassOnTin/civic-kernel": norm(re.search(r"\*\*(Rules for running a vote.*?)\*\*", (ROOT / "README.md").read_text(), re.S).group(1)),
-        "index.html": norm(re.search(r'<p class="standfirst">(.*?)</p>', essay_html, re.S).group(1)),
+        "architecture.html": norm(re.search(r'<p class="standfirst">(.*?)</p>', essay_html, re.S).group(1)),
         "scenarios.html": norm(re.search(r'<p class="lede">(.*?)</p>', (ROOT / "scenarios.html").read_text(), re.S).group(1)),
         "proto/README.md": norm(re.search(r"# proto/[^\n]*\n\n([^.]*\.)", (ROOT / "proto" / "README.md").read_text()).group(1)),
         "cast.html": norm(re.search(r'<p class="sub">([^.]*\.)', (ROOT / "cast.html").read_text(), re.S).group(1)),
