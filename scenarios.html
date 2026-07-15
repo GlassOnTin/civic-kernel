@@ -2289,6 +2289,251 @@
   ]
  },
  {
+  "id": "foi-slow-walking",
+  "title": "Nothing to Slow-Walk: The Record No One Has to Request",
+  "setting": "Esther Vale files Freedom of Information requests for a living. She runs the Northmoor Bureau, a two-person newsroom that covers the county's councils, and she has learned that the law's twenty working days is a fiction the powerful can bend at will. A request lands, the clock starts, and then: an extension 'to consider the public interest', another, a partial answer with the operative paragraph blacked out, an Information Commissioner complaint that itself takes months, a tribunal a year on. By the time the redactions are lifted the contract is delivered, the councillor has moved seats, and the story is history. She once learned that a central government unit had been circulating lists of requesters' names and their requests across Whitehall, flagging journalists and campaigners for special handling — she was, in other words, a name on a list, for the crime of asking. Transparency, in her experience, is not a right you exercise. It is a favour the holder grants on its own clock, to the people it chooses, redacted to taste.\n\nOne council in her patch works differently. Caldermoor Borough adopted a single kernel service after the procurement scandals — a witnessed, append-only transparency log — and made one promise: every decision it takes and every contract it signs lands on that log as it happens, readable by anyone, with nothing to request. This is the story of a contested waste-services contract at Caldermoor, the same shape of decision Esther has spent years prising out of other councils by force. Here she does not file anything. She reads. What that changes is real and, for once, immediate; what it leaves untouched is the reason a determined council can still keep its worst business in the dark.",
+  "threats": [
+   "T1",
+   "T12",
+   "T8"
+  ],
+  "doc_refs": [
+   "§3.4",
+   "§8",
+   "§6",
+   "§2",
+   "§1",
+   "§12",
+   "T1",
+   "T8",
+   "T12"
+  ],
+  "precedents": [
+   {
+    "event": "openDemocracy wins tribunal over Cabinet Office FOI 'Clearing House'",
+    "year": 2021,
+    "source": "openDemocracy / First-tier Tribunal (Judge Chris Hughes), June 2021",
+    "url": "https://www.opendemocracy.net/en/freedom-of-information/foi-clearing-house-michael-gove-cabinet-office-opendemocracy-wins-court-case-uk-government/",
+    "shows": "The tribunal found a 'profound lack of transparency' about a central Cabinet Office unit that screened FOI requests and circulated lists of requesters' names and requests across Whitehall — with special handling for 'news media, MPs, organised campaigns and groups' — and held the department had misled the tribunal: the applicant-blind principle broken in secret, and disclosure turned into a favour the holder controls and times."
+   },
+   {
+    "event": "Government admits unlawful failure to publish COVID contracts on time (R (Good Law Project) v SSHSC)",
+    "year": 2021,
+    "source": "Good Law Project (High Court, R (Good Law Project) v Secretary of State for Health and Social Care)",
+    "url": "https://goodlawproject.org/update/government-in-breach-of-the-law/",
+    "shows": "Government lawyers accepted it had breached the mandatory duty (reg. 50, Public Contracts Regulations 2015) to publish contract award notices within 30 days, and emails read to the court showed Number 10 asking officials to delay publishing PPE contracts to suit the news agenda — information that plainly existed, its release timed by the holder until it no longer bit."
+   },
+   {
+    "event": "Cabinet Office v Information Commissioner & Good Law Project [2025] UKFTT 306 (GRC)",
+    "year": 2025,
+    "source": "First-tier Tribunal (General Regulatory Chamber)",
+    "url": "https://becivil.co.uk/case-notes/the-cabinet-office-v-the-information-commissioner-and-the-good-law-project-2025-ukftt-306-grc-/",
+    "shows": "The tribunal dismissed the Cabinet Office's appeals against the Information Commissioner's notices requiring disclosure, in proceedings brought with the Good Law Project — the request-refuse-appeal cycle that runs for years while the information ages, the ordinary cost of transparency-by-permission."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:caldermoor.example",
+    "name": "Caldermoor Borough Council (open-record transparency pilot)",
+    "parent": "did:web:northmoor-county.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:caldermoor.example",
+    "witnesses": [
+     "did:web:northmoor-county.example",
+     "did:web:caldermoor-university.example",
+     "did:web:openrecord-trust.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-open-record",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 20,
+     "abandonment_rate": 0.0
+    },
+    {
+     "process": "foi-request-elsewhere-in-county",
+     "steps": 9,
+     "fields": 11,
+     "median_seconds": 5184000,
+     "abandonment_rate": 0.41
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:caldermoor.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Esther Vale, the Northmoor Bureau, everywhere but Caldermoor",
+    "verb": "offstage",
+    "narrative": "The backdrop is Esther's ordinary working life, and it is a real one. To learn what her other councils decide she must ask, and asking starts a clock the holder controls: twenty working days, then a 'public interest' extension, then a redacted answer, then a complaint to the Information Commissioner that itself takes months, then a tribunal a year later. When the duty is instead to publish — as it was, mandatorily, for COVID contracts within thirty days — the release is simply delayed to suit the news cycle, as the government admitted doing. And the asking is not even applicant-blind: a central unit was found circulating requesters' names across Whitehall, flagging journalists and campaigns. None of this is the kernel's to fix, and in most of the county it is untouched. Caldermoor is the exception, and the exception is instructive."
+   },
+   {
+    "actor": "Caldermoor Borough Council, environment committee",
+    "verb": "cast",
+    "narrative": "The committee resolves, over loud local objection, to outsource the borough's waste and recycling to an external operator. The moment it rises the decision is on the log: the question, the power that authorises it, the recorded division seven to five, and the count of objections considered. This is the exact species of decision Esther has spent years extracting from other councils by force of statute. Here it is a decision.closed entry, public at the instant it is taken — not a document held in a drawer pending somebody's request.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.closed",
+     "community": "did:web:caldermoor.example",
+     "timestamp": "2026-05-19T21:30:00Z",
+     "body": {
+      "decision_id": "2026-waste-services-outsourcing",
+      "question": "Outsource the borough waste-and-recycling service to an external operator under the regional framework",
+      "authorizing_rule": "caldermoor-standing-orders/v4#committee-award; local-government-act-1972:s101 delegated committee power",
+      "outcome": "approved",
+      "tally": {
+       "for": 7,
+       "against": 5,
+       "abstain": 1
+      },
+      "objections_considered": 214,
+      "note": "The resolved decision, its cited power, its recorded division and the count of objections are public the instant the committee rises — not a record held pending a request. What the log does not carry is the officers' advice and risk assessment behind the vote; that reasoning stays in FOI's domain, not the log's."
+     },
+     "sig": {
+      "key_id": "did:web:caldermoor.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVjaXNpb25DbG9zZWRXYXN0ZUNhbGRlcm1vb3JOb3RSZWFsQ3J5cHRvMDE"
+     }
+    }
+   },
+   {
+    "actor": "Caldermoor Borough Council, environment committee",
+    "verb": "cast",
+    "narrative": "A week later the contract itself is signed and lands as an executive.act: the operator named, the power cited, the route by which it was let, the value. The single document Esther would ordinarily spend eight months and a tribunal to obtain — who got the money, under what authority, for how much — is on the record at the moment of signing, carrying its own warrant, the purse's counterpart to a coercive act's cited power.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "executive.act",
+     "community": "did:web:caldermoor.example",
+     "timestamp": "2026-05-26T14:00:00Z",
+     "body": {
+      "act_class": "contract",
+      "authorizing_rule": "caldermoor-standing-orders/v4#committee-award; uk-pcr-2015:reg.33 framework call-off",
+      "issuing_authority": "Caldermoor Borough Council, environment committee",
+      "counterparty": {
+       "name": "Meridian Environmental Services Ltd",
+       "ref": "companies-house:0X-fictional-771"
+      },
+      "provenance": {
+       "route": "framework-call-off",
+       "referred_by": null,
+       "referrer_role": null
+      },
+      "value": {
+       "amount": 4200000,
+       "currency": "GBP"
+      }
+     },
+     "sig": {
+      "key_id": "did:web:caldermoor.example#log-1",
+      "alg": "ed25519",
+      "value": "RXhlY3V0aXZlQWN0V2FzdGVDb250cmFjdENhbGRlcm1vb3JOb3RSZWFsMDI"
+     }
+    }
+   },
+   {
+    "actor": "Esther Vale",
+    "verb": "read",
+    "narrative": "Esther reads both entries from the log on her phone the same afternoon the contract is signed. She files nothing. There is no twenty-day clock to start, no public-interest extension to grant, no unit to route her request through, no officer deciding what to black out, because there is no request at all. This is the whole of the read verb: the record is not a favour granted on the holder's timetable, it is a fact already published. The move the government admitted making — delaying a mandatory publication to suit the news cycle — is not available here, because a logged act publishes at the instant of signing, on nobody's press-office clock."
+   },
+   {
+    "actor": "Esther Vale, and any reader",
+    "verb": "verify",
+    "narrative": "She checks that both entries sit in the append-only log against a witnessed, co-signed head, so neither the decision nor the award can be quietly revised or withdrawn after she quotes it — disclosure now and integrity after are one property. And there is the point the Clearing House makes unavoidable: her reading left no request and no name. There is no applicant to profile, no list of journalists and campaigners to circulate, because a pull needs no requester. What FOI made an applicant-blind principle the holder could break in secret, the log makes applicant-blind by construction — there is simply no applicant.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "anchor.checkpoint",
+     "community": "did:web:caldermoor.example",
+     "timestamp": "2026-05-26T16:00:00Z",
+     "body": {
+      "checkpoint_id": "caldermoor-2026-05-26-1600",
+      "tree_size": 48213,
+      "root_hash": "sha256:7c3e9a1f5b2d8c4e6a0f3b7d9c1e5a8f2b4d6c0e3a7f9b1d5c8e2a4f6b0d3c7e",
+      "witnesses_cosigned": [
+       "did:web:northmoor-county.example",
+       "did:web:caldermoor-university.example",
+       "did:web:openrecord-trust.example"
+      ],
+      "anchored": "opentimestamps:bitcoin-mainnet",
+      "note": "The co-signed head Esther checks the decision and award against — three independent witnesses countersign it, so nothing she quotes can be revised or withdrawn afterward without the mismatch showing on any phone (§3.4, T8)."
+     },
+     "sig": {
+      "key_id": "did:web:caldermoor.example#log-1",
+      "alg": "ed25519",
+      "value": "QW5jaG9yQ2hlY2twb2ludENhbGRlcm1vb3JOb3RSZWFsMDM"
+     }
+    }
+   },
+   {
+    "actor": "Esther Vale, wanting the why",
+    "verb": "offstage",
+    "narrative": "Then the boundary bites. Esther wants what she always wants next: the officers' risk assessment, the legal advice, the drafts, the messages between the committee chair and the operator's lobbyist. None of that is on the log, and by design — the kernel records decisions and acts, not the deliberation behind them, and arguably it should not turn every internal note into a public entry. So for the reasoning she is back exactly where she started, filing an FOI to the same council, subject to the same twenty days, the same extension, the same redaction. The delay-lever is dissolved for what was decided and done, and untouched for why."
+   },
+   {
+    "actor": "A neighbouring council that logs nothing it dislikes",
+    "verb": "offstage",
+    "narrative": "And beneath the boundary is the residue, the same one government-by-whatsapp records, seen from the reader's end. The append-only log guarantees the integrity of what enters it; it can promise nothing about what is kept out. A council that does not want a decision read simply never commits it — takes it in a sidebar chat, an unminuted call, a deleted thread — and there is nothing to pull, because reading finds only what was logged. The executive.act type compels an act that is logged to cite its power; it cannot compel the act to be logged at all. Where government-by-whatsapp breaks on the write side, the reader meets the same wall from the far side of it."
+   },
+   {
+    "actor": "Esther Vale, filing the story instead of the request",
+    "verb": "read",
+    "narrative": "What the kernel did here, precisely: for the decisions Caldermoor takes and the contracts it signs, it abolished request-and-wait. Transparency stopped being a favour the holder times, an extension it grants itself, a requester it profiles, a paragraph it redacts — and became a pull anyone can make, unnamed, undelayable and unrevisable, the instant the act occurs. What it did not do is reach the reasoning FOI also covers, force a single thing onto the log, or change the regime one borough over, where Esther is still a name on a list, still waiting. It moved one clock she could never win to zero — for the part of the record it holds."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "FOI lets the holder control the tap: miss the deadline, extend it 'in the public interest', run the clock until the answer no longer bites. The kernel publishes each decision and act to an append-only log anyone reads with no request and no name — nothing to slow-walk, and no requester to profile. But it holds acts, not the reasoning behind them; what is never logged still needs a request that still stalls.",
+  "protection": "transparency without a request",
+  "protection_plain": "Whether a record anyone can read without a request escapes the slow-walk — the missed deadline, the public-interest extension, the unit that profiles requesters — that a holder uses to delay disclosure until it stops mattering. True for the acts it logs; not the reasoning, nor what is kept off it.",
+  "findings": [
+   {
+    "protection": "the delay-lever is gone for what is logged",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The first scenario in the corpus to centre the read verb, and its gain is real and, for the class it covers, total. Reading a logged decision or award needs no request, so every instrument of the slow-walk simply has nothing to act on: no twenty-day clock to blow, no 'public interest' extension to self-grant, no Clearing House to route through, no officer timing the release. The wrong the government admitted — delaying a mandatory publication to suit the news cycle — is structurally impossible for a logged act, which publishes at signing on no one's press timetable. Transparency-by-permission becomes transparency-by-construction for what the log holds."
+   },
+   {
+    "protection": "no requester, so no requester to profile",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "A fresh result the read verb produces almost as a side effect. The tribunal condemned the Cabinet Office's Clearing House for circulating requesters' names and requests and special-handling journalists, MPs and campaigns — a breach of FOI's applicant-blind principle carried out in secret. A pull-based record has no applicant to be non-blind about: reading leaves no request and no identity, so there is no list to compile and no name to flag. Where FOI made applicant-blindness a policy the holder could quietly break, the log makes it a structural fact — there is simply no applicant."
+   },
+   {
+    "protection": "published is also un-revisable",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "Unlike a redacted PDF that can be quietly reissued with different redactions, a logged entry sits in a witnessed append-only structure: once it is read it cannot be edited or withdrawn without the arithmetic breaking in every copy, and any phone can tell (T8). Disclosure-in-time and integrity-after are the same property here, where under FOI they are two separate fights — first to get the document, then to trust the version you got is the one that existed."
+   },
+   {
+    "protection": "the log's reach is a subset of FOI's",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The record holds decisions and acts, not the advice, drafts, risk assessments and correspondence behind them — which the kernel does not log, and mostly should not: turning every internal note into a public entry would be its own harm. But it means FOI remains the only lever for the reasoning, and the slow-walk over that reasoning is entirely untouched. The kernel dissolves delay for what was decided and done, not for why it was. §6's discipline softens this only a little: the log's scope is declared, so a reader knows what it does not hold — but declared absence is knowledge of a gap, not access through it."
+   },
+   {
+    "protection": "what is never logged cannot be read",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The deeper residue is government-by-whatsapp from the reader's end. Read finds only what was committed, and the executive.act type compels a logged act to cite its power but cannot compel the act to be logged at all. A council set on opacity keeps its worst business off the record — the sidebar chat, the unminuted call, the deleted thread — and there is nothing to pull. The append-only log guarantees the integrity of what enters it and can promise nothing about what is withheld from it. Marked a strain, not a break, because this scenario's claim is the narrower one — no slow-walk for what is logged — and that holds; the break belongs to the write side, where government-by-whatsapp already carries it."
+   }
+  ]
+ },
+ {
   "id": "government-by-whatsapp",
   "title": "The Award That Kept Its Reasons Off the Record",
   "setting": "The Borough of Ashcombe runs the full kernel. After a neighbouring council's records scandal it adopted everything — a witnessed transparency log, two anchors, the whole reference profile — on one promise to its residents: the decisions that govern you land on a record nobody can quietly change. In February 2026 the river takes the Riverside ward, and the council must award a 4.2 million pound emergency clean-up and temporary-housing contract in days, not the usual months. Deputy leader Councillor Damian Roe and two officers settle who gets it in a WhatsApp group set to clear its messages after twenty-four hours. The winner is Tidewell Facilities Ltd, whose director once ran a company with Roe, at half again the next-lowest of three bids. Into the group, before the vote is minuted anywhere, an officer types the quiet part: 'delete after — if anyone FOIs it we can say it was captured.'\n\nWhat the kernel receives is impeccable. The procurement is opened and closed on the transparency log, each entry citing the emergency power the law actually provides, co-signed overnight by three neighbouring witnesses and pinned to two anchors by dawn — a record that, thanks to the very mechanism that defeated Riverton's rewrite, can now never be altered by anyone, the council included. That is the trap, and it is the exact inverse of records-rewrite. There, an administration tried to change what the log already held, and failed at the witnesses, at the phones, and at the anchor. Here nobody changes anything. The decision that mattered simply never enters the log, and the reasons that would show the favouritism are auto-deleted at source that same night. A year on, when a reporter and the borough's own auditor come asking why Tidewell, the log answers every question about what was decided — the power, the sum, the supplier, the witnessed timeline — perfectly and unrewritably, and nothing at all about why. Because the why was engineered never to be written down.",
