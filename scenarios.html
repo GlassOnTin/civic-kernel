@@ -7883,6 +7883,254 @@
   ]
  },
  {
+  "id": "regulator-inaction",
+  "title": "The Prosecutions That Never Came: Putting a Regulator's Silence on the Record",
+  "setting": "The River Nore runs brown after rain, and often enough after none. Hesketh Rowe swims it anyway, most mornings, and has kept a phone log of what he finds for three years: the grey plume below the Wend Water outfall on a dry August day, when a storm overflow has no lawful business discharging at all; the dead crayfish; the smell. He reports each one. The reports go into a void. The Noreland Environment Board — the regional regulator, chronically underfunded, its enforcement team a third the size it was a decade ago — logs them somewhere, does nothing he can see, and moves on. There is no letter, no decision, no refusal he can appeal, because a regulator that declines to act produces nothing to appeal against. Inaction is not a decision you can take to a tribunal; it is the absence of one.\n\nThis is the shape of the real scandal. In the actual England, the Environment Agency completed not a single prosecution of a water company for pollution occurring in a five-year window during which almost two million sewage discharges were recorded; serious pollution incidents rose rather than fell; and the pattern surfaced not from the regulator but from a Panorama investigation and, later, the Office for Environmental Protection finding that the Agency and Ofwat may have broken the law by failing to regulate at all. The forbearance was total and, for years, invisible.\n\nNoreland is the one place that works differently. The Board runs a single kernel service — a witnessed transparency log — and made one binding commitment on it: every pollution report it receives is logged, and every disposition, including every decision to do nothing, is logged too, citing the reason. This scenario is what that does to a regulator's silence, and what it still cannot do to the silence's cause.",
+  "threats": [
+   "T1",
+   "T12"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§1",
+   "§2",
+   "§12",
+   "T1",
+   "T12"
+  ],
+  "precedents": [
+   {
+    "event": "Office for Environmental Protection: possible failures by Defra, the Environment Agency and Ofwat over sewage",
+    "year": 2023,
+    "source": "Office for Environmental Protection",
+    "url": "https://www.theoep.org.uk/news/oep-identifies-possible-failures-comply-environmental-law-relation-regulatory-oversight",
+    "shows": "The environment regulators' own statutory watchdog found the Environment Agency, Ofwat and Defra may have failed to comply with the law in overseeing combined sewer overflows — regulatory inaction identified after the fact, by a separate body, years into the discharges rather than by the regulator disclosing it."
+   },
+   {
+    "event": "Good Law Project — the sewage scandal: years of Environment Agency and Ofwat inaction",
+    "year": 2023,
+    "source": "Good Law Project",
+    "url": "https://goodlawproject.org/the-sewage-scandal-and-what-we-are-doing-about-it/",
+    "shows": "Chronic under-enforcement by the Environment Agency and Ofwat, both underfunded, left little to deter water companies from dumping sewage — the default was non-enforcement, and the pattern had to be reconstructed by campaigners and litigators rather than read off any regulator's record."
+   },
+   {
+    "event": "Environment Agency: no completed water-pollution prosecution in five years despite ~2 million discharges",
+    "year": 2024,
+    "source": "Channel 4 News investigation / Environment Agency performance data",
+    "url": "https://channel4news.substack.com/p/exclusive-how-polluting-water-companies",
+    "shows": "Analysis found the Environment Agency completed no prosecution of a water company for pollution occurring in the previous five years despite almost two million sewage discharges, while serious pollution incidents rose to 47 in 2023 — a regulator's forbearance quantified only by outside investigation, long after the fact, because a non-prosecution leaves no record of its own."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:noreland-environment.example",
+    "name": "Noreland Environment Board (enforcement-transparency pilot)",
+    "parent": "did:web:noreland.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:noreland-environment.example",
+    "witnesses": [
+     "did:web:noreland-audit.example",
+     "did:web:nore-rivers-trust.example",
+     "did:web:noreland-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-enforcement-register",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 25,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:noreland-environment.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "The Environment Agency, and the void a report falls into",
+    "verb": "offstage",
+    "narrative": "The backdrop is the real one, and it is not a bad decision but a missing one. Whether any given spill warrants prosecution — cost, evidence, priority, the choice to accept an enforcement undertaking instead — is regulatory discretion, and the kernel no more seizes it than it overrules a judge (refusal 11). What the real Environment Agency shows is not a wrong verdict but an absent one: no completed water-pollution prosecution across five years and two million discharges, surfaced not by the Agency but by a broadcaster and, later, the Office for Environmental Protection. The kernel cannot make a regulator enforce. The question this scenario asks is narrower: can it stop the not-enforcing from being invisible?"
+   },
+   {
+    "actor": "Noreland Environment Board",
+    "verb": "cast",
+    "narrative": "The Board opens its enforcement register on the log with a single binding commitment: every pollution report received will be logged, and every disposition of it — investigate, prosecute, accept an undertaking, or take no action — will be logged too, citing the rule and reason. The commitment itself is the first entry. Nothing here compels the Board to prosecute anyone; it compels only that whatever the Board decides, including deciding to do nothing, leaves a cited, dated, public trace.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:noreland-environment.example",
+     "timestamp": "2026-04-01T09:00:00Z",
+     "body": {
+      "decision_id": "2026-enforcement-register",
+      "decision_class": "enforcement-transparency-commitment",
+      "authorizing_rule": "environment-act-2021:s.22 duty to have regard to enforcement; noreland-enforcement-policy/v2",
+      "issuing_authority": "Noreland Environment Board",
+      "commitment": "Every report logged; every disposition logged and reasoned, including no-action; quarterly aggregate published",
+      "note": "The Board keeps its discretion whether to enforce. What it gives up is the ability to not-enforce silently: a no-action disposition is a logged process.denial-trace, not an absence."
+     },
+     "sig": {
+      "key_id": "did:web:noreland-environment.example#log-1",
+      "alg": "ed25519",
+      "value": "UmVnaXN0ZXJPcGVuZWROb3JlbGFuZE5vdFJlYWxDcnlwdG8wMQ"
+     }
+    }
+   },
+   {
+    "actor": "Hesketh Rowe, river-watch volunteer, and the Board's enforcement office",
+    "verb": "cast",
+    "narrative": "Hesketh reports a dry-weather discharge from the Wend Water outfall at Wells Reach — a storm overflow running with no storm, which is unlawful on its face. Two weeks later the Board disposes of it, and the disposition is no-action: an enforcement undertaking accepted in lieu of prosecution, investigative resource triaged elsewhere. In the real world this is where the report vanished. Here it lands as a process.denial-trace: the non-action itself is now an artifact, citing the rule it rests on and the reason it was taken, and carrying an appeal path. The Board did nothing — and for the first time the doing-nothing is a record.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:noreland-environment.example",
+     "timestamp": "2026-06-05T14:00:00Z",
+     "body": {
+      "disposition_id": "2026-nore-0417",
+      "report_ref": "citizen-report:2026-nore-0417",
+      "report_summary": "Dry-weather discharge, Wend Water outfall, Wells Reach",
+      "reported_on": "2026-05-22",
+      "disposition": "no-action",
+      "authorizing_rule": "regulators-code:proportionality; noreland-enforcement-policy/v2#undertaking-route",
+      "reason": "Enforcement undertaking accepted in lieu of prosecution; investigative resource triaged to higher-tier incidents",
+      "appeal_trace": "did:web:noreland-environment.example/appeals/2026-nore-0417",
+      "note": "A decision not to act, made appealable. Where an unlogged regulator's forbearance leaves nothing to challenge, this cites its reason and can be contested — the non-event given an artifact (§8, §3.4)."
+     },
+     "sig": {
+      "key_id": "did:web:noreland-environment.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VOb3JlMDQxN05vdFJlYWxDcnlwdG8wMg"
+     }
+    }
+   },
+   {
+    "actor": "Noreland Environment Board, a fortnight later",
+    "verb": "cast",
+    "narrative": "A second report — a permit-breach discharge above the treatment works — is disposed of the same way: no action, an undertaking accepted, resource triage cited. On its own it is a defensible call; enforcement undertakings are a lawful tool and the Board is genuinely under-resourced. But it is the second identical trace in a fortnight, and the traces are accumulating into a shape. What was a series of silent non-events is becoming a countable series of cited ones.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:noreland-environment.example",
+     "timestamp": "2026-06-19T11:00:00Z",
+     "body": {
+      "disposition_id": "2026-nore-0463",
+      "report_ref": "citizen-report:2026-nore-0463",
+      "report_summary": "Permit-breach discharge above Nore treatment works",
+      "reported_on": "2026-06-08",
+      "disposition": "no-action",
+      "authorizing_rule": "regulators-code:proportionality; noreland-enforcement-policy/v2#undertaking-route",
+      "reason": "Enforcement undertaking offered and accepted; prosecution assessed as not a proportionate use of limited investigative resource",
+      "appeal_trace": "did:web:noreland-environment.example/appeals/2026-nore-0463"
+     },
+     "sig": {
+      "key_id": "did:web:noreland-environment.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VOb3JlMDQ2M05vdFJlYWxDcnlwdG8wMw"
+     }
+    }
+   },
+   {
+    "actor": "Noreland Environment Board, transparency office",
+    "verb": "cast",
+    "narrative": "At the quarter's close the Board must publish what the dispositions add up to, and the number is its own: 1,840 reports received, 71 investigations opened, 12 undertakings accepted, zero prosecutions brought. This is §8's measure-the-process turned on a regulator's forbearance — the aggregate the Office for Environmental Protection and a broadcaster needed years and a statutory inquiry to establish, produced by the Board itself in ninety days, anonymous, signed and witnessed. 'We enforce where it is appropriate' stops being an assertion and becomes a rate: appropriate, apparently, almost never.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:noreland-environment.example",
+     "timestamp": "2026-07-01T09:00:00Z",
+     "body": {
+      "process": "pollution-report-enforcement",
+      "period": "2026-Q2",
+      "unit": "dispositions of pollution reports",
+      "reports_received": 1840,
+      "investigations_opened": 71,
+      "undertakings_accepted": 12,
+      "prosecutions_brought": 0,
+      "no_action": 1757,
+      "note": "Anonymous aggregate over the quarter's dispositions; no reporter or officer identifiers. Reports of dry-weather and permit-breach discharges: 1,840; prosecutions: 0. Measure the process, never the person (§8). The pattern — near-total forbearance — is the Board's own signed number, not a journalist's later reconstruction."
+     },
+     "sig": {
+      "key_id": "did:web:noreland-environment.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29zdEFnZ3JlZ2F0ZUVuZm9yY2VtZW50Tm9yZU5vdFJlYWwwNA"
+     }
+    }
+   },
+   {
+    "actor": "Hesketh Rowe, and the Nore Rivers Trust",
+    "verb": "read",
+    "narrative": "Hesketh reads the aggregate and his own report's denial-trace inside it, and verifies both against a witnessed head so the figure cannot be quietly revised after the Trust runs the story. For the first time the thing he always knew — that reporting was shouting into a void — is not a feeling but a documented rate, per-report and in total. The void had a shape all along; the log drew it. He has gained no power to compel a prosecution. The Board has lost the shelter that inaction always had: that a non-decision, unlike a decision, could not be pointed at."
+   },
+   {
+    "actor": "Hesketh Rowe, contesting one disposition",
+    "verb": "challenge",
+    "narrative": "Hesketh appeals the Wells Reach no-action through its denial-trace. The kernel does exactly what it promises at the level of the single act: it surfaces the cited rule and reason, and the challenge resolves that this disposition was within the Board's lawful discretion — undertakings are a permitted tool, the resource pressure is real. The individual appeal fails, and on the merits it should. This is the same wall the VIP-lane bidder met and Grace Bello met over stop-and-search: the wrong is the pattern of forbearance, and contesting the non-actions one at a time can never reach it. Only the aggregate can."
+   },
+   {
+    "actor": "The Board, the Office for Environmental Protection, and the honest ceiling",
+    "verb": "offstage",
+    "narrative": "So the number goes where remedies live, and meets their limits. On the strength of the signed rate the Rivers Trust petitions the Office for Environmental Protection, which can find the Board failed its duty to enforce — and, as in the real case, the finding is a finding: the discharges continue, no undertaking is unwound, the Nore is no cleaner for being well-documented. And two refusals bound the kernel here at once. It will not decide whether any spill deserved prosecution — that is the substantive judgement it always declines. And a regulator set on hiding its inaction can still log fewer reports as 'received' in the first place: the type compels a logged disposition to cite its reason, never compels the report to be logged at all — government-by-whatsapp's gap, one rung upstream."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it gave inaction an artifact. A regulator's forbearance — normally invisible because a non-decision produces no letter to appeal, no record to request, no act to review — became a per-report denial-trace and a signed quarterly rate: itemised, cited, appealable, contemporaneous, where the real thing took a broadcaster and a watchdog years to expose. What it did not do is compel one prosecution, judge whether any discharge deserved one, unwind a single undertaking, or clean the river. It converted a silence into a number. Turning that number into enforcement is an OEP referral, a judicial review, an election — outside the protocol, with all the ordinary ways to fail."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "A regulator that will not act leaves nothing to challenge — a non-prosecution is a non-event, invisible until a watchdog finds it years late, as the Environment Agency's five-year prosecution gap was. The kernel gives forbearance an artifact: each no-action is logged, cites its reason, and the quarter's enforcement rate is the Board's own signed number. It cannot make the Board prosecute, or clean the river.",
+  "protection": "making inaction legible",
+  "protection_plain": "Whether logging a regulator's dispositions — every decision not to act, each citing its reason — makes forbearance countable, where an unlogged non-decision leaves nothing to appeal. It does; but the kernel cannot compel enforcement, judge a case, or make the number a remedy.",
+  "findings": [
+   {
+    "protection": "inaction gets an artifact",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The fresh result, and a genuine one: a decision to do nothing normally produces nothing — no letter, no reviewable act, no record to request — which is exactly why a regulator's forbearance is so hard to challenge and took a broadcaster and the Office for Environmental Protection years to expose in the real case. The kernel logs each no-action as a cited, dated, appealable process.denial-trace, so forbearance is itemised rather than absent. This is the first scenario in the corpus to make the absence of action legible, not merely the presence of a bad one — the non-event given a handle."
+   },
+   {
+    "protection": "the rate is the regulator's own number",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "Measure-the-process (§8) turned on enforcement: 1,840 reports, zero prosecutions, published by the Board itself, anonymous and witnessed. The claim 'we enforce where appropriate' becomes a rate anyone can read, and the deniability collapses when the rate is near zero. Where the Environment Agency's five-year prosecution gap surfaced only through a Panorama investigation and a statutory watchdog, the Board's own quarterly aggregate carries it contemporaneously. Legibility of forbearance, in ninety days rather than years, is real progress that did not exist before."
+   },
+   {
+    "protection": "a number is not a remedy",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The same limit the procurement lane hit, confirmed by the precedent: the Office for Environmental Protection can find the regulators failed to comply with the law, and the discharges continue regardless. A signed rate of near-total forbearance is undeniable and unremediable at once. Picking it up is an OEP referral, a judicial review, a change of government or of the regulator's budget — all outside the protocol, all with the ordinary ways to fail. The kernel made the silence loud; it cannot make the river clean, and it would be dishonest to imply the number does more than document the failure."
+   },
+   {
+    "protection": "the single non-action is lawful",
+    "severity": "strain",
+    "doc_ref": "§2",
+    "observation": "Each disposition cites a lawful basis — enforcement undertakings are a permitted tool, the resource pressure is genuine — and survives challenge on the merits, as Hesketh's appeal does and should. The wrong is the pattern of forbearance, appealable one non-action at a time and therefore never reached that way: the identical structure as the VIP lane's individually-lawful awards and stop-and-search's individually-lawful stops. The denial-trace makes the discretion legible; it cannot promote 'a regulator that rarely enforces' into 'this decision not to enforce was unlawful', which is precisely why the pattern needs a political or supervisory remedy the kernel does not hold."
+   },
+   {
+    "protection": "whether to enforce is offstage",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Two refusals bound this at once. Whether any given spill merits prosecution is substantive regulatory judgement, which the kernel declines the way it declines to overrule a court (refusal 11) — it can make the exercise and non-exercise of discretion legible, never second-guess it. And beneath that is government-by-whatsapp one rung upstream: the type compels a logged disposition to cite its reason, but cannot compel the report to be logged as 'received' at all. A board set on hiding its inaction under-records the intake, and the denominator quietly shrinks. The kernel guarantees the integrity of the dispositions it holds and can promise nothing about the reports kept out of the register — the completeness gap, moved from the decision to the intake."
+   }
+  ]
+ },
+ {
   "id": "stolen-phone",
   "title": "Snatched on Rua da Prata: The Strike Vote That Almost Went Ahead Without the Man Who Called It",
   "setting": "Tomás Ferreira, 31, has delivered food by e-bike in Lisbon for six years, the last three as a member of Cooperativa Pedal Livre — a 94-rider co-operative that contracts collectively with the delivery platforms. When the largest platform, Zip, cut the per-drop rate by 22 cents in June, it was Tomás who stood up at the Tuesday assembly in Arroios and demanded a strike ballot. The board agreed: a formal, verifiable vote of the whole membership, opening for casting on 29 June, closing 3 July, strike on the 8th if it carries. Two years earlier, at the co-op's enrolment ceremony, Tomás had tapped through a screen he barely read: choose three guardians in case you lose your phone. He picked his sister Marta, a nurse at Santa Maria hospital; Bruno Cardoso, his rep at the Sindicato dos Estafetas; and the Junta de Freguesia de Arroios, the municipal parish office. Any two of the three could help him recover. He never thought about it again.\n\nOn the evening of 22 June, waiting at a light on Rua da Prata with the phone in his hand — unlocked, the delivery app open — a kid on a scooter took it in one clean movement and was gone toward Terreiro do Paço. In that phone's secure enclave sits the private key behind Tomás's co-op credential: the thing that proves, without naming him, that he is one of the 94 people entitled to vote in the ballot he himself forced onto the agenda. Also in that phone: his banking app, a week of undelivered earnings, his photos. The ballot opens in seven days.\n\nThe stakes are not abstract. If Tomás cannot vote, the loudest voice for the strike is silent in its own ballot. If the thief can somehow vote as Tomás, a stranger holds a rider's voice in a decision about riders' wages. And Pedal Livre is exactly the kind of small, honest, mid-lattice community the Civic Kernel says it serves: physical enrolment at assemblies but no biometric deduplication, verifiable receipt-free ballots but no paper channel, a transparency log witnessed by the union, the co-op federation, and a university lab — and no rights guard at all, a subtraction its manifest declares in the open. What follows is seven days in which the protocol's social-recovery machinery is raced against a casting window, and wins — but only with luck, an emergency patch, and a union hardship fund the protocol knows nothing about.",
