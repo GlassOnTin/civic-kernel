@@ -1,0 +1,259 @@
+{
+ "id": "party-finance-dark-money",
+ "title": "The Donor Behind the Donor: What a Clean-Money Log Can and Cannot See",
+ "setting": "The Commonweal Party is small, new, and built its whole identity on one promise: it takes no money it will not name. Where the established parties file their donations late, in bulk, to a regulator whose largest fine is a rounding error to a serious donor, Commonweal runs its finances on a witnessed kernel transparency log — every gift posted as it arrives, each carrying the source it came from. The pledge is the pitch. Petra Vance, who has spent a decade chasing dark money for a small investigative outlet, is watching to see whether it survives contact with the people who make a living hiding where political money comes from.\n\nIt is tested in May, by a gift of a hundred and twenty thousand pounds from the Albany Forum. The Forum is an unincorporated association — the same legal form that let a body with no website, no accounts and no disclosed donors route four hundred and thirty-five thousand pounds to a Brexit campaign and never say whose money it was. In the ordinary regime, more than sixty million pounds has flowed into British politics this way in two decades, foreign money among it, perfectly legally. Commonweal's log will do something the ordinary regime does not: post the Albany gift the day it lands, name the Forum as its source, and — the part that matters — mark on its own record that it cannot see past the Forum to whoever stands behind it. This scenario is about how much that honesty is worth, and exactly where it stops: at the intermediary the kernel can record but cannot compel.",
+ "threats": [
+  "T1",
+  "T10"
+ ],
+ "doc_refs": [
+  "§3.4",
+  "§8",
+  "§6",
+  "§1",
+  "§2",
+  "§12",
+  "T1",
+  "T10"
+ ],
+ "precedents": [
+  {
+   "event": "The Constitutional Research Council's £435,000 'dark money' donation to the DUP",
+   "year": 2018,
+   "source": "openDemocracy (dark-money investigations)",
+   "url": "https://www.opendemocracy.net/en/dark-money-investigations/revealed-dirty-secrets-of-dup-s-dark-money-brexit-donor/",
+   "shows": "An unincorporated association chaired by Richard Cook — no website, no published accounts, no disclosed donors — routed £435,000 to the DUP's Leave campaign, and under the secrecy rules then in force neither had to reveal the original source: money laundered into politics through an intermediary that is itself the source of record."
+  },
+  {
+   "event": "Over £60m channelled into UK politics through unincorporated associations",
+   "year": 2024,
+   "source": "Electoral Reform Society / openDemocracy",
+   "url": "https://electoral-reform.org.uk/what-are-the-political-donation-rules-in-the-uk/",
+   "shows": "Unincorporated associations need no formal structure, file no accounts and need not say where their money comes from; individuals giving to them need not be registered, and foreign money can lawfully be channelled through them — more than £60m over two decades, opaque by design at the layer above the reported donor."
+  },
+  {
+   "event": "Electoral Commission enforcement: maximum fine £20,000, 'the cost of doing business'",
+   "year": 2024,
+   "source": "Spotlight on Corruption / Electoral Reform Society",
+   "url": "https://www.spotlightcorruption.org/new-representation-of-the-people-bill/",
+   "shows": "The Commission's civil sanctions are capped at £20,000 per offence — negligible to a serious donor — and it reports donations late and in bulk; multiple committees have called the regime under-enforced, so timely disclosure and real deterrence are precisely what the ordinary system does not deliver."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:commonweal-party.example",
+   "name": "The Commonweal Party (clean-money transparency pilot)",
+   "parent": "did:web:commonweal.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:commonweal-party.example",
+   "witnesses": [
+    "did:web:commonweal-audit.example",
+    "did:web:electoral-transparency-trust.example",
+    "did:web:commonweal-university.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "read-the-donation-register",
+    "steps": 1,
+    "fields": 0,
+    "median_seconds": 20,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:commonweal-party.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The dark-money regime, and the donor no one can name",
+   "verb": "offstage",
+   "narrative": "The backdrop is the real one, and its wrong is not a bad donation but an unseeable one. Whether foreign or corporate money should be allowed into politics, and whether an intermediary should be forced to name its backers, is law and enforcement — the kernel decides none of it (refusal 11). What the real regime shows is a structural blindness: a body with no accounts routed £435,000 to a campaign and never had to say whose money it was, and £60m has moved this way in two decades, reported late to a regulator whose largest fine is a cost of doing business. The kernel cannot fix the regime. It can only offer a party that wants to be clean a way to prove it — and this scenario is as much about the limit of that offer as its value."
+  },
+  {
+   "actor": "The Commonweal Party, treasury",
+   "verb": "cast",
+   "narrative": "Commonweal opens its donation register on the log with its clean-money pledge: every gift posted as received, each citing an immediate source and, where the party can establish it, the ultimate source behind that. The waist has no native entry for a donation — it grew one for the state's spending (executive.act) but not for money flowing into politics — so the party logs contributions as an x-finance.contribution extension, and says so. The commitment itself is the first entry: whatever Commonweal takes, it will name, or mark plainly that it cannot.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:commonweal-party.example",
+    "timestamp": "2026-04-01T09:00:00Z",
+    "body": {
+     "decision_id": "2026-clean-money-register",
+     "decision_class": "donation-transparency-commitment",
+     "authorizing_rule": "commonweal-clean-money-pledge/v1; ppera-2000:part-IV permissibility",
+     "issuing_authority": "The Commonweal Party",
+     "commitment": "Every donation posted as received, citing immediate and (where establishable) ultimate source; quarterly dark-share aggregate published",
+     "extension_note": "Contributions logged as x-finance.contribution — the waist has no native donation type. It is the inbound-money twin of executive.act (state spending, with provenance); a candidate core primitive if a second such case converges.",
+     "note": "The pledge binds the party's own record, not anyone else's. It cannot compel a donor, an intermediary, or another party to log anything."
+    },
+    "sig": {
+     "key_id": "did:web:commonweal-party.example#log-1",
+     "alg": "ed25519",
+     "value": "Q2xlYW5Nb25leVJlZ2lzdGVyQ29tbW9ud2VhbE5vdFJlYWwwMQ"
+    }
+   }
+  },
+  {
+   "actor": "The Commonweal Party, treasury",
+   "verb": "cast",
+   "narrative": "A clean gift lands and is logged the same hour: eight thousand pounds from a named local supporter, source herself, permissibility checked. This is the easy case and the log handles it exactly as promised — public, immediate, sourced, witnessed. No delayed bulk filing, no regulator to wait on. For a party whose donors are who they say they are, the log is a straightforward proof of cleanliness.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-finance.contribution",
+    "community": "did:web:commonweal-party.example",
+    "timestamp": "2026-04-20T10:00:00Z",
+    "body": {
+     "contribution_id": "2026-q2-0198",
+     "amount": {
+      "value": 8000,
+      "currency": "GBP"
+     },
+     "received_on": "2026-04-20",
+     "immediate_source": {
+      "name": "A. Reyes",
+      "type": "individual-on-electoral-register",
+      "ref": "permissible-donor:verified"
+     },
+     "ultimate_source": "same-as-immediate",
+     "authorizing_rule": "commonweal-clean-money-pledge/v1; ppera-2000:s.54 permissible donor"
+    },
+    "sig": {
+     "key_id": "did:web:commonweal-party.example#log-1",
+     "alg": "ed25519",
+     "value": "Q29udHJpYnV0aW9uQ2xlYW5SZXllc05vdFJlYWxDcnlwdG8wMg"
+    }
+   }
+  },
+  {
+   "actor": "The Commonweal Party, treasury, and the Albany Forum",
+   "verb": "cast",
+   "narrative": "Then the hard case arrives: a hundred and twenty thousand pounds from the Albany Forum, an unincorporated association. The party logs it honestly, and the honesty is the whole point of what the kernel can and cannot do here. The immediate source is named — the Albany Forum — and the permissibility box is lawfully ticked, because the Forum is a permissible donor. But the ultimate source is marked, on the party's own signed record, as undisclosed-at-intermediary: the Forum files no accounts and will not say whose money it is, and Commonweal genuinely does not know. The darkness is not hidden; it is flagged. But it is not dispelled, because the layer that holds the secret is one the log cannot reach.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-finance.contribution",
+    "community": "did:web:commonweal-party.example",
+    "timestamp": "2026-05-14T15:00:00Z",
+    "body": {
+     "contribution_id": "2026-q2-0412",
+     "amount": {
+      "value": 120000,
+      "currency": "GBP"
+     },
+     "received_on": "2026-05-14",
+     "immediate_source": {
+      "name": "The Albany Forum",
+      "type": "unincorporated-association",
+      "ref": "no-published-accounts; below-registration-threshold-for-own-donors"
+     },
+     "ultimate_source": "undisclosed-at-intermediary",
+     "attestation": "The party attests the immediate source only. The Albany Forum files no accounts and has not disclosed its backers; the party cannot see past it and records that it cannot.",
+     "authorizing_rule": "commonweal-clean-money-pledge/v1; ppera-2000:s.54 permissible donor (immediate donor permissible)"
+    },
+    "sig": {
+     "key_id": "did:web:commonweal-party.example#log-1",
+     "alg": "ed25519",
+     "value": "Q29udHJpYnV0aW9uQWxiYW55Rm9ydW1Ob3RSZWFsQ3J5cHRvMDM"
+    }
+   }
+  },
+  {
+   "actor": "Petra Vance, dark-money reporter",
+   "verb": "read",
+   "narrative": "Petra reads the Albany entry the afternoon it posts — not months later in a bulk regulatory filing, and not after an enforcement complaint that would end in a fine smaller than the donation. Two things are true at once, and the log makes both plain. She can see, in real time, that a hundred and twenty thousand pounds of Commonweal's money came through an opaque intermediary, flagged by the party as unpierceable — more than the ordinary regime ever gives her, and sooner. And she still cannot see who is behind the Albany Forum, because that name was never the party's to record. The log surfaced the launder. It did not surface the launderer."
+  },
+  {
+   "actor": "Petra Vance, pushing on the wall",
+   "verb": "challenge",
+   "narrative": "She tests whether the log can be made to go further. It cannot, and the reason is exact. The kernel records what the party can attest; it cannot compel the Albany Forum — which runs no kernel, adopted no pledge, files no accounts — to disclose its backers. Piercing the intermediary is a compelled-disclosure order served on the Forum, an act of law and enforcement that lives entirely outside the protocol, and is precisely what the underfunded, weakly-sanctioned real regulator struggles to do. The log converted an invisible dark donation into a visible flagged one. Turning the flag into a name is somebody else's power."
+  },
+  {
+   "actor": "The Commonweal Party, treasury",
+   "verb": "cast",
+   "narrative": "At the quarter's close the party publishes what its sources add up to — its dark share, made a number: the proportion of funds from named ultimate sources against the proportion from intermediaries it could not see past. For a genuinely clean party this is a proof it could never give before; for a party quietly reliant on opaque money, the same metric would be a confession. Either way the reliance stops being an assertion and becomes a signed, witnessed figure. This is §8's measure-the-process turned on the money coming in, the receipts twin of the procurement lane's measure of the money going out.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:commonweal-party.example",
+    "timestamp": "2026-07-01T09:00:00Z",
+    "body": {
+     "process": "donation-provenance",
+     "period": "2026-Q2",
+     "unit": "share of donated funds by source transparency",
+     "total_gbp": 410000,
+     "named_ultimate_source_gbp": 290000,
+     "intermediary_undisclosed_gbp": 120000,
+     "dark_share": 0.29,
+     "note": "Anonymous aggregate over the quarter's contributions. The 'dark share' is funds whose ultimate source the party could not establish — money through unpierceable intermediaries. Measure the process, never the person (§8): a party's reliance on opaque money as its own signed number, not a journalist's later estimate."
+    },
+    "sig": {
+     "key_id": "did:web:commonweal-party.example#log-1",
+     "alg": "ed25519",
+     "value": "RGFya1NoYXJlQWdncmVnYXRlQ29tbW9ud2VhbE5vdFJlYWwwNA"
+    }
+   }
+  },
+  {
+   "actor": "The party, the regulator, and the honest ceiling",
+   "verb": "offstage",
+   "narrative": "So the value and the limit sit side by side. The kernel gave a party that wanted to be clean a way to prove it in real time, and gave a reliant one nowhere to hide its reliance — but only for parties that adopt it. The £435,000 that reached a real campaign passed through no log and would not have: a party built on dark money does not run a clean-money register, and the kernel cannot compel one, any more than it can compel the Albany Forum to name its donors or decide that the Forum's money is illegitimate. Two things stay resolutely offstage: whether a given donation should be permitted, which is law, and who stands behind an intermediary, which is enforcement. The kernel moved the opacity one layer up and lit the layer it reached. The layer above it remains exactly where politics has always had to fight it."
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: for a party that adopts it, it turned donation transparency from a late, bulk, weakly-enforced filing into a contemporaneous public record that must cite a source and must flag, on its own signature, where that source is an intermediary it cannot see behind. What it did not do is pierce the intermediary, compel a party that prefers the dark to keep any register, decide whether a donation is legitimate, or supply the enforcement the real regulator lacks. It made an honest party provably honest and would make a reliant one visibly reliant — and it surfaced a candidate primitive, a native contribution entry to match executive.act's spending, waiting on a second inbound-money case to earn its place in the core."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "Dark money routes a donation through an intermediary that files no accounts, so the true backer never reaches the record. For an adopting party, the kernel logs each donation as it lands and flags where its source is an unpierceable intermediary — contemporaneous, not a late filing. But it records the launder, not the truth behind it: it cannot compel the intermediary to disclose, or a dark-money party to log at all.",
+ "protection": "donation provenance on the record",
+ "protection_plain": "Whether logging each donation with its source as it lands — flagging where that source is an intermediary hiding its own backers — makes political money legible for an adopting party. It does, up to the intermediary; it cannot pierce a non-adopting front or judge which money is legitimate.",
+ "findings": [
+  {
+   "protection": "contemporaneous, and sourced by the record",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The real gain, for an adopter: a donation is public the hour it lands, carrying a cited source, rather than filed late and in bulk to a regulator whose largest fine (£20,000) a serious donor treats as a cost of doing business. The delay and the weak deterrence that define the ordinary regime simply do not apply to what is logged — the record is not a favour the party grants on its own timetable but a fact posted at receipt. For a party whose donors are who they say they are, this is a proof of cleanliness the current system cannot produce."
+  },
+  {
+   "protection": "the log flags its own blind spot",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "A fresh move worth naming: the Albany entry does not pretend to see what it cannot. It records the immediate source and marks the ultimate source undisclosed-at-intermediary on the party's own signature, and the quarterly aggregate turns that into a 'dark share' — a signed proportion of funds the party could not trace. You cannot see the donor behind the Forum, but you can see, precisely and in public, that the party could not — and a reliance on opaque money becomes a metric rather than an accusation. That is strictly more than the status quo, where the darkness is neither timely nor quantified."
+  },
+  {
+   "protection": "the launder moves one layer up",
+   "severity": "strain",
+   "doc_ref": "§2",
+   "observation": "The wrong works exactly as the CRC case did: make an intermediary the source of record. The kernel records that intermediary faithfully and cannot compel it — a non-adopter with no accounts — to name its backers. Piercing the chain is a compelled-disclosure order, an act of enforcement outside the protocol and one the real regulator is too weak to wield. The log makes the launder legible, not the launderer; it converts an invisible dark donation into a visible flagged one, which is genuine progress, and stops precisely where provenance-by-attestation must: at the first party who will not attest."
+  },
+  {
+   "protection": "it is voluntary, and the dark players opt out",
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "The kernel is a clean-money instrument for a party that chooses it, and the parties that most need watching are exactly the ones that will not. The £435,000 reached a real campaign through no log and would not have: dark money does not run a transparency register, and §6's promise — that subtraction is legible — bites only for adopters, because a party outside the system publishes no manifest to read. The design can make an honest actor provably honest; it can never make a dishonest one transparent. Adoption is the boundary, and the wrong lives on the far side of it."
+  },
+  {
+   "protection": "legitimacy is offstage, and the type is not native",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Two residues. First, whether a donation should be permitted at all — foreign money, corporate money, influence-buying — is a substantive judgment of law and politics the kernel declines the way it declines every other (refusal 11); it records provenance, it does not adjudicate legitimacy. Second, the waist has no native donation entry: contributions here are an x-finance.contribution extension, the inbound-money twin of executive.act's outbound spending. That is deliberate, not an oversight — executive.act earned its place in the core only when two independent cases converged on it, and one inbound-money case is a lead, not yet a mandate. If a second converges, the receipts primitive is the design's next honest growth."
+  }
+ ]
+}
