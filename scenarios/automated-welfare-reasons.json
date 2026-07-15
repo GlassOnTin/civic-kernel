@@ -1,0 +1,248 @@
+{
+ "id": "automated-welfare-reasons",
+ "title": "Computer Says No, and Cannot Say Why: The Right to a Reason Meets a Model That Has None",
+ "setting": "Maureen Astley cares for her adult son, who cannot be left alone, and for that the state pays her Carer's Allowance — as long as she earns no more than a hundred and fifty-one pounds in any week. Cross that line by a single penny and the whole of that week's allowance must be repaid; there is no taper, only a cliff. In the real system a hundred and thirty-five thousand carers have crossed it, mostly unknowing, mostly by a few pounds, into a quarter of a billion pounds of clawed-back debt — while the department that held their earnings data and could have warned them, did not. And there is a second machine in Maureen's life she cannot see at all: a fraud-risk model that scores claims and, when it scores one high, stops the money pending a review. The department flagged more than two hundred thousand people wrongly this way, stopped their payments, told them almost nothing about why, and — asked repeatedly, under freedom-of-information law — refused to say how the model decides.\n\nBrackmoor Welfare Authority runs its adverse decisions on a kernel transparency log, under one rule: no benefit is suspended and no overpayment demanded except by a logged entry that cites the rule it rests on and carries a machine-readable trace of its own working and a path to appeal. The same engine that tells a claimant what she is owed must show its reasoning when it takes something away. This scenario follows Maureen through two adverse decisions in Brackmoor — one a rule, one a model — because the kernel handles them very differently, and the difference is the whole finding: how far a right to a reason can reach, and the exact point at which it meets a decision that has no reason to give.",
+ "threats": [
+  "T13",
+  "T12"
+ ],
+ "doc_refs": [
+  "§8",
+  "§9",
+  "§3.4",
+  "§3.3",
+  "§1",
+  "§12",
+  "T13",
+  "T12"
+ ],
+ "precedents": [
+  {
+   "event": "Independent Review of Carer's Allowance overpayments",
+   "year": 2024,
+   "source": "GOV.UK (DWP-commissioned independent review) / Carers UK",
+   "url": "https://www.gov.uk/government/publications/review-of-carers-allowance-overpayments/independent-review-of-carers-allowance-overpayments",
+   "shows": "A hard earnings cliff-edge (GBP151/week; a penny over means repaying the whole week's allowance) drove ~135,000 carers into roughly GBP250m of overpayment debt, most crossing it unknowingly and by a few pounds, while the department held the earnings data and failed to warn them — an adverse decision that was foreseeable, preventable, and delivered as a surprise debt letter rather than a reasoned computation."
+  },
+  {
+   "event": "DWP fairness analysis finds bias across every protected characteristic in its AI fraud-detection",
+   "year": 2024,
+   "source": "The Guardian / Computer Weekly (DWP internal fairness analysis, Feb 2024)",
+   "url": "https://www.computerweekly.com/news/366616983/DWP-fairness-analysis-reveals-bias-in-AI-fraud-detection-system",
+   "shows": "The department's own analysis found a statistically significant referral and outcome disparity for all protected characteristics examined — age, disability, marital status, nationality — in the machine-learning system that selects Universal Credit claims to investigate: an automated flag with disparate impact, whose individual reasoning the department will not disclose."
+  },
+  {
+   "event": "Automated suspensions with 'minimal explanation'; DWP refuses to say how claims are flagged (Public Law Project / Big Brother Watch)",
+   "year": 2024,
+   "source": "Public Law Project / Big Brother Watch",
+   "url": "https://publiclawproject.org.uk/latest/dwp-accounts-reveal-algorithm-used-to-stop-universal-credit-payments/",
+   "shows": "Automation stops Universal Credit payments and selects claimants for review demanding documents with minimal explanation; more than 200,000 were wrongly investigated with two-thirds of high-risk flags later found legal, benefits stopped in the interim, and the department has refused FOI requests about how people are flagged — an adverse decision with neither a legible reason nor an accountable route to challenge it."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:brackmoor-welfare.example",
+   "name": "Brackmoor Welfare Authority (reasoned-decisions transparency pilot)",
+   "parent": "did:web:brackmoor.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:brackmoor-welfare.example",
+   "witnesses": [
+    "did:web:brackmoor-audit.example",
+    "did:web:brackmoor-advice-bureau.example",
+    "did:web:brackmoor-university.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "read-your-own-decision-trace",
+    "steps": 1,
+    "fields": 0,
+    "median_seconds": 30,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:brackmoor-welfare.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The Department, the cliff-edge, and the model no one may see",
+   "verb": "offstage",
+   "narrative": "The backdrop is two real machines. One is a rule with a cruel shape — the Carer's Allowance cliff-edge — that turned a few pounds of extra earnings into a full week's debt for 135,000 carers, while the department that could have warned them stayed silent. The other is a fraud-risk model that stops payments on a statistical score, flagged 200,000 people wrongly, and whose workings the department refuses to disclose. Whether Maureen is truly eligible, or truly over-claimed, is a substantive judgment the kernel will not make (refusal 11). What it can change is narrower and real: whether the decision that takes her money comes with a reason she can see, and a way to fight it."
+  },
+  {
+   "actor": "Brackmoor Welfare Authority",
+   "verb": "cast",
+   "narrative": "Brackmoor opens its adverse-decisions register on the log with one binding rule: no benefit is suspended and no overpayment demanded except by a logged entry that cites the rule it rests on, carries a machine-readable trace of its own working, and names a path to appeal. It is the discipline owed.html already uses for what a claimant is owed — every step with its rule, what was demanded, what was deliberately not asked — turned around to face what is being taken away. A decision with no reason on the record is, from here, simply not a decision the authority can make.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:brackmoor-welfare.example",
+    "timestamp": "2026-02-01T09:00:00Z",
+    "body": {
+     "decision_id": "2026-reasoned-decisions-register",
+     "decision_class": "adverse-decision-transparency-commitment",
+     "authorizing_rule": "brackmoor-welfare-code/v3; social-security-act:duty-to-give-reasons",
+     "issuing_authority": "Brackmoor Welfare Authority",
+     "commitment": "Every suspension and overpayment logged as a process.denial-trace citing its rule, carrying a claim-trace, and naming an appeal path; no adverse decision without a reason on the record",
+     "note": "The register binds the authority's own decisions. It cannot compel a body that runs no kernel to give reasons, and — as the model case will show — it can compel a citation without compelling an explanation."
+    },
+    "sig": {
+     "key_id": "did:web:brackmoor-welfare.example#log-1",
+     "alg": "ed25519",
+     "value": "UmVhc29uZWREZWNpc2lvbnNSZWdpc3RlckJyYWNrbW9vcjAx"
+    }
+   }
+  },
+  {
+   "actor": "Brackmoor Welfare Authority, and Maureen Astley",
+   "verb": "cast",
+   "narrative": "Maureen takes one extra shift and her earnings touch a hundred and fifty-four pounds in a single week — over the line. Here the kernel does two things the real system did not. Weeks earlier, the same engine that computes her entitlement saw the cliff-edge approaching and warned her — the act the department, holding the same data, omitted. And when the overpayment is determined it lands as a logged denial-trace citing the exact rule, the exact week, the exact figure, and the exact sum, with a path to appeal. It is a rule-based decision, and so it is fully legible: Maureen can see precisely why, and contest it on the merits.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.denial-trace",
+    "community": "did:web:brackmoor-welfare.example",
+    "timestamp": "2026-05-10T11:00:00Z",
+    "body": {
+     "disposition_id": "2026-astley-ca-0512",
+     "subject_ref": "claim:brackmoor-ca-88213",
+     "decision": "overpayment-determined",
+     "authorizing_rule": "carers-allowance-regs:earnings-limit-GBP151-per-week; social-security-overpayment-rules/v2",
+     "claim_trace": "Week 2026-W18: earnings GBP154.20 exceeded the GBP151 weekly limit by GBP3.20; the rule requires repayment of that week's full GBP81.90 award. One week affected; GBP81.90 recoverable.",
+     "warned_before": "2026-W16 cliff-edge alert issued to the claimant when projected earnings approached the limit - the data the department held and did not act on",
+     "appeal_trace": "did:web:brackmoor-welfare.example/appeals/2026-astley-ca-0512",
+     "note": "A rule-based adverse decision, fully legible: the week, the figure, the rule, the computation, an appeal path - and a warning before, not only a demand after. The right to reasons made real, the same claim-trace owed.html gives for what you are owed, turned on what you are losing."
+    },
+    "sig": {
+     "key_id": "did:web:brackmoor-welfare.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVuaWFsVHJhY2VBc3RsZXlDbGlmZkVkZ2VOb3RSZWFsMDI"
+    }
+   }
+  },
+  {
+   "actor": "Brackmoor's fraud-risk model, and the authority",
+   "verb": "cast",
+   "narrative": "A month later a second, different machine acts. The fraud-risk model scores Maureen's claim above its threshold and the authority suspends her payment pending review. Here the kernel's rule bites its own limit, honestly. The suspension must be logged, and it must cite something — so 'no reason at all', the real system's default, is impossible. But what it can cite is the rule that authorises the model, not a reason for choosing her: a machine-learning score is a statistical judgment, not a rule, and it cannot be rendered as a claim-trace. The entry says a model selected her. It cannot say why her. The kernel compelled a citation; it could not compel an explanation.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.denial-trace",
+    "community": "did:web:brackmoor-welfare.example",
+    "timestamp": "2026-06-15T14:00:00Z",
+    "body": {
+     "disposition_id": "2026-astley-fraud-0615",
+     "subject_ref": "claim:brackmoor-ca-88213",
+     "decision": "payment-suspended-pending-review",
+     "authorizing_rule": "social-security-fraud-review-rules/v1#targeted-case-review authorises risk-based selection",
+     "reason_given": "Selected by fraud-risk model v3, statistical risk score above threshold",
+     "reason_quality": "authority-cited-not-explained",
+     "appeal_trace": "did:web:brackmoor-welfare.example/appeals/2026-astley-fraud-0615",
+     "note": "The limit of 'cite your rule'. The suspension cites the rule authorising the model, so no-reason-at-all is impossible - but the model's individual reasoning is not a rule and cannot become a claim-trace. More than the real system's 'minimal explanation'; less than a reason."
+    },
+    "sig": {
+     "key_id": "did:web:brackmoor-welfare.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVuaWFsVHJhY2VBc3RsZXlGcmF1ZE1vZGVsTm90UmVhbDAz"
+    }
+   }
+  },
+  {
+   "actor": "Maureen Astley, with the Brackmoor Advice Bureau",
+   "verb": "read",
+   "narrative": "Maureen reads both decisions with an adviser, and the contrast is the whole lesson. The overpayment she can argue: the week, the figure, the rule are all on the record, and if the earnings entry is wrong she can prove it. The suspension she can only appeal, not interrogate: the trace tells her a model flagged her and points to a review, but not what about her tripped it, because that is not a thing the model can be made to say. She is far better off than the real system leaves a claimant — she has a live payment-appeal and a named path, not a silent stop and a refused FOI. But between a reason and a citation standing in for one, she can feel the difference exactly."
+  },
+  {
+   "actor": "Brackmoor Welfare Authority, transparency office",
+   "verb": "cast",
+   "narrative": "At the half-year the authority must publish what the model's flags add up to, and the number indicts the model in its own hand: two-thirds of high-risk selections cleared on review — payments stopped from people who were entitled — and a referral rate that differs across every protected group the analysis can measure. This is §8's measure-the-process turned on an algorithm: the disparate impact the real department found in its own fairness analysis and would not surface, here contemporaneous, signed and witnessed. The bias is no longer deniable. It is the authority's own statistic.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:brackmoor-welfare.example",
+    "timestamp": "2026-07-01T09:00:00Z",
+    "body": {
+     "process": "fraud-risk-model-selection",
+     "period": "2026-H1",
+     "unit": "referral and outcome rates",
+     "referrals": 4200,
+     "upheld_after_review": 1400,
+     "cleared_after_review": 2800,
+     "false_positive_rate": 0.67,
+     "disparity_note": "Referral and outcome disparity present across every protected characteristic analysed (age, disability, marital status, nationality) - the department's own fairness finding, here made contemporaneous and signed. Anonymous aggregate; measure the process, never the person (§8).",
+     "note": "Two-thirds of high-risk flags cleared on review: benefits stopped from the entitled. The aggregate makes the bias undeniable. The rights guard still does not fire on an administrative flag (§3.3) - legible is not blocked."
+    },
+    "sig": {
+     "key_id": "did:web:brackmoor-welfare.example#log-1",
+     "alg": "ed25519",
+     "value": "Q29zdEFnZ3JlZ2F0ZUZyYXVkTW9kZWxCcmFja21vb3JOb3RSZWFsMDQ"
+    }
+   }
+  },
+  {
+   "actor": "The rights guard, asked to intervene",
+   "verb": "verify",
+   "narrative": "The advice bureau asks the obvious question: if the model is biased, why does the guard not stop it? Because it cannot see it. The rights guard is a type-checker over proposals and decisions on the ballot path — a rule change, a franchise amendment — not over an administrative fraud-flag, which is executive discretion with no decision for the guard to analyse. It is the same blindness the stop-and-search pattern and the procurement lane recorded (§3.3). The kernel can make the model's bias a public number and every suspension appealable; it cannot veto the model or overturn a single flag. Legibility is what it has, and legibility is not fairness."
+  },
+  {
+   "actor": "Brackmoor, and the honest ceiling",
+   "verb": "offstage",
+   "narrative": "So the limits stand plainly. Whether Maureen over-claimed, or should be investigated, is substantive judgment the kernel declines - it makes the decision reasoned and appealable, never correct. The model may sense but should not act unaided: the kernel's own stance is that an automated system gets a microscope, never a pen (§9), and a fraud score that stops a payment by itself is a pen - Brackmoor keeps a human and a rule between the flag and the money, but the real department did not, and cannot be compelled to. And the deepest gap is adoption: the claimants who most need a reason are served by a system built to withhold one, running no kernel, refusing FOI on its scoring. The kernel is a promise to the people an adopting authority serves. It is not a fix for the ones outside it."
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: for a body that adopts it, it made the unreasoned adverse decision structurally impossible - every suspension and overpayment cites its rule, shows its working where the decision is a rule, warns where the harm is foreseeable, and carries a way to appeal, so 'computer says no' with no reason cannot be logged. What it did not do is make a machine-learning flag intelligible - it can compel the citation, not the explanation - decide whether anyone was eligible, block a biased model, or compel the real department to adopt any of it. It gave the claimant a right to a reason, and found the exact place that right meets a machine that has none to give."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "An algorithm suspends a claim as fraud-risk with no reason and no rule to appeal. For a body that adopts it, the kernel makes every adverse decision cite its rule and carry an appeal trace, so an unreasoned suspension can't be logged. But 'cite your rule' fully explains a rule and lets a model flag only say 'a model did it'; it cannot judge eligibility, block a biased model, or make the real department adopt it.",
+ "protection": "a reason you can see and appeal",
+ "protection_plain": "Whether requiring every adverse decision to cite its rule and carry an appeal trace gives a claimant a reason they can see, where an algorithm now suspends with none. It works for a rule; a model flag can cite its authority without explaining why you — not judge eligibility or block a biased model.",
+ "findings": [
+  {
+   "protection": "the right to a reason, made structural",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "The first scenario where the design gives the individual a right rather than making a pattern visible. A logged adverse decision must cite its rule and carry a machine-checkable appeal trace, so 'computer says no, no reason given' - the real department's 'minimal explanation' and refused FOI - cannot be logged at all. For a rule-based decision, the Carer's Allowance cliff-edge, the trace is complete: the week, the figure, the GBP151 rule, the computation, the appeal path, all legible and contestable - the same claim-trace owed.html produces for what you are owed, turned to face what you are losing."
+  },
+  {
+   "protection": "the warning the real system withheld",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "A decision that is a legible computation is one the claimant can see coming, not only appeal after. The same engine that computes entitlement can watch the cliff-edge approach and warn before it is crossed - and the real department, holding the same earnings data, warned no one, driving 135,000 carers into GBP250m of surprise debt. Prevention where the actual failure was silence: the kernel's discipline is not only a reason after the fact but a foreseeable harm flagged before it lands. It does not remove the cruel cliff-edge rule, which is policy; it removes the ambush."
+  },
+  {
+   "protection": "cite-the-rule is not explain-the-model",
+   "severity": "strain",
+   "doc_ref": "§9",
+   "observation": "The sharp, fresh limit. Section 8's 'every demand cites its rule' makes a rule-based decision fully intelligible, but a machine-learning fraud flag is not a rule - it is a statistical judgment, and it cannot be rendered as a claim-trace. The kernel can compel the suspension to cite the rule that authorises the model; it cannot make the model say why this person. A rule-based trace is a reason; 'flagged by model v3' is a citation standing in for one. And it engages the kernel's own §9 stance directly: an automated system gets a microscope, never a pen - a score that stops a payment unaided is a pen, so the honest deployment keeps a human and a rule between flag and money. The right to a reason reaches exactly as far as the decision is a rule, and no further into the model."
+  },
+  {
+   "protection": "bias is legible, not blockable",
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "The model's disparate impact - which the department's own analysis found across every protected characteristic - can be made a signed aggregate, measure-the-process as with the procurement lane, so the bias is visible and contemporaneous rather than buried in an internal report. But the rights guard does not fire: an administrative fraud flag is executive discretion, not a decision on the ballot path, so there is nothing for a type-checker to analyse, the same scope boundary the stop-and-search pattern met (§3.3). Two-thirds of high-risk flags cleared on review means the entitled had their money stopped; the kernel makes that undeniable and every case appealable, and it cannot veto the model or reverse a flag. Legible is not fair."
+  },
+  {
+   "protection": "eligibility offstage, adoption uncompelled",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Two residues bound the value. Whether Maureen over-claimed is substantive judgment the kernel refuses (refusal 11) - it makes the decision reasoned and appealable, not correct. And the real department runs no kernel: it refuses FOI on its scoring, cannot be compelled to log a decision or cite a reason, and the claimants who most need the right to a reason are served by a system engineered to withhold it. The kernel's right-to-reasons is a promise to the people an adopting authority serves, not a remedy for the ones outside it - which is most of them, and the honest limit of a discipline that binds only those who take it on."
+  }
+ ]
+}

@@ -268,9 +268,9 @@ research program, not a trained system.
   repaired by a silent recast. The repair decided it: an 8–6 win where the unrepaired
   ballot would have made it 7–7 — and what the cheating device actually encrypted stays
   sealed forever.
-- **31 scenarios**, each cross-validated against the waist schemas and each anchored to
-  documented real-world precedents (77 verified citations — the schema requires them: no
-  attack without a cited precedent): 23 strain, 7 break, 1 holds. The one hold is
+- **32 scenarios**, each cross-validated against the waist schemas and each anchored to
+  documented real-world precedents (80 verified citations — the schema requires them: no
+  attack without a cited precedent): 24 strain, 7 break, 1 holds. The one hold is
   `records-rewrite` — the log defeating tampering, the mechanism the design leans on
   hardest. The breaks are five named limits meeting unaccountable power — coercion under
   live observation, an executive that ignores court orders, a remedy too weak to stop a
