@@ -1,0 +1,185 @@
+# Triaging harms: which the kernel can touch, and which it must refuse
+
+**What this page is for:** it describes how we choose which real-world wrong to
+test against the protocol next — and, one day, how a machine could scan a whole
+archive of harms and hand back a ranked shortlist of the ones a checkable record
+would most cheaply shift. It borrows a habit called *triage* — invented in
+battlefield medicine and emergency nursing, borrowed from there by software
+engineering, and here returned to something near its original use: sorting
+social and legal harms the way a clinician sorts patients. It is written for
+litigators, campaigners, lawmakers, and anyone deciding where scarce effort
+should go.
+
+<details>
+<summary><b>Plainly</b> <i>Triage began in battlefield medicine: when you cannot treat everyone, sort by how urgent and how treatable, and name honestly whom you cannot help. Software borrowed it for bugs; we return it to public harms. The refusals matter as much as the picks — most wrongs are not ours to touch, and saying so is half the value.</i></summary>
+
+The scenario corpus answers a question one case at a time — *does a thin,
+checkable protocol help with this wrong, and where does it stop?* Each answer is
+expensive: a few hundred lines of researched, machine-validated argument. So the
+prior question — *which wrong next?* — deserves a cheap, honest, repeatable
+answer of its own. That is triage.
+
+</details>
+
+## The idea, borrowed twice
+
+The word comes from the French *trier*, to sort, and its method was worked out on
+battlefields and in emergency wards. When you cannot treat everyone at once you
+sort by two things — how urgent the case is, and how much your treatment would
+actually change its outcome — and then you do the hardest thing in the practice:
+you name, honestly, whom you cannot help. Software teams borrowed the habit for
+bugs. Turning it on legal and social harms brings it most of the way home.
+
+An engineering team faced with a thousand open bug reports does not work through
+them in the order they arrived. It **triages**: for each report it asks whether
+the bug is real and reproducible, whether it is in scope for this system at all,
+how much damage it does, and how cheap it is to fix — and only then decides what
+to pick up. The reports it *closes* — "not a bug", "won't fix", "out of scope" —
+matter as much as the ones it accepts, because a clear reason for closing saves
+everyone from re-litigating it.
+
+A democratic harm can be triaged the same way, and the discipline transfers
+almost unchanged. The one adaptation: our "won't fix" is a matter of principle,
+not laziness. A great many wrongs are real, serious, and simply *not ours to
+touch* — and the protocol is built to refuse them on purpose.
+
+## The pipeline
+
+Four stages. A case that fails an early one never reaches the later ones.
+
+1. **Intake, with a citation.** Restate the harm in one line, and name a real
+   source for it. No case enters triage without a documented precedent — the
+   same rule the scenario schema enforces ("no attack without a cited
+   precedent"), applied at the door.
+
+2. **The scope sort — the load-bearing filter.** Ask one question: is the wrong
+   a matter of *substantive judgment* (who is right, what is fair, what is true)
+   or of *process integrity* (was the record made, was the rule cited, is the
+   pattern visible)?
+   - **Substantive → refused, out of scope**, with the reason stated. A child's
+     best interests under Article 8, whether a claim is misinformation, whether a
+     policy was wise — the kernel refuses to decide these (refusal 11), because a
+     machine that adjudicated them would be a machine worth capturing. In the
+     clinical metaphor these are the cases triage cannot save — and naming them,
+     rather than pretending otherwise, is the oldest discipline in the practice.
+     This is not a gap to apologise for; it is the design.
+   - **Process integrity → accepted.** On to prioritise.
+
+3. **The signature check.** Every case that has ever *worked* shared a shape.
+   Does this one carry it? (The catalogue is below.) If it does, the same cheap
+   lever — a contemporaneous, checkable record — is a candidate.
+
+4. **Priority — reach × leverage: the clinician's calculus.** Severity and
+   treatability — how bad is it, and how much would a checkable record actually
+   change the outcome.
+   - **Reach**: how many people, how much public money, how central to the
+     democratic function (1 low – 3 high).
+   - **Leverage**: how much a cheap, checkable record would shift the *cost* of
+     the wrong (1–3). Note the word: *cost*, not *existence*. A record rarely
+     cures a wrong; it makes it visible in time, destroys deniability, and feeds
+     the courts and elections that can. Where even that changes little, leverage
+     is low, and the score says so.
+
+## The recurring signature
+
+The wrongs the protocol can touch are not a random set. Across the corpus they
+keep the same few fingerprints — the "bug categories" of public harm:
+
+- **`pattern_of_lawful_acts`** — the wrong lives in an aggregate of
+  individually-lawful acts (a procurement lane, a stop-and-search pattern, a
+  regulator's forbearance). Unreachable one act at a time; visible only in the
+  aggregate.
+- **`record_absent`** — the act was never recorded contemporaneously, so
+  accountability means reconstructing it, late and by force.
+- **`record_destroyed`** — the record was made, then destroyed at source.
+- **`access_gated`** — the record exists, but access is by-permission and can be
+  slow-walked until the answer no longer matters.
+- **`inaction_no_artifact`** — the wrong is a *non-decision*, which produces
+  nothing to appeal or review.
+- **`documentary_gate`** — a document requirement excludes people from a right.
+
+## What the scorer will and will not do
+
+This is the part that keeps triage honest, and it is worth stating plainly to a
+non-engineering reader.
+
+- **It is a scout, not a judge.** It ranks; a person decides. This is not
+  timidity — it is the kernel's own first principle. A protocol that refuses to
+  let a machine adjudicate substance cannot then build a machine that adjudicates
+  which injustices deserve attention. The scout flags "this wrong has the shape
+  of one a checkable record could reach — a human should look." Nothing more.
+- **Every score shows its inputs.** There is no hidden weighting: a score is
+  `reach × leverage`, both set by a person's reading and both on the page. The
+  same discipline the kernel demands of a form field — every demand cites its
+  rule — applied to the triage itself.
+- **Legibility is a lever, not a cure.** Cases marked ⚠ are ones where making the
+  wrong visible changed little: the court voided the procurement lane and
+  returned nothing; the watchdog found the regulator failed and the river stayed
+  dirty. They still rank — deniability destroyed is worth something — but the
+  caveat is shown, never buried.
+- **Precedents are verified at encode, not at triage.** Triage runs on
+  institution-level leads and is deliberately cheap and provisional — like
+  confirming a bug reproduces only when you pick it up, not when you file it. The
+  full cited-precedent rigour happens later, when a candidate is promoted to a
+  full scenario.
+
+## The current run
+
+Generated by `tools/triage.py` over `triage/cases.json`; regenerate it rather
+than editing by hand.
+
+_12 cases: 9 accepted, 3 refused._
+
+### Accepted — ranked by leverage
+
+| # | case | score | reach × leverage | signature | status |
+|--:|------|:-----:|:----------------:|-----------|--------|
+| 1 | foi-slow-walking | 9 | 3 × 3 | access_gated, record_absent | **encoded** |
+| 2 | party-finance-dark-money | 9 | 3 × 3 | pattern_of_lawful_acts, record_absent | **candidate** |
+| 3 | revolving-door-lobbying ⚠ | 9 | 3 × 3 | pattern_of_lawful_acts, record_absent | **candidate** |
+| 4 | automated-welfare-reasons | 6 | 3 × 2 | record_absent | **candidate** |
+| 5 | procurement-vip-lane ⚠ | 6 | 3 × 2 | pattern_of_lawful_acts, record_absent | **encoded** |
+| 6 | regulator-inaction ⚠ | 6 | 3 × 2 | pattern_of_lawful_acts, inaction_no_artifact | **encoded** |
+| 7 | removal-without-legible-warrant | 4 | 2 × 2 | record_absent | **candidate** |
+| 8 | voter-id | 4 | 2 × 2 | documentary_gate | **encoded** |
+| 9 | government-by-whatsapp ⚠ | 3 | 3 × 1 | record_destroyed | **encoded** |
+
+The ranking is worth reading as a check on the rubric, not just an output. The
+five already-encoded cases land where their verdicts say they should:
+`foi-slow-walking` at the top, `government-by-whatsapp` at the bottom — because it
+*breaks*, and a low leverage score is the rubric admitting it. And two cases we
+have not touched, **party-finance-dark-money** and **revolving-door-lobbying**,
+surface at the very top of the candidates — chosen by the process, not by an
+author's hunch.
+
+### Recommended to encode next
+
+- **party-finance-dark-money** (9) — donations routed through opaque
+  intermediaries so the true source never reaches the record.
+- **revolving-door-lobbying** (9) — privileged access via informal lobbying and
+  revolving-door appointments, invisible until reconstructed after the fact.
+- **automated-welfare-reasons** (6) — a claim flagged fraud-risk and suspended
+  with no legible reason and no cited rule to appeal.
+
+### Refused — out of scope
+
+Not defects a checkable record can touch; each closed with its reason.
+
+| case | why refused |
+|------|-------------|
+| child-surname-article8 | A substantive judgment about a child's best interests under Article 8 — who is right. The kernel refuses to decide substance (refusal 11). |
+| doctor-misinformation-gmc | Deciding whether a claim is misinformation is a judgment of truth — a ministry of truth is what the kernel refuses to build (T11, refusal 11). |
+| policy-wisdom | Whether a policy is wise is a political judgment, not a process defect — a disagreement elections settle, not infrastructure. |
+
+## Running it, and adding a case
+
+```
+python3 tools/triage.py            # print this report
+python3 tools/triage.py --check    # validate the corpus only
+```
+
+To add a case, append it to `triage/cases.json` with its harm, a lead, the scope
+(`onstage`/`offstage`), any signatures, and — for onstage cases — a `reach` and
+`leverage` from 1 to 3. Offstage cases must state why they are refused. That is
+the whole method: cheap enough to run over a large archive, honest enough that
+the refusals are on the page next to the picks.

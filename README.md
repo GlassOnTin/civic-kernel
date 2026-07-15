@@ -218,7 +218,9 @@ links back to this list.
   — same witness file, same card, same co-signature, same refusals —
   `tools/witness-parity.mjs` (CI) proves it across a whole election, alternating the
   file between the two implementations.
-- **`docs/`** — the functional (dynamics) model and the UK-trajectory worked example.
+- **`docs/`** — the functional (dynamics) model, the UK-trajectory worked example,
+  and the [triage process](docs/triage.md) for choosing which harm to test next
+  (`tools/triage.py` over `triage/cases.json`).
 - **`schema/`** — the waist: the two universal formats, as JSON Schema (Draft 2020-12).
   - `log-entry.schema.json` — one transparency-log event (includes the `coercive.act` and
     `executive.act` types — the state's force and its purse — whose bodies must each cite
