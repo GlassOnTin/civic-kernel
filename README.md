@@ -53,7 +53,7 @@ recited. The whole core fits on one page: [`KERNEL.md`](KERNEL.md).
   not do about each, with what actually helps today. Every case links through to its full
   stress-test.
 - **You want the argument.**
-  [The architecture →](https://glassontin.github.io/civic-kernel/)
+  [The architecture →](https://glassontin.github.io/civic-kernel/architecture.html)
   Democracy restated as an engineering problem, and the smallest honest answer to it.
   Every section opens as one plain line; expand for the full argument. Then watch
   [real life run against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)
@@ -180,7 +180,9 @@ links back to this list.
 
 - **`KERNEL.md`** — the distilled normative core: goals, threats, services, verbs,
   waist, refusals, measured status.
+- **`index.html`** — the front door: one thesis and four doors that route a visitor by who they are — the plain cases, the argument, the corpus, the tools.
 - **`architecture.html`** — the architecture document.
+- **`findings.html`** — three real cases in plain terms: what a checkable record could do and where it stops, each linking through to its full stress-test.
 - **`proto/`** — the first running code: the club-vote election end to end (all four
   verbs, real signatures, real Merkle log, independent verifier, committed reference
   transcript). `proto/test.sh` is the success test.

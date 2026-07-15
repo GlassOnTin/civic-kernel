@@ -1,7 +1,7 @@
 # The Kernel
 
 The rules of the Civic Kernel, on one page. The
-[essay](https://glassontin.github.io/civic-kernel/) argues them, the
+[essay](https://glassontin.github.io/civic-kernel/architecture.html) argues them, the
 [schemas](schema/) define them, the [prototype](proto/) runs them, the
 [harness](https://glassontin.github.io/civic-kernel/scenarios.html) measures them, the
 [model](docs/functional-model.md) gives them motion — this page only states them. If

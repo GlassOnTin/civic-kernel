@@ -102,7 +102,7 @@ Ten minutes with a cup of tea, in any current browser:
   [glassontin.github.io/civic-kernel/cast.html](https://glassontin.github.io/civic-kernel/cast.html)
   — the same page your members would use.
 - **The whole design, in plain speech first:**
-  [glassontin.github.io/civic-kernel](https://glassontin.github.io/civic-kernel/) — every
+  [glassontin.github.io/civic-kernel/architecture.html](https://glassontin.github.io/civic-kernel/architecture.html) — every
   section opens as one plain sentence; the detail is there if you want it. Every term
   of art has a one-line definition in the project README.
 
