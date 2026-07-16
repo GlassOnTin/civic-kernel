@@ -97,7 +97,7 @@ first real communities teach will revise it again.
   Democracy restated as an engineering problem, and the smallest honest answer to it.
   Every section opens as one plain line; expand for the full argument. Then watch
   [real life run against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)
-  — 35 stress-test stories, each machine-validated against the schemas.
+  — 36 stress-test stories, each machine-validated against the schemas.
 
 Or run everything locally — the election, its verification, and twelve attempts to rig
 it — in about a minute: [`proto/test.sh`](proto/).
@@ -255,7 +255,7 @@ The repository, file by file.
 - **`scenarios/`** — imagined human situations, each walked through the four verbs.
   Every embedded manifest and log entry is validated against the waist schemas, and
   every scenario must cite documented real-world precedents for its attack pattern
-  (a required `precedents` field, 89 citations verified July 2026).
+  (a required `precedents` field, 92 citations verified July 2026).
   `scenario.schema.json` is the record format.
 - **`corpus/`** — real legal systems captured under the same schema, sharing the
   30-invariant spine:

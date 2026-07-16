@@ -2539,6 +2539,293 @@
   ]
  },
  {
+  "id": "facial-recognition-no-basis",
+  "title": "Scanned by Default: A Coercive Act With No Subject, and the Bridge the Kernel Will Not Build",
+  "setting": "Marcus Boateng is walking through the town square to buy his mother a birthday card when a camera on a lamppost reads his face, compares it against a watchlist he has never seen, and matches him — wrongly — to someone he is not. Two officers stop him. He has done nothing; he was not suspected of anything; he simply walked through a public space where a machine was scanning everyone, and the machine, which the record will later show is far likelier to misread a Black face, misread his. In the real version of this, Marcus is one of a documented statistic: eighty per cent of the people wrongly flagged by the Metropolitan Police's live facial recognition have been Black. He was never an individual the police decided to watch. He was scanned by default, along with everyone else in the square, because that is what the technology does.\n\nThat is the wrong, and it is spreading. A court found police facial recognition unlawful in 2020 — Bridges v South Wales Police, which held there was no clear legal basis and far too much discretion left to individual officers over who goes on a watchlist and where the cameras are pointed — and almost nothing changed: seven million faces were scanned in a single year, the first permanent cameras went up over a town centre, and a national face-matching database built from passport photographs was proposed. The Ryelands Constabulary, after its own reckoning, runs its surveillance deployments on a kernel coercive-acts register. This scenario is about how far that register reaches into a scan that has no subject to name — and about the deeper thing the kernel does here, which is not to make facial recognition accountable but to refuse, in its own identity layer, to be the bridge that facial recognition is.",
+  "threats": [
+   "T6",
+   "T1"
+  ],
+  "doc_refs": [
+   "§3.1",
+   "§3.4",
+   "§8",
+   "§3.3",
+   "§1",
+   "§6",
+   "§12",
+   "T6",
+   "T1"
+  ],
+  "precedents": [
+   {
+    "event": "R (Bridges) v Chief Constable of South Wales Police [2020] EWCA Civ 1058",
+    "year": 2020,
+    "source": "Court of Appeal / Liberty",
+    "url": "https://www.libertyhumanrights.org.uk/issue/legal-challenge-ed-bridges-v-south-wales-police/",
+    "shows": "The Court of Appeal held police live facial recognition unlawful — not 'in accordance with law' under Article 8 — because of fundamental deficiencies in the legal framework that left too much discretion to individual officers over who is placed on a watchlist and where the cameras are deployed, and because the force had not investigated whether the technology was biased on race or sex."
+   },
+   {
+    "event": "UK police facial recognition expands without a legal framework: ~7 million faces scanned in a year",
+    "year": 2025,
+    "source": "State of Surveillance / Computer Weekly / Big Brother Watch",
+    "url": "https://stateofsurveillance.org/articles/government/facial-recognition-laws-uk/",
+    "shows": "Despite the 2020 ruling, the UK still has no facial-recognition law; ten forces now own the technology, the Metropolitan Police installed the first permanent fixed cameras over a town centre, roughly 7 million faces were scanned in 2025, and the government is consulting on how — not whether — to expand it, including a national face-matching database built from passport and driving-licence photographs."
+   },
+   {
+    "event": "80% of people wrongly flagged by Met facial recognition were Black",
+    "year": 2024,
+    "source": "Big Brother Watch / State of Surveillance",
+    "url": "https://myprivacy.blog/the-surveillance-state-emerges-uk-police-live-facial-recognition-explodes-without-legal-framework/",
+    "shows": "Of the people wrongly flagged by the Metropolitan Police's facial recognition, 80% were Black — the racial disparity the Bridges court found South Wales Police had never investigated, borne by people who were scanned by default and matched in error, having done nothing."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:ryelands-oversight.example",
+    "name": "Ryelands Constabulary (surveillance coercive-acts register)",
+    "parent": "did:web:ryelands.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": true,
+    "transparency_log": true
+   },
+   "rights_guard": {
+    "invariants": [
+     2,
+     3,
+     7,
+     9,
+     11,
+     12,
+     19,
+     20
+    ],
+    "remedy": "escalate",
+    "scope": "unconditional"
+   },
+   "transparency_log": {
+    "log_id": "did:web:ryelands-oversight.example",
+    "witnesses": [
+     "did:web:ryelands-audit.example",
+     "did:web:civil-liberties-bureau.example",
+     "did:web:ryelands-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-surveillance-register",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 30,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:ryelands-oversight.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Marcus Boateng, and the machine that scanned him",
+    "verb": "offstage",
+    "narrative": "The backdrop is the real one, and its wrong is a scan no one consented to and no one can point to as an act against them. Marcus was not watched; he was scanned by default, along with everyone in the square, and misread. Whether mass facial recognition should be lawful at all is a question for Parliament and the courts, which the kernel will never answer (refusal 11). And there is a deeper fact the kernel starts from: facial recognition is the very thing its own identity layer refuses to build — a biometric read of a face, in public, bridged to a name. The kernel makes no file on anyone, links no face to a civic self. So its answer here is two things at once: what an adopting force can log, and what the kernel will not itself be."
+   },
+   {
+    "actor": "Ryelands Constabulary",
+    "verb": "cast",
+    "narrative": "Ryelands opens its surveillance register with a rule modelled on the coercive-acts register, and the first awkwardness surfaces at once. It commits to logging every deployment as a coercive.act that cites its warrant — but a facial-recognition sweep is a coercive act with no single subject. There is no person the police decided to act against; there is a decision to scan everyone. So the register logs the deployment — the place, the watchlist authority, the legal basis, the officer who authorised it — and, honestly, records that its subject is the crowd, because a dragnet has none.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:ryelands-oversight.example",
+     "timestamp": "2026-01-15T09:00:00Z",
+     "body": {
+      "decision_id": "2026-surveillance-register",
+      "decision_class": "coercive-surveillance-accountability-commitment",
+      "authorizing_rule": "ryelands-surveillance-code/v2; udhr-floor:art-12-privacy",
+      "issuing_authority": "Ryelands Constabulary",
+      "commitment": "Every facial-recognition deployment logged as a coercive.act citing its legal basis, named watchlist authority, DPIA and equality assessment, and auto-escalated on the privacy floor; a match-triggered stop logged as its own coercive.act",
+      "note": "The register binds the force's own deployments. It cannot un-invent facial recognition, and - as the deployment shows - it can warrant the decision to scan, never give the scanned an act to refuse."
+     },
+     "sig": {
+      "key_id": "did:web:ryelands-oversight.example#log-1",
+      "alg": "ed25519",
+      "value": "U3VydmVpbGxhbmNlUmVnaXN0ZXJSeWVsYW5kc05vdFJlYWwwMQ"
+     }
+    }
+   },
+   {
+    "actor": "Ryelands Constabulary, town-square deployment",
+    "verb": "cast",
+    "narrative": "The deployment lands as a coercive.act of class surveillance, and it carries the exact thing Bridges found missing: a named legal basis, a defined watchlist authority, a published impact and equality assessment - not the officer discretion the court called a fundamental deficiency. For an adopting force, a basis-less deployment with an officer-chosen watchlist simply cannot be logged. But look at the subject field: it names the scanned area, not a person, because everyone in it is scanned by default. The kernel has made the decision to scan legible and warranted. It has not, and cannot, made any individual scan an act with a subject to challenge.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "coercive.act",
+     "community": "did:web:ryelands-oversight.example",
+     "timestamp": "2026-05-09T10:00:00Z",
+     "body": {
+      "act_class": "surveillance",
+      "authorizing_rule": "ryelands-surveillance-code/v2#lfr-deployment (named basis + defined watchlist authority + DPIA + equality assessment); expressly NOT officer discretion",
+      "issuing_authority": "Ryelands Constabulary, authorising superintendent",
+      "subject_ref": "collective:all-persons-in-scanned-area",
+      "rights_guard_ref": "rights.classification:2026-RYE-LFR-privacy",
+      "appeal_trace": "did:web:ryelands-oversight.example/appeals/2026-RYE-LFR-14"
+     },
+     "sig": {
+      "key_id": "did:web:ryelands-oversight.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29lcmNpdmVBY3RTdXJ2ZWlsbGFuY2VMRlJOb3RSZWFsQ3J5cHRvMDI"
+     }
+    }
+   },
+   {
+    "actor": "The rights guard",
+    "verb": "verify",
+    "narrative": "Because a mass biometric scan of an unwarned crowd engages the privacy floor, the guard fires on the deployment without being asked, and routes it to independent surveillance review with its impact and equality assessments attached - the oversight Bridges said the framework lacked. But the limit is precise and it is the fresh one: the guard escalates the deployment, the decision to scan, because that is the thing with a warrant to check. It cannot escalate Marcus's scan, because there is no such act - he is one face in a crowd the machine read by default. The guard reviews whether the square should have been scanned; it has nothing to say about any single scan, because a dragnet is made of none.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rights.classification",
+     "community": "did:web:ryelands-oversight.example",
+     "timestamp": "2026-05-09T11:00:00Z",
+     "body": {
+      "classification_id": "2026-RYE-LFR-privacy",
+      "subject": "coercive.act:2026-RYE-LFR-14 (facial-recognition deployment)",
+      "engaged_invariants": [
+       12,
+       2,
+       20
+      ],
+      "reason": "Mass biometric surveillance of an unwarned public engages UDHR Art 12 (privacy), Art 2 (non-discrimination, given documented racial bias) and Art 20 (assembly). The floor requires the deployment be reviewed, not left to officer discretion - the Bridges deficiency.",
+      "routed_to": "independent surveillance-oversight review, DPIA and equality assessment published",
+      "posture": "escalate: routes the deployment to review. It cannot reach an individual scan (a dragnet has no per-person act), and does not decide whether facial recognition should be lawful (that is law, refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:ryelands-oversight.example#log-1",
+      "alg": "ed25519",
+      "value": "UmlnaHRzQ2xhc3NpZmljYXRpb25MRlJQcml2YWN5Tm90UmVhbDAz"
+     }
+    }
+   },
+   {
+    "actor": "Ryelands officers, and Marcus Boateng",
+    "verb": "cast",
+    "narrative": "The machine flags Marcus on a false match, and two officers stop him. Now, for the first time, there is an act with a subject - a brief detention - and it is logged as its own coercive.act, citing the match that triggered it and carrying an appeal path. This is more than the real system gives Marcus: the stop names the match, the deployment behind it is on the record, and he can contest both. But the harm has already happened, to a man doing nothing, from a scan he could not refuse and a match the record will show the machine was far likelier to get wrong for a face like his. The kernel gave the stop a warrant to cite. It could not give the scan that produced it a subject who could say no.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "coercive.act",
+     "community": "did:web:ryelands-oversight.example",
+     "timestamp": "2026-05-09T14:00:00Z",
+     "body": {
+      "act_class": "detention",
+      "authorizing_rule": "police-powers:stop-on-reasonable-suspicion; sole trigger: lfr-match RYE-LFR-14-m0447",
+      "issuing_authority": "Ryelands Constabulary, deployed officer",
+      "subject_ref": "enforcement-case:RYE-2026-8831",
+      "rights_guard_ref": "rights.classification:2026-RYE-LFR-privacy",
+      "appeal_trace": "did:web:ryelands-oversight.example/appeals/RYE-2026-8831"
+     },
+     "sig": {
+      "key_id": "did:web:ryelands-oversight.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29lcmNpdmVBY3REZXRlbnRpb25NYXJjdXNOb3RSZWFsMDQ"
+     }
+    }
+   },
+   {
+    "actor": "Priya Sood, civil-liberties monitor",
+    "verb": "read",
+    "narrative": "Priya reads the register and finds, in the open, what the real thing takes a court case to establish: the deployment's cited basis, the watchlist authority, the review the guard triggered, Marcus's stop and the match behind it. What Bridges spent years proving - that the framework was deficient and the bias uninvestigated - is here a matter of record from the first day, not a finding wrung out of a reluctant force. She has gained a great deal. What she cannot find, because it does not exist, is a record of Marcus consenting to be scanned, or of any moment where he could have declined - because there was none."
+   },
+   {
+    "actor": "Ryelands Constabulary, oversight office",
+    "verb": "cast",
+    "narrative": "At the half-year the force must publish what its scanning adds up to, and the number is its own indictment: four million faces read to confirm sixty-one, and of the wrongful flags, nearly four in five falling on minority-ethnic people. The racial disparity Bridges found the real force had never even investigated is here a signed, contemporaneous figure - measure the process, never the person, no face templates, no identities. A dragnet that catches almost no one and misreads the same faces every time is no longer a civil-liberties claim; it is the constabulary's own arithmetic.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:ryelands-oversight.example",
+     "timestamp": "2026-07-01T09:00:00Z",
+     "body": {
+      "process": "lfr-deployment",
+      "period": "2026-H1",
+      "unit": "scans, matches and outcomes",
+      "faces_scanned": 4100000,
+      "matches_flagged": 812,
+      "confirmed_true": 61,
+      "false_positive_rate": 0.925,
+      "wrongful_flags_minority_ethnic_share": 0.79,
+      "note": "Anonymous aggregate; no face templates or identities held here. 4.1 million faces scanned to confirm 61, and 79% of the wrongful flags fell on minority-ethnic people - the disparity Bridges found the real force never investigated, here its own signed number. Measure the process, never the person (§8)."
+     },
+     "sig": {
+      "key_id": "did:web:ryelands-oversight.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29zdEFnZ3JlZ2F0ZUxGUlNjYW5CaWFzUnllbGFuZHNOb3RSZWFsMDU"
+     }
+    }
+   },
+   {
+    "actor": "Marcus Boateng, contesting the stop",
+    "verb": "challenge",
+    "narrative": "Marcus challenges his detention through its trace, and the kernel does what it can: it surfaces that the sole trigger was a facial-recognition match, names the deployment behind it, and gives him a forum. His challenge to the stop can succeed - a false match is not reasonable suspicion. But the deeper wrong stays out of reach. He cannot challenge the scan itself, because it was not an act against him; it was a condition of walking through a public square. The kernel gave the deployment a warrant and the stop a trace. It has no answer for the man who did nothing and was read anyway, because the harm of a dragnet is precisely that there is nothing individual to appeal."
+   },
+   {
+    "actor": "The state that builds its own bridge, and will not adopt",
+    "verb": "offstage",
+    "narrative": "And here the ceilings, plainly. Whether mass facial recognition should exist is law, which the kernel refuses to decide. The kernel's deepest answer is a refusal, not a remedy: its own identity layer will not bridge a face to a civic name - no file on anyone, unlinkable, no biometric dossier - so through the kernel your vote can never be joined to your face. But the police run their cameras, and the proposed national database of passport photographs, entirely outside it: the kernel refuses to be the bridge and cannot dismantle the one the state builds elsewhere. And a surveillance apparatus scanning seven million faces without a law is the institution least likely of all to adopt a register that logs and escalates its own deployments. It offers the accountable deployment and the refused bridge. The dragnet on the street is beyond both."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: for a force that adopts it, it forecloses the basis-less deployment Bridges found unlawful - every scan of a crowd cites its warrant and watchlist authority, auto-escalates on the privacy floor, and its bias becomes a public number, contemporaneously, where the real remedy took a Court of Appeal. And deeper, for everyone, whether any force adopts it or not: the kernel's own identity layer is built so a civic self can never be bridged to a face through it. What it did not do is give the innocent-by-default a scan to refuse - a dragnet has no subject to warrant - decide whether mass surveillance should be lawful, dismantle the cameras and databases the state runs outside it, or compel the surveillance power, least willing of all, to log and escalate itself. It made the deployment accountable and refused to be the bridge. It could not un-scan the square."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Police scan whole crowds with facial recognition on no clear basis — Bridges found it unlawful, 7 million faces scanned in a year anyway. For an adopter the kernel makes a deployment cite its warrant and escalate on the privacy floor, and its own identity layer refuses to bridge a face to a name. But a dragnet has no subject to warrant, the state runs its cameras outside any kernel, and won't bind itself.",
+  "protection": "surveillance that cites its basis",
+  "protection_plain": "Whether logging a facial-recognition deployment with its basis and bias, escalated on the privacy floor, makes mass surveillance accountable. It does for an adopter, and the kernel refuses to bridge a face to a name; but a dragnet has no subject, and the state's cameras run outside it.",
+  "findings": [
+   {
+    "protection": "the deployment's basis, made legible",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "For an adopting force, a facial-recognition deployment must cite the exact thing Bridges found missing: a named legal basis, a defined watchlist authority, a published impact and equality assessment - not the officer discretion the Court of Appeal called a fundamental deficiency - and, engaging the privacy floor, it auto-escalates to review. A basis-less, officer-chosen deployment cannot be logged. The wrong that took a landmark case to establish is foreclosed at the deployment level, contemporaneously, and the review the real framework lacked is triggered by the record itself."
+   },
+   {
+    "protection": "the kernel refuses to be the bridge",
+    "severity": "note",
+    "doc_ref": "§3.1",
+    "observation": "The deepest answer here is negative and structural, and it holds for everyone, not only an adopter. Facial recognition IS the thing the kernel's personhood layer refuses to build: a biometric read of a face, in public, bridged to an identity. The kernel makes no file on anyone, links no face to a civic self, keeps presentations unlinkable (§3.1). So through the kernel a person's vote and civic life can never be joined to their face - the proposed national database of passport photographs is exactly the bridge the kernel is built not to be. The protection is real and it is a refusal; its reach is the civic layer, not the street."
+   },
+   {
+    "protection": "a coercive act with no subject",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "The fresh awkwardness. coercive.act was built for a targeted act with a subject to name - removal named its detainee in the enforcement domain. A facial-recognition sweep scans everyone and has no subject: its subject_ref is the crowd. 'Cite your warrant per act' makes the DECISION to scan legible, but there is no per-person act to warrant, because the wrong is that everyone is scanned by default. The guard can escalate the deployment and Marcus can challenge the stop it triggered, but the scan itself is unchallengeable - not because the kernel hides it, but because a dragnet's harm is the absence of an individual act to refuse."
+   },
+   {
+    "protection": "the bias is a number, not undone",
+    "severity": "strain",
+    "doc_ref": "§3.3",
+    "observation": "The false match that stopped Marcus - he is one of the documented 80% of Met wrong-flags who were Black - becomes, in aggregate, the force's own signed disparity, where the real force had never investigated it: four million scanned to confirm sixty-one, four in five wrongful flags on minority-ethnic faces. Measure-the-process makes the bias undeniable and contemporaneous. But the rights guard does not reach the individual match (technical discretion, the stop-and-search blindness), the aggregate does not un-stop Marcus, and whether the scanning should happen is law. Legible bias is not prevented bias."
+   },
+   {
+    "protection": "the state builds its own bridge",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The adoption gap at its most acute, and the corpus's coercive-power limit again. A surveillance apparatus expanding without a law - seven million faces in a year, permanent cameras, a national passport-photo database proposed - is the institution least likely to adopt a register that logs and escalates its own deployments, and it runs its cameras and databases entirely outside any kernel. The kernel refuses to build the biometric bridge in the civic layer; it cannot dismantle the one the state builds in the enforcement layer, or compel the surveillance power to bind itself. It offers the accountable deployment and the refused bridge; the dragnet on the street is beyond both, which is the honest shape of a voluntary discipline meeting an involuntary scan."
+   }
+  ]
+ },
+ {
   "id": "foi-slow-walking",
   "title": "Nothing to Slow-Walk: The Record No One Has to Request",
   "setting": "Esther Vale files Freedom of Information requests for a living. She runs the Northmoor Bureau, a two-person newsroom that covers the county's councils, and she has learned that the law's twenty working days is a fiction the powerful can bend at will. A request lands, the clock starts, and then: an extension 'to consider the public interest', another, a partial answer with the operative paragraph blacked out, an Information Commissioner complaint that itself takes months, a tribunal a year on. By the time the redactions are lifted the contract is delivered, the councillor has moved seats, and the story is history. She once learned that a central government unit had been circulating lists of requesters' names and their requests across Whitehall, flagging journalists and campaigners for special handling — she was, in other words, a name on a list, for the crime of asking. Transparency, in her experience, is not a right you exercise. It is a favour the holder grants on its own clock, to the people it chooses, redacted to taste.\n\nOne council in her patch works differently. Caldermoor Borough adopted a single kernel service after the procurement scandals — a witnessed, append-only transparency log — and made one promise: every decision it takes and every contract it signs lands on that log as it happens, readable by anyone, with nothing to request. This is the story of a contested waste-services contract at Caldermoor, the same shape of decision Esther has spent years prising out of other councils by force. Here she does not file anything. She reads. What that changes is real and, for once, immediate; what it leaves untouched is the reason a determined council can still keep its worst business in the dark.",
