@@ -8638,6 +8638,273 @@
   ]
  },
  {
+  "id": "removal-without-legible-warrant",
+  "title": "Detained by a Rule She Cannot See: The Accountable Detention, and the Power Least Likely to Accept It",
+  "setting": "Alma Okonkwo has lived in this country for fifty-one years. She came as a child on her mother's passport, worked forty of those years, raised three children born here — and cannot prove any of it to the satisfaction of an official, because the records that would have shown it were destroyed by the state that now doubts her. One morning she is detained pending removal. In the real version of this story, that is roughly all she is told: a power exists, it has been exercised, and the burden is now entirely hers to find a lawyer, lodge a challenge, and prove a right she has always had — while held, with no time limit, in a system that is alone in Europe in setting none, and where the decision to detain was made by an official, not a judge, and reviewed by no one unless she forces it. Eighty-three people with every right to remain were wrongly deported this way before anyone called it a scandal.\n\nThe Caldon detention authority is a jurisdiction that lived through its own version of that scandal and rebuilt afterward on a kernel coercive-acts register. Its single binding rule: no person is detained or removed except by a logged coercive.act that cites the warrant it rests on, carries a path to appeal, and — because a detention engages the liberty floor — is escalated automatically to independent review by the record itself, not left to the detainee to demand. This scenario follows Alma through that register, because it shows both what an accountable detention can be designed to be, and the two things no design can supply: a warrant correctly applied, and a coercive power willing to bind itself at all.",
+  "threats": [
+   "T1",
+   "T13"
+  ],
+  "doc_refs": [
+   "§3.3",
+   "§9",
+   "§8",
+   "§5",
+   "§1",
+   "§6",
+   "§12",
+   "T1",
+   "T13"
+  ],
+  "precedents": [
+   {
+    "event": "The Windrush scandal: wrongful detention and deportation of people with the legal right to remain",
+    "year": 2018,
+    "source": "Joint Council for the Welfare of Immigrants / Wikipedia",
+    "url": "https://www.jcwi.org.uk/windrush-scandal-explained",
+    "shows": "At least 83 people with the legal right to live in the UK were wrongly deported and many more detained, because the Home Office had destroyed landing cards and the 'hostile environment' put the burden of proof on them — a coercive act whose basis was the absence of documents rather than a valid, legible warrant, applied to people who had done nothing wrong."
+   },
+   {
+    "event": "UK immigration detention: no statutory time limit and no automatic judicial oversight",
+    "year": 2024,
+    "source": "House of Commons Library / Joint Committee on Human Rights",
+    "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-7294/",
+    "shows": "Alone in Europe the UK sets no statutory time limit on immigration detention, provides no automatic judicial review of its lawfulness (the onus is on the detainee to challenge), and the power is exercised by Home Office officials rather than judges — coercive detention on executive discretion, reviewed only if the detained person can force it."
+   },
+   {
+    "event": "Border Security, Asylum and Immigration Bill 2025: expanded detention powers, reduced oversight",
+    "year": 2025,
+    "source": "Parliamentary written evidence / civil-society briefings",
+    "url": "https://committees.parliament.uk/writtenevidence/96553/html/",
+    "shows": "Reform advocates warned the 2025 Bill expands detention powers while reducing judicial oversight, with vague authorisation provisions risking indefinite detention on executive discretion — the direction of travel is toward less legibility and less automatic review, the opposite of what an accountable coercive act requires."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:caldon-detention.example",
+    "name": "Caldon Detention Authority (coercive-acts accountability pilot)",
+    "parent": "did:web:caldon.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": true,
+    "transparency_log": true
+   },
+   "rights_guard": {
+    "invariants": [
+     3,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     13,
+     14
+    ],
+    "remedy": "escalate",
+    "scope": "unconditional"
+   },
+   "transparency_log": {
+    "log_id": "did:web:caldon-detention.example",
+    "witnesses": [
+     "did:web:caldon-audit.example",
+     "did:web:caldon-bar-association.example",
+     "did:web:detention-oversight-trust.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-warrant-against-you",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 30,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:caldon-detention.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Alma Okonkwo, and the system that detains her",
+    "verb": "offstage",
+    "narrative": "The backdrop is the real one, and its wrong is coercive power exercised behind a rule the subject cannot see. Alma is detained pending removal by an official's decision, with no cited basis she can read, no time limit on how long she may be held, and no review unless she herself finds a lawyer and demands one. Eighty-three people with every right to remain were deported this way. Whether Alma is in fact removable is a substantive question for a tribunal, which the kernel will never answer (refusal 11). What it can offer, to a jurisdiction willing to accept it, is narrower and sharper: a detention that must show its warrant, and that is reviewed because it happened, not because the detained fought for it."
+   },
+   {
+    "actor": "Caldon Detention Authority",
+    "verb": "cast",
+    "narrative": "Caldon, rebuilt after its own wrongful-removal scandal, opens its coercive-acts register on the log with one binding rule: no person is detained or removed except by a logged coercive.act that cites the warrant it rests on, carries a path to appeal, and — because liberty is a floor invariant (§5) — is escalated automatically to independent review by the record itself. The onus that the real system places on the detainee, to notice and to challenge, is moved onto the state, to justify and to be reviewed. It binds Caldon's own force. It can bind no one else's.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:caldon-detention.example",
+     "timestamp": "2026-01-20T09:00:00Z",
+     "body": {
+      "decision_id": "2026-coercive-acts-register",
+      "decision_class": "coercive-accountability-commitment",
+      "authorizing_rule": "caldon-detention-code/v2; udhr-floor:art-9-liberty",
+      "issuing_authority": "Caldon Detention Authority",
+      "commitment": "Every detention and removal logged as a coercive.act citing its warrant, carrying an appeal path, and auto-escalated to independent review on the liberty floor - review by the record, not on the detainee's initiative",
+      "note": "The register binds the authority's own coercive power. It cannot compel another state's enforcement to log a warrant, and - as the removal step will show - a cited warrant is not a correctly applied one."
+     },
+     "sig": {
+      "key_id": "did:web:caldon-detention.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29lcmNpdmVSZWdpc3RlckNhbGRvbk5vdFJlYWxDcnlwdG8wMQ"
+     }
+    }
+   },
+   {
+    "actor": "Caldon enforcement, and Alma Okonkwo",
+    "verb": "cast",
+    "narrative": "Alma is detained, and in Caldon that act cannot be silent. It lands as a coercive.act citing the specific power invoked and the realistic-prospect test that conditions it, with an appeal path attached and her reference held in the enforcement identity domain — walled off, by design, from any civic pseudonym, so the detention register can never become a lever to track a citizen. For the first time in her story the rule that holds her is a thing she and her lawyer can read, name, and contest. It is legible. Whether it is right is the next question, and a harder one.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "coercive.act",
+     "community": "did:web:caldon-detention.example",
+     "timestamp": "2026-05-08T08:00:00Z",
+     "body": {
+      "act_class": "detention",
+      "authorizing_rule": "caldon-immigration-code:s.12 detention-pending-removal (realistic-prospect-within-reasonable-time test applies)",
+      "issuing_authority": "Caldon immigration enforcement (executive official)",
+      "subject_ref": "enforcement-case:CAL-2026-4471",
+      "rights_guard_ref": "rights.classification:2026-CAL-4471-liberty",
+      "appeal_trace": "did:web:caldon-detention.example/appeals/CAL-2026-4471"
+     },
+     "sig": {
+      "key_id": "did:web:caldon-detention.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29lcmNpdmVBY3REZXRlbnRpb25BbG1hTm90UmVhbENyeXB0bzAy"
+     }
+    }
+   },
+   {
+    "actor": "The rights guard",
+    "verb": "verify",
+    "narrative": "Because the detention engages the liberty floor, the guard fires without anyone asking it to. This is where a coercive.act differs from an ordinary administrative act the guard cannot see: a detention touches an invariant directly, so the schema's rights-guard link is not decorative — it classifies the act as engaging Article 9 and routes it to independent review within a fixed window. This is the automatic oversight the real system omits, supplied by the record rather than extracted by the detainee. The guard does not decide whether Alma is removable; it decides that a detention may not sit unreviewed, and enforces that by construction.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rights.classification",
+     "community": "did:web:caldon-detention.example",
+     "timestamp": "2026-05-08T10:00:00Z",
+     "body": {
+      "classification_id": "2026-CAL-4471-liberty",
+      "subject": "coercive.act:CAL-2026-4471",
+      "engaged_invariants": [
+       9,
+       3
+      ],
+      "reason": "Detention pending removal engages UDHR Art 9 (no arbitrary detention) and Art 3 (liberty and security); the floor requires review by the record, not detainee-initiated challenge.",
+      "routed_to": "independent review within 72 hours, not conditional on the detained person lodging a challenge",
+      "posture": "escalate: routes the detention to oversight automatically. It does not adjudicate whether removal is lawful - that is substantive, for the tribunal (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:caldon-detention.example#log-1",
+      "alg": "ed25519",
+      "value": "UmlnaHRzQ2xhc3NpZmljYXRpb25MaWJlcnR5QWxtYU5vdFJlYWwwMw"
+     }
+    }
+   },
+   {
+    "actor": "Alma's solicitor, reading the record",
+    "verb": "read",
+    "narrative": "Alma's solicitor reads the coercive.act and the classification and, for once, starts from knowledge rather than a blank refusal: the exact power claimed, the test it must meet, the review already triggered. But here the honest limit surfaces, and it is the Windrush limit precisely. The warrant is cited - the detention passes 'cite your warrant' cleanly. What it does not show is that the warrant is rightly applied to a woman who has lived here fifty-one years and simply cannot document it. The kernel foreclosed the detention with no basis on the record; it cannot foreclose the detention with a basis that is wrong. That the rule is legible is worth a great deal to Alma - she can finally fight it - and it is not the same as the rule being just."
+   },
+   {
+    "actor": "Alma Okonkwo, contesting the warrant",
+    "verb": "challenge",
+    "narrative": "Alma challenges through the appeal trace, and the kernel does exactly what it promises at the level of the act: it surfaces the cited power, the realistic-prospect test, and the automatic review, and gives her a forum that opened without her having to find it. The challenge then turns on the merits - whether the immigration rule truly reaches a lifelong resident whose records the state destroyed - and that is a tribunal's judgment, not the protocol's. The kernel handed her the warrant and the door. What it did not hand her is the verdict, because the verdict is a substantive question it refuses on principle to decide."
+   },
+   {
+    "actor": "Caldon Detention Authority, oversight office",
+    "verb": "cast",
+    "narrative": "At the half-year the authority must publish what its detentions add up to, and the number speaks to the wrong the real system institutionalises: of three hundred and forty detentions, sixty-one people held beyond twenty-eight days with no realistic removal date on the record. The indefinite detention that the UK alone in Europe permits, and that no single case can prove, becomes a signed aggregate - the realistic-prospect test failing in the pattern, contemporaneous and public. Measure the process (§8): the guard escalates each detention one at a time; only the aggregate shows the system holding people it has no prospect of removing.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:caldon-detention.example",
+     "timestamp": "2026-07-01T09:00:00Z",
+     "body": {
+      "process": "detention-pending-removal",
+      "period": "2026-H1",
+      "unit": "detentions by duration and removal prospect",
+      "detentions_opened": 340,
+      "over_28_days": 96,
+      "over_28_days_no_realistic_removal_date": 61,
+      "median_days": 34,
+      "note": "The indefinite-detention wrong as a signed number: 61 people held past 28 days with no realistic removal date on the record, where the real UK system sets no statutory limit at all. Anonymous aggregate; measure the process, never the person (§8)."
+     },
+     "sig": {
+      "key_id": "did:web:caldon-detention.example#log-1",
+      "alg": "ed25519",
+      "value": "RGV0ZW50aW9uRHVyYXRpb25BZ2dyZWdhdGVDYWxkb25Ob3RSZWFsMDQ"
+     }
+    }
+   },
+   {
+    "actor": "Caldon enforcement, and the pen the kernel does not hold",
+    "verb": "offstage",
+    "narrative": "Now the sharpest residue. The classification escalated Alma's detention; suppose enforcement, under political pressure, removes her before the review concludes. The log records that faithfully - a cited detention, an automatic escalation, and a removal that overrode it, all signed and permanent. And a true record of a wrongful removal is not the removal prevented. This is the executive-ignores break at coercive power: the kernel senses at machine speed and holds no pen (§9). It can make the violation undeniable, evidentiary, and permanent; it cannot, of itself, stop the plane. A detention binds only where the power detaining obeys the record it is bound by."
+   },
+   {
+    "actor": "The states that will not adopt it",
+    "verb": "offstage",
+    "narrative": "And beneath even that is the ceiling that makes this the corpus's closest strain to a break: adoption. Caldon bound its own force only because a scandal shamed it into rebuilding. The coercive power in the real story - the one that destroyed the records, set no time limit, and reviewed nothing unless forced - runs no kernel, and is the least likely institution on earth to adopt a register that constrains its own capacity to detain. The coercive.act is a promise a state makes to the people it may imprison, and coercive power is precisely the power that refuses to make it. The primitive is sound; its reach ends exactly where the willingness of the least willing does."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: for a jurisdiction that adopts it, it designed the accountable detention - every coercive act cites its warrant, carries an appeal path, and is escalated to independent review automatically because it touches the liberty floor, so the no-cited-basis and no-automatic-oversight that define the real system are foreclosed, and the register can never double as a tool to track the civic identity of anyone. What it did not do is decide whether a cited warrant was rightly applied (Windrush's true wrong, a substantive question), prevent a removal by a power that overrides the escalation (it records, it holds no pen), or compel the coercive state - least willing of all adopters - to accept any of it. It drew the shape of an accountable detention. It cannot make the state stand inside it."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Immigration detention runs on executive discretion, no cited basis and no automatic oversight — Windrush deported 83 who had every right to stay. The kernel's coercive act must cite its warrant, be appealable, and escalate on the liberty floor, so for an adopter a warrantless, unreviewed detention can't be logged. But the coercive state least adopts, a warrant can be wrongly applied, and binds only where power obeys.",
+  "protection": "the accountable detention",
+  "protection_plain": "Whether the coercive-act primitive — each detention citing its warrant, appealable, auto-escalating on the liberty floor — gives the detained a basis they can see and oversight they needn't fight for. True for an adopter; but coercive power least adopts, and a warrant can be wrongly applied.",
+  "findings": [
+   {
+    "protection": "the warranted, auto-reviewed detention",
+    "severity": "note",
+    "doc_ref": "§3.3",
+    "observation": "The design property, and a real one: a coercive.act requires the warrant ('every coercive act cites its warrant'), carries an appeal trace, and - because a detention engages the liberty floor directly, unlike a routine administrative act the guard cannot see - is classified and escalated to independent review automatically. That answers the two defining failures of the real UK system, which alone in Europe sets no detention time limit and provides no automatic judicial oversight, leaving the onus on the detainee. For an adopter the unwarranted, unreviewed detention is structurally foreclosed - the wrong's mechanism absent by construction, as the booth gate is in voter-id."
+   },
+   {
+    "protection": "a cited warrant can still be wrongly applied",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The Windrush limit, exactly. The wrong there was rarely a missing warrant; it was a valid immigration power misapplied to people with the right to remain who could not prove it because the state had destroyed their records. 'Cite your warrant' forecloses the un-warranted act; it cannot catch the wrongly-warranted one. The kernel makes the claimed basis legible and appealable - a large gain, because the subject can finally see and contest it, and the review opens without her fighting for it - but whether the rule truly applies is substantive judgment for a tribunal, which the kernel refuses. It foreclosed the detention with no basis, not the detention with a wrong one."
+   },
+   {
+    "protection": "binds only where power obeys the record",
+    "severity": "strain",
+    "doc_ref": "§9",
+    "observation": "The enforcement-obeys residue at its sharpest, and the corpus's executive-ignores break at coercive power. A cited, escalated detention constrains only if the detaining power obeys the escalation; if enforcement removes Alma before the review concludes, the log holds a permanent, evidentiary record of a cited detention, an automatic escalation, and a removal that overrode it - and a true record of a wrongful removal is not the removal prevented. The kernel senses at machine speed and holds no pen (§9). It makes the violation undeniable and permanent, which matters for every case that follows; it cannot, by itself, stop this one."
+   },
+   {
+    "protection": "the coercive state is the least likely adopter",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The harshest adoption gap in the corpus, and why this strains at the very edge of breaking. The coercive.act is a promise a state makes to the people it may detain, and coercive power - the power that destroyed the records, set no time limit, reviewed nothing unless forced - is precisely the institution least willing to bind its own capacity to imprison to a public, appealable, auto-escalating record. Caldon adopted it only after a scandal shamed it into rebuilding; the real Home Office runs no kernel and will not. The primitive is sound and its reach ends exactly where the willingness of the least willing does - which, for coercive power, is very near zero."
+   },
+   {
+    "protection": "the wall between civic and enforcement identity",
+    "severity": "note",
+    "doc_ref": "§12",
+    "observation": "A deliberate design line worth naming so the accountability is not mistaken for surveillance. coercive.act's subject_ref must live in the enforcement-identity domain and never a civic unlinkable pseudonym - the kernel refuses to bridge civic anonymity to enforcement attribution (T6, T1). So even a full deployment cannot turn the detention register into a lever over the civic layer: the accountable-detention record and the anonymous-vote record are walled apart by construction. The design gives the state's force a warrant it must show and a review it cannot skip, without giving anyone a thread from a person's vote to a person's cell."
+   }
+  ]
+ },
+ {
   "id": "revolving-door-lobbying",
   "title": "The Door With No Record: A Revolving Door Made Visible as It Turns",
   "setting": "Halcyon Capital is a supply-chain finance firm with a single genuine asset: proximity. Its founder, Lucian Harrow, was brought into the Kingsmere government years ago as a 'crown representative', an unpaid adviser role that placed him, without a contract or a competition, at the centre of how the state buys and pays. The official who brought him in, Chief Commercial Officer Gethin Rowntree, later took a paid part-time advisory role with Halcyon — while still in his government post, and without the propriety clearance the rules require. And when the pandemic hit and Halcyon wanted into the emergency financing scheme it did not qualify for, a former minister, Lord Aldous Vane, made the case directly to the Chancellor: some by recorded meeting, much of it by private text and call.\n\nEvery one of these acts was, taken alone, lawful. That is the whole difficulty, and it is the real one: when the Greensill affair broke, a 141-page review concluded that no lobbying rules had been broken — and that this only showed how weak the rules were. The wrong was never in any single appointment or any single message. It was in the door: the quiet, unrecorded traffic between a firm and the public office that served it, reconstructed only afterward, at length, by an inquiry. Kingsmere is the one government that runs its propriety register on a kernel transparency log — appointments, secondary employments, and formal lobbying contacts posted with their provenance as they happen. This scenario is about how much of that door the log can light, and the part of it that stays, deliberately and structurally, in the dark.",

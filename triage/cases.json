@@ -116,8 +116,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "removal-without-legible-warrant"
     },
     {
       "id": "child-surname-article8",
