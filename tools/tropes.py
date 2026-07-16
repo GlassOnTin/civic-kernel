@@ -104,6 +104,9 @@ for t in sorted(threat_scen, key=lambda x: int(x[1:])):
     out.append('</ul>')
     out.append('</section>')
 
+# live count line at the top, so the page never hardcodes a total that drifts
+out.insert(0, f'<p class="stat">{len(scen)} scenarios &middot; {len(SIGNATURES)} shapes &middot; {len(threat_scen)} threats in play &middot; nothing cherry-picked</p>')
+
 fragment = "\n".join(out)
 
 page = ROOT / "tropes.html"
