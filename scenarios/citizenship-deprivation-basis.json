@@ -1,0 +1,268 @@
+{
+ "id": "citizenship-deprivation-basis",
+ "title": "The Roll Is the State's: Escalating the Loss of Citizenship Into a Sealed Room",
+ "setting": "Nadia Rahman was born abroad, naturalised as a British citizen at twenty-six, and had lived in Britain for nineteen years when she flew back to visit her dying father. While she was there, a letter arrived at her home in Britain: the Home Secretary had decided that depriving her of her citizenship was 'conducive to the public good', on national-security grounds, and she was now excluded from the country she had made her home. She has never been charged with anything. She cannot see the case against her — it is national-security material, heard in a closed court where only a security-cleared 'special advocate', not Nadia and not the lawyer she chose, is permitted to read it, and where that advocate, once he has seen it, may no longer take instructions from her. Because she is abroad and now excluded, she cannot return to fight the decision that excluded her. And because she was born with a claim to another nationality, the law's one hard limit — that no one may be made stateless — does not protect her, though it would protect a British-born citizen with no such claim, deprived on identical facts.\n\nThis is British Nationality Act 1981 section 40, the closed-material procedure, and the shape of the Shamima Begum litigation, in which the courts held that a person could be deprived and excluded even where exclusion left her unable to participate effectively in her own appeal. Parliament has since legislated for deprivation without any notice at all. The Department for Citizenship, in this scenario, runs the credential on a kernel register — personhood, the very service that decides who may speak — and the question the case puts is the darkest the corpus has faced: when the state revokes the status on which every other right depends, by executive order, on grounds you may never see, what can a protocol that secures the count do for a person struck from the roll? It can make the striking accountable, noticed, and escalated. It cannot keep her on the roll, because the roll was never the kernel's to keep.",
+ "threats": [
+  "T7",
+  "T1"
+ ],
+ "doc_refs": [
+  "§3.1",
+  "§3.3",
+  "§5",
+  "§9",
+  "§8",
+  "§1",
+  "§12",
+  "T7",
+  "T1"
+ ],
+ "precedents": [
+  {
+   "event": "British Nationality Act 1981 s.40 — deprivation 'conducive to the public good'",
+   "year": 1981,
+   "source": "British Nationality Act 1981 s.40; legislation.gov.uk",
+   "url": "https://www.legislation.gov.uk/ukpga/1981/61/section/40",
+   "shows": "The Home Secretary may deprive a person of British citizenship where satisfied it is 'conducive to the public good' (s.40(2)), subject only to the bar on rendering someone stateless (s.40(4)) - a bar that does not protect a citizen with a claim to another nationality, creating a deprivation power that reaches naturalised and dual-heritage citizens and not others deprived on identical facts."
+  },
+  {
+   "event": "Begum v SIAC / Home Secretary — deprivation, exclusion, and a hollow appeal",
+   "year": 2021,
+   "source": "R (Begum) v Special Immigration Appeals Commission [2021] UKSC 7",
+   "url": "https://www.supremecourt.uk/cases/uksc-2020-0155.html",
+   "shows": "The national-security case is heard in a closed procedure where the person and their chosen lawyer never see the evidence - only a special advocate does, who cannot then take instructions - and the Supreme Court held a person could be deprived and excluded even where exclusion left her unable to participate effectively in her own appeal: the deprivation forecloses the challenge to the deprivation."
+  },
+  {
+   "event": "Nationality and Borders Act 2022 s.9 — deprivation without notice",
+   "year": 2022,
+   "source": "Nationality and Borders Act 2022 s.9; D4 (Notice of Deprivation) litigation",
+   "url": "https://www.legislation.gov.uk/ukpga/2022/36/section/9",
+   "shows": "After a court found deprivation without notice unlawful (the D4 case), Parliament legislated to permit the Home Secretary to deprive a person of citizenship without giving them notice at all - a life-altering executive decision that the subject may not even know has been taken, the completeness gap of the personhood layer made law."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:citizenship.meridon.example",
+   "name": "Department for Citizenship (deprivation-decisions register)",
+   "parent": "did:web:meridon.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": true,
+   "transparency_log": true
+  },
+  "rights_guard": {
+   "invariants": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    15
+   ],
+   "remedy": "escalate",
+   "scope": "unconditional"
+  },
+  "transparency_log": {
+   "log_id": "did:web:citizenship.meridon.example",
+   "witnesses": [
+    "did:web:meridon-independent-reviewer.example",
+    "did:web:citizenship-audit.example",
+    "did:web:meridon-bar-council.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "receive-notice-and-appeal-route-of-a-deprivation",
+    "steps": 1,
+    "fields": 0,
+    "median_seconds": 60,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:citizenship.meridon.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Nadia Rahman, and the power over her status",
+   "verb": "offstage",
+   "narrative": "The backdrop is a power unlike any other in the corpus: not a detention, not a denied benefit, but the removal of the status on which every other right depends. Under s.40 the Home Secretary may deprive a citizen of citizenship on grounds of the public good, tested in a closed court the person cannot see into, and now - since 2022 - possibly without notice at all; the one hard limit, statelessness, spares only those with no claim to another nationality, so the power falls on naturalised and dual-heritage Britons and not their neighbours. Whether any particular person is truly a security risk is a substantive national-security judgment the kernel refuses to make (refusal 11), and who belongs on the citizenship roll is governance's to set, not the kernel's (refusal 10). What the kernel can change is only the manner of the taking: whether it is noticed, accountable, escalated, and appealable - or silent."
+  },
+  {
+   "actor": "Department for Citizenship",
+   "verb": "cast",
+   "narrative": "The department opens its deprivation register - the log of the decisions that revoke the credential §3.1 calls the right to speak. Its commitment: a deprivation is a logged revocation that names its author and cites its statutory power, that must be served as notice on the person even when the reasons are sealed, that commits the sealed national-security case to a published digest so it cannot later be rewritten, and that is automatically classified against the rights floor for the nationality invariant. The department keeps every substantive power it had - it still decides whom to deprive and on what security assessment. The register changes only that the deciding must be noticed, cited, sealed-but-committed, and escalated, never done in the dark.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:citizenship.meridon.example",
+    "timestamp": "2026-01-15T09:00:00Z",
+    "body": {
+     "decision_id": "2026-deprivation-register",
+     "decision_class": "citizenship-deprivation-commitment",
+     "authorizing_rule": "meridon-nationality-act:s.40; duty-to-notice; auto-classify-on-nationality-floor",
+     "issuing_authority": "Department for Citizenship",
+     "commitment": "Every deprivation is a logged, notice-served, appealable revocation citing its statutory power; the sealed case is digest-committed; the nationality floor auto-classifies to rights review; an annual aggregate publishes deprivations by statutory limb and by sole-vs-dual nationality",
+     "note": "The register makes the taking accountable. It does not decide whether the person is a security risk (refusal 11), nor whether they belong on the roll (refusal 10) - those remain the state's."
+    },
+    "sig": {
+     "key_id": "did:web:citizenship.meridon.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVwcml2YXRpb25SZWdpc3Rlck9wZW5lZE1lcmlkb25Ob3QwMQ"
+    }
+   }
+  },
+  {
+   "actor": "The Home Secretary, depriving",
+   "verb": "cast",
+   "narrative": "The deprivation lands as a logged act: Nadia named by case reference, the statutory power cited, the author identified, an appeal route to the closed commission attached - and the national-security case itself sealed behind a published digest, readable by the court and an auditor but not by Nadia and not by the world. Crucially, the act is served as notice: whatever else is hidden, the fact of the decision is not, and the register's rule is that no deprivation may be entered without notice to the person. The without-notice deprivation that Parliament legislated for cannot happen here - 'we deprived you and told no one' is unloggable. She learns, on the day, that a decision has been taken, by whom, under what power, and how to appeal. She does not learn why.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "coercive.act",
+    "community": "did:web:citizenship.meridon.example",
+    "timestamp": "2026-04-03T09:00:00Z",
+    "body": {
+     "act_class": "sanction",
+     "authorizing_rule": "meridon-nationality-act:s.40(2) conducive-to-the-public-good; citizenship-deprivation (national-security basis, sealed)",
+     "issuing_authority": "Home Secretary (executive)",
+     "subject_ref": "deprivation-case:MER-2026-0091 (notice served to the person)",
+     "rights_guard_ref": "rights.classification:2026-MER-0091-nationality",
+     "appeal_trace": "did:web:citizenship.meridon.example/appeals/MER-2026-0091 (closed-material commission)"
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2",
+     "readable_by": [
+      "court-order",
+      "authorized-auditor"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:citizenship.meridon.example#log-1",
+     "alg": "ed25519",
+     "value": "Q29lcmNpdmVBY3REZXByaXZhdGlvblJhaG1hbk5vdFJlYWwwMg"
+    }
+   }
+  },
+  {
+   "actor": "The rights guard, firing",
+   "verb": "cast",
+   "narrative": "The guard does exactly what it did for the detention in the removal case: it reads the act, classifies it as engaging the rights floor - here the nationality and personhood invariants, the right to a nationality and to recognition as a person before the law - and escalates it automatically, not waiting for Nadia to lodge anything. And here the corpus meets the sharpest irony it holds. The guard's remedy, by §3.3, is publicity: a rights-stripping is pushed onto a road that is slower, louder, harder. But a national-security deprivation is the one rights-stripping the law answers with a state secret - so the escalation routes not to a louder road but to a closed one, the commission where the case is sealed and the person shut out. The guard fires. It fires into the dark.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "rights.classification",
+    "community": "did:web:citizenship.meridon.example",
+    "timestamp": "2026-04-03T09:01:00Z",
+    "body": {
+     "classification_id": "2026-MER-0091-nationality",
+     "subject": "coercive.act:MER-2026-0091",
+     "engaged_invariants": [
+      15,
+      6
+     ],
+     "reason": "Deprivation of citizenship engages UDHR Art 15 (right to a nationality; no arbitrary deprivation of it) and Art 6 (recognition everywhere as a person before the law) - the most fundamental status, on which the standing to speak (§3.1, §5) depends.",
+     "routed_to": "closed-material commission review, automatic, not conditional on the person lodging a challenge - but conducted where the person and their own lawyer cannot see the case",
+     "posture": "escalate: routes the deprivation to oversight automatically. It does not adjudicate the security assessment (substantive, refusal 11), and the road it escalates to is, by national-security law, sealed rather than public - the guard's publicity remedy negated at its destination."
+    },
+    "sig": {
+     "key_id": "did:web:citizenship.meridon.example#log-1",
+     "alg": "ed25519",
+     "value": "UmlnaHRzQ2xhc3NpZmljYXRpb25OYXRpb25hbGl0eU5vdDAz"
+    }
+   }
+  },
+  {
+   "actor": "Nadia Rahman, reading her notice abroad",
+   "verb": "read",
+   "narrative": "In her father's house, Nadia reads what the register gives her, and it is more than the real letter gave: the author, the power, the date, the fact that a sealed case exists and is committed so it cannot be quietly changed, that a special advocate and an auditor will see it, and that an appeal exists. The envelope is entirely legible. What she cannot read is the one thing that matters - what she is supposed to have done - because the contents are sealed and she is not among those who may open them. And she is abroad, excluded by the very act she must appeal, holding a route to a courtroom she cannot enter and a case she cannot see. The kernel has handed her a legible envelope, a committed secret, and an appeal she cannot effectively run."
+  },
+  {
+   "actor": "The special advocate, and the closed commission",
+   "verb": "challenge",
+   "narrative": "The appeal proceeds the only way this power allows. A security-cleared special advocate reads the sealed case; from the moment he does, he may no longer take instructions from Nadia, so he contests, alone, a case she will never see, on behalf of a client he can no longer consult. The kernel's appeal-trace is real and it is honoured - the door is open, the process runs. But §3.3's promise of a louder road has become the quietest room in the state, and the guard that escalated her deprivation cannot make that room open, because whether the material must stay sealed is a national-security judgment the kernel refuses to second-guess (refusal 11). The challenge is genuine. It is also, by design, a challenge in the dark."
+  },
+  {
+   "actor": "Department for Citizenship, transparency office",
+   "verb": "cast",
+   "narrative": "At year's end the register publishes what deprivation looks like in aggregate: how many, under which limb of s.40, how many on sealed national-security grounds, and - the number the real debate most lacked - how many fell on citizens with a claim to another nationality, who can be deprived, versus those without, who cannot. Measure the process, never the person (§8): the two-tier shape of the power becomes the department's own signed figure, not an advocacy estimate. It is the clearest description of the asymmetry anyone has had. It is a description, and the asymmetry is written into the statute, which the number cannot touch.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:citizenship.meridon.example",
+    "timestamp": "2026-12-01T09:00:00Z",
+    "body": {
+     "process": "citizenship-deprivation",
+     "period": "2026",
+     "unit": "deprivation decisions",
+     "total": 104,
+     "limb_public_good_s40_2": 61,
+     "limb_fraud_s40_3": 43,
+     "sealed_national_security_basis": 47,
+     "subjects_with_claim_to_other_nationality": 104,
+     "subjects_sole_nationality_deprived": 0,
+     "note": "Anonymous aggregate. Every deprivation fell on a citizen with a claim to another nationality - the statelessness bar means the power reaches them and not sole-nationals on the same facts. Measure the process (§8): the two-tier shape as the department's own signed number. The number reveals the asymmetry; it is written into the statute and cannot remove it (refusal 11)."
+    },
+    "sig": {
+     "key_id": "did:web:citizenship.meridon.example#log-1",
+     "alg": "ed25519",
+     "value": "QWdncmVnYXRlRGVwcml2YXRpb25Ud29UaWVyTm90UmVhbDA0"
+    }
+   }
+  },
+  {
+   "actor": "The roll, and the pen above it",
+   "verb": "offstage",
+   "narrative": "The ceilings here are the corpus's deepest, because the wrong reaches the foundation the whole kernel stands on. The kernel secures the count - no one can rig the tally - but the roll it takes as given (refusal 10), and citizenship is the roll: the right to be counted at all. Deprivation edits that roll one name at a time, by executive pen, and the rights guard - armed for the majoritarian threat, a 51% vote to strip a minority, the T7 it was built to re-route - fires but cannot stop it, and escalates it into a sealed room where its publicity remedy dies. The most capture-resistant count ever designed still rests on a roll the executive may revise, on grounds it may seal, against people the statute selects by their access to another passport. Three further walls stand behind that one: the sealed case cannot be opened by the person it condemns (refusal 11); the remedy self-entrenches, because exclusion hollows the appeal against exclusion (§9 - the process is slow, the exile immediate); and the Home Office, which legislated to deprive without notice, is the last institution that would run a register forcing the notice it fought to withhold. The kernel can dress the taking in every procedure it owns. It cannot make the credential the person's rather than the state's."
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: it turned a silent, unaccountable revocation into a noticed, cited, escalated, appealable, aggregated act - so the wrongs the real power is built on cannot be logged here: a deprivation without notice, a decision whose author or power is hidden, a rights-stripping that reaches no oversight, an asymmetry no one can count. On this register the person always learns a decision exists, who made it, under what power, and how to appeal; the guard always fires; the two-tier shape is always a public number. What it did not do, and by its own principles cannot: open the sealed case to the person it condemns, make the closed court public, make an excluded person's appeal effective, or keep a name on the roll against the executive's pen - because the security judgment is refused, the roll is governance's, and the guard is built for the ballot box and the sealed room is not on the ballot. It is the removal case taken to the root: there the state took a person's liberty with a warrant that could at least be read; here it takes the personhood itself, with a warrant sealed, and the kernel escalates the loss of everything into the one room its own remedy cannot reach. The record is complete, noticed, and honest. The citizen is still struck from the roll."
+ }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "The Home Secretary can strip your citizenship on secret grounds, in a closed court you and your lawyer never see, then exclude you so you cannot fight it (BNA s.40; Begum). The kernel makes the revocation a noticed, appealable, escalated act — so no secret deprivation. But the guard's remedy is publicity, and this is the rights-stripping law answers with a state secret: it escalates into a sealed room.",
+ "protection": "the noticed, escalated deprivation",
+ "protection_plain": "Whether logging deprivation as a noticed, appealable act citing its power, auto-escalated to rights review, protects the citizen. It forecloses the secret, without-notice deprivation; but the guard escalates into a closed court the person can't see, and the roll stays the executive's to edit.",
+ "findings": [
+  {
+   "protection": "the credential revocation, made accountable and noticed",
+   "severity": "note",
+   "doc_ref": "§3.1",
+   "observation": "For an adopting authority, a deprivation is a logged revocation naming its author, citing its statutory power, carrying an appeal route, and - decisively - served as notice on the person even when the reasons are sealed. So the wrong Parliament legislated for, deprivation without notice (NBA 2022 s.9), cannot be logged: the subject always at least learns that a decision exists, who took it, under what power, and how to challenge it. The completeness gap of the personhood layer - a life-ending status change the person may not even know occurred - is closed. It is the smallest of the protections here and, given the without-notice power, far from the least."
+  },
+  {
+   "protection": "the guard escalates into a sealed room",
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "The finding this case exists to make. The rights guard fires exactly as it did on the detention in the removal case - it classifies the deprivation as engaging the nationality floor (UDHR Art 15) and escalates automatically. But §3.3's remedy is publicity: rights-stripping is pushed onto a road 'slower, louder, harder'. A national-security deprivation is the one rights-stripping the law answers with a state secret, so the escalation routes to a closed commission where the person and their own lawyer never see the case - a road slower, harder, and by statute quieter. The guard's protection is to make a wrong loud; this is the wrong the state is entitled to keep silent. The guard fires and lands in the dark, and cannot itself open the room, because whether the material stays sealed is substantive (refusal 11)."
+  },
+  {
+   "protection": "the roll is upstream, and the credential is the state's",
+   "severity": "strain",
+   "doc_ref": "§5",
+   "observation": "The deepest limit, because it reaches the kernel's foundation. The kernel secures the count and the record; the roll of who may be counted it takes as given (refusal 10). Citizenship is that roll - the standing §5 calls nearly impossible to change and §3.1 calls the right to speak - and deprivation edits it one name at a time by executive order, upstream of any ballot the kernel protects. The rights guard is built to re-route the majoritarian threat (T7), a vote to strip a minority; an administrative deprivation is not a vote and never enters the ballot path, so the guard escalates but cannot veto, and the franchise is narrowed by pen where voter-id saw it narrowed by rule. The most capture-resistant count ever built still rests on a roll the executive may revise - and the kernel, by design, does not contest who belongs on it."
+  },
+  {
+   "protection": "the sealed warrant, and the self-entrenching remedy",
+   "severity": "strain",
+   "doc_ref": "§9",
+   "observation": "Removal's warrant was citable and testable; its limit was wrong application (Windrush). Here the warrant is sealed on national-security grounds, so the person cannot contest what they cannot see - the envelope is legible (author, power, date, appeal) and the contents are the state's to seal. Worse, the remedy self-entrenches: a deprivation that also excludes strips the person of the ability to run the appeal against the deprivation (Begum - exclusion left her unable to participate effectively), and §9's constitutional speed means the process is slow while the exile is immediate. The kernel makes the sealing visible without making it openable, and hands over an appeal the wrong itself has hollowed. A challenge you cannot see and cannot attend is a challenge in name."
+  },
+  {
+   "protection": "the two-tier aggregate names the asymmetry it cannot cure",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "The aggregate surfaces what the real debate most lacked: how many deprivations, on which statutory limb, how many sealed on national-security grounds, and how many fell on citizens with a claim to another nationality - who can be deprived - versus sole-nationals, who cannot. Measure the process (§8): the two-tier shape the statelessness bar creates becomes the department's own signed figure rather than an advocacy estimate. It is the clearest description of the asymmetry anyone has had, and it is only a description - the two tiers are written into the statute, and whether the power itself is legitimate is a substantive judgment the kernel refuses (refusal 11). The number makes the unfairness undeniable and countable; it leaves it exactly in the law where it was written."
+  }
+ ]
+}

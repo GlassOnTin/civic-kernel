@@ -336,9 +336,9 @@
       "signature": ["record_absent"],
       "reach": 2,
       "leverage": 2,
-      "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "remedy_caveat": true,
+      "status": "encoded",
+      "scenario": "citizenship-deprivation-basis"
     },
     {
       "id": "infected-blood-coverup",
