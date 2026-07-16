@@ -8765,6 +8765,268 @@
   ]
  },
  {
+  "id": "protest-conditions-no-basis",
+  "title": "A Protest Delayed Is a Protest Denied: The Remedy That Arrives After the Day",
+  "setting": "Fen Latham has spent six weeks organising a cost-of-living march through Harborne for the morning of the thirtieth of May — the route agreed, the marshals briefed, three thousand people expecting to walk. At seven that morning, two hours before it begins, a senior officer imposes conditions under the Public Order Act: the march is confined to a back street, capped at an hour, its sound equipment banned. The stated ground is 'serious disruption', on a threshold that a court would later hold the government had no lawful power to set. Fen can challenge the conditions — but only by judicial review, a process that will conclude, if she is lucky, months from now. The march is today. Whatever the law eventually says, the march that happens will be the diminished one the police allowed, and the march she planned will simply never have taken place.\n\nThis is the shape of the real thing. The Public Order Act 2023 lowered the threshold for conditions from disruption that is 'significant and prolonged' to disruption that is 'more than minor'; the government made the change by regulation, under Henry VIII powers, after Parliament had rejected it, and in 2024 the High Court — upheld by the Court of Appeal in 2025 — ruled the change unlawful, because 'serious' requires a high threshold. Police impose section 12 conditions within minutes; the only way to contest them in advance is the slow machinery of judicial review; and people were convicted under the unlawful regulations before the courts struck them down. The Harborne Constabulary runs its public-order decisions on a kernel register. This scenario is about a right whose entire value is its timing, meeting a remedy that runs at the speed of law — and about the kernel being honest, for once against its own instinct, that its speed is the wrong one here.",
+  "threats": [
+   "T1",
+   "T13"
+  ],
+  "doc_refs": [
+   "§3.3",
+   "§9",
+   "§8",
+   "§5",
+   "§1",
+   "§6",
+   "§12",
+   "T1",
+   "T13"
+  ],
+  "precedents": [
+   {
+    "event": "Liberty v Home Secretary: lowering the 'serious disruption' threshold ruled unlawful",
+    "year": 2024,
+    "source": "High Court / Court of Appeal (Liberty legal challenge) / Human Rights Watch",
+    "url": "https://www.hrw.org/news/2024/05/29/uk-court-rules-anti-protest-measures-unlawful",
+    "shows": "The government lowered the threshold for imposing protest conditions from disruption that is 'significant and prolonged' to 'more than minor', by regulation under Henry VIII powers after Parliament had rejected the same change; the High Court in 2024, upheld by the Court of Appeal in 2025, held this unlawful because 'serious' requires a high threshold — so conditions were imposed for years on a basis the courts found the state had no power to set."
+   },
+   {
+    "event": "Protest conditions imposed in minutes, challengeable only by judicial review long after the day",
+    "year": 2024,
+    "source": "UK Parliament (POST) / Home Affairs Committee",
+    "url": "https://post.parliament.uk/policing-of-peaceful-but-disruptive-protests/",
+    "shows": "Police can impose conditions under section 12 of the Public Order Act within minutes of a protest, and those affected can contest them in advance only by judicial review — a lengthy process that concludes long after the protest is over. The restriction takes effect immediately; the remedy, if any, arrives too late for the assembly it stopped."
+   },
+   {
+    "event": "Activists convicted under regulations later found unlawful; bail conditions barring protest",
+    "year": 2025,
+    "source": "Just Stop Oil / Big Issue",
+    "url": "https://juststopoil.org/2025/02/17/three-just-stop-oil-supporters-found-guilty-for-breaching-illegally-introduced-anti-protest-regulations/",
+    "shows": "Three activists were found guilty of breaching the 'illegally introduced' serious-disruption regulations, and others were given bail conditions barring them from protests for months despite not being charged — restrictions enforced in the moment on a basis the courts had held unlawful, the vindication arriving far too late for the protests they prevented."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:harborne-public-order.example",
+    "name": "Harborne Constabulary (public-order coercive-acts register)",
+    "parent": "did:web:harborne.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": true,
+    "transparency_log": true
+   },
+   "rights_guard": {
+    "invariants": [
+     3,
+     7,
+     9,
+     11,
+     19,
+     20
+    ],
+    "remedy": "escalate",
+    "scope": "unconditional",
+    "timing": "post-enforcement"
+   },
+   "transparency_log": {
+    "log_id": "did:web:harborne-public-order.example",
+    "witnesses": [
+     "did:web:harborne-audit.example",
+     "did:web:civil-liberties-bureau.example",
+     "did:web:harborne-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-public-order-register",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 30,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:harborne-public-order.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Fen Latham, and a march due in two hours",
+    "verb": "offstage",
+    "narrative": "The backdrop is the real one, and its wrong is a clock. A protest is a right whose whole value is its timing — a march matters on its day, for its cause, in its moment — and the law lets police restrict it in minutes while allowing challenge only through judicial review that takes months. Whether a given protest crosses the threshold for conditions is a judgment the kernel will never make (refusal 11); and the threshold itself, lowered by regulation after Parliament refused it, was a rule the courts later struck down. What the kernel can change is not the speed of the courts. It is whether the condition's basis is legible the instant it is imposed, and whether the restriction is reviewed at all — while being honest that reviewed is not the same as reviewed in time."
+   },
+   {
+    "actor": "Harborne Constabulary",
+    "verb": "cast",
+    "narrative": "Harborne opens its public-order register, and does something unusual: it declares its own remedy weak on the record. Every protest condition will be logged as a coercive act citing its legal basis and auto-escalated on the assembly floor — but the manifest states plainly that the guard's timing is post-enforcement, because a review of a condition imposed the morning of a march cannot conclude before the march is over. The force commits to making the restriction legible and reviewable. It does not pretend the review will be timely, because for a one-day right it cannot be.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:harborne-public-order.example",
+     "timestamp": "2026-01-20T09:00:00Z",
+     "body": {
+      "decision_id": "2026-public-order-register",
+      "decision_class": "protest-conditions-transparency-commitment",
+      "authorizing_rule": "harborne-public-order-code/v2; udhr-floor:art-20-assembly, art-19-expression",
+      "issuing_authority": "Harborne Constabulary",
+      "commitment": "Every protest condition or ban logged as a coercive.act citing its specific legal basis, auto-escalated on the assembly and expression floor; conditioning pattern published quarterly",
+      "timing_declared": "post-enforcement: the review of a same-day condition cannot conclude before the protest ends - declared, not hidden",
+      "note": "The register makes the restriction legible and reviewable. It cannot make the review arrive in time, and says so - the timing gap is the honest subtraction here (§3.3 timing axis)."
+     },
+     "sig": {
+      "key_id": "did:web:harborne-public-order.example#log-1",
+      "alg": "ed25519",
+      "value": "UHVibGljT3JkZXJSZWdpc3RlckhhcmJvcm5lTm90UmVhbDAx"
+     }
+    }
+   },
+   {
+    "actor": "Harborne Constabulary, senior officer at the scene",
+    "verb": "cast",
+    "narrative": "Two hours before the march, the condition is imposed and logged as a coercive act: the specific statutory provision cited, the disruption ground stated, the restriction defined - a back street, one hour, no sound. For an adopting force, a condition on a vague or unrecorded ground simply cannot be logged; the basis that in the real system stays opaque until a judicial-review bundle months later is on the record the instant the condition takes effect. Fen can read exactly what power is claimed against her march. What she cannot do is stop the claim from taking effect while she reads it.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "coercive.act",
+     "community": "did:web:harborne-public-order.example",
+     "timestamp": "2026-05-30T07:00:00Z",
+     "body": {
+      "act_class": "sanction",
+      "authorizing_rule": "public-order-act-1986:s12 conditions; harborne-serious-disruption-standard/v3 (high threshold, cited) - NOT the 'more than minor' regulation the courts struck down",
+      "issuing_authority": "Harborne Constabulary, senior officer at the scene",
+      "subject_ref": "collective:the-assembly (cost-of-living march, 2026-05-30)",
+      "rights_guard_ref": "rights.classification:2026-harborne-assembly",
+      "appeal_trace": "did:web:harborne-public-order.example/appeals/2026-march-0530"
+     },
+     "sig": {
+      "key_id": "did:web:harborne-public-order.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29lcmNpdmVBY3RQcm90ZXN0Q29uZGl0aW9uTm90UmVhbDAy"
+     }
+    }
+   },
+   {
+    "actor": "The rights guard",
+    "verb": "verify",
+    "narrative": "The condition restricts a protest, so it engages the assembly and expression floor, and the guard fires without being asked - routing the restriction to independent review. And here the fresh limit lands, and it is the kernel's own principle turned against it. The guard senses at machine speed; the kernel, deliberately, responds at constitutional speed, so that the defence never becomes an autoimmune weapon (§9). But the march is at nine. The escalation is real and the review will be thorough and it will conclude weeks from now, on a protest that ended weeks ago. The guard did everything it is built to do, at exactly the speed it is built to do it, and that speed is the wrong one for a right that lives for a single morning.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rights.classification",
+     "community": "did:web:harborne-public-order.example",
+     "timestamp": "2026-05-30T07:30:00Z",
+     "body": {
+      "classification_id": "2026-harborne-assembly",
+      "subject": "coercive.act:2026-march-0530 (protest condition)",
+      "engaged_invariants": [
+       20,
+       19
+      ],
+      "reason": "A condition restricting a protest engages UDHR Art 20 (peaceful assembly) and Art 19 (expression). The floor requires the restriction be reviewed.",
+      "routed_to": "independent review of the condition",
+      "timing": "post-enforcement: the condition takes effect at 07:00 and binds the 09:00 march; a lawful review cannot conclude before the protest is over. A protest delayed is a protest denied.",
+      "posture": "escalate, and honestly late: the guard routes the condition to review at constitutional speed (§9), which for a same-day protest is after the fact. It does not decide whether the condition was justified (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:harborne-public-order.example#log-1",
+      "alg": "ed25519",
+      "value": "UmlnaHRzQ2xhc3NBc3NlbWJseVRpbWluZ05vdFJlYWwwMw"
+     }
+    }
+   },
+   {
+    "actor": "Fen Latham, reading the basis in real time",
+    "verb": "read",
+    "narrative": "Fen reads the logged condition on her phone at the assembly point, and it is more than the real system ever gives her: the exact statute, the exact ground, the exact restriction, the review already triggered - not the opaque wall that in reality stays opaque until a judicial-review hearing next year. She knows precisely what is being done to her march and on what claimed authority. And it changes nothing about the next two hours: the condition binds, the marshals redirect, the sound stays off, and three thousand people walk a back street for an hour. Legibility arrived in time. The remedy did not, and could not."
+   },
+   {
+    "actor": "Harborne Constabulary, oversight office",
+    "verb": "cast",
+    "narrative": "At the quarter's close the register must publish what the conditions add up to, and the number is the force's own: of some three hundred and forty notified assemblies, ninety-six conditioned and fourteen effectively banned - and three of those conditions later found unlawful, each one a protest wrongly stopped and vindicated too late to matter. The chilling of assembly, which in the real system is anecdote and dispute, is here a signed figure, with a column - 'later found unlawful' - that is the timing wrong made explicit: restrictions the courts would strike, enforced in full on the day, undone only after the day was gone.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:harborne-public-order.example",
+     "timestamp": "2026-07-01T09:00:00Z",
+     "body": {
+      "process": "protest-conditions",
+      "period": "2026-H1",
+      "unit": "notified assemblies by disposition",
+      "assemblies_notified": 340,
+      "conditions_imposed": 96,
+      "effectively_banned": 14,
+      "conditions_later_found_unlawful": 3,
+      "note": "The conditioning pattern as the force's own number: 96 of 340 assemblies conditioned, 14 effectively banned, 3 conditions later found unlawful - vindicated after the protests they stopped. Measure the process, never the person (§8). The chilling of assembly made countable; the 'later found unlawful' column is the timing gap made explicit."
+     },
+     "sig": {
+      "key_id": "did:web:harborne-public-order.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29uZGl0aW9uUGF0dGVybkFnZ3JlZ2F0ZUhhcmJvcm5lTm90UmVhbDA0"
+     }
+    }
+   },
+   {
+    "actor": "Fen Latham, challenging the condition",
+    "verb": "challenge",
+    "narrative": "Fen challenges the condition through its trace, and the kernel gives her what it can: the cited basis surfaced, a forum opened, the review already under way. Weeks later she may even win - the disruption ground was thin, the standard arguably misapplied, as Liberty won that the real threshold was set unlawfully low. And winning will restore nothing. The march happened once, diminished, on the thirtieth of May; a judgment in July cannot re-run it. This is the trap the timing draws tight: a challenge that succeeds after the event is a vindication, not a remedy, for a right whose exercise cannot be rescheduled."
+   },
+   {
+    "actor": "The constabulary, and the honest ceiling",
+    "verb": "offstage",
+    "narrative": "The ceilings, plainly. The deepest is timing, and it is the kernel's own design meeting its match: the guard senses at machine speed but responds at constitutional speed by choice (§9), so the defence cannot be weaponised - and a protest is precisely the right that needs a fast remedy, so the kernel's carefulness is, here, the wrong speed, honestly declared as post-enforcement. Whether the disruption justified the condition is substantive judgment the kernel refuses. The condition binds the moment it is imposed - the kernel logs and escalates, it does not lift it; it holds no pen (§9). And a police force is among the least likely to adopt a register that logs and escalates its own restrictions on protest. The kernel offers the legible, reviewable condition. The march that did not happen is beyond it."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: for a force that adopts it, it forecloses the vague, unrecorded condition - every restriction cites its specific basis the instant it is imposed, escalates on the assembly floor, and its pattern becomes a number, including the conditions later found unlawful - and it declares honestly that its remedy is post-enforcement, refusing to pretend a same-day review is timely. What it did not do is make the remedy arrive before the march ends - its own constitutional-speed principle is the wrong speed for a one-day right - decide whether the disruption justified the condition, lift a condition in the moment, or compel the police to adopt any of it. It made the restriction legible and reviewable. For a protest, whose whole worth is its timing, legible-and-reviewable is a great deal, and it is not the day back."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Police impose conditions on a protest under vague 'serious disruption' powers a court struck as unlawful — too late to contest before the day. For an adopter the kernel makes a condition cite its basis and escalate on the assembly floor, its pattern a number. But it responds at constitutional speed and a protest is one day: the review arrives after the march. A protest delayed is denied; the police won't adopt.",
+  "protection": "the reviewable protest condition",
+  "protection_plain": "Whether logging a protest condition with its cited basis and escalating it on the assembly floor makes police restrictions accountable. It does after the fact; but the kernel responds at constitutional speed while a protest is one day — the review comes too late, a protest delayed denied.",
+  "findings": [
+   {
+    "protection": "the condition's basis, made legible and reviewable",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "For an adopting force, a protest condition must cite its specific legal basis the instant it is imposed - the 'serious disruption' ground that in the real system stays opaque until a judicial-review bundle months later, and that Liberty had to win a case to expose as unlawfully lowered - and it auto-escalates on the assembly and expression floor (Art 20, 19). A vague, unrecorded condition cannot be logged. The basis is on the record on the day, not next year, and the restriction is reviewed rather than merely endured. That is real, and for the first time in this scenario it is also not enough."
+   },
+   {
+    "protection": "the remedy is too slow for a right that is fast",
+    "severity": "strain",
+    "doc_ref": "§9",
+    "observation": "The distinctive limit, and the first where the kernel's own principle is the problem. The kernel senses at machine speed but responds at constitutional speed by deliberate design (§9), so its defences never become an autoimmune weapon. But a protest is a single, time-critical event: the condition binds at 07:00, the march is at 09:00, and even an escalation-triggered review runs at the speed of law and concludes weeks later, on a protest long over. Post-enforcement vindication - Liberty's win months on - is worthless to the march that was stopped: a protest delayed is a protest denied. The manifest's timing axis names it honestly as post-enforcement, and for a one-day right, post-enforcement is no remedy. Carefulness that is a virtue everywhere else is, here, the wrong speed."
+   },
+   {
+    "protection": "the condition takes effect regardless",
+    "severity": "strain",
+    "doc_ref": "§9",
+    "observation": "The holds-no-pen residue, in its most time-sensitive form. The officer imposes the condition and it binds immediately; the kernel logs it and escalates it, and the march is still policed under it in the moment - redirected, capped, silenced. Legibility and escalation do not stay the restriction. The kernel senses at machine speed and holds no pen; it can make the condition undeniable and reviewable, and it cannot lift it while the assembly it restricts is still assembling."
+   },
+   {
+    "protection": "whether the disruption justified it is offstage",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "Whether a protest crosses the threshold for conditions is a substantive judgment the kernel declines (refusal 11) - it makes the cited ground legible and reviewable, and does not decide whether the restriction was warranted. The real fight is exactly there: Liberty won not that a condition was misapplied but that the government had unlawfully lowered the threshold itself. The kernel can surface which standard a force claims to apply; it cannot adjudicate whether the standard is lawful or met - that stays with the courts, at the courts' speed."
+   },
+   {
+    "protection": "the police won't adopt, and the right is time-shaped",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The adoption gap, and beneath it the deepest point. A police force is among the institutions least likely to run a register that logs and escalates its own restrictions on protest - and even where one does, the value it can add is bounded by the shape of the right. Assembly is time-shaped: its worth is the day, the cause, the moment, none of which a later remedy restores. A voluntary transparency discipline can make a protest restriction accountable after the fact and countable in aggregate; it cannot give back the march. The kernel offers the legible, reviewable, honestly-post-enforcement condition; the protest that did not happen is beyond any record."
+   }
+  ]
+ },
+ {
   "id": "records-rewrite",
   "title": "The Vote That Would Not Stay Buried: How Riverton's Stadium Deal Ran Into Its Own Ledger",
   "setting": "In May 2023, the city of Riverton tore itself in half over forty hectares of riverside allotments and flood meadow called the Delcote Flats. Developers wanted mixed commercial zoning; the allotment holders, led by a retired pharmacist named Tessa Okafor, wanted the protective designation kept. After a bruising spring the referendum went 9,412 to 8,687 — 52 to 48 — to retain the protection. The losers were furious, but the tally proof checked out on anyone's phone, the paper-ballot audit confirmed it, and the result went into Riverton's public transparency log, co-signed that night by the town clerks of neighbouring Harwick and Stonebridge and by Lakeshore University, and checkpointed the next morning to two public blockchains. People moved on.\n\nThree years later Vincent Odell is mayor, elected on jobs, and Meridian Arena Group wants the Flats for a 22,000-seat stadium. Odell's lawyers deliver bad news: the 2023 decision binds unless a new referendum overturns it, and the polling on a rematch is ugly. In late May 2026 the mayor's deputy chief of staff, Kester Blane, walks down to the records office and tells the municipal clerk, Neriah Voss, that the 2023 record needs \"correcting\" — the question, he says, had always been understood to carry a three-year sunset clause, and the archived entry should reflect that understanding. He follows up by email, which will matter later. Voss, twenty-two years in the job and four from her pension, understands exactly what she is being asked to do, and that the person asking controls her department's budget.\n\nAn IT contractor is brought in quietly over the first weekend of June. He restores the log database from a 2023 snapshot, edits the body of entry 48,207 — the tally-proof for the Delcote decision — to include the sunset clause, rebuilds the hash tree, and has the municipal log server sign and publish the new head. On paper it is a perfect forgery: correctly signed by the city's own log key, internally consistent, indistinguishable from truth to anyone who only trusts City Hall. The question this scenario tests is why that is not enough — and what happens to Blane, Voss, and Odell once the mathematics starts talking.",
