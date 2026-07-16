@@ -168,8 +168,8 @@
       "reach": 3,
       "leverage": 3,
       "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "horizon-unauditable-evidence"
     },
     {
       "id": "nhs-data-access-opaque",

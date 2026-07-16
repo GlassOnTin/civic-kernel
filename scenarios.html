@@ -3079,6 +3079,251 @@
   ]
  },
  {
+  "id": "horizon-unauditable-evidence",
+  "title": "Trust the Shed, or Check It: An Accounting Record No Operator Can Quietly Rewrite",
+  "setting": "Nadia Fenwick has run the Larkfield-North post office counter for eleven years, and she is good at it: her till balances to the penny, most nights, the way it always has. Then one evening the system shows her eight thousand two hundred pounds short. She did not take it. She cannot find it. She cannot explain it, because the accounting system is a black box she is required to trust and forbidden to inspect, and when she rings the helpline she is told what hundreds were told before her — that she is the only one seeing this, and that the computer does not make mistakes.\n\nThat is the real Horizon scandal, and it is the largest miscarriage of justice in British history. More than nine hundred subpostmasters were convicted of theft and false accounting on shortfalls the Fujitsu-built Horizon system produced through its own bugs — and the High Court later found that Fujitsu could reach into branch accounts remotely and alter them so that it looked as though the subpostmaster had made entries they never made, while the Post Office denied remote access was even possible and, in a judge's words, showed 'a pattern of defensiveness' and 'a lack of transparency'. The convictions stood because English law presumed the computer reliable and put the burden on the accused to prove it wrong — which they could not, because they could not see inside it. In the end it took an Act of Parliament to quash seven hundred of them at a stroke.\n\nLarkfield is a mutualised post network that rebuilt its branch accounting on a kernel transparency log after living through its own version of this. Its single rule is the kernel's founding claim, applied to money: no trust in the software that produced the record. This scenario is the closest the corpus comes to the case the kernel was built for — and an honest account of where even here it stops.",
+  "threats": [
+   "T8",
+   "T2"
+  ],
+  "doc_refs": [
+   "§3.4",
+   "§4",
+   "§1",
+   "§6",
+   "§2",
+   "§12",
+   "T8",
+   "T2"
+  ],
+  "precedents": [
+   {
+    "event": "Bates & Others v Post Office (Horizon Issues judgment, Fraser J)",
+    "year": 2019,
+    "source": "High Court (Fraser J) / British Post Office scandal",
+    "url": "https://en.wikipedia.org/wiki/British_Post_Office_scandal",
+    "shows": "The judge found Horizon contained bugs, errors and defects that caused phantom shortfalls, and that Fujitsu could remotely alter branch transaction data so it appeared the subpostmaster had made entries they had not — while the Post Office denied remote access was possible and showed 'a pattern of defensiveness' and 'a lack of transparency': a record the operator controlled, could alter, and would not open."
+   },
+   {
+    "event": "Over 900 wrongful convictions, and the legal presumption that computer evidence is reliable",
+    "year": 2024,
+    "source": "Computer Weekly / Criminal Cases Review Commission",
+    "url": "https://www.computerweekly.com/feature/Post-Office-Horizon-scandal-explained-everything-you-need-to-know",
+    "shows": "More than 900 subpostmasters were convicted on Horizon shortfalls they could not challenge, because English law presumed computer output reliable and put the burden on the accused to prove the machine wrong — which they could not, as they could not see inside it; the CCRC has said the rules on digital evidence are partly to blame for the widest miscarriage of justice in UK history."
+   },
+   {
+    "event": "Post Office (Horizon System) Offences Act 2024: convictions quashed by statute",
+    "year": 2024,
+    "source": "UK Parliament / House of Lords Library",
+    "url": "https://lordslibrary.parliament.uk/post-office-horizon-it-scandal-progress-of-compensation/",
+    "shows": "Parliament quashed more than 700 convictions by an Act in May 2024 — an extraordinary step showing the remedy lived entirely outside any record or technical fix: it took legislation, not a better ledger, to undo what an unauditable one had done."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:larkfield-post.example",
+    "name": "Larkfield Post Network (checkable-ledger transparency pilot)",
+    "parent": "did:web:larkfield.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:larkfield-post.example",
+    "witnesses": [
+     "did:web:larkfield-audit.example",
+     "did:web:postmasters-mutual.example",
+     "did:web:larkfield-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "reconcile-your-own-till-against-the-log",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 40,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:larkfield-post.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Nadia Fenwick, and the black box she must trust",
+    "verb": "offstage",
+    "narrative": "The backdrop is the real Horizon, and its wrong is a record no one could check. A system produced shortfalls that were not real; its operator could alter branch accounts remotely and denied it could; the audit trail was not open to the accused; and the law presumed the computer reliable, so the burden fell on the subpostmaster to disprove a machine she was forbidden to inspect. Whether any given shortfall was theft is a court's judgment the kernel will never make (refusal 11). What it can change is the thing underneath the injustice: whether the record that accuses you is one you must trust, or one you can check."
+   },
+   {
+    "actor": "Larkfield Post Network",
+    "verb": "cast",
+    "narrative": "Larkfield opens its branch-accounting log with the kernel's founding claim turned on money: every transaction is an append-only, hash-chained entry, attributable to the till or system process that made it, witnessed by parties outside the operator, and verifiable by any branch's own device against the published record. No entry can be added, altered, or removed without every copy's arithmetic breaking. The rule is one sentence — no trust in the software that produced the record — and it is the whole difference between Larkfield and Horizon.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:larkfield-post.example",
+     "timestamp": "2026-01-10T09:00:00Z",
+     "body": {
+      "decision_id": "2026-checkable-ledger-register",
+      "decision_class": "branch-accounting-transparency-commitment",
+      "authorizing_rule": "larkfield-accounting-code/v2; udhr-floor:art-10-fair-hearing",
+      "issuing_authority": "Larkfield Post Network (mutual)",
+      "commitment": "Every branch transaction an append-only, witnessed, attributable log entry, reconcilable by the branch's own device; no entry added, altered or removed without every copy detecting it",
+      "note": "The operator gives up the one power Horizon's operator most relied on: to alter a branch's record quietly and deny it. It does not thereby guarantee the software wrote the right number - only that the record cannot be secretly changed and can be checked."
+     },
+     "sig": {
+      "key_id": "did:web:larkfield-post.example#log-1",
+      "alg": "ed25519",
+      "value": "Q2hlY2thYmxlTGVkZ2VyUmVnaXN0ZXJMYXJrZmllbGROb3RSZWFsMDE"
+     }
+    }
+   },
+   {
+    "actor": "Nadia Fenwick's counter, an ordinary day",
+    "verb": "cast",
+    "narrative": "On a normal day Nadia's transactions land as attributable entries and her evening reconciliation is a thing she performs, not a verdict handed to her: her own device checks the day's entries against the witnessed log and the sums match. The routine is the point. Where Horizon gave a subpostmaster a balance to accept on faith, Larkfield gives her a record to check — and the difference between accepting and checking is the difference between the two stories.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-ledger.entry",
+     "community": "did:web:larkfield-post.example",
+     "timestamp": "2026-05-01T18:30:00Z",
+     "body": {
+      "entry_id": "2026-larkfield-north-0501-recon",
+      "branch": "larkfield-north",
+      "kind": "daily-reconciliation",
+      "origin": "branch-authenticated-till",
+      "declared_variance": 0,
+      "note": "A routine day: every transaction attributable to the branch's authenticated till, reconciled by the subpostmaster's own device against the witnessed log. She checks; she need not trust."
+     },
+     "sig": {
+      "key_id": "did:web:larkfield-post.example#log-1",
+      "alg": "ed25519",
+      "value": "TGVkZ2VyRW50cnlSb3V0aW5lTGFya2ZpZWxkTm90UmVhbENyeXB0bzAy"
+     }
+    }
+   },
+   {
+    "actor": "The accounting system, and Nadia",
+    "verb": "cast",
+    "narrative": "Then it happens to her too: an eight-thousand-two-hundred-pound shortfall she did not create. In Horizon this was the moment the trapdoor opened - an unexplained gap she had to trust the computer about, with no way to trace it. In Larkfield the shortfall is an entry, and the entry has an origin on its face: it was written by a system process, not by her authenticated till, timestamped, and it cannot have been slipped in quietly, because a co-signed head already fixed the log before it. She did not make this entry, and for the first time in this story that is not her word against a black box - it is on the record.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-ledger.entry",
+     "community": "did:web:larkfield-post.example",
+     "timestamp": "2026-05-14T14:00:00Z",
+     "body": {
+      "entry_id": "2026-larkfield-north-0514-adj",
+      "branch": "larkfield-north",
+      "kind": "system-adjustment",
+      "origin": "system-process",
+      "not_from": "branch-authenticated-till",
+      "amount": {
+       "value": -8200,
+       "currency": "GBP"
+      },
+      "authorizing_rule": "larkfield-accounting-code/v2#system-adjustment (must be attributable and disputable)",
+      "note": "The phantom, made visible and attributable. A shortfall the subpostmaster did not enter, logged as system-originated - timestamped, its origin on its face, disputable - where the real Horizon gave her an untraceable gap and told her the computer does not err."
+     },
+     "sig": {
+      "key_id": "did:web:larkfield-post.example#log-1",
+      "alg": "ed25519",
+      "value": "TGVkZ2VyRW50cnlQaGFudG9tTGFya2ZpZWxkTm90UmVhbENyeXB0bzAz"
+     }
+    }
+   },
+   {
+    "actor": "Nadia, and an independent verifier",
+    "verb": "verify",
+    "narrative": "Nadia and an auditor from the postmasters' mutual verify the branch log against a co-signed head anchored beyond the operator. Two facts fall out that Horizon's operator spent a decade denying. First, the shortfall entry was made by a system process, not by Nadia - attributable, not anonymous. Second, and decisively, the record cannot have been altered behind her back: the remote reach into a branch's accounts that Fujitsu had and denied would here be a witnessed, tamper-evident entry that no copy could hide. Against a hidden or altered record, the kernel does exactly what it does in its one clean hold, records-rewrite: it holds.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "anchor.checkpoint",
+     "community": "did:web:larkfield-post.example",
+     "timestamp": "2026-05-15T09:00:00Z",
+     "body": {
+      "checkpoint_id": "larkfield-2026-05-15",
+      "tree_size": 92847,
+      "root_hash": "sha256:4d9f2a7c1e8b3f6a0d5c9e2b7f4a1d8c3e6b9f2a5d8c1e4b7f0a3d6c9e2b5f8a",
+      "witnesses_cosigned": [
+       "did:web:larkfield-audit.example",
+       "did:web:postmasters-mutual.example",
+       "did:web:larkfield-university.example"
+      ],
+      "anchored": "opentimestamps:bitcoin-mainnet",
+      "note": "The co-signed head Nadia and the mutual's auditor check against. Because three parties outside the operator countersign it and it is anchored beyond them all, a quiet remote alteration - Horizon's central deceit - would show as a mismatch on any device."
+     },
+     "sig": {
+      "key_id": "did:web:larkfield-post.example#log-1",
+      "alg": "ed25519",
+      "value": "QW5jaG9yQ2hlY2twb2ludExhcmtmaWVsZE5vdFJlYWxDcnlwdG8wNA"
+     }
+    }
+   },
+   {
+    "actor": "Nadia Fenwick, disputing the entry",
+    "verb": "challenge",
+    "narrative": "Nadia disputes the shortfall through its trace, and the kernel does precisely what it can at the level of the record: it surfaces that the entry was system-originated, not hers, and un-altered since, and gives her a forum that starts from that fact rather than from her denial. But here the honest limit lands. The log proves the entry was written by a system process and never quietly changed; it does not, by itself, prove the number is a bug rather than a true adjustment. Whether the eight thousand pounds is phantom is reconciliation and forensics - the kernel makes it attributable and disputable, which is most of the battle and would likely have stopped the prosecutions, but not automatically resolved."
+   },
+   {
+    "actor": "A court, the law, and the operator who would not adopt",
+    "verb": "offstage",
+    "narrative": "Three things stay beyond the record. Whether Nadia stole is a court's judgment the kernel refuses. The law's presumption that a computer is reliable - the rule that put the burden on nine hundred accused - is undercut by a record anyone can check, but repealing it is legislation, not a ledger; the real convictions fell only when Parliament quashed them by statute. And the sharpest gap: Horizon's operator did not merely lack transparency, its power over the subpostmasters came from controlling a record it could alter and they could not see. The party that most needed to adopt a record no one can rig is the party whose leverage was the rigging. The kernel offers the counter a fair ledger; it cannot make the operator want one."
+   },
+   {
+    "actor": "Anyone, reconciling the branch after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely, and it is the most of any case in the corpus: it turned a shortfall you must trust the computer about into an entry you can check, attribute, and dispute from the published record alone - and against Horizon's central deceit, a record secretly altered and an audit trail suppressed, it holds the way records-rewrite holds. What it did not do is make a bug's faithfully-logged number correct (integrity is not correctness), decide whether a shortfall was theft, repeal the law's presumption that the machine is right, or compel the operator whose power was the black box to give it up. Nobody had to trust the shed - the prototype's closing line, and here the answer to the question Horizon asked nine hundred people and refused to let them check."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Horizon convicted 900+ subpostmasters on a faulty system's shortfalls — the operator could alter accounts remotely, denied it, hid the trail. The kernel's founding claim answers — a record you check, not trust: witnessed, append-only, so an alteration is tamper-evident and a phantom shortfall attributable. But integrity isn't correctness, theft is a court's call, and the operator won't adopt it.",
+  "protection": "a record you check, not trust",
+  "protection_plain": "Whether an append-only, witnessed, verifiable accounting record answers the trust-the-computer wrong — a shortfall you check, not an operator's word. It holds against a hidden or altered record; but a bug's logged entry is still wrong, theft is a court's call, and the operator won't adopt it.",
+  "findings": [
+   {
+    "protection": "the record you check, not trust",
+    "severity": "note",
+    "doc_ref": "§1",
+    "observation": "This is the case the kernel was most built for: its founding claim - no trust in the server, the committee, or the software that produced the record - is the exact answer to Horizon, where a shortfall was a black-box assertion the accused was forbidden to inspect. An append-only, witnessed, independently verifiable ledger turns that assertion into an entry the subpostmaster reconciles on her own device. The prototype's closing line, 'nobody had to trust the shed', is literally the answer to 'nobody should have had to trust Horizon' - and here the founding promise meets the wrong it was written against."
+   },
+   {
+    "protection": "the hidden and altered record is foreclosed",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "Horizon's central deceit was that Fujitsu could reach into branch accounts remotely, make it look as though the subpostmaster had made entries she had not, and the Post Office denied remote access was even possible. In a witnessed append-only log every entry is attributable to the till or system that made it, and no entry can be altered or slipped in without every co-signed copy's arithmetic breaking - so a remote alteration is a visible, tamper-evident, undeniable entry. This is the corpus's one clean hold, records-rewrite, applied to money: against a hidden or altered record, the kernel holds outright, and that alone would likely have broken the prosecutions."
+   },
+   {
+    "protection": "integrity is not correctness",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The limit, stated plainly. A bug that writes a phantom shortfall and then dutifully hash-chains it is preserved by the log's integrity, not corrected by it: the kernel guarantees the record cannot be secretly altered, never that the software wrote the right number. What it does, and it is a great deal, is make the phantom visible and attributable - system-originated, not the subpostmaster's, and disputable from the record - where Horizon gave only an untraceable gap. But proving the entry phantom rather than a true adjustment is reconciliation and forensics, which the log makes possible and does not itself perform."
+   },
+   {
+    "protection": "the operator's power is the opaque record",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "A distinctive and severe adoption gap. Horizon's operator did not merely fail to be transparent; its leverage over the subpostmasters came from controlling a record it could alter and they could not check. An institution whose power is the black box has the strongest possible reason not to adopt a ledger no one can rig - it would be surrendering the very asset. The kernel offers the counter a fair record; the party that must choose to run it is the party that profited from the unfair one. Legibility is available to any operator willing to be checked, and unavailable exactly where the checking is most needed."
+   },
+   {
+    "protection": "theft is a court's, and the law presumed the machine",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "Two things stay offstage. Whether a genuine shortfall is theft is substantive judgment for a court, which the kernel refuses (refusal 11) - it hands the court a record it need not trust, not a verdict. And the deeper obstacle is legal, not technical: English law presumed computer output reliable and put the burden on the accused to disprove a machine they could not see inside, which the CCRC has called partly to blame for the widest miscarriage of justice in UK history. A checkable record guts the rationale for that presumption but cannot repeal it - the real convictions fell only when Parliament quashed them by an Act. The kernel can stop the court being handed a record it must trust; it cannot make the law stop trusting one."
+   }
+  ]
+ },
+ {
   "id": "lawful-access-refusal",
   "title": "A Bribery Inquiry Meets a Ballot Box With No Key — Not Even for the Court",
   "setting": "The Meridian Movement began as a coalition of nurses, teachers, and small-shop owners in Vela Harbour, the port district of the national capital, and by 2027 it was large enough that its internal leadership contest mattered to the whole republic. In June it held that contest — a members' primary between the reformist slate led by Dr. Ines Calvo and the continuity slate — not on paper ballots dropped in a school-hall box, but through the civic kernel: every member proved she was a member without saying which member, cast a ballot her own phone could later confirm was counted, and no one — not even the movement's own officers — could see how any single person had voted. The reform slate won by two hundred and seventy-five votes.\n\nAmara Ndoro cast one of them. She is a thirty-four-year-old intensive-care nurse at St. Fenn's, a hospital whose board is chaired by a man with close ties to the continuity slate. Amara has never told a colleague which way she leans; the last nurse who did was moved to permanent nights and then quietly not renewed. When she voted for Calvo's slate, the only things that left her phone were an encrypted ballot and a proof that she was eligible and had not voted twice. The kernel was built precisely so that her fear and her vote could never be joined in any file that anyone — her employer, her union, her government — could ever open.\n\nThen the money surfaced. A leaked correspondent-banking file suggested that a foundation registered abroad had wired roughly four hundred thousand euro, in the weeks before the primary, into accounts connected to the reform campaign. Deputy State Prosecutor Marek Halász opened a file. It is not a pretext; foreign electoral financing is a serious crime, and the pattern in the banking records is real. In July his office obtained a production order from the National Capital District Court and served it on the kernel's trustee consortium and log operators. It demanded two things: the list of every member who had voted for the reform slate, and the true identity of the person behind a per-decision pseudonym that appeared, handwritten, in a seized campaign ledger.\n\nThe operators can honour part of that order completely. They can hand the prosecutor the entire, cryptographically verifiable record of what the movement decided and that it decided it validly. What they cannot do — not \"will not,\" cannot — is either of the two things he actually needs. There is no key that turns a ballot back into a voter, and no party who holds one, because the personhood layer was built so that key never exists. This is the moment the wall was built for, and it does not care that the person knocking on it is, this time, in the right.",
