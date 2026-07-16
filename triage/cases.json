@@ -181,8 +181,8 @@
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "nhs-data-access-opaque"
     },
     {
       "id": "facial-recognition-no-basis",

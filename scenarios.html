@@ -7100,6 +7100,255 @@
   ]
  },
  {
+  "id": "nhs-data-access-opaque",
+  "title": "Who Has Read Your Record: An Access Log You Can See, and the Copy You Cannot",
+  "setting": "Della Voss has a diagnosis she has told almost no one about, and a reasonable expectation that the people who hold her medical record will not hand it around. In the real health service she has no way to test that expectation. Her GP data, her hospital data, sits in systems she cannot inspect, shared under a consent model most people never understood — a weak opt-out, buried — with researchers, planners, and commercial partners, and she cannot see who has looked at her record, when, or why. When care.data proposed pooling GP records for research, planning and possible commercial use, roughly a million and a half people opted out and the scheme collapsed; the NHS, in the words of its critics, had handled it with opacity. Since then identifiable records have reached a private analytics company under a contract patients can neither audit nor refuse, and an internal note warned it risked a loss of public confidence. The wrong Della lives with is not only that her data moves. It is that she cannot see it move.\n\nThe Mersey Vale Health Board runs one kernel service: a witnessed access log over its patient records, built on a rule the ordinary system has never offered. Every access to a record is itself a logged, append-only, attributable event — who, when, for what purpose, under what legal basis — and, because this is private data and not a public decision, the log is subject-readable rather than public: Della can read her own record's access history from her phone, an independent auditor can verify that no access is hidden, and neither can the world see who is ill. This scenario follows one access she did not expect, and marks the two places the log reaches its edge: the question of whether the sharing should happen at all, and the copy that leaves its walls.",
+  "threats": [
+   "T6",
+   "T8"
+  ],
+  "doc_refs": [
+   "§3.4",
+   "§3.1",
+   "§4",
+   "§1",
+   "§6",
+   "§12",
+   "T6",
+   "T8"
+  ],
+  "precedents": [
+   {
+    "event": "care.data scrapped after mass opt-outs and opacity",
+    "year": 2016,
+    "source": "The Conversation / medConfidential",
+    "url": "https://theconversation.com/care-data-has-been-scrapped-but-your-health-data-could-still-be-shared-62181",
+    "shows": "care.data would have pooled GP records for research, planning and possible commercial use under a weak opt-out most patients never understood; the NHS ran it with opacity, failing to communicate how data was used, and around 1.5 million people opted out before it was scrapped in 2016 — mass sharing whose access patients could not see (the same period saw NHS records reach pharmaceutical firms and, at the Royal Free, Google DeepMind without proper consent)."
+   },
+   {
+    "event": "NHS Federated Data Platform: contractor access to identifiable patient data",
+    "year": 2024,
+    "source": "The Register / Financial Times",
+    "url": "https://www.theregister.com/databases/2026/05/12/nhs-england-confirms-palantir-staff-can-access-patient-data/",
+    "shows": "NHS England confirmed that staff from Palantir and other contractors could access identifiable patient data on the £330m Federated Data Platform, and an internal briefing warned this risked a loss of public confidence — third-party access to identifiable medical records with no trail the patient can see."
+   },
+   {
+    "event": "NHS patients cannot opt out of the Federated Data Platform",
+    "year": 2024,
+    "source": "The Register",
+    "url": "https://www.theregister.com/databases/2026/06/13/nhs-patients-cant-opt-out-of-palantirs-data-platform-but-their-hospital-can/",
+    "shows": "Patients cannot opt out of the Federated Data Platform — only their hospital can — the procurement was criticised as unusually short and opaque, and 168 of 214 trusts had signed up: a central platform holding identifiable records that patients can neither refuse nor audit."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:merseyvale-health.example",
+    "name": "Mersey Vale Health Board (subject-readable access-log pilot)",
+    "parent": "did:web:merseyvale.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:merseyvale-health.example",
+    "witnesses": [
+     "did:web:merseyvale-audit.example",
+     "did:web:patients-association.example",
+     "did:web:merseyvale-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-who-accessed-your-record",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 25,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:merseyvale-health.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Della Voss, and the systems she cannot see into",
+    "verb": "offstage",
+    "narrative": "The backdrop is the real one, and its wrong has two parts the kernel treats very differently. One is a governance question: whether her data should be shared at all, on what consent, with which commercial partners — care.data's weak opt-out, the Federated Data Platform's no-opt-out. That is policy, and the kernel decides none of it (refusal 10). The other is the part underneath: even where sharing is lawful, Della cannot see who accessed her record, when, or why. The first question the kernel refuses. The second — whether access is opaque or legible — is exactly the one it can answer, and this scenario is about how far that answer goes."
+   },
+   {
+    "actor": "Mersey Vale Health Board",
+    "verb": "cast",
+    "narrative": "Mersey Vale opens its access register with a rule the ordinary system never offered: every access to a patient record is itself a logged, append-only, witnessed event citing who accessed it, when, for what purpose and under what legal basis. Because this is private data, not a public decision, the log is subject-readable rather than public — a mode the transparency log has to grow here: Della reads her own record's access history from her phone, an auditor verifies that no access is hidden, and the world learns nothing about who is ill. No dossier is published; an audit trail is.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:merseyvale-health.example",
+     "timestamp": "2026-02-01T09:00:00Z",
+     "body": {
+      "decision_id": "2026-access-register",
+      "decision_class": "access-transparency-commitment",
+      "authorizing_rule": "merseyvale-data-code/v3; uk-gdpr:art-5-accountability",
+      "issuing_authority": "Mersey Vale Health Board",
+      "log_mode": "subject-readable (not public): access metadata visible to the record's subject and completeness-verifiable by an independent auditor; content and identities not published",
+      "commitment": "Every record access an append-only, witnessed, attributable entry citing accessor, time, purpose and legal basis; the subject reads their own access history; no access can be hidden",
+      "note": "The board can make access legible; it cannot, and does not claim to, make the sharing policy fair - whether data should be shared, and on what consent, stays governance (refusal 10)."
+     },
+     "sig": {
+      "key_id": "did:web:merseyvale-health.example#log-1",
+      "alg": "ed25519",
+      "value": "QWNjZXNzUmVnaXN0ZXJNZXJzZXlWYWxlTm90UmVhbENyeXB0bzAx"
+     }
+    }
+   },
+   {
+    "actor": "Della's GP, direct care",
+    "verb": "cast",
+    "narrative": "Della's own GP opens her record to adjust a prescription, and the access lands as an entry Della can see: her GP, the time, the purpose direct-care, the legal basis. This is the ordinary, legitimate case, and the point is not that it is logged but that she can read it. Where the real system gives a patient no window at all, Mersey Vale gives her one onto exactly the accesses that are proper — so that the improper one, when it comes, is visible against them.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-access.event",
+     "community": "did:web:merseyvale-health.example",
+     "timestamp": "2026-05-12T10:00:00Z",
+     "body": {
+      "access_id": "2026-mv-r88-0512",
+      "record_subject": "patient-cred:MV-88",
+      "accessor": "Dr E. Marsh, Mersey Vale GP",
+      "accessor_role": "direct-care-clinician",
+      "purpose": "direct-care",
+      "legal_basis": "uk-gdpr:art-9(2)(h) provision of health care",
+      "visible_to_subject": true,
+      "note": "A legitimate access Della can see - who, when, why, under what basis, on her own device. The routine is the point: the window that shows the proper accesses is the one that will show the improper."
+     },
+     "sig": {
+      "key_id": "did:web:merseyvale-health.example#log-1",
+      "alg": "ed25519",
+      "value": "QWNjZXNzRXZlbnRHUERpcmVjdENhcmVOb3RSZWFsQ3J5cHRvMDI"
+     }
+    }
+   },
+   {
+    "actor": "Kestrel Analytics, a commercial research partner",
+    "verb": "cast",
+    "narrative": "Then an access Della did not expect: a commercial analytics firm reads a pseudonymised extract of her record for a project cited as 'planning and research', under a data-sharing agreement, her opt-out not exercised because she never knew to. In the real system this is precisely the access that is invisible - the pharma access, the DeepMind transfer, the platform contractor. Here it is an entry in Della's own history, with the firm named and the basis cited. She learns her data was read by a company she has never heard of. That she can learn it is the whole difference; what she can do about it is the whole limit.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-access.event",
+     "community": "did:web:merseyvale-health.example",
+     "timestamp": "2026-06-20T15:00:00Z",
+     "body": {
+      "access_id": "2026-mv-r88-0620",
+      "record_subject": "patient-cred:MV-88",
+      "accessor": "Kestrel Analytics Ltd",
+      "accessor_role": "commercial-research-partner",
+      "purpose": "planning-and-research (cited)",
+      "legal_basis": "data-sharing-agreement:MV-2026-R14; opt-out-not-exercised",
+      "extract": "pseudonymised",
+      "visible_to_subject": true,
+      "note": "A commercial access, logged and visible to Della. The log records the CITED purpose and basis - not whether the purpose is genuine or the access necessary - and if the extract is exported to Kestrel's own environment, what it does with the copy is outside this log."
+     },
+     "sig": {
+      "key_id": "did:web:merseyvale-health.example#log-1",
+      "alg": "ed25519",
+      "value": "QWNjZXNzRXZlbnRLZXN0cmVsUmVzZWFyY2hOb3RSZWFsMDM"
+     }
+    }
+   },
+   {
+    "actor": "Della Voss, reading her own access history",
+    "verb": "read",
+    "narrative": "Della opens her record's access history on her phone and, for the first time in her life as a patient, sees it: her GP, for care; Kestrel Analytics, for research. Two accesses, attributed, dated, reasoned. And she can trust the list is complete, because it is witnessed and append-only - a hidden access would break the log an auditor checks, so the holder cannot look at her record and suppress the trace, nor delete an embarrassing entry. The question every patient in the real system is denied - who has read my record? - she can now simply answer."
+   },
+   {
+    "actor": "Della and the Patients' Association",
+    "verb": "challenge",
+    "narrative": "Della raises the Kestrel access with a patient advocate, and the kernel does exactly what it can and no more. It surfaces the cited purpose, the agreement, the fact her opt-out was never exercised - and there the limits stand, all three. Whether a commercial firm should have this access at all is governance the kernel refuses (refusal 10). Whether 'planning and research' is the true and necessary purpose, the log records the claim, not its honesty. And whether Kestrel, having taken a copy into its own systems, still holds or has onward-shared it, the log cannot say - it accounts for access within Mersey Vale's walls, not for a copy that has left them."
+   },
+   {
+    "actor": "Mersey Vale Health Board, transparency office",
+    "verb": "cast",
+    "narrative": "At the half-year the board publishes what the access log adds up to, without naming a soul: of some 1.84 million accesses, the overwhelming share direct care, a fraction planning and research, and twelve thousand by commercial partners. The commercial and research access that is invisible in the real system becomes a signed rate anyone can see - measure the process, not the person. A firm reading tens of thousands of records under 'research' is no longer a rumour or an FOI battle; it is the board's own number, published while it is happening.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:merseyvale-health.example",
+     "timestamp": "2026-07-01T09:00:00Z",
+     "body": {
+      "process": "patient-record-access",
+      "period": "2026-H1",
+      "unit": "accesses by purpose and accessor type",
+      "total_accesses": 1840000,
+      "direct_care": 1710000,
+      "planning_research": 118000,
+      "commercial_partner": 12000,
+      "note": "Anonymous aggregate; no subject identifiers. The commercial/research access invisible in the real system, here a signed rate: 12,000 commercial-partner accesses in six months, each individually cited. Measure the process, never the person (§8)."
+     },
+     "sig": {
+      "key_id": "did:web:merseyvale-health.example#log-1",
+      "alg": "ed25519",
+      "value": "QWNjZXNzQWdncmVnYXRlTWVyc2V5VmFsZU5vdFJlYWxDcnlwdG8wNA"
+     }
+    }
+   },
+   {
+    "actor": "The board, the platform, and the honest ceiling",
+    "verb": "offstage",
+    "narrative": "Three things stay beyond the log. The consent question - whether to share, with whom, on what basis - is governance the kernel will not decide (refusal 10); it makes the policy's every access legible without making the policy just, and care.data's real wrong was the policy. The copy that leaves is the completeness gap: a bulk export to a contractor's own environment escapes per-access logging, government-by-whatsapp on data, so the log answers 'who accessed the record here', never 'who holds a copy elsewhere'. And the adoption gap runs deep here too - a platform whose value is frictionless access to identifiable records at scale has little reason to adopt a log that lets every patient watch. The kernel's own instinct, data you keep rather than an account and no dossier built (§3.1), points the other way from a central platform, and population-scale health research genuinely needs the pooling the patient's control resists. The kernel makes that tension legible and accountable; it does not dissolve it."
+   },
+   {
+    "actor": "Anyone, reading their own history after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it turned opaque access into a subject-readable, tamper-evident audit - every access to your record attributable, purpose-cited, visible to you and to no one who should not see it, with none hidden - and to do it the transparency log grew a mode it did not have, private to the subject rather than public to the world. What it did not do is decide whether the sharing should happen, verify that a cited purpose is genuine, follow a copy out of its walls, or compel a platform built on frictionless access to let patients watch. It answered the question the whole system is built to keep you from asking - who has read my record - and reached its edge exactly where the data leaves, or where the question turns from who accessed it to whether they ever should have."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Patient records are shared under weak consent, and you can't see who accessed yours, or why. The kernel logs every access as a witnessed, append-only entry citing accessor, purpose and basis, readable by you and impossible to hide — the opacity foreclosed for an adopter. But it makes access legible, not consent fair; a cited purpose isn't a true one; and a copy exported elsewhere escapes the log.",
+  "protection": "who has read your record",
+  "protection_plain": "Whether logging every access to your medical record — accessor, purpose, basis — as a witnessed, subject-readable entry lets you see who read it and stops any being hidden. It does for an adopter; but whether the sharing should happen is governance, and a copy exported elsewhere escapes the log.",
+  "findings": [
+   {
+    "protection": "who-read-your-record, made readable",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The fresh result: the transparency log applied to access of private data, and for that it grows a mode it did not have. The log is normally public-by-construction (foi-slow-walking); here it becomes subject-readable-by-construction - every access to a record an append-only, witnessed, attributable entry citing accessor, time, purpose and basis, visible to the record's subject on her phone and completeness-verifiable by an auditor, without publishing to the world who is ill. The 'no legible audit of who accessed what' wrong at the heart of care.data and the Federated Data Platform is foreclosed for an adopter: the question the system is built to keep a patient from asking, she can simply answer."
+   },
+   {
+    "protection": "no access can be hidden",
+    "severity": "note",
+    "doc_ref": "§3.1",
+    "observation": "The tamper-evidence half, and the kernel's deeper instinct. A witnessed append-only access log means the holder cannot quietly read a record and suppress the trace, nor delete an embarrassing access - every entry is accounted, a hidden one breaks the log an auditor checks. And it publishes an audit trail, never a dossier: no file on the patient is built (§3.1), the access metadata is visible to her and to no one who should not see it. Where the real system's access was invisible by default, here the invisibility of a logged access is impossible."
+   },
+   {
+    "protection": "legible access is not fair consent",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The governance boundary. The kernel forces every access to cite its authority; it does not decide whether that authority is legitimate - whether a buried opt-out is fair consent, whether a commercial partner should have access at all, is policy the kernel refuses (refusal 10). care.data's real wrong was exactly that policy: mass sharing under a consent most never understood. The kernel makes such a policy's every access legible without making the policy just. Visibility of who accessed is necessary, and nowhere near sufficient for whether they should have - and it would be dishonest to sell an access log as a consent regime."
+   },
+   {
+    "protection": "cited purpose, and the copy that escapes",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Two limits, one familiar and one sharp. An access cites 'direct care' or 'research'; the log records the claim, not its truth or necessity - as with the automated-welfare model, the citation stands where a verified reason cannot, though a pattern of 'research' access becomes a visible aggregate. Sharper: the kernel accounts for access within its walls, and a bulk export of records to a contractor's own environment escapes per-access logging entirely - government-by-whatsapp on data. The log answers 'who accessed the record here', never 'who holds a copy elsewhere', which is exactly where identifiable NHS data has repeatedly gone."
+   },
+   {
+    "protection": "the data you keep vs the data they need",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The deepest tension, named honestly. The kernel's structural answer to the honeypot is local-first - data you keep, not an account, no dossier built - and a subject-readable access log is the compromise where central holding is unavoidable. But population-scale health research genuinely needs the pooling that patient control resists, and a platform whose value is frictionless access to identifiable records at scale has the least reason of all to adopt a log that lets every patient watch. The kernel makes the trade between a person's control over who-sees-what and research at scale visible and accountable; it does not dissolve it, and a transparency log that claimed to reconcile the two would be overselling."
+   }
+  ]
+ },
+ {
   "id": "no-smartphone",
   "title": "The Woman Who Wanted a Box: Mosserdale Votes on Its Hall, With and Without Phones",
   "setting": "Mosserdale is a village of about two hundred people in a west Cumbrian valley, and its hall is the last roofed thing in it that belongs to everyone. Built in 1923 as a war memorial, it has hosted the Women's Institute, wakes, whist drives, badger-group talks, and every parish vote since anyone can remember. Edith Braithwaite, 84, poured tea in it for forty years; her late husband Tom's name is on the honours board by the door. The roof now needs £48,000 the parish council does not have, and a holiday-let developer has made an offer. The council, unable to face deciding alone, has put it to the village: sell, or repair and keep.\n\nThe parish clerk, Margaret Tyson, has coupled the parish into a Civic Kernel pilot run with Cumberland Council — phone voting for the commuters and the diaspora children who moved to Carlisle and Manchester, and a paper channel in the hall itself for everyone else. Edith is everyone else. She has no smartphone and wants none; her hands are arthritic enough that a stylus is an insult; and her distrust of computers is not confusion but a position, articulately held: machines are somebody's machine, and she has never yet met the somebody. 'I want to put a paper in a box like I always have,' she tells Margaret at the post office, 'and I want to watch it counted.'\n\nHer granddaughter Katie, 26, a veterinary nurse in Cockermouth, has the phone client and adores both her grandmother and the hall. Katie will end up being Edith's window into half of this system — which is precisely the question this vote quietly tests. The old tin ballot box asked Edith to trust a seal, a public count, and neighbours' eyes. The new system promises her the same paper, the same box, the same public count — plus mathematics she cannot see and will not touch. Whether what Edith is asked to trust has grown or shrunk is not a footnote to the pilot. For her, it is the pilot.",
