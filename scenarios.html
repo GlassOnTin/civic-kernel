@@ -3614,6 +3614,280 @@
   ]
  },
  {
+  "id": "grenfell-warnings-ignored",
+  "title": "The Warning That Left No Mark: A Receipt Is Not a Rescue",
+  "setting": "For years before the fire, the residents of Grenfell Tower told anyone who would listen that their building was dangerous. The Grenfell Action Group wrote it on a blog, in letters to the tenant management organisation, in complaints to the council: the fire doors, the single stairwell, the lack of sprinklers, the exposed risers. In November 2016 they wrote that only a catastrophic fire would finally expose the landlord's incompetence — and that when it came, the responsible bodies would be found to have been repeatedly warned. Seven months later, on 14 June 2017, seventy-two people died in exactly the fire they had described. The Inquiry that followed spent years reconstructing what had been said, and when, and to whom — assembling from scattered blog posts and unanswered letters the contemporaneous record that should have existed all along.\n\nThe wrong here is not a decision made badly. It is a warning received and left to fall into a void: acknowledged by no one, clocked by nothing, answerable on no timetable, and — because the body being warned was the body responsible — with every incentive to let it lie. Ashcombe Homes, a tenant management organisation for a cluster of towers including the fictional Thornmere Tower, runs its building-safety complaints on a kernel register. This scenario asks the narrowest, hardest question the corpus has yet put to itself: if the warning had carried a signed receipt, a clock the landlord was bound to answer, and an aggregate that made twenty scattered letters into one rising number — would that have saved them? The honest answer is the finding, and it is not comfortable: it would have made the ignoring undeniable, and it would not, by itself, have put out the fire.",
+  "threats": [
+   "T12",
+   "T8"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§9",
+   "§1",
+   "§12",
+   "T12",
+   "T8"
+  ],
+  "precedents": [
+   {
+    "event": "The Grenfell Action Group warns of fire risk and predicts a catastrophe",
+    "year": 2016,
+    "source": "Grenfell Action Group blog; Grenfell Tower Inquiry",
+    "url": "https://grenfelltowerinquiry.org.uk/",
+    "shows": "Residents warned repeatedly and specifically - poor fire safety, a single stairwell, no sprinklers, exposed risers - through a public blog and letters to the tenant management organisation and the council, and in November 2016 wrote that only a catastrophic fire would expose the landlord's failings and that the responsible bodies would be shown to have been warned. The warnings were dismissed, and residents reported being threatened with legal action for making them."
+   },
+   {
+    "event": "Seventy-two people die in the Grenfell Tower fire",
+    "year": 2017,
+    "source": "public record; Grenfell Tower Inquiry",
+    "url": "https://en.wikipedia.org/wiki/Grenfell_Tower_fire",
+    "shows": "Seven months after the final warning, a fire spread up combustible cladding and killed seventy-two people - the outcome the residents had described in detail. The warnings had been made, received, and understood; what did not exist was any record that obliged the landlord to answer them in time."
+   },
+   {
+    "event": "The Grenfell Tower Inquiry finds residents' concerns were not listened to",
+    "year": 2024,
+    "source": "Grenfell Tower Inquiry Phase 2 report",
+    "url": "https://grenfelltowerinquiry.org.uk/phase-2-report",
+    "shows": "The Inquiry found a sustained pattern of residents' safety concerns being dismissed, and had to reconstruct over years - from blogs, letters, and memories - what had been warned and ignored. A contemporaneous, acknowledged, time-bound record of the warnings did not exist at the time to compel a response, and its absence was itself part of the failure."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:ashcombe-homes.example",
+    "name": "Ashcombe Homes (building-safety complaints register)",
+    "parent": "did:web:ashcombe-council.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:ashcombe-homes.example",
+    "witnesses": [
+     "did:web:thornmere-residents.example",
+     "did:web:ashcombe-audit.example",
+     "did:web:county-fire-authority.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "report-a-hazard-and-get-a-receipt",
+     "steps": 1,
+     "fields": 4,
+     "median_seconds": 180,
+     "abandonment_rate": 0.02
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:ashcombe-homes.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "The residents of Grenfell Tower, warning",
+    "verb": "offstage",
+    "narrative": "The backdrop is the warnings, and their particular horror is that they worked as warnings and failed as protection. The Grenfell Action Group did not miss the danger; they named it, in public, for years, and predicted the fire almost exactly. What they could not do was make the warning bind anyone: it was received by the landlord it accused, acknowledged on no fixed record, answerable on no clock, and easy to leave in a drawer. Whether any specific warning was grave enough to compel the cost of re-cladding a tower is an engineering and political judgment the kernel refuses to make (refusal 11). What the kernel can change is narrower and, it turns out, not enough on its own: whether the warning gets a receipt, a deadline, and a place in a rising count - so that ignoring it becomes a visible act rather than a silence."
+   },
+   {
+    "actor": "Ashcombe Homes",
+    "verb": "cast",
+    "narrative": "Ashcombe opens a building-safety register with one promise: every hazard a resident reports gets a signed, timestamped receipt and a clock the landlord is bound to answer by, and a report that passes its clock without a reasoned response becomes a logged default - not a silence, an entry. The landlord keeps every substantive power it had: it still decides what work to do and when. The register changes only that the deciding must now happen on the record, against a deadline, in view of a running count.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:ashcombe-homes.example",
+     "timestamp": "2025-03-01T09:00:00Z",
+     "body": {
+      "decision_id": "2025-safety-register",
+      "decision_class": "hazard-report-commitment",
+      "authorizing_rule": "ashcombe-tenant-safety-charter/v1; duty-to-respond within 28 days",
+      "issuing_authority": "Ashcombe Homes",
+      "commitment": "Every resident hazard report receives a signed receipt and a 28-day response clock; no report can be closed without a reasoned response; a report past its clock is logged as a default; open reports on the same hazard aggregate",
+      "note": "The register makes a warning receipted, clocked, and countable. It does not decide whether a hazard is grave enough to compel costly work - that judgment stays with the engineers and, in the end, the residents' remedies (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe-homes.example#log-1",
+      "alg": "ed25519",
+      "value": "U2FmZXR5UmVnaXN0ZXJPcGVuZWRBc2hjb21iZU5vdFJlYWwwMQ"
+     }
+    }
+   },
+   {
+    "actor": "Denise Okafor, Thornmere Action Group",
+    "verb": "cast",
+    "narrative": "Denise files the warning that, in the real story, lived only on a blog. She names the mechanism precisely - the single stairwell, the absent sprinklers, the cladding specified for the coming refurbishment - and the register hands her back a signed receipt with a date the landlord must answer by. This is the smallest and most concrete thing the kernel does, and it is the thing the Inquiry lacked: a contemporaneous, acknowledged record that this warning was made, on this day, in these words. From this moment, 'we were never told' is a claim the log can refute.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-hazard.report",
+     "community": "did:web:ashcombe-homes.example",
+     "timestamp": "2025-06-12T10:00:00Z",
+     "body": {
+      "report_id": "2025-thornmere-0417",
+      "reporter_ref": "resident:thornmere (Thornmere Action Group, D. Okafor)",
+      "hazard_class": "fire-safety",
+      "location": "Thornmere Tower",
+      "description": "Single stairwell with no protected second means of escape; no sprinkler system; combustible cladding specified in the pending refurbishment; disabled residents on upper floors with no personal evacuation plan. A fire on any floor risks the whole tower.",
+      "cited_standard": "Regulatory Reform (Fire Safety) Order 2005 art.9 (fire risk assessment); building-safety guidance on means of escape",
+      "receipt": "signed:did:web:ashcombe-homes.example#log-1",
+      "acknowledged": true,
+      "response_due": "2025-07-10",
+      "note": "The receipt is the record_absent fix: the warning the Inquiry had to reconstruct years later is, here, contemporaneous, acknowledged, and dated on the day it was made."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe-homes.example#log-1",
+      "alg": "ed25519",
+      "value": "SGF6YXJkUmVwb3J0T2thZm9yUHJvcGhldGljTm90UmVhbDAy"
+     }
+    }
+   },
+   {
+    "actor": "A second resident, same hazard",
+    "verb": "cast",
+    "narrative": "Weeks later another resident files the same danger from a different flat. In the real world these were twenty separate letters in twenty separate drawers, each dismissible alone. Here the second report attaches to the first: the register begins to count how many residents are warning of one hazard, and how long each has gone unanswered. A single complaint is easy to file away; a rising number on a named hazard is not the same object.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-hazard.report",
+     "community": "did:web:ashcombe-homes.example",
+     "timestamp": "2025-07-20T14:00:00Z",
+     "body": {
+      "report_id": "2025-thornmere-0603",
+      "reporter_ref": "resident:thornmere-11f",
+      "hazard_class": "fire-safety",
+      "location": "Thornmere Tower",
+      "description": "Fire door on the 11th floor landing propped and not self-closing; smoke would enter the single stairwell. Reported previously by phone, no reference given, no response.",
+      "cited_standard": "Regulatory Reform (Fire Safety) Order 2005 art.17 (maintenance of fire safety measures)",
+      "receipt": "signed:did:web:ashcombe-homes.example#log-1",
+      "acknowledged": true,
+      "response_due": "2025-08-17",
+      "aggregates_with": "hazard:thornmere-fire-safety",
+      "note": "Aggregation begins: two receipted reports on one hazard, each with its own clock. The count is the object the landlord now has to answer, not any single letter."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe-homes.example#log-1",
+      "alg": "ed25519",
+      "value": "SGF6YXJkUmVwb3J0U2Vjb25kRG9vclRob3JubWVyZU5vdDAz"
+     }
+    }
+   },
+   {
+    "actor": "Denise Okafor, reading her receipt",
+    "verb": "read",
+    "narrative": "Denise reads what she now holds: the warning on the record, acknowledged, with a date the landlord is bound to answer by. The real Action Group had a blog - a public, timestamped record too - and it did not save them, because a blog is a diary: it records that you spoke, and obliges no one to reply. What the register adds over the blog is exactly the binding part - the receipt the landlord signed and the clock it accepted. That is a real difference, and reading it, Denise can also see its edge: the clock obliges an answer, not an action. The landlord must respond by the date. It need not, on that date, do anything."
+   },
+   {
+    "actor": "Ashcombe Homes, not acting",
+    "verb": "cast",
+    "narrative": "The clock runs out, and the register does to the landlord's silence what the real story never could: it writes it down. Whether Ashcombe answers with a brush-off or lets the date pass, the outcome is an entry - a reasoned refusal or a logged default, cited, appealable, and permanent. The ignoring that the Grenfell Inquiry had to prove existed is here self-proving. And the entry is honest about what it is: a decision not to act, on the record, by name - which is a conviction waiting for a reckoning, and not a repair.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:ashcombe-homes.example",
+     "timestamp": "2025-09-30T16:00:00Z",
+     "body": {
+      "in_response_to": [
+       "2025-thornmere-0417",
+       "2025-thornmere-0603"
+      ],
+      "disposition": "no remedial action scheduled",
+      "stated_reason": "hazard assessed as tolerable pending the planned refurbishment; no budget allocated this year",
+      "response_due": "2025-07-10",
+      "responded_at": "2025-09-30",
+      "days_past_clock": 82,
+      "appeal_trace": "did:web:ashcombe-homes.example/appeals/thornmere-fire-safety",
+      "note": "The inaction_no_artifact fix: the ignoring is now itself an artifact - reasoned, late, cited, and appealable. 'We were never warned' cannot be logged against this record. What the record cannot do is make the stated reason true or the refusal safe."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe-homes.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VUaG9ybm1lcmVOb0FjdGlvbk5vdFJlYWwwNA"
+     }
+    }
+   },
+   {
+    "actor": "Ashcombe Homes, safety office",
+    "verb": "cast",
+    "narrative": "The aggregate publishes what twenty drawers hid: how many residents have warned of this one hazard, how many reports sit in default past their clock, and how long the oldest has been open. It is the regulator-inaction move turned on a landlord and a single building - measure the process, never the person (§8), the failure-to-act as the landlord's own signed number. It is the sharpest thing the kernel produces here, and it is a description of the danger, not a defence against it.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:ashcombe-homes.example",
+     "timestamp": "2025-12-01T09:00:00Z",
+     "body": {
+      "hazard": "thornmere-fire-safety",
+      "period": "2025",
+      "unit": "hazard reports on one danger",
+      "reports_on_hazard": 23,
+      "in_default_past_clock": 19,
+      "oldest_open_days": 172,
+      "note": "Anonymous aggregate. Twenty-three residents, one hazard, nineteen unanswered past their clock. Measure the process (§8): the landlord's failure to act as a rising, dated, signed number - available on the day, not reconstructed after the fire."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe-homes.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlVGhvcm5tZXJlRmlyZURlZmF1bHROb3RSZWFsMDU"
+     }
+    }
+   },
+   {
+    "actor": "The tower, and the honest limit of a record",
+    "verb": "offstage",
+    "narrative": "The ceilings are where this case earns its place, because they are the ones the corpus most wants to pretend away. A receipt is not a rescue: the kernel makes the ignoring undeniable, dated, and countable, and it cannot compel the re-cladding, the sprinklers, or the second stairwell. A warning logged, acknowledged, escalated, and still refused is still refused - and on a complete, exemplary record, seventy-two people can still die. The record convicts after; it does not force before. Three further limits stand behind that one: a record with no adopter binds no one, and the party being warned - the landlord the warning accuses - is the least likely of all to run a register that escalates the accusation against it; whether the hazard is grave enough to compel the cost is a substantive judgment the kernel refuses (refusal 11); and even the kernel's speed is wrong for this - it responds at the speed of law and appeal (§9), while a fire hazard needs forcing faster than any log can force. The register is built for the reckoning. The rescue was always someone else's to order, and had to come first."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it turned an ignorable warning into a receipted, clocked, aggregated demand - so the two wrongs at the heart of the real failure, a warning the landlord could later deny (record_absent) and an ignoring that left nothing to challenge (inaction_no_artifact), are both foreclosed. 'We were never told' cannot be logged. The failure to act is permanent, timestamped, and counted from the day it happened, not assembled over seven years by an Inquiry. What it did not do, and could not, is put out the fire: it cannot make a landlord act, only make the not-acting undeniable. That is a great deal - it is most of what accountability is - and it is measured here against the one thing it is not, which is a life. The inbound hazard report, with its receipt and its duty-to-respond clock, is the citizen-to-authority twin of the executive.act (an authority's spend) and the donation entry (money coming in); logged here as an extension, it would earn a place in the core if a second inbound-warning case asked for the same primitive. Until then it is what it is: the machinery that makes sure the next Inquiry is short, because the record it needs already exists - written, this time, before the fire instead of after."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Residents warn for years that their tower will burn, and are ignored, then treated as never warned (Grenfell, 2017). The kernel gives every warning a signed receipt and a clock the landlord must answer by, turning the ignoring into a logged, countable default — so 'we were never told' cannot survive. But a receipt is not a rescue: it dates the failure to act and makes it permanent; it cannot compel the act.",
+  "protection": "the receipted, clocked warning",
+  "protection_plain": "Whether giving a resident's safety warning a signed receipt, a response clock, and an aggregate makes it un-ignorable. It forecloses the 'we were never warned' defence and makes the ignoring a permanent, countable default — but a receipt cannot compel the remedy.",
+  "findings": [
+   {
+    "protection": "the warning gets a receipt",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The record_absent fix, delivered cleanly. A resident lodges a hazard report and receives a signed, timestamped, witnessed acknowledgement on an append-only log - so the thing the Grenfell Inquiry spent years reconstructing from blogs and letters is, here, contemporaneous and undeniable. Because the log can only grow and any witness can detect a rewritten past (§3.4, T8), the landlord cannot later erase or deny the warning: 'we were never told' is a claim the record refutes. The warning made, on the day, in the resident's own words, is preserved as a fact rather than a memory."
+   },
+   {
+    "protection": "a receipt is not a rescue",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The finding this case exists to make, and the one the corpus is most tempted to look away from. The kernel makes the ignoring undeniable, dated, and countable - and it cannot compel the act. A warning receipted, clocked, escalated, and still refused is still refused; on a complete and exemplary record, the fire still comes and seventy-two people still die. The record convicts after the fact; it does not force action before it. This is distinct from the exam case's legible-is-not-just: there the visible thing was an unjust design, here the visible thing is an unmet duty to act, and making the duty visible does not discharge it. Legibility is necessary for the reckoning and is not, by itself, safety."
+   },
+   {
+    "protection": "a blog is a diary; a receipt is a demand",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "The real warnings were already partly on a public, timestamped record - the Action Group's blog - and it did not save anyone, because a record that obliges no reply is a diary. What the register adds is precisely the binding part: a receipt the landlord signed and a clock it accepted, turning a diary entry into a demand that must be answered or stand in visible default. That is a real gain over the blog. But it holds only where the authority has adopted the register: a resident-run log carries the same evidentiary weight and none of the binding force - it can prove the warning was made, it cannot oblige anyone to answer it."
+   },
+   {
+    "protection": "the adopter is the accused",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The adoption gap at its sharpest. The party a safety warning accuses is the landlord, and the landlord is the party that must run the register for the receipt and the clock to bind. A body with something to hide has the least reason of anyone to operate a system that timestamps the warnings against it and counts its own defaults in public - the same wall the corpus meets with coercive power and with a Prime Minister judging himself. A safety regulator or a court could mandate the register from outside; absent that mandate, the register depends on the good faith of exactly the actor whose bad faith is the danger."
+   },
+   {
+    "protection": "the aggregate, and the primitive behind it",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "Many residents warning of one hazard become a single rising, dated, countable signal rather than twenty dismissible letters - measure-the-process (§8) brought down to one building, the landlord's failure to act as its own signed number, available on the day instead of after the Inquiry. The aggregate is still not a remedy (the regulator-inaction limit holds: a number does not re-clad a tower), and whether the hazard compels costly work stays substantive (refusal 11). It also surfaces a candidate core primitive: the inbound hazard report with a duty-to-respond clock is the citizen-to-authority twin of executive.act (outbound spend) and the donation entry (inbound money). Logged here as an x- extension; it earns core adoption if a second inbound-warning case converges on the same shape - the discipline that grew executive.act."
+   }
+  ]
+ },
+ {
   "id": "horizon-unauditable-evidence",
   "title": "Trust the Shed, or Check It: An Accounting Record No Operator Can Quietly Rewrite",
   "setting": "Nadia Fenwick has run the Larkfield-North post office counter for eleven years, and she is good at it: her till balances to the penny, most nights, the way it always has. Then one evening the system shows her eight thousand two hundred pounds short. She did not take it. She cannot find it. She cannot explain it, because the accounting system is a black box she is required to trust and forbidden to inspect, and when she rings the helpline she is told what hundreds were told before her — that she is the only one seeing this, and that the computer does not make mistakes.\n\nThat is the real Horizon scandal, and it is the largest miscarriage of justice in British history. More than nine hundred subpostmasters were convicted of theft and false accounting on shortfalls the Fujitsu-built Horizon system produced through its own bugs — and the High Court later found that Fujitsu could reach into branch accounts remotely and alter them so that it looked as though the subpostmaster had made entries they never made, while the Post Office denied remote access was even possible and, in a judge's words, showed 'a pattern of defensiveness' and 'a lack of transparency'. The convictions stood because English law presumed the computer reliable and put the burden on the accused to prove it wrong — which they could not, because they could not see inside it. In the end it took an Act of Parliament to quash seven hundred of them at a stroke.\n\nLarkfield is a mutualised post network that rebuilt its branch accounting on a kernel transparency log after living through its own version of this. Its single rule is the kernel's founding claim, applied to money: no trust in the software that produced the record. This scenario is the closest the corpus comes to the case the kernel was built for — and an honest account of where even here it stops.",

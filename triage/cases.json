@@ -298,8 +298,8 @@
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "grenfell-warnings-ignored"
     },
     {
       "id": "criminal-disclosure-failure",
