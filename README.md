@@ -250,7 +250,8 @@ The repository, file by file.
     an authorizing rule).
   - `manifest.schema.json` — a community's conformance manifest: which services and
     which of the 30 UDHR invariants it upholds, its `decisions.coercion_resistance`,
-    and its `rights_guard.remedy`.
+    its `rights_guard.remedy`, and its `transparency_log.mode` (public, or subject-readable
+    for a log over personal data — see the `sealed` entry field).
 - **`scenarios/`** — imagined human situations, each walked through the four verbs.
   Every embedded manifest and log entry is validated against the waist schemas, and
   every scenario must cite documented real-world precedents for its attack pattern

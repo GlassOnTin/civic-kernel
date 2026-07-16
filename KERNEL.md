@@ -113,7 +113,11 @@ Thinner than the services: a [log entry](schema/log-entry.schema.json) and a
 on a [lattice](README.md#w-lattice), not jurisdictional sovereignty. A community may sit anywhere below the full
 profile — but its manifest declares every subtraction machine-readably, and the citizen's
 client renders it. Dilution becomes legible, not lethal (T10); a manifest that lies is a
-consistency-proof failure, not a marketing dispute.
+consistency-proof failure, not a marketing dispute. The log itself has two declared modes
+(§3.4): *public* by default — the record anyone can check — and *subject-readable* for
+personal data, where an access's existence and order stay public and tamper-evident while
+its content is sealed to the data subject, so who read your medical record is legible to
+you and complete to an auditor without being visible to the world (nhs-data-access-opaque).
 
 One limit, measured in [`proto/`](proto/) rather than assumed: the manifest is signed by the
 operator's own log key, so it cannot vouch for *who witnesses it*. An operator can rewrite

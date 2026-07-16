@@ -49,6 +49,22 @@
       "type": "object",
       "description": "Type-specific payload. E.g. decision.opened carries the decision id, question hash, eligibility-rule version and deliberation window; rights.classification carries the tripped invariant articles and reasons (§3.3); process.cost-aggregate carries anonymous aggregate metrics only — measure the process, never the person (§8)."
     },
+    "sealed": {
+      "type": "object",
+      "description": "Subject-readable / commit-now-reveal-later at the entry level — the general form of the sealed_until/sealed_body_digest fields on coercive.act and executive.act. The entry's existence, order and this digest sit in the public Merkle tree (an auditor proves inclusion and completeness), while the content it commits to is sealed and openable only by the parties in readable_by. This is how a transparency_log with mode 'subject-readable' keeps a private record auditable (nhs-data-access-opaque): who accessed a medical record is readable by that patient and verifiable-complete by an auditor, yet invisible to the world. Honest caveat: the unseal key is a trusted party, not a cryptographic guarantee — the same witness-recursion problem as §6's anchor.",
+      "required": ["sealed_body_digest", "readable_by"],
+      "additionalProperties": false,
+      "properties": {
+        "sealed_body_digest": { "type": "string", "description": "Hash commitment to the sealed content, published now so a later reveal cannot be altered." },
+        "readable_by": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "enum": ["subject", "authorized-auditor", "court-order"] },
+          "description": "Who may open the seal. 'subject' = the data subject's own key, the record theirs to read and not the world's; 'authorized-auditor' = an independent auditor verifying completeness under authorisation; 'court-order' = disclosure compelled by a court."
+        },
+        "sealed_until": { "type": "string", "format": "date-time", "description": "Optional: the content also becomes public after this time (commit-now-reveal-later); absent for a permanently subject-readable entry." }
+      }
+    },
     "sig": { "$ref": "#/$defs/signature" }
   },
   "allOf": [

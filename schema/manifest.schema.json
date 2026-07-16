@@ -111,6 +111,10 @@
           "type": "array",
           "items": { "type": "string" },
           "description": "Permissionless chains receiving periodic log-head/manifest-digest checkpoints — notary of last resort, never database (§6). Reference profile: at least two independent anchors. No token ever enters the citizen's path."
+        },
+        "mode": {
+          "enum": ["public", "subject-readable"],
+          "description": "Disclosure mode of the log (§3.4). 'public' (default; the reference profile) — every entry's content is world-readable, the record anyone can check. 'subject-readable' — for a log over personal data (a medical record's accesses; nhs-data-access-opaque): each entry's existence, order and digest are public and tamper-evident, but its content is sealed and readable only by the data subject and, on authorisation, an auditor, so completeness is verifiable without disclosing who is who. Declaring the mode keeps §6 subtraction legible: a 'transparency' claim that is subject-readable-only is a weaker, different conformance than a public log, and a client must render the difference."
         }
       }
     },

@@ -62,7 +62,8 @@
    "anchors": [
     "opentimestamps:bitcoin-mainnet",
     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
-   ]
+   ],
+   "mode": "subject-readable"
   },
   "interaction_cost": [
    {
@@ -129,6 +130,10 @@
      "visible_to_subject": true,
      "note": "A legitimate access Della can see - who, when, why, under what basis, on her own device. The routine is the point: the window that shows the proper accesses is the one that will show the improper."
     },
+    "sealed": {
+     "sealed_body_digest": "sha256:1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+     "readable_by": ["subject", "authorized-auditor"]
+    },
     "sig": {
      "key_id": "did:web:merseyvale-health.example#log-1",
      "alg": "ed25519",
@@ -155,6 +160,10 @@
      "extract": "pseudonymised",
      "visible_to_subject": true,
      "note": "A commercial access, logged and visible to Della. The log records the CITED purpose and basis - not whether the purpose is genuine or the access necessary - and if the extract is exported to Kestrel's own environment, what it does with the copy is outside this log."
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c",
+     "readable_by": ["subject", "authorized-auditor"]
     },
     "sig": {
      "key_id": "did:web:merseyvale-health.example#log-1",
