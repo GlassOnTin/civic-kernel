@@ -1,0 +1,248 @@
+{
+ "id": "exam-algorithm-downgrade",
+ "title": "Graded by Her School, Not Her Work: When a Legible Algorithm Is Still Unjust",
+ "setting": "Asha Bello sat no exams in the summer of 2026 — a public-health emergency cancelled them — and so an algorithm decided her future instead. Her history teacher, who taught her for two years, assessed her at an A; she is, by every account, an A student. The standardisation model gave her a C. Not because of anything Asha did or wrote, but because of the school she attends: a large state comprehensive in a low-attainment area, whose cohorts three years ago achieved few top grades, and the model pulled her grade down to fit that history. Two streets away, a candidate in a class of nine at a fee-paying school kept his teacher's grade untouched — small cohorts were exempt from standardisation, and small cohorts are far more common in the private sector. Asha was graded on the past of strangers who shared her postcode.\n\nThis is the 2020 exam-grading fiasco, and its numbers are real: around two in five teacher-assessed grades were lowered, state-school pupils downgraded at nearly twice the rate of independent-school pupils, students given no mechanism to appeal the algorithm itself, and the whole thing abandoned within days after public fury — the Prime Minister calling it a 'mutant algorithm' and the regulator reverting to teachers' grades. The Calderbank Qualifications Authority runs its grading on a kernel register, and this scenario is a deliberate counterpoint to the welfare case: there, the harm was a model no one could see into; here, the harm is a model anyone can see through completely — and it is still unjust, because the injustice is not hidden in the algorithm. It is written plainly across its face.",
+ "threats": [
+  "T13",
+  "T11"
+ ],
+ "doc_refs": [
+  "§8",
+  "§9",
+  "§7",
+  "§3.3",
+  "§1",
+  "§12",
+  "T13",
+  "T11"
+ ],
+ "precedents": [
+  {
+   "event": "2020 exam-grading algorithm downgrades ~40% of grades, favouring small private cohorts",
+   "year": 2020,
+   "source": "Wikipedia / Ofqual (2020 United Kingdom school exam grading controversy)",
+   "url": "https://en.wikipedia.org/wiki/2020_United_Kingdom_school_exam_grading_controversy",
+   "shows": "Ofqual's standardisation algorithm lowered around 36-40% of teacher-assessed grades and systematically downgraded high-achieving pupils at state schools while leaving untouched the small cohorts (under 15) more common in the fee-paying sector - grading an individual by the historical performance of their school rather than their own work, with a disparate impact by socio-economic background."
+  },
+  {
+   "event": "Pupils had no mechanism to appeal the algorithm's grade",
+   "year": 2020,
+   "source": "Wikipedia (Ofqual exam results algorithm)",
+   "url": "https://en.wikipedia.org/wiki/Ofqual_exam_results_algorithm",
+   "shows": "Students were issued algorithm-assigned grades with no route to appeal the standardisation itself, which the opposition argued made the process unlawful - an automated decision with life-shaping consequences and no way for the person it judged to contest it."
+  },
+  {
+   "event": "The government U-turn: the 'mutant algorithm' withdrawn",
+   "year": 2020,
+   "source": "Global Government Forum",
+   "url": "https://www.globalgovernmentforum.com/uk-government-drops-exam-grading-algorithm-in-the-face-of-public-anger/",
+   "shows": "After public outrage the government abandoned the algorithm entirely and reverted to teacher-assessed grades - the remedy was a political reversal, not a technical or legal correction, and it arrived only after results had already been issued and offers withdrawn."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:calderbank-quals.example",
+   "name": "Calderbank Qualifications Authority (grading-decisions register)",
+   "parent": "did:web:calderbank.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:calderbank-quals.example",
+   "witnesses": [
+    "did:web:calderbank-audit.example",
+    "did:web:teachers-union.example",
+    "did:web:calderbank-university.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "read-how-your-grade-was-computed",
+    "steps": 1,
+    "fields": 0,
+    "median_seconds": 30,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:calderbank-quals.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Asha Bello, and the model that graded her",
+   "verb": "offstage",
+   "narrative": "The backdrop is the real fiasco, and its wrong is unusual: it is not that the reasoning was hidden. Ofqual's model was published and understood; anyone could see that it standardised individual grades to their school's history. The wrong was that this was done at all - that a pupil's grade was set by the past performance of other pupils at her school, with no appeal, downgrading state schools and sparing the small classes of the private sector. Whether grading a person by their group is fair is a policy question the kernel will not answer (refusal 11). What it can change is whether the grade's logic is legible and appealable - and this case is chosen precisely to show that here, unusually, that is not enough."
+  },
+  {
+   "actor": "Calderbank Qualifications Authority",
+   "verb": "cast",
+   "narrative": "Calderbank opens its grading register: every grade is a logged decision citing the rule that produced it, carrying a machine-readable trace of its own working and a route to appeal. Where the real system handed pupils a grade and a wall, this hands them the computation. The authority keeps its standardisation model - the kernel does not touch whether the policy is right. It changes only that the policy must show its work, per pupil, on the record.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:calderbank-quals.example",
+    "timestamp": "2026-01-20T09:00:00Z",
+    "body": {
+     "decision_id": "2026-grading-register",
+     "decision_class": "grading-transparency-commitment",
+     "authorizing_rule": "calderbank-assessment-code/v2; duty-to-give-reasons",
+     "issuing_authority": "Calderbank Qualifications Authority",
+     "commitment": "Every grade a logged decision citing its rule, carrying a claim-trace and an appeal path; disparate-impact aggregate published on results day",
+     "note": "The register makes each grade legible and appealable. It does not adjudicate whether the standardisation policy is fair - that is substantive (refusal 11)."
+    },
+    "sig": {
+     "key_id": "did:web:calderbank-quals.example#log-1",
+     "alg": "ed25519",
+     "value": "R3JhZGluZ1JlZ2lzdGVyQ2FsZGVyYmFua05vdFJlYWwwMQ"
+    }
+   }
+  },
+  {
+   "actor": "The standardisation model, and Asha",
+   "verb": "cast",
+   "narrative": "On results day Asha's grade lands as a logged decision, and its trace spells out precisely what happened: teacher-assessed A, standardised to C, because her centre's grade distribution over three prior years - a large state school in a low-attainment area - has a low top-grade rate, and her rank within it maps there. Her own work entered the sum only as a rank order. She can read the whole thing. And reading it, she learns exactly what was done to her: she was marked down for the past of pupils she never met, who happened to share her school. The logic is completely legible. That is the point, and the wound.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-grading.decision",
+    "community": "did:web:calderbank-quals.example",
+    "timestamp": "2026-08-13T09:00:00Z",
+    "body": {
+     "decision_id": "2026-cba-asha-history",
+     "candidate_ref": "candidate:CBA-88213",
+     "subject": "A-level History",
+     "teacher_assessed_grade": "A",
+     "algorithm_grade": "C",
+     "authorizing_rule": "calderbank-standardisation-model/v1 (grade standardised to the centre's 2023-2025 distribution)",
+     "claim_trace": "Teacher A lowered to C by standardising to the centre's historical grade distribution; the centre's low top-grade rate maps a high within-centre rank to a lower standardised grade. The candidate's own work entered only as her rank order within the centre.",
+     "appeal_trace": "did:web:calderbank-quals.example/appeals/CBA-88213",
+     "note": "The whole logic is legible - and that is both the gain and the limit. Asha can see exactly why she was downgraded: not for what she did, but for the historical performance of others at her school. The decision about her was computed from data about strangers."
+    },
+    "sig": {
+     "key_id": "did:web:calderbank-quals.example#log-1",
+     "alg": "ed25519",
+     "value": "R3JhZGVEZWNpc2lvbkFzaGFEb3duZ3JhZGVOb3RSZWFsMDI"
+    }
+   }
+  },
+  {
+   "actor": "The same model, two streets away",
+   "verb": "cast",
+   "narrative": "The contrast is on the same log, legible beside Asha's. A candidate in a history class of nine at a fee-paying school keeps his teacher's B untouched: cohorts under fifteen are exempt from standardisation, and such cohorts are far more common in the private sector. Nothing is hidden here - the exemption is cited in the open. The design's disparate impact is not a suspicion to be reconstructed later; it is visible, decision by decision, the moment the grades are issued. Legibility has done its whole job. It has shown, plainly, an unfairness it cannot itself undo.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-grading.decision",
+    "community": "did:web:calderbank-quals.example",
+    "timestamp": "2026-08-13T09:05:00Z",
+    "body": {
+     "decision_id": "2026-cba-small-cohort",
+     "candidate_ref": "candidate:CBA-40771",
+     "subject": "A-level History",
+     "teacher_assessed_grade": "B",
+     "algorithm_grade": "B",
+     "authorizing_rule": "calderbank-standardisation-model/v1#small-cohort-exemption (cohorts under 15 retain the teacher grade)",
+     "note": "The exemption, cited in the open: a small cohort - more common in the fee-paying sector - keeps the teacher grade, while Asha's larger state-school cohort is standardised down. The disparate impact is legible per decision, not only in aggregate."
+    },
+    "sig": {
+     "key_id": "did:web:calderbank-quals.example#log-1",
+     "alg": "ed25519",
+     "value": "R3JhZGVEZWNpc2lvblNtYWxsQ29ob3J0Tm90UmVhbDAz"
+    }
+   }
+  },
+  {
+   "actor": "Asha Bello, reading her grade's working",
+   "verb": "read",
+   "narrative": "Asha reads the trace on results morning and understands her grade completely - more than the real fiasco ever allowed, where pupils knew only that a number had fallen from the sky. She can see the rule, the data, the exemption she did not get. And understanding changes nothing about the offer she has just lost: the university place conditional on an A is gone, on results day, on the strength of her school's history. To see precisely why you have been treated unjustly is a real thing, and it is not the same as being treated justly. The kernel gave her the reason. The reason was the injustice."
+  },
+  {
+   "actor": "Calderbank Qualifications Authority, standards office",
+   "verb": "cast",
+   "narrative": "On results day the authority publishes what the standardisation did in aggregate, and the number is its own, on the day, not in a university's secondary analysis a year later: state-school candidates downgraded at nearly twice the rate of independent-school candidates, most of the gap traceable to the small-cohort exemption. The disparate impact that took the real fiasco weeks of outrage and academic reconstruction to establish is here a signed figure at 9am. Measure the process, never the person (§8). The bias is undeniable and immediate. It is also, on its own, still just a number beside a great many ruined mornings.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:calderbank-quals.example",
+    "timestamp": "2026-08-13T12:00:00Z",
+    "body": {
+     "process": "grade-standardisation",
+     "period": "2026-summer",
+     "unit": "candidates by standardisation outcome",
+     "candidates": 210000,
+     "downgraded_one_or_more": 84000,
+     "downgraded_two_or_more": 6300,
+     "downgrade_rate_state_schools": 0.41,
+     "downgrade_rate_independent_schools": 0.22,
+     "note": "Anonymous aggregate; no candidate identifiers. State-school candidates downgraded at nearly twice the independent-school rate, most of the gap via the small-cohort exemption. Measure the process (§8): the model's disparate impact as the authority's own signed number, on results day - not a secondary analysis months later."
+    },
+    "sig": {
+     "key_id": "did:web:calderbank-quals.example#log-1",
+     "alg": "ed25519",
+     "value": "RGlzcGFyYXRlSW1wYWN0R3JhZGluZ0FnZ3JlZ2F0ZU5vdFJlYWwwNA"
+    }
+   }
+  },
+  {
+   "actor": "Asha Bello, appealing",
+   "verb": "challenge",
+   "narrative": "Asha appeals through the trace, and the kernel gives her a forum and the full computation - and shows exactly how bounded her appeal is. She can contest whether the model was correctly applied: was her rank right, was her centre's data accurate. She cannot appeal the thing that actually harmed her - the policy of standardising an individual to her school's history at all - because that is a design choice, not a computational error, and the kernel does not adjudicate whether the policy is fair (refusal 11). An appeal against a faithfully-applied rule can only check the arithmetic; it cannot indict the rule the arithmetic faithfully served. She can prove the sum is right. She cannot prove the sum should never have been done."
+  },
+  {
+   "actor": "The authority, and the honest edge of transparency",
+   "verb": "offstage",
+   "narrative": "The ceilings here are the sharpest thing the corpus has to say about its own promise. The deepest is this: transparency is not justice. Unlike the welfare model, whose reasoning could not be rendered, this model's reasoning is rendered completely - and it is still unjust, because the wrong is in the visible design, not in any opacity. A decision can be perfectly legible and perfectly unfair. Whether grading a person by their group is legitimate is policy the kernel refuses to judge; the rights guard does not fire on an administrative grade the way it would on a ballot-path decision (§3.3); the appeal reaches the sum and not the design; and the real remedy was none of these - it was a political U-turn, a Prime Minister disowning a 'mutant algorithm' after the damage was done. The kernel makes the reasoning visible. Here, visibility's honest limit is that it can make an injustice undeniable and leave it entirely in place."
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: it turned an opaque, unappealable grade into a legible, appealable decision whose group-based logic is on the record on results day, with its disparate impact a signed number the same morning - so Ofqual's actual procedural wrongs, an unexplained grade and no appeal, cannot be logged. What it did not do, and is the point of the case, is make a transparent decision a just one: the injustice was written plainly across the model's face, in a policy the kernel makes visible and refuses to adjudicate, appealable only as arithmetic and remediable only by politics. It is the honest counterpoint to the welfare model - there the reason could not be seen, here the reason is the wrong - and together they mark the two edges of the kernel's whole promise: a reason you cannot see, and a reason that, fully seen, is unjust. Transparency is necessary. It was never, by itself, enough."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "An algorithm downgrades a state-school pupil from her teacher's A to a C — for her school's past cohort, not her work — with no appeal, while small private classes keep theirs (Ofqual 2020). The kernel makes each grade a logged decision citing its rule, with a claim-trace and an appeal. But the model is transparent and still unjust — the injustice in the visible design, which is policy the kernel refuses.",
+ "protection": "the legible, appealable grade",
+ "protection_plain": "Whether making an algorithmic grade a logged, reasoned, appealable decision makes it just. It forecloses the no-reason/no-appeal wrong; but a transparent model can still be unfair — grading a pupil by her school's history — the injustice in a visible design the kernel won't judge.",
+ "findings": [
+  {
+   "protection": "the grade, made legible and appealable",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "For an adopting authority, an algorithmic grade is a logged decision citing its rule, carrying a machine-readable claim-trace and an appeal path - so Ofqual's actual procedural wrongs, a grade issued with no explanation and no route to appeal the standardisation, simply cannot be logged. Asha can read exactly how her grade was computed and contest whether it was correctly applied, where the real pupils got a number and a wall. The right to a reason and to challenge, made machine-checkable, is real and it is delivered."
+  },
+  {
+   "protection": "legible is not just",
+   "severity": "strain",
+   "doc_ref": "§1",
+   "observation": "The sharp, fresh finding, and the honest counterpoint to the welfare case. There the model was opaque - cite the rule, but the reason could not be rendered. Here the model is fully transparent: Asha can read the entire standardisation logic - and it is still unjust, because the injustice is not hidden in the algorithm but written across its face, in the design that grades an individual by her school's history rather than her work. A decision can be completely legible and completely unfair. Transparency makes the wrong undeniable; it does not make it right. This is the honest edge of the kernel's whole promise: legibility is necessary and, when the injustice is in the visible design, nowhere near sufficient."
+  },
+  {
+   "protection": "the injustice is in the policy, and the policy is offstage",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Whether grading an individual by their school's historical cohort is fair is a substantive policy judgment - the standardisation design - which the kernel makes legible and does not decide (refusal 11). The real fight was exactly there, and its remedy was political: the 'mutant algorithm' abandoned by government U-turn, not corrected by a court or a better trace. The kernel can show a pupil, precisely, that she was graded by her school rather than herself; it cannot rule that doing so is wrong, because ruling on the fairness of a policy is the substantive judgment it refuses on principle to hold."
+  },
+  {
+   "protection": "the appeal reaches the sum, not the design",
+   "severity": "strain",
+   "doc_ref": "§8",
+   "observation": "The appeal-trace lets Asha contest whether the computation was correctly applied - her rank, her centre's data - but not the design of standardising individuals to group history at all, because that is a policy choice rather than an arithmetic error. The appeal is real and bounded: it can check the sum, never indict the rule the sum faithfully executes. An appeal against a faithfully-applied unjust rule vindicates the rule - she can prove the arithmetic is right, and cannot prove the arithmetic should never have been done. Legibility of a decision empowers a challenge to its accuracy, not to its justice."
+  },
+  {
+   "protection": "the disparity is immediate, and the guard is blind",
+   "severity": "strain",
+   "doc_ref": "§3.3",
+   "observation": "A real gain in timing, with the familiar limit. The model's disparate impact - state schools downgraded at nearly twice the independent-school rate, most of it via the small-cohort exemption - becomes a signed aggregate on results day, not a university's secondary analysis a year later. But the rights guard does not fire on an administrative grading decision, as it would on a ballot-path proposal (the stop-and-search blindness, §3.3); the aggregate re-grades no one; and, as with the whole case, the disparity made legible and immediate is a disparity documented, not a disparity remedied. The kernel brought the wrong forward in time and into the open. It did not make it stop."
+  }
+ ]
+}

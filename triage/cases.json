@@ -271,7 +271,20 @@
       "signature": ["record_absent", "pattern_of_lawful_acts"],
       "reach": 3,
       "leverage": 2,
-      "remedy_caveat": false,
+      "remedy_caveat": true,
+      "status": "encoded",
+      "scenario": "exam-algorithm-downgrade"
+    },
+    {
+      "id": "drc-medical-detention",
+      "harm": "Hospitals detain medically-cleared patients — and hold the bodies of the deceased — until unpaid bills are settled, with no lawful warrant and no route to contest the confinement.",
+      "lead": "Transnational Justice Initiative / 9BR Chambers; UN Working Group Against Arbitrary Detention (DRC debt-detention, 2025); via CrowdJustice — non-UK",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["record_absent"],
+      "reach": 3,
+      "leverage": 1,
+      "remedy_caveat": true,
       "status": "candidate",
       "scenario": null
     },

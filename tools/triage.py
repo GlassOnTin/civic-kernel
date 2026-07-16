@@ -11,8 +11,9 @@ triage itself. See docs/triage.md.
 Usage:
   python3 tools/triage.py            # print the markdown triage report
   python3 tools/triage.py --check    # validate the corpus only (exit 1 on error)
+  python3 tools/triage.py --write    # fill the <!--TRIAGE-START-->..<!--END--> region of docs/triage.md
 """
-import json, sys, pathlib
+import json, sys, re, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CASES = ROOT / "triage" / "cases.json"
@@ -96,7 +97,17 @@ def main():
     if "--check" in sys.argv:
         print(f"ok  {len(cases)} cases valid")
         return 0
-    print(md(cases))
+    report = md(cases)
+    if "--write" in sys.argv:
+        page = ROOT / "docs" / "triage.md"
+        new, n = re.subn(r'(<!--TRIAGE-START-->).*?(<!--TRIAGE-END-->)',
+                         lambda m: m.group(1) + "\n\n" + report + "\n\n" + m.group(2),
+                         page.read_text(), count=1, flags=re.S)
+        assert n == 1, "TRIAGE markers not found in docs/triage.md"
+        page.write_text(new)
+        print(f"docs/triage.md regenerated: {len(cases)} cases")
+        return 0
+    print(report)
     return 0
 
 
