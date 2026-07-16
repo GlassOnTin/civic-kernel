@@ -324,8 +324,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "ofsted-single-word-judgment"
     },
     {
       "id": "citizenship-deprivation-basis",

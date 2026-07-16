@@ -9270,6 +9270,277 @@
   ]
  },
  {
+  "id": "ofsted-single-word-judgment",
+  "title": "One Word for a Whole School: The Verdict That Refuses to Have Working",
+  "setting": "Helen Marsh had been headteacher of Brookmere Primary for eleven years, and by every measure that reaches a child it was a good school: reading results well above the national average, a settled and happy staff, a community that trusted it. In June an inspection downgraded it from Outstanding to Inadequate — the lowest of four single words — on a single ground: the school's safeguarding record-keeping was found wanting, a central register incomplete, some recruitment checks logged late. Nothing about the teaching changed. But under the framework a failure in safeguarding is a 'limiting judgment': it caps the overall grade at Inadequate no matter how strong everything else, and so the whole school was reduced to the one word that would follow it everywhere — into the local paper, the parents' WhatsApp groups, the estate agents' descriptions, and the statutory machinery that forces an 'Inadequate' school to become an academy. Helen waited weeks for the report to publish, living with a word she could not answer, and the wait is what broke her.\n\nThis is the shape of Ruth Perry and Caversham Primary School, whose headteacher took her own life in 2023 awaiting an Ofsted report that downgraded her school to Inadequate on safeguarding grounds; a coroner found the inspection had contributed to her death. The wrong is not that the record was hidden — the inspectors gathered evidence and could explain it — nor that the judgment was secret. It is that a whole institution, in all its dimensions, was compressed into one word that carries no structure to interrogate: 'Inadequate' cannot be argued with, because it does not say what it is made of. The Ashfield Schools Inspectorate, in this scenario, runs its judgments on a kernel register, and the question is unusually precise. The kernel cannot decide whether Brookmere is inadequate — that is a judgment, and judgment is refused. But can it stop a judgment being delivered as an atom?",
+  "threats": [
+   "T12",
+   "T8"
+  ],
+  "doc_refs": [
+   "§8",
+   "§7",
+   "§9",
+   "§3.4",
+   "§1",
+   "§12",
+   "T12",
+   "T8"
+  ],
+  "precedents": [
+   {
+    "event": "Ruth Perry's death after an Ofsted downgrade to Inadequate",
+    "year": 2023,
+    "source": "Coroner's inquest (Berkshire, 2023); Caversham Primary School",
+    "url": "https://en.wikipedia.org/wiki/Death_of_Ruth_Perry",
+    "shows": "A headteacher took her own life while awaiting an Ofsted report that downgraded her school from Outstanding to Inadequate on safeguarding grounds, despite strengths elsewhere; the coroner concluded the inspection had contributed to her death - the single-word judgment and the wait for it carrying consequences out of all proportion to a records failing."
+   },
+   {
+    "event": "The single-word overall grade and the 'limiting judgment'",
+    "year": 2019,
+    "source": "Ofsted school inspection handbook / framework",
+    "url": "https://www.gov.uk/government/publications/school-inspection-handbook-eif",
+    "shows": "Schools were reduced to one of four words - Outstanding, Good, Requires Improvement, Inadequate - with a 'limiting judgment' rule under which an Inadequate finding on safeguarding caps the overall grade at Inadequate regardless of the quality of education; the single grade then triggers structural consequences, including a statutory direction to become an academy."
+   },
+   {
+    "event": "Ofsted scraps single-word overall grades for schools",
+    "year": 2024,
+    "source": "Department for Education / Ofsted announcement",
+    "url": "https://www.gov.uk/government/news/single-headline-ofsted-grades-scrapped",
+    "shows": "After Ruth Perry's death and a coroner's prevention-of-future-deaths report, single-word overall judgments were abolished in favour of a multi-area report card scoring each area separately - the remedy for the reductive word was a change of policy, not an appeal a school could win."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:ashfield-inspectorate.example",
+    "name": "Ashfield Schools Inspectorate (inspection-judgments register)",
+    "parent": "did:web:ashfield-education.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:ashfield-inspectorate.example",
+    "witnesses": [
+     "did:web:ashfield-heads-association.example",
+     "did:web:ashfield-inspectorate-audit.example",
+     "did:web:ashfield-parents-forum.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-composition-behind-your-school's-grade",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 90,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:ashfield-inspectorate.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Helen Marsh, and a word she cannot answer",
+    "verb": "offstage",
+    "narrative": "The backdrop is a judgment shaped to be uninterrogable. Four words stand for every school in the country, and one of them - Inadequate - can be triggered by a single limiting area while everything else is strong, then carries consequences, structural and reputational and personal, out of all proportion to what caused it. The evidence exists and could be explained; the inspectors are not hiding their reasons. The wrong is that the reasons are compressed, at the moment of publication, into a token with no internal structure - a word you can read but cannot argue with, because it does not say what it is made of. Whether Brookmere is truly inadequate is a substantive judgment, and the kernel refuses to make judgments (refusal 11). What it can change is the shape of the judgment: whether the word must show its parts, and whether each part can be answered."
+   },
+   {
+    "actor": "Ashfield Schools Inspectorate",
+    "verb": "cast",
+    "narrative": "The inspectorate opens a judgments register with one discipline: no overall grade may be published as an atom. Every headline must carry its components - each area graded separately, each grade tied to its cited evidence, each open to its own challenge - and the school must have a right of reply on the record before the report goes public. The inspectorate keeps its whole substantive power: it still assesses, still grades, still applies the limiting-judgment rule. What changes is that the grade arrives decomposed, with its working attached, rather than as one word standing alone.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:ashfield-inspectorate.example",
+     "timestamp": "2026-02-01T09:00:00Z",
+     "body": {
+      "decision_id": "2026-judgments-register",
+      "decision_class": "inspection-judgment-commitment",
+      "authorizing_rule": "ashfield-inspection-framework/v2; no-atomic-headline; right-of-reply-before-publication",
+      "issuing_authority": "Ashfield Schools Inspectorate",
+      "commitment": "No overall grade is published without its component grades, each cited to evidence and separately appealable; the limiting rule that produced the headline is named; the school has a right of reply on the record before publication; an annual aggregate publishes how headlines were composed",
+      "note": "The register makes the judgment decompose and each part answerable. It does not decide whether the grade is right, nor whether a limiting rule should cap a whole school - those are substantive/policy (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:ashfield-inspectorate.example#log-1",
+      "alg": "ed25519",
+      "value": "SnVkZ21lbnRzUmVnaXN0ZXJPcGVuZWRBc2hmaWVsZE5vdDAx"
+     }
+    }
+   },
+   {
+    "actor": "The inspectors, judging Brookmere",
+    "verb": "cast",
+    "narrative": "Brookmere's judgment lands not as a word but as a composition. The headline is Inadequate - and beneath it, on the same record, are its parts: safeguarding Inadequate, and quality of education Outstanding, leadership Good, behaviour Good, personal development Good, each grade attached to its cited evidence and its own route of appeal, and the limiting rule named in the open as the thing that turned one weak area into a whole-school verdict. Anyone reading it sees, at a glance, what the single word conceals: that the word rests entirely on a records failing, and that the school it condemns is by every educational measure a strong one. The kernel has not softened the grade. It has made the grade show its working - and the working shows the disproportion.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-inspection.judgment",
+     "community": "did:web:ashfield-inspectorate.example",
+     "timestamp": "2026-06-15T10:00:00Z",
+     "body": {
+      "inspection_id": "2026-brookmere",
+      "institution": "Brookmere Primary School",
+      "headline_grade": "Inadequate",
+      "previous_grade": "Outstanding",
+      "headline_rule": "limiting-judgment: an Inadequate on safeguarding caps the overall grade at Inadequate regardless of other areas",
+      "components": [
+       {
+        "area": "safeguarding",
+        "grade": "Inadequate",
+        "evidence_ref": "did:web:ashfield-inspectorate.example/evidence/2026-brookmere/safeguarding",
+        "appeal_trace": "did:web:ashfield-inspectorate.example/appeals/2026-brookmere/safeguarding",
+        "detail": "single central record incomplete; three recruitment checks logged after start date"
+       },
+       {
+        "area": "quality-of-education",
+        "grade": "Outstanding",
+        "evidence_ref": "did:web:ashfield-inspectorate.example/evidence/2026-brookmere/education",
+        "appeal_trace": "did:web:ashfield-inspectorate.example/appeals/2026-brookmere/education"
+       },
+       {
+        "area": "leadership-and-management",
+        "grade": "Good",
+        "evidence_ref": "did:web:ashfield-inspectorate.example/evidence/2026-brookmere/leadership",
+        "appeal_trace": "did:web:ashfield-inspectorate.example/appeals/2026-brookmere/leadership"
+       },
+       {
+        "area": "behaviour-and-attitudes",
+        "grade": "Good",
+        "evidence_ref": "did:web:ashfield-inspectorate.example/evidence/2026-brookmere/behaviour",
+        "appeal_trace": "did:web:ashfield-inspectorate.example/appeals/2026-brookmere/behaviour"
+       },
+       {
+        "area": "personal-development",
+        "grade": "Good",
+        "evidence_ref": "did:web:ashfield-inspectorate.example/evidence/2026-brookmere/personal-development",
+        "appeal_trace": "did:web:ashfield-inspectorate.example/appeals/2026-brookmere/personal-development"
+       }
+      ],
+      "note": "The single word forced to decompose: Inadequate is carried entirely by safeguarding record-keeping, while quality of education is Outstanding. The composition is legible - and so is the disproportion. The kernel makes the word show its parts; it does not decide whether the word is right (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:ashfield-inspectorate.example#log-1",
+      "alg": "ed25519",
+      "value": "SW5zcGVjdGlvbkp1ZGdtZW50QnJvb2ttZXJlRGVjb21wTm90MDI"
+     }
+    }
+   },
+   {
+    "actor": "Helen Marsh, reading the composition",
+    "verb": "read",
+    "narrative": "Helen reads the judgment and, for the first time in this kind of story, reads something she can hold. Not a word handed down whole, but a structure: the one area that failed, the four that did not, the rule that let the one govern the whole, the evidence for each, laid out so that the disproportion is not her aggrieved opinion but a fact on the face of the report. In the real system the word arrives as an atom and the reasoning stays in a draft only the inspectorate controls; here the reasoning is the published thing, and what she reads is not a softer grade - it is Inadequate still - but a grade that can no longer pretend to be about her school as a whole. The word has been made to confess what it is made of."
+   },
+   {
+    "actor": "Helen Marsh, replying before publication",
+    "verb": "challenge",
+    "narrative": "Because the register gives her a reply before the report is public, Helen contests the thing that actually harms her: not that safeguarding paperwork was imperfect - she has already fixed it - but that a records failing should cap a whole school at its lowest word, and that the limiting rule was applied to a gap since closed. The inspectorate answers on the record. And here the ceiling shows through the protection: her challenge can test whether the limiting rule was correctly applied, and win a re-inspection of safeguarding - but it cannot touch the rule itself, that one area may govern the verdict, because that is the framework's policy and policy is not the kernel's to overturn (refusal 11). She can contest the arithmetic of the judgment. She cannot appeal its design.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:ashfield-inspectorate.example",
+     "timestamp": "2026-07-01T10:00:00Z",
+     "body": {
+      "in_response_to": "inspection:2026-brookmere#headline",
+      "challenge": "headline Inadequate is disproportionate to a records gap since remedied; requests review of the limiting rule's application",
+      "disposition": "limiting rule upheld as correctly applied at time of inspection; safeguarding to be re-inspected within 30 days; remediation noted",
+      "stated_reason": "the limiting judgment applies where safeguarding is Inadequate at the time of inspection; post-inspection remediation cannot alter the finding of record (framework policy)",
+      "appeal_trace": "did:web:ashfield-inspectorate.example/appeals/2026-brookmere",
+      "note": "The reply on the record, and its bound: the school can contest the application of the rule, not the policy that one area caps the whole. The report, with its headline, still publishes while the re-inspection is pending."
+     },
+     "sig": {
+      "key_id": "did:web:ashfield-inspectorate.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VCcm9va21lcmVIZWFkbGluZU5vdFJlYWwwMw"
+     }
+    }
+   },
+   {
+    "actor": "Ashfield Schools Inspectorate, standards office",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes what the single word hides in aggregate: how many schools were graded Inadequate on the strength of one limiting area alone, how many of those were strong on quality of education, and how many headlines were softened once challenged. Measure the process, never the person (§8): the reductiveness of the one-word grade as the inspectorate's own signed number. It is the clearest evidence anyone has had that the word does violence to what it summarises. It is also only evidence: it un-publishes no headline, and reverses no academisation the word has already set in motion.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:ashfield-inspectorate.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "single-headline-inspection-grades",
+      "period": "2026",
+      "unit": "schools graded Inadequate",
+      "inadequate_total": 210,
+      "inadequate_via_single_limiting_area": 128,
+      "of_those_strong_on_quality_of_education": 96,
+      "headlines_softened_on_challenge": 41,
+      "note": "Anonymous aggregate. 128 of 210 'Inadequate' schools were capped by a single limiting area; 96 of those were strong on quality of education. Measure the process (§8): the reductiveness the single word hides, as the inspectorate's own number. It does not un-publish a headline or undo an academisation the word triggered."
+     },
+     "sig": {
+      "key_id": "did:web:ashfield-inspectorate.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlSW5hZGVxdWF0ZUxpbWl0aW5nQXJlYU5vdDA0"
+     }
+    }
+   },
+   {
+    "actor": "The single word, and what the record cannot lift",
+    "verb": "offstage",
+    "narrative": "The ceilings define what a record can and cannot do to a judgment. The kernel makes the verdict decompose, but it cannot forbid the headline: whether Brookmere is Inadequate is the inspectorate's substantive call, and the kernel decomposes the word without overturning it (refusal 11). Worse, the consequences attach to the word, not to its parts - the statutory academisation, the reputational collapse, the estate-agent shorthand all fire on the atom 'Inadequate', and a decomposition that shows the atom to be disproportionate does not stop the guillotine the policy has welded to it. The real remedy for the single word was not an appeal any school won; it was a policy change - the word abolished after a death - which the kernel can make harder to defend by exposing its disproportion, and cannot itself enact. And the timing compounds it: the report publishes while the challenge is pending (§9), so the word does its damage in a day that months of re-inspection cannot recall. One thing the kernel does better here than with coercive power: a reforming inspectorate is a more plausible adopter than a police force or a Home Office, having no case of its own to protect - but a single word is politically potent precisely because it is simple, and decomposition is the enemy of that potency, which is why the regimes that use single words tend to want them kept whole."
+   },
+   {
+    "actor": "Anyone, reading the report after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it forced a single-word verdict to decompose into cited, separately-appealable parts, with a right of reply before publication - so the wrongs at the centre of the real tragedy cannot be logged here: a whole school reduced to one uninterrogable word, and a judgment with no reason to answer and no reply in time. On this register the disproportion is legible on the face of the report, and every part of the verdict can be contested. What it did not do, and by its own rule cannot: strike the headline, detach the consequences the policy welds to the word, or make the reply outrun the publication. It made the atom show its parts; it could not stop the atom being thrown. This names a candidate primitive the corpus has not needed before - a decomposable evaluative judgment, a verdict that may not be published as an atom - the counterpart to the exam case, where a fully decomposed and legible judgment was still unjust because its design was unjust: there legibility was not enough, here the refusal of legibility is the wrong itself, and a second case that needs this same 'no atomic verdict' shape would earn it a place in the core, the discipline that grew executive.act. The word that broke Ruth Perry is, here, a composition anyone can read as disproportionate on the day it publishes. That is a real protection. It was not, in the end, what ended single-word grades; a death and a change of policy were."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "A school is downgraded from Outstanding to Inadequate — reduced to one word, carried by a records failing though its teaching stays excellent (Ruth Perry, 2023). The kernel forces the word to decompose: a headline must carry its cited, separately-appealable parts, so the disproportion is legible. But it cannot strike the word or detach the consequences welded to it — the real remedy was scrapping single-word grades.",
+  "protection": "the decomposed, appealable judgment",
+  "protection_plain": "Whether forcing a single-word inspection grade to decompose — a headline that must carry its cited, separately-appealable parts — protects the school. It makes the disproportion legible and each part contestable; but the kernel cannot strike the headline, nor detach the consequences welded to it.",
+  "findings": [
+   {
+    "protection": "the headline forced to decompose",
+    "severity": "note",
+    "doc_ref": "§7",
+    "observation": "For an adopting inspectorate, no overall grade may be published as an atom: the headline must carry its component grades, each tied to cited evidence and each separately appealable, with the limiting rule that produced it named in the open. So the wrong at the heart of the Ruth Perry tragedy - a whole school compressed into one uninterrogable word - cannot be logged: Inadequate must appear as 'Inadequate on safeguarding records; Outstanding on quality of education', and the reader sees at a glance that the word rests on one area. It is the kernel's cite-your-rule discipline extended from rules to judgments - a verdict made to show its working - and the working is what makes the disproportion a fact on the record rather than an aggrieved claim."
+   },
+   {
+    "protection": "a verdict that refuses to have working",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The finding this case exists to make, and a failure mode new to the corpus. It is not the hidden reason (the welfare model's opacity) nor the visible-but-unjust design (the exam algorithm): it is the reason compressed into a token that cannot carry it - a word legible to read and impossible to argue with, because it has no internal structure to check. The kernel can force the decomposition, making the atom confess its parts. What it cannot do is forbid the atom: whether the school is Inadequate is a substantive evaluative judgment (refusal 11), and the kernel decomposes the verdict without overturning it. It makes the single word's violence to the structure beneath it undeniable; it does not strike the word. Legibility is made compositional - a real gain - and is still not the power to change the grade."
+   },
+   {
+    "protection": "the consequences attach to the word, not its parts",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The disproportion is the true harm, and it survives the decomposition. A whole school is forced toward academisation, a headteacher's standing and health destroyed, on one word carried by a paperwork gap - and the statutory and reputational consequences fire on the atom 'Inadequate', not on its components. A composition that proves the word disproportionate does not stop the guillotine the policy has welded to the headline. Whether one limiting area should govern a whole school is policy, offstage (refusal 11); the real remedy was the abolition of single-word grades after Ruth Perry's death - a change of policy, not an appeal. The kernel can make the disproportion legible and so make the policy harder to defend; it cannot detach the consequence from the word, nor enact the reform the exposure argues for."
+   },
+   {
+    "protection": "the reply is real and too slow",
+    "severity": "strain",
+    "doc_ref": "§9",
+    "observation": "The register gives the school a right of reply before publication and each component its own appeal route - a genuine gain, since the head contests the limiting rule's application on the record rather than in a draft only the inspectorate reads. But the reply is bounded and the clock is against it: the challenge can test whether the rule was correctly applied, not the policy that one area caps the whole; and the report, with its headline, publishes while the re-inspection is still pending (§9's constitutional speed), so the word does its reputational damage in a day that months of appeal cannot recall. A verdict you can decompose and contest, but only after it has published and its consequences have begun, is a bounded protection - better than silence, short of a remedy."
+   },
+   {
+    "protection": "the aggregate, and the primitive it names",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The aggregate turns the single word's reductiveness into the inspectorate's own signed figure - how many schools were graded Inadequate on one limiting area alone, how many of those were strong on education, how many headlines softened on challenge - measure-the-process (§8), the pattern the word hides made countable on the day. And it names a candidate core primitive the corpus has not needed before: a decomposable evaluative judgment, a verdict that may not be published as an atom but must carry its cited, separately-appealable components. It is the complement of the exam case - there a fully decomposed, legible judgment was still unjust because its design was unjust; here the refusal to decompose is itself the wrong - and the two together map the edges of legibility for judgments. Logged here as an x- extension; a second case that needs the same 'no atomic verdict' shape would earn it the core, the discipline that grew executive.act from two converging cases."
+   }
+  ]
+ },
+ {
   "id": "party-finance-dark-money",
   "title": "The Donor Behind the Donor: What a Clean-Money Log Can and Cannot See",
   "setting": "The Commonweal Party is small, new, and built its whole identity on one promise: it takes no money it will not name. Where the established parties file their donations late, in bulk, to a regulator whose largest fine is a rounding error to a serious donor, Commonweal runs its finances on a witnessed kernel transparency log — every gift posted as it arrives, each carrying the source it came from. The pledge is the pitch. Petra Vance, who has spent a decade chasing dark money for a small investigative outlet, is watching to see whether it survives contact with the people who make a living hiding where political money comes from.\n\nIt is tested in May, by a gift of a hundred and twenty thousand pounds from the Albany Forum. The Forum is an unincorporated association — the same legal form that let a body with no website, no accounts and no disclosed donors route four hundred and thirty-five thousand pounds to a Brexit campaign and never say whose money it was. In the ordinary regime, more than sixty million pounds has flowed into British politics this way in two decades, foreign money among it, perfectly legally. Commonweal's log will do something the ordinary regime does not: post the Albany gift the day it lands, name the Forum as its source, and — the part that matters — mark on its own record that it cannot see past the Forum to whoever stands behind it. This scenario is about how much that honesty is worth, and exactly where it stops: at the intermediary the kernel can record but cannot compel.",
