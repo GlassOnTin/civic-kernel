@@ -310,9 +310,9 @@
       "signature": ["access_gated", "record_absent"],
       "reach": 2,
       "leverage": 2,
-      "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "remedy_caveat": true,
+      "status": "encoded",
+      "scenario": "criminal-disclosure-failure"
     },
     {
       "id": "ofsted-single-word-judgment",

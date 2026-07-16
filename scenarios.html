@@ -2258,6 +2258,264 @@
   ]
  },
  {
+  "id": "criminal-disclosure-failure",
+  "title": "Item 14, Withheld: The Evidence That Clears You, Held by the Side That Would Convict",
+  "setting": "Tom Fielding, a twenty-two-year-old student, was charged with rape and faced years in prison. The police had downloaded the complainant's phone: some forty thousand messages, among them a thread in which she pursued him after the night in question and described what had happened in terms that flatly contradicted the charge. The prosecution held this download for months and did not hand it over. Under the disclosure regime it is the prosecution — the very side seeking to convict him — that reviews its own material and decides, in private, which parts might assist the defence. It decided these messages did not. The case against Tom collapsed only because, days into his trial, a barrister happened to ask for the download and read it; had she not, he would very likely have been convicted on evidence the state was sitting on the whole time.\n\nThis is R v Liam Allan and the disclosure crisis it exposed: inspectorate after inspectorate has found that failures to disclose unused material are not rare accidents but a routine, structural feature of the system, surfacing — when they surface at all — mid-trial, or years later through the Criminal Cases Review Commission, after the conviction has already been served. The wrong has a precise shape: one party holds all the evidence because it did the investigating, and the other cannot ask for what it does not know exists, so the accused depends entirely on his accuser's good-faith search of its own files for the things that would sink its case. The Wessex Crown Prosecution Service, in this scenario, runs disclosure on a kernel register, and the question is exact: a protocol cannot decide whether forty thousand messages are relevant — that is a judgment, and judgment is refused. But can it stop that judgment being made in the dark?",
+  "threats": [
+   "T8",
+   "T12"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§7",
+   "§9",
+   "§1",
+   "§12",
+   "T8",
+   "T12"
+  ],
+  "precedents": [
+   {
+    "event": "R v Liam Allan — rape trial collapses over undisclosed messages",
+    "year": 2017,
+    "source": "R v Allan (2017, trial collapsed); press and parliamentary coverage",
+    "url": "https://en.wikipedia.org/wiki/Disclosure_(criminal_procedure)",
+    "shows": "A student faced twelve charges and a possible life sentence; the police held a download of the complainant's phone containing messages that undermined the case, which the prosecution did not disclose. The trial collapsed only when defence counsel obtained and read the download mid-trial - the exculpatory evidence had been in the state's hands throughout, withheld by the side prosecuting him."
+   },
+   {
+    "event": "Criminal Procedure and Investigations Act 1996 — the disclosure duty runs against the prosecution",
+    "year": 1996,
+    "source": "CPIA 1996 s.3; legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ukpga/1996/25/section/3",
+    "shows": "The prosecution must disclose unused material that 'might reasonably be considered capable of undermining the case for the prosecution or of assisting the case for the accused' - a relevance judgment made by the party whose case the material would damage, over evidence only it holds, with the defence unable to ask for what it cannot see."
+   },
+   {
+    "event": "Inspectorates find disclosure failures systemic, not exceptional",
+    "year": 2020,
+    "source": "HM Crown Prosecution Service Inspectorate / HMICFRS joint disclosure reviews (2017, 2020)",
+    "url": "https://www.justiceinspectorates.gov.uk/hmcpsi/",
+    "shows": "Joint inspectorate reviews found disclosure of unused material routinely handled poorly - schedules incomplete or completed late, relevance assessed carelessly, failures surfacing at or after trial rather than before - a structural feature of the system rather than a series of isolated errors."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:wessex-cps.example",
+    "name": "Wessex Crown Prosecution Service (disclosure register)",
+    "parent": "did:web:wessex-justice.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:wessex-cps.example",
+    "witnesses": [
+     "did:web:wessex-criminal-bar.example",
+     "did:web:wessex-cps-audit.example",
+     "did:web:justice-inspectorate.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-schedule-of-material-held-in-your-case",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 120,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:wessex-cps.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Tom Fielding, and the evidence held against him",
+    "verb": "offstage",
+    "narrative": "The backdrop is an asymmetry no other case in the corpus has quite this sharply. One party investigated, so one party holds all the evidence; the other cannot ask for what it does not know exists. And the law asks the holding party - the prosecution - to search its own files, in private, for the material that would defeat it, and to hand that material to the other side. When it decides a thing is not relevant, the decision is silent: the defence never learns the thing existed. Whether forty thousand messages are 'capable of assisting the defence' is a substantive judgment, and the kernel refuses to make judgments (refusal 11). What it can change is whether that judgment is made in the dark: whether the defence can at least see what the state holds, item by item, and contest what it chooses to withhold."
+   },
+   {
+    "actor": "Wessex Crown Prosecution Service",
+    "verb": "cast",
+    "narrative": "The service opens a disclosure register with a single discipline: for every case, a complete, witnessed schedule of the unused material it holds, listing every item's existence - including the ones it will not disclose and the ones it must seal for a third party's privacy - and recording every non-disclosure as an itemised, cited, challengeable decision. The prosecution keeps its substantive power entirely: it still assesses relevance, still decides what to disclose. The register changes only that the assessing happens against a list the defence can see, with each withholding named and contestable, rather than inside a file only the prosecution reads.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:wessex-cps.example",
+     "timestamp": "2026-02-01T09:00:00Z",
+     "body": {
+      "decision_id": "2026-disclosure-register",
+      "decision_class": "disclosure-schedule-commitment",
+      "authorizing_rule": "CPIA 1996 s.3; wessex-disclosure-charter/v1 (complete witnessed schedule; every withholding itemised and challengeable)",
+      "issuing_authority": "Wessex Crown Prosecution Service",
+      "commitment": "Every case carries a complete, witnessed, append-only schedule of unused material; sensitive items are listed but sealed; every non-disclosure is an itemised decision citing its basis with a route to challenge; an annual aggregate publishes late/failed disclosure and withholdings overturned on challenge",
+      "note": "The register makes the existence of material and the fact of each withholding legible. It does not decide relevance - that judgment stays with the prosecution and, on challenge, the court (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:wessex-cps.example#log-1",
+      "alg": "ed25519",
+      "value": "RGlzY2xvc3VyZVJlZ2lzdGVyT3BlbmVkV2Vzc2V4Tm90UmVhbDAx"
+     }
+    }
+   },
+   {
+    "actor": "The disclosure officer, scheduling",
+    "verb": "cast",
+    "narrative": "The schedule for R v Fielding lands as a logged, witnessed record: forty-seven items of unused material, each with a plain descriptor and a disclosure status, the whole thing append-only so nothing can later be quietly dropped from it. Item 14 is the download of the complainant's phone - forty thousand messages - listed by its descriptor, marked withheld as not relevant, its contents sealed for the third party's privacy behind a published digest a court can open. Tom's lawyer cannot read item 14 from the schedule. But she can see, from the first day, that it exists, how big it is, and that the prosecution has chosen not to disclose it. In the real case, that knowledge arrived by luck, mid-trial. Here it is on the record before the trial begins.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-disclosure.schedule",
+     "community": "did:web:wessex-cps.example",
+     "timestamp": "2026-05-10T10:00:00Z",
+     "body": {
+      "case_ref": "R v Fielding / WCP-2026-0231",
+      "schedule_type": "unused-material (CPIA 1996 s.3)",
+      "items_total": 47,
+      "disclosed": 39,
+      "withheld_not_relevant": 6,
+      "withheld_sensitive_sealed": 2,
+      "integrity": "witnessed + anchored, append-only; no item may be removed after scheduling",
+      "key_item": {
+       "item_no": 14,
+       "descriptor": "complainant mobile-phone message export, ~40,000 messages",
+       "status": "withheld - assessed not capable of undermining/assisting (CPIA s.3)",
+       "challenge_trace": "did:web:wessex-cps.example/disclosure/WCP-2026-0231/item-14"
+      },
+      "note": "The schedule lists the existence of every item, including those withheld and those sealed for third-party privacy. The defence cannot read item 14's content here - but can see it exists, was withheld, and can be challenged."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+      "readable_by": [
+       "court-order",
+       "authorized-auditor"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:wessex-cps.example#log-1",
+      "alg": "ed25519",
+      "value": "RGlzY2xvc3VyZVNjaGVkdWxlRmllbGRpbmdJdGVtMTROb3QwMg"
+     }
+    }
+   },
+   {
+    "actor": "The prosecution, withholding item 14",
+    "verb": "cast",
+    "narrative": "The non-disclosure of item 14 is not a silence but an entry: the prosecution's judgment that the messages are not capable of assisting the defence, recorded against the item, citing the statutory test, naming that it is the prosecution's own assessment, and carrying a route by which the defence may put it to the court. This is the fresh move the case turns on. The kernel does not - cannot - say the judgment is wrong. It makes the judgment exist in the open, attached to a named item, where a wrong call can be contested, instead of dissolving into a file no one outside the prosecution ever reads.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:wessex-cps.example",
+     "timestamp": "2026-05-10T10:05:00Z",
+     "body": {
+      "in_response_to": "disclosure-schedule:WCP-2026-0231#item-14",
+      "disposition": "withheld - not disclosed",
+      "stated_reason": "assessed as not capable of undermining the prosecution or assisting the accused (CPIA 1996 s.3)",
+      "decision_by": "police disclosure officer, reviewed by reviewing prosecutor",
+      "challenge_trace": "did:web:wessex-cps.example/disclosure/WCP-2026-0231/item-14",
+      "note": "The relevance judgment in the open: the item named, the basis cited, the author identified, a route to challenge attached - so the defence contests a decision it can see, not a silence it cannot."
+     },
+     "sig": {
+      "key_id": "did:web:wessex-cps.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VJdGVtMTRXaXRoaGVsZE5vdFJlYWwwMw"
+     }
+    }
+   },
+   {
+    "actor": "Tom Fielding's counsel, reading the schedule",
+    "verb": "read",
+    "narrative": "Tom's barrister reads the schedule on the day she is briefed, not in the fourth day of trial. She sees item 14: a forty-thousand-message export, withheld, marked not relevant. She does not need to know what is in it to know that a download that large, from the complainant's own phone, is the first place any competent defence would look - and she does not have to hope it surfaces, because the register has already told her it exists. The read the real defence got by accident is here a standing fact. What she reads is not the evidence. It is the existence of the evidence, which is the thing the old system let the prosecution keep to itself."
+   },
+   {
+    "actor": "Tom Fielding's counsel, challenging",
+    "verb": "challenge",
+    "narrative": "She challenges the withholding through the trace, and the question of relevance goes where it belongs: to the court, in the open, before trial. A judge reviews item 14 under supervision, the messages are disclosed, and they do to this case what they did to the real one - end it, because they are plainly capable of assisting the defence and never should have been withheld. The kernel decided nothing about relevance. It made item 14 visible, and visibility let the defence force the judgment out of the prosecution's private discretion and into a courtroom - early enough to matter. That is the whole of what it did, and in this case it was the difference between a collapsed trial and a wrongful conviction."
+   },
+   {
+    "actor": "Wessex Crown Prosecution Service, disclosure audit",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes disclosure as a number the inspectorates spent years establishing by hand: how many cases had late or failed disclosure, how many withholdings were challenged, and how many of those - assessed 'not relevant' by the prosecution - were overturned when a court finally looked. Measure the process, never the person (§8): the reliability of the prosecution's own relevance calls, as its own signed figure. It is the clearest audit of the disclosure system anyone has had. It is also only a description: it does not re-try the cases where no one thought to challenge.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:wessex-cps.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "disclosure-of-unused-material",
+      "period": "2026",
+      "unit": "concluded cases",
+      "cases": 3100,
+      "late_or_failed_disclosure": 620,
+      "withholdings_challenged": 210,
+      "withholdings_overturned_on_challenge": 148,
+      "note": "Anonymous aggregate. Of 210 withholdings assessed 'not relevant' and then challenged, 148 were overturned - the prosecution's relevance call against the defence wrong most of the time it was contested. Measure the process (§8): the disclosure failure rate as the office's own signed number, not an inspectorate's finding years later. It cannot count the cases no one challenged."
+     },
+     "sig": {
+      "key_id": "did:web:wessex-cps.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlRGlzY2xvc3VyZU92ZXJ0dXJuZWROb3RSZWFsMDQ"
+     }
+    }
+   },
+   {
+    "actor": "The evidence room, and what never reaches the list",
+    "verb": "offstage",
+    "narrative": "The ceilings are where the honesty is. The kernel cannot judge relevance, and does not try - it stops the judgment being made in secret, not the judgment itself; a determined prosecutor can still assess wrongly, and only a challenge that someone thinks to bring will test it. Deeper: the schedule's completeness is proven over what was scheduled, not over what was gathered. The append-only witnessed list guarantees no item is removed after it is entered (§3.4, T8) - but not that every relevant thing the police collected was ever entered. The exculpatory message an officer deemed irrelevant and never scheduled is government-by-whatsapp in the evidence room: what is never recorded cannot be read or challenged, and the register moves that gap upstream to intake without closing it. And the adopter is, once again, the accused party: the disclosure duty runs against the prosecution, and the prosecution is precisely who must run a register that itemises everything it holds and every withholding it makes against its own case - a court or an inspectorate could compel it, but unbidden it rests on the good faith of the office whose bad faith is the wrong. The schedule is early; the plea, sometimes, is earlier."
+   },
+   {
+    "actor": "Anyone, reading the case record after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it turned the prosecution's private control over its own evidence into a complete, witnessed, itemised schedule with every withholding named and challengeable - so the two wrongs at the centre of the real scandal cannot be logged here: material whose existence the defence never learns, and a relevance call made where no one can contest it. On this register the defence always sees what the state holds, item by item, and can always put a withholding to the court, before trial rather than after conviction. What it did not do, and by its own rule cannot: decide whether the messages assist the defence, capture what the investigator never recorded, force the prosecutor to run it, or outrun a guilty plea. It made the asymmetry visible and contestable; it did not abolish it, because the state still gathers the evidence and still holds it. The download that cleared Liam Allan by luck, days into his trial, is here item 14 on a schedule his lawyer reads on day one. That is most of the distance from a wrongful conviction to a fair trial. It is not the whole of it, because the one thing the record cannot show is the item that was never written down."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "A student faces rape charges; police hold 40,000 of the complainant's messages that clear him, but the prosecution never discloses them (Liam Allan, 2017). The kernel makes the prosecution publish a complete, witnessed schedule of what it holds, each withholding itemised and challengeable — so the defence can contest what it now knows exists. But it cannot judge relevance, nor record what was never scheduled.",
+  "protection": "the challengeable disclosure schedule",
+  "protection_plain": "Whether making the prosecution publish a complete, witnessed schedule of what it holds — each non-disclosure itemised and challengeable — gives the defence a fair sight of the case. It forecloses the silent withholding; but the kernel cannot judge relevance, nor record what was never scheduled.",
+  "findings": [
+   {
+    "protection": "the schedule of what the state holds",
+    "severity": "note",
+    "doc_ref": "§7",
+    "observation": "For an adopting prosecution, the unused material is a complete, witnessed, contemporaneous schedule the defence can read from the day it is briefed - every item's existence listed, including those withheld and those sealed for a third party's privacy. So the wrong at the heart of R v Allan, exculpatory material whose existence the defence never learns, cannot be logged: the read the real defence got by luck mid-trial is here a standing artifact available before trial. The defence cannot read a sealed item's content from the schedule, but it can always see that the item exists, how it is described, and that it was withheld - which is the knowledge the old system let the prosecution keep to itself."
+   },
+   {
+    "protection": "stops relevance being judged in secret",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The finding this case exists to make. The disclosure duty asks the party whose case the material would damage to decide, privately, what assists the other side - and the kernel refuses to make that relevance judgment itself (refusal 11). What it forecloses is the secrecy of the judgment: every non-disclosure becomes an itemised, cited, challengeable decision - item X exists, withheld on this basis, by this officer, contest it here - so the defence argues against a decision it can see rather than a silence it cannot. The relevance call moves from the prosecution's private file to a contestable record and, on challenge, to the court. The kernel does not stop a wrong call being made; it stops a wrong call being unanswerable, which is what let Allan's download stay buried until luck exposed it."
+   },
+   {
+    "protection": "completeness is proven over the schedule, not the gathering",
+    "severity": "strain",
+    "doc_ref": "§3.4",
+    "observation": "The append-only, witnessed schedule guarantees that no item, once entered, can be quietly removed (§3.4, T8) - the after-the-fact suppression of scheduled material is foreclosed. What it cannot guarantee is that everything the police gathered reached the schedule. The item an investigator deems irrelevant and never records is the government-by-whatsapp of the evidence room: what is never scheduled cannot be read or challenged, because the register can only prove the completeness of the list, not the completeness of the collection. The kernel moves the disclosure gap upstream, from the review stage to the intake stage - a real narrowing, since a listed-but-withheld item is now contestable where a buried one was not - but it does not close it. The exculpatory message that never becomes item 14 is the one the record still cannot show."
+   },
+   {
+    "protection": "the prosecutor is the least likely adopter",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The adoption gap in its purest form. The disclosure duty runs against the prosecution, and the prosecution is exactly the party that must operate a register itemising everything it holds and recording every withholding it makes against its own case. A body seeking a conviction has little incentive to run a system that hands the defence a map of its files and turns each of its relevance calls into a challengeable entry - the same wall the corpus meets with coercive power and the self-judging minister. A court's standing rules or an inspectorate's mandate could impose the register from outside; absent that, it depends on the good faith of the office whose lapses in good faith are the very wrong it addresses."
+   },
+   {
+    "protection": "the aggregate audits the calls it cannot re-try",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The aggregate turns the disclosure system's reliability into the prosecution's own signed figure: how many cases suffered late or failed disclosure, how many withholdings were challenged, and how many 'not relevant' assessments were overturned when a court finally looked - the systemic finding the inspectorates reconstructed over years, available on the day and measured against the process, never the accused (§8). And its limits are the scenario's in miniature: it counts only the withholdings someone challenged, so the cases where no one knew to look are invisible to it; the schedule is contemporaneous but a guilty plea can precede the moment a buried item would have surfaced (§9); and a number that proves the relevance calls were often wrong does not, by itself, re-open the trials that turned on them. It makes the failure rate undeniable. It does not undo the convictions it counts."
+   }
+  ]
+ },
+ {
   "id": "diluted-vendor",
   "title": "The Kernel That Wasn't: How Wuppertal Bought the Brand and the Fine Print Fought Back",
   "setting": "The demo in the Barmen town hall lasted forty minutes, and by the end of it half the committee was already sold. Jonas Beck of CivicFlow GmbH, a Berlin vendor with a stand at every smart-city fair, walked Wuppertal's digitalisation committee through a participation platform that was genuinely lovely: three taps to vote on the Nordstadt participatory budget, a live dashboard, accessibility badges, and — the closer — 'full Civic Kernel compatibility'. The contract was signed in April. In May, press office head Petra Sandmann sent out the release the mayor had asked for: 'Wuppertal now runs on the Civic Kernel.' The local paper printed it almost verbatim.\n\nWhat the press release did not say, the conformance manifest could not avoid saying. The kernel's manifest schema forces every deployment to declare all four services true or false and to detail what it actually built: CivicFlow's ballots are mathematically verifiable but not receipt-free — the app emails you a confirmation showing how you voted. Eligibility is a live lookup against the city's resident register, so the city gets a linkable record of who participated in what. The transparency log has exactly one witness: CivicFlow itself, signing off on its own honesty. No rights guard. No paper channel. No cast-or-audit. The manifest is signed with CivicFlow's own company key, not the city's.\n\nFor most of Wuppertal's 28,000 budget voters, none of this surfaced. For Meryem Kaya, a care-home worker in Oberbarmen whose shift coordinator asked the whole team to forward their voting confirmations 'for the team tally', the missing receipt-freeness was not fine print. And for Leyla Arslan, a reporter who had learned to run the kernel's reference verifier client, the gap between the press release and the manifest was a story — the only kind of story a machine-readable declaration makes possible.",
