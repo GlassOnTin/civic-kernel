@@ -48,13 +48,15 @@
   .group-blurb { color: var(--muted); margin: 0 0 1.2rem; max-width: 44rem; }
   .group-cta { margin: 1.1rem 0 0; font-family: var(--mono); font-size: .82rem; }
   .group-cta a { color: var(--accent); }
-  .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: .7rem; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
   .cards a {
-    display: block; height: 100%; background: var(--card); border: 1px solid var(--line);
-    border-radius: 8px; padding: 1rem 1.1rem; color: inherit; text-decoration: none;
+    display: flex; flex-direction: column; height: 100%; background: var(--card); border: 1px solid var(--line);
+    border-radius: 8px; padding: .7rem .85rem; color: inherit; text-decoration: none;
   }
   .cards a:hover { border-color: var(--accent); }
-  .cards h3 { font-size: 1.02rem; margin: .5rem 0 .35rem; line-height: 1.35; }
+  .cards h3 { font-size: .95rem; margin: 0 0 .5rem; line-height: 1.3; font-weight: 600; }
+  .cards .cmeta { margin: auto 0 0; font-family: var(--mono); font-size: .7rem; display: flex; align-items: center; gap: .45rem; color: var(--muted); flex-wrap: wrap; }
+  .cards .cmeta .prot { font-style: italic; cursor: help; }
   .cards p { font-size: .85rem; color: var(--muted); margin: 0; }
   .cards p.cv { margin-top: .5rem; font-style: italic; }
   .jcard .cv { font-style: italic; color: var(--muted); font-size: .85rem; margin: .45rem 0 .55rem; }
@@ -11574,10 +11576,8 @@ const SECTIONS = [
 
 function card(s) {
   return `<li><a href="#${esc(s.id)}">
-    <p class="protline"><span class="prot" data-tip="${esc(s.protection_plain)}">${esc(s.protection)}</span> <span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span></p>
     <h3>${esc(s.title)}</h3>
-    <p>${esc(s.setting.split(/(?<=[.!?])\s/)[0])}</p>
-    <p class="cv">${esc(s.verdict_plain)}</p>
+    <p class="cmeta"><span class="badge ${esc(s.verdict)}" data-tip="${esc(TIP[s.verdict])}">${esc(s.verdict)}</span> <span class="prot" data-tip="${esc(s.verdict_plain)}">${esc(s.protection)}</span></p>
   </a></li>`;
 }
 
