@@ -1,0 +1,262 @@
+{
+ "id": "ministerial-standards-unenforced",
+ "title": "The Judge Is the Defendant: A Breach Found, a Finding Overridden, an Adviser Who Can Only Resign",
+ "setting": "Sir Alan Rede is the independent adviser on ministerial standards, and after weeks of evidence he has concluded that the Home Secretary, Cole Harrow, breached the ministerial code by bullying his officials. He writes it down plainly, because it is plainly true. Then it goes to the one person who decides what happens next: the Prime Minister — who reads the finding, declares full confidence in the minister, and does nothing. Rede has exactly one lever, and he pulls it: he resigns. In the real version of this, that is not a hypothetical. In 2020 the adviser found Priti Patel had breached the code, the Prime Minister overruled him, and Sir Alex Allan resigned; two years later Lord Geidt resigned as the second ethics adviser in the same tenure, having concluded he was not truly independent and could not even open an inquiry, still less advise a Prime Minister on the Prime Minister's own conduct.\n\nThe wrong here is not a captured regulator that could act and won't. It is a constitutional arrangement in which the person who judges the conduct of the government is the head of the government — the Prime Minister is the ultimate arbiter of the code, judging his own ministers and himself, and the independent adviser advises, resigns, and is replaced. The Ashfold government runs its standards process on a kernel transparency register, after its own two advisers walked out. This scenario is about what a record can do when the judge is the defendant: it can make the finding, the override, and the resignation permanent and countable — and it cannot make the judge disinterested, because who judges is the one thing the kernel will not decide.",
+ "threats": [
+  "T1",
+  "T12"
+ ],
+ "doc_refs": [
+  "§8",
+  "§3.4",
+  "§9",
+  "§1",
+  "§6",
+  "§12",
+  "T1",
+  "T12"
+ ],
+ "precedents": [
+  {
+   "event": "Sir Alex Allan resigns after the PM overrules his finding that Priti Patel breached the code",
+   "year": 2020,
+   "source": "Institute for Government",
+   "url": "https://www.instituteforgovernment.org.uk/article/comment/handling-priti-patel-bullying-inquiry-has-fatally-undermined-ministerial-code",
+   "shows": "The independent adviser found the Home Secretary had breached the ministerial code by bullying officials; the Prime Minister concluded she had not and declared full confidence in her; the adviser's only recourse was to resign, which he did — the finding overridden by the sole arbiter, and the Institute for Government judging the episode to have 'fatally undermined' the code."
+  },
+  {
+   "event": "Lord Geidt resigns as the second ethics adviser in one tenure",
+   "year": 2022,
+   "source": "The Constitution Unit (UCL)",
+   "url": "https://constitution-unit.com/2022/06/17/lord-geidts-resignation-is-a-fresh-reminder-of-the-governments-restrictive-approach-to-scrutiny-of-its-actions/",
+   "shows": "The second Independent Adviser on Ministers' Interests to resign under the same Prime Minister; MPs saw the office as not truly independent — the adviser could only open an investigation with the Prime Minister's consent, and was inhibited from advising a Prime Minister on the Prime Minister's own conduct — the judge structurally the interested party."
+  },
+  {
+   "event": "Two ethics advisers resign in two years; the PM remains the code's ultimate arbiter",
+   "year": 2022,
+   "source": "CNN",
+   "url": "https://edition.cnn.com/2022/06/16/uk/boris-johnson-geidt-ethics-adviser-resigns-intl-gbr/index.html",
+   "shows": "Two independent advisers resigned within two years under one Prime Minister, who throughout remained the ultimate arbiter of the ministerial code with the adviser unable to compel any action — so the office's only sanction against an overridden finding is the adviser's own resignation, a protest that leaves the minister in post."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:ashfold-standards.example",
+   "name": "Ashfold Government (ministerial-standards register)",
+   "parent": "did:web:ashfold.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:ashfold-standards.example",
+   "witnesses": [
+    "did:web:ashfold-audit.example",
+    "did:web:standards-in-public-life.example",
+    "did:web:ashfold-university.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "read-the-standards-register",
+    "steps": 1,
+    "fields": 0,
+    "median_seconds": 25,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:ashfold-standards.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Sir Alan Rede, the Prime Minister, and the code that judges itself",
+   "verb": "offstage",
+   "narrative": "The backdrop is the real one, and its wrong is not that no one can act but that the only person who can is the one on trial. The Prime Minister is the ultimate arbiter of the ministerial code, judging his own ministers and his own conduct; the independent adviser finds facts and advises, and when overruled can do nothing but resign — as Sir Alex Allan did in 2020 over Priti Patel, and Lord Geidt in 2022 as the second to walk. Whether the Prime Minister should sanction a minister is his constitutional judgment, which the kernel will not seize (refusal 10): who judges is governance, and the kernel enforces governance, never overrules it. What it can change is whether the finding and the choice to bury it survive, or vanish into a news cycle."
+  },
+  {
+   "actor": "The Ashfold government",
+   "verb": "cast",
+   "narrative": "Ashfold, after its own two advisers resigned, opens a standards register on the log with one rule: the adviser's findings, the Prime Minister's dispositions of them, and any resignation are all logged — the finding and the response as a dated, witnessed, linked pair, permanent and public. It does not touch who decides; the Prime Minister remains the arbiter. It touches only whether the deciding is visible. The government keeps the power to overrule its own adviser. What it gives up is the ability to do so quietly.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:ashfold-standards.example",
+    "timestamp": "2026-01-20T09:00:00Z",
+    "body": {
+     "decision_id": "2026-standards-register",
+     "decision_class": "ministerial-standards-transparency-commitment",
+     "authorizing_rule": "ashfold-standards-code/v2; ministerial-code:the-prime-minister-is-the-ultimate-arbiter (unchanged)",
+     "issuing_authority": "Ashfold Government",
+     "commitment": "Every adviser finding, every Prime Ministerial disposition of it (act or no-action, reasoned), and every resignation logged as a permanent linked record; quarterly disposition aggregate published",
+     "note": "The register changes nothing about who judges - the PM stays the arbiter (refusal 10). It removes only the ability to override a finding silently."
+    },
+    "sig": {
+     "key_id": "did:web:ashfold-standards.example#log-1",
+     "alg": "ed25519",
+     "value": "U3RhbmRhcmRzUmVnaXN0ZXJBc2hmb2xkTm90UmVhbENyeXB0bzAx"
+    }
+   }
+  },
+  {
+   "actor": "Sir Alan Rede, independent adviser",
+   "verb": "cast",
+   "narrative": "Rede logs his finding: the Home Secretary breached the code by bullying officials, established on the evidence. It is his, independently, and it is now permanent - where in the real system a finding can be delayed, unpublished, or spun, and the adviser cannot even open an inquiry without the Prime Minister's leave. The record does not make the finding true; the evidence did. It makes the finding impossible to make disappear.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-standards.finding",
+    "community": "did:web:ashfold-standards.example",
+    "timestamp": "2026-05-10T11:00:00Z",
+    "body": {
+     "finding_id": "2026-rede-harrow-01",
+     "adviser": "Sir Alan Rede, Independent Adviser on Ministerial Standards",
+     "subject": "Minister for the Home Department",
+     "code_provision": "ashfold-ministerial-code:para-1.2 (treat officials with consideration and respect)",
+     "finding": "breach: sustained bullying of officials, established on the evidence",
+     "note": "An independent finding of breach, permanent and public. The disposition is not the adviser's to make - only the Prime Minister's - which is exactly the point the next entry records."
+    },
+    "sig": {
+     "key_id": "did:web:ashfold-standards.example#log-1",
+     "alg": "ed25519",
+     "value": "U3RhbmRhcmRzRmluZGluZ0hhcnJvd05vdFJlYWxDcnlwdG8wMg"
+    }
+   }
+  },
+  {
+   "actor": "The Prime Minister",
+   "verb": "cast",
+   "narrative": "The Prime Minister disposes of the finding, and does nothing: full confidence in the minister, no action. In the real system this is the move that vanishes - a statement, a news cycle, and the finding is history. Here it is a process.denial-trace beside the finding it overrides: the Prime Minister's choice not to act, cited to the very rule that makes him the arbiter, dated and permanent. The kernel does not say the choice is wrong - that is his constitutional call. It says, and cannot be made to un-say, that a breach was found and he chose to let it stand.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.denial-trace",
+    "community": "did:web:ashfold-standards.example",
+    "timestamp": "2026-05-14T16:00:00Z",
+    "body": {
+     "disposition_id": "2026-pm-harrow-01",
+     "of_finding": "2026-rede-harrow-01",
+     "decider": "Prime Minister (the code's sole arbiter)",
+     "disposition": "no-action",
+     "authorizing_rule": "ashfold-ministerial-code:the-prime-minister-is-the-ultimate-arbiter",
+     "reason_given": "the Prime Minister retains full confidence in the minister",
+     "note": "The choice not to act, made an artifact: the override of an independent breach finding, cited and dated beside the finding, not a vanishing news cycle - the regulator-inaction move at the apex. The kernel records the disposition; it does not judge whether the PM should have acted (refusal 10)."
+    },
+    "sig": {
+     "key_id": "did:web:ashfold-standards.example#log-1",
+     "alg": "ed25519",
+     "value": "UE1EaXNwb3NpdGlvbk5vQWN0aW9uSGFycm93Tm90UmVhbDAz"
+    }
+   }
+  },
+  {
+   "actor": "Sir Alan Rede, resigning",
+   "verb": "cast",
+   "narrative": "Rede does the only thing the office lets him do: he resigns, in protest, and the resignation is logged as what it is - not a routine departure but a linked answer to an overridden finding, the same act Allan and Geidt made in the real world. The record binds the three together permanently: a breach found, a finding overridden, an adviser gone. It is the loudest a resignation can be made. It is also, and the record says so, not a sanction: Harrow is still the Home Secretary.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-standards.resignation",
+    "community": "did:web:ashfold-standards.example",
+    "timestamp": "2026-05-15T10:00:00Z",
+    "body": {
+     "resignation_id": "2026-rede-resign",
+     "adviser": "Sir Alan Rede",
+     "in_response_to": "2026-pm-harrow-01 (Prime Ministerial override of finding 2026-rede-harrow-01)",
+     "stated_reason": "resigning in protest at the override of a breach finding, the office holding no further recourse",
+     "note": "The only lever the office has, logged and linked: a protest against an overridden finding (Allan 2020, Geidt 2022), permanent rather than a news cycle. A resignation is not a sanction - the minister keeps the post - and the record does not pretend otherwise."
+    },
+    "sig": {
+     "key_id": "did:web:ashfold-standards.example#log-1",
+     "alg": "ed25519",
+     "value": "UmVzaWduYXRpb25SZWRlUHJvdGVzdE5vdFJlYWxDcnlwdG8wNA"
+    }
+   }
+  },
+  {
+   "actor": "The Ashfold public-administration committee",
+   "verb": "read",
+   "narrative": "The committee reads the chain in one place: finding, override, resignation, dated and linked. What in the real system is a contested he-said-she-said - was there really a finding? did the Prime Minister overrule it? was the resignation about this? - is here a settled, permanent record. The self-judgment is on the log: a breach was found by the independent adviser, the Prime Minister chose to let it stand, and the adviser resigned rather than lend his name to it. The committee has gained nothing it can enforce. It has gained a fact no one can now dispute."
+  },
+  {
+   "actor": "The Ashfold government, standards office",
+   "verb": "cast",
+   "narrative": "At the parliament's close the register must publish what the dispositions add up to, and the number is the government's own: of nine independent breach findings, the Prime Minister acted on two and overrode seven, and two advisers resigned. The override rate - invisible in the real system, where each episode is its own news cycle - is a signed figure. Measure the process, never the person (§8): the pattern of a government declining to enforce its own code against itself, made countable, where before it was only ever anecdote.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:ashfold-standards.example",
+    "timestamp": "2026-07-01T09:00:00Z",
+    "body": {
+     "process": "ministerial-standards-enforcement",
+     "period": "this-parliament",
+     "unit": "adviser findings by Prime Ministerial disposition",
+     "findings_of_breach": 9,
+     "acted_on": 2,
+     "overridden_no_action": 7,
+     "adviser_resignations": 2,
+     "note": "The override rate as the government's own signed number: 9 independent breach findings, 2 acted on, 7 overridden, 2 advisers resigned. Measure the process (§8). The self-judgment made countable, where the real system leaves it a series of separate news cycles."
+    },
+    "sig": {
+     "key_id": "did:web:ashfold-standards.example#log-1",
+     "alg": "ed25519",
+     "value": "T3ZlcnJpZGVSYXRlQWdncmVnYXRlQXNoZm9sZE5vdFJlYWwwNQ"
+    }
+   }
+  },
+  {
+   "actor": "The government, and the honest ceiling",
+   "verb": "offstage",
+   "narrative": "The ceilings here are the corpus's sharpest. The judge is the interested party by design: the Prime Minister is the arbiter of the conduct of his own government, and the kernel makes that self-judgment legible without making it independent, because who judges is governance the kernel enforces and never overrules (refusal 10) - there is no independent guard to route to, because the whole wrong is that there isn't one. The only recourse the office holds is resignation, and a resignation is a protest, not a sanction: the minister stays. The record binds only where power obeys - the Prime Minister can simply not act, and the log holds a faithful account of an unenforced breach, which is not an enforced one (holds no pen, §9). And the adoption gap is at its most acute: the apex is the institution least likely to run a register that logs its own refusals to enforce its own code."
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: it turned the finding-override-resignation chain from a contested news cycle into a permanent, linked, countable record - a breach found by an independent adviser, a Prime Minister's cited choice to let it stand, a resignation in protest, and an override rate that is the government's own number. What it did not do is make the Prime Minister act, supply the independent enforcer the constitution declines to appoint, convert a resignation into a sanction, or compel a government to log its own failures to police itself. It made the self-judgment undeniable. It could not make the judge disinterested - which was never the kernel's to fix, because deciding who judges is precisely the power it refuses to hold."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "The ministerial code is judged by the prime minister alone: a breach the adviser finds is acted on only if the PM chooses, and an overridden finding leaves the adviser one recourse — resignation. The kernel logs the finding, the PM's cited non-action and the resignation, the override-rate its own number. But the judge is the interested party by design, a resignation is no sanction, and the apex won't adopt it.",
+ "protection": "the self-judgment on the record",
+ "protection_plain": "Whether logging the adviser's finding, the PM's cited non-action and the resignation, plus the override-rate, makes the self-judged code legible. It does, where the real system lets an override vanish; but the judge is the interested party by design and a resignation is no sanction.",
+ "findings": [
+  {
+   "protection": "the finding, override and resignation, made a record",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The kernel logs the adviser's independent finding, the Prime Minister's disposition of it, and the resignation as a dated, witnessed, permanently linked chain — where the real system lets an overridden finding dissolve into a contested news cycle (Allan 2020, Geidt 2022). A breach found and a choice to let it stand become an undeniable pair; the question that consumes the real episodes — was there a finding, did the PM overrule it, was the resignation about this — is settled on the record. It enforces nothing, and it makes the self-judgment a fact no one can later dispute."
+  },
+  {
+   "protection": "the non-action gets an artifact, at the apex",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "The regulator-inaction move applied to the highest office: the Prime Minister's choice not to act is logged as a cited, dated disposition, not a silent non-event, and the override rate — of nine findings, seven overridden — becomes the government's own signed number. A government declining to enforce its own code against itself is, in the real world, only ever anecdote and news cycle; here it is a measured process (§8). Legibility of the pattern is real progress, and it is all the leverage a record can supply against a discretion it may not overrule."
+  },
+  {
+   "protection": "the judge is the interested party, by design",
+   "severity": "strain",
+   "doc_ref": "§1",
+   "observation": "The distinctive limit, sharper than any captured regulator. The wrong is not that an enforcer could act and won't; it is a constitutional arrangement in which the person who judges the government's conduct is the head of the government, judging his own ministers and himself. The kernel makes that self-judgment legible; it cannot make it independent, because who judges is governance the kernel enforces and never decides (refusal 10). Unlike a franchise amendment on the ballot path, there is no independent guard to route the decision to — the entire wrong is that there is no independent adjudicator, and a transparency log can expose a conflict of interest, never dissolve one."
+  },
+  {
+   "protection": "resignation is a protest, not a sanction",
+   "severity": "strain",
+   "doc_ref": "§1",
+   "observation": "The office's only lever is the adviser's own resignation, and the kernel can log it as what it is — a protest against an overridden finding, made permanent and linked rather than absorbed by a news cycle. But a resignation is not enforcement: the minister keeps the post, the breach stands unremedied, and the adviser is simply replaced. Legibility of the protest does not convert it into a sanction. The kernel makes the override loud and lasting; it cannot make it cost the minister, or the Prime Minister, anything they are not willing to pay."
+  },
+  {
+   "protection": "binds only where power obeys, and the apex won't adopt",
+   "severity": "strain",
+   "doc_ref": "§9",
+   "observation": "The enforcement-obeys residue at the very top, and the adoption gap at its most acute. The Prime Minister can simply decline to act, and the kernel records the non-action faithfully — a true account of an unenforced breach is not an enforced one; the kernel senses at machine speed and holds no pen (§9). And the institution that would most be watched by a standards register is the apex deciding whether to run one: a government is the body least likely to adopt a log of its own refusals to police itself. The kernel offers the legible self-judgment; whether it is ever kept is the choice of the power it would document, which is the honest shape of a voluntary discipline meeting an unaccountable one."
+  }
+ ]
+}
