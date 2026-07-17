@@ -12796,6 +12796,246 @@
   ]
  },
  {
+  "id": "single-justice-procedure-opaque",
+  "title": "Convicted by Silence: A Criminal Record on the Papers, in a Private Room",
+  "setting": "Edith Prewett is eighty-one, and at some point last spring she became a convicted criminal without ever knowing it was happening. A postal notice arrived while she was in hospital after a fall, telling her she was accused of watching television without a licence and could reply in writing; she never saw it. Months later a single magistrate, sitting not in open court but in a private room, reading her file among dozens of others, convicted her on the papers — no hearing, no prosecutor present, no Edith, no word from her, and so no mention of the hospital, the confusion, or the licence she had in fact held for sixty years. She learned of it when a fine demand followed her home. Under the Single Justice Procedure, this is not a malfunction. It is the ordinary operation of the system as designed: her silence was taken as her plea.\n\nThe Single Justice Procedure was built in 2015 to clear high-volume, non-imprisonable offences — no TV licence, no car tax, no insurance, fare evasion — quickly and cheaply, and it processes on the order of eight hundred thousand cases a year. Something like three in four defendants never respond to the notice at all, and are convicted anyway; journalists, not the system, have surfaced the cruellest cases — the dying, the bereaved, the destitute, the confused, criminalised in absentia and in private — and prosecutors have quietly withdrawn the worst only once a reporter was watching. The wrong has a particular and modern shape: a real criminal conviction, produced at industrial scale, in a closed room, out of a citizen's silence, with nothing heard and nothing seen. Wearside Magistrates' Court, in this scenario, runs its Single Justice list on a kernel transparency log, and the question is whether a protocol that cannot hold a hearing for Edith can at least stop her silence being mistaken, invisibly and by the hundred thousand, for her guilt.",
+  "threats": [
+   "T12",
+   "T9"
+  ],
+  "doc_refs": [
+   "§8",
+   "§4",
+   "§3.4",
+   "§7",
+   "§1",
+   "§12",
+   "T12",
+   "T9"
+  ],
+  "precedents": [
+   {
+    "event": "The Single Justice Procedure convicts at scale, in private, on the papers",
+    "year": 2015,
+    "source": "Criminal Justice and Courts Act 2015; HMCTS Single Justice Procedure",
+    "url": "https://www.legislation.gov.uk/ukpga/2015/2/part/3/crossheading/trial-by-single-justice-on-the-papers",
+    "shows": "A single magistrate, sitting in private with a legal adviser, decides summary non-imprisonable offences from paperwork alone, without a hearing or the parties present - some 800,000 cases a year, the great majority for TV licence, vehicle, and fare offences, decided outside open court."
+   },
+   {
+    "event": "Most defendants never respond, and are convicted anyway",
+    "year": 2024,
+    "source": "Transform Justice; Magistrates' Association; Evening Standard (Tristan Kirk) reporting",
+    "url": "https://www.transformjustice.org.uk/publication/the-single-justice-procedure/",
+    "shows": "Around three-quarters of defendants do not respond to the Single Justice Procedure notice and are convicted in absentia with no mitigation heard; reporting exposed elderly, ill, bereaved and destitute people criminalised in private, and prosecutors withdrawing the most egregious cases only after journalists highlighted them - the system relying on non-response rather than being troubled by it."
+   },
+   {
+    "event": "A conviction the defendant never knew of can be set aside — if they find out",
+    "year": 1980,
+    "source": "Magistrates' Courts Act 1980 s.14 (statutory declaration); 2024 SJP reform proposals",
+    "url": "https://www.legislation.gov.uk/ukpga/1980/43/section/14",
+    "shows": "A defendant who did not know of the proceedings may make a statutory declaration to have the conviction set aside and the case reopened - a remedy that reaches only those who discover the conviction and know the route, and that undoes the record without undoing the period a criminal conviction stood against them."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:wearside-sjp.example",
+    "name": "Wearside Magistrates' Court (Single Justice register)",
+    "parent": "did:web:hmcts.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:wearside-sjp.example",
+    "witnesses": [
+     "did:web:magistrates-association.example",
+     "did:web:wearside-court-audit.example",
+     "did:web:court-transparency-ngo.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-basis-of-your-conviction-and-the-route-to-reopen",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 60,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:wearside-sjp.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Edith Prewett, convicted without knowing",
+    "verb": "offstage",
+    "narrative": "The backdrop is a wrong the system does not experience as a wrong, because it is the design working. The Single Justice Procedure takes non-response as a plea and convicts on it, and most defendants do not respond - so the machine converts silence into guilt at scale, in a private room, with no hearing to attend and no open court to watch. Edith's silence was not a choice; it was a notice unseen in a hospital. Whether she was in fact guilty, and whether non-response should ever convict, are substantive questions the kernel refuses to answer (refusal 11). What it can change is narrower: whether each conviction is legible and appealable, whether the private paper process becomes a scrutable public record, and whether a conviction entered from silence is marked and counted as exactly that, rather than dissolved into a bulk statistic that hides how many were never heard."
+   },
+   {
+    "actor": "Wearside Magistrates' Court",
+    "verb": "cast",
+    "narrative": "Wearside opens its Single Justice list on a public transparency log, with a discipline the private procedure lacks: every conviction is an entry citing the charge and the rule, recording whether the defendant was served and whether they responded, giving the reasons and a route to reopen - and every conviction entered with no response is flagged, on its face, as a conviction with nothing heard. The court keeps its whole jurisdiction; a magistrate still decides. What changes is that the deciding leaves a legible, public, appealable record, and that the system's reliance on silence becomes a visible, counted fact rather than an invisible convenience.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:wearside-sjp.example",
+     "timestamp": "2026-01-20T09:00:00Z",
+     "body": {
+      "decision_id": "2026-sjp-register",
+      "decision_class": "single-justice-transparency-commitment",
+      "authorizing_rule": "Criminal Justice and Courts Act 2015 Part 3; open-justice principle; wearside-sjp-charter/v1",
+      "issuing_authority": "Wearside Magistrates' Court",
+      "commitment": "Every Single Justice conviction a public entry citing charge and rule, recording service and response, giving reasons and a reopen route; every conviction with no response flagged as nothing-heard; conviction-by-silence published as a rate",
+      "note": "The register restores open justice at the record level and makes conviction-by-silence a counted, flagged category. It does not decide guilt, nor whether non-response should convict at all (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:wearside-sjp.example#log-1",
+      "alg": "ed25519",
+      "value": "U0pQUmVnaXN0ZXJPcGVuZWRXZWFyc2lkZU5vdFJlYWwwMQ"
+     }
+    }
+   },
+   {
+    "actor": "A single magistrate, on the papers",
+    "verb": "cast",
+    "narrative": "Edith's case is decided, and the entry does not pretend otherwise: charged with using a television without a licence, notice served by post, no response received, convicted on the papers in private, no mitigation before the court because none was sent. In the ordinary procedure this is where the conviction would vanish into a bulk return, indistinguishable from a conviction where the defendant pleaded guilty by choice. Here it carries a flag that will not come off - convicted without response, nothing heard - and a route to reopen. The kernel has not stopped the conviction. It has refused to let the conviction pass as anything other than what it is: a verdict reached from silence.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-sjp.conviction",
+     "community": "did:web:wearside-sjp.example",
+     "timestamp": "2026-04-15T10:00:00Z",
+     "body": {
+      "case_id": "2026-wearside-51120",
+      "offence": "using a television without a licence (Communications Act 2003 s.363)",
+      "prosecutor": "TV Licensing (private prosecutor)",
+      "notice_served": "2026-02-10, by post",
+      "response_received": false,
+      "outcome": "convicted; fine, costs and victim surcharge imposed",
+      "mitigation_heard": "none - no response submitted",
+      "flag": "CONVICTED-WITHOUT-RESPONSE (nothing heard)",
+      "reopen_trace": "did:web:wearside-sjp.example/reopen/2026-51120 (statutory declaration, MCA 1980 s.14)",
+      "note": "The conviction the system produces from silence, marked as such. The kernel cannot make Edith respond; it can refuse to let her non-response masquerade as a plea, and give the conviction a face and a route out."
+     },
+     "sig": {
+      "key_id": "did:web:wearside-sjp.example#log-1",
+      "alg": "ed25519",
+      "value": "U2pwQ29udmljdGlvbkVkaXRoU2lsZW5jZU5vdFJlYWwwMg"
+     }
+    }
+   },
+   {
+    "actor": "A court-transparency monitor, reading the list",
+    "verb": "read",
+    "narrative": "A monitor - the kind of court reporter who, in the real system, has to sit in on hearings that are not really open and prise cases out one at a time - reads the register instead, and sees what the private procedure hides: not just Edith's conviction but the flag on it, and beside it a hundred more flagged the same way. The single conviction is now legible: charge, rule, service, silence, sentence, all on the public record. And the pattern is legible too, which the bulk return never allowed - that a great many of these convictions were reached with no one heard at all. Open justice, which the Single Justice Procedure quietly set aside, is restored at least to the record: the deciding is done in private, but it can no longer be done in the dark."
+   },
+   {
+    "actor": "Edith Prewett, reopening",
+    "verb": "challenge",
+    "narrative": "When the fine demand reaches her, Edith - with a granddaughter's help - follows the reopen route the record gave her, and makes a statutory declaration that she never knew of the case. The conviction is set aside; heard at last, her account of the hospital and the sixty-year licence ends the matter, and the prosecution withdraws. Her silence, it turns out, was never consent. But the limit is in the same breath as the protection: she found out, and many do not; she had help, and many do not; and the set-aside clears the record without clearing the months in which she was, unknowing, a convicted criminal with a fine against her name. The kernel gave her silence a door. It could not make the system knock before walking through it.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:wearside-sjp.example",
+     "timestamp": "2026-08-01T11:00:00Z",
+     "body": {
+      "in_response_to": "x-sjp.conviction:2026-wearside-51120",
+      "challenge": "statutory declaration: defendant did not know of the proceedings (in hospital; postal notice unseen); mitigation now offered",
+      "disposition": "conviction set aside; case reopened; prosecution withdraws on the account given",
+      "note": "The silence was not consent: given a hearing, the conviction did not survive first contact with the defendant's account. The reopen route reaches only those who find out in time and know it exists - and undoes the record, not the months the conviction stood."
+     },
+     "sig": {
+      "key_id": "did:web:wearside-sjp.example#log-1",
+      "alg": "ed25519",
+      "value": "UmVvcGVuU2V0QXNpZGVFZGl0aFdpdGhkcmF3bk5vdDAz"
+     }
+    }
+   },
+   {
+    "actor": "Wearside Magistrates' Court, transparency office",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes the number the bulk return was built to blur: of the convictions entered, how many followed a response, and how many followed only silence. When nearly three in four convictions were reached with nothing heard, the figure says what no single flagged case could - that the system does not occasionally convict the unheard but ordinarily does, by design. Measure the process, never the person (§8): conviction-by-silence as the court's own signed number. It is the clearest account of the procedure anyone has had. It also counts only the convictions that exist to be counted, and the reopenings of the few who surfaced - never the many who never knew.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:wearside-sjp.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "single-justice-convictions",
+      "period": "2026",
+      "unit": "SJP cases concluded",
+      "convictions": 210000,
+      "response_received": 57000,
+      "convicted_without_response": 153000,
+      "reopened_or_withdrawn_when_surfaced": 4200,
+      "note": "Anonymous aggregate. 153,000 convictions - nearly three in four - were entered with no response and nothing heard. Of the few that surfaced and were reopened, most did not survive the defendant's account. Measure the process (§8): conviction-by-silence as a signed number, the scale the bulk return hides. It counts what was reopened, not the far larger number who never knew to."
+     },
+     "sig": {
+      "key_id": "did:web:wearside-sjp.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlU2pwQ29udmljdGVkQnlTaWxlbmNlTm90MDQ"
+     }
+    }
+   },
+   {
+    "actor": "The silence, and what a record cannot make it mean",
+    "verb": "offstage",
+    "narrative": "The ceilings are set by the nature of silence. The kernel can flag and count a conviction reached from non-response, and it cannot compel the response, nor supply the mitigation that was never sent - it makes the silence accountable, not consenting, and Edith's account still had to reach the court from her, not from the log. Whether non-response should convict at all is a policy and legal judgment the kernel refuses (refusal 11); the real remedy - prosecutors reviewing a case for mitigation before convicting, the reforms that followed the reporting - is a change of law the kernel can make harder to resist by counting the silence, and cannot itself enact. Open justice restored to the record is not the open hearing: a scrutable public entry is a real thing and it is not the human moment of being heard, and publishing convictions carries its own cost, met here only partly by pseudonymous entries. The reopen route reaches only those who find out in time and know it exists - the attrition that filtered the SEND appeal, here filtering who escapes a criminal record - and the accessible floor that would help the confused and the vulnerable respond (§4, T9) is exactly what the kernel guarantees for the record and cannot guarantee for the reply. And a system built for cheap volume is not the readiest adopter of a register that marks, on three convictions in every four, that no one was heard."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it turned a private, on-the-papers, industrial-scale conviction into a legible, public, appealable record, and made conviction-by-silence a flagged and counted category - so the wrong at the centre of the Single Justice scandal, a criminal conviction produced from a citizen's silence, in a closed room, indistinguishable in the returns from a considered guilty plea, cannot hide: the conviction shows its charge and its basis, the nothing-heard is marked on its face, the reopen route is there to be used, and the scale is a signed number by the year's end. What it did not do, and cannot: compel a response, supply the mitigation never sent, decide whether Edith was guilty, overturn the rule that silence convicts, reach the many who never learn they were convicted, or make a public record into the hearing she was owed. It made her silence accountable and could not make it consent. Hundreds of thousands are still convicted having said nothing - but now the court must say, on the record, how many said nothing, and each of them can at last see what they were convicted of, and how to answer."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Hundreds of thousands are convicted in private, on paperwork, under the Single Justice Procedure — most unheard, having never responded (SJP; Transform Justice). The kernel makes each conviction a cited, appealable public record and flags conviction-by-silence as a counted category — so mass silence can't pass as mass guilt. But it can't compel a response or overturn the policy that silence convicts.",
+  "protection": "the legible, flagged conviction",
+  "protection_plain": "Whether making each Single Justice conviction a cited, appealable public record, and flagging every conviction entered with no response, protects the convicted. It stops mass silence passing as mass guilt; but the kernel can't compel a response or overturn the policy that silence convicts.",
+  "findings": [
+   {
+    "protection": "the conviction, legible and public",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "For an adopting court, every Single Justice conviction is a public entry citing the charge and the rule, recording service and response, giving its reasons and a route to reopen - so a criminal conviction is no longer an opaque event in a private room, indistinguishable in a bulk return from a considered plea. Open justice, which the Single Justice Procedure quietly set aside, is restored at least at the level of the record: the deciding is still done in private, but it can no longer be done in the dark, and a court reporter reads the list instead of prising cases out one at a time. The defendant gets the basis of their conviction and the route to answer it; the public gets a process it can scrutinise."
+   },
+   {
+    "protection": "silence is not consent",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "The finding this case exists to make. The Single Justice Procedure converts non-response into conviction and relies on most defendants not responding - and non-response is usually not a choice but a notice unseen, unread, or not understood, by the ill, the bereaved, the confused, the destitute. The kernel flags every conviction-without-response as a distinct category and counts it, so mass silence can no longer pass, invisibly, as mass guilt: the number convicted with nothing heard becomes a signed figure that demands scrutiny, and each such conviction is marked on its face rather than dissolved into a return. What the kernel cannot do is compel the response, supply the mitigation never sent, or make the silence into consent - it makes the default accountable, not just, and the account that clears you must still reach the court from you, not from the log."
+   },
+   {
+    "protection": "the rule that silence convicts is offstage",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Whether non-response should convict at all - whether a criminal conviction may be built on a citizen's silence - is a policy and legal judgment the kernel refuses (refusal 11). The real remedy was a change of practice and law: prosecutors reviewing a case for mitigation before convicting, the reforms that followed the reporting, not a better record. The kernel makes conviction-by-silence visible and countable, which makes the policy harder to defend and easier to reform; it cannot abolish the rule, only deny it the cover of invisibility. As with the exam and maternity cases, legibility here indicts a design it has no power to change."
+   },
+   {
+    "protection": "a public record is not the open hearing",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "A scrutable public entry is a real gain and it is not the thing the defendant was owed, which was a hearing - the human moment of being heard before being judged, which no record reconstitutes. And the reopen route reaches only those who find out in time and know it exists: the same attrition that filtered the SEND appeal, here deciding who escapes a criminal record and who keeps one they never knew they had, filtered by literacy, help, and luck. A set-aside undoes the record and not the months a conviction stood against an unknowing person (§9's constitutional speed against a life already marked). The kernel gives the silence a door; it cannot make the system knock, nor undo the time before the door was found."
+   },
+   {
+    "protection": "the aggregate counts only the surfaced",
+    "severity": "note",
+    "doc_ref": "§4",
+    "observation": "The aggregate turns the procedure's reliance on silence into the court's own signed figure - how many convictions followed a response and how many followed only silence - measure-the-process (§8), the scale the bulk return was built to blur, made plain: a system that does not occasionally convict the unheard but ordinarily does. Its limits are the case's. It counts only convictions that exist to be counted and reopenings of the few who surfaced, never the many who never knew; and the vulnerable it flags - the notice unseen, unread, unaccommodated - are exactly those the accessible floor (§4, T9) would help to respond and exactly those the kernel can only mark, not reach. It guarantees the record of the silence. It cannot guarantee the reply that would break it."
+   }
+  ]
+ },
+ {
   "id": "stolen-phone",
   "title": "Snatched on Rua da Prata: The Strike Vote That Almost Went Ahead Without the Man Who Called It",
   "setting": "Tomás Ferreira, 31, has delivered food by e-bike in Lisbon for six years, the last three as a member of Cooperativa Pedal Livre — a 94-rider co-operative that contracts collectively with the delivery platforms. When the largest platform, Zip, cut the per-drop rate by 22 cents in June, it was Tomás who stood up at the Tuesday assembly in Arroios and demanded a strike ballot. The board agreed: a formal, verifiable vote of the whole membership, opening for casting on 29 June, closing 3 July, strike on the 8th if it carries. Two years earlier, at the co-op's enrolment ceremony, Tomás had tapped through a screen he barely read: choose three guardians in case you lose your phone. He picked his sister Marta, a nurse at Santa Maria hospital; Bruno Cardoso, his rep at the Sindicato dos Estafetas; and the Junta de Freguesia de Arroios, the municipal parish office. Any two of the three could help him recover. He never thought about it again.\n\nOn the evening of 22 June, waiting at a light on Rua da Prata with the phone in his hand — unlocked, the delivery app open — a kid on a scooter took it in one clean movement and was gone toward Terreiro do Paço. In that phone's secure enclave sits the private key behind Tomás's co-op credential: the thing that proves, without naming him, that he is one of the 94 people entitled to vote in the ballot he himself forced onto the agenda. Also in that phone: his banking app, a week of undelivered earnings, his photos. The ballot opens in seven days.\n\nThe stakes are not abstract. If Tomás cannot vote, the loudest voice for the strike is silent in its own ballot. If the thief can somehow vote as Tomás, a stranger holds a rider's voice in a decision about riders' wages. And Pedal Livre is exactly the kind of small, honest, mid-lattice community the Civic Kernel says it serves: physical enrolment at assemblies but no biometric deduplication, verifiable receipt-free ballots but no paper channel, a transparency log witnessed by the union, the co-op federation, and a university lab — and no rights guard at all, a subtraction its manifest declares in the open. What follows is seven days in which the protocol's social-recovery machinery is raced against a casting window, and wins — but only with luck, an emergency patch, and a union hardship fund the protocol knows nothing about.",

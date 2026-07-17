@@ -428,8 +428,8 @@
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "single-justice-procedure-opaque"
     },
     {
       "id": "dwp-death-reviews-secret",
