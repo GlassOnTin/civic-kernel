@@ -11805,6 +11805,252 @@
   ]
  },
  {
+  "id": "send-ehcp-refusals",
+  "title": "Refused by Default: A Right Enforced by Appeal Is a Lottery of Persistence",
+  "setting": "Aarav is six, autistic, and drowning quietly in a mainstream classroom that cannot meet his needs. His mother, Priya Nair, asks Marchwood Council to carry out an Education, Health and Care needs assessment — the statutory gateway to a legally binding plan of support. Six weeks later the council refuses even to assess him, in a letter that cites a threshold: Aarav's needs, it says, can be met from the school's ordinarily-available provision. The letter is polite, individually defensible, and — on the evidence of what happens next — very probably wrong. Priya appeals to the SEND Tribunal, and eight months, one paid educational-psychology report, and a great deal of persistence later, she wins, as the overwhelming majority of appellants do. Most parents never get that far.\n\nThat last fact is the wrong. Tribunals overturn something like ninety-five per cent of appeals against a refusal to assess, which means the refusals are, in aggregate, systematically unlawful — and the council issues them anyway, because it knows that only a fraction of refused parents will appeal, and that the fraction who do skews sharply toward those with the money, health, time, and confidence to fight. The refusal is not really a judgment about a child's needs; it is a bet that the parent will give up. A universal statutory entitlement is quietly converted into one rationed by parental persistence — the paperwork quietly taking a right away, exactly as §8 warns. Marchwood, in this scenario, runs its SEND decisions on a kernel register, and the question is whether a protocol that cannot judge one child's needs, nor lower a tribunal's barriers, can at least make the rationing visible enough to be undeniable.",
+  "threats": [
+   "T12",
+   "T1"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§9",
+   "§1",
+   "§2",
+   "§12",
+   "T12",
+   "T1"
+  ],
+  "precedents": [
+   {
+    "event": "SEND Tribunal overturns the great majority of refusal appeals",
+    "year": 2023,
+    "source": "Ministry of Justice SEND tribunal statistics; IPSEA",
+    "url": "https://www.gov.uk/government/collections/tribunals-statistics",
+    "shows": "Around 95% of appeals to the First-tier Tribunal (SEND) against local-authority decisions succeed - a success rate so high that the underlying refusals are, in aggregate, systematically unlawful, yet councils continue to issue them because only a minority of refused families appeal."
+   },
+   {
+    "event": "Children and Families Act 2014 — the EHC assessment duty and its deadlines",
+    "year": 2014,
+    "source": "Children and Families Act 2014 s.36; SEND Regulations 2014",
+    "url": "https://www.legislation.gov.uk/ukpga/2014/6/section/36",
+    "shows": "A local authority must decide whether to conduct an EHC needs assessment within six weeks of a request and, if it assesses, issue any plan within twenty weeks; the threshold for assessment is low, yet refusals are routine and the statutory deadlines are widely missed, with the burden of enforcement placed entirely on parents via appeal."
+   },
+   {
+    "event": "Ombudsman and inspectorates find SEND failures systemic",
+    "year": 2022,
+    "source": "Local Government & Social Care Ombudsman SEND reports; Ofsted/CQC SEND area inspections",
+    "url": "https://www.lgo.org.uk/information-centre/reports/investigation-reports",
+    "shows": "The Ombudsman and joint area inspections repeatedly find delay and unlawful refusal to be endemic in SEND, with children waiting far beyond statutory deadlines and provision effectively rationed by families' capacity to complain and appeal rather than by children's needs."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:marchwood-send.example",
+    "name": "Marchwood Council (SEND decisions register)",
+    "parent": "did:web:marchwood.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:marchwood-send.example",
+    "witnesses": [
+     "did:web:marchwood-parent-carer-forum.example",
+     "did:web:marchwood-send-audit.example",
+     "did:web:send-advocacy.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "request-an-assessment-and-track-its-clock",
+     "steps": 1,
+     "fields": 3,
+     "median_seconds": 240,
+     "abandonment_rate": 0.03
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:marchwood-send.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Priya Nair, and a right rationed by attrition",
+    "verb": "offstage",
+    "narrative": "The backdrop is a wrong with an unusual mechanism: the entitlement is real and the refusal is beatable, and that is precisely how the rationing works. Each refusal cites a threshold and stands up on its own; the systemic fact - that tribunals overturn the great majority of these refusals - is invisible from inside any single letter. So the council refuses widely, knowing that most families will not appeal, and that those who do are the ones who can afford reports, absorb months of delay, and navigate a tribunal. The provision is thereby rationed not by which children need it but by which parents can fight for it. Whether Aarav in particular crosses the assessment threshold is a substantive educational judgment the kernel refuses to make (refusal 11). What it can change is whether the refusals, the appeals, and the overturns are a legible, linked, countable record - whether the attrition can be seen."
+   },
+   {
+    "actor": "Marchwood Council",
+    "verb": "cast",
+    "narrative": "Marchwood opens a SEND register with three commitments: every assessment request is receipted and clocked to its statutory deadline, so a missed deadline is a logged default rather than a silence; every refusal cites the threshold it applies and carries a route of appeal; and the refuse, appeal, and overturn rates are published as linked numbers, each refusal traceable to what became of it. The council keeps its substantive power - it still judges thresholds, still decides whom to assess. What changes is that the deciding happens on a clock, against a citation, and inside a running count of how often its own refusals are later overturned.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:marchwood-send.example",
+     "timestamp": "2026-01-20T09:00:00Z",
+     "body": {
+      "decision_id": "2026-send-register",
+      "decision_class": "send-decisions-commitment",
+      "authorizing_rule": "Children and Families Act 2014 s.36; SEND Regs 2014; marchwood-send-charter/v1",
+      "issuing_authority": "Marchwood Council SEND service",
+      "commitment": "Every EHC assessment request receipted and clocked to the 6-week statutory deadline; every refusal cites its threshold and carries an appeal-trace; refuse/appeal/overturn rates published as linked numbers with the un-appealed remainder named",
+      "note": "The register makes the refuse-appeal-overturn chain legible and the rationing countable. It does not decide whether a child meets the assessment threshold (refusal 11), nor lower the tribunal barriers that do the rationing."
+     },
+     "sig": {
+      "key_id": "did:web:marchwood-send.example#log-1",
+      "alg": "ed25519",
+      "value": "U0VORFJlZ2lzdGVyT3BlbmVkTWFyY2h3b29kTm90UmVhbDAx"
+     }
+    }
+   },
+   {
+    "actor": "Priya Nair, requesting an assessment",
+    "verb": "cast",
+    "narrative": "Priya submits her request for Aarav, and the register hands her back a receipt and a clock: the statutory six weeks, running visibly, the date by which the council must decide fixed on the record. In the real system a request can vanish into an inbox and a parent is left chasing for months with nothing to point to. Here the request cannot be lost, and its deadline cannot be quietly overshot - if the council misses it, that is an entry, not a silence Priya has to prove.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-send.request",
+     "community": "did:web:marchwood-send.example",
+     "timestamp": "2026-03-02T10:00:00Z",
+     "body": {
+      "request_id": "2026-marchwood-1187",
+      "child_ref": "child:marchwood-1187 (pseudonymous)",
+      "request_type": "EHC needs assessment",
+      "received": "2026-03-02",
+      "statutory_deadline": "2026-04-13",
+      "receipt": "signed:did:web:marchwood-send.example#log-1",
+      "note": "The request receipted and clocked. The six-week statutory deadline is on the record from the day the request lands - a missed deadline becomes a logged default, not a chase."
+     },
+     "sig": {
+      "key_id": "did:web:marchwood-send.example#log-1",
+      "alg": "ed25519",
+      "value": "U2VuZFJlcXVlc3RBYXJhdkNsb2NrZWROb3RSZWFsMDI"
+     }
+    }
+   },
+   {
+    "actor": "Marchwood Council, refusing to assess",
+    "verb": "cast",
+    "narrative": "Inside the deadline, the council refuses - and the refusal is an entry citing its threshold: Aarav's needs, it holds, can be met from the school's ordinarily-available provision, so no assessment is warranted. It carries the route of appeal, and it joins the count. On its own it is unremarkable, one defensible letter among thousands. What the register adds is the context the letter never carried: this refusal now sits, visibly, in a pile that the tribunal overturns most of the time.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:marchwood-send.example",
+     "timestamp": "2026-04-10T14:00:00Z",
+     "body": {
+      "in_response_to": "x-send.request:2026-marchwood-1187",
+      "disposition": "refused - no EHC needs assessment",
+      "stated_reason": "child's needs assessed as capable of being met from the school's ordinarily-available provision (Children and Families Act 2014 s.36(8) threshold not met)",
+      "statutory_deadline_met": true,
+      "appeal_trace": "did:web:marchwood-send.example/appeals/2026-marchwood-1187 (First-tier Tribunal, SEND)",
+      "note": "Individually defensible, on the record, within the deadline - and, per the published overturn rate, statistically very likely to fall on appeal. The single refusal is lawful; the aggregate is the wrong."
+     },
+     "sig": {
+      "key_id": "did:web:marchwood-send.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VTZW5kUmVmdXNhbEFhcmF2Tm90UmVhbDAz"
+     }
+    }
+   },
+   {
+    "actor": "Priya Nair, reading the refusal in context",
+    "verb": "read",
+    "narrative": "Priya reads the refusal, and beside it the register's published rates, and she sees what no refusal letter has ever told a parent: that the council overturns most of its own refusals on appeal, that hers is one of hundreds this year, and that the difference between the children who eventually get support and those who do not is largely whether their parents appeal. She is holding a refusal that the numbers say is probably wrong. In the old world that knowledge lived in a Ministry of Justice statistics table she would never see; here it sits next to her own letter. It does not change her refusal. It tells her, truthfully, that the refusal is a bet the council is making against her stamina."
+   },
+   {
+    "actor": "Priya Nair, appealing",
+    "verb": "challenge",
+    "narrative": "Priya appeals, and she wins - eight months later, after commissioning the educational-psychology report the council did not, after learning a tribunal's procedures, after the kind of sustained effort that a parent working two jobs, or ill, or unsupported, or simply exhausted, could not have sustained. The kernel gave her the appeal-trace, and the appeal-trace was honoured. What the kernel did not give her, and cannot, is a lower barrier: the report, the months, the expertise are the tribunal's making, not the register's, and they are exactly the filter that rations the entitlement. Priya cleared the barrier. The register can only record that most parents, refused the same way, never do."
+   },
+   {
+    "actor": "Marchwood Council, SEND transparency office",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes the shape of the rationing as the council's own signed figures: how many assessments were requested, how many refused, how many of those refusals were appealed, how many overturned - and, the number the debate has always lacked, how many were refused and never appealed at all. Set against the overturn rate, that last figure is an estimate of the children who were probably entitled to an assessment and simply went without, because no one fought. Measure the process, never the person (§8): the attrition made arithmetic. It is the clearest account of the rationing anyone has had, and it re-assesses not one of the children it counts.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:marchwood-send.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "ehc-needs-assessment-requests",
+      "period": "2026",
+      "unit": "assessment requests",
+      "requested": 2400,
+      "refused": 1200,
+      "appealed": 300,
+      "overturned_on_appeal": 285,
+      "overturn_rate": 0.95,
+      "refused_never_appealed": 900,
+      "note": "Anonymous aggregate. 1,200 of 2,400 requests refused; of the 300 refusals appealed, 285 were overturned. 900 refusals were never appealed - at a 95% overturn rate, on the order of 855 children were probably entitled to an assessment and went without. Measure the process (§8): rationing-by-attrition as the council's own number. It re-assesses none of them."
+     },
+     "sig": {
+      "key_id": "did:web:marchwood-send.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlU2VuZEF0dHJpdGlvbk92ZXJ0dXJuTm90MDQ"
+     }
+    }
+   },
+   {
+    "actor": "The barrier, and what a number cannot lower",
+    "verb": "offstage",
+    "narrative": "The ceilings are where the honesty lives. The kernel makes the rationing-by-attrition undeniable - the ninety-five per cent overturn against the low appeal rate, the eight hundred and fifty-five children the count implies - and it cannot lower the barrier that does the rationing, because the barrier is the tribunal's: the reports, the months, the expertise, the sheer persistence, all of which live outside the register and all of which filter by a family's resources rather than a child's needs. Three further walls stand with it. The threshold is substantive: the kernel cannot say Aarav's particular refusal was wrong, only that it sits in a pile the tribunal mostly overturns (refusal 11). A number is not a remedy: the aggregate convicts the policy of rationing-by-refusal and re-assesses no child, and the un-appealed majority it counts get nothing from being counted (§9 - the remedy is the slow appeal only the persistent bring). And the adopter is the rationer: a council balancing a high-needs deficit by refusing widely has no incentive to publish its own overturn rate, and only a reforming authority, or an ombudsman or inspectorate mandate, would compel it. The register turns the attrition into a fact. It does not turn the fact into a place at the table for the child whose parent could not fight."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it made every refusal cite its threshold and carry an appeal, put every request on a visible statutory clock, and turned the refuse-appeal-overturn chain into a linked, published count that names its own un-appealed remainder - so 'each refusal defensible, the pattern invisible' becomes 'each refusal defensible, the pattern a signed number', and the rationing-by-attrition that hides inside a thousand reasonable-sounding letters is made undeniable. What it did not do, and cannot: lower the tribunal barrier that does the rationing, judge whether any one child met the threshold, compel the council to provide, or reach the eight hundred children whose parents never appealed. It made the injustice legible and countable; the child whose parent cannot fight still goes without, and the number that proves it is not, by itself, the support he needed. A note for the core: the request-with-a-statutory-clock here is the same shape as the hazard-report-with-a-duty-clock in the Grenfell case - an inbound submission that starts a timed duty whose breach is a logged default - two cases now for a 'timed inbound duty' primitive; but each expresses it cleanly as an extension, so it stays one, earning a place in the waist only if a case arrives that the extension cannot carry."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "A council refuses to assess a child for special-needs support; tribunals overturn ~95% of such refusals — the refusals are systematically wrong, and the council relies on most parents not appealing (SEND tribunal). The kernel makes every refusal cited and appealable and the refuse/appeal/overturn rates a published number, so rationing-by-attrition is countable. But it can't lower the appeal barrier that rations.",
+  "protection": "the cited refusal and the attrition rate",
+  "protection_plain": "Whether making every SEND refusal cited and appealable, and the refuse/appeal/overturn rates a linked number, protects the child. It makes rationing-by-attrition countable — 95% overturned against a low appeal rate — but can't lower the barrier that rations, nor reach children who never appeal.",
+  "findings": [
+   {
+    "protection": "the refusal cited, appealable, and in context",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "For an adopting council, every refusal cites the threshold it applies and carries a route of appeal, every request runs on a visible statutory clock, and the refuse-appeal-overturn chain is a linked record - so a refusal no longer arrives as an isolated, uncontextualised letter but as an entry sitting visibly in a pile the tribunal mostly overturns. The parent gets not just the refusal but the pattern it belongs to, and a missed statutory deadline becomes a logged default rather than a silence to chase. The right to a reason and to challenge is made machine-checkable, and the individual refusal is placed, for the first time, inside the statistics that judge it."
+   },
+   {
+    "protection": "rationing by attrition — a right enforced by appeal",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The finding this case exists to make. A tribunal overturn rate near ninety-five per cent proves the refusals are systematically unlawful; the low appeal rate proves the council profits from the barrier; and the gap between them - the refused who never appealed - is the harm made arithmetic: at that overturn rate, most of them were probably entitled and went without. Enforcement-by-appeal converts a universal statutory entitlement into one rationed by which parents can navigate a tribunal - money, health, time, confidence - rather than which children need it, the paperwork quietly taking a right away exactly as §8 warns. The kernel makes this undeniable and countable, a genuine and sharp exposure. It cannot lower the appeal barrier that does the rationing, because the barrier - the reports, the months, the expertise - is the tribunal's, outside the register. It names the injustice; it does not dissolve it."
+   },
+   {
+    "protection": "the threshold is substantive; only the pile is judgeable",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Whether Aarav's needs cross the assessment threshold is an educational and clinical judgment the kernel refuses to make (refusal 11), so it cannot say his particular refusal was wrong. It can say the refusal sits in a pile the tribunal overturns most of the time - a statistical indictment of the policy, not a ruling on the case. The individual defensibility of each letter survives intact; it is the aggregate that convicts, and the aggregate cannot reach down to vindicate one child. This is the same boundary the procurement and regulator cases meet - the single act stays lawful, the pattern is the wrong - here sharpened by the fact that the pattern's own overturn rate all but names each refusal as probably unlawful, and still cannot rule on any one."
+   },
+   {
+    "protection": "a number is not a remedy, and the barrier stands",
+    "severity": "strain",
+    "doc_ref": "§9",
+    "observation": "The aggregate convicts the rationing policy and re-assesses not one child. The remedy remains the tribunal - slow, evidence-hungry, months long - and only the persistent bring it (§9's constitutional speed against a child's school year); the un-appealed majority the number counts get nothing from being counted. The kernel brings the injustice forward in time and into the open, and there its power ends: it cannot lower the barrier, compel the provision, or convert an estimate of eight hundred failed children into eight hundred assessments. As with regulator-inaction, a rate is worth something - deniability destroyed, the policy made undeniable - and it is not the thing the child needed, which was a place, this year, in a classroom that could teach him."
+   },
+   {
+    "protection": "the timed-duty convergence, and the adopter",
+    "severity": "note",
+    "doc_ref": "§1",
+    "observation": "Two notes for the design. First, convergence: the assessment-request-with-a-statutory-clock here is structurally the hazard-report-with-a-duty-clock of the Grenfell case - an inbound submission that starts a timed duty whose breach is a logged default - the second case for a candidate 'timed inbound duty' primitive. But both express it cleanly as an extension over decision.opened plus a clock, with no structural gap the waist would need to close, so it stays an extension per the thin-waist discipline; it would earn a core type only when a case arrives that the extension cannot carry, the same bar that promoted executive.act and the sealed record. Second, adoption: the body that must run this register is the council doing the rationing, which has no incentive to publish its own overturn rate; a reforming authority, or an ombudsman or inspectorate mandate, could impose it, but unbidden the exposure depends on the institution it exposes."
+   }
+  ]
+ },
+ {
   "id": "stolen-phone",
   "title": "Snatched on Rua da Prata: The Strike Vote That Almost Went Ahead Without the Man Who Called It",
   "setting": "Tomás Ferreira, 31, has delivered food by e-bike in Lisbon for six years, the last three as a member of Cooperativa Pedal Livre — a 94-rider co-operative that contracts collectively with the delivery platforms. When the largest platform, Zip, cut the per-drop rate by 22 cents in June, it was Tomás who stood up at the Tuesday assembly in Arroios and demanded a strike ballot. The board agreed: a formal, verifiable vote of the whole membership, opening for casting on 29 June, closing 3 July, strike on the 8th if it carries. Two years earlier, at the co-op's enrolment ceremony, Tomás had tapped through a screen he barely read: choose three guardians in case you lose your phone. He picked his sister Marta, a nurse at Santa Maria hospital; Bruno Cardoso, his rep at the Sindicato dos Estafetas; and the Junta de Freguesia de Arroios, the municipal parish office. Any two of the three could help him recover. He never thought about it again.\n\nOn the evening of 22 June, waiting at a light on Rua da Prata with the phone in his hand — unlocked, the delivery app open — a kid on a scooter took it in one clean movement and was gone toward Terreiro do Paço. In that phone's secure enclave sits the private key behind Tomás's co-op credential: the thing that proves, without naming him, that he is one of the 94 people entitled to vote in the ballot he himself forced onto the agenda. Also in that phone: his banking app, a week of undelivered earnings, his photos. The ballot opens in seven days.\n\nThe stakes are not abstract. If Tomás cannot vote, the loudest voice for the strike is silent in its own ballot. If the thief can somehow vote as Tomás, a stranger holds a rider's voice in a decision about riders' wages. And Pedal Livre is exactly the kind of small, honest, mid-lattice community the Civic Kernel says it serves: physical enrolment at assemblies but no biometric deduplication, verifiable receipt-free ballots but no paper channel, a transparency log witnessed by the union, the co-op federation, and a university lab — and no rights guard at all, a subtraction its manifest declares in the open. What follows is seven days in which the protocol's social-recovery machinery is raced against a casting window, and wins — but only with luck, an emergency patch, and a union hardship fund the protocol knows nothing about.",
