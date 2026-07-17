@@ -2769,6 +2769,256 @@
   ]
  },
  {
+  "id": "drc-medical-detention",
+  "title": "No Adopter Will Come: When the Detainer Profits and the State Looks Away",
+  "setting": "Kavira gave birth in a Kinshasa hospital and, three weeks later, is still there — not because she or her baby need care, but because she cannot pay the bill. She was medically discharged long ago; a guard sits at the ward door; the charges mount for every additional day she is held. Down the corridor, a family cannot reclaim the body of a man who died in the same hospital, because the mortuary will not release him until his account is settled. Neither Kavira nor the dead man's family has broken any law. The hospital has: imprisonment for the inability to pay a debt is prohibited outright by the international covenant the Democratic Republic of the Congo has ratified. But no domestic court will intervene, the police would return Kavira if she fled, and an Associated Press investigation found that twenty of twenty-one hospitals it visited in the country detain patients this way. The practice is not hidden. It is ordinary.\n\nThis is the flagged case — a 2025 class action, brought by a diaspora legal team to the UN Working Group on Arbitrary Detention, on behalf of more than a hundred detained people — and it is the first in this corpus that is not British, deliberately so, because it tests the outer edge of the whole idea. Every other scenario has had, somewhere in it, an institution that could keep a record: a council, a Home Office, an inspectorate, a landlord — bodies that might refuse to adopt the kernel, but that at least exist as candidates for adoption. Here there is none. The party doing the detaining profits from it; the party that could stop it looks away. So the question this case puts is not how well the kernel performs, but whether it can engage at all — and the honest answer, which the scenario is built to state plainly rather than soften, is that against a lawless private coercion in an enforcement void, a protocol for accountable record-keeping largely cannot.",
+  "threats": [
+   "T14",
+   "T9"
+  ],
+  "doc_refs": [
+   "§4",
+   "§6",
+   "§3.4",
+   "§1",
+   "§12",
+   "T14",
+   "T9"
+  ],
+  "precedents": [
+   {
+    "event": "Hospitals detain discharged patients for non-payment, and withhold the dead",
+    "year": 2018,
+    "source": "Chatham House; Associated Press investigation",
+    "url": "https://www.chathamhouse.org/publication/hospital-detentions-non-payment-fees-denial-rights-and-dignity",
+    "shows": "Detention of medically-discharged patients for inability to pay is documented across sub-Saharan Africa and beyond; an Associated Press investigation found 20 of 21 hospitals visited in the DRC detained patients, some held for months, guards posted to prevent escape, and the bodies of the deceased withheld from families until bills were paid."
+   },
+   {
+    "event": "International law already prohibits imprisonment for debt",
+    "year": 1966,
+    "source": "International Covenant on Civil and Political Rights, Article 11 (ratified by the DRC)",
+    "url": "https://www.ohchr.org/en/instruments-mechanisms/instruments/international-covenant-civil-and-political-rights",
+    "shows": "'No one shall be imprisoned merely on the ground of inability to fulfil a contractual obligation.' Debt-detention is already unlawful under a treaty the state has ratified - the wrong is not a gap in the law nor a lack of visibility, but the total absence of any domestic body willing to enforce the existing prohibition."
+   },
+   {
+    "event": "The only forum is a non-binding UN mechanism",
+    "year": 2025,
+    "source": "UN Working Group on Arbitrary Detention; 2025 class action (diaspora legal team)",
+    "url": "https://www.ohchr.org/en/issues/detention/pages/wgadindex.aspx",
+    "shows": "With no domestic remedy, a 2025 class action on behalf of over a hundred detained people seeks an opinion from the UN Working Group on Arbitrary Detention - a body of independent experts that issues opinions, not binding orders, so even a favourable finding directs no hospital to open a door and frees no one held behind one."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:congo-health-rights-monitor.example",
+    "name": "Congo Health-Rights Monitor (detention registry — third-party witness log)",
+    "parent": "did:web:international-detention-watch.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:congo-health-rights-monitor.example",
+    "witnesses": [
+     "did:web:international-detention-watch.example",
+     "did:web:diaspora-legal-team.example",
+     "did:web:medical-rights-auditor.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "report-a-detention-to-a-monitor-on-paper-or-by-phone",
+     "steps": 1,
+     "fields": 4,
+     "median_seconds": 600,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:congo-health-rights-monitor.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Kavira, held, and no one who will keep a record",
+    "verb": "offstage",
+    "narrative": "The backdrop is a wrong that is already illegal, already visible, and entirely unremedied. Debt-detention is barred by the covenant the state has ratified; the Associated Press has counted it; no one pretends it does not happen. What is missing is not law and not knowledge but enforcement - a domestic body willing to compel the prohibition already on the books. And the kernel's whole method assumes something that is absent here: an institution that agrees to keep an accountable record of its own acts. The hospital will not, because the detention is its leverage to be paid. The state will not, because it declines to act. There is, uniquely in this corpus, no candidate adopter inside the system at all - and so the honest question is not whether the kernel governs this wrong well, but whether it can touch it."
+   },
+   {
+    "actor": "A human-rights monitor, doing the only possible thing",
+    "verb": "cast",
+    "narrative": "The one kernel-shaped artifact this situation permits is not the detainer's log but a third party's. A human-rights monitor opens a detention registry: not a record the hospital keeps of what it does, but a record the monitor keeps of what patients and families report, gathered on paper and by phone from people with no device of their own, sealed so that naming a detained person cannot endanger them, and anchored outside the country so the count cannot be suppressed. It is worth being exact about what this is and is not. It is a witness's notebook, kept for an outside tribunal. It is not the accountability the kernel exists to produce, because the party being recorded never agreed to be bound by the record.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:congo-health-rights-monitor.example",
+     "timestamp": "2026-01-10T09:00:00Z",
+     "body": {
+      "decision_id": "2026-detention-registry",
+      "decision_class": "third-party-witness-commitment",
+      "authorizing_rule": "ICCPR Art 11; monitor-evidentiary-protocol/v1 (witnessed, sealed, externally anchored)",
+      "issuing_authority": "Congo Health-Rights Monitor (a third party, not the detaining hospital)",
+      "commitment": "Each reported detention logged as a witnessed, sealed entry readable by an auditor and the tribunal but not the public; the count externally anchored so it cannot be suppressed; the registry offered as evidence to the UN Working Group",
+      "note": "This is documentation for an external forum, not governance of the actor. The hospital keeps no record and is bound by none; the monitor's registry cannot make it accountable, only make the pattern undeniable to those outside."
+     },
+     "sig": {
+      "key_id": "did:web:congo-health-rights-monitor.example#log-1",
+      "alg": "ed25519",
+      "value": "RGV0ZW50aW9uUmVnaXN0cnlNb25pdG9yTm90UmVhbENyeXB0bzAx"
+     }
+    }
+   },
+   {
+    "actor": "A field worker, recording Kavira's detention",
+    "verb": "cast",
+    "narrative": "A monitor's field worker records Kavira's case from her sister's account, because Kavira herself has no phone and cannot leave the ward. The entry states what can be verified and seals what would identify her: a woman medically discharged weeks ago, held over a maternity bill, a guard at the door, the charge growing daily. The record is careful, witnessed, and real. It is also, for Kavira, powerless: it establishes beyond doubt that she is being held, and it does not unlock the door she is being held behind. What the kernel can capture here is her detention as evidence. What it cannot capture is any lever to end it.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-detention.report",
+     "community": "did:web:congo-health-rights-monitor.example",
+     "timestamp": "2026-05-02T11:00:00Z",
+     "body": {
+      "report_id": "2026-chrm-0412",
+      "reported_by": "family member, via monitor field worker (paper intake)",
+      "facility_ref": "facility identity sealed for the detainee's safety",
+      "detainee_status": "medically discharged; detained for non-payment of a maternity bill",
+      "days_held_at_report": 21,
+      "note": "Sealed to protect the detained person; readable by an auditor and the tribunal, not the public. Verifiable evidence of the detention - and no purchase whatever on ending it."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+      "readable_by": [
+       "authorized-auditor",
+       "court-order"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:congo-health-rights-monitor.example#log-1",
+      "alg": "ed25519",
+      "value": "RGV0ZW50aW9uUmVwb3J0S2F2aXJhU2VhbGVkTm90UmVhbDAy"
+     }
+    }
+   },
+   {
+    "actor": "The same registry, recording the dead",
+    "verb": "cast",
+    "narrative": "The gravest entries are the ones that can no longer be helped at all: the bodies withheld until families pay. The registry records one - a man dead a month, held by the mortuary against his account - because to record it is to make the mortuary's ledger visible to a tribunal that may one day rule the practice unlawful. It is the clearest thing the kernel does here and the starkest measure of its limits. A witnessed, anchored record of a body held for ransom is a real and terrible fact placed beyond deniability. It returns no one to their family.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-detention.report",
+     "community": "did:web:congo-health-rights-monitor.example",
+     "timestamp": "2026-05-20T15:00:00Z",
+     "body": {
+      "report_id": "2026-chrm-0538",
+      "reported_by": "family member, via monitor field worker",
+      "facility_ref": "facility identity sealed",
+      "detainee_status": "deceased; body withheld from family pending payment",
+      "days_held_at_report": 31,
+      "note": "The most severe form of the practice, recorded for the tribunal. Beyond deniability, and beyond the reach of any record to remedy."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
+      "readable_by": [
+       "authorized-auditor",
+       "court-order"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:congo-health-rights-monitor.example#log-1",
+      "alg": "ed25519",
+      "value": "RGV0ZW50aW9uUmVwb3J0Qm9keVdpdGhoZWxkTm90UmVhbDAz"
+     }
+    }
+   },
+   {
+    "actor": "The diaspora legal team, reading for the tribunal",
+    "verb": "read",
+    "narrative": "The registry's reader is not a domestic court - there is none that will act - but a diaspora legal team assembling the class action, and behind them the UN Working Group that will receive it. To them the anchored, witnessed count is genuinely valuable: it turns scattered, deniable, individually-silenced cases into a single body of evidence a state cannot wave away, and that is a real contribution to a real remedy being sought. But read honestly, the chain from this registry to Kavira's release is long and mostly broken: the Working Group issues an opinion, not an order; the opinion lands on a state that already ignores its own ratified law; and Kavira, while the evidence is compiled and filed and deliberated, is still in the ward. The record is on its way to Geneva. She is not on her way home."
+   },
+   {
+    "actor": "The monitor, publishing the count",
+    "verb": "cast",
+    "narrative": "The monitor publishes the aggregate, externally anchored so no one can quietly shrink it: how many detentions reported, how many still held, how many bodies withheld. It is atrocity documentation of a high standard - trustworthy, complete against its own intake, impossible to suppress - and it is the outer limit of what a record can do to this wrong. Measure the process, never the person (§8): the practice made a signed, anchored number for a tribunal. The number is unimpeachable. It has never opened a door.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:congo-health-rights-monitor.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "reported-medical-detentions",
+      "period": "2026",
+      "unit": "reported detentions",
+      "reported": 143,
+      "still_held_at_publication": 41,
+      "bodies_withheld": 12,
+      "note": "Anonymous aggregate, sealed at the individual level, anchored externally against suppression. Complete against what was reported to the monitor - not against what was never reported, in a country where most detentions never reach any record. Evidence for a tribunal; no remedy for the 41 still held."
+     },
+     "sig": {
+      "key_id": "did:web:congo-health-rights-monitor.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlTWVkaWNhbERldGVudGlvbkNvdW50Tm90UmVhbDA0"
+     }
+    }
+   },
+   {
+    "actor": "The ward door, and the edge of the whole idea",
+    "verb": "offstage",
+    "narrative": "This is where the corpus states its outer boundary, and it should be stated without flinching. The kernel governs institutions that agree to keep a record; against a private coercion whose beneficiary will never agree, backed by a state that declines to act, it does not merely strain - it breaks, because the accountability it exists to produce requires an adopter and there is none. Three things confirm the break rather than soften it. The wrong is already illegal and already visible - ICCPR Article 11, the AP's count - so this is not a legibility gap the kernel is built to close; it is an enforcement void, and the kernel enforces nothing. The only forum is a non-binding one, so even perfect evidence buys an opinion, not a release. And the substrate is denied at every layer: a detained person with no device (T9), infrastructure that barely reaches (T14), foreign witnesses, a foreign anchor, a foreign tribunal - the kernel's resilience lets a monitor keep a notebook, and a notebook is where its power ends. This is precisely why the triage engine ranked this grave harm at leverage 1: not despite its severity, which is extreme, but because the engine weighs treatability, and here treatability is near zero. The low rank was the scout being honest. The scenario is that honesty made concrete."
+   },
+   {
+    "actor": "Anyone, reading the registry from outside",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it gave a human-rights monitor a witnessed, sealed, externally-anchored registry that turns silenced individual detentions into a body of evidence a state cannot deny, strengthening a real class action to the UN Working Group. That is not nothing, and in a case this grave it is worth building. What it did not do, and structurally cannot: bind the hospital, compel a release, free Kavira, return the withheld body, supply the domestic enforcement the existing law lacks, or make a lawless private detention accountable - because there is no adopter within the system, the wrong is already illegal and merely unenforced, and the kernel makes records checkable rather than enforcing law or opening doors. It is the corpus's clearest break and its most important one, because it marks the edge of the claim: the civic kernel is a protocol for the governance of the consenting, and against coercion by the non-consenting, with the state stood aside, it becomes at most a trustworthy witness - and a witness, however unimpeachable, is not a rescue. The evidence is anchored beyond suppression. Kavira is still in the ward, and the record knows it, and the record cannot reach her."
+   }
+  ],
+  "verdict": "breaks",
+  "verdict_plain": "Hospitals detain patients who cannot pay — a new mother in the maternity ward, the dead held until families pay — where no court will intervene (DRC). The kernel needs an institution that agrees to keep a record; the detainer profits and the state looks away, so none will. It offers only a monitor's witnessed registry — evidence for a distant UN tribunal, not accountability. It opens no ward door.",
+  "protection": "the accountable detention",
+  "protection_plain": "Whether the kernel can make a hospital detention accountable. It cannot: it needs an institution that will keep a record, and here the detainer profits and the state looks away, so none will. Only a monitor's registry remains — evidence for a distant tribunal, not accountability, no release.",
+  "findings": [
+   {
+    "protection": "the one thing possible: a witnessed, anchored registry",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The only kernel-shaped artifact this situation permits is a third party's, not the detainer's: a human-rights monitor's registry of reported detentions, gathered from people with no device on paper and by phone, sealed so that naming a detained person cannot endanger them, and anchored outside the country so the count cannot be suppressed (§3.4). It materially strengthens the evidence for the class action to the UN Working Group - scattered, deniable, individually-silenced cases turned into one body a state cannot wave away. It is real and worth building. It is also documentation for an outside forum, not the accountability the kernel exists to produce - a note about what a record can do here, not a protection that holds."
+   },
+   {
+    "protection": "the kernel governs the consenting; here no one consents",
+    "severity": "break",
+    "doc_ref": "§1",
+    "observation": "The core break, and the corpus's outer boundary. Every other scenario contained an institution that could adopt the kernel even where it would not - a council, a Home Office, an inspectorate. Here the party doing the detaining profits from it and the party that could stop it looks away, so there is no actor to keep a self-binding record, and the accountability the kernel exists to produce simply cannot be produced. A lawless private detention cannot be made accountable by a protocol its beneficiary will never run. The kernel is a protocol for the governance of the consenting; against coercion by the non-consenting, with the state stood aside, it has no purchase - not a strained protection but an absent one."
+   },
+   {
+    "protection": "already illegal — the void is enforcement, not legibility",
+    "severity": "break",
+    "doc_ref": "§12",
+    "observation": "Debt-detention is prohibited outright by ICCPR Article 11, which the state has ratified, and the practice is already documented and counted - so this is not the legibility gap the kernel is built to close. The wrong persists in an enforcement void: no domestic body will compel the prohibition already on the books. The kernel makes records checkable; it does not enforce law, and better documentation does not move an enforcement void. Where the exam and welfare cases needed a reason made legible, this case needs a law made enforced - a different thing entirely, and one outside the kernel's reach. It can prove the detention; it cannot make anyone act on the proof."
+   },
+   {
+    "protection": "documentation is not accountability",
+    "severity": "break",
+    "doc_ref": "§6",
+    "observation": "The registry's audience is not a domestic court but the UN Working Group on Arbitrary Detention, which issues opinions, not orders. The kernel converts victim testimony into trustworthy, anchored, un-suppressible evidence - a genuine gain for the class action - but between that evidence and a release stand a foreign tribunal's non-binding opinion and a state that already ignores its own ratified law. The record convicts the practice to the world and frees no one it records. This is the executive-ignores break in a harsher key: there a domestic record had no binding force on a minister who ignored it; here even that record cannot be made by the actor, and the only record that can be made answers to no one with the power to open a door."
+   },
+   {
+    "protection": "the non-UK substrate, and the engine's honest leverage",
+    "severity": "note",
+    "doc_ref": "§4",
+    "observation": "Transplanted from its UK-shaped corpus, the kernel meets a context that denies its every assumption: a detained person with no device (T9), infrastructure that barely reaches (T14), witnesses who are a foreign NGO, an anchor on a foreign chain, a forum thousands of miles away that cannot bind. Its resilience - the paper floor, the low-bandwidth payload, the sealed report (§4) - is exactly what lets a monitor document at all, which is not nothing. But it vindicates rather than rebuts the triage engine's ranking of this grave harm at leverage 1: the engine scores treatability, not severity, and here treatability is near zero because there is nothing in the system for a record to bind. The scout was right to rank an atrocity low, and that low rank - severity extreme, leverage almost none - is the honest measurement, not a failure of compassion."
+   }
+  ]
+ },
+ {
   "id": "exam-algorithm-downgrade",
   "title": "Graded by Her School, Not Her Work: When a Legible Algorithm Is Still Unjust",
   "setting": "Asha Bello sat no exams in the summer of 2026 — a public-health emergency cancelled them — and so an algorithm decided her future instead. Her history teacher, who taught her for two years, assessed her at an A; she is, by every account, an A student. The standardisation model gave her a C. Not because of anything Asha did or wrote, but because of the school she attends: a large state comprehensive in a low-attainment area, whose cohorts three years ago achieved few top grades, and the model pulled her grade down to fit that history. Two streets away, a candidate in a class of nine at a fee-paying school kept his teacher's grade untouched — small cohorts were exempt from standardisation, and small cohorts are far more common in the private sector. Asha was graded on the past of strangers who shared her postcode.\n\nThis is the 2020 exam-grading fiasco, and its numbers are real: around two in five teacher-assessed grades were lowered, state-school pupils downgraded at nearly twice the rate of independent-school pupils, students given no mechanism to appeal the algorithm itself, and the whole thing abandoned within days after public fury — the Prime Minister calling it a 'mutant algorithm' and the regulator reverting to teachers' grades. The Calderbank Qualifications Authority runs its grading on a kernel register, and this scenario is a deliberate counterpoint to the welfare case: there, the harm was a model no one could see into; here, the harm is a model anyone can see through completely — and it is still unjust, because the injustice is not hidden in the algorithm. It is written plainly across its face.",
