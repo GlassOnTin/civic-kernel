@@ -350,8 +350,8 @@
       "reach": 3,
       "leverage": 1,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "infected-blood-coverup"
     },
     {
       "id": "clinical-best-interests",

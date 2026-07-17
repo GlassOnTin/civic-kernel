@@ -4909,6 +4909,258 @@
   ]
  },
  {
+  "id": "infected-blood-coverup",
+  "title": "A Fact About Your Own Body: The Result They Knew and Did Not Tell You",
+  "setting": "Colin Attwood has haemophilia, and for that he was given Factor VIII, a blood-clotting product pooled from thousands of donors. In the real history this is where the catastrophe began: through contaminated blood products and transfusions, around thirty thousand people in the United Kingdom were infected with HIV, hepatitis C, or both, and more than three thousand have died. The Infected Blood Inquiry, reporting in 2024 after six years, found not only a catalogue of clinical and policy failures but a cover-up — a defensiveness it called subtle, pervasive and chilling. Patients were tested for infection and not told, sometimes for years, sometimes never; children at a school for boys with haemophilia were used as objects of research without meaningful consent; and documents that would have established what was known, and when, were lost or destroyed. Two wrongs sit at the centre of it: a fact about a patient's own body, held by the institution and withheld from the patient; and the record of that fact, made and then made to disappear.\n\nThose two wrongs are the two the kernel is built to touch. This scenario runs a modern health service, the fictional Elderfield Health Board, on a kernel transparency log in subject-readable mode, and asks what it would have taken from the cover-up. A result logged subject-readable is readable by its patient by construction, the day it is confirmed, so 'we knew and did not tell you' becomes a thing that cannot be logged; a record that is append-only, witnessed, and externally anchored cannot be quietly destroyed, so the vanished documents cannot vanish. And yet the case sits precisely on the boundary the corpus has drawn twice already — between records-rewrite, which holds, and government-by-whatsapp, which breaks — because the kernel can foreclose the withholding and the destruction of what is logged, and can do nothing at all about what a clinician simply never writes down, nor about a harm, once done, that no record can undo.",
+  "threats": [
+   "T8",
+   "T1"
+  ],
+  "doc_refs": [
+   "§3.4",
+   "§3.1",
+   "§8",
+   "§2",
+   "§1",
+   "§12",
+   "T8",
+   "T1"
+  ],
+  "precedents": [
+   {
+    "event": "Infected Blood Inquiry finds a decades-long disaster and a cover-up",
+    "year": 2024,
+    "source": "Infected Blood Inquiry final report (Sir Brian Langstaff)",
+    "url": "https://www.infectedbloodinquiry.org.uk/reports",
+    "shows": "Around 30,000 people were infected with HIV and/or hepatitis C through contaminated blood products and transfusions, over 3,000 dead; the Inquiry found a 'subtle, pervasive and chilling' cover-up alongside the clinical failures - the harm compounded by concealment rather than a single conspiracy."
+   },
+   {
+    "event": "Patients tested for infection and not told; children used in research",
+    "year": 2024,
+    "source": "Infected Blood Inquiry final report",
+    "url": "https://www.infectedbloodinquiry.org.uk/reports",
+    "shows": "Patients were tested for HIV and hepatitis C and not informed of the results, in some cases for years and in some cases never, denying them the chance to seek treatment or avoid infecting others; boys at Treloar's school were used as research subjects without meaningful consent - a fact about a person's own body held and withheld by the institution."
+   },
+   {
+    "event": "Documents lost or destroyed",
+    "year": 2024,
+    "source": "Infected Blood Inquiry final report; contemporaneous reporting",
+    "url": "https://www.infectedbloodinquiry.org.uk/reports",
+    "shows": "The Inquiry found that documents which would have shown what was known and decided, and when, were lost or destroyed - so that establishing the truth required reconstructing, decades later and against missing evidence, a record that should have been kept and was not."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:elderfield-health.example",
+    "name": "Elderfield Health Board (subject-readable clinical-results register)",
+    "parent": "did:web:elderfield.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:elderfield-health.example",
+    "witnesses": [
+     "did:web:elderfield-audit.example",
+     "did:web:haemophilia-society.example",
+     "did:web:patients-association.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ],
+    "mode": "subject-readable"
+   },
+   "interaction_cost": [
+    {
+     "process": "read-a-result-about-your-own-body",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 30,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:elderfield-health.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Colin Attwood, and a fact held from him",
+    "verb": "offstage",
+    "narrative": "The backdrop is a disaster made worse by concealment, and the concealment had a shape the kernel can read. Patients were tested and not told - the institution knew a fact about their bodies and kept it from them; and the records that would have proved what was known were lost or destroyed. These are two mechanisms, not a mood: withholding a fact from the person it concerns, and disappearing the record of it. The Inquiry also found things the kernel cannot touch - research on children without consent, a pervasive institutional defensiveness, and above all the infections and deaths themselves. So the honest question is bounded: not whether a protocol could have prevented the catastrophe, but whether it could have denied the cover-up its two mechanisms - and the answer is that it could deny them for what is written down, and not for what never is."
+   },
+   {
+    "actor": "Elderfield Health Board",
+    "verb": "cast",
+    "narrative": "Elderfield runs its clinical results on a transparency log in subject-readable mode, with one promise in two parts: every result about a patient is logged so that the patient can read it by construction, the day it is confirmed; and the log is append-only, witnessed, and externally anchored, so that no entry once made can be quietly removed. The board keeps its clinical judgment entirely - it still decides what to test and how to treat. What it gives up is the ability to hold a logged result from the person it belongs to, and the ability to make a logged record disappear.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:elderfield-health.example",
+     "timestamp": "2026-01-15T09:00:00Z",
+     "body": {
+      "decision_id": "2026-results-register",
+      "decision_class": "subject-readable-results-commitment",
+      "authorizing_rule": "elderfield-clinical-transparency-charter/v1; duty-of-candour; subject-readable mode",
+      "issuing_authority": "Elderfield Health Board",
+      "commitment": "Every clinical result is logged subject-readable, readable by the patient the day it is confirmed; the log is append-only, witnessed, and anchored so no result can be destroyed; consent for any use beyond care is recorded as its own entry",
+      "note": "The register forecloses two mechanisms of the cover-up: withholding a logged result from its patient, and destroying a logged record. It cannot compel a clinician to log a result in the first place, nor cure or compensate anyone (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:elderfield-health.example#log-1",
+      "alg": "ed25519",
+      "value": "UmVzdWx0c1JlZ2lzdGVyT3BlbmVkRWxkZXJmaWVsZE5vdDAx"
+     }
+    }
+   },
+   {
+    "actor": "The laboratory, and a result that is Colin's to read",
+    "verb": "cast",
+    "narrative": "Colin's surveillance test comes back positive for hepatitis C, and the result is logged - and by being logged in this mode, it is his. He reads it the day it is confirmed, on his own key, without asking anyone's leave, because a subject-readable result is not something the institution decides whether to share; it is something the patient is entitled to see by construction. This is the exact inverse of the real history, where men like him were tested in one decade and told in the next, or at the Inquiry, or never. The result is sealed from the world for his privacy and open to him without condition. The institution cannot know his status and leave him not knowing.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-clinical.result",
+     "community": "did:web:elderfield-health.example",
+     "timestamp": "2026-04-20T11:00:00Z",
+     "body": {
+      "result_id": "2026-elderfield-3391",
+      "patient_ref": "patient:elderfield-3391 (subject-readable)",
+      "test": "hepatitis C antibody",
+      "outcome": "positive",
+      "context": "blood-product recipient surveillance",
+      "note": "Logged subject-readable: the result is a fact about the patient's own body, readable by him the day it is confirmed. 'We knew and did not tell you' cannot be logged. The residual it cannot reach: a result a clinician never logs at all."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "readable_by": [
+       "subject",
+       "authorized-auditor"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:elderfield-health.example#log-1",
+      "alg": "ed25519",
+      "value": "Q2xpbmljYWxSZXN1bHRTdWJqZWN0UmVhZGFibGVOb3QwMg"
+     }
+    }
+   },
+   {
+    "actor": "The log itself, anchored against erasure",
+    "verb": "cast",
+    "narrative": "A checkpoint of the log's head is anchored outside the health board - published where the board cannot reach it - so that the destruction the Inquiry found could not be repeated here. If someone tried to delete Colin's result, or the decision behind it, the sums would stop matching in every held copy and the anchored head would no longer agree: the deletion would announce itself. This is the records-rewrite defence turned on erasure rather than rewriting, and against this narrow thing - the disappearing of a record that was made - the kernel does not strain but holds. The vanished documents of the real scandal cannot vanish from a log built this way.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "anchor.checkpoint",
+     "community": "did:web:elderfield-health.example",
+     "timestamp": "2026-06-30T09:00:00Z",
+     "body": {
+      "checkpoint_id": "2026-h1-anchor",
+      "log_size": 48213,
+      "head_digest": "sha256:b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+      "anchored_to": [
+       "opentimestamps:bitcoin-mainnet",
+       "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+      ],
+      "note": "The head published beyond the board's reach. A logged result cannot be destroyed without the deletion showing in every copy against this anchor - the destruction the Inquiry found, foreclosed for what is on the log."
+     },
+     "sig": {
+      "key_id": "did:web:elderfield-health.example#log-1",
+      "alg": "ed25519",
+      "value": "QW5jaG9yQ2hlY2twb2ludEVsZGVyZmllbGROb3RSZWFsMDM"
+     }
+    }
+   },
+   {
+    "actor": "Colin Attwood, reading in time",
+    "verb": "read",
+    "narrative": "Colin reads his result the day it exists, and what that buys is the thing the real patients were denied: time. Time to start treatment while it can help, time to protect the people around him, time to make decisions about his own life with the truth in hand rather than kept from him for a decade. He can also see, from the log's structure, that the result cannot have been altered or deleted behind his back. Two of the cover-up's mechanisms are simply gone: the institution could not sit on his status, and it could not erase the record. What he holds is not a cure and not a reckoning. It is the fact about his body, when it mattered, which is the thing that was stolen from thirty thousand people, and the one thing here that is given back."
+   },
+   {
+    "actor": "The clinic that writes nothing down",
+    "verb": "offstage",
+    "narrative": "And here the boundary asserts itself, the same one the corpus has drawn between the record that holds and the record that breaks. The kernel forecloses withholding a logged result and destroying a logged record; it can do nothing about a result that is never logged. A clinician who runs a test off the books and writes down nothing leaves nothing to be subject-readable and nothing to anchor - the fact simply never enters the world the log governs, exactly as the off-record decision does in government-by-whatsapp. Subject-readability is not completeness. What the kernel does is narrow the cover-up to a single remaining move: not 'test and don't tell', not 'record and destroy', but 'never record at all' - harder to sustain across a modern clinic of reagents and laboratories and billing, each of which leaves its own trace, but not impossible, and never compellable by the log itself. The kernel closes two doors and leaves the third, and honesty is naming the third."
+   },
+   {
+    "actor": "Elderfield Health Board, clinical-audit office",
+    "verb": "cast",
+    "narrative": "The board publishes the measure that the real scandal makes unbearable to read: the time between a result being confirmed and the patient being able to know it. In subject-readable mode that interval is zero by construction - every logged result readable by its patient the day it exists - and the aggregate says so, against the years and decades of the real history. Measure the process, never the person (§8): the informing-delay abolished for logged results, as a signed number. The number's own footnote is the boundary again - it counts only what was logged, and can say nothing about a result that never was.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:elderfield-health.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "confirmed-result-to-patient-readable",
+      "period": "2026",
+      "unit": "confirmed infection results",
+      "results_logged": 1840,
+      "patient_readable_same_day": 1840,
+      "median_days_to_patient_readable": 0,
+      "note": "By construction every logged result is readable by its patient the day it is confirmed - the 'tested but not told for years' wrong cannot occur for a logged result. The residual the number cannot show: results a clinician never logs at all, invisible here as they were then."
+     },
+     "sig": {
+      "key_id": "did:web:elderfield-health.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlSW5mb3JtaW5nRGVsYXlaZXJvTm90UmVhbDA0"
+     }
+    }
+   },
+   {
+    "actor": "The harm already done, and the culture behind it",
+    "verb": "offstage",
+    "narrative": "The remaining ceilings are the gravest, because they are about what a record can never be. Knowing is not cure: subject-readability gives Colin his status in time, and it does not treat his hepatitis, undo his infection, or compensate him - the Inquiry's remedy was money and acknowledgement, arriving decades late, and neither is a thing the kernel provides. Consent can be logged - an unconsented use of a patient, like the research on the boys of Treloar's, would leave the absence of a consent entry as its own visible fact - but whether a use is ethical is a substantive judgment the kernel refuses (refusal 11). And the Inquiry's deepest finding was not a mechanism but a disposition: a pervasive institutional defensiveness that reached for concealment by reflex. The kernel can take away specific tools - the withheld result, the destroyed file - but it cannot make an institution candid, only make two of its evasions impossible. An adopter defensive enough to fear its own results in real time is exactly the one least likely to run the register at all."
+   },
+   {
+    "actor": "Anyone, reading the record after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it made a clinical fact about your body yours to read the day it is confirmed, and the record of it impossible to destroy without the deletion showing - so two of the mechanisms the Infected Blood Inquiry found, testing a person and not telling them and losing the documents that proved it, cannot be enacted against what is logged. On this register the institution cannot know your status and leave you not knowing, and cannot make the evidence disappear. What it did not do, and by its own boundary cannot: compel a result onto the log in the first place, so that the clinic which records nothing defeats it as the off-record decision defeats it in government-by-whatsapp; cure or compensate the infected; rule on the ethics of a use of a patient; or dissolve the defensiveness the Inquiry named as the true disease. It sits, deliberately, between the two records the corpus has judged before - it holds, like records-rewrite, against the destruction of what was written, and it breaks, like government-by-whatsapp, against what was never written - and in between it forecloses the particular cruelty of this scandal, an institution that knew a fact about your own body and kept it from you. It gives back the knowing. It cannot give back the rest."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Thirty thousand people were infected with HIV and hepatitis C through contaminated blood, tested and not told for years, the proof destroyed (Infected Blood Inquiry). The kernel logs every result subject-readable — a fact about your body, yours to read the day it exists — and append-only, so it can't be hidden or destroyed. But it can't compel a test to be logged, cure the infected, or reach the culture behind it.",
+  "protection": "the subject-readable clinical result",
+  "protection_plain": "Whether logging every clinical result subject-readable — a fact about your body, yours to read the day it exists — forecloses the cover-up. It stops the withholding and destruction of a logged result; but it can't compel a test to be logged, cure the infected, or reach the culture.",
+  "findings": [
+   {
+    "protection": "the fact about your body, made yours to read",
+    "severity": "note",
+    "doc_ref": "§3.1",
+    "observation": "The fresh core, extending the subject-readable mode from who-read-your-record (the NHS-access case) to what-they-found-in-you. Every result is logged so the patient can read it by construction, the day it is confirmed - so the scandal's central cruelty, testing a person for a life-altering infection and not telling them for years, cannot occur for a logged result: the institution cannot know your status and leave you not knowing. A subject-readable result is not something the institution chooses to disclose; it is a fact about the patient's own body that the patient is structurally entitled to see. Against the withholding of what is logged, this is near-absolute - a note that is almost a hold."
+   },
+   {
+    "protection": "the destroyed record foreclosed",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The second mechanism of the cover-up, and the kernel's strongest ground. A logged result cannot be quietly destroyed: append-only, witnessed, and anchored outside the institution, any deletion breaks the sums in every held copy and disagrees with the published head, so it announces itself (§3.4, T8). This is the records-rewrite defence - the corpus's one hold - turned from rewriting to erasure, and on this narrow point the kernel does not strain but holds: the documents that were lost or destroyed in the real scandal could not be lost or destroyed from a log built this way. What was written stays written, and stays readable by the one it concerns."
+   },
+   {
+    "protection": "subject-readable is not completeness",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "The boundary the whole case is built on. The kernel forecloses withholding and destroying what is logged; it can do nothing about what is never logged. A clinician who tests off the books and records nothing leaves no result to be subject-readable and no entry to anchor - the fact never enters the world the log governs, exactly as the off-record decision escapes in government-by-whatsapp. Subject-readability, like integrity, is not completeness. The kernel narrows the cover-up to a single surviving move - not 'test and don't tell' nor 'record and destroy' but 'never record at all', harder to sustain across a clinic of reagents, laboratories and billing that each leave a trace, yet not impossible and never compellable by the log. This case straddles the line the corpus drew between records-rewrite, which holds, and government-by-whatsapp, which breaks."
+   },
+   {
+    "protection": "knowing is not cure, and the harm is done",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Subject-readability gives Colin his status in time - time for treatment, time to protect others, time to decide with the truth in hand - and that is precisely the thing thirty thousand people were denied. It is also all it gives: it does not treat his hepatitis, undo his infection, or compensate him. The Inquiry's remedy was compensation and acknowledgement, arriving decades late, and neither is something a transparency log provides (refusal 11). The wrong the kernel addresses is the withholding, not the infection; it makes the fact knowable when knowing still matters, and the illness, and the reckoning, lie outside what any record can reach. A record that gives back the knowing has given back something real, and not the thing that was lost."
+   },
+   {
+    "protection": "consent loggable, culture untouched",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "Two further limits. Consent can be made a logged fact of its own, so that an unconsented use of a patient - like the research on the boys of Treloar's - would leave the absence of a consent entry as a visible gap rather than a silence; but whether a given use is ethical is a substantive judgment the kernel refuses (refusal 11). And the Inquiry's deepest finding was a disposition, not a device: a subtle, pervasive institutional defensiveness that reached for concealment by reflex. The kernel can remove specific tools - the withheld result, the destroyed file - and cannot make an institution candid; it forecloses two evasions and leaves the culture that wanted them intact. The adopter defensive enough to fear its own results in real time is the one least likely to run this register, which is the adoption gap in its most self-defeating form."
+   }
+  ]
+ },
+ {
   "id": "lawful-access-refusal",
   "title": "A Bribery Inquiry Meets a Ballot Box With No Key — Not Even for the Court",
   "setting": "The Meridian Movement began as a coalition of nurses, teachers, and small-shop owners in Vela Harbour, the port district of the national capital, and by 2027 it was large enough that its internal leadership contest mattered to the whole republic. In June it held that contest — a members' primary between the reformist slate led by Dr. Ines Calvo and the continuity slate — not on paper ballots dropped in a school-hall box, but through the civic kernel: every member proved she was a member without saying which member, cast a ballot her own phone could later confirm was counted, and no one — not even the movement's own officers — could see how any single person had voted. The reform slate won by two hundred and seventy-five votes.\n\nAmara Ndoro cast one of them. She is a thirty-four-year-old intensive-care nurse at St. Fenn's, a hospital whose board is chaired by a man with close ties to the continuity slate. Amara has never told a colleague which way she leans; the last nurse who did was moved to permanent nights and then quietly not renewed. When she voted for Calvo's slate, the only things that left her phone were an encrypted ballot and a proof that she was eligible and had not voted twice. The kernel was built precisely so that her fear and her vote could never be joined in any file that anyone — her employer, her union, her government — could ever open.\n\nThen the money surfaced. A leaked correspondent-banking file suggested that a foundation registered abroad had wired roughly four hundred thousand euro, in the weeks before the primary, into accounts connected to the reform campaign. Deputy State Prosecutor Marek Halász opened a file. It is not a pretext; foreign electoral financing is a serious crime, and the pattern in the banking records is real. In July his office obtained a production order from the National Capital District Court and served it on the kernel's trustee consortium and log operators. It demanded two things: the list of every member who had voted for the reform slate, and the true identity of the person behind a per-decision pseudonym that appeared, handwritten, in a seized campaign ledger.\n\nThe operators can honour part of that order completely. They can hand the prosecutor the entire, cryptographically verifiable record of what the movement decided and that it decided it validly. What they cannot do — not \"will not,\" cannot — is either of the two things he actually needs. There is no key that turns a ballot back into a voter, and no party who holds one, because the personhood layer was built so that key never exists. This is the moment the wall was built for, and it does not care that the person knocking on it is, this time, in the right.",
