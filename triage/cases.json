@@ -415,8 +415,8 @@
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "maternity-harm-downgraded"
     },
     {
       "id": "single-justice-procedure-opaque",

@@ -8937,6 +8937,249 @@
   ]
  },
  {
+  "id": "maternity-harm-downgraded",
+  "title": "The Grader Is the Harmer: Downgrading a Baby's Injury to Stay Below the Line",
+  "setting": "Ruben Hartley was born with a brain injury that need not have happened. His mother's labour was not escalated when it should have been, an emergency caesarean came too late, and he was starved of oxygen in the minutes that decided the rest of his life. What his parents, Sarah and Tom, were told afterwards was that nothing had gone wrong — that his injury was one of those tragedies of birth, unavoidable, no lapse in care. And on the trust's own record, that is exactly what it was graded: low harm, no lapse identified. That grade is not a description. It is a gate. A maternity incident graded as serious harm caused by a lapse in care triggers a formal patient-safety investigation, a duty of candour, a coroner's interest, the attention of the regulator; a grade of low harm, no lapse triggers none of them. The trust that caused the harm is the body that grades it, and the grade decides whether anyone outside the trust will ever look.\n\nThis is the shape the Ockenden review of Shrewsbury and Telford found, and the Kirkup reports into East Kent and elsewhere: not only clinical failures but their systematic minimisation — avoidable deaths recorded as unavoidable, harm graded down, families who knew something was wrong told firmly that it was not, and a pattern that stayed invisible for years precisely because each incident had been individually, defensibly, graded below the line that would have exposed it. Thornbury NHS Trust, in this scenario, runs its incident grading on a kernel transparency log in subject-readable mode, and the question is a narrow and uncomfortable one. A protocol cannot decide whether Ruben's injury was avoidable — that is a clinical judgment, and judgment is refused. But when the party grading the harm is the party that caused it, can the protocol at least stop the grading being done in the dark?",
+  "threats": [
+   "T1",
+   "T8"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§3.1",
+   "§1",
+   "§2",
+   "§12",
+   "T1",
+   "T8"
+  ],
+  "precedents": [
+   {
+    "event": "Ockenden Review finds avoidable harm systematically minimised",
+    "year": 2022,
+    "source": "Ockenden Review (Shrewsbury and Telford NHS Trust)",
+    "url": "https://www.gov.uk/government/publications/final-report-of-the-ockenden-review",
+    "shows": "The largest maternity-care review in NHS history found hundreds of avoidable baby deaths and injuries over two decades, harm repeatedly graded down or recorded as unavoidable, families dismissed when they raised concerns, and a culture that suppressed scrutiny of its own failures - the pattern invisible for years because each case was individually minimised."
+   },
+   {
+    "event": "Kirkup reports: harm graded away from external review",
+    "year": 2022,
+    "source": "Reading the Signals (East Kent maternity) — Dr Bill Kirkup",
+    "url": "https://www.gov.uk/government/publications/maternity-and-neonatal-services-in-east-kent-reading-the-signals-report",
+    "shows": "The East Kent investigation found suboptimal care and avoidable deaths, with the trust's own assessments minimising harm and grading incidents so as to avoid the investigations and candour that a higher grade would have compelled - the severity classification functioning as a gate to oversight, controlled by the graded party."
+   },
+   {
+    "event": "The severity grade determines whether external scrutiny is triggered",
+    "year": 2022,
+    "source": "NHS Serious Incident Framework / Patient Safety Incident Response Framework (PSIRF)",
+    "url": "https://www.england.nhs.uk/patient-safety/patient-safety-incident-response-framework/",
+    "shows": "Whether a patient-safety incident triggers a formal investigation, duty of candour, or external referral depends on how its severity and avoidability are graded - and that grade is assigned by the provider itself, giving the body responsible for the harm control over whether the harm is scrutinised at all."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:thornbury-maternity.example",
+    "name": "Thornbury NHS Trust (maternity incident-grading register)",
+    "parent": "did:web:thornbury-nhs.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:thornbury-maternity.example",
+    "witnesses": [
+     "did:web:maternity-safety-body.example",
+     "did:web:thornbury-audit.example",
+     "did:web:bereaved-families-association.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ],
+    "mode": "subject-readable"
+   },
+   "interaction_cost": [
+    {
+     "process": "read-and-contest-the-grade-of-your-own-care",
+     "steps": 1,
+     "fields": 2,
+     "median_seconds": 300,
+     "abandonment_rate": 0.04
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:thornbury-maternity.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Sarah and Tom Hartley, and a grade that is a gate",
+    "verb": "offstage",
+    "narrative": "The backdrop is a wrong with a quiet mechanism: not a warning ignored, not a decision hidden, but a classification set low. When a maternity unit harms a baby, the severity it assigns to that harm is what decides whether anyone outside the unit ever investigates - and the unit assigns it. Grade the injury 'low harm, no lapse' and the formal investigation, the duty of candour, the coroner's interest, the regulator's attention all fall away; each individual grade is defensible, and the pattern of them is invisible from inside any single one. Whether Ruben's injury was in fact avoidable is a clinical judgment the kernel refuses to make (refusal 11). What it can change is whether the grade is cited, whether the family can see and contest it, and whether the trust's own downgrades can be counted - whether, in short, the party grading its own harm must do so in the open."
+   },
+   {
+    "actor": "Thornbury NHS Trust",
+    "verb": "cast",
+    "narrative": "Thornbury opens an incident-grading register with three commitments: every incident is graded on the record, citing the rule and threshold applied; the family is a party to the record of their own care, able to read the grade and contest it; and the trust's grades, contests, and re-grades are published as linked numbers. The trust keeps its clinical judgment entirely - it still assigns the first grade. What it gives up is the ability to set that grade in private, to keep the family from seeing it, and to let a pattern of downgrades accumulate unseen.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:thornbury-maternity.example",
+     "timestamp": "2026-01-20T09:00:00Z",
+     "body": {
+      "decision_id": "2026-grading-register",
+      "decision_class": "incident-grading-commitment",
+      "authorizing_rule": "PSIRF; duty of candour; thornbury-safety-charter/v1",
+      "issuing_authority": "Thornbury NHS Trust maternity service",
+      "commitment": "Every incident graded on the record citing its severity rule and threshold; the family a party able to read and contest the grade of their own care; grades, contests and re-grades published as linked rates",
+      "note": "The register makes the grade cited, family-readable, and contestable, and the downgrade-pattern countable. It does not decide whether an incident was avoidable (refusal 11), nor make the trust's first grade honest - only make a dishonest one visible and reversible."
+     },
+     "sig": {
+      "key_id": "did:web:thornbury-maternity.example#log-1",
+      "alg": "ed25519",
+      "value": "R3JhZGluZ1JlZ2lzdGVyT3BlbmVkVGhvcm5idXJ5Tm90MDE"
+     }
+    }
+   },
+   {
+    "actor": "The trust, grading its own harm",
+    "verb": "cast",
+    "narrative": "Ruben's injury is graded, and the grade is the low one: low harm, no lapse in care identified - the grade that keeps the incident below every threshold that would bring an outside eye. But now the grade is not a line in a file the family will never see; it is an entry on a log, citing the matrix that produced it, readable by the Hartleys and witnessed beyond the trust. The trust has made the call it has every incentive to make. What it can no longer do is make that call unseen. The downgrade that, in the real scandals, disappeared into an internal system is here a signed, cited, contestable fact.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-incident.grading",
+     "community": "did:web:thornbury-maternity.example",
+     "timestamp": "2026-05-05T14:00:00Z",
+     "body": {
+      "incident_id": "2026-thornbury-0442",
+      "event": "hypoxic brain injury following delayed emergency caesarean",
+      "trust_grade": "low harm - no lapse in care identified",
+      "grading_rule": "thornbury incident-severity matrix v3 (PSIRF thresholds)",
+      "triggers_external_review": false,
+      "note": "The grade is the gate: 'low harm, no lapse' keeps the incident below the threshold that would compel a patient-safety investigation, duty of candour, or coroner referral. Cited and family-readable - the downgrade can no longer be made in the dark."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+      "readable_by": [
+       "subject",
+       "authorized-auditor"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:thornbury-maternity.example#log-1",
+      "alg": "ed25519",
+      "value": "SW5jaWRlbnRHcmFkaW5nUnViZW5Mb3dIYXJtTm90UmVhbDAy"
+     }
+    }
+   },
+   {
+    "actor": "Sarah and Tom Hartley, reading the grade of their son's care",
+    "verb": "read",
+    "narrative": "The Hartleys read the grade, and read what it means: that their trust has recorded their son's brain injury as no lapse in care, and that this recording is the reason no one outside the trust will look. In the real scandals this was the moment families were sent away with a firm reassurance and nothing to hold - no document, no grade, no thread to pull. Here they hold the grade itself, cited to the matrix that produced it, and they can see the machinery: that the low grade and the absence of any investigation are the same fact. What they have is not yet justice, and it is the thing the bereaved families of Shrewsbury and East Kent spent years without - a place to put their certainty that something went wrong, on the same record the trust must answer."
+   },
+   {
+    "actor": "Sarah and Tom Hartley, contesting the grade",
+    "verb": "challenge",
+    "narrative": "Because they are a party to the record, the Hartleys contest the grade, and an independent review - reachable because the grade was visible to be challenged - finds that a delay in escalation did contribute to Ruben's injury. The grade is reversed: severe harm, lapse in care, external investigation triggered, and the reversal is itself logged beside the original, so the trust's first call and its correction sit permanently together. This is the protection working, and its limit in the same breath. The kernel let a dishonest grade be seen, contested, and overturned. It did not make the first grade honest, and a family without the Hartleys' resolve, or without an expert to bring, might never have reached the review at all.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:thornbury-maternity.example",
+     "timestamp": "2026-07-10T11:00:00Z",
+     "body": {
+      "in_response_to": "x-incident.grading:2026-thornbury-0442",
+      "challenge": "family contests 'low harm - no lapse'; independent review commissioned",
+      "disposition": "re-graded to severe harm - lapse in care; external investigation triggered; original grade retained on the record beside the correction",
+      "note": "Contestability made real: because the grade was on the record and the family a party, the downgrade could be challenged and reversed, and the reversal is permanent. The kernel cannot make the trust's first grade honest - only make a dishonest one contestable and its overturning a matter of record."
+     },
+     "sig": {
+      "key_id": "did:web:thornbury-maternity.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VSZWdyYWRlZFNldmVyZUhhcm1Ob3QwMw"
+     }
+    }
+   },
+   {
+    "actor": "Thornbury NHS Trust, safety office",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes the shape the inquiries took years to reconstruct: how many incidents the trust graded low or no harm, how many of those grades were contested, and how many were upgraded once someone looked. Measure the process, never the person (§8): the distance between the trust's own grade and the reviewed grade, as the trust's own signed number. When two-thirds of the contested downgrades are overturned, the aggregate says plainly what no single defensible grade could - that the grading runs systematically low. It is the clearest early warning of a failing unit anyone has had. It is also only a warning, and it re-grades no child it counts.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:thornbury-maternity.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "maternity-incident-severity-grading",
+      "period": "2026",
+      "unit": "graded maternity incidents",
+      "graded_low_or_no_harm": 380,
+      "contested": 90,
+      "upgraded_on_review": 61,
+      "note": "Anonymous aggregate. Of 90 low/no-harm grades contested, 61 were upgraded on review - the trust's downgrade overturned two-thirds of the time it was examined. Measure the process (§8): the gap between the trust's grade and the reviewed grade as a signed number, on the day, not reconstructed by an inquiry years later. It counts only incidents graded at all, and only grades someone contested."
+     },
+     "sig": {
+      "key_id": "did:web:thornbury-maternity.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlR3JhZGluZ0Rvd25ncmFkZVJhdGVOb3QwNA"
+     }
+    }
+   },
+   {
+    "actor": "The grader who is the harmer, and what stays out of reach",
+    "verb": "offstage",
+    "narrative": "The ceilings are set by the wrong's own shape. The grader is the harmer: the trust still assigns the first grade, with every incentive to assign it low, and the kernel makes that grade visible, contestable, and countable without making it honest - it takes away the secret downgrade and leaves the trust its judgment. Behind that stand the familiar walls. The clinical grade is substantive: the kernel cannot rule that Ruben's injury was avoidable, only show that his grade sits in a pile the reviewers mostly overturn (refusal 11). The contest is filtered by resource, as the SEND appeal is: a family needs the resolve and often the expert to challenge a clinical grade, so the protection reaches furthest for those best able to use it. The harm that is never graded at all - never entered as an incident - escapes entirely, government-by-whatsapp in the ward, and the kernel narrows the evasion from 'grade it down' to 'never record it', harder across a unit of notes and monitors and referrals but not impossible. And a number is not a remedy: the aggregate is an early warning of a failing unit, and it re-grades no child, heals no injury, and staffs no ward. The kernel makes the harmer grade in the open. It cannot make the open grade safe care."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it made the severity grade of an institution's own harm a cited, family-readable, contestable decision, and the pattern of its downgrades a signed number - so the mechanism at the centre of the maternity scandals, a harm quietly graded below the line that would bring an outside eye, cannot be enacted in the dark: the grade is seen, the family can contest it, the reversal is permanent, and the downgrade-rate is countable on the day rather than reconstructed by an inquiry a decade later. What it did not do, and by its own boundary cannot: make the trust's first grade honest, since the grader remains the harmer; judge whether any one injury was avoidable; reach a harm that was never recorded as an incident at all; close the gap between the family that can bring an expert and the one that cannot; or heal the child the grade was hiding. It took away the secret downgrade and left the trust its judgment - a real and specific protection, the kind the bereaved families of Shrewsbury spent years without. The grader is still the harmer. But now the harmer grades in the open, with the family reading over its shoulder, and the pattern it used to bury is a number by the end of the year."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Maternity units grade their own avoidable harm as low-risk to stay below the scrutiny threshold, families told nothing went wrong (Ockenden; East Kent). The kernel makes each incident-grade cited, family-readable and contestable — so the secret downgrade can't be logged. But the grader is still the harmer: it makes the downgrade contestable, not honest, and can't reach a harm never logged.",
+  "protection": "the cited, contestable harm-grade",
+  "protection_plain": "Whether making a trust's grade of its own harm cited, family-readable and contestable protects the harmed. It forecloses the secret downgrade that keeps harm below the scrutiny threshold; but the grader is still the harmer, and the kernel can't judge the clinical call nor reach a harm never logged.",
+  "findings": [
+   {
+    "protection": "the grade, cited and family-readable",
+    "severity": "note",
+    "doc_ref": "§3.1",
+    "observation": "For an adopting trust, every incident-grade is a cited decision the family can read on the record of their own care (subject-readable) - so the secret downgrade, the grade quietly set below the review threshold, cannot be logged, and the family who knows something went wrong holds the grade itself rather than a verbal reassurance and nothing to point to. It extends the subject-readable mode from a clinical fact about your body (the infected-blood case) to the severity assigned to your care: the recording that decides whether anyone outside the trust will look is now a thing the harmed party can see and name. It is the smallest of the protections and, against a wrong built on unseen classification, the load-bearing one."
+   },
+   {
+    "protection": "the grader is the harmer",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "The finding this case exists to make. The wrong's mechanism is self-classification: the trust grades its own incidents, and the grade is the gate to scrutiny, so grading low is how the trust escapes oversight of its own harm. The kernel makes the grade cited, witnessed, family-contestable, and the downgrade-rate countable, which forecloses the secret downgrade - but the trust still assigns the first grade, and a body grading its own harm has every incentive to grade it down. The kernel makes a dishonest grade visible and its reversal permanent; it cannot make the first grade honest. This is the adoption gap turned inward: not a wrongdoer refusing to run the register, but a wrongdoer running it and still holding the judgment the register exposes. The grader remains the harmer, now grading in the open."
+   },
+   {
+    "protection": "the clinical grade is substantive; only the pattern convicts",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Whether Ruben's injury was avoidable is a clinical judgment the kernel refuses (refusal 11), so it cannot rule his particular grade wrong - only show it sits in a pile the reviewers overturn two-thirds of the time. The single grade stays the trust's; the aggregate convicts the pattern, and cannot reach down to vindicate one child. And the contest that overturns a grade is filtered by resource, exactly as the SEND appeal is: a family needs the resolve and usually an expert to challenge a clinical classification, so the protection reaches furthest for those best able to use it, and a family without either may never reach the review that would have reversed the downgrade."
+   },
+   {
+    "protection": "the harm never recorded at all",
+    "severity": "strain",
+    "doc_ref": "§3.4",
+    "observation": "The kernel forecloses grading a logged incident down and forecloses erasing a logged grade - append-only and witnessed, the downgrade is seen and the reversal permanent. What it cannot reach is a harm never entered as an incident at all: the event a unit simply does not report leaves no grade to contest and no entry to count, government-by-whatsapp in the ward. The kernel narrows the evasion from 'grade it down' to 'never record it', which is harder to sustain across a modern unit of clinical notes, monitoring traces, referrals and billing, each leaving its own trace - but not impossible, and never compellable by the log. Subject-readability and integrity, here as everywhere, are not completeness."
+   },
+   {
+    "protection": "an early warning is not a remedy",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The aggregate turns the gaming into the trust's own signed figure - how many incidents graded low, how many contested, how many upgraded on review - measure-the-process (§8), the systematic downgrading that the Ockenden and Kirkup reviews reconstructed over years made visible on the day, and the clearest early warning of a failing unit that oversight could ask for. Its limits are the case's in miniature: it counts only incidents that were graded, so the unreported harm is invisible to it; it counts only grades someone contested, so the uncontested downgrade is uncounted; and a rate that proves the grading runs low re-grades no child, heals no injury, and staffs no ward. It makes the pattern undeniable and early. It does not make the care safe, which was the only thing that would have saved Ruben."
+   }
+  ]
+ },
+ {
   "id": "ministerial-standards-unenforced",
   "title": "The Judge Is the Defendant: A Breach Found, a Finding Overridden, an Adviser Who Can Only Resign",
   "setting": "Sir Alan Rede is the independent adviser on ministerial standards, and after weeks of evidence he has concluded that the Home Secretary, Cole Harrow, breached the ministerial code by bullying his officials. He writes it down plainly, because it is plainly true. Then it goes to the one person who decides what happens next: the Prime Minister — who reads the finding, declares full confidence in the minister, and does nothing. Rede has exactly one lever, and he pulls it: he resigns. In the real version of this, that is not a hypothetical. In 2020 the adviser found Priti Patel had breached the code, the Prime Minister overruled him, and Sir Alex Allan resigned; two years later Lord Geidt resigned as the second ethics adviser in the same tenure, having concluded he was not truly independent and could not even open an inquiry, still less advise a Prime Minister on the Prime Minister's own conduct.\n\nThe wrong here is not a captured regulator that could act and won't. It is a constitutional arrangement in which the person who judges the conduct of the government is the head of the government — the Prime Minister is the ultimate arbiter of the code, judging his own ministers and himself, and the independent adviser advises, resigns, and is replaced. The Ashfold government runs its standards process on a kernel transparency register, after its own two advisers walked out. This scenario is about what a record can do when the judge is the defendant: it can make the finding, the override, and the resignation permanent and countable — and it cannot make the judge disinterested, because who judges is the one thing the kernel will not decide.",
