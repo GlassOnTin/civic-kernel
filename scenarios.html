@@ -1410,6 +1410,259 @@
   ]
  },
  {
+  "id": "carers-allowance-overpayment",
+  "title": "The Pound It Could Have Stopped: Punishing a Debt the State Watched Grow",
+  "setting": "Joan Fenwick cares for her disabled son more than fifty hours a week, and for that she receives Carer's Allowance — a small weekly sum with a cruel edge. Earn a single pound over the weekly limit and you lose not the pound but the whole week's allowance; there is no taper, only a cliff. One spring Joan picked up extra shifts to cover a colleague, and for a handful of weeks her pay crept a few pounds over the line. She did not know she had crossed it. But the state did: through the real-time earnings feed it receives from the tax authority, the department knew, within days, that Joan had gone over. It said nothing. It said nothing for the next sixteen months, while the overpayment it could have halted at four pounds compounded, week upon unnoticed week, into a demand for four thousand — which then arrived at her door as a debt to be recovered, with the threat of a fraud investigation behind it.\n\nThis is the Carer's Allowance overpayment scandal: tens of thousands of unpaid carers pursued for large sums built up over months and years of small, often unwitting breaches, by a department that held, the whole time, the real-time data that would have flagged the first week — and used it not to prevent the harm but to recover it, magnified, after the fact. The cruelty is not that the state failed to know; it is that it knew, and let the knowing accumulate into a punishment. The Merdon Benefits Agency, in this scenario, runs its Carer's Allowance on a kernel register, and the question is precise: a protocol cannot abolish the cliff-edge, which is a policy, nor forgive a debt genuinely incurred. But when the state holds in its own hands the data that would stop a harm at a pound, can the protocol make it a duty to use that data for prevention, rather than a resource to be saved up for punishment?",
+  "threats": [
+   "T12",
+   "T1"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.1",
+   "§11",
+   "§4",
+   "§1",
+   "§12",
+   "T12",
+   "T1"
+  ],
+  "precedents": [
+   {
+    "event": "Carers pursued for large overpayments the DWP could have prevented",
+    "year": 2024,
+    "source": "The Guardian investigation (2024); National Audit Office; Work and Pensions Committee",
+    "url": "https://www.theguardian.com/society/carers-allowance",
+    "shows": "Tens of thousands of unpaid carers were pursued for overpayments — often thousands of pounds built up over months or years of small, frequently unwitting earnings breaches — by a department that held real-time earnings data capable of flagging the first week, but did not act on it, allowing the debt to accumulate before recovering it and, in some cases, prosecuting."
+   },
+   {
+    "event": "The DWP receives real-time earnings data it does not act on promptly",
+    "year": 2024,
+    "source": "National Audit Office; DWP Real Time Information (RTI) earnings alerts",
+    "url": "https://www.nao.org.uk/reports/",
+    "shows": "The department receives PAYE earnings data from HMRC in near real time, generating alerts when a carer's earnings may breach the limit — but a large share of these alerts were not actioned in time, so the information that could have stopped an overpayment at the outset instead documented one growing unchecked."
+   },
+   {
+    "event": "The cliff-edge earnings rule turns a small breach into a total loss",
+    "year": 2024,
+    "source": "Carer's Allowance earnings rule; independent review (2024-25)",
+    "url": "https://www.gov.uk/carers-allowance",
+    "shows": "Carer's Allowance is withdrawn in full for any week in which net earnings exceed the limit — an all-or-nothing cliff-edge rather than a taper — so a breach of a few pounds forfeits the entire weekly award, and a run of small breaches becomes a large recoverable overpayment; whether the cliff-edge itself should be reformed is a policy question under review."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:merdon-benefits.example",
+    "name": "Merdon Benefits Agency (Carer's Allowance register)",
+    "parent": "did:web:merdon-gov.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:merdon-benefits.example",
+    "witnesses": [
+     "did:web:carers-association.example",
+     "did:web:merdon-benefits-audit.example",
+     "did:web:welfare-rights-body.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ],
+    "mode": "subject-readable"
+   },
+   "interaction_cost": [
+    {
+     "process": "see-your-own-earnings-against-the-limit-this-week",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 45,
+     "abandonment_rate": 0.01
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:merdon-benefits.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Joan Fenwick, and a debt the state watched grow",
+    "verb": "offstage",
+    "narrative": "The backdrop is a wrong made not of ignorance but of withheld knowledge. The department is not blind to a carer's earnings; it receives them in near real time from the tax authority, and an alert fires the very week a limit is crossed. The failure is downstream of knowing: the alert is not acted on, the breach is not flagged to the carer, and the small correctable event of one week over the line is allowed to repeat, unspoken, until it is a large debt worth recovering. Whether the cliff-edge rule that forfeits a whole week's allowance for a single pound is fair is a policy question the kernel refuses (refusal 11), and a genuine overpayment is genuinely owed. What the kernel can change is the space between the state's knowing and its acting: whether the duty to use the data it holds is clocked, whether the carer can see her own breach in time to correct it, and whether a recovery demand must show when the state first knew against when it finally moved."
+   },
+   {
+    "actor": "Merdon Benefits Agency",
+    "verb": "cast",
+    "narrative": "Merdon opens its Carer's Allowance on a subject-readable register with three commitments: each real-time earnings alert is logged with a duty to notify the carer and adjust the award within a set window, so an alert left to accumulate becomes a logged default; the carer can see her own earnings against the limit, week by week, on her own key; and any recovery demand must cite the date the state first knew and the date it first acted. The agency keeps the rule it administers - it still applies the cliff-edge. What it gives up is the ability to sit on what it knows: to hold the data that would stop a harm and spend it only on recovering the harm, later and larger.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:merdon-benefits.example",
+     "timestamp": "2025-06-01T09:00:00Z",
+     "body": {
+      "decision_id": "2025-carers-register",
+      "decision_class": "earnings-alert-duty-commitment",
+      "authorizing_rule": "Carer's Allowance regs; RTI earnings feed; merdon-benefits-charter/v1",
+      "issuing_authority": "Merdon Benefits Agency",
+      "commitment": "Every RTI earnings alert logged with a 14-day duty to notify the carer and adjust the award; the carer's earnings-against-limit subject-readable weekly; every recovery demand cites first-known and first-action dates; the state's alert-to-action delay published as a rate",
+      "note": "The register makes the duty to act on held data clocked, the breach visible to the carer in time, and the state's delay part of any demand. It does not abolish the cliff-edge (refusal 11) nor forgive a debt genuinely owed."
+     },
+     "sig": {
+      "key_id": "did:web:merdon-benefits.example#log-1",
+      "alg": "ed25519",
+      "value": "Q2FyZXJzUmVnaXN0ZXJPcGVuZWRNZXJkb25Ob3RSZWFsMDE"
+     }
+    }
+   },
+   {
+    "actor": "The tax feed, and a breach the state now holds",
+    "verb": "cast",
+    "narrative": "Joan's extra shifts push her a few pounds over the limit, and the alert fires the same week - as it does in the real system, where the data arrives promptly and the acting does not. Here the alert is an entry: the week, the amount over, the effect on her award, and a duty to tell her within fourteen days. Crucially it is readable by Joan herself, sealed from the world but open to her, because it is a fact about her own money. The state holds the knowledge of her breach exactly as it does today. What is different is that the knowledge is now clocked and shared, not stored up in silence.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-earnings.alert",
+     "community": "did:web:merdon-benefits.example",
+     "timestamp": "2025-07-14T10:00:00Z",
+     "body": {
+      "alert_id": "2025-merdon-77310",
+      "claimant_ref": "carer:merdon-77310 (subject-readable)",
+      "source": "HMRC Real Time Information (PAYE)",
+      "week": "2025-week-28",
+      "earnings_over_limit_by": "GBP 4.20 net",
+      "award_effect": "Carer's Allowance not payable this week (cliff-edge: whole week forfeited)",
+      "duty": "notify the carer and adjust the award",
+      "duty_deadline": "2025-07-28",
+      "note": "The state holds this the week it happens. Subject-readable, so the carer can see the breach in time to correct it; clocked, so leaving it to accumulate is a logged default, not a silent debt."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+      "readable_by": [
+       "subject",
+       "authorized-auditor"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:merdon-benefits.example#log-1",
+      "alg": "ed25519",
+      "value": "RWFybmluZ3NBbGVydEpvYW5CcmVhY2hTZWFsZWROb3QwMg"
+     }
+    }
+   },
+   {
+    "actor": "Joan Fenwick, seeing her breach in time",
+    "verb": "read",
+    "narrative": "Joan checks her award page and sees it the week it happens: she has gone over, and this week's allowance is gone. It is a small, legible, correctable fact - four pounds over, one week lost - and it arrives while it is still small, when she can adjust her shifts, query the figure, or simply know where she stands. This is the whole difference the register makes to her, and it is not a small one. In the real story, the first thing Joan learns is a demand for four thousand pounds sixteen months later; here the first thing she learns is four pounds over, this week. The debt that grew in silence cannot grow in silence, because the silence is gone."
+   },
+   {
+    "actor": "Merdon Benefits Agency, recovery office",
+    "verb": "cast",
+    "narrative": "Suppose, though, that Joan did not check - that the alert went to a carer too exhausted or unwell or unaware to read it, and the department, as departments do, did not act on its side either. Sixteen months on, the recovery demand is raised, and even now the register changes what it can be. The demand must cite the date the state first knew and the date it first acted, and so it cannot present the whole four thousand as Joan's unbroken fault: it shows, on its face, that the state knew in week 28 and moved in week 94, and that every pound of the debt accrued in the gap between. A demand that must confess the state's own delay is a different instrument from one that arrives shorn of it.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-overpayment.demand",
+     "community": "did:web:merdon-benefits.example",
+     "timestamp": "2026-10-20T14:00:00Z",
+     "body": {
+      "demand_id": "2026-merdon-77310-R",
+      "claimant_ref": "carer:merdon-77310",
+      "amount": "GBP 4,180",
+      "period": "2025-week-28 to 2026-week-94 (66 weeks)",
+      "first_known": "2025-week-28 (RTI alert)",
+      "first_action": "2026-week-94",
+      "state_delay_weeks": 66,
+      "share_accrued_after_first_known": 1.0,
+      "appeal_trace": "did:web:merdon-benefits.example/appeals/2026-77310",
+      "note": "The demand carries the state's delay: known in week 28, acted in week 94, the entire debt grown in the gap. It cannot pretend the accumulation was only the carer's doing - the delay is part of whether recovery and any penalty are just, though the waiver stays the department's discretion."
+     },
+     "sig": {
+      "key_id": "did:web:merdon-benefits.example#log-1",
+      "alg": "ed25519",
+      "value": "T3ZlcnBheW1lbnREZW1hbmREZWxheVNob3duTm90UmVhbDAz"
+     }
+    }
+   },
+   {
+    "actor": "Merdon Benefits Agency, transparency office",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes the number the scandal turned on: how long, on average, the department sat between the alert that told it of a breach and the action it finally took, and how much of everything it recovered had accrued after it already knew. When the median delay is more than a year and nine pounds in ten were recovered after the first alert, the aggregate says plainly what no single demand could - that this was money the state could have stopped at the first pound and chose, in effect, to collect by the thousand. Measure the process, never the person (§8): the preventable overpayment as the department's own signed figure.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:merdon-benefits.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "carers-allowance-earnings-recovery",
+      "period": "2026",
+      "unit": "overpayment cases",
+      "cases": 12000,
+      "median_weeks_state_delay": 64,
+      "total_recovered": "GBP 38,000,000",
+      "share_accrued_after_first_rti_alert": 0.92,
+      "note": "Anonymous aggregate. Median state delay 64 weeks between the first RTI alert and action; 92% of the sum recovered accrued after the first alert - money the state could have stopped at the first pound and instead recovered by the thousand. Measure the process (§8): the preventable overpayment as the department's own number."
+     },
+     "sig": {
+      "key_id": "did:web:merdon-benefits.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlUHJldmVudGFibGVPdmVycGF5bWVudE5vdDA0"
+     }
+    }
+   },
+   {
+    "actor": "The data held, and what a duty cannot compel",
+    "verb": "offstage",
+    "narrative": "The ceilings are set by what a record can and cannot make a state do. The kernel can clock the duty to act on the data the state holds; it cannot compel the act - a department that under-resources its alerts can still let debts grow, only now the growing is a visible default rather than a silent convenience, and the choice to spend the data on prevention rather than punishment is made accountable, not made. The cliff-edge is policy: whether a pound over should forfeit a week is substantive, and the real remedy - a taper, an earnings buffer - is a change of law the kernel can make harder to defend by counting the preventable harm, and cannot itself enact (refusal 11). Subject-readability requires the carer to look and to understand a net-earnings rule that is genuinely confusing; the accessible floor (§4) helps, and the kernel guarantees the sight, not the comprehension, still less the reply. And a debt genuinely owed remains owed: the kernel stops it being grown in the dark and then weaponised, and makes the state's delay part of whether recovery and penalty are just, but it does not erase what a carer, in fact and over the limit, was overpaid. The state's own data is made a duty and a sight. Whether the state uses it to prevent or to punish is the thing the kernel makes it answer for, not the thing it can decide for it."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it clocked the state's duty to act on the earnings data it already holds, gave the carer subject-readable sight of her own breach the week it happens, and made every recovery demand show when the state first knew against when it acted - so the wrong at the centre of the Carer's Allowance scandal, a small preventable overpayment allowed to grow in silence into a large punitive one by a department that knew all along, cannot be enacted: the breach is visible while it is still small, the failure to act is a logged default, and no demand can hide the delay behind it. It is the Owed engine run in reverse - the machinery that tells you what you are owed, turned to tell you what you owe before it grows (§11). What it did not do, and by its own limits cannot: abolish the cliff-edge that makes a pound cost a week, compel the department to act on the alerts it receives, ensure the carer looks or understands, or forgive a debt genuinely incurred. It took the data that would have stopped the harm at a pound and made it the carer's to read and the state's duty to use. It could not make the state choose prevention over punishment - only make that choice, at last, a thing the state must account for on the record."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "The DWP gets real-time earnings data — it knows within weeks when a carer earns over the limit — but stays silent for years, lets the overpayment grow to thousands, then claws it back (Guardian 2024). The kernel clocks the state's duty to act on the data it holds, lets the carer see her breach in time, and makes each demand show the state's own delay. But it can't abolish the cliff-edge or compel the act.",
+  "protection": "the visible breach, the clocked duty",
+  "protection_plain": "Whether clocking the state's duty to act on the earnings data it holds, letting the carer see her breach, and making each demand show the state's delay, protects her. It forecloses harm grown in silence then punished; but can't abolish the cliff-edge, compel the act, or erase a real debt.",
+  "findings": [
+   {
+    "protection": "the breach, made visible in time",
+    "severity": "note",
+    "doc_ref": "§3.1",
+    "observation": "For an adopting agency, the real-time earnings alert the state receives is logged subject-readable, so the carer sees her own breach the week it happens - a small, correctable fact of four pounds over, one week lost - rather than a demand for four thousand sixteen months later; and the department's duty to act on the alert is clocked, so a breach left to accumulate is a logged default, not a silent debt. It is the Owed engine (§11) run in reverse: the machinery that tells a citizen what she is owed here tells her what she owes, while it is still small enough to fix. Against the specific harm of a debt grown in silence, this sight in time is the load-bearing protection."
+   },
+   {
+    "protection": "prevention held, spent only on punishment",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "The finding this case exists to make. The deepest wrong is not that the state failed to know but that it knew and saved the knowing up: it held the data that would have stopped the harm at a pound and used it only to recover the harm, magnified, by the thousand. The kernel makes every demand cite when the state first knew against when it acted, so a demand for money that accrued entirely in the gap cannot present the accumulation as only the carer's fault - the state's delay is on the record and part of the reckoning. But the kernel clocks the duty to act; it cannot compel the act. A department that under-resources its alerts can still let debts grow, now as a visible default rather than a silent convenience. It makes prevention owed and legible, and the choice to spend the data on prevention rather than punishment accountable - it cannot make the state make it."
+   },
+   {
+    "protection": "the cliff-edge is policy",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Whether a single pound over the limit should forfeit an entire week's allowance - an all-or-nothing cliff rather than a taper - is a substantive policy judgment the kernel refuses (refusal 11). The real remedy is a change of the rule: a taper, an earnings buffer, a run-in before recovery. The kernel makes the breach visible in time and the state's delay accountable, which makes the cruelty of the cliff-edge harder to defend and easier to reform; it cannot soften the rule itself. As in the exam and single-justice cases, legibility indicts a design it has no power to change - here a design that turns a few pounds of honest earning into thousands of pounds of recoverable debt."
+   },
+   {
+    "protection": "sight is not comprehension; a real debt remains owed",
+    "severity": "strain",
+    "doc_ref": "§4",
+    "observation": "Two bounds on the protection. Subject-readable access gives the carer the breach in time and requires her to look and to understand a net-earnings rule that is genuinely confusing - allowable expenses, averaging, what counts; the accessible floor (§4) helps, and the kernel guarantees the sight, not the comprehension, still less the reply. And where a carer did earn over, the allowance was not due: the kernel does not forgive a debt genuinely incurred. What it does is stop that debt being grown in the dark and then weaponised, and make the state's own delay a factor in whether recovery and any penalty are just - the difference between a debt honestly corrected in week 28 and one silently harvested to week 94, even though both are, in the arithmetic, owed."
+   },
+   {
+    "protection": "the aggregate convicts a pattern the recoverer profits from",
+    "severity": "note",
+    "doc_ref": "§1",
+    "observation": "The aggregate turns the scandal's core into the department's own signed figure - the median delay between the alert and the action, and the share of everything recovered that accrued after the state already knew - measure-the-process (§8): money the state could have stopped at the first pound and collected by the thousand, made countable and undeniable, where the Guardian and the auditors had to reconstruct it. Its limits are the case's. The adopter is the department that recovers the debt and under-resourced the prevention, with little incentive to publish its own delay; and the aggregate convicts the pattern while refunding no carer and waiving no penalty, both of which remain the department's discretion. It makes the preventable harm a number. It does not make the state prefer prevention, only answer for choosing punishment."
+   }
+  ]
+ },
+ {
   "id": "citizenship-deprivation-basis",
   "title": "The Roll Is the State's: Escalating the Loss of Citizenship Into a Sealed Room",
   "setting": "Nadia Rahman was born abroad, naturalised as a British citizen at twenty-six, and had lived in Britain for nineteen years when she flew back to visit her dying father. While she was there, a letter arrived at her home in Britain: the Home Secretary had decided that depriving her of her citizenship was 'conducive to the public good', on national-security grounds, and she was now excluded from the country she had made her home. She has never been charged with anything. She cannot see the case against her — it is national-security material, heard in a closed court where only a security-cleared 'special advocate', not Nadia and not the lawyer she chose, is permitted to read it, and where that advocate, once he has seen it, may no longer take instructions from her. Because she is abroad and now excluded, she cannot return to fight the decision that excluded her. And because she was born with a claim to another nationality, the law's one hard limit — that no one may be made stateless — does not protect her, though it would protect a British-born citizen with no such claim, deprived on identical facts.\n\nThis is British Nationality Act 1981 section 40, the closed-material procedure, and the shape of the Shamima Begum litigation, in which the courts held that a person could be deprived and excluded even where exclusion left her unable to participate effectively in her own appeal. Parliament has since legislated for deprivation without any notice at all. The Department for Citizenship, in this scenario, runs the credential on a kernel register — personhood, the very service that decides who may speak — and the question the case puts is the darkest the corpus has faced: when the state revokes the status on which every other right depends, by executive order, on grounds you may never see, what can a protocol that secures the count do for a person struck from the roll? It can make the striking accountable, noticed, and escalated. It cannot keep her on the roll, because the roll was never the kernel's to keep.",
