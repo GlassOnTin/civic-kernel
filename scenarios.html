@@ -14385,6 +14385,245 @@
   ]
  },
  {
+  "id": "us-civil-asset-forfeiture",
+  "title": "The Money Is the Defendant: Seized on Suspicion, Kept by Default",
+  "setting": "Darnell Reeves was driving across the county with eight thousand dollars in cash, on his way to buy a car from a private seller, when a highway stop turned into a seizure. He was not arrested. He was not charged. He was, by the end of the afternoon, without his money — taken on the officer's suspicion that a large sum of cash, carried by a man who could not explain it to the officer's satisfaction, was probably connected to a crime nobody named. To get it back, Darnell would have to go to court and prove a negative: that his own money was innocent. The case, if it were filed, would not even bear his name. It would be styled against the cash itself — The State v. $8,000 in United States Currency — because in civil asset forfeiture the action runs against the property, and the property has no presumption of innocence, no right to counsel, and no charge to answer, only an owner who must come forward and prove it clean.\n\nThis is civil forfeiture as practised across the United States, and its logic is a burden turned upside down: the state seizes on suspicion, charges no one, and makes the owner prove the property's innocence to recover it — while the proceeds of what is kept flow, in most jurisdictions, back to the budget of the very agency that seized it. The Institute for Justice has documented the result as policing for profit; the Supreme Court in Timbs v. Indiana held the Excessive Fines Clause a limit on it, and the practice continues at scale, most seizures small enough that the cost of a lawyer exceeds the sum, so most are never contested and simply kept. This is the second case in the corpus that is not British, and the Meridian County Sheriff's Office runs its forfeitures on a kernel register. The kernel cannot decide whether a person may be relieved of property without a charge — that is a question for the courts and the Constitution. It can ask a narrower one: when the whole system runs on never having to state a reason, what happens if you make the seizure state one?",
+  "threats": [
+   "T1",
+   "T12"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§9",
+   "§1",
+   "§6",
+   "§12",
+   "T1",
+   "T12"
+  ],
+  "precedents": [
+   {
+    "event": "Civil forfeiture: property seized without a charge, the owner bearing the burden",
+    "year": 2019,
+    "source": "Timbs v. Indiana, 586 U.S. ___ (2019)",
+    "url": "https://www.supremecourt.gov/opinions/18pdf/17-1091_5536.pdf",
+    "shows": "US civil asset forfeiture proceeds in rem against the property itself, so the owner need not be charged or convicted and must affirmatively reclaim seized property; the Supreme Court held the Eighth Amendment's Excessive Fines Clause applies to the states as a limit, while leaving the practice itself in place."
+   },
+   {
+    "event": "Policing for profit: seizures fund the agencies that make them",
+    "year": 2020,
+    "source": "Institute for Justice, 'Policing for Profit' (3rd ed.)",
+    "url": "https://ij.org/report/policing-for-profit-3/",
+    "shows": "In most jurisdictions the proceeds of forfeited property flow to the budget of the seizing agency, creating a direct financial incentive to seize; the median seizure is small - often a few hundred to a couple of thousand dollars - below the cost of hiring counsel to contest, so the great majority are never challenged and are kept by default."
+   },
+   {
+    "event": "Most owners are never charged with any crime",
+    "year": 2020,
+    "source": "Institute for Justice; state forfeiture data",
+    "url": "https://ij.org/issues/private-property/civil-forfeiture/",
+    "shows": "Analyses of state forfeiture data find that a large majority of people whose property is seized are never charged with a crime, and that a small fraction of seized value is ever returned - the seizure standing not on a proven connection to crime but on the owner's inability or unwillingness to bear the cost and burden of reclaiming it."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:meridian-sheriff.example",
+    "name": "Meridian County Sheriff's Office (civil-forfeiture register)",
+    "parent": "did:web:meridian-county.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:meridian-sheriff.example",
+    "witnesses": [
+     "did:web:civil-liberties-union.example",
+     "did:web:meridian-forfeiture-audit.example",
+     "did:web:public-defender-office.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-basis-for-your-seizure-and-the-route-to-reclaim",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 90,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:meridian-sheriff.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Darnell Reeves, and a case with no defendant",
+    "verb": "offstage",
+    "narrative": "The backdrop is a wrong built out of two legal moves. The first is the in-rem fiction: the action runs against the property, not the person, so no one need be charged and the owner has no defendant's protections - the money is the defendant, and money has no presumption of innocence. The second is the burden turned over: the state seizes on suspicion and the owner must come forward and prove the property clean. Add a third, practical fact - that the proceeds fund the agency that seizes, and that most seizures are too small to be worth a lawyer - and the property is kept not because a crime was shown but because reclaiming it costs more than it is worth. Whether a state may take property without a charge is a constitutional question the kernel refuses (refusal 11). What it can change is whether the seizure must state an articulable basis, whether the owner the fiction erases is named, whether the reclaim is clocked, and whether the profit is a number."
+   },
+   {
+    "actor": "Meridian County Sheriff's Office",
+    "verb": "cast",
+    "narrative": "Meridian opens a forfeiture register with commitments aimed at the two fictions and the one incentive: every seizure is a logged act that must state an articulable basis at the moment it is made; the owner is named as a party, whatever the caption of any later suit; the reclaim route is clocked and cited; and the disposition of every seizure - returned, or kept, and to whose budget - is published. The office keeps its power to seize under the forfeiture statute. What it gives up is the ability to seize without stating a reason, to proceed as though no person were involved, and to keep and spend what it takes without anyone counting.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:meridian-sheriff.example",
+     "timestamp": "2025-06-01T09:00:00Z",
+     "body": {
+      "decision_id": "2025-forfeiture-register",
+      "decision_class": "civil-forfeiture-commitment",
+      "authorizing_rule": "state civil-forfeiture statute; Timbs v. Indiana (excessive-fines limit); meridian-charter/v1",
+      "issuing_authority": "Meridian County Sheriff's Office",
+      "commitment": "Every seizure logs an articulable basis at the moment of seizure; the owner is named as a party despite any in-rem caption; the reclaim route is clocked and cited; the disposition of every seizure and the destination of proceeds are published in aggregate",
+      "note": "The register requires a basis the suspicionless seizure cannot supply, and names the person the in-rem fiction erases. It does not decide whether forfeiture without a charge is lawful, nor reassign the legal burden of proof in a forfeiture suit (refusal 11)."
+     },
+     "sig": {
+      "key_id": "did:web:meridian-sheriff.example#log-1",
+      "alg": "ed25519",
+      "value": "Rm9yZmVpdHVyZVJlZ2lzdGVyT3BlbmVkTWVyaWRpYW5Ob3QwMQ"
+     }
+    }
+   },
+   {
+    "actor": "The deputy, seizing on suspicion",
+    "verb": "cast",
+    "narrative": "Darnell's cash is taken, and the register makes the deputy do the one thing the practice is built to avoid: state a basis, on the record, at the moment of the seizure. What he enters is what there is - a large sum of cash, a traveller who could not explain it to the officer's satisfaction, no charge, no named crime - and written down, that basis is visibly almost nothing. The owner is named, too, so the coming fiction that the case is against the money and not against Darnell is contradicted before it begins. The seizure still happens; the kernel does not stand between the deputy and the cash. But it will not let the seizure be recorded as anything more than what it is: a taking on suspicion, from a man charged with nothing.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "coercive.act",
+     "community": "did:web:meridian-sheriff.example",
+     "timestamp": "2026-02-10T15:00:00Z",
+     "body": {
+      "act_class": "seizure",
+      "authorizing_rule": "civil-forfeiture statute (in rem); stated basis: 'large sum of cash; traveller could not explain intended purchase to officer's satisfaction'",
+      "issuing_authority": "Meridian County Sheriff (highway interdiction)",
+      "subject_ref": "owner:meridian-2231 (not charged; named as a party despite any in-rem caption)",
+      "appeal_trace": "did:web:meridian-sheriff.example/reclaim/2231 (reclaim route, clocked)"
+     },
+     "sig": {
+      "key_id": "did:web:meridian-sheriff.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29lcmNpdmVBY3RTZWl6dXJlRGFybmVsbENhc2hOb3QwMg"
+     }
+    }
+   },
+   {
+    "actor": "A civil-liberties monitor, reading the seizure",
+    "verb": "read",
+    "narrative": "A monitor reads the entry and sees, plainly, what the practice usually keeps out of sight: a named man, uncharged, relieved of eight thousand dollars, on a basis that when written down amounts to the fact that he had cash and could not satisfy an officer. The in-rem caption cannot hide him; the suspicion cannot dress itself as evidence, because the record holds exactly what the deputy could articulate and no more. This is the 'cite your rule' discipline turned around to face the state at the moment it takes - and the discovery, made fifty scenarios in and now against a seizure, is the same one: when a power that runs on not stating a reason is made to state one, the reason is very often nothing, and the record says so."
+   },
+   {
+    "actor": "Meridian County Sheriff's Office, disposition",
+    "verb": "cast",
+    "narrative": "Ninety days pass, and Darnell does not file. To reclaim eight thousand dollars he would need a lawyer whose fee would approach or exceed it, time off work, and the confidence to litigate against the county - and like most people whose property is seized, he lets it go. The register records the disposition honestly, which the practice never does: the property is kept not because its connection to a crime was proven, but because no claim was filed - and the proceeds go to the sheriff's own budget. Uncontested is not the same as guilty; to-whose-budget is not a detail. The kernel logs both of the facts the forfeiture usually swallows.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:meridian-sheriff.example",
+     "timestamp": "2026-05-20T11:00:00Z",
+     "body": {
+      "in_response_to": "coercive.act:seizure:owner:meridian-2231",
+      "disposition": "property retained - no claim filed within the 90-day window",
+      "basis_for_retention": "default, not adjudication: retained because uncontested, not because a connection to crime was proven",
+      "economics": "USD 8,000 seized; cost to contest (counsel, time) typically approaches or exceeds a small seizure's value",
+      "proceeds_to": "Meridian County Sheriff's Office budget (equitable-sharing)",
+      "note": "The attrition and the profit made an entry: kept by default rather than by proof, and spent by the office that seized it. The kernel logs the two facts forfeiture hides - uncontested-not-proven, and to-whose-budget."
+     },
+     "sig": {
+      "key_id": "did:web:meridian-sheriff.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VLZXB0QnlEZWZhdWx0TWVyaWRpYW5Ob3QwMw"
+     }
+    }
+   },
+   {
+    "actor": "Meridian County Sheriff's Office, audit",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes what the practice is, in aggregate, as the office's own figures: how much was seized, from how many people never charged, how much was contested, how little was returned, and how much flowed to the office's own budget. When the median seizure is smaller than the lawyer needed to fight it, four in five owners are never charged, and millions go to the agency that did the seizing, the numbers describe policing for profit more precisely than any advocacy could, because they are the seizer's own. Measure the process, never the person (§8): what the office takes from the uncharged, keeps by default, and spends on itself, as a signed figure.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:meridian-sheriff.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "civil-asset-forfeiture",
+      "period": "2026",
+      "unit": "seizures",
+      "seizures": 2400,
+      "median_value_usd": 1300,
+      "owners_never_charged_share": 0.82,
+      "uncontested_share": 0.78,
+      "value_returned_share": 0.11,
+      "proceeds_to_seizing_agency_usd": 5200000,
+      "note": "Anonymous aggregate. Median seizure USD 1,300 - below the cost of contesting; 82% of owners never charged with a crime; 78% uncontested; 11% of value returned; USD 5.2m to the seizing agency's own budget. Measure the process (§8): policing-for-profit as the agency's own signed number."
+     },
+     "sig": {
+      "key_id": "did:web:meridian-sheriff.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlUG9saWNpbmdGb3JQcm9maXRNZXJpZGlhbjA0"
+     }
+    }
+   },
+   {
+    "actor": "The burden, and where the record cannot follow it",
+    "verb": "offstage",
+    "narrative": "The ceilings mark exactly how far a record reaches into a law. The kernel moves the demand for a basis to the moment of the taking, where a suspicionless seizure cannot supply one - but it cannot reassign the legal burden of proof inside a forfeiture suit: a seizure with a stated basis still leaves Darnell, if he sues, to prove his own money innocent, because that reversal is substantive law, for the courts and Timbs, not for the record (refusal 11). The profit incentive it makes a number and does not remove: whether an agency should fund itself from what it seizes is a policy question the kernel refuses, converting the motive from hidden to accountable and leaving it in place. The attrition it cannot touch at all: a reclaim route clocked and cited is still one a man cannot afford to walk for eight thousand dollars, and the kernel lowers the friction of the record, not the price of a lawyer. The adopter is the accused - the office that profits from forfeiture is the one asked to publish what it takes. And, as with the DR Congo case, the power itself is written into a country's law: the kernel makes the seizure cite its basis, the owner visible, the profit countable, and cannot reach the rule that a person may be parted from his property without a charge and made to buy it back. That is for the courts and the legislature - which a truthful record can inform, and cannot replace."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it made every seizure state an articulable basis at the moment of the taking, named the owner the in-rem fiction erases, clocked the reclaim, and published the honest disposition and the destination of the proceeds - so the devices civil forfeiture runs on cannot operate in the dark: the suspicionless seizure cannot be logged as more than suspicion, the case cannot pretend to have no human defendant, the retention cannot pass as proof when it is default, and the profit motive is on the record as the agency's own number. What it did not do, and by its own boundary cannot: reassign the burden of proof the law places on the owner, abolish the forfeiture power or the incentive to use it, or lower the cost that keeps a small seizure uncontested. It forced the state, at the point of the taking, to say the reason it is built never to have to say - and left the deeper wrong, that the saying of almost nothing is enough, to the courts and the constitution that permit it. The burden survives in the courtroom. At the record, for once, the state has to show its hand, and the hand, written down, is a man's own money and an officer's hunch."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "US police seize cash from people they never charge; the owner must prove the property innocent to reclaim it — most seizures too small to contest, kept by default, funding the agency (civil forfeiture; Timbs). The kernel makes every seizure cite an articulable basis and name the owner the in-rem fiction erases, and makes the profit a number. But it can't reassign the burden of proof or remove the profit incentive.",
+  "protection": "the seizure made to cite its basis",
+  "protection_plain": "Whether making every seizure cite an articulable basis, name the owner the in-rem fiction erases, and publish where proceeds go protects the owner. It forecloses the suspicionless seizure at the record; but can't reassign the burden of proof, remove the profit incentive, or lower the cost.",
+  "findings": [
+   {
+    "protection": "the seizure made to cite its basis, the owner named",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "For an adopting agency, every seizure is a logged act that must state an articulable basis at the moment it is made, and names the owner as a party whatever the caption of any later suit - so the two devices civil forfeiture runs on cannot operate unseen. A seizure with no articulable basis cannot be entered; and the in-rem fiction that no person is accused is contradicted by a record that names the person the property was taken from. It is the corpus's cite-your-rule discipline turned to face the state at the moment it takes, and the recurring discovery holds against a seizure too: made to state the reason the practice is built never to state, the reason written down is often a sum of cash and an officer's hunch, and the record preserves exactly that and no more."
+   },
+   {
+    "protection": "the burden un-flips at the record, not in court",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The finding this case exists to make. Civil forfeiture is a burden reversed: the property is treated as guilty until the owner proves it innocent, and the owner is never charged. The kernel cannot reassign the legal burden of proof inside a forfeiture suit - that reversal is substantive law, for the courts and Timbs v. Indiana, not for a record (refusal 11). What it can do is move the demand for a basis to the point and moment of the taking: the seizer must state an articulable basis to log the seizure at all, so a suspicionless seizure cannot be entered even though a suspicionless forfeiture can still be pursued in court. The burden-flip survives where it lives, in the courtroom, and is foreclosed where the kernel reaches, at the record - a real narrowing that is not, and cannot be, the abolition of the reversal itself."
+   },
+   {
+    "protection": "the profit incentive, made a number but not removed",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "In most jurisdictions the proceeds of what is forfeited fund the budget of the agency that seized it, a direct incentive to seize. The kernel makes that visible - the disposition of every seizure, returned or kept and to whose budget, and the aggregate that turns policing-for-profit into the office's own signed figure: what it takes from the uncharged, keeps by default, and spends on itself. But making the incentive legible does not remove it. Whether an agency should be funded by what it seizes is a policy question the kernel refuses; it converts the motive from a hidden fact into an accountable one and leaves the motive in place, for the legislature to keep or to end."
+   },
+   {
+    "protection": "kept by default, and the attrition the record can't lower",
+    "severity": "strain",
+    "doc_ref": "§9",
+    "observation": "The register logs the honest reason property is kept - not that a connection to crime was proven, but that no claim was filed - and clocks a reclaim route where before there was silence. But the reason most seizures go uncontested is economic: the median seizure is worth less than the counsel required to reclaim it, and against the county a small claim is rarely worth bringing. The kernel lowers the friction of the record and not the price of a lawyer (§9's constitutional speed here meeting the SEND and Single-Justice attrition once more): a cited, clocked reclaim route that a man still cannot afford to walk for eight thousand dollars is a gain in legibility and, for a small enough sum, none in outcome. Default retention is now recorded as such; it is not thereby prevented."
+   },
+   {
+    "protection": "the adopter is the accused, and the power is the law's",
+    "severity": "note",
+    "doc_ref": "§6",
+    "observation": "Two limits close the case. The body that must run the register is the agency that profits from forfeiture, the least likely of any to publish what it takes and keeps; an oversight mandate could impose it, but unbidden it depends on the good faith of exactly the office whose incentive it exposes. And, as with the DR Congo detention case, this is a power embedded in a country's own law: the kernel makes the seizure cite its basis, the owner visible, and the profit countable, and it cannot reach the underlying rule that a person may be parted from his property without a charge and made to buy it back. That belongs to the courts and the legislature - which a truthful, complete, un-suppressible record can inform, and cannot replace. The kernel supplies the evidence for the argument; it does not settle it."
+   }
+  ]
+ },
+ {
   "id": "voter-id",
   "title": "No Passport, Still a Vote: The Gate Moves From the Booth to the Door",
   "setting": "Vera Skelton is seventy-nine and has not owned a valid document with her photograph on it since her passport lapsed in 2014. She never drove; the bus pass in her purse has her name but no picture the law will take. In the next county over, at last spring's elections, that made her exactly the person turned away at the polling station — one of the roughly fourteen thousand the Electoral Commission counted, and the far larger number nobody could count, because the law forbade the staff from writing down who they refused. Her grandson Reuben, nineteen and between jobs, is the other kind: young, no driving licence, never voted before, precisely the profile the same research found least likely to hold any accepted ID. In the county, neither of them votes. In Marsh Brydon, which runs its district elections on the Civic Kernel, both of them do — and the story is what that costs and what it does not.\n\nThe reason is structural, not generous. Marsh Brydon's ballot has no identity check at the point of casting to fail: a voter proves eligibility with a ring signature over the enrolled roster — 'some member of this list, not already voted' — not by producing a card. The gate voter ID installs at the booth simply is not there, and cannot be added to the cast without tearing up SVC-1. But the identity requirement has not vanished. It has moved once, upstream, to a single enrolment ceremony where Vera had to appear in person before a clerk and two neighbours drawn by lottery — and that door, unlike the booth, is a place a determined council could still put a lock. In June, a faction on that council tries to. This scenario is about a franchise the kernel protects at the booth and cannot simply guarantee at the door, and about what its refusal to decide who belongs is worth when someone means to narrow the roll.",

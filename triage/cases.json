@@ -454,8 +454,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "us-civil-asset-forfeiture"
     },
     {
       "id": "online-safety-content-takedown",
