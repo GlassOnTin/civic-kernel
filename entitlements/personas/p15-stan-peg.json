@@ -20,6 +20,7 @@
     "you_get_ca": false,
     "partner_gets_ca": false,
     "scotland": false,
+    "wales": false,
     "aa_excluded": false,
     "aa_day": false,
     "aa_night": false,

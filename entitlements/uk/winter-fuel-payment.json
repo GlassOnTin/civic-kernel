@@ -52,8 +52,9 @@
     {
       "id": "partner_income_over_35k",
       "label": "Is your partner's own taxable income over £35,000 a year?",
+      "help": "Only asked because your partner qualifies for a share of the payment — recovery applies to each person's own share, never to yours for theirs.",
       "type": "bool",
-      "when": { "get": "has_partner" },
+      "when": { "and": [ { "get": "has_partner" }, { "born_on_or_before": { "dob": { "get": "partner_dob" }, "date": "1960-06-27" } } ] },
       "rule": "gov.uk Winter Fuel Payment: recovery applies per person, to each person's own share",
       "uri": "https://www.gov.uk/winter-fuel-payment"
     }
@@ -109,7 +110,7 @@
   ],
   "verdicts": [
     {
-      "when": { "and": [ { "val": "wfp_any_80" }, { "not": { "or": [ { "get": "income_over_35k" }, { "and": [ { "get": "has_partner" }, { "get": "partner_income_over_35k" } ] } ] } } ] },
+      "when": { "and": [ { "val": "wfp_any_80" }, { "not": { "or": [ { "get": "income_over_35k" }, { "and": [ { "val": "wfp_partner_qualifies" }, { "get": "partner_income_over_35k" } ] } ] } } ] },
       "verdict": "appears-eligible",
       "because": "£300 for your household this winter (someone was born before 28 September 1946), paid automatically in November or December — no claim needed for most people, and nothing is recovered at your incomes.",
       "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment",
@@ -123,7 +124,7 @@
       "uri": "https://www.gov.uk/winter-fuel-payment"
     },
     {
-      "when": { "not": { "or": [ { "get": "income_over_35k" }, { "and": [ { "get": "has_partner" }, { "get": "partner_income_over_35k" } ] } ] } },
+      "when": { "not": { "or": [ { "get": "income_over_35k" }, { "and": [ { "val": "wfp_partner_qualifies" }, { "get": "partner_income_over_35k" } ] } ] } },
       "verdict": "appears-eligible",
       "because": "£200 for your household this winter, paid automatically in November or December — no claim needed for most people, and nothing is recovered at your incomes.",
       "rule": "S.I. 2025/969; gov.uk Winter Fuel Payment",

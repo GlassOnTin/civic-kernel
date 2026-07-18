@@ -16,6 +16,7 @@
     "carer_paid_for_you": false,
     "you_get_ca": false,
     "scotland": false,
+    "wales": false,
     "aa_excluded": false,
     "aa_day": true,
     "aa_night": false,

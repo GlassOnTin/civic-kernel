@@ -27,6 +27,13 @@
       "uri": "https://www.mygov.scot/council-tax-reduction"
     },
     {
+      "id": "wales",
+      "label": "Do you live in Wales?",
+      "type": "bool",
+      "rule": "Wales runs its own national Council Tax Reduction scheme — a close cousin of these England rules, not verified here",
+      "uri": "https://www.gov.wales/council-tax-discounts-disregards-exemptions-and-reductions"
+    },
+    {
       "id": "has_partner",
       "label": "Do you live with a partner (married, civil partner, or as a couple)?",
       "type": "bool",
@@ -221,6 +228,13 @@
       "uri": "https://www.mygov.scot/council-tax-reduction"
     },
     {
+      "when": { "get": "wales" },
+      "verdict": "signpost",
+      "because": "Wales runs its own national Council Tax Reduction scheme, claimed through your council — a close cousin of these England rules, but not the ones verified line by line here. The help is real; apply through your council.",
+      "rule": "Council Tax Reduction Schemes and Prescribed Requirements (Wales) Regulations 2013 (S.I. 2013/3029 (W. 301))",
+      "uri": "https://www.gov.wales/council-tax-discounts-disregards-exemptions-and-reductions"
+    },
+    {
       "when": { "not": { "spa_reached": { "dob": { "get": "dob" } } } },
       "verdict": "signpost",
       "because": "Under State Pension age, Council Tax Reduction is your council's own working-age scheme — genuinely local rules this page cannot compute. Apply through your council anyway; the help is real.",
@@ -303,6 +317,7 @@
     { "what": "The taper: class B deducts 2 6/7 per cent of the weekly excess against the daily liability — exactly 20 per cent in weekly terms", "where": "SI 2012/2885 Sch 1 para 10 (legislation.gov.uk revised text)", "date": "2026-07-12" },
     { "what": "Tariff income £1 per £500 (or part) above £10,000, up to the £16,000 ceiling (verbatim)", "where": "SI 2012/2885 Sch 1 para 37 (legislation.gov.uk revised text) — £16,000 limit cross-checked against Age UK", "date": "2026-07-12" },
     { "what": "Applicable amounts £238.00 / £363.25; severe disability premium £86.05 / £172.10; carer premium £48.15 (April 2026, uprated by S.I. 2026/27)", "where": "SI 2012/2885 Sch 2 (legislation.gov.uk revised text)", "date": "2026-07-12" },
-    { "what": "Pensioner definition and the working-age/mixed-age boundary", "where": "SI 2012/2885 reg 3", "date": "2026-07-12" }
+    { "what": "Pensioner definition and the working-age/mixed-age boundary", "where": "SI 2012/2885 reg 3", "date": "2026-07-12" },
+    { "what": "Wales runs its own scheme under the Council Tax Reduction Schemes and Prescribed Requirements (Wales) Regulations 2013 (S.I. 2013/3029 (W. 301)), in force as revised — gated to a signpost here, not verified line by line", "where": "legislation.gov.uk (wsi/2013/3029); gov.wales council tax pages", "date": "2026-07-19" }
   ]
 }
