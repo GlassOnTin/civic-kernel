@@ -469,6 +469,45 @@
       "remedy_caveat": false,
       "status": "out-of-scope",
       "scenario": null
+    },
+    {
+      "id": "family-contact-order-unenforced",
+      "harm": "A court orders contact between a child and a parent; the order is breached serially; each enforcement application is heard alone, months later, and almost none ends in any sanction. No record aggregates the breaches, so the passage of time quietly becomes the ruling.",
+      "lead": "Fathers4Justice campaign territory (user-flagged); Family Justice Review; HMCTS enforcement statistics",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["pattern_of_lawful_acts", "inaction_no_artifact"],
+      "reach": 3,
+      "leverage": 2,
+      "remedy_caveat": true,
+      "status": "candidate",
+      "scenario": null
+    },
+    {
+      "id": "family-court-secrecy",
+      "harm": "Family courts decide childhoods in closed hearings: judgments largely unpublished, parties silenced by contempt rules, no way for anyone to check a pattern across cases — while the children's privacy that justifies the sealing is real, and cuts against the obvious fix.",
+      "lead": "Fathers4Justice campaign territory (user-flagged); President of the Family Division's Transparency Review (2021); reporting pilots from 2023",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["access_gated", "pattern_of_lawful_acts"],
+      "reach": 3,
+      "leverage": 2,
+      "remedy_caveat": true,
+      "status": "candidate",
+      "scenario": null
+    },
+    {
+      "id": "family-custody-bias",
+      "harm": "The campaign's central claim: that family-court contact and custody outcomes are systematically unjust to fathers, and the discretion itself is the wrong.",
+      "lead": "Fathers4Justice campaign territory (user-flagged)",
+      "scope": "offstage",
+      "offstage_reason": "A substantive judgment about a child's best interests and how judicial discretion should fall — who is right. The kernel refuses to decide substance (refusal 11), exactly as it refused the child-surname Article 8 case. What it can reach is the process around the judgment: the unpublished pattern (family-court-secrecy) and the unenforced order (family-contact-order-unenforced) — the two onstage halves of this campaign.",
+      "signature": [],
+      "reach": 1,
+      "leverage": 0,
+      "remedy_caveat": false,
+      "status": "out-of-scope",
+      "scenario": null
     }
   ]
 }
