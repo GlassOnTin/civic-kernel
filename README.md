@@ -115,32 +115,28 @@ it — in about a minute: [`proto/test.sh`](proto/).
 
 ## Next
 
-The corpus has done its inward work — 52 cases, six shapes, one settled line
-([what the fifty add up to](https://glassontin.github.io/civic-kernel/map.html), and
-[the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html) they imply
-for UK law) — so
-the road turns outward: carry it to the people who can act on it, and put the working
-tools in real hands. Five threads, each ending in something a named reader can use:
-a **committee brief** ([drafted](https://glassontin.github.io/civic-kernel/committee-brief.html):
-one printable page, four committees — records, welfare, policing, public money — each
-built from the cases it owns); an **advocate's guide**
-([grafted onto the findings page](https://glassontin.github.io/civic-kernel/findings.html#advocates):
-the scenario as a worked remedy, the citation spine, the verdicts, and the door for the
-next case); an **adviser's note** for
-[Owed](https://glassontin.github.io/civic-kernel/owed.html)
-([drafted](https://glassontin.github.io/civic-kernel/adviser-note.html): trust-by-inspection, for
-the people who help others claim); the **club hand-over pack**
-([pre-flighted](docs/clubhouse-demo.md): the suite runs green, both riggings reproduce
-their quoted failure lines, and the run sheet now ends in a single hand-over checklist —
-what remains is a real club and a real season); and a **break-me door**
-([open](https://glassontin.github.io/civic-kernel/break.html): the claim, the twelve
-caught riggings, the rules of the game, and the offer — a winning attack becomes a
-named defence). Outreach drafts are prepared in the open —
-[a note to the Good Law Project](docs/glp-note.md) returning four encoded cases to the
-people who fought them, [a note to mySociety](docs/mysociety-note.md) on the two
-findings their tools are halfway through, and a
-[Metagov seminar abstract](docs/metagov-abstract.md) with the browser verifier as the
-live demonstration — and sending them is a person's decision, not a repo's.
+The outward build is finished. The corpus did its inward work — 52 cases, six shapes,
+one settled line ([the map](https://glassontin.github.io/civic-kernel/map.html)) and
+[the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html) it implies
+for UK law — and every entrance that line asked for now exists, in the open: the
+[one-page committee brief](https://glassontin.github.io/civic-kernel/committee-brief.html)
+(four committees, each built from the cases it owns), the
+[advocate's section](https://glassontin.github.io/civic-kernel/findings.html#advocates),
+the [adviser's note](https://glassontin.github.io/civic-kernel/adviser-note.html) for
+[Owed](https://glassontin.github.io/civic-kernel/owed.html), the notes to the
+[Good Law Project](docs/glp-note.md) and [mySociety](docs/mysociety-note.md), the
+[Metagov abstract](docs/metagov-abstract.md), the
+[club hand-over](docs/clubhouse-demo.md) (pre-flighted: suite green, both riggings
+reproducing their quoted failure lines, one checklist), and the
+[break-me door](https://glassontin.github.io/civic-kernel/break.html).
+
+What remains is not building, and the repo is honest about whose move it is. A
+committee gets picked and a brief gets printed; a club gets picked and a season gets
+run; four letters get a signature and a send — a person's decisions, not a repo's.
+Meanwhile two doors stand open to the world and set whatever is built next: a proposed
+case that survives [the triage](docs/triage.md) reopens the corpus, and a winning
+attack on [the game](https://glassontin.github.io/civic-kernel/break.html) becomes
+tamper thirteen and its named defence.
 
 <details>
 <summary>What exists now, and the road behind the threads</summary>
