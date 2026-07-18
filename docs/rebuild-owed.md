@@ -81,6 +81,25 @@ Credit thresholds. Disagreement means one of the two is wrong, and finding out w
 is exactly the kind of contribution the
 [open door](https://github.com/GlassOnTin/civic-kernel/issues) is for.
 
+## Has this been tried?
+
+Yes, once, honestly. A strong frontier model (OpenAI's Codex, `gpt-5.6-sol`, highest
+reasoning setting) was given the rule files and the prompt above — and nothing else: no
+access to this project's own page or code. In one pass it produced a single, self-contained,
+genuinely offline page (no network request of any kind; it stores nothing). Driven through
+all of this repository's test personas — twenty-two people, eight entitlements each — its
+displayed verdicts and weekly amounts **agreed with the independent judge on every one of
+the 176 checks**, matching our own page exactly.
+
+It also did what the last line of the prompt asks, and reported back four genuine
+ambiguities it found in the rules themselves (Savings-Credit-only cases, a missing Wales
+route in Council Tax Reduction, a mixed-age condition, Winter Fuel recovery with a partner)
+— which is the recipe working as intended: a fresh reader auditing the rules on the way past.
+
+Not proven: this was one model and one run, and the accessibility wiring was checked
+structurally rather than with a real screen reader. But the core claim held under test —
+a stranger's rebuild, from the rules alone, matched the judge.
+
 *Part of the [Civic Kernel](https://github.com/GlassOnTin/civic-kernel) — the same
 discipline as the rest of it: the artifact is checkable, the recipe is public, and
 nobody has to trust the shed.*
