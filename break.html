@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="An open invitation to attack the Civic Kernel prototype: the claim under attack, the twelve riggings already caught by name, the rules of the game, and the standing offer — a winning attack becomes a named defence.">
+<title>Break it — Civic Kernel</title>
+<style>
+  /* The corpus register, because this page is a reading page with commands in it.
+     One addition to the vocabulary: the pre block, and the tamper list's arrow table. */
+  :root {
+    color-scheme: light;
+    --paper: #f6f7f9; --card: #ffffff; --ink: #1c2333; --muted: #5a6376;
+    --accent: #2e5eaa; --line: #d8dce4; --line-strong: #b9c0cd;
+    --ok: #00703c; --warn: #9a6a1e; --bad: #a33d2e;
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', 'URW Palladio L', 'P052', Georgia, serif;
+    --mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { margin: 0; font-family: var(--serif); color: var(--ink); background: var(--paper);
+    line-height: 1.6; font-size: 1.0625rem; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  .home { display: block; margin: 0 0 1.8rem; padding: .2rem 0 .9rem;
+    border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: .6875rem;
+    letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
+  .home b { color: var(--ink); font-weight: 700; letter-spacing: .2em; }
+  .home:hover b { text-decoration: underline; }
+
+  header.hero { text-align: center; margin: 0 0 2.2rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.6rem); line-height: 1.12; margin: .3rem 0 .7rem; text-wrap: balance; }
+  .lede { font-size: 1.25rem; color: var(--muted); max-width: 41rem; margin: 0 auto; text-wrap: pretty; }
+  .intro { max-width: 44rem; margin: 1.6rem auto 0; }
+  .intro p { margin: 0 0 1rem; }
+
+  h2 { font-family: var(--mono); font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin: 3rem 0 .5rem; border-top: 3px double var(--line-strong); padding-top: 1.5rem; }
+  section > p { max-width: 44rem; margin: 0 0 1rem; }
+  section { margin-bottom: .4rem; }
+  strong.k { font-weight: 700; }
+
+  pre { font-family: var(--mono); font-size: .84rem; line-height: 1.55; background: var(--card);
+    border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0;
+    padding: .8rem 1rem; max-width: 44rem; overflow-x: auto; }
+  code { font-family: var(--mono); font-size: .86em; }
+
+  ul.tampers { list-style: none; margin: .3rem 0 1rem; padding: 0; display: flex;
+    flex-direction: column; gap: .4rem; max-width: 45rem; }
+  ul.tampers li { font-size: .95rem; line-height: 1.5; padding-left: 1.1rem; position: relative; }
+  ul.tampers li::before { content: "×"; position: absolute; left: 0; color: var(--bad);
+    font-family: var(--mono); font-weight: 700; }
+  ul.tampers .m { font-family: var(--mono); font-size: .84em; font-weight: 700; color: var(--ink); }
+  ul.tampers .d { color: var(--muted); }
+  ul.tampers .d b { color: var(--ok); font-weight: 700; }
+
+  .close { margin-top: 3rem; border-top: 3px double var(--line-strong); padding-top: 1.6rem;
+    font-size: 1.15rem; max-width: 44rem; }
+  .close b { color: var(--ink); }
+  nav.doors { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 1rem 1.6rem;
+    font-family: var(--mono); font-size: .82rem; }
+  footer { margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 1rem;
+    color: var(--muted); font-family: var(--mono); font-size: .78rem; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="home" href="index.html"><b>Civic&nbsp;Kernel</b> a thin protocol for public decisions</a>
+
+<header class="hero">
+  <h1>Break it</h1>
+  <p class="lede">A protocol that claims nobody can rig it undetected owes you the chance to try. Here is the claim, the twelve ways we already failed to break it, the rules, and the standing offer: a winning attack becomes a named defence.</p>
+</header>
+
+<div class="intro">
+  <p>The prototype runs a sixty-member society's election and publishes everything: the roster, the sealed ballots, the log, the witnessed fingerprints, the count. The claim under attack is exactly this: <strong class="k">from the published record alone, an independent verifier — sharing no code with the election software — confirms the result; and no insider, up to the committee and both witnesses colluding, can change history, ballots, or count without that verifier objecting.</strong></p>
+  <p>Claims like that are worth nothing until someone hostile has spent an evening on them. This page is the invitation to be that someone.</p>
+</div>
+
+<section>
+<h2>The twelve we already caught</h2>
+<p>The tamper suite is an escalation, and each rung is caught by the specific defence the design names for it — proven in CI by switching that defence off and watching the tamper walk through. One insider holding the log key:</p>
+<ul class="tampers">
+  <li><span class="m">log</span> — edit a history entry <span class="d">→ caught by <b>Merkle consistency</b></span></li>
+  <li><span class="m">rehead</span> — edit it and regenerate the heads <span class="d">→ caught by <b>the witness co-signatures they cannot forge</b></span></li>
+  <li><span class="m">unwitness</span> — rewrite the manifest to say there were never witnesses <span class="d">→ caught by <b>the manifest's own logged digest</b></span></li>
+  <li><span class="m">roster</span> — rewrite the eligibility rule after the vote <span class="d">→ caught by <b>the witnessed roster digest</b></span></li>
+</ul>
+<p>Attacks on the vote, most assuming the committee <em>and</em> both witnesses collude on a rewritten history:</p>
+<ul class="tampers">
+  <li><span class="m">box</span> — swap a cast ballot for a forged one <span class="d">→ caught by <b>the ring signature</b> (no member signed it)</span></li>
+  <li><span class="m">stuff</span> — mint an extra ballot under full collusion <span class="d">→ caught by <b>ring membership</b> (nothing to prove)</span></li>
+  <li><span class="m">doublevote</span> — negate your own linking tag to vote twice <span class="d">→ caught by <b>the nullifier's subgroup check</b></span></li>
+  <li><span class="m">smuggle</span> — slip a malformed ciphertext past the proofs <span class="d">→ caught by <b>the ciphertext subgroup check</b></span></li>
+  <li><span class="m">overvote</span> — encrypt two votes in one envelope <span class="d">→ caught by <b>the 0-or-1 validity proof</b></span></li>
+  <li><span class="m">share</span> — announce a rigged decryption <span class="d">→ caught by <b>the Chaum–Pedersen share proof</b></span></li>
+  <li><span class="m">count</span> — announce rigged totals <span class="d">→ caught by <b>the recount refuting itself</b></span></li>
+</ul>
+<p>And the twelfth, the subtle one: <span class="m" style="font-family:var(--mono);font-weight:700">drop</span> forges <em>nothing</em>. The same full collusion erases one counted ballot and re-signs the shortened history end to end — deniability, not forgery. Every internal check passes, because everything remaining is genuine. The only thing that objects is the one artifact outside the colluders' reach: <strong class="k">the closing fingerprint anchored with an outside party</strong> — in the demo, a newspaper's three printed lines.</p>
+</section>
+
+<section>
+<h2>How to play</h2>
+<p>Ten minutes to a working attack bench:</p>
+<pre>git clone https://github.com/GlassOnTin/civic-kernel &amp;&amp; cd civic-kernel
+pip install -r requirements.txt
+./proto/test.sh                # ends ALL GREEN: 12/12 tampers caught
+
+# watch one get caught:
+python3 proto/clubvote.py tamper proto/out /tmp/rigged drop
+python3 proto/verify.py /tmp/rigged        # NOT VERIFIED, and it says why</pre>
+<p>The game is <strong class="k">tamper thirteen</strong>: produce a transcript that lies — about history, about a ballot, or about the count — that <code>proto/verify.py</code> <em>and</em> the <a href="verifier.html">browser verifier</a> both call VERIFIED. Start from <code>proto/out</code>, or from your own <code>clubvote.py run</code>. Editing anything is fair; the transcript on disk is the only truth the verifiers get.</p>
+<p>Two smaller wins count too. <strong class="k">A parity split</strong>: any transcript the Python judge and the browser judge disagree about is a bug with your name on it. <strong class="k">A privacy break</strong>: from a <code>--real</code> transcript's published artifacts alone, show which member cast which ballot — beyond the residues the design already declares.</p>
+</section>
+
+<section>
+<h2>The rules, stated before you find them</h2>
+<p><strong class="k">You hold every key the committee holds.</strong> The tampers all do; insider capture is the threat model, not an edge case. Collusion up to the committee plus both witnesses is in bounds — the suite's own strongest tamper assumes it. Beyond that the design declares its honest floor rather than defending it: steal the outside anchor's key <em>and</em> a quorum of trustees too, and the machine falls — that boundary is written in <a href="proto/README.md">the proto's own documentation</a>, so crossing it discovers nothing.</p>
+<p><strong class="k">The demo's secrets are public on purpose</strong> — every key derives from a published seed, so the transcript is byte-reproducible and anyone can play every role. An attack that works only because it read those published secrets must also work against a <code>--real</code> transcript, where every key comes from the OS. And the declared residues are declared, not discoverable: whoever collects ballot files sees who handed one in; the anonymity set is the size of the village; the reproducible demo has no privacy at all, by design.</p>
+<p><strong class="k">Out of scope</strong>, because it attacks the laptop rather than the design: denial of service, malware on a voter's phone, social engineering, and bugs in your own fork. <strong class="k">In scope</strong>: the mathematics, the encodings, the two schemas, both verifiers' parsers, and every gap between what the documentation claims and what the code does.</p>
+</section>
+
+<section>
+<h2>The offer</h2>
+<p>A winning tamper becomes <strong class="k">mode thirteen in the suite</strong> — reproduced, then caught forever by a defence we have to build and name, with your name on the finding if you want it there. That is not a bug bounty; there is no money anywhere in this project. It is the older currency: the suite's twelve names are twelve people's evenings, and the design is exactly as strong as the list is long.</p>
+<p>The house rule that makes this safe to offer: <strong class="k">weakness is permitted; hiding it is not.</strong> Every deployment publishes a manifest of what it upholds and what it leaves out. If your attack works, it goes in the manifest and the suite — not in a drawer.</p>
+<p>Bring what you have — a script, a transcript, half an idea — to the open door: <a href="https://github.com/GlassOnTin/civic-kernel/issues">github.com/GlassOnTin/civic-kernel/issues</a>.</p>
+</section>
+
+<div class="close">
+<p><b>Why ask for this.</b> Fifty-two case studies in this repo show institutions grading their own homework and failing quietly. A protocol that wants to be trusted with anyone's vote has to invert that: publish the attack surface, keep the adversarial audit standing, and treat every falsified claim as a gift. The twelve behind us were ours. The thirteenth is yours if you can find it.</p>
+</div>
+
+<nav class="doors">
+  <a href="verifier.html">The thing itself →</a>
+  <a href="proto/README.md">The design, residues included →</a>
+  <a href="architecture.html">The full argument →</a>
+  <a href="scenarios.html">The fifty-two →</a>
+</nav>
+
+<footer>
+Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype — the tamper suite runs on every commit; 12/12 caught as of July 2026. The demo election is sixty imaginary members of an imaginary society; the verifier shares no code with the software it judges.
+</footer>
+</div>
+</body>
+</html>
