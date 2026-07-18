@@ -108,8 +108,9 @@ The corpus has done its inward work — 52 cases, six shapes, one settled line
 ([what the fifty add up to](https://glassontin.github.io/civic-kernel/map.html)) — so
 the road turns outward: carry it to the people who can act on it, and put the working
 tools in real hands. Five threads, each ending in something a named reader can use:
-a **committee brief** (one printable page per committee — records, welfare, policing —
-built from the cases each one owns); an **advocate's guide** (how to read a scenario as
+a **committee brief** ([drafted](https://glassontin.github.io/civic-kernel/committee-brief.html):
+one printable page, four committees — records, welfare, policing, public money — each
+built from the cases it owns); an **advocate's guide** (how to read a scenario as
 a worked remedy, and how to propose the next); an **adviser's note** for
 [Owed](https://glassontin.github.io/civic-kernel/owed.html) (trust-by-inspection, for
 the people who help others claim); the **club hand-over pack** (everything below is

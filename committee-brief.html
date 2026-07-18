@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Committee briefing — Civic Kernel</title>
+<meta name="description" content="A one-page briefing for a select committee: fifty-two documented institutional failures, machine-checked against one thin protocol, and the single fix that repeats — a record that cannot be quietly absent, altered, or ignored.">
+<style>
+  /* The gov.uk discipline, as owed.html adopted it: white page, near-black large type,
+     big radios, yellow focus, square corners, colour spent only on meaning. This page
+     adds one duty owed.html doesn't have: it must print onto a single A4 side. */
+  :root {
+    color-scheme: light;
+    --bg: #ffffff; --fg: #0b0c0c; --muted: #505a5f; --line: #b1b4b6;
+    --ok: #00703c; --bad: #d4351c; --warn: #996c00;
+    --panel: #f3f2f1; --accent: #1d70b8; --focus: #ffdd00; --focus-fg: #0b0c0c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 44rem;
+    background: var(--bg); color: var(--fg);
+    font: 1.1875rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (max-width: 40rem) { body { font-size: 1rem; } }
+  .home { display:block; margin:0 0 1.5rem; padding:.2rem 0 .85rem;
+    border-bottom:1px solid var(--line);
+    font-family:ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;
+    font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); }
+  .home b { color:var(--fg); font-weight:700; letter-spacing:.2em; }
+  .home:hover b { text-decoration:underline; text-underline-offset:.14em; }
+  .home:focus { background:var(--focus); color:var(--focus-fg); outline:3px solid var(--focus); box-shadow:0 3px 0 var(--focus-fg); text-decoration:none; }
+  h1 { font-size: 2rem; line-height: 1.15; margin: .6rem 0 .4rem; }
+  h2 { font-size: 1.25rem; margin: 1.6rem 0 .4rem; }
+  p  { margin: .6rem 0; }
+  .sub { color: var(--muted); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
+  a:focus { background: var(--focus); color: var(--focus-fg);
+    outline: 3px solid var(--focus); outline-offset: 0;
+    box-shadow: 0 3px 0 var(--focus-fg); text-decoration: none; }
+  .picker { margin: 1.4rem 0 .4rem; border: 0; padding: 0; }
+  .picker legend { font-weight: 700; padding: 0; }
+  .picker .help { color: var(--muted); margin: .15rem 0 .5rem; font-size: 1rem; }
+  .radios { display: flex; flex-direction: column; gap: .35rem; }
+  .radio { display: inline-flex; align-items: center; gap: .55rem;
+    font-weight: 400; min-height: 44px; cursor: pointer; }
+  .radio input { width: 1.7rem; height: 1.7rem; margin: 0; accent-color: var(--fg); cursor: pointer; flex: none; }
+  .radio input:focus { outline: 3px solid var(--focus); outline-offset: 1px; }
+  .case { margin: .9rem 0; padding: .1rem 0 .1rem 1rem; border-left: .4rem solid var(--line); }
+  .case.holds { border-left-color: var(--ok); }
+  .case.breaks { border-left-color: var(--bad); }
+  .case p { margin: .25rem 0; }
+  .case .name { font-weight: 700; }
+  .case .limit { color: var(--muted); font-size: 1rem; }
+  ul.plain { margin: .4rem 0; padding-left: 1.3rem; }
+  ul.plain li { margin: .3rem 0; }
+  .figures { background: var(--panel); padding: .8rem 1rem; margin: 1rem 0; font-size: 1rem; }
+  .committee-block { display: none; }
+  .committee-block.on { display: block; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 1rem;
+    border-top: 1px solid var(--line); padding-top: 1rem; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { position: static; display: inline-block; padding: .2rem .5rem; }
+
+  @media print {
+    @page { margin: 11mm 13mm; }
+    body { font-size: 10pt; line-height: 1.32; padding: 0; max-width: none; }
+    .home, .picker, .noprint, .skip { display: none; }
+    h1 { font-size: 15pt; margin: 0 0 .1rem; }
+    .sub { margin: 0 0 .3rem; }
+    h2 { font-size: 10.5pt; margin: .55rem 0 .2rem; }
+    p { margin: .25rem 0; }
+    ul.plain li { margin: .15rem 0; }
+    a { color: var(--fg); text-decoration: none; }
+    .figures { padding: .35rem .6rem; margin: .4rem 0; font-size: inherit; }
+    .case { margin: .35rem 0; padding-left: .7rem; border-left-width: .28rem; }
+    .case .limit { font-size: 8.5pt; }
+    footer { margin-top: .6rem; padding-top: .4rem; font-size: 8.5pt; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<a class="home" href="index.html"><b>Civic&nbsp;Kernel</b> <span>a thin protocol for public decisions</span></a>
+<main id="main">
+
+<h1>Fifty-two failures, one repeating fix</h1>
+<p class="sub">A one-page briefing for the <span class="committee-name">Public Administration and Constitutional Affairs Committee</span>.</p>
+
+<fieldset class="picker noprint">
+  <legend>Which committee is this for?</legend>
+  <p class="help">The pattern is the same for each; the three worked cases change. Pick one, then print — the page fits a single side of A4.</p>
+  <div class="radios" role="radiogroup">
+    <label class="radio"><input type="radio" name="committee" value="pacac" checked> Public Administration and Constitutional Affairs</label>
+    <label class="radio"><input type="radio" name="committee" value="wp"> Work and Pensions</label>
+    <label class="radio"><input type="radio" name="committee" value="ha"> Home Affairs</label>
+    <label class="radio"><input type="radio" name="committee" value="pac"> Public Accounts</label>
+  </div>
+</fieldset>
+
+<h2>The pattern</h2>
+<p>Fifty-two documented institutional failures — Horizon, the deleted WhatsApps, the carer pursued for a debt the state watched grow — have been rebuilt as machine-checked case studies and stress-tested against one thin protocol for public decisions. In forty-three of the fifty-two, the harm ran through a record: one that was quietly absent, quietly altered, or quietly ignored.</p>
+<p>The fix that repeats is not a new power or a new regulator. It is a record of each act of power that <strong>cannot be quietly absent</strong> (it must exist at the moment of the act, citing the rule it acts under), <strong>cannot be quietly altered</strong> (independent witnesses hold its fingerprints), and <strong>cannot be quietly ignored</strong> (its silence is itself a visible, datable fact).</p>
+
+<h2>Three cases this committee knows</h2>
+
+<div class="committee-block" data-committee="pacac" data-name="Public Administration and Constitutional Affairs Committee">
+  <div class="case breaks">
+    <p class="name">Government by WhatsApp</p>
+    <p>Decisions were made and reasons destroyed by disappearing messages before any record existed. A required contemporaneous record turns the absence itself into the visible breach — dated, attributable, on the day.</p>
+    <p class="limit">Honest limit: the corpus marks this one <strong>broken</strong> — where substance is destroyed off-record, a log proves only that nothing arrived. The record must be made to be protected.</p>
+  </div>
+  <div class="case">
+    <p class="name">FOI slow-walking</p>
+    <p>Deadlines missed, public-interest extensions stacked, requesters profiled. Every one of those levers acts on the <em>request</em> — so the protocol removes the request. A record public by default cannot be slow-walked; there is nothing to ask for.</p>
+    <p class="limit">Honest limit: true for the acts it logs, not for reasoning kept off it.</p>
+  </div>
+  <div class="case holds">
+    <p class="name">Rewriting the minutes</p>
+    <p>An append-only log whose fingerprints independent parties already hold: rewriting any entry breaks a chain the world can check. The one case in fifty-two where the protection fully <strong>holds</strong> — because tamper-evidence is precisely what the machine is for.</p>
+  </div>
+</div>
+
+<div class="committee-block" data-committee="wp" data-name="Work and Pensions Committee">
+  <div class="case">
+    <p class="name">Automated benefit decisions</p>
+    <p>An algorithm suspends a claim and cannot say why. Under the protocol every adverse decision must cite the rule it acts under — a model flag that has no reason produces a <em>visible missing reason</em>, on the record, appealable from day one.</p>
+    <p class="limit">Honest limit: it cannot judge eligibility or fix a biased model — it makes the missing reason a fact.</p>
+  </div>
+  <div class="case">
+    <p class="name">Carer's Allowance overpayments</p>
+    <p>The state held the earnings data while the debt grew, then prosecuted the growth. A logged duty-to-act makes the state's own delay part of every demand it later issues: the carer sees her breach the month it happens, not five years and £20,000 later.</p>
+    <p class="limit">Honest limit: it cannot abolish the cliff-edge or erase a real debt — it forecloses harm grown in silence.</p>
+  </div>
+  <div class="case">
+    <p class="name">Internal reviews of claimant deaths</p>
+    <p>Reviews buried, recommendations vanishing between reports. Each review becomes un-buriable and family-readable, and each recommendation is tracked to its fate: implemented, or visibly not — a number a committee can put to a Permanent Secretary.</p>
+    <p class="limit">Honest limit: it cannot compel implementation — it makes non-implementation count itself.</p>
+  </div>
+</div>
+
+<div class="committee-block" data-committee="ha" data-name="Home Affairs Committee">
+  <div class="case">
+    <p class="name">Police vetting failures</p>
+    <p>Nine warnings about one officer, each dismissed alone, none aggregated. The protocol keeps the file it refuses on any citizen — on the one who holds power: flags cluster visibly, and every dismissal must cite its reason.</p>
+    <p class="limit">Honest limit: it cannot judge whether a cluster warrants removal — it forecloses the untraced dismissal.</p>
+  </div>
+  <div class="case">
+    <p class="name">Citizenship deprivation</p>
+    <p>Citizenship removed without notice, discovered at a border. Deprivation becomes a noticed, appealable act citing its statutory power, escalated to rights review automatically — the secret removal is foreclosed.</p>
+    <p class="limit">Honest limit: the appeal still leads into a closed court, and the roll stays the executive's to edit.</p>
+  </div>
+  <div class="case">
+    <p class="name">Protest conditions without basis</p>
+    <p>Conditions imposed on the day, basis supplied later or never. Each condition must cite its legal basis at the moment imposed, and the missing basis is immediately visible to the assembly it restricts.</p>
+    <p class="limit">Honest limit: review moves at legal speed and a protest is one day — legibility arrives; the day may not.</p>
+  </div>
+</div>
+
+<div class="committee-block" data-committee="pac" data-name="Public Accounts Committee">
+  <div class="case">
+    <p class="name">Post Office Horizon</p>
+    <p>Twenty years of "trust the computer" — convictions on a record only the operator could see or silently correct. An append-only, witnessed accounting record makes a shortfall something you <em>check</em>, not something you take on an operator's word.</p>
+    <p class="limit">Honest limit: a bug's logged entry is still wrong — but it is checkably wrong, by the defence too.</p>
+  </div>
+  <div class="case">
+    <p class="name">The PPE VIP lane</p>
+    <p>Every contract was lawful; the lane was not. Each award logs the power it acts under and the referral that produced it — a hidden fast lane becomes a signed, contemporaneous, countable number instead of a two-year reconstruction.</p>
+    <p class="limit">Honest limit: legibility, not remedy — value for money stays this committee's judgement to make.</p>
+  </div>
+  <div class="case">
+    <p class="name">Carer's Allowance overpayments</p>
+    <p>The state held the data that would have stopped the debt at one pound, then spent public money recovering and prosecuting its growth. The record makes prevention's price visible next to enforcement's — the cheapest pound is the one never owed.</p>
+    <p class="limit">Honest limit: it cannot compel the timely act — it prices the failure to act.</p>
+  </div>
+</div>
+
+<h2>What it cannot do</h2>
+<ul class="plain">
+  <li>It does not decide substance — who is right, what is true, what a policy should be. That refusal is structural: a machine that judged substance would be worth capturing.</li>
+  <li>It reaches legibility, not remedy. A wrong made visible still needs a forum — this committee, a court, a regulator — willing to act on it.</li>
+  <li>It binds only bodies that adopt it. Three preconditions recur: the record must be made; a forum must act on what it shows; the adopter must be willing. In eight of the fifty-two cases those fail, and the case is marked <strong>broken</strong> — the corpus counts its own failures.</li>
+</ul>
+
+<h2>One question it puts in this committee's hands</h2>
+<p>When a witness next says a record did not exist, was not kept, or cannot now be found: ask why it could not have been <em>required</em> to exist — at the moment of the act, citing the rule it acted under, in a form no one could quietly edit.</p>
+
+<div class="figures">
+  <strong>Check the working.</strong> Every figure above is drawn from a machine-validated corpus: 52 case studies, 140 cited real-world precedents, verdicts of 43 strain / 8 break / 1 hold, all open at <strong>glassontin.github.io/civic-kernel</strong> — the <a href="map.html">synthesis</a>, the <a href="scenarios.html">full corpus</a>, and the <a href="architecture.html">design argument</a>.
+</div>
+
+<footer>
+  <p>Prepared from the Civic Kernel corpus, July 2026 — an open, non-commercial design study. The protocol is a working prototype, not deployed government software; the case studies encode documented public events, cited to source.</p>
+  <p>[Sender: add your name and contact line here before printing or attaching.]</p>
+</footer>
+
+</main>
+<script>
+  const blocks = document.querySelectorAll('.committee-block');
+  const nameSpans = document.querySelectorAll('.committee-name');
+  function show(id) {
+    let name = '';
+    blocks.forEach(b => {
+      const on = b.dataset.committee === id;
+      b.classList.toggle('on', on);
+      if (on) name = b.dataset.name;
+    });
+    nameSpans.forEach(s => s.textContent = name);
+  }
+  document.querySelectorAll('input[name=committee]').forEach(r =>
+    r.addEventListener('change', () => show(r.value)));
+  show('pacac');
+</script>
+</body>
+</html>
