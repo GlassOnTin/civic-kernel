@@ -39,7 +39,7 @@
       "label": "If one of you is under State Pension age: do you get pension-age Housing Benefit as a couple?",
       "help": "A small number of couples keep Pension Credit under transitional protection this way. If unsure, answer no.",
       "type": "bool",
-      "when": { "get": "has_partner" },
+      "when": { "and": [ { "get": "has_partner" }, { "not": { "spa_reached": { "dob": { "get": "partner_dob" } } } } ] },
       "rule": "Welfare Reform Act 2012 (Commencement No. 31 etc.) Order 2019 (S.I. 2019/37), savings provisions; gov.uk Pension Credit eligibility",
       "uri": "https://www.legislation.gov.uk/uksi/2019/37"
     },

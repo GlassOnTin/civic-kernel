@@ -46,7 +46,7 @@
       "label": "If one of you is under State Pension age: do you get pension-age Housing Benefit as a couple?",
       "help": "Couples protected since before 15 May 2019. If unsure, answer no.",
       "type": "bool",
-      "when": { "get": "has_partner" },
+      "when": { "and": [ { "get": "has_partner" }, { "not": { "spa_reached": { "dob": { "get": "partner_dob" } } } } ] },
       "rule": "S.I. 2019/37 savings; SI 2012/2885 reg 3",
       "uri": "https://www.legislation.gov.uk/uksi/2019/37"
     },
@@ -291,6 +291,7 @@
   "not_encoded": [
     "non-dependant deductions (Sch 1 para 8: a deduction per other adult in the home, sized by their income — where they apply, the flagged amount will be lower)",
     "the second-adult rebate (class C: up to 25% where other adults on low incomes live with you — ask your council to work out both and give the higher)",
+    "the Savings-Credit-only case (Sch 1 para 14: the authority starts from the DWP's assessed income instead — this file's whole-income disregard assumes Guarantee Credit)",
     "councils may be MORE generous than these prescribed rules (LGFA 1992 s.13A(1)(c) discretion) — this file computes the national floor, never your council's ceiling",
     "discounts and exemptions themselves (the 25% single-person discount, severe mental impairment, and others — enter your bill after them; if you have not claimed them, that is more money again)",
     "Wales's default national scheme (a close cousin of these rules, not verified line by line here)",
