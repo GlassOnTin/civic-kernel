@@ -123,7 +123,8 @@ for UK law — and every entrance that line asked for now exists, in the open: t
 (four committees, each built from the cases it owns), the
 [advocate's section](https://glassontin.github.io/civic-kernel/findings.html#advocates),
 the [adviser's note](https://glassontin.github.io/civic-kernel/adviser-note.html) for
-[Owed](https://glassontin.github.io/civic-kernel/owed.html), the notes to the
+[Owed](https://glassontin.github.io/civic-kernel/owed.html) (its
+[covering email](docs/carers-uk-email.md) drafted too), the notes to the
 [Good Law Project](docs/glp-note.md) and [mySociety](docs/mysociety-note.md), the
 [Metagov abstract](docs/metagov-abstract.md), the
 [club hand-over](docs/clubhouse-demo.md) (pre-flighted: suite green, both riggings
