@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="A roadmap for UK law drawn from fifty-two documented institutional failures: make the record exist, bind a forum to it, then build the humane layer — each stage makes the next one arguable. Every step cited to the cases that prove it and the vehicle that could carry it.">
+<title>The order of repair — Civic Kernel</title>
+<style>
+  /* map.html's register — the essay's serif and navy, light-committed — because this
+     page is the map's sibling: the diagnosis got a prescription. One new device: the
+     ground line under each step, naming the cases that prove it and the vehicle that
+     could carry it. */
+  :root {
+    color-scheme: light;
+    --paper: #f6f7f9; --card: #ffffff; --ink: #1c2333; --muted: #5a6376;
+    --accent: #2e5eaa; --line: #d8dce4; --line-strong: #b9c0cd;
+    --ok: #00703c; --warn: #9a6a1e; --bad: #a33d2e;
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', 'URW Palladio L', 'P052', Georgia, serif;
+    --mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { margin: 0; font-family: var(--serif); color: var(--ink); background: var(--paper);
+    line-height: 1.6; font-size: 1.0625rem; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  .home { display: block; margin: 0 0 1.8rem; padding: .2rem 0 .9rem;
+    border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: .6875rem;
+    letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
+  .home b { color: var(--ink); font-weight: 700; letter-spacing: .2em; }
+  .home:hover b { text-decoration: underline; }
+
+  header.hero { text-align: center; margin: 0 0 2.2rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.6rem); line-height: 1.12; margin: .3rem 0 .7rem; text-wrap: balance; }
+  .lede { font-size: 1.25rem; color: var(--muted); max-width: 41rem; margin: 0 auto; text-wrap: pretty; }
+  .intro { max-width: 44rem; margin: 1.6rem auto 0; }
+  .intro p { margin: 0 0 1rem; }
+
+  h2 { font-family: var(--mono); font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin: 3rem 0 .5rem; border-top: 3px double var(--line-strong); padding-top: 1.5rem; }
+  section > p { max-width: 44rem; margin: 0 0 1rem; }
+  section { margin-bottom: .4rem; }
+  strong.k { font-weight: 700; }
+
+  .figure { font-family: var(--mono); font-size: .82rem; letter-spacing: .03em; color: var(--muted);
+    background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0; padding: .5rem .8rem; margin: 0 0 1.1rem; display: inline-block; }
+  .figure b { color: var(--ink); }
+
+  ol.ways { counter-reset: w; list-style: none; margin: .3rem 0 1rem; padding: 0; display: flex; flex-direction: column; gap: 1.05rem; }
+  ol.ways li { counter-increment: w; position: relative; padding-left: 2.4rem; max-width: 44rem; }
+  ol.ways li::before { content: counter(w); position: absolute; left: 0; top: -.1rem;
+    font-family: var(--mono); font-size: .8rem; font-weight: 700; color: var(--accent);
+    border: 1px solid var(--line-strong); border-radius: 99px; width: 1.7rem; height: 1.7rem;
+    display: grid; place-items: center; }
+  ol.ways li b { color: var(--ink); }
+
+  .ground { display: block; margin-top: .35rem; font-family: var(--mono); font-size: .74rem;
+    letter-spacing: .02em; color: var(--muted); line-height: 1.7; }
+  .ground a { color: var(--muted); }
+  .ground .lbl { color: var(--accent); text-transform: uppercase; font-weight: 700;
+    font-size: .64rem; letter-spacing: .1em; margin-right: .15rem; }
+  .b { display: inline-block; font-family: var(--mono); font-size: .62rem; letter-spacing: .04em;
+    text-transform: uppercase; padding: .05rem .42rem; border-radius: 99px; border: 1px solid; vertical-align: .08em; }
+  .b.holds { color: var(--ok); border-color: var(--ok); }
+  .b.breaks { color: var(--bad); border-color: var(--bad); }
+
+  .close { margin-top: 3rem; border-top: 3px double var(--line-strong); padding-top: 1.6rem;
+    font-size: 1.15rem; max-width: 44rem; }
+  .close b { color: var(--ink); }
+  nav.doors { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 1rem 1.6rem;
+    font-family: var(--mono); font-size: .82rem; }
+  footer { margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 1rem;
+    color: var(--muted); font-family: var(--mono); font-size: .78rem; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="home" href="index.html"><b>Civic&nbsp;Kernel</b> a thin protocol for public decisions</a>
+
+<header class="hero">
+  <h1>The order of repair</h1>
+  <p class="lede">Fifty-two documented failures imply a sequence for UK law: make the record exist, bind a forum to it, then build the humane layer — because each stage makes the next one arguable.</p>
+</header>
+
+<div class="intro">
+  <p>This page is the prescription to the <a href="map.html">map's diagnosis</a>. The corpus behind both is fifty-two real institutional failures — Horizon, the deleted WhatsApps, the carer prosecuted for a debt the state watched grow — each rebuilt as a machine-checked case study. The diagnosis was one line: in forty-three of the fifty-two, the harm ran through a record that was quietly absent, quietly altered, or quietly ignored.</p>
+  <p class="figure"><b>43 of 52</b> failures ran through a record — absent, altered, or ignored</p>
+  <p>The prescription is a sequence, and the order matters. <strong class="k">Records come first</strong> because they are the cheapest reforms to legislate, the hardest to oppose out loud — nobody rises to defend the right not to write things down — and the safest: none of them hands anyone new discretionary power. They remove the discretion to be silent. Then come the forums, because a record only matters if silence about it has consequences. The humane layer comes last not because it matters least, but because every pound and every duty in it becomes arguable the moment the record exists.</p>
+  <p>One discipline carried over from the corpus: every step below is grounded in the cases that prove it and, where one exists, the real legislative vehicle that could carry it — dated as of early 2026, because statuses move. And one honesty up front: this is a roadmap of process. It does not build a kind state; it builds the floor a kind state can stand on.</p>
+</div>
+
+<section>
+<h2>First — make the record exist</h2>
+<ol class="ways">
+  <li><b>A statutory duty to record decisions when they are made.</b> English law obliges the state to archive records, not to create them — so a decision destroyed before it is written defeats every safeguard downstream. The WhatsApp case is the proof by failure; the one case in the corpus where the protection fully holds is the proof by success: a record that exists, witnessed, survives its own committee.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#government-by-whatsapp">government-by-whatsapp</a> <span class="b breaks">breaks</span> · <a href="scenarios.html#records-rewrite">records-rewrite</a> <span class="b holds">holds</span> &nbsp;<span class="lbl">vehicle</span> the Covid Inquiry's recommendations on ministerial messaging; the creation gap in the Public Records Act</span></li>
+  <li><b>A duty of candour with criminal teeth.</b> Infected blood, Grenfell and the maternity cases share one shape: the institution grading its own harm. A duty of candour on public authorities — with personal, criminal consequence for concealment — is the legal form of "the record cannot be quietly absent."
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#infected-blood-coverup">infected-blood-coverup</a> · <a href="scenarios.html#grenfell-warnings-ignored">grenfell-warnings-ignored</a> · <a href="scenarios.html#maternity-harm-downgraded">maternity-harm-downgraded</a> &nbsp;<span class="lbl">vehicle</span> the Hillsborough Law (Public Authority (Accountability) Bill) — promised, introduced, and fought over; its teeth are the thing to watch</span></li>
+  <li><b>A general duty to give reasons for adverse administrative decisions.</b> There is still no general duty in English administrative law to say <em>why</em> — only patches of context. The algorithm that suspends a claim without a reason, the one-word inspection verdict, the citizenship stripped on a basis its subject cannot see: all reduce to this gap.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#automated-welfare-reasons">automated-welfare-reasons</a> · <a href="scenarios.html#ofsted-single-word-judgment">ofsted-single-word-judgment</a> · <a href="scenarios.html#citizenship-deprivation-basis">citizenship-deprivation-basis</a> &nbsp;<span class="lbl">vehicle</span> none current — recommended since at least 1988; the oldest unenacted step on this page</span></li>
+  <li><b>Reverse the computer-evidence presumption.</b> Horizon convicted on a presumption that the machine is reliable unless the defendant proves otherwise — a presumption the defendant had no access to rebut. Small, precise, and already consulted on.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#horizon-unauditable-evidence">horizon-unauditable-evidence</a> &nbsp;<span class="lbl">vehicle</span> the Ministry of Justice's 2025 call for evidence on computer evidence, post-Horizon</span></li>
+  <li><b>Publication by default, at the moment of the act.</b> Every slow-walking lever — the missed deadline, the stacked extension, the profiled requester — acts on the <em>request</em>; a record public by default has nothing to request. The VIP lane shows the same fix on spending: each award published as it is signed, with its route.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#foi-slow-walking">foi-slow-walking</a> · <a href="scenarios.html#procurement-vip-lane">procurement-vip-lane</a> &nbsp;<span class="lbl">vehicle</span> the Procurement Act 2023's transparency duties, in force from 2025 — the principle, generalised beyond procurement</span></li>
+</ol>
+</section>
+
+<section>
+<h2>Second — bind a forum to the record</h2>
+<p>A record only matters if something must answer it. The corpus's middle finding is that the UK's forums are optional in practice: deadlines without consequence, recommendations without follow-up, watchdogs that must wait to be asked.</p>
+<ol class="ways">
+  <li><b>Deadlines that enforce themselves.</b> The 20-week EHCP limit is breached routinely and costs the breacher nothing; around 95 per cent of appeals succeed, which convicts the refusals — but only for the families who survive the appeal. A missed statutory deadline should carry a default: the request granted, or escalation triggered, automatically.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#send-ehcp-refusals">send-ehcp-refusals</a> · <a href="scenarios.html#foi-slow-walking">foi-slow-walking</a> &nbsp;<span class="lbl">vehicle</span> SEND reform, long promised and repeatedly deferred; FOI enforcement practice</span></li>
+  <li><b>Recommendations tracked to their fate.</b> Inquiries and internal reviews issue recommendations that vanish between reports; the next death repeats the last. A standing body should hold every recommendation to a public status: implemented, or visibly not.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#dwp-death-reviews-secret">dwp-death-reviews-secret</a> · <a href="scenarios.html#grenfell-warnings-ignored">grenfell-warnings-ignored</a> &nbsp;<span class="lbl">vehicle</span> a House of Lords committee recommended exactly this monitoring body in 2024</span></li>
+  <li><b>An ombudsman that can start by itself.</b> The public-services ombudsman still needs a complaint routed through an MP and cannot open an investigation on its own initiative — which means patterns (a vetting cluster, a mass of unopposed convictions, a forfeiture total) have no forum until individuals fight one case at a time.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#police-vetting-ignored">police-vetting-ignored</a> · <a href="scenarios.html#single-justice-procedure-opaque">single-justice-procedure-opaque</a> · <a href="scenarios.html#us-civil-asset-forfeiture">us-civil-asset-forfeiture</a> &nbsp;<span class="lbl">vehicle</span> the draft Public Service Ombudsman Bill of 2016 — stalled since</span></li>
+  <li><b>Automated-decision safeguards, restored.</b> The exam algorithm and the welfare model show what an unexplainable adverse decision does at scale. The honest headwind: 2025 data legislation loosened these safeguards rather than tightening them. This step swims upstream, and says so.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#exam-algorithm-downgrade">exam-algorithm-downgrade</a> · <a href="scenarios.html#automated-welfare-reasons">automated-welfare-reasons</a> &nbsp;<span class="lbl">vehicle</span> restoration of the protections diluted in the 2025 data reforms</span></li>
+</ol>
+</section>
+
+<section>
+<h2>Third — the humane layer</h2>
+<p>This is where "supportive" lives, and it is exactly what no protocol can do — the corpus refuses to pretend otherwise. What the first two stages contribute is that every duty here becomes arguable, costable, and enforceable the moment the record exists.</p>
+<ol class="ways">
+  <li><b>The state's data used for the person.</b> The DWP held the earnings data while the carer's debt grew, then prosecuted the growth; roughly a third of Pension Credit goes unclaimed by people the state could identify. A duty to act on held data — notify before the debt, auto-award where the entitlement is computable — turns the machinery of enforcement into machinery of prevention. <a href="owed.html">Owed</a> is this page's working sketch of the idea.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#carers-allowance-overpayment">carers-allowance-overpayment</a> &nbsp;<span class="lbl">vehicle</span> take-up campaigns exist; the step is making prevention a duty, not a campaign</span></li>
+  <li><b>Remedy at the speed of the harm.</b> A protest is one day; review at legal speed arrives after it. Where the harm outruns the court, the law needs interim remedies that default toward the right being exercised, not the restriction being obeyed.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#protest-conditions-no-basis">protest-conditions-no-basis</a> &nbsp;<span class="lbl">vehicle</span> no single vehicle — interim-relief practice, said plainly</span></li>
+  <li><b>Advice where the lottery of persistence decides.</b> A right enforced only by appeal selects for the persistent, the represented and the lucky — the corpus calls it rationing by attrition. Legal aid and tribunal capacity are the unglamorous end of this roadmap, and nothing above substitutes for them: no record fixes an unrepresented person.
+    <span class="ground"><span class="lbl">proved by</span> <a href="scenarios.html#send-ehcp-refusals">send-ehcp-refusals</a> · <a href="scenarios.html#carers-allowance-overpayment">carers-allowance-overpayment</a> · <a href="scenarios.html#single-justice-procedure-opaque">single-justice-procedure-opaque</a> &nbsp;<span class="lbl">vehicle</span> none current that matches the scale of the gap</span></li>
+</ol>
+</section>
+
+<section>
+<h2>What this roadmap refuses</h2>
+<p>The corpus's discipline carries over. <strong class="k">No step above legislates wisdom or kindness</strong> — the sequence makes cruelty and neglect visible, dated and attributable, which is the precondition of a humane state, not its substance. Substance stays where it belongs: with courts, with Parliament, with the people the record finally arms.</p>
+<p>And the corpus's three preconditions bind law as much as protocol: the record must be made (stage one fails without candour-backed sanction), a forum must act on it (stage two is institutional, not technical), and someone must be answerable at all. The corpus's eight <em>breaks</em> — the cases where no willing adopter exists, from messages destroyed before any record to <a href="scenarios.html#drc-medical-detention">a detainer who profits from the detention</a> — are not arguments against the record. They are the strongest argument on this page for legislation with consequence: where nothing consents, only law reaches.</p>
+</section>
+
+<div class="close">
+<p><b>The measure of the sequence.</b> None of these twelve steps is utopian; most are old recommendations with dust on them, and every one is cited to a failure that already happened to real people. Stronger means harder to break quietly. Safer means the person facing power can see what is being done and under which rule. More humane begins where the first two are settled — because a state that must write down what it does, and answer for what it wrote, has taken the first honest step toward being worth trusting.</p>
+</div>
+
+<nav class="doors">
+  <a href="map.html">The diagnosis →</a>
+  <a href="scenarios.html">The fifty-two cases →</a>
+  <a href="committee-brief.html">Put it in a committee's hands →</a>
+  <a href="findings.html#advocates">For the advocate →</a>
+</nav>
+
+<footer>
+Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype — a roadmap drawn from the corpus at fifty-two scenarios (43 strain, 8 break, 1 hold; 140 cited precedents), July 2026. Legislative vehicles dated as of early 2026; statuses move — a snapshot, not a live count. Cases are from the <a href="https://goodlawproject.org">Good Law Project</a> and the public record.
+</footer>
+</div>
+</body>
+</html>

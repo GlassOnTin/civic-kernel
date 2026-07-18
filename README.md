@@ -105,7 +105,9 @@ it — in about a minute: [`proto/test.sh`](proto/).
 ## Next
 
 The corpus has done its inward work — 52 cases, six shapes, one settled line
-([what the fifty add up to](https://glassontin.github.io/civic-kernel/map.html)) — so
+([what the fifty add up to](https://glassontin.github.io/civic-kernel/map.html), and
+[the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html) they imply
+for UK law) — so
 the road turns outward: carry it to the people who can act on it, and put the working
 tools in real hands. Five threads, each ending in something a named reader can use:
 a **committee brief** ([drafted](https://glassontin.github.io/civic-kernel/committee-brief.html):
