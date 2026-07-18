@@ -102,7 +102,13 @@
     border-radius: 0; color: var(--fg);
   }
   .dropzone.over { border-color: var(--accent); background: var(--panel); }
-  .dropzone input { display: none; }
+  /* focusable-hidden, not display:none — the keyboard path into the picker */
+  .dropzone input { position: absolute; width: 1px; height: 1px; opacity: 0;
+    overflow: hidden; clip: rect(0 0 0 0); }
+  .dropzone:focus-within { outline: 3px solid var(--focus); outline-offset: 0;
+    box-shadow: 0 3px 0 var(--focus-fg); }
+  .vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   footer { margin-top: 3rem; color: var(--muted); font-size: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; }
 </style>
 </head>
@@ -127,7 +133,7 @@ already owe you. An election you can check and a benefit you can check are the s
 power — that it should never get to say <em>because I said so</em>.</p>
 </details>
 
-<div id="banner" class="banner"></div>
+<div id="banner" class="banner" role="status"></div>
 
 <div class="panel">
   <h2>About you</h2>
@@ -151,9 +157,10 @@ power — that it should never get to say <em>because I said so</em>.</p>
     Returning? Drop your <code>circumstances.json</code> here — or
     <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="circpicker"></label>.
   </div>
-  <div id="circout" class="small" style="margin-top:.5rem"></div>
+  <div id="circout" class="small" style="margin-top:.5rem" role="status"></div>
 </div>
 
+<div id="announce" class="vh" role="status"></div>
 <div id="results"></div>
 
 <div class="panel">
@@ -180,6 +187,7 @@ power — that it should never get to say <em>because I said so</em>.</p>
   as data anyone can read or re-run; an independent Python judge computes every persona
   identically in CI, and this page is one client of that corpus, never the door.
   Helping someone else claim? There is a <a href="adviser-note.html">one-page note for advisers</a>.
+  And if you would rather rebuild this than trust it, <a href="docs/rebuild-owed.md">the recipe is public</a>.
 </footer>
 </main>
 
@@ -222,21 +230,26 @@ const QUESTIONS = [];
   }
 }
 function questionHtml(q) {
-  const help = q.help ? '<div class="help">' + esc(q.help) + '</div>' : '';
+  const help = q.help ? '<div class="help" id="qhelp-' + q.id + '">' + esc(q.help) + '</div>' : '';
   const cite = '<div class="cite">asked under: <a href="' + esc(q.uri) + '">' + esc(q.rule) + '</a></div>';
   if (q.type === "bool") {
     // the gov.uk pattern: big radio buttons, never a dropdown — visible options,
     // one tap, a fieldset whose legend is the question
-    return '<fieldset class="q" id="qrow-' + q.id + '">'
+    return '<fieldset class="q" id="qrow-' + q.id + '"'
+      + (q.help ? ' aria-describedby="qhelp-' + q.id + '"' : '') + '>'
       + '<legend>' + esc(q.label) + '</legend>' + help
       + '<div class="radios">'
       + '<label class="radio"><input type="radio" name="q-' + q.id + '" value="1"> Yes</label>'
       + '<label class="radio"><input type="radio" name="q-' + q.id + '" value="0" checked> No</label>'
       + '</div>' + cite + '</fieldset>';
   }
+  // the unit and help are part of the field's meaning — say so to the accessibility tree
+  const desc = (q.help ? 'qhelp-' + q.id + ' ' : '') + (q.type === "number" ? 'qunit-' + q.id : '');
+  const describedby = desc.trim() ? ' aria-describedby="' + desc.trim() + '"' : '';
   const control = q.type === "date"
-    ? '<input type="date" id="q-' + q.id + '">'
-    : '<input type="number" id="q-' + q.id + '" min="0" step="0.01" value="0"> <span class="small sub">£ per week'
+    ? '<input type="date" id="q-' + q.id + '"' + describedby + '>'
+    : '<input type="number" id="q-' + q.id + '" min="0" step="0.01" value="0"' + describedby
+      + '> <span class="small sub" id="qunit-' + q.id + '">£ per week'
       + (q.id === "capital" ? " — total, not weekly" : "") + '</span>';
   return '<div class="q" id="qrow-' + q.id + '">'
     + '<label for="q-' + q.id + '">' + esc(q.label) + '</label>' + help + control + cite + '</div>';
@@ -324,6 +337,16 @@ function cardHtml(ent, trace, err) {
     + '<p class="small sub">' + esc(ent.plainly) + "</p>" + inner + "</div>";
 }
 
+// tell screen readers the results moved — one debounced summary line, never the
+// whole re-rendered region (aria-live on #results would read every card per keystroke)
+let annTimer = 0, lastAnn = "";
+function announce(msg) {
+  clearTimeout(annTimer);
+  annTimer = setTimeout(() => {
+    if (msg !== lastAnn) { $("announce").textContent = msg; lastAnn = msg; }
+  }, 600);
+}
+
 function recompute() {
   const answers = readAnswers();
   // hide questions whose `when` does not hold; they are not demanded, so not shown
@@ -331,11 +354,15 @@ function recompute() {
     $("qrow-" + q.id).style.display = whenHolds(q, answers) ? "" : "none";
   }
   let html = "";
+  const eligible = [];
   for (const ent of CORPUS.entitlements) {
     let trace = null, err = null;
     try {
       trace = CivicOwed.evaluate(ent, CORPUS.spa, answers, todayIso());
       TRACES[ent.id] = trace;
+      if (trace.verdict === "appears-eligible") {
+        eligible.push(ent.title + (trace.weekly ? " " + pounds(trace.weekly) + " a week" : ""));
+      }
     } catch (e) {
       err = /unanswered question: (dob|partner_dob)/.test(e.message)
         ? "Enter the date of birth above to work this one out."
@@ -344,6 +371,10 @@ function recompute() {
     html += cardHtml(ent, trace, err);
   }
   $("results").innerHTML = html;
+  announce("Results updated. " + (eligible.length
+    ? eligible.length + " appear eligible: " + eligible.slice(0, 4).join("; ")
+      + (eligible.length > 4 ? "; and " + (eligible.length - 4) + " more" : "") + "."
+    : "Nothing appears eligible on these answers yet."));
   for (const b of document.querySelectorAll("button[data-dl]")) {
     b.onclick = () => traceDownload(TRACES[b.dataset.dl]);
   }
