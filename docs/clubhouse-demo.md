@@ -224,3 +224,39 @@ verifier, the cast page, the architecture.
   fine; only one file gets handed in.
 - Reset between rehearsals: `rm -rf /tmp/demo-*`. Nothing in the demo modifies the
   repo or `proto/out`.
+
+## The hand-over — one list
+
+Everything above is built and rehearsed; what remains needs a person. In order:
+
+**Before anything**
+
+- [ ] Pick the club and the vote (the treasurer race, or one motion). If it really is
+  Heeley Bank, re-read the invitation's admission about the borrowed name first.
+- [ ] Print [the invitation](shadow-agm-invitation.md). On the printed copy, write the
+  three links (verifier / cast / architecture) and your direct contact details — they
+  are deliberately not in the repo.
+- [ ] Read the run sheet above once, end to end.
+
+**The night before**
+
+- [ ] `./proto/test.sh` on the demo laptop ends `ALL GREEN`.
+- [ ] One full rehearsal, both riggings included; `rm -rf /tmp/demo-*` afterwards.
+- [ ] Decide wifi or offline. If members' phones will cast, confirm the live pages
+  load at the clubhouse — or bring a hotspot; offline, the laptop path shows the same
+  thing.
+
+**On the day**
+
+- [ ] Laptop charged. Two tabs open (verifier, cast), one terminal in the repo,
+  `/tmp/demo-*` clean.
+- [ ] Leave behind the printed invitation, links and contact on it.
+
+**Afterwards — the part that is the actual experiment**
+
+- [ ] The same evening, write down what confused people, what broke, and what they
+  asked. Those notes are what the season is *for* — file them as
+  [issues](https://github.com/GlassOnTin/civic-kernel/issues), including the
+  embarrassing ones.
+- [ ] If the committee says no: ask why, and write that down too. The invitation calls
+  a no a finding — mean it.

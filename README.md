@@ -116,10 +116,14 @@ the scenario as a worked remedy, the citation spine, the verdicts, and the door 
 next case); an **adviser's note** for
 [Owed](https://glassontin.github.io/civic-kernel/owed.html)
 ([drafted](https://glassontin.github.io/civic-kernel/adviser-note.html): trust-by-inspection, for
-the people who help others claim); the **club hand-over pack** (everything below is
-built — what remains is a real club and a real season); and a **break-me door** (the
+the people who help others claim); the **club hand-over pack**
+([pre-flighted](docs/clubhouse-demo.md): the suite runs green, both riggings reproduce
+their quoted failure lines, and the run sheet now ends in a single hand-over checklist —
+what remains is a real club and a real season); and a **break-me door** (the
 tamper suite as an open invitation: winning attacks become named defences). Outreach
-drafts are prepared in the open; sending them is a person's decision, not a repo's.
+drafts are prepared in the open — the latest,
+[a note to the Good Law Project](docs/glp-note.md), returns four encoded cases to the
+people who fought them — and sending them is a person's decision, not a repo's.
 
 <details>
 <summary>What exists now, and the road behind the threads</summary>
