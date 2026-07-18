@@ -16841,6 +16841,10 @@ function corpus() {
       <h1>Real legal systems, under one schema</h1>
       <p class="meta-line">the fixed axis is the 30 articles of the <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights">Universal Declaration of Human Rights</a> (<abbr title="Universal Declaration of Human Rights">UDHR</abbr>); each column swaps the legal backing · validated by tools/validate-corpus.py</p>
       <p class="cite" style="font-style:italic">A coarse comparative-law mapping from public sources (UK via legislation.gov.uk; Germany via gesetze-im-internet.de; US via archives.gov; EU via eur-lex.europa.eu) — it points to where systems differ, and is not legal advice or authoritative scholarship. Some cells are debatable; the caveats live in each corpus file.</p>
+      <h2 class="sec">Coverage matrix — 30 <abbr title="Universal Declaration of Human Rights">UDHR</abbr> invariants × jurisdiction</h2>
+      <p>Red cells are invariants with <em>no</em> domestic backing. The pattern down each column is that system's position on the kernel's §6 lattice — legible, and comparable, because the spine is shared.</p>
+      <div style="overflow-x:auto"><table class="cmp"><thead>${head}</thead><tbody>${rows}</tbody></table></div>
+      <h2 class="sec">Each column, summarized</h2>
       <div class="jcards">${cards}</div>
       <div class="client">
         <div class="cap">Three axes decide the outcome — and they form a cascade</div>
@@ -16851,9 +16855,6 @@ function corpus() {
           <li><b>3 · Coverage — is the right even named?</b> ${js.map(j => `${esc(j.meta.name)} backs <b>${j.meta.coverage.backed}</b>`).join(', ')} of 30 — the <abbr title="Charter of Fundamental Rights of the European Union">EU Charter</abbr> alone reaches the socio-economic rights (social security, health, even rest and leisure) the national instruments omit and has <span class="present">no fully-unbacked article</span>; the UK omits movement, asylum and nationality; the US alone lacks a constitutional right to education, privacy or asylum. Necessary, but — the UK proves — nowhere near sufficient.</li>
         </ul>
       </div>
-      <h2 class="sec">Coverage matrix — 30 <abbr title="Universal Declaration of Human Rights">UDHR</abbr> invariants × jurisdiction</h2>
-      <p>Red cells are invariants with <em>no</em> domestic backing. The pattern down each column is that system's position on the kernel's §6 lattice — legible, and comparable, because the spine is shared.</p>
-      <div style="overflow-x:auto"><table class="cmp"><thead>${head}</thead><tbody>${rows}</tbody></table></div>
       <h2 class="sec">Parliamentary decisions</h2>
       <p>Real divisions rendered as <code>decision.closed</code> log entries. A division is a <em>public, named</em> vote — the deliberate opposite of the citizen ballot's receipt-freeness — carrying the real outcome with provenance, not a cryptographic re-derivation.</p>
       ${divisions || '<p class="cite">none yet</p>'}
