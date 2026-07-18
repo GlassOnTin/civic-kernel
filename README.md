@@ -20,47 +20,6 @@ anyone to own.**
 one page: what it's for, why it holds, and tools you can use today. This README is the
 same project, from the source side.
 
-<details>
-<summary>The one-paragraph technical version</summary>
-
-A thin, capture-resistant protocol for democratic decision-making — fourteen threats,
-four services, four verbs, two message formats, one floor, twelve refusals. The floor is
-the Universal Declaration of Human Rights, measured rather than recited. The whole core
-fits on one page: [`KERNEL.md`](KERNEL.md).
-
-</details>
-
-## What it is
-
-The claim: **anyone can check the process that governs them, from the published record
-alone.** No trust in the server. No trust in the committee. No trust in the software
-that produced the record.
-
-The running prototype is a sixty-member allotment society electing its treasurer.
-Every ballot is anonymous, yet provably cast by an enrolled member. No ballot is ever
-opened: ballots are added up while still encrypted, and only that sum is decrypted. An
-independent verifier — sharing no code with the election software — confirms the
-result from the published files alone. Then it catches all twelve of the ways we tried
-to rig it, up to a committee and both witnesses colluding to rewrite history, and
-finally to erase one inconvenient ballot from it. When everything holds, the
-verifier's closing line is: *"nobody had to trust the shed."*
-
-Who it's for: the member who can see her own ballot counted without anyone learning
-her vote. The club or co-op whose election nobody can rig. One day — the long game —
-the household that learns what it is owed without telling anyone it asked.
-
-Today it is a research prototype at village scale, and it says so. Every deployment
-publishes a machine-readable manifest of what it upholds **and what it leaves out** —
-weakness is permitted; hiding it is not.
-
-## What it is not
-
-Not a product, not a platform, not a blockchain — no token in any citizen's path,
-ever. And not finished, by design: this repo treats its own documents the way the
-kernel treats law. The architecture essay is at rev. 4 because evidence already
-revised it three times — most recently with what the prototype proved — and what the
-first real communities teach will revise it again.
-
 ## What's here for you
 
 - **You want to know what you are owed.**
@@ -112,6 +71,47 @@ first real communities teach will revise it again.
 
 Or run everything locally — the election, its verification, and twelve attempts to rig
 it — in about a minute: [`proto/test.sh`](proto/).
+
+## What it is
+
+<details>
+<summary>The one-paragraph technical version</summary>
+
+A thin, capture-resistant protocol for democratic decision-making — fourteen threats,
+four services, four verbs, two message formats, one floor, twelve refusals. The floor is
+the Universal Declaration of Human Rights, measured rather than recited. The whole core
+fits on one page: [`KERNEL.md`](KERNEL.md).
+
+</details>
+
+The claim: **anyone can check the process that governs them, from the published record
+alone.** No trust in the server. No trust in the committee. No trust in the software
+that produced the record.
+
+The running prototype is a sixty-member allotment society electing its treasurer.
+Every ballot is anonymous, yet provably cast by an enrolled member. No ballot is ever
+opened: ballots are added up while still encrypted, and only that sum is decrypted. An
+independent verifier — sharing no code with the election software — confirms the
+result from the published files alone. Then it catches all twelve of the ways we tried
+to rig it, up to a committee and both witnesses colluding to rewrite history, and
+finally to erase one inconvenient ballot from it. When everything holds, the
+verifier's closing line is: *"nobody had to trust the shed."*
+
+Who it's for: the member who can see her own ballot counted without anyone learning
+her vote. The club or co-op whose election nobody can rig. One day — the long game —
+the household that learns what it is owed without telling anyone it asked.
+
+Today it is a research prototype at village scale, and it says so. Every deployment
+publishes a machine-readable manifest of what it upholds **and what it leaves out** —
+weakness is permitted; hiding it is not.
+
+## What it is not
+
+Not a product, not a platform, not a blockchain — no token in any citizen's path,
+ever. And not finished, by design: this repo treats its own documents the way the
+kernel treats law. The architecture essay is at rev. 4 because evidence already
+revised it three times — most recently with what the prototype proved — and what the
+first real communities teach will revise it again.
 
 ## Next
 
