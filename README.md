@@ -104,12 +104,21 @@ it — in about a minute: [`proto/test.sh`](proto/).
 
 ## Next
 
-A shadow-mode run alongside one real club's AGM — the official result still decided by
-the show of hands — and, behind it, the bigger want the essay names: *find out what you
-are owed, without telling anyone you asked*.
+The corpus has done its inward work — 52 cases, six shapes, one settled line
+([what the fifty add up to](https://glassontin.github.io/civic-kernel/map.html)) — so
+the road turns outward: carry it to the people who can act on it, and put the working
+tools in real hands. Five threads, each ending in something a named reader can use:
+a **committee brief** (one printable page per committee — records, welfare, policing —
+built from the cases each one owns); an **advocate's guide** (how to read a scenario as
+a worked remedy, and how to propose the next); an **adviser's note** for
+[Owed](https://glassontin.github.io/civic-kernel/owed.html) (trust-by-inspection, for
+the people who help others claim); the **club hand-over pack** (everything below is
+built — what remains is a real club and a real season); and a **break-me door** (the
+tamper suite as an open invitation: winning attacks become named defences). Outreach
+drafts are prepared in the open; sending them is a person's decision, not a repo's.
 
 <details>
-<summary>What exists now, and the road ahead</summary>
+<summary>What exists now, and the road behind the threads</summary>
 
 A shadow-mode run alongside one real club's AGM, with the official result still decided
 by the show of hands. Every part now exists — `cast.html` for the voter,
