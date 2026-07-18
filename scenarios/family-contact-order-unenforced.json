@@ -1,0 +1,275 @@
+{
+ "id": "family-contact-order-unenforced",
+ "title": "Time Quietly Becomes the Ruling: The Contact Order Tracked to Its Fate",
+ "setting": "Daniel Mercer's daughter Freya was six when the family court ordered that she spend alternate weekends with him — a child-arrangements order under the Children Act, made after a year of hearings, a Cafcass report, and a judge's considered view that the contact was in her interests. The first missed handover had a reason: Freya was ill. So did the second: plans had changed, the message came late. By the ninth, fourteen months on, there was no longer any pretence of reasons, and Daniel applied to enforce the order the court itself had made. His application was listed for eleven weeks out, then adjourned, then relisted. By the time a judge finally considered it — thirty-four weeks after he filed — the hearing had a new shape: Freya had not seen her father for over a year, and the question was no longer why the order had been breached but whether, after so long, reintroducing contact would unsettle her. The passage of time had quietly become the ruling, and nobody had signed it.\n\nThis is the documented pattern, not a campaign's claim: research for the Nuffield Foundation found family courts treat enforcement applications as invitations to problem-solve rather than enforce, and the state's own statistics show thousands of enforcement applications a year ending in an enforcement order in roughly one case in a hundred, while private-law cases run to forty-plus weeks. And the pattern has a second face the first telling omits: the Ministry of Justice's Harm Panel documented mothers breaching orders to protect children from contact that was genuinely unsafe — sometimes the breach is the protection, and a court must tell which is which. The kernel refuses that question absolutely (refusal 11): whether any breach was obstruction or protection, whether contact serves this child, is a judge's judgment about a childhood. The Calderbrook Family Court, in this scenario, runs its orders on a subject-readable register, and the narrow question is whether a protocol can at least make the order's fate a record: each breach a dated receipt, the application a running clock with an owner, the disposition made to sit beside the chain it declines to act on — so that drift, the real decider in the real cases, can no longer decide invisibly.",
+ "threats": [
+  "T1",
+  "T8"
+ ],
+ "doc_refs": [
+  "§8",
+  "§3.4",
+  "§3.1",
+  "§1",
+  "§6",
+  "§12",
+  "T1",
+  "T8"
+ ],
+ "precedents": [
+  {
+   "event": "Courts problem-solve rather than enforce breached contact orders",
+   "year": 2013,
+   "source": "Trinder et al., 'Enforcing contact orders: problem-solving or punishment?' (University of Exeter / Nuffield Foundation)",
+   "url": "https://www.nuffieldfoundation.org/project/enforcing-contact-orders",
+   "shows": "The major empirical study of enforcement applications found courts overwhelmingly respond to breach allegations with further directions and renewed contact orders rather than sanctions; punitive powers - unpaid work, fines, committal - exist and are almost never used. Each application is treated as a fresh dispute to manage, not a breach chain to answer, so serial non-compliance is re-set to zero at every hearing."
+  },
+  {
+   "event": "Enforcement orders follow enforcement applications in roughly one case in a hundred, while private-law cases run to forty-plus weeks",
+   "year": 2023,
+   "source": "Ministry of Justice, Family Court Statistics Quarterly (enforcement applications and dispositions; private-law timeliness)",
+   "url": "https://www.gov.uk/government/collections/family-court-statistics-quarterly",
+   "shows": "The state's own statistics: thousands of applications each year to enforce child-arrangements orders, with enforcement orders made in around one per cent of them; and average time for private children-law cases climbing past forty weeks. The gap between order and enforcement, and the delay in between, are documented in aggregate - but no record ties any one order to its accumulated breaches, its waiting time, and its fate."
+  },
+  {
+   "event": "Sometimes the breach is the protection: the Harm Panel on unsafe contact",
+   "year": 2020,
+   "source": "Ministry of Justice, 'Assessing Risk of Harm to Children and Parents in Private Law Children Cases' (the Harm Panel report)",
+   "url": "https://www.gov.uk/government/consultations/assessing-risk-of-harm-to-children-and-parents-in-private-law-children-cases",
+   "shows": "The panel documented a pro-contact culture in which abusive parents used repeat applications and enforcement to continue abuse, and protective parents breached orders to shield children from contact that was genuinely unsafe. The same breach chain can be obstruction or protection; only a court weighing the child's welfare can say which - a substantive judgment no protocol may make, and the reason this scenario's register records fates and refuses motives."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:calderbrook-family-court.example",
+   "name": "Calderbrook Family Court (child-arrangements register)",
+   "parent": "did:web:hmcts-calderbrook.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:calderbrook-family-court.example",
+   "witnesses": [
+    "did:web:calderbrook-childrens-guardian.example",
+    "did:web:family-justice-observatory.example",
+    "did:web:calderbrook-court-audit.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ],
+   "mode": "subject-readable"
+  },
+  "interaction_cost": [
+   {
+    "process": "report-a-breach-of-your-order",
+    "steps": 2,
+    "fields": 3,
+    "median_seconds": 300,
+    "abandonment_rate": 0.05
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:calderbrook-family-court.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Daniel Mercer, and a drift nobody signed",
+   "verb": "offstage",
+   "narrative": "The backdrop is a decision made by no one. A court weighs a child's welfare and orders contact; the order is breached, and breached again, each instance separately explicable; the parent the order was made for applies to the court that made it, and waits; and somewhere in the waiting the outcome is settled — not by a judge weighing welfare, but by the status quo the delay itself has built. In the real statistics the shape is documented at scale: enforcement applications in their thousands, enforcement orders in roughly one case in a hundred, cases running past forty weeks — and, on the other face, protective parents breaching orders to shield children from genuinely unsafe contact. Whether any breach is obstruction or protection is a judge's question about a childhood, and the kernel refuses it absolutely. What the kernel can ask is narrower: whether the order's fate — the breaches, the waiting, the disposition — can be made a record with dates and owners, so that when time decides, the record at least says so."
+  },
+  {
+   "actor": "Calderbrook Family Court",
+   "verb": "cast",
+   "narrative": "Calderbrook opens its child-arrangements register with commitments aimed at the drift: every order is logged, subject-readable — the parties and the child's guardian can read it, the public cannot; every reported breach produces a dated receipt, linked to the order and to every earlier report, so a chain cannot be re-set to zero at the next hearing; every enforcement application starts a clock that runs visibly on the record, owned by the court; every disposition must cite the rule it applies and sit beside the breach chain it answers; and the register publishes an annual anonymous aggregate — applications, dispositions, waiting times, sanctions. The court keeps every judgment: what the child needs, whether a breach was justified, whether to sanction. What it gives up is the silence between those judgments — the months that used to pass without an owner.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2025-01-06T09:00:00Z",
+    "body": {
+     "decision_id": "2025-child-arrangements-register",
+     "decision_class": "family-order-commitment",
+     "authorizing_rule": "Children Act 1989 ss.8, 11J; Family Procedure Rules; calderbrook-charter/v1",
+     "issuing_authority": "Calderbrook Family Court",
+     "commitment": "Every child-arrangements order logged subject-readable; every reported breach a dated, chained receipt; every enforcement application a visible clock owned by the court; every disposition cites its rule beside the chain it answers; annual anonymous aggregate of applications, waiting times and sanctions",
+     "note": "The register forecloses invisible drift. It does not judge a breach, decide what a child needs, or compel a sanction (refusal 11) - and the child's file is readable by the parties and the guardian, never the public."
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "Q2FsZGVyYnJvb2tSZWdpc3Rlck9wZW5lZDAx"
+    }
+   }
+  },
+  {
+   "actor": "The order, and the ninth dated receipt",
+   "verb": "cast",
+   "narrative": "The order granting Freya alternate weekends with her father enters the register in February, subject-readable, citing its statutory basis. The first missed handover becomes a dated receipt in March — with the stated reason, because the register records explanations without judging them. So does the second, in April. By October there are nine, and the ninth receipt does what no hearing bundle in the real cases does: it carries the chain. Nine breaches, each with its date and its stated reason, each separately explicable, the sequence undeniable — and none of them judged. Perhaps all nine were justified; perhaps none; perhaps the truth is harder than either. That is for a judge. What the chain forecloses is the amnesia the Nuffield study documented, where every hearing starts the story again: whatever a judge makes of these nine, there are nine, from these dates, and both parents and the guardian read the same list.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-family.breach-receipt",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2025-10-17T16:40:00Z",
+    "body": {
+     "order_ref": "order:calderbrook-2025-CA-0412",
+     "receipt_no": 9,
+     "reported_by": "party:applicant (readable by the parties and the children's guardian)",
+     "stated_reason_of_other_party": "recorded verbatim, unjudged",
+     "chain": "receipts 1-8, 2025-03-08 to 2025-09-26, each dated with its stated reason",
+     "note": "A dated receipt, chained to the order and every earlier report. The register records the breach report and the explanation; it judges neither. What it forecloses is the chain being re-set to zero at the next hearing."
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90",
+     "readable_by": [
+      "subject",
+      "authorized-auditor"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "TmludGhSZWNlaXB0Q2hhaW5lZERhdGVkMDI"
+    }
+   }
+  },
+  {
+   "actor": "Daniel Mercer, applying to enforce — and the clock that now has an owner",
+   "verb": "cast",
+   "narrative": "The enforcement application goes in a week after the ninth receipt, and from that moment the register runs a clock the real system never shows: filed on this date, listed for eleven weeks out, adjourned on that date at the court's own motion, relisted eight weeks further. In the real cases this is where the outcome is quietly made — 'things drifted' — and the drift belongs to nobody. Here every week of it is on the record with an owner: the court's listing decisions, dated; the applicant's waiting, counted. The register cannot list the hearing sooner. A visible clock is not a faster court, and thirty-four weeks legible is still thirty-four weeks of a childhood. But when the hearing finally comes, one thing is no longer available to anyone in the room: the pretence that the time passed by itself.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-family.enforcement-application",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2025-10-24T10:15:00Z",
+    "body": {
+     "order_ref": "order:calderbrook-2025-CA-0412",
+     "application_id": "enf:calderbrook-2025-0771",
+     "breach_chain_ref": "receipts 1-9",
+     "received": "2025-10-24",
+     "clock": "runs on the record from receipt; every listing, adjournment and relisting logged with its date and mover",
+     "note": "The application's dated receipt starts a court-owned clock. The register cannot speed the listing; it makes the waiting a fact with an owner instead of a drift with none."
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f9012",
+     "readable_by": [
+      "subject",
+      "authorized-auditor"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "QXBwbGljYXRpb25DbG9ja093bmVkMDM"
+    }
+   }
+  },
+  {
+   "actor": "The court, disposing — beside the chain it answers",
+   "verb": "cast",
+   "narrative": "Thirty-four weeks after the application, the court declines to make an enforcement order. Perhaps rightly: the judge hears both parents, weighs a report, and concludes that after so long an interruption, sanctions would serve the parents' war and not the child. The kernel has no opinion; the judgment is exactly what refusal 11 protects. What the register requires is only that the disposition be made where the record can see it: citing the rule considered and not applied, sitting beside the chain of nine dated receipts and the thirty-four-week clock it answers. In the real cases each hearing is an island, and a court can decline, and decline, and decline, each time as if for the first time. Here the declining accumulates. This disposition is the register's first entry in a different chain — dispositions against this order, sanctions nil — and that chain, too, will be readable by the parties, the guardian, and the auditor the next time anyone asks the court to enforce what it ordered.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-family.disposition",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2026-06-19T14:30:00Z",
+    "body": {
+     "application_ref": "enf:calderbrook-2025-0771",
+     "disposition": "no enforcement order; contact arrangements to be reviewed",
+     "rule_considered": "Children Act 1989 s.11J (unpaid work requirement) - considered, not applied; reasons recorded subject-readable",
+     "answers_chain": "receipts 1-9; application clock 34 weeks",
+     "dispositions_against_order": "1 of 1 declining sanction",
+     "note": "The disposition must cite its rule and sit beside the chain it answers. The register does not review the judgment (refusal 11); it forecloses the island hearing - the declining now accumulates on the record."
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f901234",
+     "readable_by": [
+      "subject",
+      "authorized-auditor"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "RGlzcG9zaXRpb25CZXNpZGVDaGFpbjA0"
+    }
+   }
+  },
+  {
+   "actor": "The two faces of the chain, and the clock no record can wind back",
+   "verb": "offstage",
+   "narrative": "The ceilings, plainly. The same nine receipts could belong to a different story: a mother recording her reasons one by one as she keeps a child from contact that is genuinely unsafe, while an abusive applicant uses the enforcement clock as one more instrument — the Harm Panel documented exactly this, and the register serves that mother too, her stated reasons dated and chained and unjudged, evidence for the judge who must finally tell protection from obstruction. The kernel cannot tell them apart, refuses to try, and any deployment that scored breach chains for 'obstructiveness' would be building the substantive judgment the design forbids. Time is the second ceiling: the register makes every month datable and owned, and restores none of them — a childhood keeps its own calendar, legibility arrives after the drift has done its work, and a court unwilling to sanction is made visible, never willing. And the adopter is the courts service itself, asked to run the register that counts its own listing delays and its own declinings — the transparency pilots suggest more willingness than the corpus's police and departments, and it remains a body consenting to measure itself. The kernel gives the drift a date and an owner. It cannot give back the year.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2026-12-01T09:00:00Z",
+    "body": {
+     "process": "child-arrangements-enforcement",
+     "period": "2026",
+     "unit": "orders and enforcement applications",
+     "orders_logged": 412,
+     "breach_receipts": 1093,
+     "enforcement_applications": 168,
+     "median_weeks_application_to_disposition": 31,
+     "dispositions_with_sanction": 2,
+     "note": "Anonymous aggregate, no child identifiable. Of 168 applications to enforce orders this court made, 2 ended in any sanction, at a median 31 weeks' wait. Measure the process (§8): the enforcement gap and the court's own tempo as the court's own signed figures - where the national statistics show the same shape but no order can be followed from breach to fate."
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "QWdncmVnYXRlRW5mb3JjZW1lbnRHYXAwNQ"
+    }
+   }
+  },
+  {
+   "actor": "Anyone the file concerns, reading it after",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: it made the order's whole life one chain — the order, nine dated receipts with their unjudged reasons, an application with a court-owned clock, a disposition citing the rule it declined to use, sitting beside everything it answered — readable by both parents, the guardian, and the auditor, and never the public; and it made the court's aggregate tempo and enforcement rate the court's own signed numbers. So the real pattern's engine — the island hearing, the chain re-set to zero, the drift that belongs to nobody — cannot run: when time decides, the record now says that time decided, from which dates, on whose clock. What it did not do, and by its own limits cannot: judge a single breach, tell a protective parent from an obstructive one, compel a sanction, list a hearing sooner, or return a month of a childhood. Freya's year did not come back. The next parent's year now happens on a clock with an owner — and whichever parent that is, and whichever way the judge finally rules, the ruling will have to be made beside a record of everything the waiting already ruled."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "A court orders contact; nine breaches follow, each explained alone; the enforcement application waits 34 weeks, and the settled status quo decides the hearing — time ruled, and nobody signed it. The kernel chains dated breach receipts, runs a court-owned clock, and makes the disposition cite its rule beside the chain. It cannot judge a breach, tell protection from obstruction, speed a court, or return the year.",
+ "protection": "the order tracked to its fate; the drift dated and owned",
+ "protection_plain": "Whether chaining the order, each breach receipt, the application's visible clock and the rule-citing disposition makes the order's fate — and the court's own delay — a countable record. It forecloses invisible drift; but it can't judge a breach, compel a sanction, or restore the months.",
+ "findings": [
+  {
+   "protection": "the chain that cannot be re-set to zero",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The Nuffield study's core mechanism is amnesia: each enforcement hearing treats the dispute as new, so serial breach is judged as first breach, forever. The register's chained receipts - each dated, each with its stated reason recorded unjudged - foreclose the re-set: whatever a judge makes of nine breaches, there are nine, from these dates, and both parties, the guardian and the auditor read the same list. The child's file stays off the public web absolutely (subject-readable, sealed bodies); the chain is for the people the order concerns, not the crowd."
+  },
+  {
+   "protection": "the drift, dated and owned",
+   "severity": "strain",
+   "doc_ref": "§8",
+   "observation": "The finding this case exists to make. In the real pattern the decider is time: the application waits, the status quo hardens, and the outcome arrives without an author - 'things drifted'. The register makes time an actor on the record: the application's clock runs from a dated receipt, every listing and adjournment is logged with its mover, and the disposition must sit beside the wait it ends - so when the passage of time becomes the ruling, the record says so, with dates and an owner. But a dated month is still a lost month. The register cannot list a hearing sooner, and a childhood keeps its own calendar: legibility arrives after the drift has done its work - the protest-conditions finding at the scale of a year of a child's life."
+  },
+  {
+   "protection": "protection or obstruction is a judge's question",
+   "severity": "strain",
+   "doc_ref": "§1",
+   "observation": "The Harm Panel documented the chain's other face: protective parents breach orders to shield children from genuinely unsafe contact, and abusive applicants use enforcement itself to continue abuse. The same nine receipts can be obstruction or protection, and the kernel refuses to tell them apart (refusal 11) - it records each breach and its stated reason unjudged, and hands the judge the chain, never a verdict. The refusal is load-bearing: a register that scored parents for 'obstructiveness' would be a machine worth capturing by whichever parent captures it. The cost of the refusal is real too - the register strengthens the honest chain and the dishonest one alike, and only the court can say which is which."
+  },
+  {
+   "protection": "the declining accumulates",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Enforcement stays discretionary, and the kernel cannot compel it: a court that declines sanction nine times has been made countable, not willing - the police-vetting shape on the bench. What changes is that each declining now cites the rule it considered and joins a chain of dispositions against the order, and the annual aggregate turns the enforcement gap into the court's own signed figure - 2 sanctions in 168 applications, median 31 weeks - where the national statistics show the same shape but no individual order can be followed from breach to fate. A court unwilling to enforce its own orders is made visible to the parties, the auditor and the aggregate. Visibility is not will."
+  },
+  {
+   "protection": "the child's file, and who may never read it",
+   "severity": "note",
+   "doc_ref": "§6",
+   "observation": "This register only exists because the mode exists: a child-arrangements file laid open to the public would itself be a harm, so every body is sealed subject-readable - the parties, the children's guardian, the authorized auditor, never the crowd - and public accountability lives only in the anonymous aggregate. This is the corpus's clearest case of the kernel arguing against its own public-by-default instinct and standing on the sealed object instead: legibility to the people the order concerns, privacy against everyone else, and the pattern still countable. The adopter is the courts service measuring its own tempo - the transparency pilots suggest real willingness, and it remains consent, not compulsion."
+  }
+ ]
+}
