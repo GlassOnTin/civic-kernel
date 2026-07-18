@@ -1,0 +1,244 @@
+{
+ "id": "family-court-secrecy",
+ "title": "The Secret Court, Split in Two: Existence Public, Content Sealed",
+ "setting": "Maya Okonkwo's son was taken into interim care on a Tuesday afternoon, in a hearing no journalist attended, on evidence she believes was wrong, by an order whose written reasons were never published. When she tried to tell her MP what had happened, a solicitor warned her carefully: section 12 of the Administration of Justice Act 1960 makes publishing information about children proceedings a contempt of court — the gag binds the parties too, and parents have been taken back to court for a Facebook post. So she lived the double seal: a decision she could not get read, about which she could not speak. She is not the only shape in this story. The same seal protects her son — a child's worst year must not be googleable forever, and the privacy is not a pretext but the point — and it protected, in the real cases, courts that were never checked: judgments unpublished at rates researchers had to reconstruct, regional patterns nobody could count, and a public confidence that curdled into 'secret courts' conspiracy precisely because no claim about the family courts, true or false, could be tested against a record.\n\nThe real system has begun to move: the President of the Family Division's Transparency Review concluded in 2021 that the balance had tipped too far and that openness and children's anonymity must both be had; the reporting pilots from 2023 let accredited journalists report what they see under Transparency Orders that protect identities. The kernel's question is what those reforms look like as machinery rather than discretion. This scenario runs the Calderbrook Family Court's children-proceedings register at the corpus's hardest setting — a forum where the public may read nothing — and asks whether the kernel's own instinct for publication by default can honestly survive. Its answer is to split open justice into two separable goods: the existence, timing, actor-roles and cited rules of every act, public and witnessed; the content, sealed and readable by the parties, the guardian, and auditors whose access is itself logged. Whether any decision about Maya's son was right is a judge's question, refused absolutely (refusal 11). What the register tests is narrower: whether a court can be private without being deniable.",
+ "threats": [
+  "T1",
+  "T8"
+ ],
+ "doc_refs": [
+  "§8",
+  "§3.4",
+  "§3.1",
+  "§1",
+  "§6",
+  "§12",
+  "T1",
+  "T8"
+ ],
+ "precedents": [
+  {
+   "event": "The President of the Family Division's Transparency Review: the balance must reset",
+   "year": 2021,
+   "source": "Sir Andrew McFarlane, 'Confidence and Confidentiality: Transparency in the Family Courts'",
+   "url": "https://www.judiciary.uk/guidance-and-resources/confidence-and-confidentiality-transparency-in-the-family-courts/",
+   "shows": "The family judiciary's own review concluded that the degree of secrecy had gone further than children's privacy requires, damaging public confidence and accountability, and that greater openness and the anonymity of children are separable goods that must both be secured - the split this scenario turns into machinery."
+  },
+  {
+   "event": "The reporting pilots: accredited journalists report under Transparency Orders",
+   "year": 2023,
+   "source": "Family Court Reporting Pilot (Cardiff, Leeds, Carlisle; extended from 2024); Courts and Tribunals Judiciary",
+   "url": "https://www.judiciary.uk/courts-and-tribunals/family-law-courts/",
+   "shows": "From January 2023, accredited journalists and legal bloggers in pilot courts may report family proceedings subject to a Transparency Order protecting the identities of children and families - demonstrating in practice that content-anonymized openness is workable, and supplying the access-under-logged-terms role this scenario's register formalizes."
+  },
+  {
+   "event": "The gag that binds even the parties, and the judgments nobody could read",
+   "year": 1960,
+   "source": "Administration of Justice Act 1960, s.12; Cardiff University / Nuffield Foundation research on family judgment publication",
+   "url": "https://www.legislation.gov.uk/ukpga/1960/65/section/12",
+   "shows": "Publishing information about children proceedings is contempt of court, including for the parties themselves - parents have faced proceedings for speaking about their own case - while research found only a small fraction of family judgments were ever published, so the default forum was one whose decisions could be neither read nor discussed: secrecy of content swallowing publicity of existence."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:calderbrook-family-court.example",
+   "name": "Calderbrook Family Court (children-proceedings register)",
+   "parent": "did:web:hmcts-calderbrook.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:calderbrook-family-court.example",
+   "witnesses": [
+    "did:web:calderbrook-childrens-guardian.example",
+    "did:web:family-justice-observatory.example",
+    "did:web:calderbrook-court-audit.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ],
+   "mode": "subject-readable"
+  },
+  "interaction_cost": [
+   {
+    "process": "read-your-own-case-file",
+    "steps": 1,
+    "fields": 0,
+    "median_seconds": 180,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:calderbrook-family-court.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Maya Okonkwo, sealed and silenced",
+   "verb": "offstage",
+   "narrative": "The backdrop is a forum where the seal swallowed everything. The privacy of a child in proceedings is a real good — the rare case where the corpus's public-by-default instinct is simply wrong — but in the real system it metastasized: judgments unpublished, hearings unreportable, patterns uncountable, and the parties themselves gagged by section 12 even about their own case. The result was the worst of both worlds: children not meaningfully more private — their cases were legible to every professional in the room — while courts became undeniable to no one and deniable to everyone: no way to establish what was decided when, whether a file was complete, whether a court's pattern differed from its neighbour's. Whether any removal was right is a judge's question and stays one (refusal 11). The kernel's question: which parts of open justice can be public when the content cannot be — and the answer it proposes is all of them except the words."
+  },
+  {
+   "actor": "Calderbrook Family Court",
+   "verb": "cast",
+   "narrative": "Calderbrook opens its children-proceedings register on the split. Every hearing, order and judgment produces a log entry whose shell is public and witnessed — a case pseudonym, the entry type, the timestamp, the actor's role, the rule the act cites — and whose body is sealed, readable by the parties, the children's guardian, and auditors whose access is itself a logged act. Judgment bodies carry an anonymized-publication flag, so the register counts what is published and what is not. Quarterly, the register publishes anonymous aggregates: cases, orders by type, hearing gaps, publication rates, access grants. The public can verify the forum's existence, integrity and tempo to the byte, and cannot read a word about any child. The court keeps every judgment and every discretion. What it gives up is deniability: a hearing that happened cannot have not happened, and a pattern can no longer hide inside a seal.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2025-03-02T09:00:00Z",
+    "body": {
+     "decision_id": "2025-children-proceedings-register",
+     "decision_class": "sealed-forum-commitment",
+     "authorizing_rule": "Children Act 1989; Administration of Justice Act 1960 s.12; transparency-order practice; calderbrook-charter/v1",
+     "issuing_authority": "Calderbrook Family Court",
+     "commitment": "Every act in children proceedings logs a public, witnessed shell - case pseudonym, type, timestamp, actor role, cited rule - with a sealed body readable by parties, guardian and logged auditors; judgment entries carry an anonymized-publication flag; quarterly anonymous aggregates publish cases, orders, tempo, publication rates and access grants",
+     "note": "Open justice, split: existence, integrity and pattern are public; content is sealed. The register does not judge any decision (refusal 11), publish any child, or repeal the s.12 gag - it makes the sealed forum undeniable, not open."
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "U2VhbGVkRm9ydW1Db21taXRtZW50MDE"
+    }
+   }
+  },
+  {
+   "actor": "The hearing that cannot be denied",
+   "verb": "cast",
+   "narrative": "The interim care order concerning Maya's son enters the register the afternoon it is made. The world sees the shell: an interim care order, in case CP-0187, citing section 38 of the Children Act, made by a circuit judge on the fourteenth of May, witnessed complete. The world sees nothing else — not the names, not the evidence, not the reasons. Maya sees everything: the sealed body holds the order and its reasons in full, hers to read that evening rather than months later on a transcript she must pay for. The seal that used to swallow the hearing whole now covers exactly the words. If anyone later claims the hearing never happened, or happened on different terms, or that the reasons were written after the fact, the public shell and its witnesses answer without opening. Her son's privacy has not thinned by one line — and the decision about him has become a fact in the world.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-family.hearing-record",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2025-05-14T15:20:00Z",
+    "body": {
+     "case_ref": "case:calderbrook-2025-CP-0187",
+     "entry_class": "interim-care-order",
+     "rule_cited": "Children Act 1989 s.38",
+     "actor_role": "circuit-judge",
+     "reasons": "sealed body: full order and written reasons, readable by the parties and the children's guardian the same day",
+     "anonymized_publication": "not published",
+     "note": "The public shell carries existence, timing, type, role and rule; the sealed body carries every word. The register records that this was decided, not whether it was right (refusal 11)."
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90123456",
+     "readable_by": [
+      "subject",
+      "authorized-auditor"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "SGVhcmluZ1NoZWxsUHVibGljQm9keVNlYWxlZDAy"
+    }
+   }
+  },
+  {
+   "actor": "An accredited reporter, reading on the record",
+   "verb": "cast",
+   "narrative": "A journalist accredited under the pilot practice asks to follow case CP-0187. In the real pilots this is a Transparency Order — discretionary, paper, its terms invisible. Here it is machinery: a logged access grant, public in its shell — an accredited-reporter role was granted sealed-content access to this case on this date, under an anonymization duty, by this court — with the duty's terms in the granted record. Her reading is itself on the record; the watcher is watched. When she publishes her anonymized report, anyone can check its checkable claims — that a hearing happened that day, that the order cited that rule, that four months passed before the next listing — against the public shells, without any seal opening. Maya cannot speak; the gag is statute, and the kernel does not repeal law. But a stranger with a logged duty now can, and what the stranger writes can be tested against a record instead of against rumour.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-family.access-grant",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2025-09-10T11:05:00Z",
+    "body": {
+     "case_ref": "case:calderbrook-2025-CP-0187",
+     "grantee_role": "accredited-reporter",
+     "terms": "sealed-content access under anonymization duty (transparency-order practice); breach of terms is a logged, appealable act",
+     "granted_by": "circuit-judge",
+     "access_logged": true,
+     "note": "The pilot's Transparency Order made computable: who may read a sealed forum, under what duty, granted when, by whom - public in shell, so access to secrecy is never itself secret."
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "QWNjZXNzR3JhbnRXYXRjaGVyV2F0Y2hlZDAz"
+    }
+   }
+  },
+  {
+   "actor": "The register, counting what no one may read",
+   "verb": "cast",
+   "narrative": "Quarterly, the register publishes the numbers the sealed forum never had: cases opened and closed, orders by type, the median gap between listings, how many judgment entries carry the anonymized-publication flag and how many do not, how many access grants were made and to whom by role. For the first time a claim about the family courts — they publish almost nothing; they are slower here than there; removals are rising — can be checked against a signed figure instead of fought over in the dark, and a court's pattern can be compared with its neighbour's while every child in every case stays sealed. The categories doing the counting are the court's own, and that is a limit the register wears openly: it counts what the forum coded, and coding is judgment. But the alternative it replaces was not a better count. It was no count at all.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:calderbrook-family-court.example",
+    "timestamp": "2026-01-15T09:00:00Z",
+    "body": {
+     "process": "children-proceedings",
+     "period": "2025-Q4",
+     "unit": "cases and orders",
+     "cases_active": 214,
+     "orders_by_type": "interim-care 37, supervision 22, child-arrangements 96, other 41",
+     "median_weeks_between_listings": 9,
+     "judgments_published_anonymized": 11,
+     "judgments_unpublished": 63,
+     "reporter_access_grants": 4,
+     "note": "Anonymous aggregate, no case identifiable. The forum's tempo, output and publication rate as signed public figures - the pattern countable while every body stays sealed. Categories are the court's own coding; the register counts them and does not define them."
+    },
+    "sig": {
+     "key_id": "did:web:calderbrook-family-court.example#log-1",
+     "alg": "ed25519",
+     "value": "QWdncmVnYXRlU2VhbGVkRm9ydW1Db3VudDA0"
+    }
+   }
+  },
+  {
+   "actor": "The gag, the coder, and the auditor who must choose to look",
+   "verb": "offstage",
+   "narrative": "The ceilings, plainly. The gag is law: section 12 binds Maya whatever the register does, and the kernel does not repeal statutes — what it gives her is a file that is complete, witnessed and provable to an appeal court or an auditor, a record without a voice, which is more than she had and less than justice. The categories are judgments: every aggregate column — what counts as an allegation raised, a delay, a distinct hearing — is the court's own coding, and a register that defined the categories itself would be deciding substance by taxonomy (refusal 11); it counts the coder's counts and shows the coder. Completeness is not scrutiny: the sealed file waits for an auditor, a guardian, an appeal — the register makes looking possible and cheap, never mandatory, and a wrong judgment sealed in a perfect file is still wrong, found only if someone with access reads it. Anonymization is a practice, not a proof: a small town can sometimes name a family through any aggregate, and the register's counts are coarse on purpose, which is a real cost to the pattern's resolution. And the adopter is the forum measuring itself — though here, unusually in this corpus, the real institution got there first: the Transparency Review and the pilots are the courts choosing openness-with-anonymity, and this register is that choice made checkable rather than discretionary."
+  },
+  {
+   "actor": "Anyone, checking the forum they may not read",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: it took open justice apart and kept every piece that does not name a child. Existence — every hearing, order and judgment a public, witnessed, undeniable shell citing its rule. Integrity — a file whose completeness the parties and the world can verify without reading it. Access — every reading of the sealed content itself a logged, public-shelled act, so secrecy is never secretly accessed. Pattern — the forum's tempo, output and publication rate as signed anonymous figures, comparable across courts. And content — sealed, subject-readable, exactly as narrow as the child's privacy requires. So the two real scandals stop sharing a defence: a court can no longer answer 'you may not see the pattern' with 'the children must be private', because the pattern is public and the children are not in it. What it did not do, and by its own limits cannot: repeal the gag on the parties, define a single category, force an auditor to look, publish a judgment, make any decision right, or give Maya back the Tuesday afternoon. The seal survives, where it belongs: over the words about a boy. Everything else about the court that decided his year is now a fact anyone can check — which is what 'secret court' was never able to mean before: private, and answerable."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "Family courts seal everything: judgments unpublished, parties gagged about their own case, patterns uncountable. The kernel splits open justice: every act's existence, timing and cited rule public and witnessed; every word sealed, subject-readable, auditor access itself logged; patterns as anonymous counts — private and undeniable at once. It cannot repeal the gag, force scrutiny, or make a sealed judgment right.",
+ "protection": "open justice, split: existence public, content sealed",
+ "protection_plain": "Whether a public, witnessed shell for every sealed act — type, date, rule — plus logged auditor access and anonymous aggregates makes a private forum undeniable and its pattern countable. It does; but the parties stay gagged by statute, categories are the court's own, and no one is made to look.",
+ "findings": [
+  {
+   "protection": "existence public, content sealed",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The finding this case exists to make, and the corpus's only forum-scale seal. The secret court's real defect was never that content was hidden - sometimes it must be - but that hiddenness swallowed existence: what was decided when, by what rule, whether the file was complete, all deniable. The register splits the two: a public, witnessed shell for every act (pseudonym, type, timestamp, role, cited rule) with every word sealed subject-readable. A hearing that happened cannot have not happened; a child's privacy does not thin by one line. Open justice becomes decomposable - and the kernel's public-by-default instinct honestly yields to the one domain where it is wrong, standing on the sealed object instead."
+  },
+  {
+   "protection": "the gagged party's provable file",
+   "severity": "strain",
+   "doc_ref": "§3.1",
+   "observation": "Section 12 binds the parties whatever the register does: Maya may read everything and still say almost nothing, and the kernel does not repeal statutes. What she gains is a file that is complete, witnessed, same-day readable, and provable to an appeal court or auditor without public disclosure - a record without a voice. That is real: the parent who once paid for a late transcript of her own hearing now holds the sealed original the day it was made, and no one can tell her it does not exist. It is also honestly less than the wrong: the double seal is half-lifted - the decision she could not get read, she reads; the case she may not speak about stays unspeakable, because that seal is Parliament's."
+  },
+  {
+   "protection": "the pattern counted, no child readable",
+   "severity": "strain",
+   "doc_ref": "§8",
+   "observation": "Quarterly anonymous aggregates - orders by type, listing gaps, publication rates, access grants - make claims about the family courts checkable for the first time against signed figures, and courts comparable with their neighbours, while every body stays sealed. Two honest limits. The categories are the court's own coding, and coding is judgment: a register that defined 'an allegation raised' or 'a delay' would decide substance by taxonomy (refusal 11), so it counts the coder's counts and shows the coder. And anonymity constrains resolution: coarse counts protect small-town families and cost the pattern detail - a trade the register makes on purpose and says so."
+  },
+  {
+   "protection": "access to secrecy is never secret",
+   "severity": "note",
+   "doc_ref": "§12",
+   "observation": "The pilots' Transparency Order made computable: an accredited reporter's sealed-content access is a logged act with a public shell - who may read, under what anonymization duty, granted when, by whom - and the reading itself is on the record, so the watcher is watched. Published reports become checkable against the shells (a hearing that day, that rule, that gap) without any seal opening. This is the register's answer to both scandals at once: the public's stranger-with-a-duty can see in, and the family can see exactly who has seen in. The real institution supplied the role; the register supplies the record of its use."
+  },
+  {
+   "protection": "completeness is not scrutiny",
+   "severity": "strain",
+   "doc_ref": "§1",
+   "observation": "The sealed file waits. The register makes looking possible, cheap and provable - a complete, witnessed record for any appeal, guardian or auditor - and makes no one look: a wrong judgment sealed in a perfect file is still wrong, found only if someone with access reads it, and the forum being measured is the forum keeping the file. The adopter caveat is gentler here than anywhere in the corpus - the Transparency Review and the pilots are the courts choosing openness-with-anonymity unprompted - but a register that counts publication rates still needs the court to keep publishing, and visibility of the unread file is not the reading of it. The kernel arms scrutiny; it cannot supply the scrutineer."
+  }
+ ]
+}
