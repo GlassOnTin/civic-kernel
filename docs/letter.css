@@ -1,0 +1,6 @@
+body{font:11pt/1.5 system-ui,sans-serif;color:#0b0c0c;max-width:none;margin:0}
+h1{font-size:15pt;line-height:1.2}
+a{color:#1d70b8}
+blockquote{margin:0 0 0 1em;padding-left:.8em;border-left:3px solid #b1b4b6;color:#505a5f}
+hr{border:0;border-top:1px solid #b1b4b6}
+@page{size:A4;margin:17mm}

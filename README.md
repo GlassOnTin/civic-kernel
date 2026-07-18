@@ -125,7 +125,8 @@ for UK law — and every entrance that line asked for now exists, in the open: t
 the [adviser's note](https://glassontin.github.io/civic-kernel/adviser-note.html) for
 [Owed](https://glassontin.github.io/civic-kernel/owed.html) (its
 [covering email](docs/carers-uk-email.md) drafted too), the notes to the
-[Good Law Project](docs/glp-note.md) and [mySociety](docs/mysociety-note.md), the
+[Good Law Project](docs/glp-note.md) and [mySociety](docs/mysociety-note.md) — each
+with its covering email and PDF enclosure beside it in `docs/` — the
 [Metagov abstract](docs/metagov-abstract.md), the
 [club hand-over](docs/clubhouse-demo.md) (pre-flighted: suite green, both riggings
 reproducing their quoted failure lines, one checklist), and the

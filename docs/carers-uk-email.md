@@ -49,7 +49,8 @@ The overpayment case, worked step by step:
 
 ---
 
-*[Before sending: print `adviser-note.html` to PDF for the attachment — it lands on
-one side of A4 by design; add the name, contact line, and addressee. Written for the
-advice team; opening with the policy team instead would lead with the middle
-paragraph.]*
+*[Before sending: attach `docs/adviser-note.pdf` — one side of A4; regenerate after
+any edit with
+`google-chrome --headless --no-pdf-header-footer --print-to-pdf=docs/adviser-note.pdf file://$PWD/adviser-note.html`.
+Add the name, contact line, and addressee. Written for the advice team; opening with
+the policy team instead would lead with the middle paragraph.]*
