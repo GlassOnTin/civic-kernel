@@ -165,12 +165,18 @@
   .cmp .cite { margin-top: .25rem; }
   .cmp details { margin-top: .2rem; }
   .cmp summary { font-size: .7rem; }
+  .propose { margin-top: 3rem; max-width: 46rem; background: var(--card); border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: .8rem 1.1rem; font-size: .95rem; }
+  .propose b { color: var(--ink); }
   footer { margin-top: 3.5rem; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line); padding-top: 1rem; }
   @media (max-width: 560px) { .step { flex-direction: column; gap: .15rem; } .verb { text-align: left; flex-basis: auto; } }
 </style>
 </head>
 <body>
 <div class="wrap"><a class="home" href="index.html"><b>Civic&nbsp;Kernel</b> <span>a thin protocol for public decisions</span></a><main id="app"></main>
+<section class="propose">
+<b>Know a case that belongs here?</b> The corpus grows by a <a href="docs/triage.md">triage that shows its working</a>: failures of process — a record quietly absent, altered, or ignored — are in scope; cases that would need the protocol to judge substance are refused, with the reason recorded. Bring the case you know to the <a href="https://github.com/GlassOnTin/civic-kernel/issues">open door</a>, and the triage will answer in the open.
+</section>
 <footer>Every manifest and log entry shown here validates against the <a href="schema/manifest.schema.json">two waist schemas</a> — that is the test. The stories are fiction anchored to fact: the people are invented, and every attack pattern cites a documented real-world precedent on its page. Verdicts are the harness's honest reading of the <a href="architecture.html">architecture document</a>'s own claims and limits, not endorsements. And the waist is not only for fiction: the prototype election validates against the same two schemas — <a href="verifier.html">check it in your browser</a>.</footer>
 </div>
 
