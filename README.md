@@ -132,11 +132,15 @@ next case); an **adviser's note** for
 the people who help others claim); the **club hand-over pack**
 ([pre-flighted](docs/clubhouse-demo.md): the suite runs green, both riggings reproduce
 their quoted failure lines, and the run sheet now ends in a single hand-over checklist —
-what remains is a real club and a real season); and a **break-me door** (the
-tamper suite as an open invitation: winning attacks become named defences). Outreach
-drafts are prepared in the open — the latest,
-[a note to the Good Law Project](docs/glp-note.md), returns four encoded cases to the
-people who fought them — and sending them is a person's decision, not a repo's.
+what remains is a real club and a real season); and a **break-me door**
+([open](https://glassontin.github.io/civic-kernel/break.html): the claim, the twelve
+caught riggings, the rules of the game, and the offer — a winning attack becomes a
+named defence). Outreach drafts are prepared in the open —
+[a note to the Good Law Project](docs/glp-note.md) returning four encoded cases to the
+people who fought them, [a note to mySociety](docs/mysociety-note.md) on the two
+findings their tools are halfway through, and a
+[Metagov seminar abstract](docs/metagov-abstract.md) with the browser verifier as the
+live demonstration — and sending them is a person's decision, not a repo's.
 
 <details>
 <summary>What exists now, and the road behind the threads</summary>
