@@ -25,17 +25,18 @@ a public study of fifty-two institutional failures, one of them the overpayment
 scandal you've campaigned on — the state holding the earnings data while the debt
 grew, then prosecuting the growth. Owed is meant to be the other half of that finding:
 the limit checked privately, before the first pound of overpayment, by the person it
-protects.
+protects. It competes with nothing you run — done well, its job is to bring a carer to
+your helpline sooner, with a saved file in hand instead of a fear.
 
 The attached one-page note for advisers covers what it computes, why it can be checked
 rather than trusted, and where it honestly stops — eight entitlements, not advice, no
 Universal Credit or PIP, and no replacement for the full calculators your team already
 uses.
 
-The ask is small: fifteen minutes from someone on your advice team, against your
-hardest anonymised cases. Where it's wrong, or asks a question badly, I'd genuinely
-like to know — the rules are public data, and fixable. If it's useful, it's yours to
-share.
+The ask is small: fifteen minutes from someone on your advice team, running your
+hardest anonymised cases through it next to the Turn2us check your site links. Where
+it disagrees, or asks a question badly, I'd genuinely like to know — the rules are
+public data, and fixable. If it's useful, it's yours to share.
 
 With thanks for everything your advice line carries,
 
