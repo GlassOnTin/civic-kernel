@@ -9,6 +9,10 @@ whatever is strongest when you read this — plus the test that tells you whethe
 came back is right. If the rebuild agrees with the independent judge on every test
 case, you never needed to trust us; if ours disappears tomorrow, yours works.*
 
+Rebuilding is the proof; **owning is the practice**. If what you want is your own
+running copy — your name, your address, and the April uprating routine that keeps it
+true — the step-by-step guide is [docs/own](own/README.md).
+
 ## What you need
 
 - The rule files (public, plain JSON — the only source of truth):

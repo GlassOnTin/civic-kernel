@@ -21,7 +21,7 @@ legislation.gov.uk, and the client can save their answers as a small file they k
 nothing exists unless they choose to save it.
 
 The reason I'm writing to Carers UK first is the earnings limit. Behind the tool sits
-a public study of fifty-two institutional failures, one of them the overpayment
+a public study of fifty-four institutional failures, one of them the overpayment
 scandal you've campaigned on — the state holding the earnings data while the debt
 grew, then prosecuting the growth. Owed is meant to be the other half of that finding:
 the limit checked privately, before the first pound of overpayment, by the person it
@@ -36,7 +36,8 @@ uses.
 The ask is small: fifteen minutes from someone on your advice team, running your
 hardest anonymised cases through it next to the Turn2us check your site links. Where
 it disagrees, or asks a question badly, I'd genuinely like to know — the rules are
-public data, and fixable. If it's useful, it's yours to share.
+public data, and fixable. If it's useful, it's yours to share — and if you'd rather
+own it than link it, there's a step-by-step guide for that too.
 
 With thanks for everything your advice line carries,
 
