@@ -3272,6 +3272,251 @@
   ]
  },
  {
+  "id": "dwp-death-reviews-secret",
+  "title": "Reviewed, Recommended, Repeated: The Death Investigation That Learns Nothing",
+  "setting": "Raymond Ainsley had a serious mental illness, and when the department found him fit for work and then sanctioned him for missing an appointment he could not face, his support stopped, and some weeks later he took his own life. Because his death followed the department's own decisions, it triggered what the department calls an Internal Process Review — an investigation, conducted by the department, into whether the department's handling contributed to a death it may have caused. The review found what such reviews often find: that his assessment had not obtained or considered his medical evidence, that the sanction had been applied despite clear indications of his illness, and it recommended that assessors must, in such cases, get and weigh the medical record before deciding. Then the review was filed away, unpublished; his family, seeking to understand why he died, were sent a version so redacted it told them nothing; and the recommendation — which had, it later emerged, been made almost word for word after an earlier death, and not acted on — was not acted on this time either.\n\nThis is the real pattern of the DWP's death reviews, surfaced not by the department but by journalists and bereaved families prising documents out through Freedom of Information, heavily redacted and years late: reviews conducted in secret into the state's own role in the deaths of Errol Graham, Jodey Whiting, and others; recommendations that recur across deaths because they were never implemented; a department investigating its own culpability and controlling what anyone may see of it. Whether a sanction caused a death is a question for a coroner, and the kernel refuses it (refusal 11). The Elverton Department for Work, in this scenario, runs its death reviews on a kernel register, and the question is narrow and grave: when the body that failed a person investigates its own failure and holds the only account of it, can a protocol at least stop the review being buried, the family being shut out, and the recommendation vanishing only to be recommended again over the next coffin?",
+  "threats": [
+   "T1",
+   "T8"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§3.1",
+   "§1",
+   "§6",
+   "§12",
+   "T1",
+   "T8"
+  ],
+  "precedents": [
+   {
+    "event": "The DWP reviews its own role in claimant deaths in secret",
+    "year": 2020,
+    "source": "Disability News Service (John Pring); DWP Internal Process Reviews via FOI",
+    "url": "https://www.disabilitynewsservice.com/?s=internal+process+review",
+    "shows": "The department conducts Internal Process Reviews (formerly Peer Reviews) when a claimant dies and its own actions may be implicated, but conducts them in secret, resisting disclosure of their number, findings and recommendations and releasing them years late and heavily redacted - the body that may have failed a person controlling the only investigation into that failure."
+   },
+   {
+    "event": "Deaths where DWP decisions were implicated: Errol Graham, Jodey Whiting",
+    "year": 2019,
+    "source": "Errol Graham inquest; Jodey Whiting (ICE / second tribunal); coroners' Prevention of Future Deaths reports",
+    "url": "https://www.bbc.co.uk/news/uk-england-nottinghamshire-53179344",
+    "shows": "Errol Graham starved to death after his benefits were wrongly stopped; Jodey Whiting took her life after being found fit for work and sanctioned. Coroners issued Prevention of Future Deaths reports, and internal reviews recommended changes - recommendations that recurred across deaths because earlier ones had not been implemented."
+   },
+   {
+    "event": "Recommendations from death reviews recur, unimplemented",
+    "year": 2020,
+    "source": "National Audit Office; Independent Case Examiner; Public Accounts Committee",
+    "url": "https://www.nao.org.uk/reports/information-held-by-the-department-for-work-pensions-on-deaths-by-suicide-of-benefit-claimants/",
+    "shows": "The NAO found the department could not show it had learned from the deaths of claimants: reviews were not systematically tracked, recommendations were not reliably implemented, and the same failings recurred - a learning process whose failures were invisible because the reviews and their recommendations were neither published nor followed to their outcome."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:elverton-dwp.example",
+    "name": "Elverton Department for Work (death-review register)",
+    "parent": "did:web:elverton-gov.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:elverton-dwp.example",
+    "witnesses": [
+     "did:web:bereaved-families-network.example",
+     "did:web:elverton-dwp-audit.example",
+     "did:web:disability-rights-body.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ],
+    "mode": "subject-readable"
+   },
+   "interaction_cost": [
+    {
+     "process": "read-the-review-into-your-relative's-death",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 120,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:elverton-dwp.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Raymond Ainsley's family, and a review they cannot see",
+    "verb": "offstage",
+    "narrative": "The backdrop is an investigation the investigated body owns. When a claimant dies and the department's decisions may be implicated, the department reviews itself - and keeps the review, its findings, and its recommendations to itself, releasing them, if at all, redacted and years late. The wrong compounds in three ways the kernel can read: the review can be buried, so the fact of it is deniable; the bereaved are shut out, so the people most entitled to understand are told least; and the recommendation vanishes, so a fix identified after one death is not implemented and is identified again after the next. Whether a decision caused a death is a coroner's question, and the kernel refuses it (refusal 11). What it can change is whether the review exists un-buriably, whether the family may read it, and whether the recommendation is followed to its fate so that a failure to learn cannot hide."
+   },
+   {
+    "actor": "Elverton Department for Work",
+    "verb": "cast",
+    "narrative": "Elverton opens its death reviews on a subject-readable register with commitments aimed exactly at the three evasions: every death that triggers a review produces a logged, witnessed entry, so no review can be buried or denied; its finding and recommendation are append-only, so neither can quietly be dropped; the bereaved family is a party who may read the review into their relative's death; and every recommendation carries a tracked implementation status, linked to any earlier review that made the same recommendation. The department keeps its judgment - it still writes the review of its own conduct. What it gives up is the ability to hold the review in the dark, to keep the family out, and to let the recommendation disappear.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:elverton-dwp.example",
+     "timestamp": "2025-09-01T09:00:00Z",
+     "body": {
+      "decision_id": "2025-death-review-register",
+      "decision_class": "death-review-commitment",
+      "authorizing_rule": "internal-review-policy; duty of candour to the bereaved; elverton-charter/v1",
+      "issuing_authority": "Elverton Department for Work",
+      "commitment": "Every triggering death produces a logged, witnessed review; finding and recommendation append-only; the bereaved family may read the review into their relative's death; every recommendation carries a tracked implementation status linked to earlier identical recommendations; recurrence of unimplemented recommendations published as a rate",
+      "note": "The register forecloses the buried review, the shut-out family, and the vanishing recommendation. It does not decide whether the department caused a death (coronial, refusal 11), nor make the department's account of itself honest."
+     },
+     "sig": {
+      "key_id": "did:web:elverton-dwp.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVhdGhSZXZpZXdSZWdpc3Rlck9wZW5lZEVsdmVydG9uMDE"
+     }
+    }
+   },
+   {
+    "actor": "The department, reviewing its own failure",
+    "verb": "cast",
+    "narrative": "The review into Raymond's death is written, and it is now an entry that cannot be un-written: it records that his assessment did not obtain or weigh his medical evidence, that the sanction was applied despite clear indications of his illness, and it recommends that assessors must get and consider the medical record before such a decision. It is sealed from the public for the family's and others' privacy, and open to his family, who are the review's rightful readers. The department has still investigated itself, and the kernel does not pretend otherwise. But the review can no longer be filed into silence, and the recommendation it makes now has somewhere it must go.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-review.finding",
+     "community": "did:web:elverton-dwp.example",
+     "timestamp": "2026-02-15T11:00:00Z",
+     "body": {
+      "review_id": "2026-elverton-IPR-0231",
+      "trigger": "death of a claimant following a fit-for-work decision and sanction",
+      "claimant_ref": "claimant:elverton-0231 (readable by the bereaved family as the person's representatives)",
+      "finding": "the work-capability assessment did not obtain or consider the claimant's GP and psychiatric evidence; the sanction was applied despite indications of serious mental illness",
+      "recommendation": "assessors must obtain and record consideration of medical evidence before a fit-for-work decision where mental-illness indicators are present",
+      "witnessed": true,
+      "note": "The review exists, is witnessed complete, and is readable by the bereaved family - foreclosing the buried, redacted-from-the-family review. It does not decide whether the department caused the death (refusal 11)."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+      "readable_by": [
+       "subject",
+       "authorized-auditor"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:elverton-dwp.example#log-1",
+      "alg": "ed25519",
+      "value": "UmV2aWV3RmluZGluZ1JheW1vbmREZWF0aE5vdFJlYWwwMg"
+     }
+    }
+   },
+   {
+    "actor": "Raymond Ainsley's family, reading the review",
+    "verb": "read",
+    "narrative": "Raymond's family read the review into his death - not a redacted page won after two years of Freedom of Information requests, but the review itself, the finding and the recommendation, on the record, theirs to see because it is the account of what happened to their son. It does not bring him back and it does not, by itself, blame anyone; the coroner's question is not the kernel's to answer. But it ends the particular cruelty of being failed and then kept in the dark about the failing, of grieving a death the state investigated and would not let you read. They learn what the review found, and what it recommended - and, because the register does not stop there, they will learn what becomes of the recommendation."
+   },
+   {
+    "actor": "The recommendation, tracked to its fate",
+    "verb": "cast",
+    "narrative": "This is the entry the real scandal never produced: the recommendation's status, followed and logged. Months on, it stands as not implemented - and linked, on the record, to an earlier review, after an earlier death, that made the very same recommendation and was also not implemented. In the department's own filing, these two would be separate secrets, each defensible alone, the repetition invisible. Here they are one chain: a fix identified over one coffin, dropped, and identified again over the next. The kernel cannot make the department act on the recommendation. What it can do, and does, is make the not-acting a permanent, linked, countable fact - so that a failure to learn from a death can no longer pass as a first mistake.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-review.recommendation-status",
+     "community": "did:web:elverton-dwp.example",
+     "timestamp": "2026-06-30T10:00:00Z",
+     "body": {
+      "recommendation_ref": "review:2026-elverton-IPR-0231#recommendation",
+      "status": "not implemented",
+      "recurs_from": "review:2023-elverton-IPR-0104 (an earlier death; same recommendation; not implemented)",
+      "note": "The recommendation tracked to its fate. Logged and witnessed, a fix recommended after one death and dropped, then recurring after another, cannot disappear - the failure to learn is on the record and countable. The kernel cannot compel the implementation, only make its absence undeniable."
+     },
+     "sig": {
+      "key_id": "did:web:elverton-dwp.example#log-1",
+      "alg": "ed25519",
+      "value": "UmVjb21tZW5kYXRpb25TdGF0dXNSZWN1cnJlbmNlTm90MDM"
+     }
+    }
+   },
+   {
+    "actor": "Elverton Department for Work, transparency office",
+    "verb": "cast",
+    "narrative": "At year's end the register publishes the number the department fought hardest to keep un-counted: of the recommendations its own death reviews produced, how many were implemented, and how many merely repeated a recommendation from an earlier death that had not been. When nearly a third of this year's recommendations are recurrences of unheeded ones, the figure says what no single redacted review could - that the reviews are not a learning process but a ritual, the same failures found and recommended and left, across death after death. Measure the process, never the person (§8): the department's failure to learn as its own signed figure. It is the clearest possible account of a system reviewing itself and changing nothing. It changes nothing, either, on its own.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:elverton-dwp.example",
+     "timestamp": "2026-12-01T09:00:00Z",
+     "body": {
+      "process": "internal-death-reviews",
+      "period": "2026",
+      "unit": "reviews and recommendations",
+      "reviews": 180,
+      "recommendations_made": 210,
+      "recommendations_implemented": 74,
+      "recommendations_recurring_unimplemented": 61,
+      "note": "Anonymous aggregate. Of 210 recommendations from death reviews, 74 were implemented; 61 repeated a recommendation from an earlier death that had not been acted on. Measure the process (§8): the failure to learn as the department's own signed number - the same failings, reviewed and recommended and unremedied, across deaths."
+     },
+     "sig": {
+      "key_id": "did:web:elverton-dwp.example#log-1",
+      "alg": "ed25519",
+      "value": "QWdncmVnYXRlUmVjdXJyaW5nUmVjb21tZW5kYXRpb25Ob3QwNA"
+     }
+    }
+   },
+   {
+    "actor": "The reviewer who is the reviewed, and the death already done",
+    "verb": "offstage",
+    "narrative": "The ceilings are set by who holds the pen and by what a record comes too late to change. A tracked recommendation is not an implemented one: the kernel makes the recommendation and its non-implementation permanent, linked and countable, and it cannot compel the department to act - the department is the reviewer, the reviewed, and the actor, and its inaction is made undeniable, not impossible. The reviewer is the reviewed: the kernel makes the review exist, be complete, and be readable, and it cannot make it honest - a review that under-finds the department's own fault is the maternity grader-is-the-harmer at its gravest, a substantive judgment the kernel refuses (refusal 11), foreclosed from being buried but not from being self-serving. Causation is a coroner's: the kernel surfaces the review and the pattern and does not rule that a sanction killed a man. Privacy binds the openness: a death review cannot be wholly public without exposing the bereaved and the named, so scrutiny here is auditor-verified, family-readable, and anonymously aggregated, not laid open to all. And the adopter is the department whose failures the reviews record, the least willing of any to run a register that counts its own unheeded recommendations across the graves of the people it was meant to serve. The kernel makes the learning owed and its absence visible. It cannot make the learning happen, nor return the one whose death was the lesson."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did, precisely: it made each death review an un-buriable, witnessed, family-readable record whose recommendation is followed to its fate, and made the recurrence of unimplemented recommendations across deaths a signed number - so the wrong at the centre of the real scandal, a department investigating its own role in a death, hiding the review, shutting out the family, and dropping the recommendation only to identify it again over the next death, cannot be enacted: the review cannot be buried, the family cannot be shut out, and a fix recommended-and-dropped-and-recurring cannot pass as a first mistake. What it did not do, and by its own limits cannot: compel the department to implement what it recommends, make a self-investigation honest, decide whether a decision caused a death, or open a death review fully to the public. It made the learning from a death owed, legible, and its absence countable - and could not make the state learn, only make the state answer for not learning. The recommendation is on the record, and its fate is on the record; the next review, if the fix is dropped again, will find a department that knew - and this time the family, the auditor, and the count will know it too."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "When a claimant dies after a sanction, the DWP reviews its own role in secret, hides it from the family, and lets the recommendation disappear — so the same failure kills again (Errol Graham). The kernel makes each review un-buriable and family-readable, and tracks each recommendation's fate, counting the fixes dropped across deaths. But it can't compel implementation or make the self-review honest.",
+  "protection": "the un-buriable review and its recommendation",
+  "protection_plain": "Whether making each death-review un-buriable and family-readable, and tracking each recommendation's fate, protects the next at risk. It stops the buried review and the vanishing recommendation; but the kernel can't compel implementation, make the self-review honest, or rule on cause.",
+  "findings": [
+   {
+    "protection": "the review, un-buriable and family-readable",
+    "severity": "note",
+    "doc_ref": "§3.1",
+    "observation": "For an adopting department, every death that triggers a review produces a logged, witnessed entry whose finding and recommendation are append-only, and the bereaved family may read the review into their relative's death - so the buried, redacted-from-the-family review of the real scandal cannot be logged. The fact of the review is un-deniable, its recommendation cannot be quietly dropped (§3.4, T8), and the family who fought for two years for a redacted page instead read the account itself, theirs by right because it is the record of what happened to their relative. It ends the compound cruelty of being failed by the state and then kept in the dark about the failing."
+   },
+   {
+    "protection": "the recommendation tracked to its fate",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "The finding this case exists to make. The deepest wrong is not only secrecy but a recommendation that disappears: a fix identified after one death, dropped, and identified again after the next, each review defensible alone and the repetition invisible. The kernel makes every recommendation and its implementation status a linked, witnessed, countable record, tied to any earlier review that made the same recommendation - so a fix recommended-and-dropped-and-recurring becomes a signed number, and a failure to learn from a death can no longer pass as a first mistake. But the kernel tracks the recommendation; it cannot compel the implementation. A recommendation logged, and its non-implementation logged and linked to the last death it was made over, is still a recommendation not implemented - the department being reviewer, reviewed, and actor at once, its inaction made undeniable rather than impossible."
+   },
+   {
+    "protection": "the reviewer is the reviewed",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The body that failed a person investigates its own failure and holds the only account of it. The kernel makes that review exist, be complete, and be readable, and it cannot make it honest: a review that under-finds the department's own fault is the maternity grader-is-the-harmer at its gravest scale, a substantive judgment the kernel refuses (refusal 11). What is foreclosed is the burying of the review and the dropping of the recommendation; what remains is the self-serving finding, which the kernel can surface for challenge - the family and an independent witness now read it - but cannot correct. It witnesses that a review was done and preserves what it said; it does not adjudicate whether what it said was true."
+   },
+   {
+    "protection": "causation is a coroner's, and the death is done",
+    "severity": "strain",
+    "doc_ref": "§1",
+    "observation": "Whether a sanction or a fit-for-work decision caused a death is a coronial and substantive question the kernel refuses (refusal 11): it surfaces the review and the pattern, and does not rule that the department killed a man. And the accountability it builds arrives, as it must, after the death that triggered the review - a tracked recommendation can prevent the next death, if implemented, and cannot undo this one. The kernel's work here is for the reckoning and against the recurrence: it makes the death teach, on the record, what it can teach, and it cannot return the person whose death was the lesson, nor guarantee the lesson is taken."
+   },
+   {
+    "protection": "the count the department fought to prevent, and privacy",
+    "severity": "note",
+    "doc_ref": "§6",
+    "observation": "The aggregate turns the scandal's core into the department's own signed figure - how many of its death-review recommendations were implemented, and how many merely repeated an earlier unheeded one - measure-the-process (§8): the failure to learn the department fought hardest to keep un-counted, made plain, where the NAO and the Independent Case Examiner had to reconstruct it. Two constraints bound it. A death review cannot be wholly public without exposing the bereaved and the named, so scrutiny is auditor-verified, family-readable, and anonymously aggregated, not open to all - a real limit on openness accepted for a real reason. And the adopter is the department whose failures the reviews record, the least willing of any body to run a register that counts its own unheeded recommendations across the deaths of the people it was meant to serve."
+   }
+  ]
+ },
+ {
   "id": "exam-algorithm-downgrade",
   "title": "Graded by Her School, Not Her Work: When a Legible Algorithm Is Still Unjust",
   "setting": "Asha Bello sat no exams in the summer of 2026 — a public-health emergency cancelled them — and so an algorithm decided her future instead. Her history teacher, who taught her for two years, assessed her at an A; she is, by every account, an A student. The standardisation model gave her a C. Not because of anything Asha did or wrote, but because of the school she attends: a large state comprehensive in a low-attainment area, whose cohorts three years ago achieved few top grades, and the model pulled her grade down to fit that history. Two streets away, a candidate in a class of nine at a fee-paying school kept his teacher's grade untouched — small cohorts were exempt from standardisation, and small cohorts are far more common in the private sector. Asha was graded on the past of strangers who shared her postcode.\n\nThis is the 2020 exam-grading fiasco, and its numbers are real: around two in five teacher-assessed grades were lowered, state-school pupils downgraded at nearly twice the rate of independent-school pupils, students given no mechanism to appeal the algorithm itself, and the whole thing abandoned within days after public fury — the Prime Minister calling it a 'mutant algorithm' and the regulator reverting to teachers' grades. The Calderbank Qualifications Authority runs its grading on a kernel register, and this scenario is a deliberate counterpoint to the welfare case: there, the harm was a model no one could see into; here, the harm is a model anyone can see through completely — and it is still unjust, because the injustice is not hidden in the algorithm. It is written plainly across its face.",

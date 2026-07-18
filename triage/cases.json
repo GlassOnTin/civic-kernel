@@ -441,8 +441,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "dwp-death-reviews-secret"
     },
     {
       "id": "us-civil-asset-forfeiture",
