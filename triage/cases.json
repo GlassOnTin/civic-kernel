@@ -402,8 +402,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "police-vetting-ignored"
     },
     {
       "id": "maternity-harm-downgraded",

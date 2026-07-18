@@ -1,0 +1,246 @@
+{
+ "id": "police-vetting-ignored",
+ "title": "The File It Must Keep: Nine Warnings About the Officer, Each Dismissed Alone",
+ "setting": "Over eight years, nine separate concerns were recorded about the same serving officer: two domestic-abuse allegations, three of harassment, four of conduct that colleagues found alarming. Each, taken by itself, was judged not enough to act on — a complainant who withdrew, an allegation not proven, a report filed and closed. No one ever laid the nine side by side, because the force's systems held them in nine separate places, and no decision was ever recorded explaining why, cumulatively, they came to nothing. The officer kept his warrant card and his powers. Then he was convicted of grave crimes against the women he had been policing, and an inquiry, laying the nine concerns in a row for the first time, asked the question the force never had: how was he still an officer?\n\nThis is the shape of David Carrick, a serial rapist who remained an armed officer through some two decades of reports; of Wayne Couzens, flagged for indecent exposure and nicknamed by colleagues before he murdered Sarah Everard; and of the Angiolini Inquiry and the Casey Review that followed, which found intelligence about dangerous officers recorded and not acted on, clusters of concern never aggregated, and vetting treated as a one-time gate rather than a live judgment. The wrong is not that the flags were unknown. It is that the institution holding them let each dissolve alone, aggregated nothing, and left its failure to act with no trace to review. Ashmore Constabulary, in this scenario, runs its officer vetting on a kernel register — and the case forces the kernel to confront its own deepest principle, that no file is ever built on a person, and to ask whether the one exception is the person who carries a warrant card.",
+ "threats": [
+  "T6",
+  "T1"
+ ],
+ "doc_refs": [
+  "§3.1",
+  "§8",
+  "§3.4",
+  "§1",
+  "§6",
+  "§12",
+  "T6",
+  "T1"
+ ],
+ "precedents": [
+  {
+   "event": "David Carrick: a serial rapist who stayed a serving armed officer for two decades",
+   "year": 2023,
+   "source": "R v Carrick (2023); Metropolitan Police / IOPC",
+   "url": "https://en.wikipedia.org/wiki/David_Carrick",
+   "shows": "A Metropolitan Police officer was convicted of dozens of rapes and sexual offences after remaining a serving, firearms-authorised officer through around two decades in which multiple allegations - domestic abuse, harassment - had been reported to the police and not acted on; no aggregate view of the concerns about him was ever taken."
+  },
+  {
+   "event": "Wayne Couzens: flagged, nicknamed, and vetted through to murder",
+   "year": 2021,
+   "source": "Angiolini Inquiry Part 1 (2024); R v Couzens",
+   "url": "https://www.gov.uk/government/publications/the-angiolini-inquiry-part-1-report",
+   "shows": "The officer who abducted, raped and murdered Sarah Everard had a history of indecent-exposure allegations and was reportedly nicknamed by colleagues; the Angiolini Inquiry found repeated failures to act on warnings and a vetting system that let him serve - concerns recorded and never assembled into the picture they formed together."
+  },
+  {
+   "event": "Systemic vetting and misconduct failures found endemic",
+   "year": 2023,
+   "source": "Baroness Casey Review (Metropolitan Police); HMICFRS police vetting inspections",
+   "url": "https://www.met.police.uk/police-forces/metropolitan-police/areas/about-us/about-the-met/bcr/baroness-casey-review/",
+   "shows": "The Casey Review and police inspectorate reports found that intelligence and allegations about officers were recorded but not acted upon, that officers who should have failed vetting were recruited or retained, and that decisions not to act left no reviewable rationale - the failure to aggregate and to act treated as normal."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:ashmore-police.example",
+   "name": "Ashmore Constabulary (officer-vetting register)",
+   "parent": "did:web:ashmore-gov.example"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:ashmore-police.example",
+   "witnesses": [
+    "did:web:independent-police-standards.example",
+    "did:web:ashmore-vetting-audit.example",
+    "did:web:police-federation.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ],
+   "mode": "subject-readable"
+  },
+  "interaction_cost": [
+   {
+    "process": "an-officer-reads-and-contests-the-flags-held-about-them",
+    "steps": 1,
+    "fields": 2,
+    "median_seconds": 180,
+    "abandonment_rate": 0.02
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:ashmore-police.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "The women he policed, and the file no one kept",
+   "verb": "offstage",
+   "narrative": "The backdrop is an institution that held the warnings and let them dissolve. The concerns about the officer were not secret from the force - they were the force's own records, filed and closed one at a time, each judged alone and none judged together. What was missing was aggregation and a trace: no view that laid the nine concerns side by side, and no recorded decision explaining why, cumulatively, they warranted nothing. Whether any single allegation should have ended his career is a professional-standards judgment the kernel refuses (refusal 11). What it can change is whether the flags aggregate into a cluster the force can see, whether the decision not to act leaves an artifact, and whether the clearance is a live judgment a new flag re-opens - and, unavoidably here, whether the kernel that refuses to build a file on any person must build one on the person who carries a warrant card."
+  },
+  {
+   "actor": "Ashmore Constabulary",
+   "verb": "cast",
+   "narrative": "Ashmore opens an officer-vetting register, and it is candid about the thing it is doing that the kernel elsewhere forbids: it builds a file on a person. Every concern recorded about an officer is logged and aggregated to that officer, so a cluster is visible; every decision not to act on a flag is a cited, reviewable entry; a new flag re-opens the officer's clearance rather than leaving a one-time gate behind; and the officer is a party who may read and contest the flags held about him. The force keeps its judgment - it still decides what a flag warrants. What it gives up is the silo, the untraced dismissal, and the stale clearance.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:ashmore-police.example",
+    "timestamp": "2025-06-01T09:00:00Z",
+    "body": {
+     "decision_id": "2025-vetting-register",
+     "decision_class": "officer-vetting-commitment",
+     "authorizing_rule": "vetting code (APP); professional standards; ashmore-charter/v1",
+     "issuing_authority": "Ashmore Constabulary",
+     "commitment": "Every concern about an officer logged and aggregated per-officer; every non-action cited and reviewable; a new flag re-opens the clearance; the officer may read and contest the flags held about him; clusters and cited non-actions published in aggregate",
+     "note": "The register deliberately builds a file - on the officer, not the citizen. It does not decide whether a flag or a cluster warrants removal (professional-standards, refusal 11), nor adjudicate whether an allegation is true."
+    },
+    "sig": {
+     "key_id": "did:web:ashmore-police.example#log-1",
+     "alg": "ed25519",
+     "value": "VmV0dGluZ1JlZ2lzdGVyT3BlbmVkQXNobW9yZU5vdFJlYWwwMQ"
+    }
+   }
+  },
+  {
+   "actor": "The register, aggregating the ninth concern",
+   "verb": "cast",
+   "narrative": "A ninth concern about the officer is recorded, and this time it does not vanish into a ninth silo: it is aggregated to him, and the register shows the cluster it completes - nine concerns over eight years, two domestic, three of harassment, four of conduct - and re-opens the clearance the force granted him long ago. This is the file the kernel refuses to keep on a citizen, kept on the officer, and it is the picture the inquiry had to assemble by hand after the crimes. Here it assembles itself, as the flags arrive. The officer can see it too; the file held about him is not held in the dark from him.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-vetting.flag",
+    "community": "did:web:ashmore-police.example",
+    "timestamp": "2026-01-15T10:00:00Z",
+    "body": {
+     "flag_id": "2026-ashmore-vf-0912",
+     "officer_ref": "officer:ashmore-4471 (subject-readable)",
+     "source": "domestic-abuse allegation reported to the force",
+     "cluster": "9th recorded concern over 8 years (2 domestic-abuse, 3 harassment, 4 conduct)",
+     "clearance_effect": "re-opens the officer's vetting clearance for reassessment against the cluster",
+     "note": "Logged and aggregated to the officer. Each concern alone was judged insufficient; the register makes the cluster of nine visible and re-opens the clearance a new flag must be weighed against - the picture the inquiry assembled by hand, assembled as the flags arrive. Subject-readable: the officer may see and contest the file held about him."
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8",
+     "readable_by": [
+      "subject",
+      "authorized-auditor"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:ashmore-police.example#log-1",
+     "alg": "ed25519",
+     "value": "VmV0dGluZ0ZsYWdOaW50aENsdXN0ZXJBc2htb3JlTm90MDI"
+    }
+   }
+  },
+  {
+   "actor": "The force, deciding not to act",
+   "verb": "cast",
+   "narrative": "The force decides not to progress the ninth concern - the complainant has withdrawn, and the allegation alone cannot be taken further - and in the old world that would be the end of it, a ninth quiet closing. Here the non-action is an entry: cited to its basis, reviewable, and, decisively, recorded against the cluster, so that a decision not to act on nine concerns cannot disguise itself as nine separate decisions not to act on one. The failure to act, which left no trace in the real cases, now leaves exactly one. Whether the cluster should have ended his career the kernel does not say. That it was a cluster, and that no one assessed it as one, it will not let go unsaid.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.denial-trace",
+    "community": "did:web:ashmore-police.example",
+    "timestamp": "2026-01-22T14:00:00Z",
+    "body": {
+     "in_response_to": "x-vetting.flag:2026-ashmore-vf-0912",
+     "disposition": "no action on this allegation - complainant withdrew; not progressed",
+     "cited_basis": "insufficient evidence to progress this allegation alone",
+     "cluster_flag": "this is the 9th concern; the register requires a recorded assessment of the cluster, not only of the single flag",
+     "review_trace": "did:web:ashmore-police.example/vetting-review/4471",
+     "note": "The non-action gets an artifact: why no one acted is now cited and reviewable, and it sits against the cluster it belongs to. The kernel forecloses the untraced dismissal; it cannot decide whether the cluster warranted removal (refusal 11)."
+    },
+    "sig": {
+     "key_id": "did:web:ashmore-police.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVuaWFsVHJhY2VOb0FjdGlvbkNsdXN0ZXJBc2htb3JlMDM"
+    }
+   }
+  },
+  {
+   "actor": "The officer, reading his own file",
+   "verb": "read",
+   "narrative": "The officer reads the file held about him, and the register insists on this too: the dossier the kernel builds on the powerful is not a secret one. He sees the nine concerns and the cited non-actions, and he may contest them - because a file of unproven allegations can wrong him as surely as its absence wronged the women in the real cases. An officer smeared by a malicious complaint, a whistleblower flagged in retaliation, a good record dressed as a cluster - these are real dangers, and the answer to them is not to keep no file but to make the file readable and contestable by the person it concerns. The kernel does not decide whether the flags are true. It makes them visible to the reviewer, and answerable to their subject."
+  },
+  {
+   "actor": "Ashmore Constabulary, vetting-audit office",
+   "verb": "cast",
+   "narrative": "At year's end the register publishes what the silos hid: how many serving officers carry a cluster of concerns, and that every non-action now carries a cited, reviewable decision where before it left no trace. When a hundred and thirty officers on one force carry three or more flags, the figure is not an accusation of a hundred and thirty officers - most clusters will be innocent - but it is the signal the force could never see when each flag sat alone, and the beginning of the aggregate judgment the real inquiries found was never made. Measure the process, never the person (§8): the clusters and the cited non-actions as the force's own numbers, so that the failure to aggregate and the failure to trace can no longer be the default.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:ashmore-police.example",
+    "timestamp": "2026-12-01T09:00:00Z",
+    "body": {
+     "process": "officer-flag-handling",
+     "period": "2026",
+     "unit": "serving officers and the concerns held about them",
+     "officers": 4200,
+     "officers_with_a_cluster_3plus": 130,
+     "cluster_reassessments_triggered": 130,
+     "non_actions_now_carrying_a_cited_decision": "all",
+     "note": "Anonymous aggregate. 130 officers carry a cluster of three or more concerns - a signal invisible when each flag sat in its own silo; most such clusters will be innocent, which the register cannot resolve. Every non-action now carries a cited, reviewable decision, where before the failure to act left no trace. Measure the process (§8): the clusters and the cited non-actions as the force's own numbers."
+    },
+    "sig": {
+     "key_id": "did:web:ashmore-police.example#log-1",
+     "alg": "ed25519",
+     "value": "QWdncmVnYXRlT2ZmaWNlckNsdXN0ZXJzQXNobW9yZU5vdDA0"
+    }
+   }
+  },
+  {
+   "actor": "The one file the kernel keeps, and what it still cannot do",
+   "verb": "offstage",
+   "narrative": "The ceilings are unusually deep here, because the case turns the kernel against one of its own floors. The file the kernel refuses on the citizen is the file it must keep on the officer: the principle that no file is built on a person (§3.1, T6) protects the governed from the state's gaze, and the accountability of coercive power runs the other way - the person who carries a warrant card is precisely the one on whom a file is a safeguard, not a threat, held by the institution, aimed at power, and readable by its subject. That asymmetry is the design, not a breach of it. But it is a file, with a file's dangers: unproven allegations can be malicious, and whether a flag is credible or a cluster damning is a judgment of truth the kernel refuses (refusal 11) - it aggregates and makes contestable, it does not adjudicate. Whether to act on a cluster is professional standards, refused too; the kernel forecloses the untraced non-action, not the wrong one. The adopter is the accused - the force whose failure the register records, the same self-policing that kept the warrant card for two decades. And the file catches only the flagged: the officer whose victims never reported and whose colleagues stayed silent carries no cluster, and the culture that suppresses the report defeats the register as the never-logged defeats every completeness. The kernel keeps, here, the one file it exists to refuse - and keeps it because this is the one place a file guards the powerless rather than exposing them."
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did, precisely: it aggregated siloed flags into a visible per-officer cluster, cited every decision not to act so the failure leaves a trace, re-opened the clearance with each new flag, and made the file readable and contestable by the officer it concerns - so the wrong at the centre of the real cases, warnings the force held and let dissolve one at a time, the picture never assembled until after the crimes, cannot recur: the cluster assembles as the flags arrive, the non-action is answerable, and the file that the accountability of power requires is kept. What it did not do, and by its own limits cannot: decide whether a cluster warrants removal, adjudicate whether an allegation is true rather than malicious, compel the force to act, reach the crimes that were never reported, or turn the file on the officer into a licence for a file on the citizen. It built, deliberately and in one place only, the thing it exists everywhere else to refuse - because the person who carries coercive power is the one person whose file is a protection for everyone else, kept in the open, aimed at the power and not the person, and answerable to its subject. The nine warnings that dissolved alone would, on this register, have been nine that stood together - which is not a guarantee that the force would have acted, and is the end of its being able to say that no one ever saw them as one."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "Nine allegations against an officer are each recorded and dismissed alone, the cluster never seen, the non-action never traced, until he is convicted of grave crimes (Carrick; Couzens). The kernel aggregates the flags into a cluster and cites every non-action — the file it refuses on a citizen, kept on the officer with power. But it can't judge whether the cluster warrants removal, or that the flags are true.",
+ "protection": "the file on the officer, the visible cluster",
+ "protection_plain": "Whether aggregating an officer's flags into a visible cluster, each non-action cited, protects the public. It is the file the kernel refuses on a citizen, kept on the one with power — foreclosing the untraced dismissal; but it can't judge whether a cluster warrants removal, or the flags true.",
+ "findings": [
+  {
+   "protection": "the cluster made visible, the non-action traced",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "For an adopting force, every concern about an officer is aggregated to that officer and every decision not to act is a cited, reviewable entry - so a cluster of nine concerns is a visible signal rather than nine dismissible silos, and the question the inquiries had to ask after the crimes, why no one acted, is answerable on the record and recorded against the cluster it belongs to. The failure that leaves no trace, the inaction of grenfell and the regulator here turned on an officer, is foreclosed: a decision not to act on nine concerns can no longer disguise itself as nine separate decisions not to act on one. The picture assembles as the flags arrive, instead of by hand, too late."
+  },
+  {
+   "protection": "the file it refuses on the citizen, kept on the officer",
+   "severity": "strain",
+   "doc_ref": "§3.1",
+   "observation": "The finding this case exists to make, and the one point where the corpus turns the kernel against its own floor. No file is built on a person (§3.1, T6) - that principle protects the governed from the state's gaze, and it runs one way. The accountability of coercive power runs the other: the person who carries a warrant card is precisely the one on whom a file is a safeguard rather than a threat, because the flags that would have stopped Couzens and Carrick existed and were never assembled into the dossier that power's accountability requires. The asymmetry is the design. The citizen's file chills participation and is refused; the officer's file checks power and is required - held by the institution, aimed at the power and not the person, and readable and contestable by its subject. The one place the kernel builds a file is the one place a file guards everyone else."
+  },
+  {
+   "protection": "the file is a danger too; truth is substantive",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "A per-officer dossier of unproven allegations can wrong the officer - a whistleblower flagged in retaliation, a good record dressed as a cluster, a malicious complaint - and whether a flag is credible or a cluster damning is a judgment of truth the kernel refuses (refusal 11). Its answer is not to keep no file but to make the file readable and contestable by the person it concerns: the officer sees the nine flags and may challenge them, and an independent standards body witnesses the register. The kernel aggregates the flags and surfaces the cluster; it does not adjudicate whether the flags are true. The file is a tool that cuts both ways, made reviewable rather than infallible - which is the most a record can honestly be when the record is of allegations, not findings."
+  },
+  {
+   "protection": "acting is professional standards; the adopter is the accused",
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "The kernel makes the cluster visible and the non-action cited; whether a given cluster warrants suspension, re-vetting, or dismissal is a professional-standards judgment it refuses (refusal 11). It forecloses the untraced non-action, not the wrong one - a force can still assess a cluster and do nothing, now visibly and with its reasons on the record. And the body that must run the register is the force whose failure it exposes, the same institution that kept a serial offender's warrant card for two decades: the self-policing gap, the maternity grader-is-the-harmer at the coercive apex. An independent standards mandate could impose the register from outside; unbidden, it rests on the good faith of exactly the body whose lapses it records."
+  },
+  {
+   "protection": "the file catches the flagged, not the un-flagged",
+   "severity": "note",
+   "doc_ref": "§1",
+   "observation": "The register aggregates what was reported, and the officer whose victims never reported and whose colleagues stayed silent carries no cluster at all - the culture that suppresses the report, the canteen culture the reviews named, defeats the file exactly as the never-logged defeats every completeness claim in the corpus. The kernel narrows the failure from silo-and-forget to a smaller and harder one, the concern never recorded, and cannot close it. And the accountability arrives after the flags: a cluster made visible can prevent the next crime, if the force acts on it, and cannot undo the one the un-aggregated warnings failed to stop. It makes the warnings stand together where they stood alone - which is not a promise the force will act, and the end of its being able to say no one ever saw them as one."
+  }
+ ]
+}
