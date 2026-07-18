@@ -2,6 +2,17 @@
 
 [![test](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml/badge.svg)](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml)
 
+> **Fifty-two documented institutional failures — Horizon, the deleted WhatsApps, the
+> carer prosecuted for a debt the state watched grow — and in forty-three of them the
+> harm ran through a record: one that was quietly absent, quietly altered, or quietly
+> ignored.** The fix that repeats is not a new power or a new regulator. It is a record
+> of each act of power that **cannot be quietly absent** — it must exist at the moment
+> of the act, citing the rule it acts under; **cannot be quietly altered** — independent
+> witnesses hold its fingerprints; and **cannot be quietly ignored** — its silence is
+> itself a visible, datable fact. Records first, because nobody rises to defend the
+> right not to write things down:
+> [the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html).
+
 **Rules for running a vote that nobody can rig and anybody can check — too small for
 anyone to own.**
 
