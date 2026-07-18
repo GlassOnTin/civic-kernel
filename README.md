@@ -110,9 +110,12 @@ the road turns outward: carry it to the people who can act on it, and put the wo
 tools in real hands. Five threads, each ending in something a named reader can use:
 a **committee brief** ([drafted](https://glassontin.github.io/civic-kernel/committee-brief.html):
 one printable page, four committees — records, welfare, policing, public money — each
-built from the cases it owns); an **advocate's guide** (how to read a scenario as
-a worked remedy, and how to propose the next); an **adviser's note** for
-[Owed](https://glassontin.github.io/civic-kernel/owed.html) (trust-by-inspection, for
+built from the cases it owns); an **advocate's guide**
+([grafted onto the findings page](https://glassontin.github.io/civic-kernel/findings.html#advocates):
+the scenario as a worked remedy, the citation spine, the verdicts, and the door for the
+next case); an **adviser's note** for
+[Owed](https://glassontin.github.io/civic-kernel/owed.html)
+([drafted](https://glassontin.github.io/civic-kernel/adviser-note.html): trust-by-inspection, for
 the people who help others claim); the **club hand-over pack** (everything below is
 built — what remains is a real club and a real season); and a **break-me door** (the
 tamper suite as an open invitation: winning attacks become named defences). Outreach

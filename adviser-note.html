@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A note for advisers — Owed, Civic Kernel</title>
+<meta name="description" content="A one-page note for benefits advisers about Owed: a pension-age benefits check that runs entirely on the client's device, cites the rule behind every question, and can be checked rather than trusted.">
+<style>
+  /* The same gov.uk discipline as owed.html — the tool this note describes —
+     plus committee-brief.html's duty: it must print onto a single A4 side. */
+  :root {
+    color-scheme: light;
+    --bg: #ffffff; --fg: #0b0c0c; --muted: #505a5f; --line: #b1b4b6;
+    --ok: #00703c; --bad: #d4351c; --warn: #996c00;
+    --panel: #f3f2f1; --accent: #1d70b8; --focus: #ffdd00; --focus-fg: #0b0c0c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 1.2rem 1rem 4rem; max-width: 44rem;
+    background: var(--bg); color: var(--fg);
+    font: 1.1875rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (max-width: 40rem) { body { font-size: 1rem; } }
+  .home { display:block; margin:0 0 1.5rem; padding:.2rem 0 .85rem;
+    border-bottom:1px solid var(--line);
+    font-family:ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;
+    font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); }
+  .home b { color:var(--fg); font-weight:700; letter-spacing:.2em; }
+  .home:hover b { text-decoration:underline; text-underline-offset:.14em; }
+  .home:focus { background:var(--focus); color:var(--focus-fg); outline:3px solid var(--focus); box-shadow:0 3px 0 var(--focus-fg); text-decoration:none; }
+  h1 { font-size: 2rem; line-height: 1.15; margin: .6rem 0 .4rem; text-wrap: balance; }
+  h2 { font-size: 1.25rem; margin: 1.5rem 0 .4rem; }
+  p  { margin: .6rem 0; }
+  .sub { color: var(--muted); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
+  a:focus { background: var(--focus); color: var(--focus-fg);
+    outline: 3px solid var(--focus); outline-offset: 0;
+    box-shadow: 0 3px 0 var(--focus-fg); text-decoration: none; }
+  ul.plain { margin: .4rem 0; padding-left: 1.3rem; }
+  ul.plain li { margin: .3rem 0; }
+  .covers { background: var(--panel); padding: .8rem 1rem; margin: .8rem 0; font-size: 1rem; }
+  .covers p { margin: .2rem 0; }
+  .case { margin: .9rem 0; padding: .1rem 0 .1rem 1rem; border-left: .4rem solid var(--accent); }
+  .case p { margin: .25rem 0; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 1rem;
+    border-top: 1px solid var(--line); padding-top: 1rem; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { position: static; display: inline-block; padding: .2rem .5rem; }
+
+  @media print {
+    @page { size: A4; margin: 11mm 13mm; }
+    body { font-size: 10pt; line-height: 1.32; padding: 0; max-width: none; }
+    .home, .skip, .noprint { display: none; }
+    h1 { font-size: 15pt; margin: 0 0 .1rem; }
+    .sub { margin: 0 0 .3rem; }
+    h2 { font-size: 10.5pt; margin: .55rem 0 .2rem; }
+    p { margin: .25rem 0; }
+    ul.plain li { margin: .15rem 0; }
+    a { color: var(--fg); text-decoration: none; }
+    .covers { padding: .35rem .6rem; margin: .4rem 0; font-size: inherit; }
+    .case { margin: .5rem 0; padding-left: .7rem; border-left-width: .28rem; }
+    footer { margin-top: .6rem; padding-top: .4rem; font-size: 8.5pt; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<a class="home" href="index.html"><b>Civic&nbsp;Kernel</b> <span>a thin protocol for public decisions</span></a>
+<main id="main">
+
+<h1>A benefits check that tells no one it was asked</h1>
+<p class="sub">A one-page note for benefits advisers — Carers UK, Citizens Advice, Age UK, and anyone who helps people claim.</p>
+
+<h2>What it is</h2>
+<p><a href="owed.html"><strong>Owed</strong></a> is a free, open benefits check for pension-age support and Carer's Allowance that runs entirely on the client's own device. No account, no server, no analytics: the page makes <strong>no network request at all</strong> — open your browser's network panel and watch. Saved to a memory stick, it works with the internet off. When the tab closes, it forgets everything.</p>
+<p>That matters for the people advisers see most: the carer afraid that asking a question starts an investigation, the pensioner who will not put her savings into a government form. Owed lets them look first, privately — and change one answer to watch the amounts move ("what if I claimed Attendance Allowance?") before deciding anything.</p>
+
+<div class="covers">
+<p><strong>What it covers</strong> — deliberately small: Attendance Allowance · Carer's Allowance · Pension Credit (guarantee) · Housing Benefit (pension age) · Council Tax Reduction (pension age, England) · Winter Fuel Payment · free TV licence over&nbsp;75 · Pension Age Disability Payment (Scotland) — plus the statutory pensionable-age table. Rates are pinned to a named tax year; when that year passes, the page says so loudly rather than going quietly wrong.</p>
+</div>
+
+<h2>Why you can check it instead of trusting it</h2>
+<ul class="plain">
+  <li>Every question names the rule that lets it ask, and every amount shows its working, linked to legislation.gov.uk and gov.uk. A question with no cited rule cannot exist: the form is generated from the rules.</li>
+  <li>The rules are small public data files anyone can read. An independent judge — a separate program — recomputes every test case from the same files on every change; the page is one client of those rules, never the door.</li>
+  <li>The client can download their answers as a small file they keep. Nothing exists unless they choose to save it; they can bring the file to an appointment and drop it back in. Data minimisation by construction, not policy.</li>
+</ul>
+
+<h2>Where it stops</h2>
+<ul class="plain">
+  <li>It prompts a claim; it never makes one, and it is not advice. Your judgement stays the point of the appointment.</li>
+  <li>Eight entitlements, pension-age weighted. No Universal Credit, no PIP, no working-age support. A full calculator still covers far more — this is the private first look, not a replacement for it.</li>
+  <li>Coverage is uneven across the UK: Scottish and Northern Irish equivalents are named where rules differ, but only Pension Age Disability Payment is encoded so far.</li>
+</ul>
+
+<div class="case">
+  <p><strong>Why a carers' charity specifically.</strong> Behind this tool sits a corpus of fifty-two encoded institutional failures — one of them the Carer's Allowance overpayment scandal, <a href="scenarios.html#carers-allowance-overpayment">worked through step by step</a>: the state watched the earnings data as the debt grew, then prosecuted the growth. Owed is the other half of that finding — the earnings limit checked privately, before the first pound of overpayment, by the person it protects.</p>
+</div>
+
+<h2>The ask</h2>
+<p>Run your hardest real cases against it, anonymised, next to the calculator you already use. Where it disagrees, misses, or asks a question badly, the rules are public and fixable — <a href="https://github.com/GlassOnTin/civic-kernel/issues">say so in the open</a>, or reply to the sender. A tool for advisers should be corrected by advisers.</p>
+
+<footer>
+  <p>Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype — an open, non-commercial design study. The tool: <strong style="white-space:nowrap">glassontin.github.io/civic-kernel/owed.html</strong>. This note prints to one side of A4.</p>
+  <p>[Sender: add your name and contact line here before printing or attaching.]</p>
+</footer>
+
+</main>
+</body>
+</html>
