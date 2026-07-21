@@ -2517,6 +2517,324 @@
   ]
  },
  {
+  "id": "coop-governance-opaque",
+  "title": "Manifestly Dysfunctional: A Mutual Owned by Millions Learns to Show Its Working",
+  "setting": "Edith Marlow has been a member of the Fenland Co-operative Society for twenty-two years — groceries, a funeral plan, the pharmacy on Delft Street — and since 2024 an elected member of the Marsh Lane area committee, which is where her trouble with the ladder begins. Her committee passed a motion asking the Society to consult members before closing stores. It went up a tier, to the regional board, and vanished: no reply, no reasons, no way to learn whether it was even discussed. Above the regional board sits the group board, and that year the group board approved the Society's bank arm absorbing a struggling lender whose loan book, it later emerged, nobody in the room could actually read. Edith owns this business, along with 1.3 million other people, one vote each in principle. In practice her ownership is a ladder of tiers in which each rung can quietly file away what the rung below decided, elections nobody contests, and a board whose deliberations she may not see.\n\nThis is the documented shape of the mutual sector's worst modern failure. The Co-operative Group — the movement's flagship, owned by millions — was brought to the brink in 2013 by catastrophic losses in its bank, and the reviews that followed said the quiet part in public: Lord Myners found a board that was 'manifestly dysfunctional', governance he called 'one of the great national business calamities', tiers of representation that transmitted neither competence nor accountability; Sir Christopher Kelly traced the wreckage of takeovers the board had approved without being able to evaluate. In August 2014 the members themselves voted the reforms through — one member, one vote, the movement's founding principle, deployed at the brink to trim the structure that had failed it. The International Co-operative Alliance lists democratic member control as the second principle of the identity itself: this is the one kind of business that is *supposed* to be a demos.\n\nFenland is fiction, and its pilot tests the road the real reforms did not take. Myners' remedy was a smaller, professional board — less member democracy, better run. The kernel offers the other road: keep the democracy and make it checkable. Of the corpus's five business cases this is the one whose manifest needs the fewest subtractions — equal members, secret verifiable ballots, no stewardship duty forcing attributable votes — because a mutual is the business shaped most like the thing the kernel was built for. The walkthrough tests whether machinery can do what the tiers did not: let an owner walk her own ladder.",
+  "threats": [
+   "T8",
+   "T3"
+  ],
+  "doc_refs": [
+   "§3.1",
+   "§3.2",
+   "§3.4",
+   "§5",
+   "§10",
+   "§6",
+   "§7",
+   "§12",
+   "T8",
+   "T3"
+  ],
+  "precedents": [
+   {
+    "event": "Myners review of the Co-operative Group: a board 'manifestly dysfunctional', governance 'one of the great national business calamities'",
+    "year": 2014,
+    "source": "BBC News",
+    "url": "https://www.bbc.co.uk/news/business-27302820",
+    "shows": "A mutual owned by millions governed itself through elected tiers that transmitted neither competence nor accountability: the reviewer found the board manifestly dysfunctional and the structure corrosive, with member democracy formally intact and practically unreadable — the pattern this scenario's tiers reproduce."
+   },
+   {
+    "event": "Co-op Group members vote through sweeping governance reforms, August 2014",
+    "year": 2014,
+    "source": "BBC News",
+    "url": "https://www.bbc.co.uk/news/business-28701844",
+    "shows": "The repair arrived only at the brink, and by the franchise itself: one-member-one-vote reform adopted at a special members' meeting after near-collapse — evidence both that a mutual's demos can act, and that it acted only when the alternative was extinction; the chosen remedy shrank the democracy rather than instrumenting it."
+   },
+   {
+    "event": "Democratic member control: the second cooperative principle of the ICA's Statement on the Cooperative Identity",
+    "year": 1995,
+    "source": "International Co-operative Alliance",
+    "url": "https://ica.coop/en/cooperatives/cooperative-identity",
+    "shows": "One member, one vote is not an aspiration bolted onto this business form but its declared identity — which is why a co-op is the corpus's one business case where the kernel's equal-persons floor binds without subtraction, and why tiers a member cannot walk are a breach of the form's own constitution, not just bad practice."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:fenland-coop.example",
+    "name": "Fenland Co-operative Society — member-governance pilot"
+   },
+   "services": {
+    "personhood": true,
+    "decisions": true,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "personhood": {
+    "method": "external-issuer",
+    "issuer": "Fenland membership register (twelve months' membership and minimum trade before voting rights, per rulebook)",
+    "unlinkable": true,
+    "sybil_resistance": "medium",
+    "eligibility_rules": "fenland-rulebook/v7 §members-eligibility"
+   },
+   "decisions": {
+    "verifiable": true,
+    "receipt_free": true,
+    "cast_or_audit": true,
+    "paper_channel": true,
+    "coercion_resistance": "none",
+    "trustee_quorum": "3-of-5: two member-elected auditors, the co-operative federation, Kelder University, the Society's external auditor"
+   },
+   "transparency_log": {
+    "log_id": "did:web:fenland-coop.example",
+    "witnesses": [
+     "did:web:coop-federation.example",
+     "did:web:kelder-university.example",
+     "did:web:fenland-gazette.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "agm-and-motion-vote",
+     "steps": 2,
+     "fields": 0,
+     "median_seconds": 45,
+     "abandonment_rate": 0.02
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:fenland-coop.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Edith Marlow, and the ladder as it was",
+    "verb": "offstage",
+    "narrative": "The backdrop is the tiers working exactly as the real reviews found them: a motion that goes up a rung and vanishes without a disposition; elections to committees that feed boards that feed a board, each transition losing the members' sightline; an acquisition approved by people who could not read what they were approving, discovered only when the losses arrived. None of these acts was unlawful. That is the point the corpus keeps meeting — pattern_of_lawful_acts — and here the pattern wears the movement's own colours: a business whose declared identity is one member, one vote, governed in practice through a structure its owner cannot walk."
+   },
+   {
+    "actor": "Fenland's members, adopting the constitution that watches itself",
+    "verb": "cast",
+    "narrative": "The pilot begins the way the real repair did — by the franchise itself. A special members' meeting opens the reform question on kernel machinery: every member one credential, the question hashed, the window fixed. The echo is deliberate: in 2014 the Co-op's members voted sweeping reforms through at the brink. The difference is the road taken. Myners' remedy was a smaller professional board — less democracy, better run. Fenland's reform keeps the democracy and instruments it: every tier's act will land in a witnessed log citing the delegation it acts under, every motion will carry a disposition clock, and every election will be verifiable by the member it claims to represent.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:fenland-coop.example",
+     "timestamp": "2026-01-19T19:00:00Z",
+     "body": {
+      "decision_id": "2026-fenland-governance-reform",
+      "question_hash": "sha256:3e8b1f4c72a90de565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d",
+      "eligibility_rules": "fenland-rulebook/v7 §members-eligibility (twelve months + minimum trade)",
+      "window": {
+       "deliberation_ends": "2026-02-09T19:00:00Z",
+       "cast_ends": "2026-02-21T19:00:00Z"
+      },
+      "note": "The reform adopted by the franchise it instruments: one member, one vote, on whether every tier's power must henceforth show its working."
+     },
+     "sig": {
+      "key_id": "did:web:fenland-coop.example#log-1",
+      "alg": "ed25519",
+      "value": "UmVmb3JtT3BlbmVkRmVubGFuZE5vdFJlYWwwMQ"
+     }
+    }
+   },
+   {
+    "actor": "The count, and the honest number inside it",
+    "verb": "verify",
+    "narrative": "The reform passes with a tally anyone can re-run: 104,882 for, 13,322 against. The honest number is the denominator — 118,204 ballots from 1.3 million members, nine percent. In the old world turnout was a rumour; committees spoke for members who had never heard of them, and nobody could say how thin the mandate under any tier really was. The kernel does not fix nine percent. It publishes it, on every decision, forever — which converts apathy from an ambient excuse into a standing, dated fact the Society must govern in front of.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.tally-proof",
+     "community": "did:web:fenland-coop.example",
+     "timestamp": "2026-02-21T20:30:00Z",
+     "body": {
+      "decision_id": "2026-fenland-governance-reform",
+      "question_hash": "sha256:3e8b1f4c72a90de565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d",
+      "result": {
+       "adopt-reform": 104882,
+       "reject-reform": 13322
+      },
+      "ballots_counted": 118204,
+      "eligible_members": 1302411,
+      "tally_proof_hash": "sha256:5a2f7d9c4e8b3f6a0d5c9e2b7f4a1d8c3e6b9f2a5d8c1e4b7f0a3d6c9e2b5f8d",
+      "trustees_decrypting": "3-of-5",
+      "paper_channel_rla": {
+       "paper_ballots": 41210,
+       "risk_limit": 0.05,
+       "outcome": "confirmed"
+      }
+     },
+     "sig": {
+      "key_id": "did:web:fenland-coop.example#log-1",
+      "alg": "ed25519",
+      "value": "VGFsbHlSZWZvcm1GZW5sYW5kTm90UmVhbDAy"
+     }
+    }
+   },
+   {
+    "actor": "The membership register, and the carpetbaggers' arithmetic",
+    "verb": "prove",
+    "narrative": "This is the corpus's one business case where the equal-persons floor binds: a credential per member, not per pound. And the register's declared gate earns its keep within the year. Ahead of a motion to demutualise the funeral business — the windfall play that hollowed the building societies — the log's enrolment arithmetic shows 38,000 one-pound memberships arriving in six weeks, a dated public spike where the old world had a quiet swelling of the roll. The rulebook's answer was already on the page: twelve months' membership and minimum trade before voting rights, cited in the manifest, applied to everyone. The raid is not secretly blocked and not quietly admitted; it is visible, and the gate that holds it out is a published rule, not a registrar's discretion. Minting voices shows up in sums — §10's ceremony arithmetic, transplanted to a register of members.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-register.enrolment-aggregate",
+     "community": "did:web:fenland-coop.example",
+     "timestamp": "2026-04-02T12:00:00Z",
+     "body": {
+      "period": "2026-02-15 to 2026-03-31",
+      "new_memberships": 38412,
+      "trailing_year_baseline": 2140,
+      "voting_eligible_from": "2027-02-15 onward per fenland-rulebook/v7 §members-eligibility",
+      "note": "Anonymous aggregate: the spike dated and sized, the eligibility gate cited. A raid on the roll is answered by a published rule and public arithmetic, not by quiet registrar discretion."
+     },
+     "sig": {
+      "key_id": "did:web:fenland-coop.example#log-1",
+      "alg": "ed25519",
+      "value": "RW5yb2xtZW50QWdncmVnYXRlRmVubGFuZE5vdFJlYWwwMw"
+     }
+    }
+   },
+   {
+    "actor": "The Marsh Lane motion, wearing a clock",
+    "verb": "cast",
+    "narrative": "Edith's committee re-files the store-consultation motion, and this time it cannot vanish, because vanishing has been made a visible act. The motion has an identifier, the tier it went to, and a disposition clock; the regional board must answer within sixty days with adopted, adopted-in-part, or declined-with-reasons, and a motion past its clock is not a memory — it is a breach the log counts. The board adopts it in part, with reasons Edith can read and quote back. The corpus has seen this shape before, in a family court: an order is only as real as the record of what happened to it. A member's motion, it turns out, is the same species of object.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-motion.disposition",
+     "community": "did:web:fenland-coop.example",
+     "timestamp": "2026-04-14T17:00:00Z",
+     "body": {
+      "motion_id": "2026-marsh-lane-store-consultation",
+      "filed_by": "Marsh Lane area committee",
+      "referred_to": "Eastern regional board, 2026-03-02",
+      "disposition_due": "2026-05-01",
+      "disposition": "adopted-in-part",
+      "reasons": "Member consultation adopted for all proposed closures; the committee's 90-day notice period reduced to 45 on trading-viability grounds, cited to fenland-rulebook/v7 §board-duties",
+      "note": "The rung above can still say no. It can no longer say nothing: a motion carries a clock, and silence past it is a countable breach, not an outcome."
+     },
+     "sig": {
+      "key_id": "did:web:fenland-coop.example#log-1",
+      "alg": "ed25519",
+      "value": "TW90aW9uRGlzcG9zaXRpb25GZW5sYW5kTm90UmVhbDA0"
+     }
+    }
+   },
+   {
+    "actor": "The group board, buying a business on the record",
+    "verb": "cast",
+    "narrative": "Then the big one: the group board approves an acquisition — the kind of act that sank the real Group. The kernel does not and must not vote it for them; delegation is the rulebook's lawful design. What changes is that the approval is an executive act on the log: the delegation it acts under cited, the counterparty named, the diligence trail referenced, the commercial terms sealed for a year but committed by hash today. The Britannia lesson was never that members would have vetoed the deal — they were structurally incapable of even seeing it. It is that a board which cannot read a loan book must now sign, in public, on a dated record, that it has read one; and when the losses arrive, the question 'who approved this, under what power, having reviewed what' has an answer that does not require a two-year inquiry to reconstruct.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "executive.act",
+     "community": "did:web:fenland-coop.example",
+     "timestamp": "2026-05-19T14:00:00Z",
+     "body": {
+      "act_class": "contract",
+      "authorizing_rule": "fenland-rulebook/v7 §group-board-delegation (acquisitions above £5m reserved to group board with diligence certification)",
+      "issuing_authority": "Fenland group board, resolution 2026-11",
+      "counterparty": {
+       "name": "Harrow Vale Mutual (funeral services)",
+       "ref": "mutuals-register:HV-04412"
+      },
+      "provenance": {
+       "route": "board-resolution",
+       "referred_by": "group strategy office",
+       "referrer_role": "executive",
+       "referred_on": "2026-03-20"
+      },
+      "sealed_until": "2027-05-19T14:00:00Z",
+      "sealed_body_digest": "sha256:8c1d4f7a2b0e9c53b6a1d47e920fb3c8a5e6d10f9b2c4a7e8d3f5061a2b3c4f9",
+      "appeal_trace": "did:web:fenland-coop.example/motions/challenge-2026-11"
+     },
+     "sig": {
+      "key_id": "did:web:fenland-coop.example#log-1",
+      "alg": "ed25519",
+      "value": "RXhlY3V0aXZlQWN0RmVubGFuZE5vdFJlYWwwNQ"
+     }
+    }
+   },
+   {
+    "actor": "The quarter's portrait of a democracy",
+    "verb": "verify",
+    "narrative": "At quarter's end the witnessed aggregate publishes the Society's democratic vital signs: turnout nine percent and now trending measurable; 214 motions filed, 187 disposed inside their clocks, 27 past-clock and counted as breaches; 41 percent of committee seats contested, up from single figures, because a seat that visibly does something is a seat worth contesting. Myners had to assemble his picture of dysfunction by interview and inference, after the collapse. Fenland's equivalent picture is a standing public artifact, updated quarterly, disputable line by line — which is the difference between a review and an instrument panel.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:fenland-coop.example",
+     "timestamp": "2026-06-30T23:59:00Z",
+     "body": {
+      "period": "2026-Q2",
+      "metric": "member-governance-vitals",
+      "turnout_last_all-member_vote": 0.09,
+      "motions_filed": 214,
+      "motions_disposed_in_clock": 187,
+      "motions_past_clock": 27,
+      "committee_seats_contested": 0.41,
+      "note": "Anonymous aggregate: the health of the demos as a published number — apathy, backlog and contestation made standing facts rather than a post-collapse review's findings."
+     },
+     "sig": {
+      "key_id": "did:web:fenland-coop.example#log-1",
+      "alg": "ed25519",
+      "value": "R292ZXJuYW5jZVZpdGFsc0ZlbmxhbmROb3RSZWFsMDY"
+     }
+    }
+   },
+   {
+    "actor": "What the machinery cannot supply",
+    "verb": "offstage",
+    "narrative": "Three honest limits, in ascending order of weight. The kernel refuses to gate participation — no test, no minimum engagement, scaffold everything and assess nothing — so nine percent stays nine percent unless members choose otherwise; the log makes apathy visible, never curable. Legibility is not competence: a board that signs its diligence certification can still have read the loan book badly, and the losses that sank the real Group were substance — judgments the kernel will not second-guess (refusal 11), any more than it judged the take-private price two cases ago. And the sharpest: the real movement, offered this fork at the brink, chose the other road — Myners' professional board, democracy trimmed to save the business. The kernel road — democracy kept, instrumented — remains untaken at flagship scale, and a design that has never run at the scale of its failure case is a proposal, not a proof."
+   },
+   {
+    "actor": "Anyone, walking the ladder after",
+    "verb": "read",
+    "narrative": "What the kernel did: it let an owner walk her own ladder — motion to disposition, election to tally, delegation to executive act — with every rung citing the power it stood on; it made the roll's arithmetic public enough to date a carpetbagger raid and the gate that held it; and it turned the health of the democracy itself into a quarterly, witnessed, disputable number. What it did not do: raise turnout, read a loan book, or make the deal wise. The claim under test was never that machinery makes a mutual good — it is that a business whose identity is one member, one vote can at last be checked against its own constitution, by the people it belongs to, while it is still alive. The real one was checked by a review, after it nearly died."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "A mutual owned by millions was found 'manifestly dysfunctional' at the brink: tiers no member could walk, motions that vanished, a board approving what it could not read. A co-op needs almost no kernel subtractions — equal members, verifiable ballots, motions on clocks, board acts citing their power. But legibility is not competence, nine percent is an honest number now, and the real movement chose less democracy.",
+  "protection": "the member democracy you can walk",
+  "protection_plain": "Whether one-member-one-vote machinery — equal credentials from the register, verifiable tallies, motions tracked to disposition on a clock, board acts logged with the power they cite — answers a mutual governed through tiers no member could walk. Turnout and competence stay the members' own.",
+  "findings": [
+   {
+    "protection": "the equal-persons floor finally binds",
+    "severity": "note",
+    "doc_ref": "§3.1",
+    "observation": "Alone among the corpus's business cases, this demos is persons: the ICA's second principle makes one member, one vote the form's declared identity, so the kernel's personhood service applies without the weighted-franchise subtraction the shareholder case had to declare. The register's arithmetic then does double duty: a carpetbagger raid — 38,000 one-pound joiners in six weeks before a demutualisation motion — appears as a dated public spike, and the gate that holds it out is a cited rulebook clause applied uniformly, not a registrar's quiet discretion. §10's enrolment discipline, built for civic ceremonies, transplants to a membership roll intact: minting voices shows up in sums."
+   },
+   {
+    "protection": "the motion that cannot vanish",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The tiers' quietest power was never voting members down — it was filing them away: a motion that goes up a rung and returns as silence produces nothing to appeal, the inaction_no_artifact signature the corpus keeps meeting. A disposition clock converts that silence into a countable breach: the rung above can still decline, but declining now takes reasons on a dated record, and not answering is itself an answer the aggregate publishes. The board's power over outcomes is untouched; its power over whether anything happened at all is gone — the family-contact-order lesson, applied to a committee room."
+   },
+   {
+    "protection": "legibility is not competence",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The losses that nearly killed the real Group were substance: takeovers the reviews called breathtakingly destructive, approved by a board structurally unable to evaluate them. The kernel's executive.act makes the approval cite its delegation, name its counterparty, commit its terms by hash and certify its diligence — so the post-collapse question 'who approved this, under what power, having reviewed what' has a same-day answer instead of a two-year inquiry. But a signed certification can certify a bad reading, and the kernel will not mark the board's homework (refusal 11). It shortens the distance between a bad decision and its accountability; it cannot shorten the distance between a bad decision and its consequences."
+   },
+   {
+    "protection": "participation cannot be manufactured",
+    "severity": "strain",
+    "doc_ref": "§7",
+    "observation": "Nine percent turnout is this scenario's most honest number, and the kernel's own principles forbid the two easy responses: it will not gate the franchise on engagement (whoever writes the test owns the electorate — T11) and it will not coerce participation. What it does is stop the thinness being deniable — every tally publishes its denominator, every committee's mandate carries its contest rate — and make a seat worth contesting by making it visibly consequential, which the pilot's rise in contested seats gestures at. But a demos that does not show up is a fact about the demos, not the machinery; the log renders apathy in daylight and has nothing further to offer it."
+   },
+   {
+    "protection": "the road the real movement did not take",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The Co-op's members, holding the exact franchise this scenario instruments, used it at the brink to adopt the other repair: a smaller professional board — democracy traded for competence, because instrumented democracy was not on the table in 2014. That history cuts both ways. It proves a mutual's demos can act decisively, which is more than most of the corpus's adopters can claim; and it records that when the choice was live, legible member control was nobody's proposal. The kernel road has run at allotment-society scale in this corpus's own prototype; at the scale of the failure it answers — millions of members, billions at stake — it remains untried, and the case is honest about the difference between a fit and a proof."
+   }
+  ]
+ },
+ {
   "id": "criminal-disclosure-failure",
   "title": "Item 14, Withheld: The Evidence That Clears You, Held by the Side That Would Convict",
   "setting": "Tom Fielding, a twenty-two-year-old student, was charged with rape and faced years in prison. The police had downloaded the complainant's phone: some forty thousand messages, among them a thread in which she pursued him after the night in question and described what had happened in terms that flatly contradicted the charge. The prosecution held this download for months and did not hand it over. Under the disclosure regime it is the prosecution — the very side seeking to convict him — that reviews its own material and decides, in private, which parts might assist the defence. It decided these messages did not. The case against Tom collapsed only because, days into his trial, a barrister happened to ask for the download and read it; had she not, he would very likely have been convicted on evidence the state was sitting on the whole time.\n\nThis is R v Liam Allan and the disclosure crisis it exposed: inspectorate after inspectorate has found that failures to disclose unused material are not rare accidents but a routine, structural feature of the system, surfacing — when they surface at all — mid-trial, or years later through the Criminal Cases Review Commission, after the conviction has already been served. The wrong has a precise shape: one party holds all the evidence because it did the investigating, and the other cannot ask for what it does not know exists, so the accused depends entirely on his accuser's good-faith search of its own files for the things that would sink its case. The Wessex Crown Prosecution Service, in this scenario, runs disclosure on a kernel register, and the question is exact: a protocol cannot decide whether forty thousand messages are relevant — that is a judgment, and judgment is refused. But can it stop that judgment being made in the dark?",
@@ -10240,6 +10558,281 @@
   ]
  },
  {
+  "id": "marketplace-delisting-no-rule",
+  "title": "Suspended Per Section 3: The Rule That Must Name Itself, and the Money With a Clock",
+  "setting": "Petra Lindqvist has sold refurbished audio equipment on Kestrel Marketplace for eleven years — turntables rescued from house clearances, amplifiers rebuilt at her kitchen bench — and Kestrel is forty percent of her income. On a Tuesday morning her account is suspended: 'Listings removed for policy violation (inauthentic items) — see Section 3.' Her balance, £9,180, is frozen; the notice does not say for how long, or by whom, or what in Section 3 she is supposed to have breached. The appeal asks her to submit invoices proving the provenance of goods bought at estate sales, which is to say it asks for documents that have never existed. Around her, an industry has grown to serve exactly this moment: consultants who charge sellers to draft 'plans of action' — ritual confessions to violations they may not have committed, because contrition parses better than innocence in the machine that reads them. And there is a detail Petra does not yet know: Section 3 changed three weeks ago. Her listings complied with the rule that existed when she wrote them.\n\nEvery element is documented. The Verge's 'Prime and Punishment' mapped the suspension economy on Amazon's marketplace: sellers ambushed by unexplained enforcement, funds held, reinstatement by confession, a private judiciary with no published law. The EU found the pattern so routine it legislated against it — the Platform-to-Business Regulation (2019/1150) obliges platforms to give a statement of reasons for restriction, suspension or termination, advance notice of terms changes, and an internal complaint process, precisely because none of this was standard. And the CMA's mobile ecosystems study documented the dependence that gives the wrong its weight: for millions of small firms the platform is not a counterparty but the marketplace itself, and delisting is not a contract dispute — it is exile.\n\nKestrel is fiction, piloting under a seller-council settlement what the regulation demands and the corpus already had words for: rules that change only on notice with an expiry, adverse decisions that cite the rule version and the facts, money held only by an act with an author and a deadline. The walkthrough tests the two moves the gig case did not need: the amendment ladder pointed at terms-of-service, and a funds freeze given a clock — because for a seller the account is the shop, but the balance is the wages.",
+  "threats": [
+   "T12",
+   "T2"
+  ],
+  "doc_refs": [
+   "§5",
+   "§8",
+   "§3.4",
+   "§6",
+   "§12",
+   "T12",
+   "T2"
+  ],
+  "precedents": [
+   {
+    "event": "'Prime and Punishment': the seller-suspension economy — unexplained enforcement, frozen funds, reinstatement by ritual confession",
+    "year": 2018,
+    "source": "The Verge",
+    "url": "https://www.theverge.com/2018/12/19/18140799/amazon-marketplace-scams-seller-court-appeal-reinstatement",
+    "shows": "Documented the private judiciary this scenario replays: sellers suspended with no usable reasons, balances held, and an appeals culture in which paid consultants draft confessions to unproven violations because admitting fault parses better than contesting it — process without law, and livelihoods inside it."
+   },
+   {
+    "event": "Platform-to-Business Regulation (EU) 2019/1150: statement of reasons, notice of terms changes, internal complaint handling",
+    "year": 2019,
+    "source": "EUR-Lex",
+    "url": "https://eur-lex.europa.eu/eli/reg/2019/1150/oj",
+    "shows": "The legislature converging on the corpus's discipline because platforms would not adopt it voluntarily: restriction, suspension or termination of a business user must come with a statement of reasons; terms changes need advance notice; complaints need a real process — the demand this scenario turns from obligation into schema."
+   },
+   {
+    "event": "CMA mobile ecosystems market study: the dependence that makes delisting exile",
+    "year": 2022,
+    "source": "UK Competition and Markets Authority",
+    "url": "https://www.gov.uk/cma-cases/mobile-ecosystems-market-study",
+    "shows": "The regulator's account of why the wrong weighs what it does: platform gatekeepers set and enforce the terms of access to entire markets, small counterparties have no practical alternative, and the rules' application is opaque — dependence documented at ecosystem scale, the backdrop to every unexplained suspension."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:kestrel-seller-log.example",
+    "name": "Kestrel Marketplace — seller-decisions log (P2B pilot under seller-council settlement)"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:kestrel-seller-log.example",
+    "witnesses": [
+     "did:web:sellers-council.example",
+     "did:web:small-business-federation.example",
+     "did:web:kelder-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "dispute-a-suspension",
+     "steps": 2,
+     "fields": 1,
+     "median_seconds": 300,
+     "abandonment_rate": 0.06
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:kestrel-seller-log.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Petra Lindqvist, and the sentence with a section number",
+    "verb": "offstage",
+    "narrative": "The backdrop, as documented: a suspension that cites 'Section 3' the way a wall cites gravity; £9,180 frozen by nobody, for no stated period; an appeal that wants invoices estate sales never issued; and the reinstatement consultants, the truest symptom — an industry that exists because confessing to a violation you did not commit is the rational move when the tribunal is a parser and the law is unpublished. The Verge mapped this economy years ago. The EU legislated against it. What neither could reach is the detail that turns process into vertigo: the rule Petra is accused under is not the rule she listed under, and nothing in the old world would ever have told her."
+   },
+   {
+    "actor": "Kestrel, putting its rulebook on the ladder",
+    "verb": "cast",
+    "narrative": "Under the settlement, Kestrel's terms stop being weather and become amendments. Section 3's new used-goods provenance requirement arrives as a rules.amendment entry: the diff committed by hash, notice served fifteen days before effect — the regulation's own minimum — an effective date, and an expiry two years out unless renewed. This is §5 pointed at a terms-of-service: the rules can change, in stages, with expiry dates, and every version is a dated public object. Nothing stops Kestrel writing a harsher Section 3. What stops is the rule that arrives already in force, retroactively, invisibly — because from this entry on, every listing and every enforcement carries the version it happened under.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "rules.amendment",
+     "community": "did:web:kestrel-seller-log.example",
+     "timestamp": "2026-05-16T09:00:00Z",
+     "body": {
+      "amendment_id": "kestrel-terms-v12",
+      "amends": "kestrel-terms/v11",
+      "section": "§3.4 used-goods-provenance",
+      "diff_hash": "sha256:4b7e2a90cd1f6583a7c0e9d2b5f4a1c8d3e6f7091b2a3c4d5e6f708192a3b4c6",
+      "notice_served": "2026-05-16",
+      "effective_from": "2026-06-01",
+      "expires": "2028-06-01 unless renewed",
+      "authorizing_rule": "kestrel-seller-settlement/2026 §2 (terms change on 15 days' notice, versioned, with expiry)",
+      "note": "The rule change as a first-class act: noticed, dated, diffed, expiring. A term nobody re-justifies in two years lapses — the amendment ladder's discipline, transplanted to a marketplace."
+     },
+     "sig": {
+      "key_id": "did:web:kestrel-seller-log.example#log-1",
+      "alg": "ed25519",
+      "value": "UnVsZXNBbWVuZG1lbnRLZXN0cmVsTm90UmVhbDAx"
+     }
+    }
+   },
+   {
+    "actor": "The suspension, made to name itself",
+    "verb": "cast",
+    "narrative": "The flag fires against Petra's listings anyway — and now it must say what it is. The denial-trace carries the rule version (v12), the specific listings, the specific defect claimed (provenance documentation absent), the creation dates of the listings themselves, and an appeal path; the detector's working detail is sealed but committed, readable by Petra and an authorised auditor. One line in the entry does the work of the whole reform: the listings are dated 2025, the rule is dated June 2026. In the old world that mismatch lived in Petra's memory, unprovable; here it is two fields of the same public record, and anyone — Petra, the council, the regulator — can subtract one date from the other.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:kestrel-seller-log.example",
+     "timestamp": "2026-06-24T09:12:00Z",
+     "body": {
+      "disposition_id": "2026-kestrel-susp-30441",
+      "subject_ref": "seller-account:kestrel-pl-2214",
+      "decision": "listings-removed-account-suspended",
+      "authorizing_rule": "kestrel-terms/v12 §3.4 used-goods-provenance (effective 2026-06-01)",
+      "basis": "3 listings flagged: provenance documentation absent",
+      "listings_created_under": "kestrel-terms/v11 (created 2025-03 to 2025-11)",
+      "automated": true,
+      "human_review": "available on dispute per kestrel-seller-settlement/2026 §5",
+      "appeal_trace": "did:web:kestrel-seller-log.example/appeals/2026-susp-30441",
+      "note": "The statement of reasons the regulation demands, as a validity condition: rule version, named defect, named listings, their dates beside the rule's. The version mismatch is now arithmetic on the entry's own face."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:9e3a1d7c4f8b2e5a0d6c9f2b7e4a1d8c3f6b9e2a5d8c1f4b7e0a3d6c9f2b5e83",
+      "readable_by": [
+       "subject",
+       "authorized-auditor"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:kestrel-seller-log.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VLZXN0cmVsTm90UmVhbDAy"
+     }
+    }
+   },
+   {
+    "actor": "The freeze, given an author and a deadline",
+    "verb": "cast",
+    "narrative": "One minute later the money is held — as its own act, because the settlement forbids a freeze to travel silently inside a suspension. The hold names its rule, its amount, and its release clock: sixty days maximum pending investigation, and a hold past its clock is not a lapse but a visible breach the witnesses count. The FOI lesson, transplanted to an escrow balance: what the old world made a formless waiting — money gone, nobody accountable, no date to point at — is now a specific act by a specific authority that expires on a specific day. £9,180 is still frozen this morning. But it is frozen *by someone, under something, until a date*, and each of those three facts is one the old notice never contained.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-funds.hold",
+     "community": "did:web:kestrel-seller-log.example",
+     "timestamp": "2026-06-24T09:13:00Z",
+     "body": {
+      "hold_id": "2026-kestrel-hold-30441",
+      "references_disposition": "2026-kestrel-susp-30441",
+      "amount": {
+       "value": 9180,
+       "currency": "GBP"
+      },
+      "authorizing_rule": "kestrel-terms/v12 §9.2 (hold pending investigation, 60 days maximum)",
+      "release_due": "2026-08-23",
+      "held_in": "segregated escrow per kestrel-seller-settlement/2026 §6",
+      "note": "The freeze as an act with an author and a clock. Silence past release_due is itself a breach on the record — the slow-walk foreclosed for money the way the corpus forecloses it for information."
+     },
+     "sig": {
+      "key_id": "did:web:kestrel-seller-log.example#log-1",
+      "alg": "ed25519",
+      "value": "RnVuZHNIb2xkS2VzdHJlbE5vdFJlYWwwMw"
+     }
+    }
+   },
+   {
+    "actor": "Petra Lindqvist, disputing with dates instead of contrition",
+    "verb": "challenge",
+    "narrative": "Petra's dispute is one paragraph and no remorse. She cites the suspension entry against the amendment entry: the listings predate v12's effective date; v11 contained no provenance requirement; the settlement's own terms bar retroactive enforcement. There is no plan of action, no consultant, no confession engineered for a parser — the two entries argue with each other, and she merely points. The reinstatement economy the Verge documented existed because disputes had no material to work with except the seller's posture. Give the dispute two dated public facts and the posture industry has nothing left to sell."
+   },
+   {
+    "actor": "The review, and the money's early release",
+    "verb": "verify",
+    "narrative": "Day eight: the human review upholds her. The finding writes itself from the record — listings created under v11, v12 not retroactive, suspension misapplied — and the consequences execute along the entries' own references: listings restored, the hold released fifty-one days before its clock, and a misapplication counter incremented in the quarter's aggregate. The reviewer spent eleven minutes, and that number lands on the record too. Petra's case was easy precisely because the reform made it easy: the wrongness of her suspension was computable from two fields. The harder cases — where the rule was in force and the judgment is real — remain judgment, and the log's only promise there is that judgment must sign its work.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-review.outcome",
+     "community": "did:web:kestrel-seller-log.example",
+     "timestamp": "2026-07-02T14:40:00Z",
+     "body": {
+      "review_id": "2026-kestrel-rev-30441",
+      "references_disposition": "2026-kestrel-susp-30441",
+      "reviewer_role": "marketplace-integrity L2 (human)",
+      "outcome": "reinstated; hold released",
+      "finding": "listings predate kestrel-terms/v12 effective date; v11 imposed no provenance requirement; enforcement misapplied a non-retroactive amendment",
+      "elapsed_days_since_decision": 8,
+      "seconds_spent_in_review": 660,
+      "funds_released": "2026-kestrel-hold-30441 released 51 days before release_due",
+      "note": "The outcome executes along the record's own references — listings, hold, aggregate — and the review signs its reasoning, its time, and its role."
+     },
+     "sig": {
+      "key_id": "did:web:kestrel-seller-log.example#log-1",
+      "alg": "ed25519",
+      "value": "UmV2aWV3T3V0Y29tZUtlc3RyZWxOb3RSZWFsMDQ"
+     }
+    }
+   },
+   {
+    "actor": "The quarter, counting the machine's own misfires",
+    "verb": "verify",
+    "narrative": "The Q2 aggregate publishes what no seller could previously prove and no regulator could cheaply discover: 4,102 suspensions; twelve percent citing a rule version newer than the listings they struck — the retroactivity rate, now a named number; median hold thirty-one days; 3.2 percent of holds past their clocks, each a counted breach; twenty-seven percent of disputed suspensions reversed. The regulation's enforcement problem has always been that its breaches are invisible one seller at a time — pattern_of_lawful_acts, the corpus's oldest signature. A witnessed quarterly table is the pattern pre-assembled: the P2B case against a non-compliant platform, written by the platform's own log.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:kestrel-seller-log.example",
+     "timestamp": "2026-07-15T12:00:00Z",
+     "body": {
+      "period": "2026-Q2",
+      "metric": "seller-adverse-decisions",
+      "suspensions": 4102,
+      "version_mismatched_enforcements": 0.12,
+      "median_hold_days": 31,
+      "holds_past_clock": 0.032,
+      "reversed_on_dispute": 0.27,
+      "note": "Anonymous aggregate: the retroactivity rate, the money's median winter, and the breach count — the regulation's evidence base, standing and witnessed instead of subpoenaed."
+     },
+     "sig": {
+      "key_id": "did:web:kestrel-seller-log.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29zdEFnZ3JlZ2F0ZUtlc3RyZWxOb3RSZWFsMDU"
+     }
+    }
+   },
+   {
+    "actor": "The rulebook's author, still the counterparty",
+    "verb": "offstage",
+    "narrative": "The honest ceiling, and it is structural. Kestrel still writes Section 3. Version 13 can lawfully require provenance papers estate sales will never produce, and if it arrives on proper notice with a clean diff and a dated expiry, the log will record the extinction of Petra's business model in perfect order — the kernel makes rule-by-decree legible, slower, and dated; it does not make it fair, and whether a term is fair is company law and the regulation's substance, refused here on principle (refusal 11). Adoption is the second ceiling: the P2B binds on paper across the EU, but its enforcement runs through national courts seller by seller, and a platform off the log offers exactly what the Verge found — process without law. The settlement Kestrel signed is what the corpus's other platform case called being marched to the record by statute; the march is real, and it is slow, and the sellers' dependence the CMA documented does not pause while it arrives."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did: it made the rulebook a ladder of dated versions instead of weather, so retroactive enforcement became arithmetic visible on the accusing entry itself; it made the statement of reasons a validity condition rather than a courtesy; it gave the frozen money an author, a rule, and a deadline whose breach counts; and it published the machine's misfire rates — the retroactivity percentage, the holds past clock — as standing, witnessed facts. What it did not do: it did not take the pen from the rulebook's author, price the fairness of any term, or bind the platforms that never signed. The confession industry dies not because sellers got braver but because disputes finally have material: two entries, two dates, and a subtraction anyone can perform."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "'Suspended per Section 3' — a rule changed three weeks earlier without notice, money frozen with no author and no deadline, appeal by confession. Bound to the log, the rule change is a noticed, dated, expiring entry; the suspension must cite its version and facts; the hold has an owner and a clock; retroactivity becomes arithmetic. But the platform still writes the rules, and only statute makes the unwilling adopt.",
+  "protection": "the rule that must name itself, the hold with a clock",
+  "protection_plain": "Whether the amendment ladder and cited-demand discipline answer rule-by-decree: terms changing only on notice with expiry, suspensions citing rule version and facts, funds held only by an act with an author and release date, misfire rates published. The rulebook's author is untouched.",
+  "findings": [
+   {
+    "protection": "retroactivity becomes arithmetic",
+    "severity": "note",
+    "doc_ref": "§5",
+    "observation": "The amendment ladder's transplant is the scenario's cleanest win: once every terms change is a dated, noticed, diffed entry and every listing and enforcement carries its version, applying June's rule to March's listing stops being a seller's unprovable grievance and becomes a mismatch of two fields on the accusing entry itself. Petra's dispute needed one paragraph and no contrition because the wrongness was computable — and the aggregate generalises her case into a standing retroactivity rate. The expiry discipline adds the quieter gain: a term nobody will re-justify in two years lapses, so the rulebook accretes deliberately instead of geologically."
+   },
+   {
+    "protection": "the statement of reasons as a validity condition",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The P2B already obliges a statement of reasons; the Verge documented how little an obligation achieves when the reasons can be boilerplate and the forum is a parser. The kernel's move is to make the citation structural — an enforcement without rule version, named defect, and named subject cannot be validly logged, and under the settlement an unlogged enforcement is void. That kills the confession economy at its root: reinstatement consultants sold posture because disputes had no material, and a dispute that can cite two public entries at each other needs no posture. The sealed detection detail answers the gaming objection the same way the gig case did — committed now, examinable by the people with standing."
+   },
+   {
+    "protection": "the money's silence gets a deadline",
+    "severity": "strain",
+    "doc_ref": "§8",
+    "observation": "A frozen balance was the wrong's sharpest edge — the shop can be argued about; the wages are simply gone — and the old freeze had no author, no rule, and no date, the slow-walk signature the corpus met at FOI. As its own logged act the hold names all three, breaches of its clock are counted in public, and Petra's £9,180 came back fifty-one days early because the reversal executed along the record's references. The strain is what remains: thirty-one days is still the median winter a suspended seller's cashflow spends in escrow, the clock exists only because a settlement wrote one, and a lawful hold run to its full sixty days is a hardship the log dates precisely and relieves not at all."
+   },
+   {
+    "protection": "the author of the rules is the counterparty",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The structural ceiling the whole reform sits under: Kestrel drafts Section 3, and version 13 can lawfully outlaw Petra's business model on proper notice with a clean diff — the ladder makes decree legible and deliberate, never just. Whether a term is fair is the regulation's and company law's substance, refused on principle here (refusal 11). And the T2 shape gives the adoption gap its edge: the platform is not a neutral pipe that happens to be opaque — discretion is leverage, and the P2B's court-by-court enforcement is the slow march that stands where the depository case had no march at all. The CMA's dependence finding is the clock this strain runs on: exile does not wait for case law."
+   }
+  ]
+ },
+ {
   "id": "maternity-harm-downgraded",
   "title": "The Grader Is the Harmer: Downgrading a Baby's Injury to Stay Below the Line",
   "setting": "Ruben Hartley was born with a brain injury that need not have happened. His mother's labour was not escalated when it should have been, an emergency caesarean came too late, and he was starved of oxygen in the minutes that decided the rest of his life. What his parents, Sarah and Tom, were told afterwards was that nothing had gone wrong — that his injury was one of those tragedies of birth, unavoidable, no lapse in care. And on the trust's own record, that is exactly what it was graded: low harm, no lapse identified. That grade is not a description. It is a gate. A maternity incident graded as serious harm caused by a lapse in care triggers a formal patient-safety investigation, a duty of candour, a coroner's interest, the attention of the regulator; a grade of low harm, no lapse triggers none of them. The trust that caused the harm is the body that grades it, and the grade decides whether anyone outside the trust will ever look.\n\nThis is the shape the Ockenden review of Shrewsbury and Telford found, and the Kirkup reports into East Kent and elsewhere: not only clinical failures but their systematic minimisation — avoidable deaths recorded as unavoidable, harm graded down, families who knew something was wrong told firmly that it was not, and a pattern that stayed invisible for years precisely because each incident had been individually, defensibly, graded below the line that would have exposed it. Thornbury NHS Trust, in this scenario, runs its incident grading on a kernel transparency log in subject-readable mode, and the question is a narrow and uncomfortable one. A protocol cannot decide whether Ruben's injury was avoidable — that is a clinical judgment, and judgment is refused. But when the party grading the harm is the party that caused it, can the protocol at least stop the grading being done in the dark?",
@@ -15516,6 +16109,305 @@
     "severity": "strain",
     "doc_ref": "§3.4",
     "observation": "The four-verb citizen surface (§8) has no native verb for 'the state logs an act of coercion,' and coercive.act is deliberately a state write whose subject_ref sits in the walled-off enforcement identity domain (T6, T1). A consequence for the human at the centre: Marcus cannot, from his own civic client, prove that the accumulating stops are HIS, nor challenge the pattern as an aggregate — he can appeal single acts (which lawfully pass) or read the anonymous borough total, but nothing lets the coerced person bind the pattern to themselves. The privacy wall that protects him from enforcement attribution is the same wall that denies him personal standing over the pattern; only an intermediary (the Trust, the press, the assembly) can act on the aggregate."
+   }
+  ]
+ },
+ {
+  "id": "union-ballot-employer-interference",
+  "title": "The Mailbox and the Meeting: A Recognition Ballot the Boss Cannot Read",
+  "setting": "Dara Okafor has picked orders at Corvess Logistics' Dunmore fulfilment centre for five years, and for the last six months she has lived inside a campaign. The union filed for recognition in the autumn. Since then there have been meetings — mandatory, twice a week, attendance scanned at the door — where managers explain what a union would cost her. There is a supervisor who has taken to standing near the break-room noticeboard. And when the first ballot came, the company pressed the postal service to put a collection box right at the warehouse entrance, in view of the cameras, and encouraged everyone to use it. The union lost two to one. Then the labour board's officers found what the corpus would call the attack pattern: the employer had, in the regulator's words, 'essentially hijacked the process and gave a strong impression that it controlled the process'. A second election was ordered. The fear, which no order reaches, was not.\n\nAll of it is documented. At Amazon's Bessemer warehouse in 2021, the NLRB's regional director ordered a rerun in exactly these terms — the unmarked mailbox under company cameras, the surveillance, the pressure — and the rerun ran anyway under the same weight. In November 2024 the Board went further and held captive-audience meetings unlawful, its safe harbour itself a small essay in record-keeping: meetings are lawful if attendance is voluntary and no attendance records are kept — the law reaching, from its own direction, for the insight that sometimes the protective act is the absence of a record. And beneath the ballots sits the older, colder file: the Consulting Association's blacklist, 3,213 construction workers — organisers, safety reps — quietly unemployable across forty firms for years, its operator fined five thousand pounds. That is what organising can cost before any ballot exists, and no ballot design touches it.\n\nDunmore is fiction, and its rerun tests the one adopter in the business set that already runs elections for a living: the labour board itself. The kernel does not ask the employer to adopt anything. It re-equips the referee — receipt-free credentials, no workplace cast points at all, a roster both sides sign, a tally either side can re-run — and then it is honest about the perimeter: the ballot can be made unreadable to the boss; the voter's job cannot be made safe by a ballot.",
+  "threats": [
+   "T4",
+   "T6"
+  ],
+  "doc_refs": [
+   "§3.1",
+   "§3.2",
+   "§4",
+   "§2",
+   "§10",
+   "§12",
+   "T4",
+   "T6"
+  ],
+  "precedents": [
+   {
+    "event": "NLRB orders a second election at Amazon Bessemer: the employer 'essentially hijacked the process' with a mailbox under its cameras",
+    "year": 2021,
+    "source": "CNBC / NLRB Regional Director decision",
+    "url": "https://www.cnbc.com/2021/11/29/amazon-warehouse-workers-in-alabama-will-get-another-chance-to-vote-to-unionize.html",
+    "shows": "The casting environment as the attack surface: an employer-procured ballot box at the warehouse entrance, in camera view, created the impression the company controlled the election — interference found, rerun ordered, and the rerun run under the same fear, because the remedy re-ran the vote, not the conditions."
+   },
+   {
+    "event": "NLRB rules captive-audience meetings unlawful (Amazon.com Services LLC): lawful only if voluntary and no attendance records kept",
+    "year": 2024,
+    "source": "Stinson LLP, on the Board's decision of 13 November 2024",
+    "url": "https://www.stinson.com/newsroom-publications-after-76-years-the-nlrb-declares-captive-audience-meetings-unlawful",
+    "shows": "After 76 years the Board held mandatory persuasion meetings coercive per se — and its safe harbour is itself record-discipline inverted: advance notice, voluntary attendance, and no attendance records, the law independently discovering that the protective act can be the absence of a record, which is receipt-freeness's own logic."
+   },
+   {
+    "event": "The Consulting Association blacklist: 3,213 workers — organisers and safety reps — covertly unemployable across forty firms",
+    "year": 2009,
+    "source": "Wikipedia (ICO raid and aftermath, documented)",
+    "url": "https://en.wikipedia.org/wiki/Consulting_Association",
+    "shows": "What organising costs outside any ballot: a private file of union activity and safety complaints, consulted by major contractors for years, ruined livelihoods invisibly, and ended with a £5,000 fine — retaliation operating entirely upstream and downstream of elections, where no ballot design reaches."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:dunmore-ballot.example",
+    "name": "Regional labour board — Dunmore recognition ballot (kernel machinery)"
+   },
+   "services": {
+    "personhood": true,
+    "decisions": true,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "personhood": {
+    "method": "external-issuer",
+    "issuer": "Labour board, from the employer's eligibility list as reconciled through the challenge window (both parties sign the final roster)",
+    "unlinkable": true,
+    "sybil_resistance": "medium",
+    "eligibility_rules": "recognition-code/v3 §eligibility (bargaining-unit definition + challenge procedure)"
+   },
+   "decisions": {
+    "verifiable": true,
+    "receipt_free": true,
+    "cast_or_audit": true,
+    "paper_channel": true,
+    "coercion_resistance": "revote-silent",
+    "trustee_quorum": "3-of-5: the labour board, the union, the employer, Kelder University, the press association — neither party can decrypt anything alone"
+   },
+   "transparency_log": {
+    "log_id": "did:web:dunmore-ballot.example",
+    "witnesses": [
+     "did:web:dunmore-union-local.example",
+     "did:web:corvess-logistics.example",
+     "did:web:civic-observatory.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "recognition-ballot-cast",
+     "steps": 2,
+     "fields": 0,
+     "median_seconds": 70,
+     "abandonment_rate": 0.01
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:dunmore-ballot.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Dara Okafor, inside the first election",
+    "verb": "offstage",
+    "narrative": "The backdrop is Bessemer's pattern with the names changed: mandatory meetings with the scanner at the door; the supervisor by the noticeboard; the ballot box the company arranged at its own entrance, under its own cameras, with its own encouragement to use it. None of the ballots in that box were read by the employer — they did not need to be. The election's furniture said who was watching, and the regulator later found the process 'essentially hijacked'. The corpus knows this attack from a kitchen in Valmora: the coercer does not have to see the vote if he controls the room it is cast in. Here the room was a loading bay, and the rerun was ordered into the same room."
+   },
+   {
+    "actor": "The file that precedes every ballot",
+    "verb": "offstage",
+    "narrative": "Before the machinery, the perimeter — stated first because everything after must be read inside it. The Consulting Association's blacklist put 3,213 organisers and safety reps out of work across forty firms for years, for a final penalty of five thousand pounds; Dunmore's own campaign has already cost one organiser a contract renewal and Dara a photograph taken of her in the car park. This is what the triage caveat on this case means: the wrong the kernel can reach is the ballot's; the wrong that empties break rooms operates before any ballot exists and after every ballot closes, in employment, where only labour law and its enforcement reach. A person who proposes the vote pays before the vote is a thing that can protect anyone."
+   },
+   {
+    "actor": "The labour board, re-equipping itself",
+    "verb": "cast",
+    "narrative": "The rerun opens on the board's own kernel deployment — the one adopter in the business set that already runs elections for a living, so nobody hostile has to adopt anything. The opening entry declares the two design decisions that abolish the first election's attack surface. There are no workplace cast points: not a box, not a kiosk, not a tablet on the floor — casting is from the worker's own phone, by post, or at any public library, so there is no physical object at the warehouse for power to stand beside. And the ballot is receipt-free with silent re-vote: nothing a worker can show a supervisor, nothing a supervisor can demand to see, and any watched cast supersedable from a kitchen that evening.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:dunmore-ballot.example",
+     "timestamp": "2026-04-06T09:00:00Z",
+     "body": {
+      "decision_id": "2026-dunmore-recognition-rerun",
+      "question_hash": "sha256:7f2b1c4a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d5e",
+      "eligibility_rules": "recognition-code/v3 §eligibility; roster as reconciled at challenge close",
+      "window": {
+       "deliberation_ends": "2026-05-01T17:00:00Z",
+       "cast_ends": "2026-05-15T17:00:00Z"
+      },
+      "cast_channels": "own-device, postal paper, public-library kiosks — no cast infrastructure at any employer premises, by rule",
+      "note": "The mailbox abolished as a category: there is nothing at the warehouse to stand beside, procure, or film. Receipt-free, silent re-vote; neither party in the trustee set can decrypt anything alone."
+     },
+     "sig": {
+      "key_id": "did:web:dunmore-ballot.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVjaXNpb25PcGVuZWREdW5tb3JlTm90UmVhbDAx"
+     }
+    }
+   },
+   {
+    "actor": "Two hundred names, argued in daylight",
+    "verb": "challenge",
+    "narrative": "The roster fight — every recognition ballot's opening battle — moves into arithmetic. The employer's eligibility list is published as a commitment; the union challenges 214 names (supervisors listed as pickers, leavers kept on, new hires missing); the board rules on each with reasons; and the final roster is signed by both parties before a single credential mints. The count that follows can no longer be relitigated through the list that fed it, because the list itself closed as a mutually signed public object — §10's enrolment discipline doing for a bargaining unit what it does for a citizens' roll: whoever would stuff or starve the roster must now do it in public, against a signature they gave.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-roster.reconciliation",
+     "community": "did:web:dunmore-ballot.example",
+     "timestamp": "2026-04-20T16:00:00Z",
+     "body": {
+      "roster_id": "2026-dunmore-rerun-roster",
+      "employer_list_commitment": "sha256:2a7d9f4c1e8b5f0a3d6c9e2b7f4a1d8c3e6b9f2a5d8c1e4b7f0a3d6c9e2b5f84",
+      "names_challenged": 214,
+      "challenges_upheld": 61,
+      "final_unit_size": 4640,
+      "signed_by": [
+       "labour board",
+       "union local",
+       "Corvess Logistics"
+      ],
+      "note": "The Excelsior fight as sums: each challenge ruled with reasons, the final roster co-signed, credentials capped by it. Neither side can later blame the list it signed."
+     },
+     "sig": {
+      "key_id": "did:web:dunmore-ballot.example#log-1",
+      "alg": "ed25519",
+      "value": "Um9zdGVyUmVjb25jaWxlZER1bm1vcmVOb3RSZWFsMDI"
+     }
+    }
+   },
+   {
+    "actor": "Dara Okafor's fortnight: the meeting, the demo, the kitchen",
+    "verb": "cast",
+    "narrative": "The meetings still happen — voluntary now, unrecorded, per the 2024 rule whose safe harbour is itself an anti-record: no attendance list to end up in anyone's file. Dara goes, because not going is its own statement, and nods where nodding is expected, because nodding costs nothing at a count nobody can inspect. On the floor, a supervisor runs a 'voting help' demo and watches two pickers cast on a borrowed tablet; both casts are real, and both are superseded that evening from two kitchens, silently, leaving nothing on any device to show a re-vote happened. This is Corn Street's machinery working where Corn Street's coercer cannot follow: the supervisor is not Marek — he cannot hold every kitchen, demand proof of a negative from four thousand people, or tell a nod from a vote."
+   },
+   {
+    "actor": "What the booth cannot hold",
+    "verb": "offstage",
+    "narrative": "The perimeter, honestly walked. The photograph of Dara in the car park exists; the organiser's contract still lapsed mid-campaign; a shift captain still asks, pleasantly, how people are feeling about it all, and the asking still lands. Receipt-freeness makes the ballot unreadable; it does not make the campaign unwatched, and it cannot make organising costless — the blacklist file was never about how anyone voted, only about who was seen to organise the voting. Those wrongs have their own law (unfair labour practice, victimisation, data protection) and their own corpus shape — the aggregate that counts what individuals cannot prove — but they are not this ballot's to cure, and the scenario does not pretend otherwise."
+   },
+   {
+    "actor": "The close, counted by everyone",
+    "verb": "verify",
+    "narrative": "Recognition fails: 2,411 no, 2,229 yes, on a turnout of 4,640 that dwarfs the first election's. The margin is 182 votes. And here is the machinery's actual deliverable, stated exactly: not a different result — a result nobody's story can absorb. The union re-runs the tally proof and finds the count clean; the employer re-runs it and finds the same; any picker with a phone can do what both sides' lawyers did. There is no mailbox to blame and no inspector's certificate to trust. The first election produced a number that meant 'the employer ran the room'. This one produces a number that means 4,640 people, unwatched, said this — and the campaign's argument moves, as it now must, to the firings and the fear, which is where it always really was.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.tally-proof",
+     "community": "did:web:dunmore-ballot.example",
+     "timestamp": "2026-05-15T20:00:00Z",
+     "body": {
+      "decision_id": "2026-dunmore-recognition-rerun",
+      "question_hash": "sha256:7f2b1c4a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d5e",
+      "result": {
+       "recognise-union": 2229,
+       "no-recognition": 2411
+      },
+      "ballots_counted": 4640,
+      "tally_proof_hash": "sha256:1d6e3a90bc4f7583a7c0e9d2b5f4a1c8d3e6f7091b2a3c4d5e6f708192a3b4d8",
+      "trustees_decrypting": "3-of-5 (neither party alone)",
+      "paper_channel_rla": {
+       "paper_ballots": 1122,
+       "risk_limit": 0.05,
+       "outcome": "confirmed"
+      }
+     },
+     "sig": {
+      "key_id": "did:web:dunmore-ballot.example#log-1",
+      "alg": "ed25519",
+      "value": "VGFsbHlQcm9vZkR1bm1vcmVOb3RSZWFsMDM"
+     }
+    }
+   },
+   {
+    "actor": "Both parties, witnessing the same head",
+    "verb": "verify",
+    "narrative": "The checkpoint is co-signed by the union local, by Corvess Logistics, and by a civic observatory — the two adversaries in the same witness set, each holding the other's arithmetic still. That co-signature is the quiet institutional novelty of the whole rerun: a recognition election whose loser cannot claim the process and whose winner cannot be accused of running it, because both underwrote the record while it was being made rather than litigating it after it closed.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "anchor.checkpoint",
+     "community": "did:web:dunmore-ballot.example",
+     "timestamp": "2026-05-15T22:00:00Z",
+     "body": {
+      "checkpoint_id": "dunmore-2026-05-15",
+      "tree_size": 9973,
+      "root_hash": "sha256:6c9e2b7f4a1d8c3e5a2f7d9c4e8b3f6a0d5c9e2b7f4a1d8c3e6b9f2a5d8c1e47",
+      "witnesses_cosigned": [
+       "did:web:dunmore-union-local.example",
+       "did:web:corvess-logistics.example",
+       "did:web:civic-observatory.example"
+      ],
+      "anchored": "opentimestamps:bitcoin-mainnet",
+      "note": "Adversaries in one witness set: each side's daemon holds the other's record still. The count is common ground even where nothing else is."
+     },
+     "sig": {
+      "key_id": "did:web:dunmore-ballot.example#log-1",
+      "alg": "ed25519",
+      "value": "QW5jaG9yQ2hlY2twb2ludER1bm1vcmVOb3RSZWFsMDQ"
+     }
+    }
+   },
+   {
+    "actor": "The process, measuring the interference surface",
+    "verb": "verify",
+    "narrative": "A week later the board publishes the election's process aggregate: turnout eighty percent against the first election's fifty-two; casts by channel — own device, post, library — and, as a declared metric, zero cast events at employer premises, because there was nothing there to cast with. The number the first election could never produce is the one that matters: how much of the electorate the employer's furniture used to reach. Bessemer's mailbox needed a hearing officer's report to establish; Dunmore's absence of one is a line in a witnessed table.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:dunmore-ballot.example",
+     "timestamp": "2026-05-22T12:00:00Z",
+     "body": {
+      "period": "2026-dunmore-recognition-rerun",
+      "metric": "ballot-process-vitals",
+      "turnout": 0.8,
+      "first_election_turnout": 0.52,
+      "casts_by_channel": {
+       "own-device": 3021,
+       "postal-paper": 1122,
+       "library-kiosk": 497
+      },
+      "cast_events_at_employer_premises": 0,
+      "median_cast_seconds": 70,
+      "note": "Anonymous aggregate: the interference surface as a measured zero, and the turnout the watched room used to suppress."
+     },
+     "sig": {
+      "key_id": "did:web:dunmore-ballot.example#log-1",
+      "alg": "ed25519",
+      "value": "UHJvY2Vzc1ZpdGFsc0R1bm1vcmVOb3RSZWFsMDU"
+     }
+    }
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did: it abolished the employer-controlled casting environment as a category rather than policing it as a behaviour; it made the roster a co-signed public object instead of a parallel lawsuit; it let a watched vote be silently unmade from a kitchen; and it produced a loss — because it was a loss — that neither side's story can absorb, re-runnable by any picker's phone. What it did not do: unfire the organiser, expose the car-park photograph, erase the file that waits for organisers across an industry, or make the asking-how-you-feel stop landing. The regulator's rerun re-ran the vote inside the same fear; the kernel's rerun removed the vote from the fear's reach and left the fear standing, named, where labour law can be pointed at it. A fair count was never the whole of a fair fight. It is the part a protocol can hold — and the part that, held, stops absorbing the blame for the rest."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "A regulator found the employer 'essentially hijacked' a recognition ballot — a mailbox under its cameras — and the rerun ran inside the same fear. On kernel machinery the box is abolished: no workplace cast points, receipt-free ballots, watched casts unmade from a kitchen, a roster and tally both sides co-sign. But the fear was never only the ballot's: organisers still pay in employment, where no ballot reaches.",
+  "protection": "the ballot the boss cannot read",
+  "protection_plain": "Whether receipt-free credentials, silent re-vote, no workplace cast points, a co-signed roster and a tally either adversary can re-run answer employer interference in a recognition ballot. The casting environment is removed from the employer's reach; the voter's job is not, and the corpus says so.",
+  "findings": [
+   {
+    "protection": "the mailbox abolished as a category",
+    "severity": "note",
+    "doc_ref": "§4",
+    "observation": "Bessemer's interference ran through the election's physical furniture: a box the employer procured, placed, and filmed. The deployment's answer is not better rules about boxes but the removal of the class: casting is from the worker's own device, by post, or at any public library, and 'cast events at employer premises: zero' is a published metric, not a compliance claim. What took a hearing officer's report to establish in the real case — that the company had made itself look like the election's operator — becomes structurally impossible to attempt, because there is nothing at the workplace to procure, stand beside, or film. Prevention by subtraction, the kernel's oldest reflex."
+   },
+   {
+    "protection": "the watched vote, silently unmade",
+    "severity": "note",
+    "doc_ref": "§3.2",
+    "observation": "The captive audience's power at the count was always the suspicion that acquiescence could be checked; receipt-freeness removes the checkable object, and silent re-vote removes even the watched cast's finality — the supervisor's tablet demo produced two real ballots and two kitchens quietly replaced them, with nothing on any device to prove a re-vote happened. This is Corn Street's machinery in a workplace, and the same honesty travels with it: it defeats the observer who needs proof, not the household coercer with the PIN and until Saturday — but a supervisor is structurally the weaker Marek, one man to four thousand kitchens, and the 2024 rule's own safe harbour (no attendance records) is the law arriving at receipt-freeness's insight from the other side."
+   },
+   {
+    "protection": "adversaries in one witness set",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The quiet novelty with the widest reach: the union and the employer both sit in the trustee quorum (neither decrypts alone) and both co-sign the log's head, so the record is underwritten by the parties with the most reason to dispute it, while it is being made. The first election's number meant 'the employer ran the room' and was contested for a year; this one's loss — and it is a loss — is re-runnable arithmetic that neither story can absorb. A fair count does not deliver recognition. It delivers a result that cannot be blamed on the count, which relocates the fight to its real ground and strips the process of its use as either side's alibi."
+   },
+   {
+    "protection": "the fear outside the booth",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The triage sent this case in carrying its caveat — legible-not-remedied — and the walkthrough honours it. The organiser's contract lapsed mid-campaign; the car-park photograph exists; the Consulting Association file put 3,213 organisers and safety reps out of work for years at a final price of five thousand pounds, and no element of it ever touched a ballot. Receipt-freeness protects the vote; nothing in a ballot's design protects the visible act of organising the vote — the proposer pays before the machinery exists to protect anyone, which is the corpus's own named gap about itself. Those wrongs belong to labour law and to the aggregate's slow arithmetic of patterns; the scenario's honesty is that a perfect booth changes neither."
    }
   ]
  },

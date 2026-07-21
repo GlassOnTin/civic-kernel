@@ -1,0 +1,299 @@
+{
+ "id": "union-ballot-employer-interference",
+ "title": "The Mailbox and the Meeting: A Recognition Ballot the Boss Cannot Read",
+ "setting": "Dara Okafor has picked orders at Corvess Logistics' Dunmore fulfilment centre for five years, and for the last six months she has lived inside a campaign. The union filed for recognition in the autumn. Since then there have been meetings — mandatory, twice a week, attendance scanned at the door — where managers explain what a union would cost her. There is a supervisor who has taken to standing near the break-room noticeboard. And when the first ballot came, the company pressed the postal service to put a collection box right at the warehouse entrance, in view of the cameras, and encouraged everyone to use it. The union lost two to one. Then the labour board's officers found what the corpus would call the attack pattern: the employer had, in the regulator's words, 'essentially hijacked the process and gave a strong impression that it controlled the process'. A second election was ordered. The fear, which no order reaches, was not.\n\nAll of it is documented. At Amazon's Bessemer warehouse in 2021, the NLRB's regional director ordered a rerun in exactly these terms — the unmarked mailbox under company cameras, the surveillance, the pressure — and the rerun ran anyway under the same weight. In November 2024 the Board went further and held captive-audience meetings unlawful, its safe harbour itself a small essay in record-keeping: meetings are lawful if attendance is voluntary and no attendance records are kept — the law reaching, from its own direction, for the insight that sometimes the protective act is the absence of a record. And beneath the ballots sits the older, colder file: the Consulting Association's blacklist, 3,213 construction workers — organisers, safety reps — quietly unemployable across forty firms for years, its operator fined five thousand pounds. That is what organising can cost before any ballot exists, and no ballot design touches it.\n\nDunmore is fiction, and its rerun tests the one adopter in the business set that already runs elections for a living: the labour board itself. The kernel does not ask the employer to adopt anything. It re-equips the referee — receipt-free credentials, no workplace cast points at all, a roster both sides sign, a tally either side can re-run — and then it is honest about the perimeter: the ballot can be made unreadable to the boss; the voter's job cannot be made safe by a ballot.",
+ "threats": [
+  "T4",
+  "T6"
+ ],
+ "doc_refs": [
+  "§3.1",
+  "§3.2",
+  "§4",
+  "§2",
+  "§10",
+  "§12",
+  "T4",
+  "T6"
+ ],
+ "precedents": [
+  {
+   "event": "NLRB orders a second election at Amazon Bessemer: the employer 'essentially hijacked the process' with a mailbox under its cameras",
+   "year": 2021,
+   "source": "CNBC / NLRB Regional Director decision",
+   "url": "https://www.cnbc.com/2021/11/29/amazon-warehouse-workers-in-alabama-will-get-another-chance-to-vote-to-unionize.html",
+   "shows": "The casting environment as the attack surface: an employer-procured ballot box at the warehouse entrance, in camera view, created the impression the company controlled the election — interference found, rerun ordered, and the rerun run under the same fear, because the remedy re-ran the vote, not the conditions."
+  },
+  {
+   "event": "NLRB rules captive-audience meetings unlawful (Amazon.com Services LLC): lawful only if voluntary and no attendance records kept",
+   "year": 2024,
+   "source": "Stinson LLP, on the Board's decision of 13 November 2024",
+   "url": "https://www.stinson.com/newsroom-publications-after-76-years-the-nlrb-declares-captive-audience-meetings-unlawful",
+   "shows": "After 76 years the Board held mandatory persuasion meetings coercive per se — and its safe harbour is itself record-discipline inverted: advance notice, voluntary attendance, and no attendance records, the law independently discovering that the protective act can be the absence of a record, which is receipt-freeness's own logic."
+  },
+  {
+   "event": "The Consulting Association blacklist: 3,213 workers — organisers and safety reps — covertly unemployable across forty firms",
+   "year": 2009,
+   "source": "Wikipedia (ICO raid and aftermath, documented)",
+   "url": "https://en.wikipedia.org/wiki/Consulting_Association",
+   "shows": "What organising costs outside any ballot: a private file of union activity and safety complaints, consulted by major contractors for years, ruined livelihoods invisibly, and ended with a £5,000 fine — retaliation operating entirely upstream and downstream of elections, where no ballot design reaches."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:dunmore-ballot.example",
+   "name": "Regional labour board — Dunmore recognition ballot (kernel machinery)"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "external-issuer",
+   "issuer": "Labour board, from the employer's eligibility list as reconciled through the challenge window (both parties sign the final roster)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "recognition-code/v3 §eligibility (bargaining-unit definition + challenge procedure)"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "revote-silent",
+   "trustee_quorum": "3-of-5: the labour board, the union, the employer, Kelder University, the press association — neither party can decrypt anything alone"
+  },
+  "transparency_log": {
+   "log_id": "did:web:dunmore-ballot.example",
+   "witnesses": [
+    "did:web:dunmore-union-local.example",
+    "did:web:corvess-logistics.example",
+    "did:web:civic-observatory.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "recognition-ballot-cast",
+    "steps": 2,
+    "fields": 0,
+    "median_seconds": 70,
+    "abandonment_rate": 0.01
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:dunmore-ballot.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Dara Okafor, inside the first election",
+   "verb": "offstage",
+   "narrative": "The backdrop is Bessemer's pattern with the names changed: mandatory meetings with the scanner at the door; the supervisor by the noticeboard; the ballot box the company arranged at its own entrance, under its own cameras, with its own encouragement to use it. None of the ballots in that box were read by the employer — they did not need to be. The election's furniture said who was watching, and the regulator later found the process 'essentially hijacked'. The corpus knows this attack from a kitchen in Valmora: the coercer does not have to see the vote if he controls the room it is cast in. Here the room was a loading bay, and the rerun was ordered into the same room."
+  },
+  {
+   "actor": "The file that precedes every ballot",
+   "verb": "offstage",
+   "narrative": "Before the machinery, the perimeter — stated first because everything after must be read inside it. The Consulting Association's blacklist put 3,213 organisers and safety reps out of work across forty firms for years, for a final penalty of five thousand pounds; Dunmore's own campaign has already cost one organiser a contract renewal and Dara a photograph taken of her in the car park. This is what the triage caveat on this case means: the wrong the kernel can reach is the ballot's; the wrong that empties break rooms operates before any ballot exists and after every ballot closes, in employment, where only labour law and its enforcement reach. A person who proposes the vote pays before the vote is a thing that can protect anyone."
+  },
+  {
+   "actor": "The labour board, re-equipping itself",
+   "verb": "cast",
+   "narrative": "The rerun opens on the board's own kernel deployment — the one adopter in the business set that already runs elections for a living, so nobody hostile has to adopt anything. The opening entry declares the two design decisions that abolish the first election's attack surface. There are no workplace cast points: not a box, not a kiosk, not a tablet on the floor — casting is from the worker's own phone, by post, or at any public library, so there is no physical object at the warehouse for power to stand beside. And the ballot is receipt-free with silent re-vote: nothing a worker can show a supervisor, nothing a supervisor can demand to see, and any watched cast supersedable from a kitchen that evening.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:dunmore-ballot.example",
+    "timestamp": "2026-04-06T09:00:00Z",
+    "body": {
+     "decision_id": "2026-dunmore-recognition-rerun",
+     "question_hash": "sha256:7f2b1c4a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d5e",
+     "eligibility_rules": "recognition-code/v3 §eligibility; roster as reconciled at challenge close",
+     "window": {
+      "deliberation_ends": "2026-05-01T17:00:00Z",
+      "cast_ends": "2026-05-15T17:00:00Z"
+     },
+     "cast_channels": "own-device, postal paper, public-library kiosks — no cast infrastructure at any employer premises, by rule",
+     "note": "The mailbox abolished as a category: there is nothing at the warehouse to stand beside, procure, or film. Receipt-free, silent re-vote; neither party in the trustee set can decrypt anything alone."
+    },
+    "sig": {
+     "key_id": "did:web:dunmore-ballot.example#log-1",
+     "alg": "ed25519",
+     "value": "RGVjaXNpb25PcGVuZWREdW5tb3JlTm90UmVhbDAx"
+    }
+   }
+  },
+  {
+   "actor": "Two hundred names, argued in daylight",
+   "verb": "challenge",
+   "narrative": "The roster fight — every recognition ballot's opening battle — moves into arithmetic. The employer's eligibility list is published as a commitment; the union challenges 214 names (supervisors listed as pickers, leavers kept on, new hires missing); the board rules on each with reasons; and the final roster is signed by both parties before a single credential mints. The count that follows can no longer be relitigated through the list that fed it, because the list itself closed as a mutually signed public object — §10's enrolment discipline doing for a bargaining unit what it does for a citizens' roll: whoever would stuff or starve the roster must now do it in public, against a signature they gave.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-roster.reconciliation",
+    "community": "did:web:dunmore-ballot.example",
+    "timestamp": "2026-04-20T16:00:00Z",
+    "body": {
+     "roster_id": "2026-dunmore-rerun-roster",
+     "employer_list_commitment": "sha256:2a7d9f4c1e8b5f0a3d6c9e2b7f4a1d8c3e6b9f2a5d8c1e4b7f0a3d6c9e2b5f84",
+     "names_challenged": 214,
+     "challenges_upheld": 61,
+     "final_unit_size": 4640,
+     "signed_by": [
+      "labour board",
+      "union local",
+      "Corvess Logistics"
+     ],
+     "note": "The Excelsior fight as sums: each challenge ruled with reasons, the final roster co-signed, credentials capped by it. Neither side can later blame the list it signed."
+    },
+    "sig": {
+     "key_id": "did:web:dunmore-ballot.example#log-1",
+     "alg": "ed25519",
+     "value": "Um9zdGVyUmVjb25jaWxlZER1bm1vcmVOb3RSZWFsMDI"
+    }
+   }
+  },
+  {
+   "actor": "Dara Okafor's fortnight: the meeting, the demo, the kitchen",
+   "verb": "cast",
+   "narrative": "The meetings still happen — voluntary now, unrecorded, per the 2024 rule whose safe harbour is itself an anti-record: no attendance list to end up in anyone's file. Dara goes, because not going is its own statement, and nods where nodding is expected, because nodding costs nothing at a count nobody can inspect. On the floor, a supervisor runs a 'voting help' demo and watches two pickers cast on a borrowed tablet; both casts are real, and both are superseded that evening from two kitchens, silently, leaving nothing on any device to show a re-vote happened. This is Corn Street's machinery working where Corn Street's coercer cannot follow: the supervisor is not Marek — he cannot hold every kitchen, demand proof of a negative from four thousand people, or tell a nod from a vote."
+  },
+  {
+   "actor": "What the booth cannot hold",
+   "verb": "offstage",
+   "narrative": "The perimeter, honestly walked. The photograph of Dara in the car park exists; the organiser's contract still lapsed mid-campaign; a shift captain still asks, pleasantly, how people are feeling about it all, and the asking still lands. Receipt-freeness makes the ballot unreadable; it does not make the campaign unwatched, and it cannot make organising costless — the blacklist file was never about how anyone voted, only about who was seen to organise the voting. Those wrongs have their own law (unfair labour practice, victimisation, data protection) and their own corpus shape — the aggregate that counts what individuals cannot prove — but they are not this ballot's to cure, and the scenario does not pretend otherwise."
+  },
+  {
+   "actor": "The close, counted by everyone",
+   "verb": "verify",
+   "narrative": "Recognition fails: 2,411 no, 2,229 yes, on a turnout of 4,640 that dwarfs the first election's. The margin is 182 votes. And here is the machinery's actual deliverable, stated exactly: not a different result — a result nobody's story can absorb. The union re-runs the tally proof and finds the count clean; the employer re-runs it and finds the same; any picker with a phone can do what both sides' lawyers did. There is no mailbox to blame and no inspector's certificate to trust. The first election produced a number that meant 'the employer ran the room'. This one produces a number that means 4,640 people, unwatched, said this — and the campaign's argument moves, as it now must, to the firings and the fear, which is where it always really was.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:dunmore-ballot.example",
+    "timestamp": "2026-05-15T20:00:00Z",
+    "body": {
+     "decision_id": "2026-dunmore-recognition-rerun",
+     "question_hash": "sha256:7f2b1c4a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d5e",
+     "result": {
+      "recognise-union": 2229,
+      "no-recognition": 2411
+     },
+     "ballots_counted": 4640,
+     "tally_proof_hash": "sha256:1d6e3a90bc4f7583a7c0e9d2b5f4a1c8d3e6f7091b2a3c4d5e6f708192a3b4d8",
+     "trustees_decrypting": "3-of-5 (neither party alone)",
+     "paper_channel_rla": {
+      "paper_ballots": 1122,
+      "risk_limit": 0.05,
+      "outcome": "confirmed"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:dunmore-ballot.example#log-1",
+     "alg": "ed25519",
+     "value": "VGFsbHlQcm9vZkR1bm1vcmVOb3RSZWFsMDM"
+    }
+   }
+  },
+  {
+   "actor": "Both parties, witnessing the same head",
+   "verb": "verify",
+   "narrative": "The checkpoint is co-signed by the union local, by Corvess Logistics, and by a civic observatory — the two adversaries in the same witness set, each holding the other's arithmetic still. That co-signature is the quiet institutional novelty of the whole rerun: a recognition election whose loser cannot claim the process and whose winner cannot be accused of running it, because both underwrote the record while it was being made rather than litigating it after it closed.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "anchor.checkpoint",
+    "community": "did:web:dunmore-ballot.example",
+    "timestamp": "2026-05-15T22:00:00Z",
+    "body": {
+     "checkpoint_id": "dunmore-2026-05-15",
+     "tree_size": 9973,
+     "root_hash": "sha256:6c9e2b7f4a1d8c3e5a2f7d9c4e8b3f6a0d5c9e2b7f4a1d8c3e6b9f2a5d8c1e47",
+     "witnesses_cosigned": [
+      "did:web:dunmore-union-local.example",
+      "did:web:corvess-logistics.example",
+      "did:web:civic-observatory.example"
+     ],
+     "anchored": "opentimestamps:bitcoin-mainnet",
+     "note": "Adversaries in one witness set: each side's daemon holds the other's record still. The count is common ground even where nothing else is."
+    },
+    "sig": {
+     "key_id": "did:web:dunmore-ballot.example#log-1",
+     "alg": "ed25519",
+     "value": "QW5jaG9yQ2hlY2twb2ludER1bm1vcmVOb3RSZWFsMDQ"
+    }
+   }
+  },
+  {
+   "actor": "The process, measuring the interference surface",
+   "verb": "verify",
+   "narrative": "A week later the board publishes the election's process aggregate: turnout eighty percent against the first election's fifty-two; casts by channel — own device, post, library — and, as a declared metric, zero cast events at employer premises, because there was nothing there to cast with. The number the first election could never produce is the one that matters: how much of the electorate the employer's furniture used to reach. Bessemer's mailbox needed a hearing officer's report to establish; Dunmore's absence of one is a line in a witnessed table.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:dunmore-ballot.example",
+    "timestamp": "2026-05-22T12:00:00Z",
+    "body": {
+     "period": "2026-dunmore-recognition-rerun",
+     "metric": "ballot-process-vitals",
+     "turnout": 0.8,
+     "first_election_turnout": 0.52,
+     "casts_by_channel": {
+      "own-device": 3021,
+      "postal-paper": 1122,
+      "library-kiosk": 497
+     },
+     "cast_events_at_employer_premises": 0,
+     "median_cast_seconds": 70,
+     "note": "Anonymous aggregate: the interference surface as a measured zero, and the turnout the watched room used to suppress."
+    },
+    "sig": {
+     "key_id": "did:web:dunmore-ballot.example#log-1",
+     "alg": "ed25519",
+     "value": "UHJvY2Vzc1ZpdGFsc0R1bm1vcmVOb3RSZWFsMDU"
+    }
+   }
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did: it abolished the employer-controlled casting environment as a category rather than policing it as a behaviour; it made the roster a co-signed public object instead of a parallel lawsuit; it let a watched vote be silently unmade from a kitchen; and it produced a loss — because it was a loss — that neither side's story can absorb, re-runnable by any picker's phone. What it did not do: unfire the organiser, expose the car-park photograph, erase the file that waits for organisers across an industry, or make the asking-how-you-feel stop landing. The regulator's rerun re-ran the vote inside the same fear; the kernel's rerun removed the vote from the fear's reach and left the fear standing, named, where labour law can be pointed at it. A fair count was never the whole of a fair fight. It is the part a protocol can hold — and the part that, held, stops absorbing the blame for the rest."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "A regulator found the employer 'essentially hijacked' a recognition ballot — a mailbox under its cameras — and the rerun ran inside the same fear. On kernel machinery the box is abolished: no workplace cast points, receipt-free ballots, watched casts unmade from a kitchen, a roster and tally both sides co-sign. But the fear was never only the ballot's: organisers still pay in employment, where no ballot reaches.",
+ "protection": "the ballot the boss cannot read",
+ "protection_plain": "Whether receipt-free credentials, silent re-vote, no workplace cast points, a co-signed roster and a tally either adversary can re-run answer employer interference in a recognition ballot. The casting environment is removed from the employer's reach; the voter's job is not, and the corpus says so.",
+ "findings": [
+  {
+   "protection": "the mailbox abolished as a category",
+   "severity": "note",
+   "doc_ref": "§4",
+   "observation": "Bessemer's interference ran through the election's physical furniture: a box the employer procured, placed, and filmed. The deployment's answer is not better rules about boxes but the removal of the class: casting is from the worker's own device, by post, or at any public library, and 'cast events at employer premises: zero' is a published metric, not a compliance claim. What took a hearing officer's report to establish in the real case — that the company had made itself look like the election's operator — becomes structurally impossible to attempt, because there is nothing at the workplace to procure, stand beside, or film. Prevention by subtraction, the kernel's oldest reflex."
+  },
+  {
+   "protection": "the watched vote, silently unmade",
+   "severity": "note",
+   "doc_ref": "§3.2",
+   "observation": "The captive audience's power at the count was always the suspicion that acquiescence could be checked; receipt-freeness removes the checkable object, and silent re-vote removes even the watched cast's finality — the supervisor's tablet demo produced two real ballots and two kitchens quietly replaced them, with nothing on any device to prove a re-vote happened. This is Corn Street's machinery in a workplace, and the same honesty travels with it: it defeats the observer who needs proof, not the household coercer with the PIN and until Saturday — but a supervisor is structurally the weaker Marek, one man to four thousand kitchens, and the 2024 rule's own safe harbour (no attendance records) is the law arriving at receipt-freeness's insight from the other side."
+  },
+  {
+   "protection": "adversaries in one witness set",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The quiet novelty with the widest reach: the union and the employer both sit in the trustee quorum (neither decrypts alone) and both co-sign the log's head, so the record is underwritten by the parties with the most reason to dispute it, while it is being made. The first election's number meant 'the employer ran the room' and was contested for a year; this one's loss — and it is a loss — is re-runnable arithmetic that neither story can absorb. A fair count does not deliver recognition. It delivers a result that cannot be blamed on the count, which relocates the fight to its real ground and strips the process of its use as either side's alibi."
+  },
+  {
+   "protection": "the fear outside the booth",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "The triage sent this case in carrying its caveat — legible-not-remedied — and the walkthrough honours it. The organiser's contract lapsed mid-campaign; the car-park photograph exists; the Consulting Association file put 3,213 organisers and safety reps out of work for years at a final price of five thousand pounds, and no element of it ever touched a ballot. Receipt-freeness protects the vote; nothing in a ballot's design protects the visible act of organising the vote — the proposer pays before the machinery exists to protect anyone, which is the corpus's own named gap about itself. Those wrongs belong to labour law and to the aggregate's slow arithmetic of patterns; the scenario's honesty is that a perfect booth changes neither."
+  }
+ ]
+}

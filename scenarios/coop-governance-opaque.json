@@ -1,0 +1,318 @@
+{
+ "id": "coop-governance-opaque",
+ "title": "Manifestly Dysfunctional: A Mutual Owned by Millions Learns to Show Its Working",
+ "setting": "Edith Marlow has been a member of the Fenland Co-operative Society for twenty-two years — groceries, a funeral plan, the pharmacy on Delft Street — and since 2024 an elected member of the Marsh Lane area committee, which is where her trouble with the ladder begins. Her committee passed a motion asking the Society to consult members before closing stores. It went up a tier, to the regional board, and vanished: no reply, no reasons, no way to learn whether it was even discussed. Above the regional board sits the group board, and that year the group board approved the Society's bank arm absorbing a struggling lender whose loan book, it later emerged, nobody in the room could actually read. Edith owns this business, along with 1.3 million other people, one vote each in principle. In practice her ownership is a ladder of tiers in which each rung can quietly file away what the rung below decided, elections nobody contests, and a board whose deliberations she may not see.\n\nThis is the documented shape of the mutual sector's worst modern failure. The Co-operative Group — the movement's flagship, owned by millions — was brought to the brink in 2013 by catastrophic losses in its bank, and the reviews that followed said the quiet part in public: Lord Myners found a board that was 'manifestly dysfunctional', governance he called 'one of the great national business calamities', tiers of representation that transmitted neither competence nor accountability; Sir Christopher Kelly traced the wreckage of takeovers the board had approved without being able to evaluate. In August 2014 the members themselves voted the reforms through — one member, one vote, the movement's founding principle, deployed at the brink to trim the structure that had failed it. The International Co-operative Alliance lists democratic member control as the second principle of the identity itself: this is the one kind of business that is *supposed* to be a demos.\n\nFenland is fiction, and its pilot tests the road the real reforms did not take. Myners' remedy was a smaller, professional board — less member democracy, better run. The kernel offers the other road: keep the democracy and make it checkable. Of the corpus's five business cases this is the one whose manifest needs the fewest subtractions — equal members, secret verifiable ballots, no stewardship duty forcing attributable votes — because a mutual is the business shaped most like the thing the kernel was built for. The walkthrough tests whether machinery can do what the tiers did not: let an owner walk her own ladder.",
+ "threats": [
+  "T8",
+  "T3"
+ ],
+ "doc_refs": [
+  "§3.1",
+  "§3.2",
+  "§3.4",
+  "§5",
+  "§10",
+  "§6",
+  "§7",
+  "§12",
+  "T8",
+  "T3"
+ ],
+ "precedents": [
+  {
+   "event": "Myners review of the Co-operative Group: a board 'manifestly dysfunctional', governance 'one of the great national business calamities'",
+   "year": 2014,
+   "source": "BBC News",
+   "url": "https://www.bbc.co.uk/news/business-27302820",
+   "shows": "A mutual owned by millions governed itself through elected tiers that transmitted neither competence nor accountability: the reviewer found the board manifestly dysfunctional and the structure corrosive, with member democracy formally intact and practically unreadable — the pattern this scenario's tiers reproduce."
+  },
+  {
+   "event": "Co-op Group members vote through sweeping governance reforms, August 2014",
+   "year": 2014,
+   "source": "BBC News",
+   "url": "https://www.bbc.co.uk/news/business-28701844",
+   "shows": "The repair arrived only at the brink, and by the franchise itself: one-member-one-vote reform adopted at a special members' meeting after near-collapse — evidence both that a mutual's demos can act, and that it acted only when the alternative was extinction; the chosen remedy shrank the democracy rather than instrumenting it."
+  },
+  {
+   "event": "Democratic member control: the second cooperative principle of the ICA's Statement on the Cooperative Identity",
+   "year": 1995,
+   "source": "International Co-operative Alliance",
+   "url": "https://ica.coop/en/cooperatives/cooperative-identity",
+   "shows": "One member, one vote is not an aspiration bolted onto this business form but its declared identity — which is why a co-op is the corpus's one business case where the kernel's equal-persons floor binds without subtraction, and why tiers a member cannot walk are a breach of the form's own constitution, not just bad practice."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:fenland-coop.example",
+   "name": "Fenland Co-operative Society — member-governance pilot"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "external-issuer",
+   "issuer": "Fenland membership register (twelve months' membership and minimum trade before voting rights, per rulebook)",
+   "unlinkable": true,
+   "sybil_resistance": "medium",
+   "eligibility_rules": "fenland-rulebook/v7 §members-eligibility"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": true,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "none",
+   "trustee_quorum": "3-of-5: two member-elected auditors, the co-operative federation, Kelder University, the Society's external auditor"
+  },
+  "transparency_log": {
+   "log_id": "did:web:fenland-coop.example",
+   "witnesses": [
+    "did:web:coop-federation.example",
+    "did:web:kelder-university.example",
+    "did:web:fenland-gazette.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "agm-and-motion-vote",
+    "steps": 2,
+    "fields": 0,
+    "median_seconds": 45,
+    "abandonment_rate": 0.02
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:fenland-coop.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Edith Marlow, and the ladder as it was",
+   "verb": "offstage",
+   "narrative": "The backdrop is the tiers working exactly as the real reviews found them: a motion that goes up a rung and vanishes without a disposition; elections to committees that feed boards that feed a board, each transition losing the members' sightline; an acquisition approved by people who could not read what they were approving, discovered only when the losses arrived. None of these acts was unlawful. That is the point the corpus keeps meeting — pattern_of_lawful_acts — and here the pattern wears the movement's own colours: a business whose declared identity is one member, one vote, governed in practice through a structure its owner cannot walk."
+  },
+  {
+   "actor": "Fenland's members, adopting the constitution that watches itself",
+   "verb": "cast",
+   "narrative": "The pilot begins the way the real repair did — by the franchise itself. A special members' meeting opens the reform question on kernel machinery: every member one credential, the question hashed, the window fixed. The echo is deliberate: in 2014 the Co-op's members voted sweeping reforms through at the brink. The difference is the road taken. Myners' remedy was a smaller professional board — less democracy, better run. Fenland's reform keeps the democracy and instruments it: every tier's act will land in a witnessed log citing the delegation it acts under, every motion will carry a disposition clock, and every election will be verifiable by the member it claims to represent.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:fenland-coop.example",
+    "timestamp": "2026-01-19T19:00:00Z",
+    "body": {
+     "decision_id": "2026-fenland-governance-reform",
+     "question_hash": "sha256:3e8b1f4c72a90de565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d",
+     "eligibility_rules": "fenland-rulebook/v7 §members-eligibility (twelve months + minimum trade)",
+     "window": {
+      "deliberation_ends": "2026-02-09T19:00:00Z",
+      "cast_ends": "2026-02-21T19:00:00Z"
+     },
+     "note": "The reform adopted by the franchise it instruments: one member, one vote, on whether every tier's power must henceforth show its working."
+    },
+    "sig": {
+     "key_id": "did:web:fenland-coop.example#log-1",
+     "alg": "ed25519",
+     "value": "UmVmb3JtT3BlbmVkRmVubGFuZE5vdFJlYWwwMQ"
+    }
+   }
+  },
+  {
+   "actor": "The count, and the honest number inside it",
+   "verb": "verify",
+   "narrative": "The reform passes with a tally anyone can re-run: 104,882 for, 13,322 against. The honest number is the denominator — 118,204 ballots from 1.3 million members, nine percent. In the old world turnout was a rumour; committees spoke for members who had never heard of them, and nobody could say how thin the mandate under any tier really was. The kernel does not fix nine percent. It publishes it, on every decision, forever — which converts apathy from an ambient excuse into a standing, dated fact the Society must govern in front of.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:fenland-coop.example",
+    "timestamp": "2026-02-21T20:30:00Z",
+    "body": {
+     "decision_id": "2026-fenland-governance-reform",
+     "question_hash": "sha256:3e8b1f4c72a90de565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d",
+     "result": {
+      "adopt-reform": 104882,
+      "reject-reform": 13322
+     },
+     "ballots_counted": 118204,
+     "eligible_members": 1302411,
+     "tally_proof_hash": "sha256:5a2f7d9c4e8b3f6a0d5c9e2b7f4a1d8c3e6b9f2a5d8c1e4b7f0a3d6c9e2b5f8d",
+     "trustees_decrypting": "3-of-5",
+     "paper_channel_rla": {
+      "paper_ballots": 41210,
+      "risk_limit": 0.05,
+      "outcome": "confirmed"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:fenland-coop.example#log-1",
+     "alg": "ed25519",
+     "value": "VGFsbHlSZWZvcm1GZW5sYW5kTm90UmVhbDAy"
+    }
+   }
+  },
+  {
+   "actor": "The membership register, and the carpetbaggers' arithmetic",
+   "verb": "prove",
+   "narrative": "This is the corpus's one business case where the equal-persons floor binds: a credential per member, not per pound. And the register's declared gate earns its keep within the year. Ahead of a motion to demutualise the funeral business — the windfall play that hollowed the building societies — the log's enrolment arithmetic shows 38,000 one-pound memberships arriving in six weeks, a dated public spike where the old world had a quiet swelling of the roll. The rulebook's answer was already on the page: twelve months' membership and minimum trade before voting rights, cited in the manifest, applied to everyone. The raid is not secretly blocked and not quietly admitted; it is visible, and the gate that holds it out is a published rule, not a registrar's discretion. Minting voices shows up in sums — §10's ceremony arithmetic, transplanted to a register of members.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-register.enrolment-aggregate",
+    "community": "did:web:fenland-coop.example",
+    "timestamp": "2026-04-02T12:00:00Z",
+    "body": {
+     "period": "2026-02-15 to 2026-03-31",
+     "new_memberships": 38412,
+     "trailing_year_baseline": 2140,
+     "voting_eligible_from": "2027-02-15 onward per fenland-rulebook/v7 §members-eligibility",
+     "note": "Anonymous aggregate: the spike dated and sized, the eligibility gate cited. A raid on the roll is answered by a published rule and public arithmetic, not by quiet registrar discretion."
+    },
+    "sig": {
+     "key_id": "did:web:fenland-coop.example#log-1",
+     "alg": "ed25519",
+     "value": "RW5yb2xtZW50QWdncmVnYXRlRmVubGFuZE5vdFJlYWwwMw"
+    }
+   }
+  },
+  {
+   "actor": "The Marsh Lane motion, wearing a clock",
+   "verb": "cast",
+   "narrative": "Edith's committee re-files the store-consultation motion, and this time it cannot vanish, because vanishing has been made a visible act. The motion has an identifier, the tier it went to, and a disposition clock; the regional board must answer within sixty days with adopted, adopted-in-part, or declined-with-reasons, and a motion past its clock is not a memory — it is a breach the log counts. The board adopts it in part, with reasons Edith can read and quote back. The corpus has seen this shape before, in a family court: an order is only as real as the record of what happened to it. A member's motion, it turns out, is the same species of object.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-motion.disposition",
+    "community": "did:web:fenland-coop.example",
+    "timestamp": "2026-04-14T17:00:00Z",
+    "body": {
+     "motion_id": "2026-marsh-lane-store-consultation",
+     "filed_by": "Marsh Lane area committee",
+     "referred_to": "Eastern regional board, 2026-03-02",
+     "disposition_due": "2026-05-01",
+     "disposition": "adopted-in-part",
+     "reasons": "Member consultation adopted for all proposed closures; the committee's 90-day notice period reduced to 45 on trading-viability grounds, cited to fenland-rulebook/v7 §board-duties",
+     "note": "The rung above can still say no. It can no longer say nothing: a motion carries a clock, and silence past it is a countable breach, not an outcome."
+    },
+    "sig": {
+     "key_id": "did:web:fenland-coop.example#log-1",
+     "alg": "ed25519",
+     "value": "TW90aW9uRGlzcG9zaXRpb25GZW5sYW5kTm90UmVhbDA0"
+    }
+   }
+  },
+  {
+   "actor": "The group board, buying a business on the record",
+   "verb": "cast",
+   "narrative": "Then the big one: the group board approves an acquisition — the kind of act that sank the real Group. The kernel does not and must not vote it for them; delegation is the rulebook's lawful design. What changes is that the approval is an executive act on the log: the delegation it acts under cited, the counterparty named, the diligence trail referenced, the commercial terms sealed for a year but committed by hash today. The Britannia lesson was never that members would have vetoed the deal — they were structurally incapable of even seeing it. It is that a board which cannot read a loan book must now sign, in public, on a dated record, that it has read one; and when the losses arrive, the question 'who approved this, under what power, having reviewed what' has an answer that does not require a two-year inquiry to reconstruct.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "executive.act",
+    "community": "did:web:fenland-coop.example",
+    "timestamp": "2026-05-19T14:00:00Z",
+    "body": {
+     "act_class": "contract",
+     "authorizing_rule": "fenland-rulebook/v7 §group-board-delegation (acquisitions above £5m reserved to group board with diligence certification)",
+     "issuing_authority": "Fenland group board, resolution 2026-11",
+     "counterparty": {
+      "name": "Harrow Vale Mutual (funeral services)",
+      "ref": "mutuals-register:HV-04412"
+     },
+     "provenance": {
+      "route": "board-resolution",
+      "referred_by": "group strategy office",
+      "referrer_role": "executive",
+      "referred_on": "2026-03-20"
+     },
+     "sealed_until": "2027-05-19T14:00:00Z",
+     "sealed_body_digest": "sha256:8c1d4f7a2b0e9c53b6a1d47e920fb3c8a5e6d10f9b2c4a7e8d3f5061a2b3c4f9",
+     "appeal_trace": "did:web:fenland-coop.example/motions/challenge-2026-11"
+    },
+    "sig": {
+     "key_id": "did:web:fenland-coop.example#log-1",
+     "alg": "ed25519",
+     "value": "RXhlY3V0aXZlQWN0RmVubGFuZE5vdFJlYWwwNQ"
+    }
+   }
+  },
+  {
+   "actor": "The quarter's portrait of a democracy",
+   "verb": "verify",
+   "narrative": "At quarter's end the witnessed aggregate publishes the Society's democratic vital signs: turnout nine percent and now trending measurable; 214 motions filed, 187 disposed inside their clocks, 27 past-clock and counted as breaches; 41 percent of committee seats contested, up from single figures, because a seat that visibly does something is a seat worth contesting. Myners had to assemble his picture of dysfunction by interview and inference, after the collapse. Fenland's equivalent picture is a standing public artifact, updated quarterly, disputable line by line — which is the difference between a review and an instrument panel.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:fenland-coop.example",
+    "timestamp": "2026-06-30T23:59:00Z",
+    "body": {
+     "period": "2026-Q2",
+     "metric": "member-governance-vitals",
+     "turnout_last_all-member_vote": 0.09,
+     "motions_filed": 214,
+     "motions_disposed_in_clock": 187,
+     "motions_past_clock": 27,
+     "committee_seats_contested": 0.41,
+     "note": "Anonymous aggregate: the health of the demos as a published number — apathy, backlog and contestation made standing facts rather than a post-collapse review's findings."
+    },
+    "sig": {
+     "key_id": "did:web:fenland-coop.example#log-1",
+     "alg": "ed25519",
+     "value": "R292ZXJuYW5jZVZpdGFsc0ZlbmxhbmROb3RSZWFsMDY"
+    }
+   }
+  },
+  {
+   "actor": "What the machinery cannot supply",
+   "verb": "offstage",
+   "narrative": "Three honest limits, in ascending order of weight. The kernel refuses to gate participation — no test, no minimum engagement, scaffold everything and assess nothing — so nine percent stays nine percent unless members choose otherwise; the log makes apathy visible, never curable. Legibility is not competence: a board that signs its diligence certification can still have read the loan book badly, and the losses that sank the real Group were substance — judgments the kernel will not second-guess (refusal 11), any more than it judged the take-private price two cases ago. And the sharpest: the real movement, offered this fork at the brink, chose the other road — Myners' professional board, democracy trimmed to save the business. The kernel road — democracy kept, instrumented — remains untaken at flagship scale, and a design that has never run at the scale of its failure case is a proposal, not a proof."
+  },
+  {
+   "actor": "Anyone, walking the ladder after",
+   "verb": "read",
+   "narrative": "What the kernel did: it let an owner walk her own ladder — motion to disposition, election to tally, delegation to executive act — with every rung citing the power it stood on; it made the roll's arithmetic public enough to date a carpetbagger raid and the gate that held it; and it turned the health of the democracy itself into a quarterly, witnessed, disputable number. What it did not do: raise turnout, read a loan book, or make the deal wise. The claim under test was never that machinery makes a mutual good — it is that a business whose identity is one member, one vote can at last be checked against its own constitution, by the people it belongs to, while it is still alive. The real one was checked by a review, after it nearly died."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "A mutual owned by millions was found 'manifestly dysfunctional' at the brink: tiers no member could walk, motions that vanished, a board approving what it could not read. A co-op needs almost no kernel subtractions — equal members, verifiable ballots, motions on clocks, board acts citing their power. But legibility is not competence, nine percent is an honest number now, and the real movement chose less democracy.",
+ "protection": "the member democracy you can walk",
+ "protection_plain": "Whether one-member-one-vote machinery — equal credentials from the register, verifiable tallies, motions tracked to disposition on a clock, board acts logged with the power they cite — answers a mutual governed through tiers no member could walk. Turnout and competence stay the members' own.",
+ "findings": [
+  {
+   "protection": "the equal-persons floor finally binds",
+   "severity": "note",
+   "doc_ref": "§3.1",
+   "observation": "Alone among the corpus's business cases, this demos is persons: the ICA's second principle makes one member, one vote the form's declared identity, so the kernel's personhood service applies without the weighted-franchise subtraction the shareholder case had to declare. The register's arithmetic then does double duty: a carpetbagger raid — 38,000 one-pound joiners in six weeks before a demutualisation motion — appears as a dated public spike, and the gate that holds it out is a cited rulebook clause applied uniformly, not a registrar's quiet discretion. §10's enrolment discipline, built for civic ceremonies, transplants to a membership roll intact: minting voices shows up in sums."
+  },
+  {
+   "protection": "the motion that cannot vanish",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The tiers' quietest power was never voting members down — it was filing them away: a motion that goes up a rung and returns as silence produces nothing to appeal, the inaction_no_artifact signature the corpus keeps meeting. A disposition clock converts that silence into a countable breach: the rung above can still decline, but declining now takes reasons on a dated record, and not answering is itself an answer the aggregate publishes. The board's power over outcomes is untouched; its power over whether anything happened at all is gone — the family-contact-order lesson, applied to a committee room."
+  },
+  {
+   "protection": "legibility is not competence",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "The losses that nearly killed the real Group were substance: takeovers the reviews called breathtakingly destructive, approved by a board structurally unable to evaluate them. The kernel's executive.act makes the approval cite its delegation, name its counterparty, commit its terms by hash and certify its diligence — so the post-collapse question 'who approved this, under what power, having reviewed what' has a same-day answer instead of a two-year inquiry. But a signed certification can certify a bad reading, and the kernel will not mark the board's homework (refusal 11). It shortens the distance between a bad decision and its accountability; it cannot shorten the distance between a bad decision and its consequences."
+  },
+  {
+   "protection": "participation cannot be manufactured",
+   "severity": "strain",
+   "doc_ref": "§7",
+   "observation": "Nine percent turnout is this scenario's most honest number, and the kernel's own principles forbid the two easy responses: it will not gate the franchise on engagement (whoever writes the test owns the electorate — T11) and it will not coerce participation. What it does is stop the thinness being deniable — every tally publishes its denominator, every committee's mandate carries its contest rate — and make a seat worth contesting by making it visibly consequential, which the pilot's rise in contested seats gestures at. But a demos that does not show up is a fact about the demos, not the machinery; the log renders apathy in daylight and has nothing further to offer it."
+  },
+  {
+   "protection": "the road the real movement did not take",
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "The Co-op's members, holding the exact franchise this scenario instruments, used it at the brink to adopt the other repair: a smaller professional board — democracy traded for competence, because instrumented democracy was not on the table in 2014. That history cuts both ways. It proves a mutual's demos can act decisively, which is more than most of the corpus's adopters can claim; and it records that when the choice was live, legible member control was nobody's proposal. The kernel road has run at allotment-society scale in this corpus's own prototype; at the scale of the failure it answers — millions of members, billions at stake — it remains untried, and the case is honest about the difference between a fit and a proof."
+  }
+ ]
+}

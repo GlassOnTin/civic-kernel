@@ -2,8 +2,8 @@
 
 [![test](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml/badge.svg)](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml)
 
-> **Fifty-six documented institutional failures — Horizon, the deleted WhatsApps, the
-> carer prosecuted for a debt the state watched grow — and in forty-seven of them the
+> **Fifty-nine documented institutional failures — Horizon, the deleted WhatsApps, the
+> carer prosecuted for a debt the state watched grow — and in fifty of them the
 > harm ran through a record: one that was quietly absent, quietly altered, or quietly
 > ignored.** The fix that repeats is not a new power or a new regulator. It is a record
 > of each act of power that **cannot be quietly absent** — it must exist at the moment
@@ -67,7 +67,7 @@ same project, from the source side.
   Democracy restated as an engineering problem, and the smallest honest answer to it.
   Every section opens as one plain line; expand for the full argument. Then watch
   [real life run against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)
-  — 56 stress-test stories, each machine-validated against the schemas.
+  — 59 stress-test stories, each machine-validated against the schemas.
 
 Or run everything locally — the election, its verification, and twelve attempts to rig
 it — in about a minute: [`proto/test.sh`](proto/).
@@ -115,7 +115,7 @@ first real communities teach will revise it again.
 
 ## Next
 
-The outward build is finished. The corpus did its inward work — 56 cases, six shapes,
+The outward build is finished. The corpus did its inward work — 59 cases, six shapes,
 one settled line ([the map](https://glassontin.github.io/civic-kernel/map.html)) and
 [the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html) it implies
 for UK law — and every entrance that line asked for now exists, in the open: the
@@ -141,13 +141,17 @@ run; four letters get a signature and a send — a person's decisions, not a rep
 Meanwhile two doors stand open to the world and set whatever is built next: a proposed
 case that survives [the triage](docs/triage.md) reopens the corpus, and a winning
 attack on [the game](https://glassontin.github.io/civic-kernel/break.html) becomes
-tamper thirteen and its named defence. And the corpus door already stands ajar from
-the inside: five business candidates entered the triage with their scores on the page,
-and the top two are walked in full — [the unverifiable shareholder
-count](https://glassontin.github.io/civic-kernel/scenarios.html#shareholder-vote-plumbing)
-and [the robo-firing with no
-reasons](https://glassontin.github.io/civic-kernel/scenarios.html#gig-deactivation-no-reasons);
-the other three wait in score order.
+tamper thirteen and its named defence. The corpus's turn to face private power is
+complete: five business wrongs entered the triage with their scores on the page, and
+all five are walked in full — the [shareholder
+count](https://glassontin.github.io/civic-kernel/scenarios.html#shareholder-vote-plumbing),
+the [robo-firing](https://glassontin.github.io/civic-kernel/scenarios.html#gig-deactivation-no-reasons),
+the [mutual's tiers](https://glassontin.github.io/civic-kernel/scenarios.html#coop-governance-opaque),
+the [delisting](https://glassontin.github.io/civic-kernel/scenarios.html#marketplace-delisting-no-rule),
+and the [watched union
+ballot](https://glassontin.github.io/civic-kernel/scenarios.html#union-ballot-employer-interference)
+— every verdict a strain, every subtraction declared, the whole set entered through
+[the business door](https://glassontin.github.io/civic-kernel/business.html).
 
 <details>
 <summary>What exists now, and the road behind the threads</summary>
@@ -296,7 +300,7 @@ The repository, file by file.
 - **`scenarios/`** — imagined human situations, each walked through the four verbs.
   Every embedded manifest and log entry is validated against the waist schemas, and
   every scenario must cite documented real-world precedents for its attack pattern
-  (a required `precedents` field, 153 citations verified July 2026).
+  (a required `precedents` field, 162 citations verified July 2026).
   `scenario.schema.json` is the record format.
 - **`corpus/`** — real legal systems captured under the same schema, sharing the
   30-invariant spine:

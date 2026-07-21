@@ -545,8 +545,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "union-ballot-employer-interference"
     },
     {
       "id": "marketplace-delisting-no-rule",
@@ -558,8 +558,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "marketplace-delisting-no-rule"
     },
     {
       "id": "coop-governance-opaque",
@@ -571,8 +571,8 @@
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "coop-governance-opaque"
     }
   ]
 }
