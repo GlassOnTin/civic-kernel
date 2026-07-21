@@ -45,8 +45,8 @@ court, and the protocol has no business weighing it.* The method has said no to 
 sympathetic case and written down why; I'd rather you learned that from me than
 discovered it.
 
-The four files sit inside a corpus that has since grown to fifty-two cases against
-140 cited precedents, with verdicts of 43 *strains*, 8 *breaks*, 1 *holds* — it
+The four files sit inside a corpus that has since grown to sixty-one cases against
+168 cited precedents, with verdicts of 52 *strains*, 8 *breaks*, 1 *holds* — it
 counts its own failures. If any of it is useful to you it is yours: the public
 telling is [findings.html](https://glassontin.github.io/civic-kernel/findings.html)
 (with a section for advocates), the full argument is

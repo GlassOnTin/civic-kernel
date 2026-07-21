@@ -21,7 +21,7 @@ legislation.gov.uk, and the client can save their answers as a small file they k
 nothing exists unless they choose to save it.
 
 The reason I'm writing to Carers UK first is the earnings limit. Behind the tool sits
-a public study of fifty-four institutional failures, one of them the overpayment
+a public study of sixty-one institutional failures, one of them the overpayment
 scandal you've campaigned on — the state holding the earnings data while the debt
 grew, then prosecuting the growth. Owed is meant to be the other half of that finding:
 the limit checked privately, before the first pound of overpayment, by the person it

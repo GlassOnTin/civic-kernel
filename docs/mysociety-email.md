@@ -7,12 +7,12 @@ the sent copy. The note is the argument; this earns the read.*
 ---
 
 **Subject:** WhatDoTheyKnow and FixMyStreet are halfway through two findings a
-fifty-two-case corpus can now cite
+sixty-one-case corpus can now cite
 
 Dear [name — or "the mySociety team"],
 
 The attached page makes one claim you are unusually well placed to test: two of your
-tools already embody half of two findings from a study of fifty-two documented
+tools already embody half of two findings from a study of sixty-one documented
 institutional failures, each rebuilt as a machine-checked case file.
 
 For WhatDoTheyKnow: the FOI case file concludes that every slow-walking lever — the

@@ -10,12 +10,12 @@ Two of your tools sit exactly where a design study I've been running kept arrivi
 and I wanted you to have the evidence, because it is partly evidence about your own
 work.
 
-The study rebuilt fifty-two documented institutional failures — Horizon, the deleted
+The study rebuilt sixty-one documented institutional failures — Horizon, the deleted
 WhatsApps, the FOI Clearing House, the carer prosecuted for a debt the state watched
 grow — as machine-checked case files, each asking one narrow question: *which record,
 required at which moment, citing which rule, would have changed this?* Every file
-cites its sources (140 real-world citations across the corpus) and ends in an honest
-verdict; eight of the fifty-two are marked **breaks**, because the method counts its
+cites its sources (168 real-world citations across the corpus) and ends in an honest
+verdict; eight of the sixty-one are marked **breaks**, because the method counts its
 own failures.
 
 **WhatDoTheyKnow is halfway through one of the corpus's strongest findings.** The
@@ -25,7 +25,7 @@ so the end-state is a record public by default, with nothing left to request. Yo
 platform already does the first half at scale: it makes the request and the response
 public, which is what turned slow-walking from a private frustration into a
 measurable pattern. The case file is, in effect, the argument for where that road
-ends — and the fifty-two-case corpus is evidence your FOI work could cite.
+ends — and the sixty-one-case corpus is evidence your FOI work could cite.
 
 **FixMyStreet is the citizen's half of a shape the corpus met twice and named.**
 Two case files — Grenfell's ignored hazard reports, and SEND assessment requests

@@ -9,7 +9,7 @@ with the submission, not the repo.*
 ## Title
 
 **Nobody had to trust the shed: a thin protocol for public decisions,
-stress-tested against fifty-two real institutional failures**
+stress-tested against sixty-one real institutional failures**
 
 ## Abstract
 
@@ -21,13 +21,13 @@ refusals do the load-bearing work: the kernel never decides substance, never edi
 the roll, never compels a remedy — because a machine that could would be the most
 valuable thing in public life to own.
 
-The evidence is an unusual corpus. Fifty-two documented institutional failures —
+The evidence is an unusual corpus. Sixty-one documented institutional failures —
 Post Office Horizon, government by disappearing WhatsApp, an exam graded by
 postcode, a carer prosecuted for a debt the state watched grow — were rebuilt as
 machine-validated case files and run against the protocol, each ending in an honest
-verdict: 43 *strain* (it helps, with a hard limit named), 8 *break*, 1 *holds*. Two
-findings will carry the talk. First, compressibility: fifty-two failures reduce to
-six recurring shapes, and the protocol's core needed to grow exactly twice to carry
+verdict: 52 *strain* (it helps, with a hard limit named), 8 *break*, 1 *holds*. Two
+findings will carry the talk. First, compressibility: sixty-one failures reduce to
+seven recurring shapes, and the protocol's core needed to grow exactly twice to carry
 all of them — evidence that "thin" is an empirical property, not an aesthetic.
 Second, honesty as architecture: the corpus counts its own failures, and the breaks
 map the protocol's real preconditions — a record must be made, a forum must act,
