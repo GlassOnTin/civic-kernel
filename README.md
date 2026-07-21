@@ -129,16 +129,22 @@ the [adviser's note](https://glassontin.github.io/civic-kernel/adviser-note.html
 with its covering email and PDF enclosure beside it in `docs/` — the
 [Metagov abstract](docs/metagov-abstract.md), the
 [club hand-over](docs/clubhouse-demo.md) (pre-flighted: suite green, both riggings
-reproducing their quoted failure lines, one checklist), and the
-[break-me door](https://glassontin.github.io/civic-kernel/break.html).
+reproducing their quoted failure lines, one checklist), the
+[break-me door](https://glassontin.github.io/civic-kernel/break.html), and the
+[business door](https://glassontin.github.io/civic-kernel/business.html) — the kernel
+pointed at private power, with its honest pitch (it will not democratise your firm; it
+will make your firm legible) and five wrongs newly triaged behind it.
 
-What remains is not building, and the repo is honest about whose move it is. A
+What remains is mostly not building, and the repo is honest about whose move it is. A
 committee gets picked and a brief gets printed; a club gets picked and a season gets
 run; four letters get a signature and a send — a person's decisions, not a repo's.
 Meanwhile two doors stand open to the world and set whatever is built next: a proposed
 case that survives [the triage](docs/triage.md) reopens the corpus, and a winning
 attack on [the game](https://glassontin.github.io/civic-kernel/break.html) becomes
-tamper thirteen and its named defence.
+tamper thirteen and its named defence. And the corpus door already stands ajar from
+the inside: five business candidates sit triaged with their scores on the page —
+the unverifiable shareholder count at the top of the whole table — waiting to be
+encoded in score order.
 
 <details>
 <summary>What exists now, and the road behind the threads</summary>

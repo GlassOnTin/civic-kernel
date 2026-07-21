@@ -508,6 +508,71 @@
       "remedy_caveat": false,
       "status": "out-of-scope",
       "scenario": null
+    },
+    {
+      "id": "shareholder-vote-plumbing",
+      "harm": "Corporate elections run through custodian chains nobody can verify end to end: a Delaware court found more facially valid vote claims than shares in existence, and proxy contests turn on recounts nobody outside the plumbing can check.",
+      "lead": "In re Dole Food Co. Stockholder Litigation (Del. Ch. 2017); Procter & Gamble/Trian proxy contest recount (2017)",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["record_absent", "pattern_of_lawful_acts"],
+      "reach": 3,
+      "leverage": 3,
+      "remedy_caveat": false,
+      "status": "candidate",
+      "scenario": null
+    },
+    {
+      "id": "gig-deactivation-no-reasons",
+      "harm": "Gig workers dismissed by automated decision with no reason served and nothing to appeal; an explanation took years and a foreign court order under data-protection law.",
+      "lead": "Drivers v Uber BV and Ola Cabs (Amsterdam Court of Appeal, 2023), GDPR art 22",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["record_absent"],
+      "reach": 3,
+      "leverage": 2,
+      "remedy_caveat": false,
+      "status": "candidate",
+      "scenario": null
+    },
+    {
+      "id": "union-ballot-employer-interference",
+      "harm": "Workplace recognition ballots run inside the employer's power — mandatory meetings, watched infrastructure, retaliation outside the booth — and a rerun arrives only after a regulator finds the interference, against a fear no rerun removes.",
+      "lead": "NLRB, Amazon Bessemer rerun order (2021); TULR(C)A Sch A1 recognition ballots (CAC)",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["pattern_of_lawful_acts"],
+      "reach": 2,
+      "leverage": 2,
+      "remedy_caveat": true,
+      "status": "candidate",
+      "scenario": null
+    },
+    {
+      "id": "marketplace-delisting-no-rule",
+      "harm": "Sellers suspended and apps delisted with no rule cited and revenue held; the EU had to legislate a statement of reasons because platforms gave none.",
+      "lead": "Platform-to-Business Regulation (EU) 2019/1150, arts 4-5; CMA, Mobile ecosystems market study (2022)",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["record_absent"],
+      "reach": 2,
+      "leverage": 2,
+      "remedy_caveat": false,
+      "status": "candidate",
+      "scenario": null
+    },
+    {
+      "id": "coop-governance-opaque",
+      "harm": "A mutual owned by millions ran its member democracy through tiers no member could follow or check; the structure was found manifestly dysfunctional only at the point of near-collapse.",
+      "lead": "Myners, Report of the Independent Governance Review, Co-operative Group (2014)",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": ["pattern_of_lawful_acts", "record_absent"],
+      "reach": 2,
+      "leverage": 2,
+      "remedy_caveat": false,
+      "status": "candidate",
+      "scenario": null
     }
   ]
 }

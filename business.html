@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="The Civic Kernel pointed at private power: five documented business wrongs — the unverifiable shareholder count, the robo-firing, the watched union ballot, the delisting with no rule, the mutual in tiers — triaged by the same rubric as the civic corpus. It will not democratise your firm; it will make your firm's constitution legible.">
+<title>For business — Civic Kernel</title>
+<style>
+  /* The front door's own register — serif, paper, colour spent only on meaning —
+     because this page is an argument with evidence, not a tool. Light-committed
+     like every surface here: legibility is a daylight discipline. */
+  :root {
+    color-scheme: light;
+    --paper: #f6f7f9;
+    --card: #ffffff;
+    --ink: #1c2333;
+    --muted: #5a6376;
+    --accent: #2e5eaa;
+    --accent-soft: #e6edf8;
+    --threat: #a33d2e;
+    --hold: #1e6e46;
+    --line: #d8dce4;
+    --line-strong: #b9c0cd;
+    --focus: #ffdd00;
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', 'URW Palladio L', 'P052', Georgia, serif;
+    --mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body {
+    margin: 0;
+    font-family: var(--serif);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-size: 1.0625rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 46rem; margin: 0 auto; padding: 3.5rem 1.25rem 5rem; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 3px; }
+  a:focus-visible {
+    outline: 3px solid var(--focus); outline-offset: 2px;
+    background: var(--focus); color: var(--ink); text-decoration: none; border-radius: 1px;
+  }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { position: static; display: inline-block; margin-bottom: 1rem; padding: .3rem .6rem;
+    background: var(--focus); color: var(--ink); }
+
+  .home { display: inline-block; font-family: var(--mono); font-size: 0.75rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+    text-decoration: none; margin-bottom: 2.25rem; }
+  .home b { color: var(--ink); font-weight: 700; }
+  .home:hover b { text-decoration: underline; text-underline-offset: .14em; }
+
+  header.masthead { border-top: 3px double var(--line-strong); padding-top: 1.5rem; }
+  h1 {
+    font-size: clamp(2rem, 5.5vw, 2.9rem);
+    line-height: 1.12;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    margin: 0 0 1.1rem;
+  }
+  .standfirst { font-size: 1.2rem; color: var(--muted); text-wrap: pretty; max-width: 40rem; margin: 0; }
+  .standfirst .keep { color: var(--ink); }
+
+  section { margin: 3rem 0 0; }
+  .kicker {
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 0.55rem;
+  }
+  h2 { font-size: 1.5rem; line-height: 1.2; font-weight: 600; margin: 0 0 0.6rem; text-wrap: balance; }
+  section > p { max-width: 40rem; margin: 0 0 0.85rem; }
+
+  .case { margin: 1.4rem 0; padding: .1rem 0 .1rem 1.1rem; border-left: .3rem solid var(--line-strong); max-width: 40rem; }
+  .case p { margin: .3rem 0; }
+  .case .name { font-weight: 700; }
+  .case .name .score { font-family: var(--mono); font-size: .75rem; font-weight: 400;
+    color: var(--muted); letter-spacing: .06em; margin-left: .5rem; white-space: nowrap; }
+  .case .limit { color: var(--muted); font-size: .95rem; }
+  .case.top { border-left-color: var(--accent); }
+
+  .manifest {
+    font-family: var(--mono); font-size: .8125rem; line-height: 1.8;
+    background: var(--card); border: 1px solid var(--line); padding: 1rem 1.2rem;
+    margin: 1.2rem 0; max-width: 40rem; overflow-x: auto; white-space: pre;
+  }
+  .manifest .sub { color: var(--threat); }
+  .manifest .full { color: var(--hold); }
+
+  ul.plain { max-width: 40rem; margin: .4rem 0; padding-left: 1.3rem; }
+  ul.plain li { margin: .35rem 0; }
+  .refuse { color: var(--threat); }
+
+  footer {
+    margin-top: 3.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
+    color: var(--muted); font-family: var(--mono); font-size: 0.8125rem; line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="page">
+
+<a class="home" href="index.html"><b>Civic&nbsp;Kernel</b> · a thin protocol for public decisions</a>
+
+<header class="masthead">
+  <h1>It will not democratise your firm. It will make your firm legible.</h1>
+  <p class="standfirst">The machinery — <span class="keep">counts anyone can verify, rules that cite themselves, a record nobody can quietly rewrite</span> — does not care whether the community it serves is a nation, a workforce, or a shareholder register. What changes is only what you must declare.</p>
+</header>
+
+<main id="main">
+
+<section>
+  <p class="kicker">The evidence first</p>
+  <h2>Five documented business wrongs, triaged</h2>
+  <p>Each entered <a href="docs/triage.md">the same triage</a> that ranks the civic corpus: a real citation at the door, substance refused on principle, and a score — reach × leverage — that shows its inputs. One of the five lands at the very top of the whole table, beside Horizon. None is encoded as a full scenario yet; the scores say which to build first.</p>
+
+  <div class="case top">
+    <p class="name">The count nobody can check <span class="score">shareholder-vote-plumbing · 3 × 3 = 9</span></p>
+    <p>Corporate elections pass through chains of custodians no outsider can audit. In the Dole Foods settlement a Delaware court met a third more facially valid claims than there were shares in existence; Procter&nbsp;&amp;&nbsp;Gamble's proxy fight reversed on a recount, inside plumbing nobody could independently re-walk. This is the kernel's home ground — an end-to-end verifiable count in an append-only register turns <em>trust the intermediaries</em> into <em>check the tally</em>. The Horizon lesson, applied to the ballot itself.</p>
+    <p class="limit">Honest limit: one share, one vote is a weighted franchise. The equal-persons floor does not bind here — and the manifest below has to say so out loud.</p>
+  </div>
+
+  <div class="case">
+    <p class="name">Dismissed by a model, reasons withheld <span class="score">gig-deactivation-no-reasons · 3 × 2 = 6</span></p>
+    <p>Drivers deactivated by automated decision, no reason served, nothing to appeal — until a court in Amsterdam ordered explanations under data-protection law, years after the accounts went dark. Under the kernel every adverse decision cites the rule it acts under at the moment it acts, so a decision with no reason becomes a <em>visible missing reason</em>, dated and appealable from day one. The corpus already holds this wrong with the state as defendant: the welfare algorithm that could not say why.</p>
+    <p class="limit">Honest limit: it cannot judge whether the rule is fair or the model biased — it makes the missing reason a fact.</p>
+  </div>
+
+  <div class="case">
+    <p class="name">A ballot inside the boss's power <span class="score">union-ballot-employer-interference · 2 × 2 = 4 ⚠</span></p>
+    <p>Mandatory meetings, watched infrastructure — and at Amazon's Bessemer warehouse, a regulator's finding of interference and an ordered rerun that ran under the same fear. Receipt-free ballots are the kernel's oldest discipline: nobody can prove their vote to anyone, so nodding along in the meeting costs nothing at the count.</p>
+    <p class="limit">Honest limit: retaliation operates outside the booth. The organiser dismissed before any ballot opens is a wrong no ballot design reaches — the triage carries the caveat, and the corpus has met this shape before.</p>
+  </div>
+
+  <div class="case">
+    <p class="name">Delisted, citing no rule <span class="score">marketplace-delisting-no-rule · 2 × 2 = 4</span></p>
+    <p>Sellers suspended with revenue held and no rule named — a wrong so routine the EU legislated a statement of reasons (Regulation 2019/1150) because platforms would not give one. The kernel's forms discipline is the same demand made structural: every demand cites its rule, rules change on notice with an expiry, and the rule change itself lands in the record.</p>
+    <p class="limit">Honest limit: it binds platforms that adopt it, or that law compels. The EU shows the second path exists.</p>
+  </div>
+
+  <div class="case">
+    <p class="name">Member democracy in tiers <span class="score">coop-governance-opaque · 2 × 2 = 4</span></p>
+    <p>The Co-operative Group — owned by millions — ran its member democracy through tiers no member could follow or check, and was found "manifestly dysfunctional" (Myners, 2014) only at the point of near-collapse. This is the club-AGM machinery at scale: verifiable member votes, and layers whose every decision sits on a register a member can walk. Of the five, this is the one a willing adopter could run this year — a mutual chooses its own constitution.</p>
+    <p class="limit">Honest limit: legibility is not competence. The losses that nearly sank the Group were substance, and substance stays the members' problem.</p>
+  </div>
+</section>
+
+<section>
+  <p class="kicker">The honest pitch</p>
+  <h2>A manifest, not a makeover</h2>
+  <p>Every adoption of the kernel must publish, in a form anyone's phone can read, exactly which parts it took and which it left out. Point that rule at a firm and it does something no governance code quite manages: it makes the firm's <em>actual</em> constitution legible. A company that adopts the ballot machinery does not become a democracy — it becomes checkable:</p>
+
+  <div class="manifest">personhood:   share register — weighted, one share one vote  <span class="sub">[subtraction]</span>
+decisions:    end-to-end verifiable · receipt-free            <span class="full">[full]</span>
+rights guard: none — employment law applies, externally       <span class="sub">[subtraction]</span>
+record:       append-only log, independently witnessed        <span class="full">[full]</span></div>
+
+  <p>The subtraction is not a failure of the pitch; it <em>is</em> the pitch. What a firm claims about its own governance becomes something an employee, a shareholder, or a regulator can check against what it published — and what it will not grant sits on the page instead of in the fine print.</p>
+</section>
+
+<section>
+  <p class="kicker">The refusals travel too</p>
+  <h2>What it will not decide, in the office as anywhere</h2>
+  <ul class="plain">
+    <li>Whether the dismissal was <em>fair</em>, whether the union <em>should</em> win, what anyone <em>ought</em> to be paid — substance, refused. The kernel makes the decision and its reasons checkable; it never makes the judgment.</li>
+    <li><span class="refuse">The refusal is not politeness. A machine that judged these would be worth capturing — by the employer first.</span></li>
+  </ul>
+</section>
+
+<section>
+  <p class="kicker">Where this starts</p>
+  <h2>Small, willing, and checkable</h2>
+  <p>Not with a listed company. The scores above point the long way — the shareholder count is the biggest wrong and the hardest adopter. The short way is the willing end: a mutual, a co-op, a members' club that chooses its own rules. The machinery for that already runs — <a href="docs/shadow-agm-invitation.md">the invitation</a> and <a href="docs/clubhouse-demo.md">the run sheet</a> for a shadow AGM, with the official result still decided the old way while the new record proves itself beside it.</p>
+  <p>And the same standing offer as everywhere on this site: <a href="scenarios.html">the corpus these five would join</a>, <a href="docs/triage.md">the triage that scored them</a>, and <a href="break.html">the game, if you think you can rig it</a>.</p>
+</section>
+
+<footer>
+  Five triaged candidates from the Civic Kernel corpus, July 2026 — an open, non-commercial design study.
+  Leads at institution level; full cited-precedent rigour happens at encode, and these five are not yet encoded.
+  Read or fork the whole thing on <a href="https://github.com/GlassOnTin/civic-kernel">GitHub</a>.
+</footer>
+
+</main>
+</div>
+</body>
+</html>
