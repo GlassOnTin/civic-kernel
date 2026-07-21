@@ -532,8 +532,8 @@
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": false,
-      "status": "candidate",
-      "scenario": null
+      "status": "encoded",
+      "scenario": "gig-deactivation-no-reasons"
     },
     {
       "id": "union-ballot-employer-interference",

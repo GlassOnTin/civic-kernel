@@ -5118,6 +5118,286 @@
   ]
  },
  {
+  "id": "gig-deactivation-no-reasons",
+  "title": "Computer Says Gone: The Deactivation That Cannot Outrun Its Paperwork",
+  "setting": "At 19:42, mid-shift, Yusuf Adjei's phone signs him out. Seven years driving for Vireo in Ashwell, a 4.9 rating, and one message: 'Your account has been deactivated due to potentially fraudulent activity. This decision is final.' The app is dead. The appeal button opens a form whose reply, four days later, is the same sentence with a reference number. His income is zero from tonight; two days later Vireo, complying with its licensing duties, notifies the city board of a conduct dismissal, and the licence that lets him drive for anyone begins to wobble. Nobody will tell him what he is supposed to have done, because the thing that decided does not produce reasons — it produces scores, and the scores are, he is told, commercially sensitive.\n\nThis is the documented shape of platform work's sharpest wrong. In April 2023 the Amsterdam Court of Appeal found that Uber had robo-fired drivers by decisions that were 'solely automated' under GDPR article 22, that the human review said to stand behind them was 'not much more than a purely symbolic act', and that neither platform security nor trade secrets justified refusing the drivers an explanation — a ruling it took a workers' NGO four years of litigation to win, for reasons the law had nominally owed the drivers all along. The legislatures have started writing the same conclusion down: the EU's Platform Work Directive requires human oversight of automated decisions and written explanation and review of any account restriction, suspension or termination, and Washington State now runs a deactivation appeal process under which a driver who wins gets lost earnings back. The right existed; what was missing, everywhere, was an artifact.\n\nVireo is fiction. Its pilot is the transposition deadline arriving: under a works-council settlement, every decision that restricts, suspends or terminates a driver's account must land in a witnessed transparency log at the moment it takes effect — rule cited, trigger committed, review timed and attributable. The corpus already holds this wrong with the state as defendant: the welfare algorithm that could not say why. This is its private-power twin, and the difference under test is exactly the one Amsterdam exposed — a platform, unlike a department, is bound by no public-law duty to give reasons until a statute or a settlement makes it, and a right without an artifact is a lottery of persistence.",
+  "threats": [
+   "T12",
+   "T13"
+  ],
+  "doc_refs": [
+   "§8",
+   "§9",
+   "§11",
+   "§3.4",
+   "§6",
+   "§12",
+   "T12",
+   "T13"
+  ],
+  "precedents": [
+   {
+    "event": "Drivers v Uber and Ola, Amsterdam Court of Appeal: robo-firing was 'solely automated'; the human review 'purely symbolic'; trade secrets no answer",
+    "year": 2023,
+    "source": "Worker Info Exchange / App Drivers & Couriers Union",
+    "url": "https://www.workerinfoexchange.org/post/historic-digital-rights-win-for-wie-and-the-adcu-over-uber-and-ola-at-amsterdam-court-of-appeal",
+    "shows": "Drivers were deactivated by automated fraud decisions with no meaningful explanation; the court held GDPR article 22 engaged, dismissed the claimed human-in-the-loop as 'not much more than a purely symbolic act', and rejected platform-security and trade-secret grounds for withholding reasons — reasons extracted four years after the firings, by litigation, from an unwilling operator."
+   },
+   {
+    "event": "EU Platform Work Directive (2024/2831): human oversight of algorithmic management; explanation and human review of account restriction, suspension or termination",
+    "year": 2024,
+    "source": "EUR-Lex (consolidated text)",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32024L2831",
+    "shows": "The legislature writing the missing duty down: platforms must ensure human oversight of automated decisions that significantly affect platform workers, and workers get written explanation and review of decisions restricting, suspending or terminating their accounts — a direct legislative response to unexplained deactivation."
+   },
+   {
+    "event": "Washington State's deactivation appeal process for rideshare drivers: representation, and lost earnings repaid on a won appeal",
+    "year": 2023,
+    "source": "Washington State Department of Labor & Industries",
+    "url": "https://lni.wa.gov/workers-rights/industry-specific-requirements/transportation-network-company-drivers-rights/",
+    "shows": "A US state building the remedy layer the record alone cannot supply: statewide deactivation protections with a Driver Resource Center for representation and, on a successful appeal, recovery of the earnings the deactivation cost — the dated gap between firing and reversal turned into money by a rule."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:vireo-driver-log.example",
+    "name": "Vireo Mobility — driver-decisions log (algorithmic-management pilot under works-council settlement)"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:vireo-driver-log.example",
+    "witnesses": [
+     "did:web:ashwell-drivers-union.example",
+     "did:web:ashwell-licensing-observatory.example",
+     "did:web:kelder-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "dispute-a-deactivation",
+     "steps": 2,
+     "fields": 1,
+     "median_seconds": 240,
+     "abandonment_rate": 0.05
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:vireo-driver-log.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Yusuf Adjei, 19:42, and the sentence that ends the shift",
+    "verb": "offstage",
+    "narrative": "The backdrop first, as it stands without the log. The decision that ends Yusuf's income is a score crossing a threshold in a system nobody outside may inspect; the appeal is a form that returns the sentence that prompted it; and the explanation, if it ever comes, comes the Amsterdam way — an NGO, four years, a foreign court, and a ruling that the review claimed to stand behind the machine was 'not much more than a purely symbolic act'. Article 22 had owed the drivers an explanation the entire time. A right without an artifact is a lottery of persistence, and a driver whose income stopped tonight does not have four years."
+   },
+   {
+    "actor": "The cascade, two days later",
+    "verb": "offstage",
+    "narrative": "The deactivation does not stay private. Vireo's licensing duties oblige it to notify Ashwell's board of a conduct dismissal, so an allegation no one will explain to Yusuf is now an entry in a public authority's file about him — the private robo-firing feeding the state's paperwork while staying illegible to its subject. He cannot answer what he cannot read. In the real cases this cascade is where drivers lost not one platform but the licence to drive for any of them, on the strength of a score."
+   },
+   {
+    "actor": "Vireo, publishing the manifest it settled on",
+    "verb": "cast",
+    "narrative": "The transposition deadline and a works-council settlement arrive together, and Vireo publishes the pilot's constitution: every decision that restricts, suspends or terminates a driver account lands in a witnessed, append-only log at the moment it takes effect — rule cited, trigger committed, review timed and attributable, aggregates published quarterly. The manifest declares almost everything absent: no ballots, no personhood, no rights guard — employment law stays outside. What it keeps is the one discipline this wrong needs: an adverse decision that cannot exist off the record. A platform that adopts the log does not become fair. It becomes checkable.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "manifest.published",
+     "community": "did:web:vireo-driver-log.example",
+     "timestamp": "2026-03-02T09:00:00Z",
+     "body": {
+      "manifest_hash": "sha256:1c8e5a2f9b4d7e0a3c6f9b2e5d8a1c4f7b0e3d6a9c2f5e8b1d4a7c0f3e6b9d2a",
+      "scope": "every decision restricting, suspending or terminating a driver account; every human review of one; quarterly process aggregates",
+      "authorizing_rule": "pwd-transposition-act (algorithmic-management chapter); vireo-works-council-settlement/2026 §4",
+      "note": "The settlement's one-sentence rule: no driver-affecting adverse decision exists unless its entry does. Services subtracted are declared subtracted — this is a log, not a franchise."
+     },
+     "sig": {
+      "key_id": "did:web:vireo-driver-log.example#log-1",
+      "alg": "ed25519",
+      "value": "TWFuaWZlc3RQdWJsaXNoZWRWaXJlb05vdFJlYWwwMQ"
+     }
+    }
+   },
+   {
+    "actor": "The detector, firing at 19:42 — onto the record",
+    "verb": "cast",
+    "narrative": "The same flag fires in the piloted world, and now the firing cannot outrun its paperwork. The entry exists the second the suspension does, and it must carry what the sentence never did: the contract clause it acts under and the amendment that introduced it, the class of signal that tripped (location-integrity), the fact that no human has yet reviewed it and the deadline by which one must, and an appeal path. The trigger's working detail is sealed — committed by hash, readable by Yusuf and by an authorised auditor, published to nobody else. That is the answer to the trade-secrets defence Amsterdam rejected: the detector does not have to choose between being gameable and being unaccountable. It is committed now and examinable by the people with standing, which is more than a court order got the real drivers in four years.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.denial-trace",
+     "community": "did:web:vireo-driver-log.example",
+     "timestamp": "2026-05-06T19:42:00Z",
+     "body": {
+      "disposition_id": "2026-vireo-deact-18271",
+      "subject_ref": "driver-account:vireo-ash-40312",
+      "decision": "account-deactivated",
+      "authorizing_rule": "vireo-driver-terms/v9 §14.2 platform-integrity (introduced by rules.amendment 2026-01-12); pwd-transposition-act §algorithmic-management",
+      "basis_class": "location-integrity-signal (automated)",
+      "automated": true,
+      "human_review": "none yet — due within 14 days per vireo-works-council-settlement/2026 §4.3",
+      "effect": "account suspended; pending earnings frozen",
+      "appeal_trace": "did:web:vireo-driver-log.example/appeals/2026-deact-18271",
+      "note": "The sentence, replaced by an entry: the rule named, the signal classed, the review clock running in public, the detail committed and subject-readable. A decision with no reason is no longer a message — it is a schema violation."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:7d2f9a4c1e8b5f0a3d6c9e2b7f4a1d8c3e6b9f2a5d8c1e4b7f0a3d6c9e2b5f81",
+      "readable_by": [
+       "subject",
+       "authorized-auditor"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:vireo-driver-log.example#log-1",
+      "alg": "ed25519",
+      "value": "RGVuaWFsVHJhY2VEZWFjdFZpcmVvTm90UmVhbDAy"
+     }
+    }
+   },
+   {
+    "actor": "The licensing referral, carrying its trace with it",
+    "verb": "cast",
+    "narrative": "The cascade still fires — the licensing duty is real law, not the platform's choice — but the referral is now an entry that points at an entry. What reaches Ashwell's board is not a bare allegation of conduct dismissal; it is a reference to a logged decision whose rule is cited, whose review is pending on a public clock, and whose sealed detail an authorised auditor can examine. The board's file on Yusuf begins with a record he can read and answer, which is the whole difference between an accusation and a case.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-referral.licensing",
+     "community": "did:web:vireo-driver-log.example",
+     "timestamp": "2026-05-08T10:00:00Z",
+     "body": {
+      "referral_id": "2026-vireo-lic-0392",
+      "recipient": "Ashwell licensing board",
+      "subject_ref": "driver-account:vireo-ash-40312",
+      "authorizing_rule": "ashwell-phv-code §9 operator-conduct-notification",
+      "references_disposition": "2026-vireo-deact-18271",
+      "status_at_referral": "automated decision; human review pending (due 2026-05-20)",
+      "note": "The referral names its rule and carries the trace. The board is told a decision exists, what class it is, and that it is not yet a settled fact — where the old notice reported a conduct dismissal as if it were one."
+     },
+     "sig": {
+      "key_id": "did:web:vireo-driver-log.example#log-1",
+      "alg": "ed25519",
+      "value": "UmVmZXJyYWxMaWNlbnNpbmdWaXJlb05vdFJlYWwwMw"
+     }
+    }
+   },
+   {
+    "actor": "Yusuf Adjei, disputing the signal instead of the silence",
+    "verb": "challenge",
+    "narrative": "Yusuf opens the sealed detail with his own key: eleven location pings inconsistent with the road network, riverside tunnel section, two evenings before. For the first time he is answering a claim rather than a silence — he exports his own telematics, which show the same drift every time the tunnel swallows the signal, and files it against the named signal class through the appeal trace. The dispute is small, specific and winnable, because the thing to be disputed finally has edges. In the old world this exchange was the thing that did not exist: the form returned the sentence, and the sentence had no surface to argue with."
+   },
+   {
+    "actor": "A human review that must sign its work",
+    "verb": "verify",
+    "narrative": "Day eleven: a trust-operations reviewer — a named role, not a legal fiction — reinstates the account, records the finding (GPS multipath in the tunnel, a false positive), and the entry carries what Amsterdam could only infer from testimony: who reviewed, when, what changed, and how long they spent. The settlement's restitution rule turns the dated gap into money — eleven days of median earnings, paid because the log makes the gap computable, the Washington design. The review is attributable; the referral's answer follows to the board by the same mechanism. What the log did not do is make the review wise. It made it a signed, timed, reversible act instead of a symbolic one — and made its thinness, where it is thin, measurable.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-review.outcome",
+     "community": "did:web:vireo-driver-log.example",
+     "timestamp": "2026-05-17T15:30:00Z",
+     "body": {
+      "review_id": "2026-vireo-rev-18271",
+      "references_disposition": "2026-vireo-deact-18271",
+      "reviewer_role": "trust-operations L2 (human)",
+      "outcome": "reinstated",
+      "finding": "false positive: GPS multipath in riverside tunnel section; driver telematics consistent with road network",
+      "elapsed_days_since_decision": 11,
+      "seconds_spent_in_review": 210,
+      "restitution": "11 days at median earnings per vireo-works-council-settlement/2026 §4.6",
+      "licensing_update_sent": "2026-vireo-lic-0392 superseded: no conduct finding",
+      "note": "Review as an act on the record: attributable by role, timed, its reasons stated, its consequences (restitution, referral corrected) citing the rules that require them."
+     },
+     "sig": {
+      "key_id": "did:web:vireo-driver-log.example#log-1",
+      "alg": "ed25519",
+      "value": "UmV2aWV3T3V0Y29tZVZpcmVvTm90UmVhbDA0"
+     }
+    }
+   },
+   {
+    "actor": "The quarter's aggregate, published to the witnesses",
+    "verb": "verify",
+    "narrative": "At quarter's end the process publishes its own portrait, anonymous and witnessed: 1,914 deactivations, 92% initiated by automated flag, a median human review of 74 seconds, 31% of reviewed decisions reversed. Measure the process, never the person — and the numbers do what individual cases cannot. A near-one-in-three reversal rate is a defect rate no regulator has to subpoena and no union has to allege; a 74-second median review is the 'purely symbolic act' as a published statistic rather than a finding four years of litigation had to reach. The bargaining table and the enforcement case both start from a fact the platform's own witnessed log put on the record.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:vireo-driver-log.example",
+     "timestamp": "2026-06-30T23:59:00Z",
+     "body": {
+      "period": "2026-Q2",
+      "metric": "driver-account-adverse-decisions",
+      "deactivations": 1914,
+      "automated_flag_initiated": 0.92,
+      "median_seconds_per_human_review": 74,
+      "median_days_decision_to_review": 9,
+      "reversed_on_review": 0.31,
+      "note": "Anonymous aggregate. The reversal rate is the system grading its own accuracy in public; the 74-second median is the depth of its human oversight, measured. Both were previously discoverable only by litigation, if at all."
+     },
+     "sig": {
+      "key_id": "did:web:vireo-driver-log.example#log-1",
+      "alg": "ed25519",
+      "value": "Q29zdEFnZ3JlZ2F0ZVZpcmVvTm90UmVhbDA1"
+     }
+    }
+   },
+   {
+    "actor": "The platforms that never adopt, and the questions never asked",
+    "verb": "offstage",
+    "narrative": "The honest ceiling. Nothing here binds a platform that keeps its decisions off any log — Amsterdam is what non-adoption costs a driver: four years, an NGO, a foreign court, for reasons owed on paper all along. The pressure is real and growing — article 22 held, the directive in force with its transposition clock running, a US state paying lost earnings on won appeals — so unlike the corpus's depository, this adopter is being marched toward the record by statute; but between here and there, every Yusuf on an unlogged platform is still arguing with a sentence. And three things stay refused or out of reach on principle: whether §14.2 is a fair term and whether drivers are employees are company and labour law's questions, not the kernel's; the model's inner workings remain unexplained — cite-the-rule is not explain-the-model, exactly as the welfare twin found; and eleven days of zero income were repaid here only because a settlement rule said so. The log computed the gap. The rule paid it."
+   },
+   {
+    "actor": "Anyone, reading the register after",
+    "verb": "read",
+    "narrative": "What the kernel did: it made the firing carry its reasons at the moment it happened — rule, signal class, review clock, appeal path — instead of four years later by court order; it answered the trade-secrets objection with a seal that commits rather than hides; it turned the cascade referral from an unanswerable allegation into a reference to a disputable record; and it made both the reversal rate and the depth of human review published, witnessed numbers. What it did not do: it did not make the review thoughtful, the term fair, the model legible, or the platform willing — statute is doing that last work, visibly, in three jurisdictions. The corpus already knew Computer Says No. This is Computer Says Gone, and the difference is the defendant: a department at least nominally owed reasons; the platform owed nothing until the law arrived — which is why the artifact, not the right, was always the missing piece."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "A model fires a driver mid-shift — 'this decision is final' — and the reasons took four years of litigation to extract. Bound to the log, the firing cannot outrun its paperwork: rule cited, trigger sealed but committed, review timed and attributable, reversal rate published. But thin review is measured, not cured; lost days are repaid only where a rule says so; and the unlogged platform answers only to litigation.",
+  "protection": "the robo-firing that must cite its rule",
+  "protection_plain": "Whether the denial-trace discipline — every adverse decision citing its rule, carrying its trigger class and appeal path, reviews attributable and timed, aggregates published — answers the deactivation with no reasons. The trigger stays sealed but committed; review's thinness becomes a number.",
+  "findings": [
+   {
+    "protection": "the reason that arrives with the act",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The cited-demand discipline generalised to private power's adverse decisions: a deactivation with no reason is not a policy failure but a schema violation — the entry cannot validly exist without its authorizing rule, its signal class, and an appeal path, and it must exist for the suspension to. Amsterdam's drivers got their reasons four years late, by litigation, from an operator the court found had offered 'purely symbolic' review; Yusuf's arrive at 19:42, with the firing. The right existed in article 22 all along. What the log adds is the artifact that makes the right cheap to use — which the welfare twin found with the state as defendant, and which bites harder here, where no public-law duty ever bound the platform at all."
+   },
+   {
+    "protection": "sealed, not secret — the anti-gaming defence answered",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "Uber and Ola argued that explaining fraud decisions would tip off fraudsters and expose trade secrets; Amsterdam rejected the defence, but the tension is real and the kernel has a construction for it rather than a side to take. The trigger's working detail is sealed at the entry level — committed by hash now, readable by the subject and an authorised auditor, published to no one else. The detector is neither gameable-by-publication nor unaccountable-by-opacity: what it did is committed before any dispute begins, and the people with standing can examine it. The house caveat travels with the device: the unseal key is a trusted party, not a cryptographic guarantee."
+   },
+   {
+    "protection": "the symbolic review, made measurable",
+    "severity": "strain",
+    "doc_ref": "§9",
+    "observation": "The court had to infer from testimony that Uber's human-in-the-loop was 'not much more than a purely symbolic act'. Under the log, review is an attributable, timed entry — who by role, when, what changed, how long — and the quarter's aggregate publishes the distribution: a 74-second median and a 31% reversal rate, witnessed, no subpoena required. That is the strain stated honestly: the kernel cannot compel diligence, cannot make 74 seconds into judgment, and a compliant-but-hollow review still validates. What it forecloses is the pretence — thinness is now a published number a court, a regulator, or a works council reads directly, rather than a characterisation four years of litigation must earn."
+   },
+   {
+    "protection": "legibility at machine speed, remedy at rule speed",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The firing lands in a second; the reversal took eleven days; and the log can date the gap to the minute without being able to pay for it. Yusuf's eleven days came back as money only because the works-council settlement — like Washington's statute — contains a restitution rule the log makes computable. Where no such rule exists, the denial-trace feeds an appeal that arrives after the rent did, the protest-conditions shape transplanted to a livelihood: legibility arrives; the days may not. The record turns the platform's error rate into a priced, attributable externality. Pricing it and paying it remain two different acts, and the second is always a rule's."
+   },
+   {
+    "protection": "adoption marched by statute, substance still refused",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "Unlike the depository in the corpus's other business case, this adopter is being moved by law with dates on it: article 22 held at appeal, the Platform Work Directive in force with explanation-and-review duties for exactly these decisions, a US state paying lost earnings on won appeals. The strain is the meantime and the merits. In the meantime, a platform off the log answers only to litigation, and the Amsterdam route is priced in years a deactivated driver does not have. And on the merits the kernel holds its line: whether §14.2 is a fair term, whether the drivers are employees, whether a fraud model should exist at all — company and labour law's questions, refused here on principle (refusal 11). The log makes the firing checkable. It never makes it right."
+   }
+  ]
+ },
+ {
   "id": "government-by-whatsapp",
   "title": "The Award That Kept Its Reasons Off the Record",
   "setting": "The Borough of Ashcombe runs the full kernel. After a neighbouring council's records scandal it adopted everything — a witnessed transparency log, two anchors, the whole reference profile — on one promise to its residents: the decisions that govern you land on a record nobody can quietly change. In February 2026 the river takes the Riverside ward, and the council must award a 4.2 million pound emergency clean-up and temporary-housing contract in days, not the usual months. Deputy leader Councillor Damian Roe and two officers settle who gets it in a WhatsApp group set to clear its messages after twenty-four hours. The winner is Tidewell Facilities Ltd, whose director once ran a company with Roe, at half again the next-lowest of three bids. Into the group, before the vote is minuted anywhere, an officer types the quiet part: 'delete after — if anyone FOIs it we can say it was captured.'\n\nWhat the kernel receives is impeccable. The procurement is opened and closed on the transparency log, each entry citing the emergency power the law actually provides, co-signed overnight by three neighbouring witnesses and pinned to two anchors by dawn — a record that, thanks to the very mechanism that defeated Riverton's rewrite, can now never be altered by anyone, the council included. That is the trap, and it is the exact inverse of records-rewrite. There, an administration tried to change what the log already held, and failed at the witnesses, at the phones, and at the anchor. Here nobody changes anything. The decision that mattered simply never enters the log, and the reasons that would show the favouritism are auto-deleted at source that same night. A year on, when a reporter and the borough's own auditor come asking why Tidewell, the log answers every question about what was decided — the power, the sum, the supplier, the witnessed timeline — perfectly and unrewritably, and nothing at all about why. Because the why was engineered never to be written down.",
