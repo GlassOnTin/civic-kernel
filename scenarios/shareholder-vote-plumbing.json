@@ -1,0 +1,330 @@
+{
+ "id": "shareholder-vote-plumbing",
+ "title": "The Count Nobody Could Check: A Take-Private, a Register Forced to Add Up, and a Recount Anyone Can Run",
+ "setting": "Mara Quist runs portfolio operations for the Lakeshore Teachers' Retirement System, and on paper her job this October is simple: the fund holds 2,100,000 shares of Orchard Crest Foods, the investment committee has decided the founder's $13.90 take-private underprices the company, and the shares should vote no. What happens to that instruction is not simple. The company's own register lists one name for most of its stock — a depository nominee — and Mara's beneficial ownership exists only in her custodian's internal books. Her 'no' becomes a row in a broker's file, forwarded to a proxy processor, aggregated into an omnibus position, and re-reported to a tabulator the company hired. She receives no proof it arrived, no proof it was counted as cast, and if the count is close, no way to check the recount either. Somewhere between her instruction and the announced total, the vote stops being hers and becomes the plumbing's.\n\nNone of this is invented. In Dole Food's settlement, stockholders submitted facially valid claims for 49,164,415 shares against 36,793,758 on the depository's ledger — trades straddling the close had left even the canonical record unable to say who held what, and the mismatch surfaced three years late, at the money. T. Rowe Price publicly opposed the Dell buyout, and a proxy-instruction error voted its roughly 31 million shares FOR; the court held it to the recorded vote, appraisal was lost, and the firm paid about $194 million to make clients whole. Procter & Gamble announced that Nelson Peltz had lost its board vote by 6.15 million; the certified recount put him ahead by 42,780 — 0.0016% — inside a tabulation no outsider could re-run. The regulator has known the shape of all three since at least 2010, when the SEC's concept release on the proxy system named over-voting, empty voting, and the absence of end-to-end confirmation.\n\nOrchard Crest is fiction; its pipes are not. This is the corpus's first case where the demos is a share register rather than a citizenry — a weighted franchise, votes attributable by design, eligibility ownable and lendable. The company's meetings pilot runs the vote on the kernel with those subtractions declared in the manifest instead of discovered in litigation, and the walkthrough tests exactly two claims: that a register can be forced to add up in public before a single ballot opens, and that a count, once made, is anyone's to check.",
+ "threats": [
+  "T8",
+  "T3"
+ ],
+ "doc_refs": [
+  "§3.2",
+  "§3.4",
+  "§10",
+  "§6",
+  "§2",
+  "§12",
+  "T8",
+  "T3",
+  "T2"
+ ],
+ "precedents": [
+  {
+   "event": "In re Dole Food: facially valid claims for 49,164,415 shares against 36,793,758 on the depository ledger",
+   "year": 2017,
+   "source": "Delaware Court of Chancery (Laster V.C.), settlement claims opinion",
+   "url": "https://www.courtlistener.com/opinion/4348929/in-re-dole-food-co-inc-stockholder-litigation/",
+   "shows": "A settlement drew claims exceeding the record by 12.4 million shares — trades straddling the merger close left even the canonical ledger unable to say who held what. The register itself could not add up, and the discrepancy surfaced only years later, at the money, in claims administration."
+  },
+  {
+   "event": "T. Rowe Price's ~31 million Dell shares voted FOR the buyout it publicly opposed",
+   "year": 2016,
+   "source": "T. Rowe Price press release (PR Newswire)",
+   "url": "https://www.prnewswire.com/news-releases/t-rowe-price-to-compensate-clients-for-dell-voting-error-300280214.html",
+   "shows": "A proxy-instruction error inside the intermediary chain cast an institution's entire position against its stated intent; the Court of Chancery held it to the recorded vote (appraisal denied), and the firm paid about $194 million to compensate clients — an instruction with no holder-verifiable path from intent to count."
+  },
+  {
+   "event": "Procter & Gamble–Trian: an announced 6.15-million-vote loss becomes a certified win by 42,780 votes (0.0016%)",
+   "year": 2017,
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2017/11/15/nelson-peltzs-trian-wins-recount-for-board-seat-at-pg.html",
+   "shows": "The largest proxy fight on record produced two opposite results from one ballot pool, inside a tabulation no outsider could re-run — a contested count settled by an inspector's certification rather than by public arithmetic anyone could perform."
+  },
+  {
+   "event": "SEC concept release on the U.S. proxy system: over-voting, empty voting, no end-to-end confirmation",
+   "year": 2010,
+   "source": "U.S. Securities and Exchange Commission",
+   "url": "https://www.sec.gov/files/rules/concept/2010/34-62495.pdf",
+   "shows": "The regulator's own catalogue of the plumbing's failures — votes submitted in excess of entitlements, economic interest decoupled from voting power, and no way for an investor to confirm their vote was counted as cast — named in 2010 and structurally unchanged since."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:orchardcrest-register.example",
+   "name": "Orchard Crest Foods, Inc. — shareholder register (verifiable-meetings pilot)"
+  },
+  "services": {
+   "personhood": true,
+   "decisions": true,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "personhood": {
+   "method": "external-issuer",
+   "issuer": "Orchard Crest transfer agent, from 214 custodians' signed record-date position commitments (omnibus nominee: Cortell & Co., Continental Depository)",
+   "unlinkable": false,
+   "sybil_resistance": "weak",
+   "eligibility_rules": "record-date-register/2026-09-08"
+  },
+  "decisions": {
+   "verifiable": true,
+   "receipt_free": false,
+   "cast_or_audit": true,
+   "paper_channel": true,
+   "coercion_resistance": "none",
+   "trustee_quorum": "3-of-5: state corporate registrar, exchange regulator, Lakeshore University, and two investor associations"
+  },
+  "transparency_log": {
+   "log_id": "did:web:orchardcrest-register.example",
+   "witnesses": [
+    "did:web:lakeshore-university.example",
+    "did:web:pension-stewardship-council.example",
+    "did:web:financial-press-consortium.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "merger-vote-cast",
+    "steps": 3,
+    "fields": 0,
+    "median_seconds": 90,
+    "abandonment_rate": 0.01
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:orchardcrest-register.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Mara Quist, and the chain her instruction enters",
+   "verb": "offstage",
+   "narrative": "The backdrop is the plumbing as it stands. Street-name custody means the issuer's register knows one nominee where there are tens of thousands of owners; voting is messages passed hand to hand down a chain with no receipts. The corpus has met every one of this case's wrongs before, wearing state clothes: claims exceeding shares is enrolment arithmetic failing (§10); the flipped instruction is a chain of custody nobody can check; the unverifiable recount is Horizon at the ballot box — a total you must take on an operator's word. What is new is only the demos: not a citizenry but a register of capital, where the franchise is weighted, bought, and lent by design."
+  },
+  {
+   "actor": "Orchard Crest Foods, opening the vote under a manifest",
+   "verb": "cast",
+   "narrative": "The company's pilot opens the take-private vote on the kernel, and its manifest says out loud what a firm usually leaves to be discovered: the franchise is one share, one vote — weighted, not equal-persons; ballots are attributable after close, because stewardship disclosure demands it — receipt-freeness subtracted; eligibility is sybil-weak, because shares can be bought and borrowed at the record date; and there is no rights guard — company and employment law stay outside. What remains at full strength is exactly what the plumbing lacks: an end-to-end verifiable count, and an append-only witnessed record. A company that adopts the ballot machinery does not become a democracy. It becomes checkable.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.opened",
+    "community": "did:web:orchardcrest-register.example",
+    "timestamp": "2026-09-01T13:00:00Z",
+    "body": {
+     "decision_id": "2026-orchardcrest-take-private",
+     "question_hash": "sha256:8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d4",
+     "eligibility_rules": "record-date-register/2026-09-08",
+     "franchise": "one-share-one-vote (weighted; declared in manifest)",
+     "window": {
+      "deliberation_ends": "2026-09-22T21:00:00Z",
+      "cast_ends": "2026-10-06T21:00:00Z"
+     },
+     "note": "Merger agreement vote: $13.90 per share take-private. Running totals sealed until close; individual ballots attributable after close per stewardship-disclosure rules the manifest cites."
+    },
+    "sig": {
+     "key_id": "did:web:orchardcrest-register.example#log-1",
+     "alg": "ed25519",
+     "value": "T3JjaGFyZENyZXN0T3BlbmVkTm90UmVhbENyeXB0bzAx"
+    }
+   }
+  },
+  {
+   "actor": "Two hundred and fourteen custodians, at the record date",
+   "verb": "prove",
+   "narrative": "At the record date the register is not asked politely; it is made to commit. Every custodian signs the total it will answer for; the omnibus nominee signs the depository total; the issue size is already public. Three numbers that must agree, published as commitments no book can quietly restate later. And they do not agree: the custodians' signed positions sum to 41,416,500 against 41,206,500 shares in issue — an overage of 210,000, on the record, dated, before a single credential exists. In Dole this same arithmetic failed silently and surfaced three years later as 12.4 million excess claims at settlement. Here it fails in public, at the door.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-register.commitment",
+    "community": "did:web:orchardcrest-register.example",
+    "timestamp": "2026-09-08T21:00:00Z",
+    "body": {
+     "register_id": "2026-orchardcrest-record-date",
+     "record_date": "2026-09-08",
+     "shares_in_issue": 41206500,
+     "custodian_commitments": 214,
+     "commitments_root": "sha256:2f7a1d9c4e8b3f6a0d5c9e2b7f4a1d8c3e6b9f2a5d8c1e4b7f0a3d6c9e2b5f8c",
+     "omnibus_nominee": "Cortell & Co. (Continental Depository)",
+     "sum_of_commitments": 41416500,
+     "variance": 210000,
+     "status": "credentials-frozen-pending-reconciliation",
+     "authorizing_rule": "orchardcrest-bylaws/art-7 record-date franchise; meetings-code/v1 register-must-sum",
+     "note": "The register refuses to mint a single voting credential while its own arithmetic is wrong. The overage is public the evening it exists, not discoverable years later in claims administration."
+    },
+    "sig": {
+     "key_id": "did:web:orchardcrest-register.example#log-1",
+     "alg": "ed25519",
+     "value": "UmVnaXN0ZXJDb21taXRPcmNoYXJkTm90UmVhbENyeXB0bzAy"
+    }
+   }
+  },
+  {
+   "actor": "The register, refusing to proceed",
+   "verb": "challenge",
+   "narrative": "Credentials stay frozen for four days while the overage is owned. It resolves the way the Dole opinion said such overages arise: Calder & Wray Securities had counted client positions already out on stock loan, and Northgate Clearing had a settlement lag straddling the record date. Both restate, both re-sign, the sum now equals the issue, and the discrepancy itself remains in the log — attributed, dated, sized. This is §10's enrolment arithmetic transplanted to capital: minting voices, whether fake voters or double-counted shares, shows up in sums that no longer match, and the mismatch is everyone's to see. What the log cannot do is adjudicate a genuine ownership dispute — it forces the books to agree in public; it does not decide whose book was right.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-register.reconciliation",
+    "community": "did:web:orchardcrest-register.example",
+    "timestamp": "2026-09-12T16:00:00Z",
+    "body": {
+     "register_id": "2026-orchardcrest-record-date",
+     "resolved_variance": 210000,
+     "attributed_to": [
+      "Calder & Wray Securities — client positions double-counted against shares out on loan",
+      "Northgate Clearing — settlement lag straddling the record date"
+     ],
+     "corrected_sum": 41206500,
+     "status": "credentials-minting",
+     "authorizing_rule": "meetings-code/v1 register-must-sum",
+     "note": "The overage owned by name, corrected by re-signed commitments, and left on the record. The claims-exceed-shares discovery moves from three years after the money to four days before the ballots."
+    },
+    "sig": {
+     "key_id": "did:web:orchardcrest-register.example#log-1",
+     "alg": "ed25519",
+     "value": "UmVnaXN0ZXJSZWNvbmNpbGVkT3JjaGFyZE5vdFJlYWwwMw"
+    }
+   }
+  },
+  {
+   "actor": "Mara's fund, and Theo Brandt's three hundred shares",
+   "verb": "prove",
+   "narrative": "The fund's credential carries 2,100,000 weighted votes, derived from its custodian's signed commitment; Theo Brandt, who holds three hundred shares through a retail broker, gets the same arithmetic at a smaller size. Each holder's client verifies its position against the published commitments root — inclusion is a proof performed on the holder's own device, not a courtesy requested from a tabulator. For the first time in the story, the path from beneficial owner to franchise is something the owner can walk end to end, because every intermediary that used to hold the vote invisibly has already signed, in public, for exactly what it holds."
+  },
+  {
+   "actor": "Mara Quist, casting no — and the file that says yes",
+   "verb": "cast",
+   "narrative": "Mara casts the fund's 2,100,000 votes against the merger, runs a cast-or-audit challenge on the signing device, and watches her tracker confirm the sealed ballot matches the instruction. Twelve days before close, the Dell error arrives on schedule: Broadmoor Proxy Services, a processor two intermediaries down the old chain, submits an instruction file that would recast the fund's position FOR. In T. Rowe Price's case the equivalent error was discovered in a courtroom, after standing was already lost, and cost $194 million. Here it surfaces the same hour on Mara's own tracker as a superseding ballot she did not cast — attributable to the processor's key, and correctable, because the credential is the holder's, not the chain's: she re-casts, and the last ballot is the one that counts. Running totals stay sealed until close, so the solicitors' mid-vote target list has nothing to read."
+  },
+  {
+   "actor": "The close, and anyone with the tally",
+   "verb": "verify",
+   "narrative": "The vote closes at 41,124 votes' distance: 18,466,120 for the merger, 18,424,996 against — a margin of about a tenth of a percent, the P&G scale, the kind the old plumbing settles by an inspector's certificate that nobody outside can examine. Here the recount is not a petition; it is arithmetic. Any holder, any journalist, any court re-runs the public tally proof against the sealed ballots and the signed register commitments, and either the sums hold or they visibly do not. The trustees decrypt only the totals — three of five, none of them the company — and the paper proxy cards that came in by mail carry a risk-limiting audit on the same protocol.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "decision.tally-proof",
+    "community": "did:web:orchardcrest-register.example",
+    "timestamp": "2026-10-06T21:30:00Z",
+    "body": {
+     "decision_id": "2026-orchardcrest-take-private",
+     "question_hash": "sha256:8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d4",
+     "result": {
+      "approve-merger": 18466120,
+      "reject-merger": 18424996
+     },
+     "ballots_counted": 36891116,
+     "unit": "share-votes, weighted per signed record-date commitments",
+     "tally_proof_hash": "sha256:6e3a90bc4d1f6583a7c0e9d2b5f4a1c8d3e6f7091b2a3c4d5e6f708192a3b4d7",
+     "trustees_decrypting": "3-of-5",
+     "paper_channel_rla": {
+      "paper_ballots": 1204380,
+      "risk_limit": 0.05,
+      "outcome": "confirmed"
+     }
+    },
+    "sig": {
+     "key_id": "did:web:orchardcrest-register.example#log-1",
+     "alg": "ed25519",
+     "value": "VGFsbHlQcm9vZk9yY2hhcmROb3RSZWFsQ3J5cHRvMDQ"
+    }
+   }
+  },
+  {
+   "actor": "Three witnesses outside the company",
+   "verb": "verify",
+   "narrative": "A university, a pension-stewardship council, and a financial-press consortium co-sign the log head and anchor it beyond everyone involved. From this point neither the company, the depository, the tabulator, nor any custodian can restate yesterday — a corrected result, a re-filed position, a vanished discrepancy would break arithmetic that three outside parties and any holder's phone are already checking. The certificate that ended the P&G fight asked the world to trust one inspector; the checkpoint asks the world to check.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "anchor.checkpoint",
+    "community": "did:web:orchardcrest-register.example",
+    "timestamp": "2026-10-06T23:00:00Z",
+    "body": {
+     "checkpoint_id": "orchardcrest-2026-10-06",
+     "tree_size": 41519,
+     "root_hash": "sha256:9c4d1f2a7b0e8c53b6a1d47e920fb3c8a5e6d10f9b2c4a7e8d3f5061a2b3c4e8",
+     "witnesses_cosigned": [
+      "did:web:lakeshore-university.example",
+      "did:web:pension-stewardship-council.example",
+      "did:web:financial-press-consortium.example"
+     ],
+     "anchored": "opentimestamps:bitcoin-mainnet",
+     "note": "The head that makes the count final in the only sense that matters here: not beyond dispute, but beyond quiet revision."
+    },
+    "sig": {
+     "key_id": "did:web:orchardcrest-register.example#log-1",
+     "alg": "ed25519",
+     "value": "QW5jaG9yQ2hlY2twb2ludE9yY2hhcmROb3RSZWFsMDU"
+    }
+   }
+  },
+  {
+   "actor": "After the count: the claims, the loans, and the lobbying",
+   "verb": "offstage",
+   "narrative": "Dole's aftermath cannot recur here: any later settlement or appraisal claim presents the credential trail, so facially valid claims beyond the register have nothing to be facially valid against. But two things the machinery cannot reach stay in view. Eligibility itself was borrowable — the commitments show 1.9 million shares moving into lending positions in the fortnight before the record date, a dated, public spike; whose economics those votes carried is off the ledger, and the lawfulness of voting them is company law's question, not the kernel's. And the pressure moved rather than vanished: sealed running totals starved the mid-vote lobbying machine, but ballots are attributable after close by the manifest's own declaration, and the founder reads the fund's no the morning after. What he does about it is for securities and employment law — the kernel logged the vote; it does not police the grudge.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:orchardcrest-register.example",
+    "timestamp": "2026-10-07T12:00:00Z",
+    "body": {
+     "decision_id": "2026-orchardcrest-take-private",
+     "metric": "record-date-lending-aggregate",
+     "shares_entering_loan_positions_14d_before_record": 1900000,
+     "share_of_franchise": 0.046,
+     "note": "Anonymous aggregate, measured from the signed commitments: the borrowable franchise made visible as a dated number. What the borrow was for — hedge, arbitrage, or an empty vote — is economics the register cannot see and substance the kernel refuses to judge."
+    },
+    "sig": {
+     "key_id": "did:web:orchardcrest-register.example#log-1",
+     "alg": "ed25519",
+     "value": "TGVuZGluZ0FnZ3JlZ2F0ZU9yY2hhcmROb3RSZWFsMDY"
+    }
+   }
+  },
+  {
+   "actor": "Anyone, reading the register after",
+   "verb": "read",
+   "narrative": "What the kernel did: it made the register add up in public before a ballot existed, so the Dole discovery moved from claims administration to the record date; it gave the holder a device-checkable path from instruction to count, so the Dell error surfaced in an hour instead of a courtroom; and it made the recount arithmetic instead of certification, so the P&G margin is a number anyone can confirm. What it did not do: it did not un-weight the franchise, and said so in the manifest; it did not see through a record-date borrow to the economics behind it; it did not judge whether $13.90 was fair — appraisal stays a court's; and it did not make the plumbing want to be checked. One issuer chose this; the depository signed because the issuer paid it to. The incumbents whose fees are the fog have Horizon's operator's incentives, and the kernel can offer them nothing but the thing they profit by not having."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "Dole's settlement drew claims for 49.2m shares against 36.8m on the ledger; T. Rowe's 31m Dell shares voted FOR a buyout it opposed; P&G's proxy war turned on a recount nobody outside could run. A register forced to sum before ballots open and a tally anyone can recompute answer all three — but the franchise stays weighted and borrowable, and the plumbing that profits by the fog is the party that must adopt.",
+ "protection": "the checkable count in a weighted franchise",
+ "protection_plain": "Whether an end-to-end verifiable tally and a record-date register forced to add up in public answer corporate voting's plumbing — claims exceeding shares, instructions flipped in the chain, recounts nobody can re-run. The franchise stays weighted and borrowable; the manifest declares both out loud.",
+ "findings": [
+  {
+   "protection": "the recount anyone can run",
+   "severity": "note",
+   "doc_ref": "§3.2",
+   "observation": "The tally is the kernel's home ground, and this is the cleanest transplant in the business set: an end-to-end verifiable count turns the inspector's certificate — the instrument that settled P&G–Trian, a black box even to the contestants — into public arithmetic. A 41,124-vote margin among 36.9 million is exactly the case the old plumbing handles worst, because a recount there re-asks the same intermediaries the same questions; here it is any holder re-running the same proof. Note, not strain: on the count itself, against T8, the machinery does what it was built to do — the strain in this scenario lives everywhere except the counting."
+  },
+  {
+   "protection": "the register that must add up first",
+   "severity": "note",
+   "doc_ref": "§10",
+   "observation": "The scenario's one genuinely new move, and it is §10's enrolment arithmetic transplanted whole: signed per-custodian position commitments that must sum to the issue before any credential mints. Dole's 12.4 million excess shares were exactly this check failing silently — discovered three years late, at the money, by a claims administrator. Under commitments the same overage is a public, dated, attributed fact four days before the first ballot, and the register refuses to proceed until its own books agree. The honest residue: the log forces the books to agree in public; it cannot decide whose book was right — a genuine ownership dispute still belongs to a court."
+  },
+  {
+   "protection": "cast-as-intended against the chain",
+   "severity": "strain",
+   "doc_ref": "§3.2",
+   "observation": "T. Rowe's wrong — an instruction inverted somewhere in the chain, discovered only when standing was already lost — is answered by giving the holder a device-checkable path from instruction to sealed ballot, and by making any superseding cast visible to the credential's owner in time to re-vote. But the answer is available, not automatic: it protects the holder who looks at the tracker, and a fund that never checks is where T. Rowe was, with better evidence for the lawsuit afterwards. The protection converts a silent flip into a loud one; it still needs eyes on the alarm, and a re-vote window still open when it rings."
+  },
+  {
+   "protection": "a weighted, borrowable franchise, declared",
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "Three subtractions the manifest declares instead of hiding: the franchise is weighted (one share, one vote — the equal-persons floor does not bind); ballots are attributable after close (stewardship disclosure is a legal duty; receipt-freeness is given up, and with it some shelter from the founder reading the no votes); and eligibility is sybil-weak, because the record date makes voices purchasable and borrowable — the commitments can date and size the lending spike, but an empty vote is lawful and its economics are off the ledger. T3 in a suit: the kernel counts the franchise honestly and legibly; whether this franchise is just is company law's substance, which the kernel refuses to judge (refusal 11). The subtraction machinery is doing its exact job — making a firm's real constitution readable — and what it makes readable is not a democracy."
+  },
+  {
+   "protection": "the plumbing is the adopter",
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "The Horizon strain, translated: the depository, the tabulator, and the proxy processors are not neutral pipes that happen to be opaque — the fog is the product, and the fees live in it. An issuer can choose a checkable meeting, as Orchard Crest does, and pay its nominee to sign commitments; nothing in the market makes the incumbents follow, and the SEC named these failures in 2010 without the plumbing moving since. Two adoption gaps compound: the intermediaries whose leverage is the opacity (T2 — the vendor is the capture), and the law, which must accept the log's tally as THE legal count for the checkable meeting to be more than a shadow ballot beside the certified one. Until a regulator or a statute requires the register to add up in public, the strongest case in the business set waits on the least willing adopters."
+  }
+ ]
+}
