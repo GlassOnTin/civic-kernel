@@ -49,7 +49,8 @@ out = []
 
 # ---- The shapes ----
 out.append('<h2>The shapes</h2>')
-out.append('<p class="lede2">Six structural forms the institutional-failure cases keep taking — the cross-cutting tropes the triage engine sorts by. Most wrongs wear more than one.</p>')
+NUMBER_WORDS = {6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine'}
+out.append(f'<p class="lede2">{NUMBER_WORDS.get(len(SIGNATURES), len(SIGNATURES))} structural forms the institutional-failure cases keep taking — the cross-cutting tropes the triage engine sorts by. Most wrongs wear more than one.</p>')
 sig_cases = collections.defaultdict(list)
 for c in cases:
     for s in c.get("signature", []):

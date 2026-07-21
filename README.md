@@ -2,8 +2,8 @@
 
 [![test](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml/badge.svg)](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml)
 
-> **Fifty-nine documented institutional failures — Horizon, the deleted WhatsApps, the
-> carer prosecuted for a debt the state watched grow — and in fifty of them the
+> **Sixty-one documented institutional failures — Horizon, the deleted WhatsApps, the
+> carer prosecuted for a debt the state watched grow — and in fifty-two of them the
 > harm ran through a record: one that was quietly absent, quietly altered, or quietly
 > ignored.** The fix that repeats is not a new power or a new regulator. It is a record
 > of each act of power that **cannot be quietly absent** — it must exist at the moment
@@ -67,7 +67,7 @@ same project, from the source side.
   Democracy restated as an engineering problem, and the smallest honest answer to it.
   Every section opens as one plain line; expand for the full argument. Then watch
   [real life run against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)
-  — 59 stress-test stories, each machine-validated against the schemas.
+  — 61 stress-test stories, each machine-validated against the schemas.
 
 Or run everything locally — the election, its verification, and twelve attempts to rig
 it — in about a minute: [`proto/test.sh`](proto/).
@@ -115,7 +115,7 @@ first real communities teach will revise it again.
 
 ## Next
 
-The outward build is finished. The corpus did its inward work — 59 cases, six shapes,
+The outward build is finished. The corpus did its inward work — 61 cases, seven shapes,
 one settled line ([the map](https://glassontin.github.io/civic-kernel/map.html)) and
 [the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html) it implies
 for UK law — and every entrance that line asked for now exists, in the open: the
@@ -300,7 +300,7 @@ The repository, file by file.
 - **`scenarios/`** — imagined human situations, each walked through the four verbs.
   Every embedded manifest and log entry is validated against the waist schemas, and
   every scenario must cite documented real-world precedents for its attack pattern
-  (a required `precedents` field, 162 citations verified July 2026).
+  (a required `precedents` field, 168 citations verified July 2026).
   `scenario.schema.json` is the record format.
 - **`corpus/`** — real legal systems captured under the same schema, sharing the
   30-invariant spine:

@@ -1,0 +1,254 @@
+{
+ "id": "who-told-the-minister",
+ "title": "Nobody Told Me: The Advice Trail, Counted Not Read",
+ "setting": "In February 2026 a submission goes up to the minister at the Department of Public Works. It is four pages, written by deputy director Owen Tal, and it warns that the Calder housing panels — the cheap retrofit the department is about to approve for eleven thousand social homes — degrade in sustained damp, and that the testing regime the supplier cites was never run at British exposure levels. Three weeks later the programme is approved. The submission goes where submissions go: the departmental file, shielded by the policy-advice exemption, its contents secret and — this is the part that matters — its existence secret too. Two years later, when the panels start failing and the coughs start in the ground-floor flats, two sentences will be said in two rooms. The minister, by then elsewhere: 'nobody told me.' The department, quietly: 'we advised against it.' As the record stands, both are unfalsifiable, and an inquiry will spend its first two years on the question a filing system should answer in an afternoon: what was before the minister, and when.\n\nThis is the documented shape of the modern inquiry. The Infected Blood Inquiry's report runs through what ministers and officials knew about contaminated products and when they knew it — a reconstruction spanning decades of who-saw-which-paper. The Post Office inquiry devoted whole phases to what ministers were told about Horizon while subpostmasters went to prison. The Butler Review traced how advice reached decision-makers 'to the outer limits' of the intelligence. Each burned years on existence questions — was there a warning, did it go up, when — before any question of substance could start. And the engine of the delay is a genuine dilemma the law solves badly: candid advice needs shelter (FOI's s.35 exists for a reason), but the shelter as built hides the advice's existence along with its content, so deniability runs both ways — the official cannot prove she warned, the minister cannot prove he was never told.\n\nThe walkthrough tests the corpus's counts-without-contents device — built for wiretaps in accountable-warrant — pointed at the corpus's first intra-government wrong: the principal and the agent inside one department. Every written submission logs its existence the day it lands: date, directorate, topic, the decision it bears on. The content stays sealed, readable by the minister it went to, an authorised auditor, or a court. Candour keeps its shelter. Deniability loses its fog — in both directions at once.",
+ "threats": [
+  "T8",
+  "T1"
+ ],
+ "doc_refs": [
+  "§3.4",
+  "§8",
+  "§6",
+  "§2",
+  "§12",
+  "T8",
+  "T1"
+ ],
+ "precedents": [
+  {
+   "event": "Infected Blood Inquiry: decades reconstructing what ministers and officials knew, and when",
+   "year": 2024,
+   "source": "Infected Blood Inquiry, final report",
+   "url": "https://www.infectedbloodinquiry.org.uk/reports/inquiry-report",
+   "shows": "The paradigm who-knew-what-when reconstruction: harms from the 1970s, a report in 2024, and central strands of it devoted to establishing which warnings existed and whose desks they crossed — existence questions a contemporaneous advice index would answer in an afternoon, litigated across generations instead."
+  },
+  {
+   "event": "Post Office Horizon IT Inquiry: whole phases on what ministers were told while prosecutions ran",
+   "year": 2024,
+   "source": "Post Office Horizon IT Inquiry",
+   "url": "https://www.postofficehorizoninquiry.org.uk/",
+   "shows": "The same engine at forensic scale: ministerial-accountability phases spent establishing which briefings existed, what they contained, and whether 'we did not know' could survive the file — the existence of advice as contested a question as its content, years after the harm."
+  },
+  {
+   "event": "FOI Act 2000 s.35: the policy-advice exemption that shelters existence along with content",
+   "year": 2000,
+   "source": "legislation.gov.uk",
+   "url": "https://www.legislation.gov.uk/ukpga/2000/36/section/35",
+   "shows": "The legal architecture of the fog: advice on policy formulation is exempt from disclosure to protect candour — a real need — but the shelter as built lets departments withhold that advice exists at all, so the candour shield doubles as a deniability shield for whichever side of the desk needs one."
+  }
+ ],
+ "manifest": {
+  "v": "civic-kernel/manifest/v0",
+  "community": {
+   "id": "did:web:dpw-ministerial-log.example",
+   "name": "Department of Public Works — ministerial advice and decisions log (subject-readable pilot)"
+  },
+  "services": {
+   "personhood": false,
+   "decisions": false,
+   "rights_guard": false,
+   "transparency_log": true
+  },
+  "transparency_log": {
+   "log_id": "did:web:dpw-ministerial-log.example",
+   "witnesses": [
+    "did:web:national-audit-office.example",
+    "did:web:civil-service-commission.example",
+    "did:web:kelder-university.example"
+   ],
+   "anchors": [
+    "opentimestamps:bitcoin-mainnet",
+    "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+   ]
+  },
+  "interaction_cost": [
+   {
+    "process": "log-a-submission-existence",
+    "steps": 1,
+    "fields": 3,
+    "median_seconds": 40,
+    "abandonment_rate": 0.0
+   }
+  ],
+  "sig": {
+   "key_id": "did:web:dpw-ministerial-log.example#manifest-1",
+   "alg": "ed25519",
+   "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+  }
+ },
+ "walkthrough": [
+  {
+   "actor": "Two sentences, two rooms, no record between them",
+   "verb": "offstage",
+   "narrative": "The backdrop as it stands: the submission is real, filed, and doubly invisible — s.35 shelters its content for candour's sake and its existence for nobody's, so 'nobody told me' and 'we advised against it' can both be said indefinitely, by people who may each believe themselves. Infected Blood and the Post Office show what resolving that costs: years of an inquiry's life on existence questions before substance can begin. The corpus has never been inside this wrong before — every prior case is power against the governed; this one is the principal and the agent inside one building, and the fog serves whichever of them needs it on the day."
+  },
+  {
+   "actor": "The department, adopting the advice trail",
+   "verb": "cast",
+   "narrative": "The pilot is one clause in a civil service reform: every written submission to a minister logs an existence entry at the moment of delivery — date, submitting directorate, topic, the decision it bears on — with the content sealed, committed by hash, readable by the minister it went to, an authorised auditor, or a court. This is accountable-warrant's construction moved indoors: the wiretap whose existence is public while its target is sealed becomes the submission whose existence is public while its candour is. Tal's Calder warning lands on the log the day it goes up. Nobody outside can read a word of it. Everybody can see that it exists, what it concerns, and that it reached the minister's box eighteen days before the approval.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-advice.submission",
+    "community": "did:web:dpw-ministerial-log.example",
+    "timestamp": "2026-02-10T16:00:00Z",
+    "body": {
+     "submission_id": "2026-dpw-sub-0341",
+     "directorate": "building-safety",
+     "topic": "Calder retrofit panels — moisture degradation risk and testing adequacy",
+     "bears_on_decision": "2026-calder-retrofit-approval",
+     "delivered_to": "minister's private office",
+     "authorizing_rule": "civil-service-code-reform/2026 §7 advice-existence duty; foi-act-2000 s.35 content shelter preserved",
+     "note": "Existence public, content sealed: the candour shelter kept, the deniability fog removed. What was before the minister, and when, stops being an inquiry's first two years."
+    },
+    "sealed": {
+     "sealed_body_digest": "sha256:1b2c3d4e8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4",
+     "readable_by": [
+      "subject",
+      "authorized-auditor",
+      "court-order"
+     ]
+    },
+    "sig": {
+     "key_id": "did:web:dpw-ministerial-log.example#log-1",
+     "alg": "ed25519",
+     "value": "QWR2aWNlU3VibWlzc2lvbkRQV05vdFJlYWwwMQ"
+    }
+   }
+  },
+  {
+   "actor": "The minister, approving Calder on the record",
+   "verb": "cast",
+   "narrative": "The approval lands as an executive act citing its power, as the corpus's procurement cases taught — and beside it, unignorable, sits the dated existence of a building-safety submission on the same decision. The minister remains entirely free to reject the advice; ministers overrule officials lawfully every week, and the kernel would be a worse thing if they could not. What she is no longer free to do is decide in a fog that later swallows the question of what she decided against.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "executive.act",
+    "community": "did:web:dpw-ministerial-log.example",
+    "timestamp": "2026-02-28T11:00:00Z",
+    "body": {
+     "act_class": "direction",
+     "authorizing_rule": "housing-remediation-act/2024 s.4 ministerial direction; dpw-delegation-framework §2",
+     "issuing_authority": "Minister for Public Works",
+     "counterparty": {
+      "name": "Calder Building Systems Ltd",
+      "ref": "companies-register:CBS-118842"
+     },
+     "provenance": {
+      "route": "ministerial-direction",
+      "referred_by": "programme delivery board",
+      "referrer_role": "executive",
+      "referred_on": "2026-01-19"
+     },
+     "value": {
+      "amount": 148000000,
+      "currency": "GBP"
+     },
+     "appeal_trace": "did:web:dpw-ministerial-log.example/decisions/2026-calder-retrofit-approval"
+    },
+    "sig": {
+     "key_id": "did:web:dpw-ministerial-log.example#log-1",
+     "alg": "ed25519",
+     "value": "Q2FsZGVyQXBwcm92YWxEUFdOb3RSZWFsMDI"
+    }
+   }
+  },
+  {
+   "actor": "The corridor, where the record is not",
+   "verb": "offstage",
+   "narrative": "Between the submission and the approval there is a conversation this scenario must include because no schema can: the permanent secretary, walking the minister to the lift, softens the warning — 'building-safety are being cautious, minister; the programme is sound.' Nothing enters anything. This is the oldest move in the repertoire, the word in the ear, and the advice trail does not touch it: the duty binds written submissions, and the corridor is where written advice goes to be unwritten. The floor is stated now rather than discovered later — oral government is to this case what the destroyed thread was to government-by-whatsapp, the completeness limit no protocol crosses."
+  },
+  {
+   "actor": "The quarter, counting the trail",
+   "verb": "verify",
+   "narrative": "The aggregate publishes the trail's shape without opening a single seal: 341 submissions logged this quarter, 340 within a day of delivery, 61 bearing on decisions taken against the submitting directorate's stated position — that last number computable because directorates may flag divergence without disclosing content. A department where ministers routinely decide against their experts is now a visible pattern; so is a department where written advice suddenly stops, which is the chill's own signature — the corridor replacing the submission shows up as a falling line.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "process.cost-aggregate",
+    "community": "did:web:dpw-ministerial-log.example",
+    "timestamp": "2026-06-30T12:00:00Z",
+    "body": {
+     "period": "2026-Q2",
+     "metric": "ministerial-advice-trail",
+     "submissions_logged": 341,
+     "logged_within_one_day": 340,
+     "decisions_against_flagged_advice": 61,
+     "note": "Anonymous aggregate: the volume and timeliness of written advice, and the divergence rate — measured without unsealing anything. A falling submission count is the corridor made visible as a trend."
+    },
+    "sig": {
+     "key_id": "did:web:dpw-ministerial-log.example#log-1",
+     "alg": "ed25519",
+     "value": "QWR2aWNlQWdncmVnYXRlRFBXTm90UmVhbDAz"
+    }
+   }
+  },
+  {
+   "actor": "The inquiry, three years later",
+   "verb": "read",
+   "narrative": "The panels fail; the inquiry convenes; and its first question — what was before the minister, and when — is answered from the public index before the first witness is sworn: one building-safety submission, on that topic, on that decision, eighteen days before approval. The court orders the seal opened and reads Tal's four pages the same afternoon. The reconstruction that consumed the blood inquiry's early years and the Post Office inquiry's ministerial phases is, here, a lookup. What remains for the inquiry is everything that should remain — whether the advice was right, whether rejecting it was reasonable, who bears what — the substance, reached in month one instead of year three.",
+   "artifact": {
+    "v": "civic-kernel/log-entry/v0",
+    "type": "x-advice.unseal",
+    "community": "did:web:dpw-ministerial-log.example",
+    "timestamp": "2029-04-12T10:00:00Z",
+    "body": {
+     "unseal_id": "2029-calder-inquiry-unseal-01",
+     "references_submission": "2026-dpw-sub-0341",
+     "opened_under": "court-order (Calder Panels Inquiry, ruling 2029/14)",
+     "digest_verified": "sha256:1b2c3d4e8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4",
+     "note": "The seal opened by the party the schema names, the content matching the 2026 commitment to the bit. Three years of who-knew-what-when, collapsed into a docket entry."
+    },
+    "sig": {
+     "key_id": "did:web:dpw-ministerial-log.example#log-1",
+     "alg": "ed25519",
+     "value": "QWR2aWNlVW5zZWFsRFBXTm90UmVhbDA0"
+    }
+   }
+  },
+  {
+   "actor": "Both sides of the desk",
+   "verb": "offstage",
+   "narrative": "The symmetry is the finding worth pausing on. Tal is protected: 'we advised against it' is now a dated, witnessed fact he can point to without leaking a word — the civil servant's shield the blacklisted and the scapegoated never had. And a minister who genuinely was never warned is protected by the same index: against a complete, witnessed trail, the absence of a submission is itself checkable, so 'nobody told me' becomes provable exactly when it is true. Yes Minister's engine was deniability running both ways down one corridor. The trail does not decide who was right. It decides that neither can claim the fog."
+  },
+  {
+   "actor": "What stays sealed, and what stays oral",
+   "verb": "offstage",
+   "narrative": "The honest ceiling, in three parts. The seal-opener is a trusted party — the same witness-recursion caveat accountable-warrant carries: a captured court or a compliant auditor unseals nothing, and cryptography only ever moved the trust, never removed it. The subject of a seal is an office, not a person — whether a successor minister may read a predecessor's submissions is governance the kernel cannot settle, and the real Whitehall convention says no. And the corridor endures: no duty can compel the writing of advice someone prefers to whisper, and the aggregate's falling-line signal is a symptom detector, not a cure. The trail forecloses the fog around advice that was written. The advice that was never written is government-by-whatsapp's territory, and that case ends in a break."
+  }
+ ],
+ "verdict": "strains",
+ "verdict_plain": "Inquiries into infected blood and the Post Office burned years on what ministers were told. Under the advice trail every submission logs its existence the day it lands — date, topic, decision — content sealed for candour, readable by minister, auditor, or court. 'We advised against it' and 'nobody told me' both become checkable in an afternoon. But the word in the ear enters nothing, and the seal-opener is trusted.",
+ "protection": "the advice trail, counted not read",
+ "protection_plain": "Whether counts-without-contents answers the who-told-the-minister fog: every written submission logs its existence at delivery — date, directorate, topic, decision — content sealed for candour, openable by minister, auditor, or court. Deniability dies both ways; the corridor does not.",
+ "findings": [
+  {
+   "protection": "the who-knew-what-when phase collapses",
+   "severity": "note",
+   "doc_ref": "§3.4",
+   "observation": "The device is accountable-warrant's, moved indoors and doing the same work: existence, timing and topic public now, content committed by hash and sealed for the parties with standing. What that buys is measured in inquiry-years — the blood inquiry's decades of which-desk reconstruction and the Post Office inquiry's ministerial phases become a lookup against a witnessed index, and the substance questions an inquiry actually exists for start in month one. s.35's legitimate purpose — candid advice — keeps its shelter whole; what it loses is the accidental second function nobody legislated for, the existence-fog that made candour's shield into deniability's."
+  },
+  {
+   "protection": "the shield is symmetric",
+   "severity": "note",
+   "doc_ref": "§8",
+   "observation": "The trail protects whichever side of the desk told the truth, which is what distinguishes it from a weapon. The official who warned holds a dated, witnessed existence-fact — 'we advised against it' without leaking a word, the shield the corpus's whistleblower machinery never quite reached because it protects sources who speak out, not officials who spoke up. And the minister who was never warned holds the same index inverted: against a complete trail, absence is checkable, so 'nobody told me' is provable precisely when true. Deniability ran both ways down one corridor; the trail closes both directions with one artifact, and takes sides with neither."
+  },
+  {
+   "protection": "the corridor endures",
+   "severity": "strain",
+   "doc_ref": "§12",
+   "observation": "Oral government evades the trail entirely: the duty binds written submissions, and the word in the ear — the permanent secretary at the lift — is precisely where written advice gets unwritten. Worse, the trail creates its own evasion incentive: a department that wants the fog back simply stops writing things down, the drift Butler documented at the centre of government. The aggregate's falling-line signal makes that drift a visible trend, and the whatsapp-style governance answer — an unlogged act is void — could in principle extend to advice-shaped decisions. But the case is honest that this is the family's surviving move: the kernel forecloses fog around records; it cannot compel the record into being."
+  },
+  {
+   "protection": "the seal-opener is a trusted party",
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "The accountable-warrant caveat travels with the device and is restated here without discount: sealed_body_digest guarantees that what is eventually opened is what was committed, but who may open it is a list of institutions, and a captured court or a supine auditor turns subject-readable into readable-by-nobody. The witness-recursion problem is not solved by moving it indoors. What the construction adds is narrower and real: the commitment is public from day one, so even a stonewalled seal leaves the existence-fact standing — the inquiry that cannot yet read the submission still knows to demand it, which is more than the blood inquiry had for twenty years."
+  },
+  {
+   "protection": "the subject is an office, not a person",
+   "severity": "strain",
+   "doc_ref": "§6",
+   "observation": "The schema's 'subject' names whoever holds the seal-key, and in a department that is an office whose occupant changes with every reshuffle — the real Whitehall convention bars incoming ministers from their predecessors' papers, and the pilot inherits the question rather than answering it. Successor access is governance with real stakes on both settings: grant it and a new administration reads its rivals' candid deliberations; withhold it and 'nobody told me' regains a corridor of truth for every minister who arrived after the warning. The kernel can express either rule legibly in the manifest. It cannot say which is right, and the case flags the choice as the deployment's sharpest open governance question."
+  }
+ ]
+}

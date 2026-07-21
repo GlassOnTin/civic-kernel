@@ -11338,6 +11338,279 @@
   ]
  },
  {
+  "id": "minutes-written-by-the-winner",
+  "title": "The Minutes Record What Was Agreed: Ashcombe Writes Everything Down, Beautifully, Alone",
+  "setting": "The Borough of Ashcombe learned its lesson. After the flood-contract scandal — the WhatsApp group that cleared itself, the award whose reasons never existed — the new administration adopted the strictest records rule in Westmarch: every decision minuted, contemporaneously, on the witnessed log, and an unlogged act void. And it works. Nothing vanishes now. The minutes of the works committee arrive within two days, dated, signed, hash-chained, complete in form: attendees, motions, votes, outcomes. Councillor Hana Ostrik, who sits on that committee, has read the minute of the meeting where the Millbrook depot closure passed six votes to five, and it is accurate in every particular she can point to — and it does not contain the King's Counsel's warning that was read aloud, or the officers' risk table that sat on every chair, or one word of the hour in which the closure nearly died. The clerk who wrote it works for the leader's office. The archive is the victor's memo, and it is perfect.\n\nThis is the oldest trick in the building, and it is documented wherever anyone has checked. Richard Crossman's cabinet diaries — the publication Whitehall fought to suppress — recorded ministers discovering that cabinet minutes were an instrument: written by officials, after the fact, to say what should have been agreed. The Butler Review found the machinery's informal twin, decisions taken in unminuted meetings that shrank 'the scope for informed collective political judgement'. And the Hillsborough Independent Panel found the malign extreme: 164 police statements about the disaster altered by the force whose conduct they described — the interested party as sole author of the record of its own failure. The corpus has walked the first two walls of this cell: records-rewrite proved yesterday cannot be quietly rewritten, and government-by-whatsapp proved, honestly, that nothing compels the writing at all. This case is the third wall: the record that is written, kept, witnessed — and written alone.\n\nThe walkthrough tests one repair, and it is deliberately narrow: not making the minute honest — the kernel refuses to judge any account true (refusal 11) — but ending its solitude. Any participant of a logged decision may append their own attributable, signed account to the same trail. Two records of one meeting, side by side, dated, neither ranked. The minute's authority was never its accuracy; it was that there was nothing else in the file.",
+  "threats": [
+   "T8",
+   "T1"
+  ],
+  "doc_refs": [
+   "§3.4",
+   "§5",
+   "§6",
+   "§2",
+   "§12",
+   "T8",
+   "T1"
+  ],
+  "precedents": [
+   {
+    "event": "Crossman, Diaries of a Cabinet Minister: cabinet minutes as an authored instrument, and the fight to suppress the diaries that said so",
+    "year": 1975,
+    "source": "Wikipedia (Richard Crossman; the diaries and their publication)",
+    "url": "https://en.wikipedia.org/wiki/Richard_Crossman",
+    "shows": "The founding documentation of the artful minute: a serving cabinet minister recording that the official record was written by officials to reflect what should have been agreed, and a government that went to court to stop the account competing with its own — the monopoly of authorship defended as policy."
+   },
+   {
+    "event": "Butler Review: informal, unminuted decision-taking narrowed collective judgment",
+    "year": 2004,
+    "source": "Wikipedia (Butler Review)",
+    "url": "https://en.wikipedia.org/wiki/Butler_Review",
+    "shows": "The official inquiry finding that the machinery of government had drifted to informal decision-taking with reduced minuting — the record thinned at the centre precisely where the decisions were largest, leaving later scrutiny to reconstruct what no contemporaneous account held."
+   },
+   {
+    "event": "Hillsborough Independent Panel: 164 police statements altered by the force whose conduct they described",
+    "year": 2012,
+    "source": "Wikipedia (Hillsborough Independent Panel)",
+    "url": "https://en.wikipedia.org/wiki/Hillsborough_Independent_Panel",
+    "shows": "The malign extreme of single authorship: the interested institution editing the accounts of its own failure — statements amended to remove criticism — and the truth surviving only because competing accounts existed elsewhere and a panel spent two decades assembling them."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:ashcombe.example",
+    "name": "Borough of Ashcombe (post-scandal records constitution)",
+    "parent": "did:web:westmarch-county.example"
+   },
+   "services": {
+    "personhood": true,
+    "decisions": true,
+    "rights_guard": true,
+    "transparency_log": true
+   },
+   "personhood": {
+    "method": "ceremony",
+    "issuer": "Ashcombe borough registrar",
+    "unlinkable": true,
+    "sybil_resistance": "medium",
+    "eligibility_rules": "ashcombe-eligibility/v2"
+   },
+   "decisions": {
+    "verifiable": true,
+    "receipt_free": true,
+    "cast_or_audit": true,
+    "paper_channel": true,
+    "trustee_quorum": "3-of-5: Westmarch county court, two universities, the two opposition groups"
+   },
+   "rights_guard": {
+    "invariants": [
+     1,
+     2,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     17,
+     19,
+     20,
+     21,
+     25,
+     29
+    ]
+   },
+   "transparency_log": {
+    "log_id": "did:web:ashcombe.example",
+    "witnesses": [
+     "did:web:westmarch-county.example",
+     "did:web:harwick.example",
+     "did:web:lakeshore-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "append-a-participant-account",
+     "steps": 2,
+     "fields": 1,
+     "median_seconds": 600,
+     "abandonment_rate": 0.02
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:ashcombe.example#manifest-3",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Ashcombe after the scandal, and the third wall",
+    "verb": "offstage",
+    "narrative": "The trilogy, stated plainly. Records-rewrite proved the first protection: yesterday cannot be quietly rewritten, because witnessed arithmetic breaks. Government-by-whatsapp proved the first honest limit: nothing in any protocol compels the record to be written, and Ashcombe's answer was governance — the post-scandal rule that an unlogged act is void. This case is what remains when both lessons are learned: the act is logged, the record is contemporaneous and witnessed and immaculate, and one interested office holds the only pen. Crossman documented it as ordinary practice; Hillsborough documented it as catastrophe. Nothing in T8's tamper-evidence touches it, because nothing has been tampered with."
+   },
+   {
+    "actor": "The works committee, deciding Millbrook",
+    "verb": "cast",
+    "narrative": "The depot closure is opened on the log like everything now is: question hashed, eligibility cited, window fixed. The debate is real — a King's Counsel's written warning on consultation duties is read aloud, the officers' risk table is on every chair, and the closure survives six votes to five. Every one of those facts will matter later, and only some of them are about to become the record.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:ashcombe.example",
+     "timestamp": "2026-09-14T18:00:00Z",
+     "body": {
+      "decision_id": "2026-millbrook-depot-closure",
+      "question_hash": "sha256:5c2e1d7f0a9b8c3d6e5f4a1b2c3d4e8b1f4c72a90de3565fb2a8c1d40e97f3b6",
+      "eligibility_rules": "ashcombe-eligibility/v2 (works committee, 11 members)",
+      "window": {
+       "deliberation_ends": "2026-09-14T20:00:00Z",
+       "cast_ends": "2026-09-14T20:30:00Z"
+      },
+      "note": "Committee decision under the post-scandal constitution: logged at opening, voted on the record, minuted within two days by rule."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe.example#log-1",
+      "alg": "ed25519",
+      "value": "TWlsbGJyb29rT3BlbmVkQXNoY29tYmVOb3RSZWFsMDE"
+     }
+    }
+   },
+   {
+    "actor": "The leader's office, writing the record",
+    "verb": "cast",
+    "narrative": "The clerk's minute lands within the rule's two days, and it is a professional piece of work: date, attendees, motion, amendment, the 6-5 division by name, 'after full discussion the committee was satisfied that consultation obligations had been met.' Every checkable particular is accurate. The KC's warning is not in it. The risk table is not in it. The hour in which the closure nearly died is 'full discussion'. Under the old corpus this is where the story would end, with the concession maternity-harm-downgraded made: the kernel can make such a record contestable, never honest — and whether an account is honest is substance, refused. The minute is not a lie the schema can catch. It is a choice of what the file contains, made by the side that won.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-decision.minute",
+     "community": "did:web:ashcombe.example",
+     "timestamp": "2026-09-16T11:00:00Z",
+     "body": {
+      "minute_id": "2026-millbrook-minute-official",
+      "references_decision": "2026-millbrook-depot-closure",
+      "author_role": "committee clerk (leader's office)",
+      "attendees": 11,
+      "division": "6-5",
+      "content_hash": "sha256:9b8c3d6e5f4a1b2c3d4e8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0",
+      "note": "The official account: contemporaneous, signed, complete in form, authored by one interested office. Nothing in it is false enough to strike; what is absent from it is the argument."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe.example#log-1",
+      "alg": "ed25519",
+      "value": "T2ZmaWNpYWxNaW51dGVBc2hjb21iZU5vdFJlYWwwMg"
+     }
+    }
+   },
+   {
+    "actor": "Councillor Ostrik, attaching the second account",
+    "verb": "challenge",
+    "narrative": "The post-scandal constitution contains one clause the old Ashcombe never had: any participant of a logged decision may append an attributable account of it to the same trail within twenty-eight days, and the clerk's gate is ministerial, not editorial — a stall past five days is itself a countable breach. Ostrik's eligibility is a membership fact, checkable without reading a word she wrote: she cast one of the eleven votes. Her account is short, signed with her own key, and references the official minute's hash: the KC's warning, quoted; the risk table, attached by digest; the hour of argument, summarised as she heard it. The office sits on it for eight days — the gate is real — until a witness daemon's query lands and the breach counter moves. Then it appends. The kernel ranks nothing, merges nothing, marks nothing canonical: two dated, attributable accounts of one meeting now sit side by side in an order no one can quietly change.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-decision.account",
+     "community": "did:web:ashcombe.example",
+     "timestamp": "2026-09-24T09:30:00Z",
+     "body": {
+      "account_id": "2026-millbrook-account-ostrik",
+      "references_decision": "2026-millbrook-depot-closure",
+      "references_minute": "2026-millbrook-minute-official",
+      "author": "participant: works-committee member (division vote 5 of 11, eligibility checkable)",
+      "account_class": "dissenting-participant-account",
+      "content_hash": "sha256:3d6e5f4a1b2c3d4e8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8",
+      "appended_under": "ashcombe-records-constitution/v3 §9 participant-account right (28-day window; clerk gate ministerial, 5-day clock)",
+      "note": "The second account: attributable, signed, hash-stitched to the minute it answers. The kernel does not judge it truer — it makes it exist where the official account is, which is the whole repair."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe.example#participant-ostrik",
+      "alg": "ed25519",
+      "value": "T3N0cmlrQWNjb3VudEFzaGNvbWJlTm90UmVhbDAz"
+     }
+    }
+   },
+   {
+    "actor": "The gate that nearly held",
+    "verb": "offstage",
+    "narrative": "The eight-day stall deserves its own honest paragraph, because it is where this repair lives or dies. The winner operates the log: nothing in the protocol compels his gate to open, any more than the protocol could compel Damian Roe to minute the flood contract. Ashcombe's append right is a governance clause — the sibling of 'an unlogged act is void' — and where no such clause exists, the kernel's own shape offers only the workaround: communities nest (§6), so a refused account can be lodged on the parent county's log, or a neighbouring borough's, hash-stitched to the entry it answers across the boundary. The winner controls his own gate. He does not control everyone's. It is a workaround, not a guarantee, and the finding says so."
+   },
+   {
+    "actor": "The quarter's portrait of the record",
+    "verb": "verify",
+    "narrative": "At quarter's end the witnessed aggregate publishes the archive's new vital sign: 214 committee decisions minuted, 9 carrying a second participant account, median days from minute to account 6, gate-clock breaches 2. Nine in two hundred and fourteen is not a crisis; it is a temperature. A council whose minutes never attract a second account is either governing by consensus or authoring unopposed — and for the first time the difference is a public number moving over time, rather than a thing historians establish from diaries thirty years on.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:ashcombe.example",
+     "timestamp": "2026-12-31T12:00:00Z",
+     "body": {
+      "period": "2026-Q4",
+      "metric": "minutes-and-accounts",
+      "decisions_minuted": 214,
+      "decisions_with_participant_accounts": 9,
+      "median_days_minute_to_account": 6,
+      "append_gate_breaches": 2,
+      "note": "Anonymous aggregate: the frequency of contested authorship as a standing public fact — the archive's second-opinion rate."
+     },
+     "sig": {
+      "key_id": "did:web:ashcombe.example#log-1",
+      "alg": "ed25519",
+      "value": "TWludXRlc0FnZ3JlZ2F0ZUFzaGNvbWJlTm90UmVhbDA0"
+     }
+    }
+   },
+   {
+    "actor": "An auditor, a year later",
+    "verb": "read",
+    "narrative": "When the depot closure collapses in judicial review — the consultation duty, as the KC warned — the question 'what was before the committee' does not begin a two-year reconstruction. It has two signed answers, dated within days of the meeting, sitting in one trail: the office's account and the participant's, neither ranked, both attributable, their order fixed by arithmetic. The court weighs them; that is a court's job, and the kernel hands it standing instead of silence. Crossman needed a diary, a publisher, and a legal battle to put a second account beside the official one, years late. Ostrik needed a key and a clause."
+   },
+   {
+    "actor": "What the pen keeps",
+    "verb": "offstage",
+    "narrative": "Three limits, stated without flinching. The kernel cannot conjure the dissent: a cowed committee member files nothing, and the archive is the victor's memo again — the completeness floor, government-by-whatsapp's finding wearing a quieter face, and the blacklist's chill from the corpus's own union case reaching into a committee room. It cannot make either account true: refusal 11 stands, the clerk's art survives, and a beautiful, partial, unanswered minute is still beautiful and partial where no one appends. And it protects only logged participation: the corridor conversation before the meeting, the agenda drafted so the question never arises — the deeper Whitehall arts — give the annex nothing to hook. The repair is real and it is narrow: the official account has lost its solitude, not its author."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "After the WhatsApp scandal Ashcombe minutes everything — beautifully, by one office. Rewriting is caught and not-writing is void by rule; what remained was writing alone, artfully. Now any participant of a logged decision can append a signed account to the same trail: the kernel ranks neither, and the minute's authority — its solitude — is gone. But the append gate is governance, and no rule conjures a cowed dissent.",
+  "protection": "the minute among minutes",
+  "protection_plain": "Whether ending the official account's monopoly answers the artful minute: any participant of a logged decision may append an attributable, signed account to the same trail. The kernel never judges which account is true — it removes the solitude that made the official one unanswerable.",
+  "findings": [
+   {
+    "protection": "the monopoly is broken, not the truth",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The repair threads refusal 11 exactly: the kernel never judges the minute dishonest, never ranks the accounts, never merges them into a found narrative — it hosts no debate, because the append right belongs only to participants of the logged decision, an eligibility fact checkable without reading a word of content (the same boundary discipline as refusal 10). What changes is structural: the official account's authority came from being the only object in the file, and Crossman's whole scandal was the lengths a government would go to preserve that solitude. Two attributable accounts, hash-stitched and order-fixed, hand a later court standing instead of silence — the corpus's 'contestable, not honest' concession, upgraded to contestable in situ, at the time, in the same trail."
+   },
+   {
+    "protection": "the append gate is governance",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The winner usually operates the log, and nothing in the protocol compels his gate to accept the loser's account — Ashcombe's eight-day stall is the attack in miniature, and it broke only because a governance clause made the stall a countable breach, the exact sibling of the 'unlogged act is void' rule that answers government-by-whatsapp. Where no such clause exists, the kernel's shape offers cross-log annexation — communities nest, so the refused account lodges on the parent or a neighbour's log, stitched by hash across the boundary — which defeats the local gate at the price of scattering the trail. The append right, like the writing duty, is constitution, not cryptography, and the case is honest that the protocol can only make its absence visible."
+   },
+   {
+    "protection": "the kernel cannot conjure a dissent",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "The annex right protects the councillor who dares use it. The chill the corpus met at the union ballot — the organiser's lapsed contract, the file that waits — operates in committee rooms too: a member whose career the leader's office holds files no second account, and the archive returns to being the victor's memo with extra steps. This is the completeness floor again, government-by-whatsapp's central break wearing a quieter face: something must place the honest record in the log, and that something is a person with standing to lose. The aggregate's second-opinion rate at least makes a suspiciously unanimous archive a visible, countable fact — a temperature, not a cure."
+   },
+   {
+    "protection": "an extension, not a waist change",
+    "severity": "note",
+    "doc_ref": "§5",
+    "observation": "x-decision.account rides the existing entry grammar whole: an x- type, a participant's own signing key, a hash reference to the minute it answers — nothing in the waist moved. The promotion bar the corpus has held twice (executive.act, the sealed object) asks for structural insufficiency across cases, not one scenario's convenience, and one case does not meet it. If the shape recurs — the corpus now tags maternity's self-graded harm and the ministerial advice trail with the same single-author signature — a future promotion argument exists; until then the vocabulary stays small on purpose, and this case is the evidence either way."
+   },
+   {
+    "protection": "what the pen keeps",
+    "severity": "strain",
+    "doc_ref": "§2",
+    "observation": "The clerk still writes beautifully, and Hillsborough is the standing reminder of where single authorship ends when the author's own conduct is the subject — 164 statements altered, and the truth surviving only because competing accounts existed somewhere a panel could eventually reach. The kernel's repair moves that 'somewhere' from two decades of assembly to the same trail on the same day, which is a great deal. It does not touch the arts upstream of the record: the corridor before the meeting, the agenda that keeps the question from arising, the brief that frames the choice — the corpus refuses those as substance or meets them in their own cases, and this one does not pretend the annex reaches them."
+   }
+  ]
+ },
+ {
   "id": "nhs-data-access-opaque",
   "title": "Who Has Read Your Record: An Access Log You Can See, and the Copy You Cannot",
   "setting": "Della Voss has a diagnosis she has told almost no one about, and a reasonable expectation that the people who hold her medical record will not hand it around. In the real health service she has no way to test that expectation. Her GP data, her hospital data, sits in systems she cannot inspect, shared under a consent model most people never understood — a weak opt-out, buried — with researchers, planners, and commercial partners, and she cannot see who has looked at her record, when, or why. When care.data proposed pooling GP records for research, planning and possible commercial use, roughly a million and a half people opted out and the scheme collapsed; the NHS, in the words of its critics, had handled it with opacity. Since then identifiable records have reached a private analytics company under a contract patients can neither audit nor refuse, and an internal note warned it risked a loss of public confidence. The wrong Della lives with is not only that her data moves. It is that she cannot see it move.\n\nThe Mersey Vale Health Board runs one kernel service: a witnessed access log over its patient records, built on a rule the ordinary system has never offered. Every access to a record is itself a logged, append-only, attributable event — who, when, for what purpose, under what legal basis — and, because this is private data and not a public decision, the log is subject-readable rather than public: Della can read her own record's access history from her phone, an independent auditor can verify that no access is hidden, and neither can the world see who is ill. This scenario follows one access she did not expect, and marks the two places the log reaches its edge: the question of whether the sharing should happen at all, and the copy that leaves its walls.",
@@ -16961,6 +17234,260 @@
     "severity": "note",
     "doc_ref": "§10",
     "observation": "One thing the kernel adds that the statutory scheme structurally lacked: enrolment refusals are counted in public — the count, never the names (§10) — and each denial is an appealable trace citing the rule that fired, the move refugee-enrolment leaned on. The Electoral Commission could not reliably measure who voter ID excluded, because the law barred polling staff from recording demographics of the turned-away; the kernel makes exclusion-at-enrolment a visible, contestable number rather than a dark one. Legibility does not re-enfranchise anyone wrongly refused, but it denies the exclusion the invisibility that let the booth version run for years uncorrected."
+   }
+  ]
+ },
+ {
+  "id": "who-told-the-minister",
+  "title": "Nobody Told Me: The Advice Trail, Counted Not Read",
+  "setting": "In February 2026 a submission goes up to the minister at the Department of Public Works. It is four pages, written by deputy director Owen Tal, and it warns that the Calder housing panels — the cheap retrofit the department is about to approve for eleven thousand social homes — degrade in sustained damp, and that the testing regime the supplier cites was never run at British exposure levels. Three weeks later the programme is approved. The submission goes where submissions go: the departmental file, shielded by the policy-advice exemption, its contents secret and — this is the part that matters — its existence secret too. Two years later, when the panels start failing and the coughs start in the ground-floor flats, two sentences will be said in two rooms. The minister, by then elsewhere: 'nobody told me.' The department, quietly: 'we advised against it.' As the record stands, both are unfalsifiable, and an inquiry will spend its first two years on the question a filing system should answer in an afternoon: what was before the minister, and when.\n\nThis is the documented shape of the modern inquiry. The Infected Blood Inquiry's report runs through what ministers and officials knew about contaminated products and when they knew it — a reconstruction spanning decades of who-saw-which-paper. The Post Office inquiry devoted whole phases to what ministers were told about Horizon while subpostmasters went to prison. The Butler Review traced how advice reached decision-makers 'to the outer limits' of the intelligence. Each burned years on existence questions — was there a warning, did it go up, when — before any question of substance could start. And the engine of the delay is a genuine dilemma the law solves badly: candid advice needs shelter (FOI's s.35 exists for a reason), but the shelter as built hides the advice's existence along with its content, so deniability runs both ways — the official cannot prove she warned, the minister cannot prove he was never told.\n\nThe walkthrough tests the corpus's counts-without-contents device — built for wiretaps in accountable-warrant — pointed at the corpus's first intra-government wrong: the principal and the agent inside one department. Every written submission logs its existence the day it lands: date, directorate, topic, the decision it bears on. The content stays sealed, readable by the minister it went to, an authorised auditor, or a court. Candour keeps its shelter. Deniability loses its fog — in both directions at once.",
+  "threats": [
+   "T8",
+   "T1"
+  ],
+  "doc_refs": [
+   "§3.4",
+   "§8",
+   "§6",
+   "§2",
+   "§12",
+   "T8",
+   "T1"
+  ],
+  "precedents": [
+   {
+    "event": "Infected Blood Inquiry: decades reconstructing what ministers and officials knew, and when",
+    "year": 2024,
+    "source": "Infected Blood Inquiry, final report",
+    "url": "https://www.infectedbloodinquiry.org.uk/reports/inquiry-report",
+    "shows": "The paradigm who-knew-what-when reconstruction: harms from the 1970s, a report in 2024, and central strands of it devoted to establishing which warnings existed and whose desks they crossed — existence questions a contemporaneous advice index would answer in an afternoon, litigated across generations instead."
+   },
+   {
+    "event": "Post Office Horizon IT Inquiry: whole phases on what ministers were told while prosecutions ran",
+    "year": 2024,
+    "source": "Post Office Horizon IT Inquiry",
+    "url": "https://www.postofficehorizoninquiry.org.uk/",
+    "shows": "The same engine at forensic scale: ministerial-accountability phases spent establishing which briefings existed, what they contained, and whether 'we did not know' could survive the file — the existence of advice as contested a question as its content, years after the harm."
+   },
+   {
+    "event": "FOI Act 2000 s.35: the policy-advice exemption that shelters existence along with content",
+    "year": 2000,
+    "source": "legislation.gov.uk",
+    "url": "https://www.legislation.gov.uk/ukpga/2000/36/section/35",
+    "shows": "The legal architecture of the fog: advice on policy formulation is exempt from disclosure to protect candour — a real need — but the shelter as built lets departments withhold that advice exists at all, so the candour shield doubles as a deniability shield for whichever side of the desk needs one."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:dpw-ministerial-log.example",
+    "name": "Department of Public Works — ministerial advice and decisions log (subject-readable pilot)"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:dpw-ministerial-log.example",
+    "witnesses": [
+     "did:web:national-audit-office.example",
+     "did:web:civil-service-commission.example",
+     "did:web:kelder-university.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "log-a-submission-existence",
+     "steps": 1,
+     "fields": 3,
+     "median_seconds": 40,
+     "abandonment_rate": 0.0
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:dpw-ministerial-log.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Two sentences, two rooms, no record between them",
+    "verb": "offstage",
+    "narrative": "The backdrop as it stands: the submission is real, filed, and doubly invisible — s.35 shelters its content for candour's sake and its existence for nobody's, so 'nobody told me' and 'we advised against it' can both be said indefinitely, by people who may each believe themselves. Infected Blood and the Post Office show what resolving that costs: years of an inquiry's life on existence questions before substance can begin. The corpus has never been inside this wrong before — every prior case is power against the governed; this one is the principal and the agent inside one building, and the fog serves whichever of them needs it on the day."
+   },
+   {
+    "actor": "The department, adopting the advice trail",
+    "verb": "cast",
+    "narrative": "The pilot is one clause in a civil service reform: every written submission to a minister logs an existence entry at the moment of delivery — date, submitting directorate, topic, the decision it bears on — with the content sealed, committed by hash, readable by the minister it went to, an authorised auditor, or a court. This is accountable-warrant's construction moved indoors: the wiretap whose existence is public while its target is sealed becomes the submission whose existence is public while its candour is. Tal's Calder warning lands on the log the day it goes up. Nobody outside can read a word of it. Everybody can see that it exists, what it concerns, and that it reached the minister's box eighteen days before the approval.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-advice.submission",
+     "community": "did:web:dpw-ministerial-log.example",
+     "timestamp": "2026-02-10T16:00:00Z",
+     "body": {
+      "submission_id": "2026-dpw-sub-0341",
+      "directorate": "building-safety",
+      "topic": "Calder retrofit panels — moisture degradation risk and testing adequacy",
+      "bears_on_decision": "2026-calder-retrofit-approval",
+      "delivered_to": "minister's private office",
+      "authorizing_rule": "civil-service-code-reform/2026 §7 advice-existence duty; foi-act-2000 s.35 content shelter preserved",
+      "note": "Existence public, content sealed: the candour shelter kept, the deniability fog removed. What was before the minister, and when, stops being an inquiry's first two years."
+     },
+     "sealed": {
+      "sealed_body_digest": "sha256:1b2c3d4e8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4",
+      "readable_by": [
+       "subject",
+       "authorized-auditor",
+       "court-order"
+      ]
+     },
+     "sig": {
+      "key_id": "did:web:dpw-ministerial-log.example#log-1",
+      "alg": "ed25519",
+      "value": "QWR2aWNlU3VibWlzc2lvbkRQV05vdFJlYWwwMQ"
+     }
+    }
+   },
+   {
+    "actor": "The minister, approving Calder on the record",
+    "verb": "cast",
+    "narrative": "The approval lands as an executive act citing its power, as the corpus's procurement cases taught — and beside it, unignorable, sits the dated existence of a building-safety submission on the same decision. The minister remains entirely free to reject the advice; ministers overrule officials lawfully every week, and the kernel would be a worse thing if they could not. What she is no longer free to do is decide in a fog that later swallows the question of what she decided against.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "executive.act",
+     "community": "did:web:dpw-ministerial-log.example",
+     "timestamp": "2026-02-28T11:00:00Z",
+     "body": {
+      "act_class": "direction",
+      "authorizing_rule": "housing-remediation-act/2024 s.4 ministerial direction; dpw-delegation-framework §2",
+      "issuing_authority": "Minister for Public Works",
+      "counterparty": {
+       "name": "Calder Building Systems Ltd",
+       "ref": "companies-register:CBS-118842"
+      },
+      "provenance": {
+       "route": "ministerial-direction",
+       "referred_by": "programme delivery board",
+       "referrer_role": "executive",
+       "referred_on": "2026-01-19"
+      },
+      "value": {
+       "amount": 148000000,
+       "currency": "GBP"
+      },
+      "appeal_trace": "did:web:dpw-ministerial-log.example/decisions/2026-calder-retrofit-approval"
+     },
+     "sig": {
+      "key_id": "did:web:dpw-ministerial-log.example#log-1",
+      "alg": "ed25519",
+      "value": "Q2FsZGVyQXBwcm92YWxEUFdOb3RSZWFsMDI"
+     }
+    }
+   },
+   {
+    "actor": "The corridor, where the record is not",
+    "verb": "offstage",
+    "narrative": "Between the submission and the approval there is a conversation this scenario must include because no schema can: the permanent secretary, walking the minister to the lift, softens the warning — 'building-safety are being cautious, minister; the programme is sound.' Nothing enters anything. This is the oldest move in the repertoire, the word in the ear, and the advice trail does not touch it: the duty binds written submissions, and the corridor is where written advice goes to be unwritten. The floor is stated now rather than discovered later — oral government is to this case what the destroyed thread was to government-by-whatsapp, the completeness limit no protocol crosses."
+   },
+   {
+    "actor": "The quarter, counting the trail",
+    "verb": "verify",
+    "narrative": "The aggregate publishes the trail's shape without opening a single seal: 341 submissions logged this quarter, 340 within a day of delivery, 61 bearing on decisions taken against the submitting directorate's stated position — that last number computable because directorates may flag divergence without disclosing content. A department where ministers routinely decide against their experts is now a visible pattern; so is a department where written advice suddenly stops, which is the chill's own signature — the corridor replacing the submission shows up as a falling line.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "process.cost-aggregate",
+     "community": "did:web:dpw-ministerial-log.example",
+     "timestamp": "2026-06-30T12:00:00Z",
+     "body": {
+      "period": "2026-Q2",
+      "metric": "ministerial-advice-trail",
+      "submissions_logged": 341,
+      "logged_within_one_day": 340,
+      "decisions_against_flagged_advice": 61,
+      "note": "Anonymous aggregate: the volume and timeliness of written advice, and the divergence rate — measured without unsealing anything. A falling submission count is the corridor made visible as a trend."
+     },
+     "sig": {
+      "key_id": "did:web:dpw-ministerial-log.example#log-1",
+      "alg": "ed25519",
+      "value": "QWR2aWNlQWdncmVnYXRlRFBXTm90UmVhbDAz"
+     }
+    }
+   },
+   {
+    "actor": "The inquiry, three years later",
+    "verb": "read",
+    "narrative": "The panels fail; the inquiry convenes; and its first question — what was before the minister, and when — is answered from the public index before the first witness is sworn: one building-safety submission, on that topic, on that decision, eighteen days before approval. The court orders the seal opened and reads Tal's four pages the same afternoon. The reconstruction that consumed the blood inquiry's early years and the Post Office inquiry's ministerial phases is, here, a lookup. What remains for the inquiry is everything that should remain — whether the advice was right, whether rejecting it was reasonable, who bears what — the substance, reached in month one instead of year three.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-advice.unseal",
+     "community": "did:web:dpw-ministerial-log.example",
+     "timestamp": "2029-04-12T10:00:00Z",
+     "body": {
+      "unseal_id": "2029-calder-inquiry-unseal-01",
+      "references_submission": "2026-dpw-sub-0341",
+      "opened_under": "court-order (Calder Panels Inquiry, ruling 2029/14)",
+      "digest_verified": "sha256:1b2c3d4e8b1f4c72a90de3565fb2a8c1d40e97f3b6a5c2e1d7f0a9b8c3d6e5f4",
+      "note": "The seal opened by the party the schema names, the content matching the 2026 commitment to the bit. Three years of who-knew-what-when, collapsed into a docket entry."
+     },
+     "sig": {
+      "key_id": "did:web:dpw-ministerial-log.example#log-1",
+      "alg": "ed25519",
+      "value": "QWR2aWNlVW5zZWFsRFBXTm90UmVhbDA0"
+     }
+    }
+   },
+   {
+    "actor": "Both sides of the desk",
+    "verb": "offstage",
+    "narrative": "The symmetry is the finding worth pausing on. Tal is protected: 'we advised against it' is now a dated, witnessed fact he can point to without leaking a word — the civil servant's shield the blacklisted and the scapegoated never had. And a minister who genuinely was never warned is protected by the same index: against a complete, witnessed trail, the absence of a submission is itself checkable, so 'nobody told me' becomes provable exactly when it is true. Yes Minister's engine was deniability running both ways down one corridor. The trail does not decide who was right. It decides that neither can claim the fog."
+   },
+   {
+    "actor": "What stays sealed, and what stays oral",
+    "verb": "offstage",
+    "narrative": "The honest ceiling, in three parts. The seal-opener is a trusted party — the same witness-recursion caveat accountable-warrant carries: a captured court or a compliant auditor unseals nothing, and cryptography only ever moved the trust, never removed it. The subject of a seal is an office, not a person — whether a successor minister may read a predecessor's submissions is governance the kernel cannot settle, and the real Whitehall convention says no. And the corridor endures: no duty can compel the writing of advice someone prefers to whisper, and the aggregate's falling-line signal is a symptom detector, not a cure. The trail forecloses the fog around advice that was written. The advice that was never written is government-by-whatsapp's territory, and that case ends in a break."
+   }
+  ],
+  "verdict": "strains",
+  "verdict_plain": "Inquiries into infected blood and the Post Office burned years on what ministers were told. Under the advice trail every submission logs its existence the day it lands — date, topic, decision — content sealed for candour, readable by minister, auditor, or court. 'We advised against it' and 'nobody told me' both become checkable in an afternoon. But the word in the ear enters nothing, and the seal-opener is trusted.",
+  "protection": "the advice trail, counted not read",
+  "protection_plain": "Whether counts-without-contents answers the who-told-the-minister fog: every written submission logs its existence at delivery — date, directorate, topic, decision — content sealed for candour, openable by minister, auditor, or court. Deniability dies both ways; the corridor does not.",
+  "findings": [
+   {
+    "protection": "the who-knew-what-when phase collapses",
+    "severity": "note",
+    "doc_ref": "§3.4",
+    "observation": "The device is accountable-warrant's, moved indoors and doing the same work: existence, timing and topic public now, content committed by hash and sealed for the parties with standing. What that buys is measured in inquiry-years — the blood inquiry's decades of which-desk reconstruction and the Post Office inquiry's ministerial phases become a lookup against a witnessed index, and the substance questions an inquiry actually exists for start in month one. s.35's legitimate purpose — candid advice — keeps its shelter whole; what it loses is the accidental second function nobody legislated for, the existence-fog that made candour's shield into deniability's."
+   },
+   {
+    "protection": "the shield is symmetric",
+    "severity": "note",
+    "doc_ref": "§8",
+    "observation": "The trail protects whichever side of the desk told the truth, which is what distinguishes it from a weapon. The official who warned holds a dated, witnessed existence-fact — 'we advised against it' without leaking a word, the shield the corpus's whistleblower machinery never quite reached because it protects sources who speak out, not officials who spoke up. And the minister who was never warned holds the same index inverted: against a complete trail, absence is checkable, so 'nobody told me' is provable precisely when true. Deniability ran both ways down one corridor; the trail closes both directions with one artifact, and takes sides with neither."
+   },
+   {
+    "protection": "the corridor endures",
+    "severity": "strain",
+    "doc_ref": "§12",
+    "observation": "Oral government evades the trail entirely: the duty binds written submissions, and the word in the ear — the permanent secretary at the lift — is precisely where written advice gets unwritten. Worse, the trail creates its own evasion incentive: a department that wants the fog back simply stops writing things down, the drift Butler documented at the centre of government. The aggregate's falling-line signal makes that drift a visible trend, and the whatsapp-style governance answer — an unlogged act is void — could in principle extend to advice-shaped decisions. But the case is honest that this is the family's surviving move: the kernel forecloses fog around records; it cannot compel the record into being."
+   },
+   {
+    "protection": "the seal-opener is a trusted party",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The accountable-warrant caveat travels with the device and is restated here without discount: sealed_body_digest guarantees that what is eventually opened is what was committed, but who may open it is a list of institutions, and a captured court or a supine auditor turns subject-readable into readable-by-nobody. The witness-recursion problem is not solved by moving it indoors. What the construction adds is narrower and real: the commitment is public from day one, so even a stonewalled seal leaves the existence-fact standing — the inquiry that cannot yet read the submission still knows to demand it, which is more than the blood inquiry had for twenty years."
+   },
+   {
+    "protection": "the subject is an office, not a person",
+    "severity": "strain",
+    "doc_ref": "§6",
+    "observation": "The schema's 'subject' names whoever holds the seal-key, and in a department that is an office whose occupant changes with every reshuffle — the real Whitehall convention bars incoming ministers from their predecessors' papers, and the pilot inherits the question rather than answering it. Successor access is governance with real stakes on both settings: grant it and a new administration reads its rivals' candid deliberations; withhold it and 'nobody told me' regains a corridor of truth for every minister who arrived after the warning. The kernel can express either rule legibly in the manifest. It cannot say which is right, and the case flags the choice as the deployment's sharpest open governance question."
    }
   ]
  }
