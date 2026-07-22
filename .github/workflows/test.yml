@@ -16,7 +16,9 @@ jobs:
         run: python tools/validate.py
       - name: corpus validates against the waist
         run: python tools/validate-corpus.py
-      - name: the success test — run, verify, reproduce, catch 11 tampers
+      - name: the success test — run, verify, reproduce, catch 12 tampers
         run: proto/test.sh
+      - name: the waist boundary — the narrative-record attacks pass the ballot verifier, by design
+        run: proto/waist-boundary.sh
       - name: committed artifacts are current (rebuilt site data and reference transcript match the code)
         run: git diff --exit-code

@@ -9,6 +9,8 @@ the election from those artifacts alone.
 ```sh
 ./test.sh          # the success test: run, verify, reproduce, verify a --real run, catch
                    # 12 tampers, browser verifier parity, casting-page parity, agm flow
+./waist-boundary.sh   # the shadow of test.sh: the 4 narrative-record attacks (the
+                      # "Yes Minister" moves) pass the ballot verifier, by design
 python3 clubvote.py run      # -> out/ (committed as the reference transcript)
 python3 verify.py out        # independent verification, exit 0 = verified
 python3 clubvote.py run mydir --real   # same election, OS randomness: secrets are real,
@@ -255,6 +257,29 @@ system would use an elliptic-curve group for kilobyte ballots.
    What that phone actually encrypted stays sealed forever.
 
 </details>
+
+### The shadow of the table: what the ballot verifier is blind to
+
+The tamper table proves what the verifier catches. Its shadow — `./waist-boundary.sh`,
+run alongside `test.sh` in CI — proves what it does *not*, and must not: the four
+"Yes Minister" attacks that corrupt the **narrative record** rather than the ballot.
+Each passes the ballot verifier untouched, because the verifier certifies the count and
+never reads the account for meaning — a machine that graded the honesty of a minute
+would be the ministry of truth the kernel refuses to build.
+
+   | narrative attack | what the verifier does | scenario · verdict |
+   |---|---|---|
+   | **the artful minute** — the recorded account says "carried nem con" over a ballot that split 8–6 | `VERIFIED` — it recomputes the tally, never checks it against the words | `minutes-written-by-the-winner` · **strains** |
+   | **off the record** — the real choice made off-log, the logged vote a ratification | `VERIFIED` — and `drop` shows only an *anchored* omission is caught; a decision never logged has no head to anchor | `government-by-whatsapp` · **breaks** |
+   | **who told the minister** — the advice that shaped the outcome, unrecorded | no advice artifact is emitted and none is checked; an outcome binds to no advice trail | `who-told-the-minister` · **strains** |
+   | **the long grass** — the decision deferred past the point of mattering | timestamps are checked for order only; no deadline is enforced | the clock family · **covered** |
+
+So the polarity is inverted: a probe is **green when the boundary holds** — the attack
+still passes. It goes **red only if the verifier's behaviour has moved** (if someone
+taught it to read the account), which would mean the named scenario's verdict needs
+revisiting. `test.sh` proves the ballot is defended; this proves the account is the
+reader's — a court's, a member's — to judge, which is the whole reason the waist is
+drawn where it is.
 
 ## What v5 deliberately is not (the manifest is the source of truth)
 
