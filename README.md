@@ -9,8 +9,8 @@
 > of each act of power that **cannot be quietly absent** — it must exist at the moment
 > of the act, citing the rule it acts under; **cannot be quietly altered** — independent
 > witnesses hold its fingerprints; and **cannot be quietly ignored** — its silence is
-> itself a visible, datable fact. Records first, because nobody rises to defend the
-> right not to write things down:
+> itself a visible, datable fact. Records first, because the right not to write things
+> down has no defenders:
 > [the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html).
 
 **Rules for running a vote that nobody can rig and anybody can check — too small for
@@ -115,42 +115,43 @@ first real communities teach will revise it again.
 
 ## Next
 
-The outward build is finished. The corpus did its inward work — 61 cases, seven shapes,
-one settled line ([the map](https://glassontin.github.io/civic-kernel/map.html)) and
-[the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html) it implies
-for UK law — and every entrance that line asked for now exists, in the open: the
-[one-page committee brief](https://glassontin.github.io/civic-kernel/committee-brief.html)
-(four committees, each built from the cases it owns), the
-[advocate's section](https://glassontin.github.io/civic-kernel/findings.html#advocates),
-the [adviser's note](https://glassontin.github.io/civic-kernel/adviser-note.html) for
-[Owed](https://glassontin.github.io/civic-kernel/owed.html) (its
-[covering email](docs/carers-uk-email.md) drafted too), the notes to the
-[Good Law Project](docs/glp-note.md) and [mySociety](docs/mysociety-note.md) — each
-with its covering email and PDF enclosure beside it in `docs/` — the
-[Metagov abstract](docs/metagov-abstract.md), the
-[club hand-over](docs/clubhouse-demo.md) (pre-flighted: suite green, both riggings
-reproducing their quoted failure lines, one checklist), the
-[break-me door](https://glassontin.github.io/civic-kernel/break.html), and the
-[business door](https://glassontin.github.io/civic-kernel/business.html) — the kernel
-pointed at private power, with its honest pitch (it will not democratise your firm; it
-will make your firm legible) and five wrongs newly triaged behind it.
+The outward build is finished. The corpus is 61 cases and seven recurring shapes; the
+[map](https://glassontin.github.io/civic-kernel/map.html) states the one conclusion they
+reach, and [the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html)
+sets out what it implies for UK law. The ways to act on it now exist, in the open:
 
-What remains is mostly not building, and the repo is honest about whose move it is. A
-committee gets picked and a brief gets printed; a club gets picked and a season gets
-run; four letters get a signature and a send — a person's decisions, not a repo's.
-Meanwhile two doors stand open to the world and set whatever is built next: a proposed
-case that survives [the triage](docs/triage.md) reopens the corpus, and a winning
-attack on [the game](https://glassontin.github.io/civic-kernel/break.html) becomes
-tamper thirteen and its named defence. The corpus's turn to face private power is
-complete: five business wrongs entered the triage with their scores on the page, and
-all five are walked in full — the [shareholder
-count](https://glassontin.github.io/civic-kernel/scenarios.html#shareholder-vote-plumbing),
+- the [one-page committee brief](https://glassontin.github.io/civic-kernel/committee-brief.html)
+  — four committees, each built from the cases it owns;
+- the [advocate's section](https://glassontin.github.io/civic-kernel/findings.html#advocates);
+- the [adviser's note](https://glassontin.github.io/civic-kernel/adviser-note.html) for
+  [Owed](https://glassontin.github.io/civic-kernel/owed.html), with its
+  [covering email](docs/carers-uk-email.md) drafted;
+- the notes to the [Good Law Project](docs/glp-note.md) and
+  [mySociety](docs/mysociety-note.md), each with its covering email and PDF enclosure in
+  `docs/`;
+- the [Metagov abstract](docs/metagov-abstract.md);
+- the [club hand-over](docs/clubhouse-demo.md), pre-flighted — suite green, both riggings
+  reproduce their quoted failure lines, one checklist;
+- the [break-me door](https://glassontin.github.io/civic-kernel/break.html);
+- the [business door](https://glassontin.github.io/civic-kernel/business.html) — the
+  kernel pointed at private power. Its pitch is honest: it will not democratise your firm;
+  it will make your firm legible. Five wrongs are triaged behind it.
+
+What remains is mostly not building but choosing, and the choices are a person's, not the
+repo's: pick a committee and print the brief; pick a club and run a season; sign and send
+the four letters. Two doors stay open and set what gets built next — a proposed case that
+survives [the triage](docs/triage.md) reopens the corpus, and a winning attack on
+[the game](https://glassontin.github.io/civic-kernel/break.html) becomes tamper thirteen
+and its named defence.
+
+The business set is complete: five documented wrongs, each triaged with its score on the
+page and each walked in full — the
+[shareholder count](https://glassontin.github.io/civic-kernel/scenarios.html#shareholder-vote-plumbing),
 the [robo-firing](https://glassontin.github.io/civic-kernel/scenarios.html#gig-deactivation-no-reasons),
 the [mutual's tiers](https://glassontin.github.io/civic-kernel/scenarios.html#coop-governance-opaque),
 the [delisting](https://glassontin.github.io/civic-kernel/scenarios.html#marketplace-delisting-no-rule),
-and the [watched union
-ballot](https://glassontin.github.io/civic-kernel/scenarios.html#union-ballot-employer-interference)
-— every verdict a strain, every subtraction declared, the whole set entered through
+and the [watched union ballot](https://glassontin.github.io/civic-kernel/scenarios.html#union-ballot-employer-interference).
+Every verdict is a strain; every subtraction is declared. The whole set is entered through
 [the business door](https://glassontin.github.io/civic-kernel/business.html).
 
 <details>
