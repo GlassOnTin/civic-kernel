@@ -56,6 +56,8 @@
   ul.tampers .m { font-family: var(--mono); font-size: .84em; font-weight: 700; color: var(--ink); }
   ul.tampers .d { color: var(--muted); }
   ul.tampers .d b { color: var(--ok); font-weight: 700; }
+  ul.tampers.blind li::before { content: "\25CB"; color: var(--warn); }
+  ul.tampers.blind .d b { color: var(--warn); }
 
   .close { margin-top: 3rem; border-top: 3px double var(--line-strong); padding-top: 1.6rem;
     font-size: 1.15rem; max-width: 44rem; }
@@ -103,6 +105,18 @@
 </section>
 
 <section>
+<h2>The far side of the waist</h2>
+<p>An honest counter-list, because a claim is only as trustworthy as the attacks it admits it does <em>not</em> stop. These four riggings pass the verifier — <code>VERIFIED</code>, every time — and that is by design, not by oversight. They corrupt the <strong class="k">account of the decision</strong>, never the ballot: the verifier recomputes the count and never reads the words around it, because a machine that graded whether a minute told the truth would be the one thing this project refuses to build — a ministry of truth. So producing one is <em>not</em> tamper thirteen; each is one of the <a href="scenarios.html">corpus</a>'s own strain-and-break verdicts, already named and on the page.</p>
+<ul class="tampers blind">
+  <li><span class="m">artful-minute</span> — record an account that says "carried nem con" over a ballot that split 8–6 <span class="d">→ VERIFIED; the count is checked, the words are not · <a href="scenarios.html#minutes-written-by-the-winner">minutes-written-by-the-winner</a>, <b>strains</b></span></li>
+  <li><span class="m">off-record</span> — settle the real choice off the log, leave the logged vote a ratification <span class="d">→ VERIFIED; only an <em>anchored</em> omission is caught, a decision never logged has no fingerprint to miss · <a href="scenarios.html#government-by-whatsapp">government-by-whatsapp</a>, <b>breaks</b></span></li>
+  <li><span class="m">who-told</span> — hide the advice that shaped the outcome <span class="d">→ nothing binds an outcome to an advice record, so there is nothing to hide · <a href="scenarios.html#who-told-the-minister">who-told-the-minister</a>, <b>strains</b></span></li>
+  <li><span class="m">long-grass</span> — defer the decision past the point of mattering <span class="d">→ timestamps are checked for order, never for punctuality · the clock family, <b>covered</b></span></li>
+</ul>
+<p>This boundary is a runnable suite too — <code>proto/waist-boundary.sh</code>, run beside <code>test.sh</code> in CI — with the polarity inverted: it is green when each attack still <em>passes</em>, and red only if the verifier ever learns to read the account, which would move the waist and want the corpus to say so. <code>test.sh</code> proves the ballot is defended; this proves the account is the reader's — a court's, a member's — to judge, which is the whole reason the waist is drawn where it is.</p>
+</section>
+
+<section>
 <h2>How to play</h2>
 <p>Ten minutes to a working attack bench:</p>
 <pre>git clone https://github.com/GlassOnTin/civic-kernel &amp;&amp; cd civic-kernel
@@ -131,14 +145,14 @@ python3 proto/verify.py /tmp/rigged        # NOT VERIFIED, and it says why</pre>
 </section>
 
 <div class="close">
-<p><b>Why ask for this.</b> Fifty-two case studies in this repo show institutions grading their own homework and failing quietly. A protocol that wants to be trusted with anyone's vote has to invert that: publish the attack surface, keep the adversarial audit standing, and treat every falsified claim as a gift. The twelve behind us were ours. The thirteenth is yours if you can find it.</p>
+<p><b>Why ask for this.</b> Sixty-one case studies in this repo show institutions grading their own homework and failing quietly. A protocol that wants to be trusted with anyone's vote has to invert that: publish the attack surface, keep the adversarial audit standing, and treat every falsified claim as a gift. The twelve behind us were ours. The thirteenth is yours if you can find it.</p>
 </div>
 
 <nav class="doors">
   <a href="verifier.html">The thing itself →</a>
   <a href="proto/README.md">The design, residues included →</a>
   <a href="architecture.html">The full argument →</a>
-  <a href="scenarios.html">The fifty-two →</a>
+  <a href="scenarios.html">The sixty-one →</a>
 </nav>
 
 <footer>
