@@ -1,7 +1,7 @@
 {
   "v": "civic-kernel/entitlement-rules/v0",
   "id": "pension-credit-guarantee",
-  "title": "Pension Credit — Guarantee Credit",
+  "title": "Pension Credit, Guarantee Credit",
   "jurisdiction": "England, Wales and Scotland (this file assumes you live in Great Britain)",
   "kind": "computable",
   "effective": {
@@ -9,12 +9,12 @@
     "uprating": "The Social Security Benefits Up-rating Order 2026 (S.I. 2026/148), art. 29",
     "checked": "2026-07-12"
   },
-  "plainly": "A weekly top-up to a minimum income for people over State Pension age — the famously unclaimed one, and the key that opens several other entitlements.",
+  "plainly": "A weekly top-up to a minimum income for people over State Pension age, the famously unclaimed one, and the key that opens several other entitlements.",
   "questions": [
     {
       "id": "dob",
       "label": "Your date of birth",
-      "help": "Only used to work out whether you have reached State Pension age — it never leaves this page.",
+      "help": "Only used to work out whether you have reached State Pension age; it never leaves this page.",
       "type": "date",
       "rule": "State Pension Credit Act 2002 s.1(2)(b) (the qualifying age); Pensions Act 1995 Sch 4 para 1 (what that age is)",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/1"
@@ -30,7 +30,9 @@
       "id": "partner_dob",
       "label": "Your partner's date of birth",
       "type": "date",
-      "when": { "get": "has_partner" },
+      "when": {
+        "get": "has_partner"
+      },
       "rule": "State Pension Credit Act 2002 s.4(1A) (no entitlement while one of a couple is under the qualifying age)",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/4"
     },
@@ -39,7 +41,22 @@
       "label": "If one of you is under State Pension age: do you get pension-age Housing Benefit as a couple?",
       "help": "A small number of couples keep Pension Credit under transitional protection this way. If unsure, answer no.",
       "type": "bool",
-      "when": { "and": [ { "get": "has_partner" }, { "not": { "spa_reached": { "dob": { "get": "partner_dob" } } } } ] },
+      "when": {
+        "and": [
+          {
+            "get": "has_partner"
+          },
+          {
+            "not": {
+              "spa_reached": {
+                "dob": {
+                  "get": "partner_dob"
+                }
+              }
+            }
+          }
+        ]
+      },
       "rule": "Welfare Reform Act 2012 (Commencement No. 31 etc.) Order 2019 (S.I. 2019/37), savings provisions; gov.uk Pension Credit eligibility",
       "uri": "https://www.legislation.gov.uk/uksi/2019/37"
     },
@@ -62,22 +79,22 @@
     {
       "id": "weekly_earnings",
       "label": "Weekly earnings from work, after tax (both of you)",
-      "help": "Enter 0 if none. A small amount is disregarded — the working-out below shows it.",
+      "help": "Enter 0 if none. A small amount is disregarded, the working-out below shows it.",
       "type": "money",
       "rule": "State Pension Credit Act 2002 s.15(1)(a) (earnings count); SPC Regulations 2002 Sch 6 (what is disregarded)",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/15"
     },
     {
       "id": "weekly_other_income",
-      "label": "Other weekly income that counts — for example Carer's Allowance or Working Tax Credit (both of you)",
-      "help": "Do NOT include Attendance Allowance, DLA, PIP, Pension Age Disability Payment or Housing Benefit — those are not counted as income here. Enter 0 if none.",
+      "label": "Other weekly income that counts, for example Carer's Allowance or Working Tax Credit (both of you)",
+      "help": "Do NOT include Attendance Allowance, DLA, PIP, Pension Age Disability Payment or Housing Benefit, those are not counted as income here. Enter 0 if none.",
       "type": "money",
       "rule": "State Pension Credit Act 2002 s.15(1); SPC Regulations 2002 reg 15(1) (which benefits count as income)",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/regulation/15"
     },
     {
       "id": "capital",
-      "label": "Total savings and investments (both of you) — not your home",
+      "label": "Total savings and investments (both of you), not your home",
       "help": "The first £10,000 is ignored entirely; there is no upper limit, but savings above £10,000 count as a little income each week.",
       "type": "money",
       "rule": "State Pension Credit Act 2002 s.15(2); SPC Regulations 2002 reg 15(6) (deemed income from capital)",
@@ -94,7 +111,9 @@
       "id": "partner_gets_disability_benefit",
       "label": "Does your partner get one of those benefits too?",
       "type": "bool",
-      "when": { "get": "has_partner" },
+      "when": {
+        "get": "has_partner"
+      },
       "rule": "SPC Regulations 2002 Sch 1 Part I para 1 (a couple's severe-disability amount needs both to qualify)",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/schedule/1"
     },
@@ -124,7 +143,9 @@
       "id": "partner_gets_ca",
       "label": "Is your partner entitled to Carer's Allowance (or carer support payment)?",
       "type": "bool",
-      "when": { "get": "has_partner" },
+      "when": {
+        "get": "has_partner"
+      },
       "rule": "State Pension Credit Act 2002 s.2(8)(b); SPC Regulations 2002 Sch 1 Part II para 4",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/2"
     }
@@ -135,82 +156,349 @@
       "plainly": "The standard minimum guarantee for your household (2026–27: £238.00 single, £363.25 couple).",
       "rule": "State Pension Credit Act 2002 s.2(3)(a), (5); SPC Regulations 2002 reg 6(1), as uprated by S.I. 2026/148 art 29",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/regulation/6",
-      "expr": { "if": [ { "get": "has_partner" }, { "num": 36325 }, { "num": 23800 } ] }
+      "expr": {
+        "if": [
+          {
+            "get": "has_partner"
+          },
+          {
+            "num": 36325
+          },
+          {
+            "num": 23800
+          }
+        ]
+      }
     },
     {
       "id": "excess_capital",
       "plainly": "Savings above the £10,000 disregard.",
       "rule": "SPC Regulations 2002 reg 15(6)",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/regulation/15",
-      "expr": { "max": [ { "num": 0 }, { "sub": [ { "get": "capital" }, { "num": 1000000 } ] } ] }
+      "expr": {
+        "max": [
+          {
+            "num": 0
+          },
+          {
+            "sub": [
+              {
+                "get": "capital"
+              },
+              {
+                "num": 1000000
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "tariff_income",
       "plainly": "Deemed weekly income from those savings: £1 for each £500 (or part of £500) above £10,000.",
       "rule": "SPC Regulations 2002 reg 15(6)",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/regulation/15",
-      "expr": { "mul": [ { "num": 100 }, { "ceil_div": [ { "val": "excess_capital" }, { "num": 50000 } ] } ] }
+      "expr": {
+        "mul": [
+          {
+            "num": 100
+          },
+          {
+            "ceil_div": [
+              {
+                "val": "excess_capital"
+              },
+              {
+                "num": 50000
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "earnings_disregard",
       "plainly": "Earnings ignored each week: £20 where a carer's amount applies, otherwise £10 for a couple, £5 single.",
       "rule": "SPC Regulations 2002 Sch 6 paras 3, 4A, 5",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/schedules",
-      "expr": { "if": [ { "or": [ { "get": "you_get_ca" }, { "and": [ { "get": "has_partner" }, { "get": "partner_gets_ca" } ] } ] }, { "num": 2000 }, { "if": [ { "get": "has_partner" }, { "num": 1000 }, { "num": 500 } ] } ] }
+      "expr": {
+        "if": [
+          {
+            "or": [
+              {
+                "get": "you_get_ca"
+              },
+              {
+                "and": [
+                  {
+                    "get": "has_partner"
+                  },
+                  {
+                    "get": "partner_gets_ca"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "num": 2000
+          },
+          {
+            "if": [
+              {
+                "get": "has_partner"
+              },
+              {
+                "num": 1000
+              },
+              {
+                "num": 500
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "counted_earnings",
       "plainly": "Earnings that count, after the disregard.",
       "rule": "SPC Regulations 2002 Sch 6",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/schedules",
-      "expr": { "max": [ { "num": 0 }, { "sub": [ { "get": "weekly_earnings" }, { "val": "earnings_disregard" } ] } ] }
+      "expr": {
+        "max": [
+          {
+            "num": 0
+          },
+          {
+            "sub": [
+              {
+                "get": "weekly_earnings"
+              },
+              {
+                "val": "earnings_disregard"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "counted_income",
       "plainly": "All the income that counts, added up: pensions, counted earnings, other counted income, and the deemed income from savings.",
       "rule": "State Pension Credit Act 2002 s.15",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/15",
-      "expr": { "add": [ { "get": "weekly_state_pension" }, { "get": "weekly_other_pensions" }, { "val": "counted_earnings" }, { "get": "weekly_other_income" }, { "val": "tariff_income" } ] }
+      "expr": {
+        "add": [
+          {
+            "get": "weekly_state_pension"
+          },
+          {
+            "get": "weekly_other_pensions"
+          },
+          {
+            "val": "counted_earnings"
+          },
+          {
+            "get": "weekly_other_income"
+          },
+          {
+            "val": "tariff_income"
+          }
+        ]
+      }
     },
     {
       "id": "severe_disability_amount",
       "plainly": "The severe-disability additional amount, where it applies (2026–27: £86.05, or £172.10 for a couple who both qualify).",
       "rule": "State Pension Credit Act 2002 s.2(7); SPC Regulations 2002 reg 6(4)–(5), Sch 1 Part I para 1",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/regulation/6",
-      "expr": { "if": [ { "and": [ { "get": "has_partner" }, { "get": "gets_disability_benefit" }, { "get": "partner_gets_disability_benefit" }, { "not": { "get": "other_adults" } }, { "not": { "get": "carer_paid_for_you" } } ] }, { "num": 17210 }, { "if": [ { "and": [ { "not": { "get": "has_partner" } }, { "get": "gets_disability_benefit" }, { "not": { "get": "other_adults" } }, { "not": { "get": "carer_paid_for_you" } } ] }, { "num": 8605 }, { "num": 0 } ] } ] }
+      "expr": {
+        "if": [
+          {
+            "and": [
+              {
+                "get": "has_partner"
+              },
+              {
+                "get": "gets_disability_benefit"
+              },
+              {
+                "get": "partner_gets_disability_benefit"
+              },
+              {
+                "not": {
+                  "get": "other_adults"
+                }
+              },
+              {
+                "not": {
+                  "get": "carer_paid_for_you"
+                }
+              }
+            ]
+          },
+          {
+            "num": 17210
+          },
+          {
+            "if": [
+              {
+                "and": [
+                  {
+                    "not": {
+                      "get": "has_partner"
+                    }
+                  },
+                  {
+                    "get": "gets_disability_benefit"
+                  },
+                  {
+                    "not": {
+                      "get": "other_adults"
+                    }
+                  },
+                  {
+                    "not": {
+                      "get": "carer_paid_for_you"
+                    }
+                  }
+                ]
+              },
+              {
+                "num": 8605
+              },
+              {
+                "num": 0
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "carer_amount",
       "plainly": "The carer additional amount (2026–27: £48.15 each, where you or your partner are entitled to Carer's Allowance).",
       "rule": "State Pension Credit Act 2002 s.2(8); SPC Regulations 2002 reg 6(6)(a), (8), Sch 1 Part II para 4",
       "uri": "https://www.legislation.gov.uk/uksi/2002/1792/regulation/6",
-      "expr": { "add": [ { "if": [ { "get": "you_get_ca" }, { "num": 4815 }, { "num": 0 } ] }, { "if": [ { "and": [ { "get": "has_partner" }, { "get": "partner_gets_ca" } ] }, { "num": 4815 }, { "num": 0 } ] } ] }
+      "expr": {
+        "add": [
+          {
+            "if": [
+              {
+                "get": "you_get_ca"
+              },
+              {
+                "num": 4815
+              },
+              {
+                "num": 0
+              }
+            ]
+          },
+          {
+            "if": [
+              {
+                "and": [
+                  {
+                    "get": "has_partner"
+                  },
+                  {
+                    "get": "partner_gets_ca"
+                  }
+                ]
+              },
+              {
+                "num": 4815
+              },
+              {
+                "num": 0
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "appropriate_minimum_guarantee",
       "plainly": "Your minimum guarantee: the standard amount plus any additional amounts.",
       "rule": "State Pension Credit Act 2002 s.2(3)",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/2",
-      "expr": { "add": [ { "val": "standard_minimum_guarantee" }, { "val": "severe_disability_amount" }, { "val": "carer_amount" } ] }
+      "expr": {
+        "add": [
+          {
+            "val": "standard_minimum_guarantee"
+          },
+          {
+            "val": "severe_disability_amount"
+          },
+          {
+            "val": "carer_amount"
+          }
+        ]
+      }
     },
     {
       "id": "guarantee_credit",
       "plainly": "Guarantee Credit: the difference between your minimum guarantee and your counted income.",
       "rule": "State Pension Credit Act 2002 s.2(2)(b)",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/2",
-      "expr": { "max": [ { "num": 0 }, { "sub": [ { "val": "appropriate_minimum_guarantee" }, { "val": "counted_income" } ] } ] }
+      "expr": {
+        "max": [
+          {
+            "num": 0
+          },
+          {
+            "sub": [
+              {
+                "val": "appropriate_minimum_guarantee"
+              },
+              {
+                "val": "counted_income"
+              }
+            ]
+          }
+        ]
+      }
     }
   ],
   "gates": [
     {
-      "when": { "not": { "spa_reached": { "dob": { "get": "dob" } } } },
+      "when": {
+        "not": {
+          "spa_reached": {
+            "dob": {
+              "get": "dob"
+            }
+          }
+        }
+      },
       "verdict": "not-eligible",
-      "because": "You have not yet reached State Pension age — Pension Credit starts there. (Working-age support is Universal Credit, which this page does not cover.)",
+      "because": "You have not yet reached State Pension age, Pension Credit starts there. (Working-age support is Universal Credit, which this page does not cover.)",
       "rule": "State Pension Credit Act 2002 s.1(2)(b); Pensions Act 1995 Sch 4 para 1",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/1"
     },
     {
-      "when": { "and": [ { "get": "has_partner" }, { "not": { "spa_reached": { "dob": { "get": "partner_dob" } } } }, { "not": { "get": "partner_hb_pension_age" } } ] },
+      "when": {
+        "and": [
+          {
+            "get": "has_partner"
+          },
+          {
+            "not": {
+              "spa_reached": {
+                "dob": {
+                  "get": "partner_dob"
+                }
+              }
+            }
+          },
+          {
+            "not": {
+              "get": "partner_hb_pension_age"
+            }
+          }
+        ]
+      },
       "verdict": "not-eligible",
       "because": "A couple cannot get Pension Credit while one partner is under State Pension age (unless protected by pension-age Housing Benefit). Until then, support is Universal Credit.",
       "rule": "State Pension Credit Act 2002 s.4(1A)",
@@ -219,17 +507,30 @@
   ],
   "verdicts": [
     {
-      "when": { "gt": [ { "val": "guarantee_credit" }, { "num": 0 } ] },
+      "when": {
+        "gt": [
+          {
+            "val": "guarantee_credit"
+          },
+          {
+            "num": 0
+          }
+        ]
+      },
       "verdict": "appears-eligible",
-      "weekly": { "val": "guarantee_credit" },
-      "because": "Your counted income appears to be below your minimum guarantee, so Guarantee Credit would top it up by the weekly amount shown — and being on Pension Credit opens the passported entitlements below.",
+      "weekly": {
+        "val": "guarantee_credit"
+      },
+      "because": "Your counted income appears to be below your minimum guarantee, so Guarantee Credit would top it up by the weekly amount shown, and being on Pension Credit opens the passported entitlements below.",
       "rule": "State Pension Credit Act 2002 s.2(2)(b)",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/2"
     },
     {
-      "when": { "num": 1 },
+      "when": {
+        "num": 1
+      },
       "verdict": "not-eligible",
-      "because": "Your counted income appears to be at or above your minimum guarantee. Close cases are worth claiming anyway — an award of even a few pence opens the passported entitlements, and this page cannot see everything (see what it does not encode).",
+      "because": "Your counted income appears to be at or above your minimum guarantee. Close cases are worth claiming anyway, an award of even a few pence opens the passported entitlements, and this page cannot see everything (see what it does not encode).",
       "rule": "State Pension Credit Act 2002 s.2(1)(b)",
       "uri": "https://www.legislation.gov.uk/ukpga/2002/16/section/2"
     }
@@ -253,17 +554,55 @@
     "polygamous marriages (s.12)"
   ],
   "passports": [
-    { "id": "tv-licence-over-75", "name": "Free TV licence at 75", "note": "Pension Credit is the qualifying condition." },
-    { "name": "Warm Home Discount", "note": "Guarantee Credit is the core qualifying group." },
-    { "name": "Free NHS dental treatment, sight tests and help with health costs", "note": "via Guarantee Credit." },
-    { "id": "housing-benefit-pension-age", "name": "Maximum Housing Benefit", "note": "on Guarantee Credit, income and savings are disregarded and rent is normally covered in full — worked out below." },
-    { "id": "council-tax-reduction", "name": "Maximum Council Tax Reduction", "note": "on Guarantee Credit, normally the whole bill — worked out below." }
+    {
+      "id": "tv-licence-over-75",
+      "name": "Free TV licence at 75",
+      "note": "Pension Credit is the qualifying condition."
+    },
+    {
+      "name": "Warm Home Discount",
+      "note": "Guarantee Credit is the core qualifying group."
+    },
+    {
+      "name": "Free NHS dental treatment, sight tests and help with health costs",
+      "note": "via Guarantee Credit."
+    },
+    {
+      "id": "housing-benefit-pension-age",
+      "name": "Maximum Housing Benefit",
+      "note": "on Guarantee Credit, income and savings are disregarded and rent is normally covered in full, worked out below."
+    },
+    {
+      "id": "council-tax-reduction",
+      "name": "Maximum Council Tax Reduction",
+      "note": "on Guarantee Credit, normally the whole bill, worked out below."
+    }
   ],
   "sources_checked": [
-    { "what": "Standard minimum guarantee £238.00 / £363.25; severe-disability £86.05 / £172.10; carer £48.15 (2026–27)", "where": "SPC Regulations 2002 reg 6 as in force (legislation.gov.uk revised text) — cross-checked against gov.uk/pension-credit/what-youll-get", "date": "2026-07-11" },
-    { "what": "Tariff income: £1 per £500 (or part) above £10,000", "where": "SPC Regulations 2002 reg 15(6) (legislation.gov.uk revised text) — cross-checked against gov.uk/pension-credit/eligibility", "date": "2026-07-11" },
-    { "what": "Earnings disregards £5 / £10 / £20-for-carers", "where": "SPC Regulations 2002 Sch 6 paras 3, 4A, 5 (legislation.gov.uk revised text)", "date": "2026-07-12" },
-    { "what": "Mixed-age couple exclusion", "where": "SPC Act 2002 s.4(1A) (legislation.gov.uk revised text); gov.uk/pension-credit/eligibility (Housing Benefit saving)", "date": "2026-07-11" },
-    { "what": "Pensionable-age table", "where": "Pensions Act 1995 Sch 4 para 1 as amended (legislation.gov.uk revised text)", "date": "2026-07-11" }
+    {
+      "what": "Standard minimum guarantee £238.00 / £363.25; severe-disability £86.05 / £172.10; carer £48.15 (2026–27)",
+      "where": "SPC Regulations 2002 reg 6 as in force (legislation.gov.uk revised text), cross-checked against gov.uk/pension-credit/what-youll-get",
+      "date": "2026-07-11"
+    },
+    {
+      "what": "Tariff income: £1 per £500 (or part) above £10,000",
+      "where": "SPC Regulations 2002 reg 15(6) (legislation.gov.uk revised text), cross-checked against gov.uk/pension-credit/eligibility",
+      "date": "2026-07-11"
+    },
+    {
+      "what": "Earnings disregards £5 / £10 / £20-for-carers",
+      "where": "SPC Regulations 2002 Sch 6 paras 3, 4A, 5 (legislation.gov.uk revised text)",
+      "date": "2026-07-12"
+    },
+    {
+      "what": "Mixed-age couple exclusion",
+      "where": "SPC Act 2002 s.4(1A) (legislation.gov.uk revised text); gov.uk/pension-credit/eligibility (Housing Benefit saving)",
+      "date": "2026-07-11"
+    },
+    {
+      "what": "Pensionable-age table",
+      "where": "Pensions Act 1995 Sch 4 para 1 as amended (legislation.gov.uk revised text)",
+      "date": "2026-07-11"
+    }
   ]
 }

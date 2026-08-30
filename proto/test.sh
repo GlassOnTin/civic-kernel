@@ -3,7 +3,7 @@
 # election from the artifacts alone; every tamper is caught BY THE DEFENCE THE DESIGN
 # NAMES, not merely caught; the run is byte-reproducible. Run from anywhere.
 #
-# Verifying an anonymous ballot is O(roster) — a ring signature per ballot — so a single
+# Verifying an anonymous ballot is O(roster), a ring signature per ballot, so a single
 # verification is seconds and the whole suite would be minutes run end to end. But the
 # honest check, the reproducibility run and all twelve tampers only READ out/, so they
 # are independent: this script fans them across cores and aggregates the verdicts. The
@@ -42,31 +42,31 @@ real() {
 }
 # The same checks ship as a browser page (../verifier.html). Its engine must reach
 # the same verdicts as verify.py, and its pinned copies of the waist schemas must
-# equal the repo's — tools/verify-parity.mjs asserts both. Needs node (CI has it).
+# equal the repo's, tools/verify-parity.mjs asserts both. Needs node (CI has it).
 parity() {
   if command -v node > /dev/null 2>&1; then
     if node ../tools/verify-parity.mjs > "$T/parity.log" 2>&1
     then record parity "OK   verifier.js reaches the same verdicts on the same checks; embedded schemas match"
     else record parity "FAIL browser-verifier parity: $(grep -m1 FAIL "$T/parity.log")"; fi
   else
-    record parity "OK   SKIPPED here — node not installed; CI runs this"
+    record parity "OK   SKIPPED here, node not installed; CI runs this"
   fi
 }
 # The casting page (../cast.html) is held to the Python verifier the same way: a
 # ballot its engine builds, collected into the reference transcript, must verify
-# AND count — tally 8-6 -> 9-5, one voter switched, nothing stuffed.
+# AND count, tally 8-6 -> 9-5, one voter switched, nothing stuffed.
 castpage() {
   if command -v node > /dev/null 2>&1; then
     if node ../tools/cast-parity.mjs > "$T/castpage.log" 2>&1
     then record castpage "OK   a cast.js ballot, collected, verifies in verify.py and counts (8-6 -> 9-5)"
     else record castpage "FAIL cast-page parity: $(grep -m1 FAIL "$T/castpage.log")"; fi
   else
-    record castpage "OK   SKIPPED here — node not installed; CI runs this"
+    record castpage "OK   SKIPPED here, node not installed; CI runs this"
   fi
 }
 # The verifier page's hand-in step (collectBallot) is held to the committee's real
-# path the same way: four ballots — a proper re-cast, a stale attempt number, an
-# exact duplicate, a forged one — must meet the same outcome in the browser engine
+# path the same way: four ballots, a proper re-cast, a stale attempt number, an
+# exact duplicate, a forged one, must meet the same outcome in the browser engine
 # as in `clubvote.py collect` + verify.py, and the page's pinned demo joint secret
 # must equal the election key the trustee commitments derive.
 collectpage() {
@@ -75,7 +75,7 @@ collectpage() {
     then record collectpage "OK   the page's hand-in step matches collect + verify.py on all four outcomes"
     else record collectpage "FAIL collect-page parity: $(grep -m1 FAIL "$T/collectpage.log")"; fi
   else
-    record collectpage "OK   SKIPPED here — node not installed; CI runs this"
+    record collectpage "OK   SKIPPED here, node not installed; CI runs this"
   fi
 }
 # The entitlements page (../owed.html) is held to its independent judge: two engines
@@ -89,11 +89,11 @@ owedpage() {
     then record owedpage "OK   two engines, one corpus, identical traces over the battery; no network API exists in the page"
     else record owedpage "FAIL owed parity: $(grep -m1 FAIL "$T/owedpage.log")"; fi
   else
-    record owedpage "OK   SKIPPED here — node not installed; CI runs this"
+    record owedpage "OK   SKIPPED here, node not installed; CI runs this"
   fi
 }
 # The witness page (../witness.html) is held to `clubvote.py witness` the same way:
-# a real agm election runs with one witness on the browser engine — its card, its
+# a real agm election runs with one witness on the browser engine, its card, its
 # co-signatures and its witness FILE must be interchangeable with the Python
 # witness's (the file is alternated between the two implementations), verify.py must
 # certify the result, and the re-signed-rewrite refusal must hold in the browser on
@@ -104,13 +104,13 @@ witnesspage() {
     then record witnesspage "OK   the browser witness and the Python witness are the same witness (card, cosigs, file, refusals)"
     else record witnesspage "FAIL witness-page parity: $(grep -m1 FAIL "$T/witnesspage.log")"; fi
   else
-    record witnesspage "OK   SKIPPED here — node not installed; CI runs this"
+    record witnesspage "OK   SKIPPED here, node not installed; CI runs this"
   fi
 }
 # A REAL election, every party separated: the register (issuer new/certify), witnesses
 # (new/watch/sign), trustees (new/receive/share), the anchor (new/watch/lodge), and a
-# committee left holding one key — the log's (agm ... plus enrol-by-credential and the
-# three imports) — across separate processes and directories, cast.js voters, verify.py
+# committee left holding one key, the log's (agm ... plus enrol-by-credential and the
+# three imports), across separate processes and directories, cast.js voters, verify.py
 # the judge. The named defences: a phantom credential dies at enrol; a re-signed
 # rewrite on the witness's memory; a corrupted cross-share on the Feldman check; a
 # bogus tally share on its CP proof; a rewritten close on the anchor's memory.
@@ -120,7 +120,7 @@ agmflow() {
     then record agmflow "OK   every party on its own keys; the committee holds one (the log's); every refusal holds"
     else record agmflow "FAIL agm flow: $(grep -m1 FAIL "$T/agmflow.log")"; fi
   else
-    record agmflow "OK   SKIPPED here — node not installed; CI runs this"
+    record agmflow "OK   SKIPPED here, node not installed; CI runs this"
   fi
 }
 # must_fail: the verifier must REJECT the tamper, and a FAIL line must match the defence
@@ -138,7 +138,7 @@ must_fail() { # mode  want
   fi
 }
 
-# Everything below reads out/ and nothing else — launch it all at once (one verify per
+# Everything below reads out/ and nothing else, launch it all at once (one verify per
 # core) and wait. `desc` is printed in a fixed order afterwards, so the output is
 # deterministic however the jobs interleave.
 honest & reproduce & real & parity & castpage & collectpage & witnesspage & owedpage & agmflow &
@@ -183,7 +183,7 @@ ORDER="honest reproduce real parity castpage collectpage witnesspage owedpage ag
 
 echo; fails=0
 for name in $ORDER; do
-  [ -f "$T/v.$name" ] || { echo "  FAIL $name — task produced no verdict (it crashed)"; fails=$((fails+1)); continue; }
+  [ -f "$T/v.$name" ] || { echo "  FAIL $name, task produced no verdict (it crashed)"; fails=$((fails+1)); continue; }
   verdict=$(cut -f2 "$T/v.$name")
   printf '  %-11s %s\n             %s\n' "$name" "${desc[$name]}" "$verdict"
   [[ $verdict == OK* ]] || fails=$((fails+1))
@@ -193,6 +193,6 @@ echo
 if [ "$fails" -eq 0 ]; then
   echo "ALL GREEN: verified honest run, 12/12 tampers caught by their named defence, reproducible."
 else
-  echo "$fails FAILURE(S) — the reason is on each failing line above."
+  echo "$fails FAILURE(S), the reason is on each failing line above."
   exit 1
 fi

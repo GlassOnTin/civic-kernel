@@ -2,11 +2,11 @@
 """The independent entitlement judge.
 
 Second implementation of the entitlements engine: reads the same rules
-files as owed.js and shares no code with it — the producer/judge
-discipline the election pages use, pointed at welfare arithmetic. Given a
-persona (answers + an as-of date + expected outcomes), it evaluates every
-entitlement in the corpus and refuses loudly when an expectation does not
-hold. tools/owed-parity.mjs runs both engines over the persona battery and
+files as owed.js and shares no code with it, applying an independent
+verification design to welfare arithmetic. Given a persona (answers,
+an as-of date, and expected outcomes), it evaluates every entitlement
+in the corpus and reports an error if an expectation does not hold.
+tools/owed-parity.mjs runs both engines over the persona battery and
 diffs the full traces.
 
 Semantics, shared with owed.js because the corpus defines them: integers
@@ -19,8 +19,8 @@ Usage:
   judge.py <entitlements-uk-dir> --persona <persona.json> [--json]
     --json prints {entitlement_id: trace} and skips expectation checks
 
-A circumstances file saved by owed.html is persona-shaped and runs here
-unchanged — your own file, through the independent judge.
+A circumstances file saved by owed.html matches the persona structure and runs
+here unchanged through the independent judge.
 """
 import json
 import math
@@ -187,7 +187,7 @@ def evaluate(ent: dict, spa: dict, answers: dict, as_of: str) -> dict:
             if "weekly" in v:
                 trace["weekly"] = ev.ev(v["weekly"])
             return trace
-    sys.exit(f"{ent['id']}: no verdict matched — the corpus must end with a catch-all")
+    sys.exit(f"{ent['id']}: no verdict matched; the corpus must end with a catch-all")
 
 
 def main() -> int:

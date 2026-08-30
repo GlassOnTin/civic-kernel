@@ -1,28 +1,28 @@
 #!/usr/bin/env python3
-"""The Heeley Bank club vote, end to end — the smallest real run of the four verbs.
+"""The Heeley Bank club vote, end to end, the smallest real run of the four verbs.
 
 Simulates every actor in one process (key custody is NOT the property under test;
 verification-from-artifacts is) and emits a transcript any independent party can check
 with verify.py, which shares no code with this file.
 
   python3 clubvote.py run [outdir] [--real]      full election -> artifacts. Default: every
-      secret derives from a public seed — byte-reproducible, zero privacy, by design.
+      secret derives from a public seed, byte-reproducible, zero privacy, by design.
       --real draws every key and scalar from the OS instead: same artifact set, same
-      verifier, real secrets — and no tampering, because the tampers below simulate
+      verifier, real secrets, and no tampering, because the tampers below simulate
       insiders who hold the demo keys, which a --real transcript's insiders do not.
   python3 clubvote.py collect <out> <dst> <ballot.json>...   the committee's side of a page
       cast INTO THE DEMO: copy the transcript, add externally built ballots (e.g. from
-      cast.html) to the box, then legitimately re-run everything downstream of it — box
+      cast.html) to the box, then legitimately re-run everything downstream of it, box
       digest, tally, heads, anchor. Ballots are accepted, not judged: verify.py is the
       judge, so run it on <dst> afterwards. Demo-seed transcripts only.
   python3 clubvote.py agm new <dir> <cards-and-deals.json>...   a REAL election the
       committee can run across days: its own keys generated once from the OS and kept in
       <dir>/private/keys.json (0600, the only file to guard); the publishable transcript
       grows append-only in <dir>/public/. The arguments are the witnesses' cards and the
-      trustees' deals — the committee holds NO witness key and NO trustee polynomial;
+      trustees' deals, the committee holds NO witness key and NO trustee polynomial;
       every command that grows the log cuts a head that must come back co-signed before
       history can advance, and the tally waits for the trustees' answers. Then:
-        agm enrol <dir> <cert.json>              file a register-certified credential —
+        agm enrol <dir> <cert.json>              file a register-certified credential,
                                                  the committee itself can certify nobody
         agm open <dir> <decision-id> "<question>" "<optA>" "<optB>"   pin the roster, open
         agm collect <dir> <ballot.json>...       box ballots from cast.html as they arrive
@@ -34,38 +34,38 @@ with verify.py, which shares no code with this file.
                                                  anchor-request.json for the anchor
         agm anchor-import <dir> <receipt.json>.. attach the anchors' receipts; when every
                                                  required anchor holds this history, done
-      The committee never reforges history (that is the tampers' move) — it only appends.
+      The committee never reforges history (that is the tampers' move); it only appends.
       Shadow-mode subtractions are declared in the emitted manifest, not hidden.
   python3 clubvote.py witness new <wdir> <key-id>    a witness, on the witness's OWN
-      machine: one key (private), one card (public, hand to the committee), one memory —
+      machine: one key (private), one card (public, hand to the committee), one memory,
       the last head it co-signed. Then:
         witness watch <wdir> <community-id> <log-pub>   pin whom you watch; the log key
-                                                 arrives out of band — that is the ceremony
+                                                 arrives out of band, that is the ceremony
         witness sign <wdir> <witness-request.json>      check the head roots the log it
       came with AND extends the history already co-signed, then emit a cosig file. A
-      history that is not an extension is REFUSED — the witness's memory is the defence.
+      history that is not an extension is REFUSED, the witness's memory is the defence.
   python3 clubvote.py trustee new <tdir> <index>     a trustee, on the trustee's OWN
       machine: deal your own polynomial. deal.json (public commitments) goes to the
       committee and the other trustees; each share-for-N.json goes to trustee N ONLY,
-      directly — whoever collects all the cross-shares holds the joint secret. Then:
+      directly, whoever collects all the cross-shares holds the joint secret. Then:
         trustee receive <tdir> <deal.json> <share.json>   Feldman-verify a cross-share
         trustee share <tdir> <tally-request.json>         recompute the sum from the box
-      in the request (never exponentiate a bare number — that is a decryption oracle)
+      in the request (never exponentiate a bare number, that is a decryption oracle)
       and answer with a Chaum-Pedersen-proven share of it.
-  python3 clubvote.py anchor new <adir> <key-id>     the anchor, on ITS OWN machine —
+  python3 clubvote.py anchor new <adir> <key-id>     the anchor, on ITS OWN machine,
       the newspaper's public notices as a tool. One key, one card, one memory: which
       closing head it lodged for which log. Then:
         anchor watch <adir> <community-id> <log-pub>    pin whom you anchor (out of band)
         anchor lodge <adir> <anchor-request.json>       lodge the closing head and emit a
       receipt. Lodging is ONCE per log: a different closing head for a log already
-      lodged is REFUSED — history changing after the close is the attack, and the
+      lodged is REFUSED, history changing after the close is the attack, and the
       refusal to reprint is the anchor's entire job.
-  python3 clubvote.py issuer new <idir> <key-id>     the register, on ITS OWN machine —
+  python3 clubvote.py issuer new <idir> <key-id>     the register, on ITS OWN machine,
       the plot book's pen. The committee can verify and file credentials but write
       none: a phantom member needs the registrar, not the log-keeper. Then:
         issuer certify <idir> "<member>" <voter_pub>    certify a member's public key
       (from cast.html step 1) -> cert-<member>.json, for the committee's agm enrol.
-      Whom to certify is the register's human judgment — sybil resistance is exactly
+      Whom to certify is the register's human judgment, sybil resistance is exactly
       as strong as that judgment, and the manifest says so.
   python3 clubvote.py tamper <out> <dst> <mode>  copy transcript, corrupt it. The modes are an
       escalation. One insider holding the log key: log (edit an entry) -> rehead (edit it and
@@ -79,25 +79,25 @@ with verify.py, which shares no code with this file.
       history; the next two are pure tally lies under the same collusion: share (announce a
       rigged decryption), count (announce rigged counts). The last, drop, forges NOTHING:
       the same collusion erases a counted ballot and re-signs the shortened history end to
-      end — deniability, not forgery — and only the externally anchored closing head objects.
+      end, deniability, not forgery, and only the externally anchored closing head objects.
 
 Ballots are anonymous. Eligibility is proven, not asserted: each ballot carries a linkable
 ring signature (LSAG, Liu-Wei-Wong 2004) over the whole published roster, proving the signer
 holds SOME roster secret without revealing which, and binding the ballot to a per-decision
-linking tag H(decision_id)^x — §3.1's `nym_secret x context_id` pseudonym, in the exponent.
+linking tag H(decision_id)^x, §3.1's `nym_secret x context_id` pseudonym, in the exponent.
 Same voter twice in one decision: same tag, so the last ballot supersedes. Same voter in
 another decision: another context generator, so nothing links.
 
 Ballots are exponential-ElGamal encryptions to a 2-of-3 trustee key (RFC 3526 MODP-2048,
-stdlib pow — auditable over compact): the box holds ciphertexts that are never individually
+stdlib pow, auditable over compact): the box holds ciphertexts that are never individually
 opened; the tally decrypts only their homomorphic SUM, each trustee share carrying a
 Chaum-Pedersen correctness proof, each ballot a 0-or-1 validity proof (CDS). The key is
-generated distributively — each trustee deals their own Feldman-committed polynomial, and
+generated distributively; each trustee deals their own Feldman-committed polynomial, and
 no party ever holds the joint secret. Deliberate subtractions, declared in the emitted
 manifest rather than hidden: the DKG has no hash-commitment round (a rushing trustee could
 bias the key's distribution), the anonymity set is the roster and the proof is linear in it,
 sybil resistance is the plot register, receipt-freeness holds only if the client discards its
-encryption randomness (this file does — r never outlives cast()). See README.md.
+encryption randomness (this file does, r never outlives cast()). See README.md.
 """
 import base64
 import hashlib
@@ -137,7 +137,7 @@ def b64d(s: str) -> bytes:
 
 def sig_ok(pub_b64: str, sig: dict, obj_minus_sig: dict) -> bool:
     # actors checking each other's signatures (a witness checking the log key, the
-    # committee checking a returned co-signature) — the independent VERIFIER still
+    # committee checking a returned co-signature), the independent VERIFIER still
     # lives in verify.py and shares none of this
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
     try:
@@ -182,7 +182,7 @@ def merkle_root(leaves: list[bytes]) -> bytes:
 
 # --------------------------------------------- the ballot group and its proofs
 # RFC 3526 group 14: p a 2048-bit safe prime, g=2 generating the prime-order-q subgroup
-# (q=(p-1)/2). The verifier pins these parameters by NAME — a transcript never supplies
+# (q=(p-1)/2). The verifier pins these parameters by NAME, a transcript never supplies
 # its own group, or it could supply a smooth one.
 
 GROUP = "rfc3526-modp-2048"
@@ -214,7 +214,7 @@ def rand_scalar(label: str) -> int:
 
 def load_secrets(path: Path):
     """agm: the committee's private material, one guarded file. Loading it makes labels
-    resolve across processes the way _real makes them resolve within one — an election
+    resolve across processes the way _real makes them resolve within one, an election
     can span days of separate invocations and still be one election."""
     global REAL
     REAL = True
@@ -227,7 +227,7 @@ def load_secrets(path: Path):
 
 def save_secrets(path: Path):
     """Written exactly once, by `agm new`: after it, no command ever creates a NEW
-    persistent secret — later invocations only load. Proof nonces stay ephemeral in
+    persistent secret, later invocations only load. Proof nonces stay ephemeral in
     memory, as nonces must."""
     from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat
     keys, scalars = {}, {}
@@ -241,7 +241,7 @@ def save_secrets(path: Path):
 
 
 def enc(m: int, r: int, h: int) -> dict:
-    # exponential ElGamal: Enc(m; r) = (g^r, g^m * h^r) — additively homomorphic in m
+    # exponential ElGamal: Enc(m; r) = (g^r, g^m * h^r), additively homomorphic in m
     return {"c1": hx(pow(G, r, P)), "c2": hx(pow(G, m, P) * pow(h, r, P) % P)}
 
 
@@ -252,7 +252,7 @@ def fs_challenge(statement: dict) -> int:
 
 
 def prove01(m: int, r: int, ct: dict, h: int, ctx: str, label: str) -> dict:
-    """CDS disjunctive proof that ct encrypts g^0 or g^1 — simulate the false branch,
+    """CDS disjunctive proof that ct encrypts g^0 or g^1, simulate the false branch,
     answer the true one, split the challenge so the verifier cannot tell which is which."""
     c1, c2 = int(ct["c1"], 16), int(ct["c2"], 16)
     f = 1 - m
@@ -278,7 +278,7 @@ def cp_prove(x_i: int, c1_sum: int, index: int, ctx: str) -> tuple[int, dict]:
     the share is correct or the proof is impossible, no trust in the trustee required."""
     d = pow(c1_sum, x_i, P)
     # the nonce label binds the STATEMENT (via C1), so two proofs over different sums
-    # can never share a nonce — nonce reuse across statements would leak x_i
+    # can never share a nonce, nonce reuse across statements would leak x_i
     w = rand_scalar(f"cp|{index}|{ctx}|{hx(c1_sum)[:16]}")
     a, b = pow(G, w, P), pow(c1_sum, w, P)
     stmt = {"t": "cp", "ctx": ctx, "index": index, "h_i": hx(pow(G, x_i, P)),
@@ -290,7 +290,7 @@ def cp_prove(x_i: int, c1_sum: int, index: int, ctx: str) -> tuple[int, dict]:
 
 def cp_ok(share_hex: str, prf: dict, c1_sum: int, h_i: int, index: int, ctx: str) -> bool:
     # an actor (the committee at tally-import) checking a returned share before
-    # accepting it — the independent verifier makes the same check in verify.py
+    # accepting it, the independent verifier makes the same check in verify.py
     stmt = {"t": "cp", "ctx": ctx, "index": index, "h_i": hx(h_i),
             "c1": hx(c1_sum), "d": share_hex, "a": prf["a"], "b": prf["b"]}
     c = fs_challenge(stmt)
@@ -302,7 +302,7 @@ def cp_ok(share_hex: str, prf: dict, c1_sum: int, h_i: int, index: int, ctx: str
 # ------------------------------------- unlinkable eligibility: the ring and the tag
 # §3.1 asks eligibility for `prove(eligible, decision_id) -> pseudonym + proof`, with the
 # pseudonym derived as `nym_secret x context_id`. Here context_id is a subgroup generator
-# hashed from the decision, and the pseudonym — the nullifier — is that generator raised
+# hashed from the decision, and the pseudonym, the nullifier, is that generator raised
 # to the voter's nym secret. The proof is a linkable ring signature over the whole roster:
 # it proves the signer knows SOME roster secret and that the nullifier is that same
 # secret's tag, without revealing which roster entry signed. This is the village-scale
@@ -340,7 +340,7 @@ def ring_sign(ring: list[int], pi: int, x: int, ctx: str, msg: str, ring_digest:
               label: str, tag: int | None = None) -> tuple[dict, int]:
     """LSAG: simulate every ring position but the signer's, answer that one for real, and
     close the challenge chain back onto itself. Returns (signature, challenge at the
-    signer's index) — the caller needs the latter only when forging a tag (see doublevote).
+    signer's index), the caller needs the latter only when forging a tag (see doublevote).
     """
     n = len(ring)
     hl = context_gen(ctx)
@@ -375,10 +375,10 @@ ACTORS = {
                "external anchor: the newspaper's public-notices column (simulated)"),
 }
 # Members hold no signing key at all: the ballot is signed by the RING, not by a name.
-# What the issuer certifies is a nym public key g^x — the entry in the anonymity set.
+# What the issuer certifies is a nym public key g^x, the entry in the anonymity set.
 
 # 2-of-3 trustees; two happen to also be witnesses, the third is a neutral neighbour.
-# Trustees never sign anything — their shares are proven correct by mathematics (CP),
+# Trustees never sign anything, their shares are proven correct by mathematics (CP),
 # so trust.json needs no trustee keys.
 TRUSTEES = [
     {"did": "did:web:sheffield-allotment-federation.example", "index": 1},
@@ -397,7 +397,7 @@ def dkg_polys() -> dict:
     # Pedersen-style DKG: each trustee deals their OWN degree-1 polynomial f_j(z) =
     # a_j0 + a_j1*z over Z_q. The joint secret x = sum_j a_j0 is never assembled anywhere;
     # trustee i's share is x_i = sum_j f_j(i), and the joint polynomial F = sum_j f_j has
-    # F(0) = x, so any 2 shares reconstruct exponents of x — of a number no one knows.
+    # F(0) = x, so any 2 shares reconstruct exponents of x, of a number no one knows.
     return {j: (rand_scalar(f"dkg|{j}|a0"), rand_scalar(f"dkg|{j}|a1")) for j in (1, 2, 3)}
 
 
@@ -415,7 +415,7 @@ class Log:
 
     def append(self, type_, body, timestamp, head=True):
         # head=False (agm): entries accumulate and a head is cut per COMMAND, as a
-        # checkpoint travelling to real witnesses — not per entry with local keys
+        # checkpoint travelling to real witnesses, not per entry with local keys
         entry = {"v": "civic-kernel/log-entry/v0", "type": type_, "community": COMMUNITY,
                  "timestamp": timestamp, "body": body}
         entry["sig"] = sign_over(self.log_priv, ACTORS["log"][0], entry)
@@ -468,7 +468,7 @@ def combine_shares(n_counted: int, C2: int, shares: list, options: list[str]) ->
             break
         acc = acc * G % P
     if T is None:
-        raise ValueError("tally is not a small discrete log — a ciphertext was malformed")
+        raise ValueError("tally is not a small discrete log, a ciphertext was malformed")
     return {options[0]: T, options[1]: n_counted - T}
 
 
@@ -477,7 +477,7 @@ def build_tally(box: list, present_indices: list[int], decision_id: str = None,
     """Homomorphically sum the counted set, threshold-decrypt the sum with the present
     trustees' shares, brute-force the small exponent. The DEMO path: shares are computed
     here because the demo holds every polynomial. This is also what the colluding-
-    committee tampers reuse: even they cannot skip the proofs. (agm cannot use this —
+    committee tampers reuse: even they cannot skip the proofs. (agm cannot use this,
     its trustees answer from their own machines; see agm_tally_import.)"""
     decision_id, options = decision_id or DECISION, options or OPTIONS
     latest, C1, C2 = counted_sum(box)
@@ -515,7 +515,7 @@ def run(outdir: Path):
 
     # --- ceremony (prove, part 1): the issuer certifies each member's nym public key.
     # This is the last time a name and a key appear together. Everything downstream sees
-    # the ring — the set of keys — and never learns which of them signed a ballot.
+    # the ring, the set of keys, and never learns which of them signed a ballot.
     issuer = keypair("issuer")
     roster = []
     for name in MEMBERS:
@@ -536,7 +536,7 @@ def run(outdir: Path):
     # --- the trustees generate the election key TOGETHER: each deals their own
     # Feldman-committed polynomial and sends every other trustee a private share, which
     # the recipient verifies against the dealer-trustee's commitments before accepting.
-    # The published setup is only the per-trustee commitments — the election key and
+    # The published setup is only the per-trustee commitments, the election key and
     # every h_i are DERIVED from their product by any verifier, so a mis-run ceremony
     # cannot produce provable shares, and no party ever holds the joint secret.
     polys = dkg_polys()
@@ -551,8 +551,8 @@ def run(outdir: Path):
         "trustees": [{**tr, "commitments": [hx(c) for c in comms[tr["index"]]]}
                      for tr in TRUSTEES],
         "note": "distributed key generation in the parish room: each trustee dealt their "
-                "own polynomial and exchanged Feldman-verified shares; no party — not the "
-                "committee, not the ceremony, not any single trustee — ever held the joint "
+                "own polynomial and exchanged Feldman-verified shares; no party, not the "
+                "committee, not the ceremony, not any single trustee, ever held the joint "
                 "secret. Not defended: a trustee who waits to see the others' commitments "
                 "before choosing their own could bias the key's distribution (the rushing "
                 "attack, Gennaro et al.); the fix is a hash-commitment round that a single "
@@ -587,14 +587,14 @@ def run(outdir: Path):
     log = Log(keypair("log"), t(1, 19))
     log.append("manifest.published", {
         "manifest_digest": manifest_digest,
-        "note": "Prototype run. Declares: roster personhood, sybil-weak but UNLINKABLE — a "
+        "note": "Prototype run. Declares: roster personhood, sybil-weak but UNLINKABLE, a "
                 "ballot proves membership of the roster ring by linkable ring signature and "
                 "carries a per-decision pseudonym H(decision)^nym_secret, so no party, the "
                 "issuer included, learns who cast which ballot, and nothing links a voter "
                 "across decisions (the anonymity set is the roster; the proof is linear in "
                 "it). Ballots encrypted to a distributively-generated 2-of-3 trustee key (no "
                 "dealer; no party ever holds the joint secret) and never individually opened "
-                "— only the homomorphic sum is decrypted; receipt-free at the transcript "
+                ",  only the homomorphic sum is decrypted; receipt-free at the transcript "
                 "level (the client must discard its encryption randomness after cast; a "
                 "retained r reconstructs a receipt), cast-or-audit device challenges, silent "
                 "re-vote, no rights guard, no paper channel."}, t(1, 19))
@@ -613,7 +613,7 @@ def run(outdir: Path):
     # one will ever individually open. Before casting, a voter may CHALLENGE: the device
     # must reveal (choice, r), and since it cannot tell a challenge from a cast when it
     # encrypts, a cheating device is caught with probability = the challenge rate
-    # (Benaloh). A challenged ciphertext is a receipt by construction, so it is spoiled —
+    # (Benaloh). A challenged ciphertext is a receipt by construction, so it is spoiled,
     # logged in the audit file, never cast. After a real cast, r is discarded: nothing
     # this function returns can prove what the ballot says. Nor WHO said it: the ballot is
     # signed by the ring, so what leaves this function is "some plot-holder, exactly once."
@@ -651,16 +651,16 @@ def run(outdir: Path):
 
     # Who turns up to an allotment AGM: about a plot in six, and the five named members.
     # Sandra and Ernest challenge their devices first and cast on the next attempt.
-    # Plot-holder 23's phone is compromised — it displays Sandra and encrypts Keith — so
+    # Plot-holder 23's phone is compromised; it displays Sandra and encrypts Keith, so
     # her first cast is a lie she does not know she told. She challenges on a whim, the
     # opened encryption does not match, the failure is logged publicly, and she recasts
     # from the clubhouse kiosk: the phone's ballot is silently superseded, and stays
-    # sealed forever. Nobody will ever learn what it said. The two remedies compose —
+    # sealed forever. Nobody will ever learn what it said. The two remedies compose,
     # cast-or-audit caught the device, the recast policy repaired the vote.
     # Nalini votes, thinks about the water-rate surplus overnight, and re-votes: same
     # linking tag, later seq, so the first ballot is superseded without anyone knowing
     # it was hers. Ernest (no smartphone, trusts none of it) votes at the table with two
-    # tellers; his ballot carries no mark of that — an "assisted" label on one ballot in
+    # tellers; his ballot carries no mark of that, an "assisted" label on one ballot in
     # a ring of sixty would name him.
     def turns_out(name: str) -> bool:
         return hashlib.sha256(("turnout|" + name).encode()).digest()[0] < 30
@@ -679,7 +679,7 @@ def run(outdir: Path):
              ("Plot-holder 23", OPTIONS[0], 2, False),  # the clubhouse kiosk, after the challenge
              ("Ernest Toft", OPTIONS[1], 1, False)]
     # Cast order is not roster order. `seq` decides which of a voter's ballots counts, so
-    # it has to be in the signed ballot — which means it must carry no trace of who cast it.
+    # it has to be in the signed ballot, which means it must carry no trace of who cast it.
     plan.sort(key=lambda p: (hashlib.sha256(("order|" + p[0]).encode()).hexdigest(), p[2]))
     for name, choice, attempt, cheat in plan:
         cast(name, choice, attempt, cheat)
@@ -718,7 +718,7 @@ def run(outdir: Path):
         "rejected_at_cast": [rejected]}, t(21, 18))
 
     # --- tally: two of the three trustees decrypt the SUM (Meersbrook's secretary is in
-    # Whitby with the key card in a drawer — the threshold is the point). No individual
+    # Whitby with the key card in a drawer, the threshold is the point). No individual
     # ballot is opened; the tally proof lives in the log itself.
     body = tally_body(box, box_digest, [1, 3],
                       "Meersbrook trustee share absent (secretary away); quorum met 2-of-3 "
@@ -730,11 +730,11 @@ def run(outdir: Path):
 
     # --- the anchor: the closing head, republished where neither the committee nor the
     # witnesses can reach it. Everything above survives signature collusion because it is
-    # held up by proofs — but a proof can only convict what is PRESENT. A colluding
+    # held up by proofs, but a proof can only convict what is PRESENT. A colluding
     # committee's last move is subtraction: erase a ballot, re-sign the shortened history,
     # retally honestly, and nothing inside the transcript objects. So the closing head
     # goes outside: the treasurer pays for three lines in the Sheffield Star's public
-    # notices (the key here stands in for the printed page — in reality the receipt is
+    # notices (the key here stands in for the printed page, in reality the receipt is
     # the archive itself; a chain as notary of last resort is the same move, see the
     # kernel's refusal 5). History can still be lied about; it can no longer quietly shorten.
     head = log.heads[-1]
@@ -746,7 +746,7 @@ def run(outdir: Path):
     # --- trust anchors: what a verifier must already trust (in reality: DID resolution +
     # the witness ecosystem). `witnesses` is the bar the transcript cannot lower: the
     # manifest is signed by the log key, so it cannot vouch for its own witness count.
-    # No trustee keys here — trustee shares are proven by Chaum-Pedersen against the
+    # No trustee keys here, trustee shares are proven by Chaum-Pedersen against the
     # Feldman commitments, which ride the witnessed log; and the election key cannot be
     # swapped either, because every ballot's validity proof binds to it under a ring
     # signature only a plot-holder can make. No voter keys either, and that is the point:
@@ -759,8 +759,8 @@ def run(outdir: Path):
 
     counts = body["counts"]
     print(f"run complete -> {out}")
-    print("  randomness: " + ("the OS (--real) — secrets are real, the run is not reproducible"
-                              if REAL else "the public demo seed — reproducible, zero privacy"))
+    print("  randomness: " + ("the OS (--real), secrets are real, the run is not reproducible"
+                              if REAL else "the public demo seed, reproducible, zero privacy"))
     print(f"  {len(MEMBERS)} enrolled, {len(box)} anonymous ballots ({body['distinct_voters']} counted, "
           f"{body['superseded']} superseded), 1 unenrolled cast rejected")
     print(f"  each ballot proves membership of the {len(ring)}-key ring; nothing says which key")
@@ -805,7 +805,7 @@ def entry(entries: list, type_: str) -> dict:
 
 def rewrite_box(dst: Path, mutate, collude=False, retally=True):
     """Apply `mutate` to the ballot box. If the committee colludes, it repairs the box
-    digest in the log and the witnesses co-sign the rewritten history — every hash and
+    digest in the log and the witnesses co-sign the rewritten history, every hash and
     signature then agrees, and only the voter-level proofs can object. `retally` re-runs
     the threshold decryption honestly over the poisoned box; set it False when the poison
     makes the sum undecryptable (a griefed tally cannot be re-announced), leaving the stale
@@ -833,7 +833,7 @@ def ring_of(dst: Path) -> tuple[list, dict, str]:
 
 def resign_ballot(dst: Path, b: dict, name: str, label: str):
     """A saboteur re-proves his OWN altered ballot. He can: it is his ring secret. What he
-    cannot do is make the altered ciphertext legal — that is a different check's job."""
+    cannot do is make the altered ciphertext legal, that is a different check's job."""
     ring, index, rd = ring_of(dst)
     x = nym_secret(name)
     b.pop("ring_sig", None)
@@ -850,7 +850,7 @@ def forge_cds_outside(c1: int, c2_bad: int, h: int, m: int, r: int, ctx: str, la
     """A CDS 0-or-1 proof for a ciphertext whose c2 is OUTSIDE the prime-order subgroup.
     prove01 for an honest c2 works because c2 = g^m·h^r; here c2 has been negated, so the
     real branch's h-equation picks up a factor (-1)^challenge that the honest prover never
-    sees. But p is a safe prime — (-1)^even = 1 — so grind the nonce until the real-branch
+    sees. But p is a safe prime, (-1)^even = 1, so grind the nonce until the real-branch
     challenge is even and the factor vanishes. The proof then verifies over a ciphertext
     that is not a well-formed group element at all: precisely what the per-ballot subgroup
     check, and nothing else, refuses to wave through."""
@@ -874,7 +874,7 @@ def forge_cds_outside(c1: int, c2_bad: int, h: int, m: int, r: int, ctx: str, la
 
 
 def require_demo_keys(src: Path, who: str):
-    # Both collect and every tamper act AS a key-holder — the committee or an insider.
+    # Both collect and every tamper act AS a key-holder, the committee or an insider.
     # Those keys are re-derived from the demo seed, so on a --real transcript there is
     # no one here to play: refuse rather than mis-simulate.
     trust = json.loads((src / "trust.json").read_text())
@@ -887,7 +887,7 @@ def reanchor(dst: Path, published: str = "Sheffield Star public notices, reprint
                                          "collection closed (simulated)"):
     """Republish the closing head after a legitimate re-run of the close: the anchor
     receipt must cover the WHOLE final log, so anything that grows or re-signs history
-    ends by re-anchoring — the committee's last act, same as in run()."""
+    ends by re-anchoring, the committee's last act, same as in run()."""
     heads = [json.loads(l) for l in (dst / "heads.jsonl").read_text().splitlines()]
     head = heads[-1]
     receipt = {"log_id": COMMUNITY, "size": head["size"], "root": head["root"],
@@ -899,9 +899,9 @@ def reanchor(dst: Path, published: str = "Sheffield Star public notices, reprint
 def collect(src: Path, dst: Path, ballot_paths: list[Path]):
     """The committee's side of an externally cast ballot (cast.html, or any tool that
     emits the ballot format): add it to the box and legitimately re-run everything the
-    box feeds — digest, tally, heads, anchor. This is the same machinery the colluding
+    box feeds, digest, tally, heads, anchor. This is the same machinery the colluding
     tampers reuse, pointed at its honest purpose: even the committee cannot skip the
-    proofs, so a bad external ballot is not caught here — it is caught by verify.py,
+    proofs, so a bad external ballot is not caught here; it is caught by verify.py,
     which is the judge. Run it on <dst> afterwards."""
     require_demo_keys(src, "collection re-runs the close, so the committee")
     if dst.exists():
@@ -916,7 +916,7 @@ def collect(src: Path, dst: Path, ballot_paths: list[Path]):
                 sys.exit(f"ballot is for decision {b.get('decision_id')!r}, not {DECISION!r}")
             if (b["nullifier"], b["seq"]) in have:
                 sys.exit(f"a ballot with tag {b['nullifier'][:16]}… and seq {b['seq']} is "
-                         "already in the box — a re-cast needs a higher attempt number")
+                         "already in the box, a re-cast needs a higher attempt number")
             ballots.append(b)
         ballots.sort(key=lambda b: b["nullifier"])  # position must say nothing, as in run()
     rewrite_box(dst, add, collude=True)
@@ -931,25 +931,25 @@ def collect(src: Path, dst: Path, ballot_paths: list[Path]):
 # trustee polynomial is generated once with OS randomness and kept in
 # <dir>/private/keys.json (0600), while the published transcript grows APPEND-ONLY in
 # <dir>/public/ across days of separate invocations. Nothing here ever reforges
-# history — rewriting is the tampers' move; the committee only appends and, once the
+# history, rewriting is the tampers' move; the committee only appends and, once the
 # closing head is witnessed, anchors. Voters are cast.html: their secrets are born on
-# their devices and never appear on this machine — the roster holds only certified
+# their devices and never appear on this machine, the roster holds only certified
 # public keys, so the issuer cannot link a ballot to a member even in principle.
 #
-# EVERY OTHER PARTY IS SEPARATE. The committee's keys.json holds ONE key — the log's:
+# EVERY OTHER PARTY IS SEPARATE. The committee's keys.json holds ONE key, the log's:
 # at `agm new` the witnesses, trustees, anchor and issuer each hand over a public half
 # (a card or a deal, made by `witness new` / `trustee new` / `anchor new` /
 # `issuer new` on their own machines). The committee publishes, gates and assembles,
 # and can vouch for nothing by itself. Enrolment is the register's: `issuer certify`
 # signs a credential on the register's machine and `agm enrol` can only verify and
-# file it — a phantom member needs the registrar's pen. Every command that grows the
+# file it, a phantom member needs the registrar's pen. Every command that grows the
 # log cuts a PENDING head that must come back co-signed (`witness sign` -> `agm
-# witness-import`) before history advances — a witness co-signs only what extends the
+# witness-import`) before history advances, a witness co-signs only what extends the
 # history it remembers, so a committee that rewrites cannot get witnessed. The tally
 # is not the committee's to compute: `close` emits a request, each trustee answers
 # from its own machine (`trustee share` -> `agm tally-import`), and no machine
 # anywhere can decrypt alone. And the closing head goes to the anchor (`anchor lodge`
-# -> `agm anchor-import`), which lodges it at most once per log — so history cannot
+# -> `agm anchor-import`), which lodges it at most once per log, so history cannot
 # quietly change after the close. Shadow-mode subtraction, said on the cast page:
 # whoever collects ballot files sees who handed over which.
 
@@ -992,14 +992,14 @@ def agm_cut_head(d: Path, log: Log):
 def agm_require_witnessed(d: Path, doing: str):
     if (d / "pending-head.json").exists():
         sys.exit(f"cannot {doing}: the previous head is not yet co-signed by every witness "
-                 f"— send {d / 'witness-request.json'} to them and run agm witness-import. "
+                 f",  send {d / 'witness-request.json'} to them and run agm witness-import. "
                  "History does not advance past an unwitnessed checkpoint.")
 
 
 def agm_new(d: Path, card_paths: list[Path]):
     global REAL
     if d.exists():
-        sys.exit(f"{d} already exists — one directory is one election")
+        sys.exit(f"{d} already exists, one directory is one election")
     docs = [json.loads(p.read_text()) for p in card_paths]
     cards = [c for c in docs if "witness" in c]
     deals = [c for c in docs if "commitments" in c]
@@ -1013,20 +1013,20 @@ def agm_new(d: Path, card_paths: list[Path]):
         if len(b64d(c["pub"])) != 32 or "#" not in kid:
             sys.exit(f"malformed card: {c}")
     if not cards:
-        sys.exit("no witness cards — an unwitnessed log cannot defeat a records rewrite")
+        sys.exit("no witness cards, an unwitnessed log cannot defeat a records rewrite")
     if not anchor_cards:
-        sys.exit("no anchor card — an unanchored log cannot refute a quietly erased ballot")
+        sys.exit("no anchor card, an unanchored log cannot refute a quietly erased ballot")
     if len(issuer_cards) != 1:
-        sys.exit("exactly one issuer card — the register that certifies members is one "
+        sys.exit("exactly one issuer card, the register that certifies members is one "
                  "party, and it is not the committee")
     if len({c["witness"].split('#')[0] for c in cards}) < len(cards):
-        sys.exit("two cards from the same witness DID — witnesses must be independent parties")
+        sys.exit("two cards from the same witness DID, witnesses must be independent parties")
     witness_dids = [c["witness"].split("#")[0] for c in cards]
     anchor_dids = [c["anchor"].split("#")[0] for c in anchor_cards]
     issuer_kid = issuer_cards[0]["issuer"]
     # the trustees' PUBLIC deals: their own Feldman commitments, dealt on their own
     # machines (`trustee new`); the private cross-shares travelled trustee-to-trustee
-    # and never came here. The committee holds no polynomial — it can derive everyone's
+    # and never came here. The committee holds no polynomial; it can derive everyone's
     # PUBLIC key from these commitments, and nothing else.
     if {(t["did"], t["index"]) for t in deals} != {(t["did"], t["index"]) for t in TRUSTEES}:
         sys.exit(f"need exactly the {len(TRUSTEES)} trustees' deals: "
@@ -1045,7 +1045,7 @@ def agm_new(d: Path, card_paths: list[Path]):
         "note": "each trustee dealt their own Feldman-committed polynomial on their own "
                 "machine and exchanged private shares trustee-to-trustee; the committee "
                 "holds none of them. Not defended, as ever: the rushing attack "
-                "(Gennaro et al.) — declared, not half-checked",
+                "(Gennaro et al.), declared, not half-checked",
     }
     (pub / "trustees.json").write_text(json.dumps(trustees_doc, indent=1) + "\n")
 
@@ -1055,7 +1055,7 @@ def agm_new(d: Path, card_paths: list[Path]):
                       "parent": "did:web:sheffield-allotment-federation.example"},
         "services": {"personhood": True, "decisions": True, "rights_guard": False, "transparency_log": True},
         "personhood": {"method": "ceremony",
-                       "issuer": issuer_kid + " — the club register on its own machine: "
+                       "issuer": issuer_kid + ", the club register on its own machine: "
                                  "secrets born on voters' devices, the register certifies "
                                  "only public keys, the committee can add nobody itself",
                        "unlinkable": True, "sybil_resistance": "weak",
@@ -1064,7 +1064,7 @@ def agm_new(d: Path, card_paths: list[Path]):
         "decisions": {"verifiable": True, "receipt_free": True, "cast_or_audit": True,
                       "paper_channel": False, "coercion_resistance": "revote-silent",
                       "trustee_quorum": "2-of-3: " + ", ".join(t["did"] for t in TRUSTEES)
-                                        + " — each holding their own polynomial on their "
+                                        + "; each holding their own polynomial on their "
                                           "own machine"},
         "transparency_log": {"log_id": COMMUNITY, "witnesses": witness_dids},
         "decision_metadata": False,
@@ -1072,7 +1072,7 @@ def agm_new(d: Path, card_paths: list[Path]):
     manifest["sig"] = sign_over(keypair("log"), COMMUNITY + "#manifest-1", manifest)
     (pub / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
 
-    # The committee's trust set holds NO other party's private key — only the cards'
+    # The committee's trust set holds NO other party's private key, only the cards'
     # public halves. keys.json below holds exactly ONE key: the log's. Even the pen
     # that certifies members is someone else's now; the committee can publish, gate
     # and assemble, and can vouch for nothing by itself.
@@ -1103,7 +1103,7 @@ def agm_new(d: Path, card_paths: list[Path]):
                 "machines co-signing every checkpoint, trustees on their own machines "
                 "answering the tally, the anchor on its own machine lodging the "
                 "closing head once and forever. The committee holds one key: the "
-                "log's. It can publish, gate and assemble — and vouch for nothing by "
+                "log's. It can publish, gate and assemble, and vouch for nothing by "
                 "itself. The official result is whatever the meeting decides by hand; "
                 "this record exists so anyone can check what a real run would have "
                 "them check."}, ts,
@@ -1122,49 +1122,49 @@ def agm_new(d: Path, card_paths: list[Path]):
 def agm_enrol(d: Path, cred_path: Path):
     """The committee cannot certify anyone: it holds no issuer key. It VERIFIES a
     credential the register signed on its own machine, and only then adds it to the
-    roster — a phantom member now needs the registrar's pen, not the log-keeper's."""
+    roster, a phantom member now needs the registrar's pen, not the log-keeper's."""
     pub, log = agm_load(d)
     if "decision.opened" in agm_by_type(log):
         sys.exit("the decision is open and the logged roster digest pins the member list "
-                 "— enrolment is closed")
+                 ",  enrolment is closed")
     trust = json.loads((pub / "trust.json").read_text())
     cred = json.loads(cred_path.read_text())
     if set(cred) != {"member", "voter_pub", "issuer_sig"}:
         sys.exit(f"{cred_path}: a credential is exactly member + voter_pub + issuer_sig "
-                 "— the roster stores what the register signed, byte for byte")
+                 ",  the roster stores what the register signed, byte for byte")
     sig = cred.get("issuer_sig", {})
     if sig.get("key_id") != trust["issuer"]:
         sys.exit(f"{cred_path}: certified by {sig.get('key_id')!r}, not this election's "
-                 f"register ({trust['issuer']}) — the committee can add nobody itself")
+                 f"register ({trust['issuer']}), the committee can add nobody itself")
     if not sig_ok(trust["keys"][trust["issuer"]], sig,
                   {k: v for k, v in cred.items() if k != "issuer_sig"}):
         sys.exit(f"{cred_path}: the credential's signature does not verify against the "
-                 "register's card — not certified, not enrolled")
+                 "register's card, not certified, not enrolled")
     y = int(cred["voter_pub"], 16)
     if not (1 < y < P and pow(y, Q, P) == 1):
-        sys.exit("that public key is not a prime-order subgroup element — refused at the "
+        sys.exit("that public key is not a prime-order subgroup element, refused at the "
                  "door (the same input hygiene the verifier applies to the ring)")
     doc = json.loads((pub / "roster.json").read_text())
     if any(c["member"] == cred["member"] for c in doc["members"]):
         sys.exit(f"{cred['member']!r} is already enrolled")
     if any(int(c["voter_pub"], 16) == y for c in doc["members"]):
-        sys.exit("that public key is already enrolled under another name — one key, one member")
+        sys.exit("that public key is already enrolled under another name, one key, one member")
     doc["members"].append({"member": cred["member"], "voter_pub": cred["voter_pub"],
                            "issuer_sig": sig})
     (pub / "roster.json").write_text(json.dumps(doc, indent=1) + "\n")
-    print(f"enrolled {cred['member']} ({len(doc['members'])} member(s)) — certified by the "
+    print(f"enrolled {cred['member']} ({len(doc['members'])} member(s)), certified by the "
           "register; the committee only checked and filed it.")
 
 
 def agm_open(d: Path, decision_id: str, question: str, options: list[str]):
     pub, log = agm_load(d)
     if "decision.opened" in agm_by_type(log):
-        sys.exit("this election directory already opened its decision — one directory, "
+        sys.exit("this election directory already opened its decision, one directory, "
                  "one decision")
     agm_require_witnessed(d, "open the decision")
     roster_doc = json.loads((pub / "roster.json").read_text())
     if not roster_doc["members"]:
-        sys.exit("nobody is enrolled — a ring of zero keys can sign nothing")
+        sys.exit("nobody is enrolled, a ring of zero keys can sign nothing")
     digest = sha256_hex(canon(roster_doc))
     ts = now_iso()
     from datetime import datetime, timedelta, timezone
@@ -1194,9 +1194,9 @@ def agm_collect(d: Path, ballot_paths: list[Path]):
     pub, log = agm_load(d)
     by = agm_by_type(log)
     if "decision.opened" not in by:
-        sys.exit("no decision is open — nothing to collect into")
+        sys.exit("no decision is open, nothing to collect into")
     if "decision.closed" in by:
-        sys.exit("the decision closed and its box is committed by digest — a late ballot "
+        sys.exit("the decision closed and its box is committed by digest, a late ballot "
                  "cannot enter, which is the point of the digest")
     decision_id = by["decision.opened"]["body"]["decision_id"]
     doc = json.loads((pub / "ballot-box.json").read_text())
@@ -1207,22 +1207,22 @@ def agm_collect(d: Path, ballot_paths: list[Path]):
             sys.exit(f"{p}: ballot is for decision {b.get('decision_id')!r}, not {decision_id!r}")
         if (b["nullifier"], b["seq"]) in have:
             sys.exit(f"{p}: a ballot with this tag and seq {b['seq']} is already in the box "
-                     "— a re-cast needs a higher attempt number")
+                     ",  a re-cast needs a higher attempt number")
         have.add((b["nullifier"], b["seq"]))
         doc["ballots"].append(b)
     doc["ballots"].sort(key=lambda b: b["nullifier"])  # position must say nothing
     (pub / "ballot-box.json").write_text(json.dumps(doc, indent=1) + "\n")
     print(f"collected {len(ballot_paths)} ballot(s); the box holds {len(doc['ballots'])}. "
-          "Ballots are accepted, not judged — verify.py judges the closed transcript.")
+          "Ballots are accepted, not judged, verify.py judges the closed transcript.")
 
 
 def agm_close(d: Path):
     pub, log = agm_load(d)
     by = agm_by_type(log)
     if "decision.opened" not in by:
-        sys.exit("no decision is open — nothing to close")
+        sys.exit("no decision is open, nothing to close")
     if "decision.closed" in by:
-        sys.exit("already closed — a close is once; that is what the anchor seals")
+        sys.exit("already closed, a close is once; that is what the anchor seals")
     agm_require_witnessed(d, "close the decision")
     opened = by["decision.opened"]["body"]
     box_doc = json.loads((pub / "ballot-box.json").read_text())
@@ -1239,12 +1239,12 @@ def agm_close(d: Path):
     agm_write_log(pub, log)
     latest, C1, _ = counted_sum(box_doc["ballots"])
     # The tally request carries the WHOLE box: each trustee recomputes the sum itself
-    # and exponentiates only that — a trustee that raised a committee-supplied number
+    # and exponentiates only that, a trustee that raised a committee-supplied number
     # would be a decryption oracle for any single ballot the committee cared to send.
     (d / "tally-request.json").write_text(json.dumps({
         "decision_id": opened["decision_id"], "box": box_doc,
         "counted": len(latest), "sum_c1": hx(C1)}, indent=1) + "\n")
-    print(f"closed: {len(box_doc['ballots'])} ballots, {len(latest)} counted. No tally yet —")
+    print(f"closed: {len(box_doc['ballots'])} ballots, {len(latest)} counted. No tally yet, ")
     print(f"  send {d / 'tally-request.json'} to the trustees; each answers with")
     print(f"  `trustee share`, and a {THRESHOLD}-of-{len(TRUSTEES)} quorum of answers tallies:")
     print(f"  agm tally-import {d} <share.json>...")
@@ -1254,9 +1254,9 @@ def agm_tally_import(d: Path, share_paths: list[Path]):
     pub, log = agm_load(d)
     by = agm_by_type(log)
     if "decision.closed" not in by:
-        sys.exit("the decision has not closed — there is no sum to decrypt yet")
+        sys.exit("the decision has not closed, there is no sum to decrypt yet")
     if "decision.tally-proof" in by:
-        sys.exit("already tallied — the tally is once; the witnessed head seals it")
+        sys.exit("already tallied, the tally is once; the witnessed head seals it")
     opened, closed = by["decision.opened"]["body"], by["decision.closed"]["body"]
     box_doc = json.loads((pub / "ballot-box.json").read_text())
     latest, C1, C2 = counted_sum(box_doc["ballots"])
@@ -1272,7 +1272,7 @@ def agm_tally_import(d: Path, share_paths: list[Path]):
         if idx not in A:
             sys.exit(f"{p}: index {idx} is not one of this election's trustees")
         if any(v["index"] == idx for v in shares):
-            print(f"  {p}: trustee {idx} already answered — skipping duplicate")
+            print(f"  {p}: trustee {idx} already answered, skipping duplicate")
             continue
         # h_i derives from the published commitments; the share proves itself against
         # it or it does not enter. A wrong share convicts itself here, not at verify.
@@ -1280,7 +1280,7 @@ def agm_tally_import(d: Path, share_paths: list[Path]):
         for j in A:
             h_i = h_i * (A[j][0] * pow(A[j][1], idx, P) % P) % P
         if not cp_ok(s["share"], s["proof"], C1, h_i, idx, opened["decision_id"]):
-            sys.exit(f"{p}: the Chaum-Pedersen proof does not verify — this is not "
+            sys.exit(f"{p}: the Chaum-Pedersen proof does not verify, this is not "
                      f"trustee {idx}'s honest share of THIS sum; refused")
         shares.append({"trustee": s["trustee"], "index": idx,
                        "share": s["share"], "proof": s["proof"]})
@@ -1309,7 +1309,7 @@ def agm_tally_import(d: Path, share_paths: list[Path]):
     (d / "tally-request.json").unlink(missing_ok=True)
     print(f"tally: " + ", ".join(f"{k} {v}" for k, v in counts.items())
           + f"  ({body['distinct_voters']} counted, {body['superseded']} superseded)")
-    print("  the anchor follows the witnessed closing head — after the import:")
+    print("  the anchor follows the witnessed closing head, after the import:")
     print(f"  python3 {Path(__file__).parent / 'verify.py'} {pub}")
     agm_cut_head(d, log)
 
@@ -1317,7 +1317,7 @@ def agm_tally_import(d: Path, share_paths: list[Path]):
 def agm_witness_import(d: Path, cosig_paths: list[Path]):
     pub, log = agm_load(d)
     if not (d / "pending-head.json").exists():
-        sys.exit("no head is pending — nothing to import co-signatures for")
+        sys.exit("no head is pending, nothing to import co-signatures for")
     pending = json.loads((d / "pending-head.json").read_text())
     body = pending["head"]
     trust = json.loads((pub / "trust.json").read_text())
@@ -1345,7 +1345,7 @@ def agm_witness_import(d: Path, cosig_paths: list[Path]):
     (d / "witness-request.json").unlink(missing_ok=True)
     print(f"head at size {body['size']} co-signed by every witness; checkpoint published")
     if "decision.tally-proof" in agm_by_type(log):
-        # the CLOSING head: it goes to the anchor — the party whose job is to hold it
+        # the CLOSING head: it goes to the anchor, the party whose job is to hold it
         # beyond everyone who signs things, once, forever
         (d / "anchor-request.json").write_text(json.dumps(
             {"head": log.heads[-1]}, indent=1) + "\n")
@@ -1357,7 +1357,7 @@ def agm_witness_import(d: Path, cosig_paths: list[Path]):
 # ---------------------------------------------------------------- the witness
 # A separate party on a separate machine. It holds one key, remembers the last head it
 # co-signed, and signs a new head only if the history it is shown EXTENDS the history
-# it remembers — so a committee that rewrites the past cannot get its checkpoint
+# it remembers, so a committee that rewrites the past cannot get its checkpoint
 # witnessed. The log key it checks against arrives out of band (`witness watch`): that
 # exchange, two secretaries swapping keys at a federation meeting, is the ceremony.
 
@@ -1395,29 +1395,29 @@ def witness_watch(wdir: Path, community: str, log_pub: str):
         sys.exit("that does not look like a raw Ed25519 public key (base64url)")
     w["watch"] = {"community": community, "log_pub": log_pub}
     witness_save(wdir, w)
-    print(f"watching {community}. The log key came to you out of band — that exchange is "
+    print(f"watching {community}. The log key came to you out of band, that exchange is "
           "the ceremony; never take it from the request you are asked to sign.")
 
 
 def witness_sign(wdir: Path, request_path: Path):
     w = witness_load(wdir)
     if not w.get("watch"):
-        sys.exit("this witness watches nobody yet — run witness watch first")
+        sys.exit("this witness watches nobody yet, run witness watch first")
     req = json.loads(request_path.read_text())
     head, entries = req["head"], req["entries"]
     body = {k: v for k, v in head.items() if k != "sigs"}
     if body.get("log_id") != w["watch"]["community"]:
         sys.exit(f"this head is from {body.get('log_id')!r}, not the community I watch")
     if not any(sig_ok(w["watch"]["log_pub"], s, body) for s in head.get("sigs", [])):
-        sys.exit("the head is not signed by the log key I was given at the ceremony — refusing")
+        sys.exit("the head is not signed by the log key I was given at the ceremony, refusing")
     leaves = [leaf_hash(canon({k: v for k, v in e.items() if k != "sig"})) for e in entries]
     if body["size"] != len(entries) or body["root"] != "sha256:" + merkle_root(leaves).hex():
-        sys.exit("the head does not root the log that came with it — refusing")
+        sys.exit("the head does not root the log that came with it, refusing")
     if w["last"]:
         if body["size"] < w["last"]["size"] or \
            "sha256:" + merkle_root(leaves[:w["last"]["size"]]).hex() != w["last"]["root"]:
             sys.exit(f"REFUSED: this history is not an extension of the history I co-signed "
-                     f"at size {w['last']['size']}. Append-only is violated — someone is "
+                     f"at size {w['last']['size']}. Append-only is violated, someone is "
                      "asking me to witness a rewrite, and my memory is the defence.")
     priv = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(w["priv"]))
     out = wdir / f"cosig-{body['size']}.json"
@@ -1431,8 +1431,8 @@ def witness_sign(wdir: Path, request_path: Path):
 
 # ---------------------------------------------------------------- the trustee
 # A third party on a third machine. Each trustee deals their OWN polynomial (`trustee
-# new`), sends every other trustee a private cross-share DIRECTLY — the committee never
-# carries them, because whoever holds all the cross-shares holds the joint secret — and
+# new`), sends every other trustee a private cross-share DIRECTLY, the committee never
+# carries them, because whoever holds all the cross-shares holds the joint secret, and
 # Feldman-verifies what it receives (`trustee receive`). At tally time it answers the
 # committee's request (`trustee share`) by recomputing the sum FROM THE BOX IT IS SENT
 # and proving its decryption share of exactly that: a trustee that exponentiated a bare
@@ -1470,7 +1470,7 @@ def trustee_new(tdir: Path, index: int):
             p.chmod(0o600)
     print(f"trustee {index} ({me['did']}) -> {tdir}")
     print(f"  deal.json is public: to the committee AND to the other trustees")
-    print(f"  share-for-N.json goes to trustee N ONLY, directly — never via the committee:")
+    print(f"  share-for-N.json goes to trustee N ONLY, directly, never via the committee:")
     print(f"  whoever collects all the cross-shares holds the joint secret")
 
 
@@ -1485,18 +1485,18 @@ def trustee_receive(tdir: Path, deal_path: Path, share_path: Path):
     if not any(x["index"] == j for x in TRUSTEES) or j == t["index"]:
         sys.exit(f"trustee index {j} is not another trustee of this election")
     if str(j) in t["received"]:
-        sys.exit(f"already holding trustee {j}'s share — a second, different one would be an attack")
+        sys.exit(f"already holding trustee {j}'s share, a second, different one would be an attack")
     A0, A1 = (int(c, 16) for c in deal["commitments"])
     v = int(share["value"], 16)
     if pow(G, v, P) != A0 * pow(A1, t["index"], P) % P:
         sys.exit("REFUSED: the share does not match the dealer's own commitments (Feldman "
-                 "check) — corrupted in transit, misdealt, or malicious; do not accept it")
+                 "check), corrupted in transit, misdealt, or malicious; do not accept it")
     t["received"][str(j)] = share["value"]
     trustee_save(tdir, t)
     waiting = [x["index"] for x in TRUSTEES
                if x["index"] != t["index"] and str(x["index"]) not in t["received"]]
     print(f"verified and stored trustee {j}'s cross-share"
-          + (f"; still waiting on {waiting}" if waiting else " — my share of the joint key is complete"))
+          + (f"; still waiting on {waiting}" if waiting else ", my share of the joint key is complete"))
 
 
 def trustee_answer(tdir: Path, request_path: Path):
@@ -1506,12 +1506,12 @@ def trustee_answer(tdir: Path, request_path: Path):
     waiting = [x["index"] for x in TRUSTEES
                if x["index"] != t["index"] and str(x["index"]) not in t["received"]]
     if waiting:
-        sys.exit(f"my share of the joint key is incomplete — still waiting on cross-shares "
+        sys.exit(f"my share of the joint key is incomplete, still waiting on cross-shares "
                  f"from {waiting}; answering now would decrypt against the wrong key")
     req = json.loads(request_path.read_text())
     latest, C1, _ = counted_sum(req["box"]["ballots"])
     if req.get("sum_c1") != hx(C1):
-        sys.exit("the request's claimed sum does not match the box that came with it — "
+        sys.exit("the request's claimed sum does not match the box that came with it, "
                  "refusing; I decrypt only a sum I computed myself")
     x = (int(t["a0"], 16) + int(t["a1"], 16) * t["index"]
          + sum(int(v, 16) for v in t["received"].values())) % Q
@@ -1525,7 +1525,7 @@ def trustee_answer(tdir: Path, request_path: Path):
 
 
 # ---------------------------------------------------------------- the anchor
-# A fourth party on a fourth machine — the newspaper's public notices, as a tool. Its
+# A fourth party on a fourth machine, the newspaper's public notices, as a tool. Its
 # entire job is ONE property: it lodges a community's closing head at most once, and
 # refuses a different head for the same log forever after. Witnesses stop history being
 # rewritten before the close; the anchor stops it quietly changing after. Reprinting
@@ -1566,26 +1566,26 @@ def anchor_watch(adir: Path, community: str, log_pub: str):
         sys.exit("that does not look like a raw Ed25519 public key (base64url)")
     a["watch"] = {"community": community, "log_pub": log_pub}
     anchor_save(adir, a)
-    print(f"anchoring {community}. The log key came to you out of band — never from the "
+    print(f"anchoring {community}. The log key came to you out of band, never from the "
           "request you are asked to lodge.")
 
 
 def anchor_lodge(adir: Path, request_path: Path):
     a = anchor_load(adir)
     if not a.get("watch"):
-        sys.exit("this anchor serves nobody yet — run anchor watch first")
+        sys.exit("this anchor serves nobody yet, run anchor watch first")
     req = json.loads(request_path.read_text())
     head = req["head"]
     body = {k: v for k, v in head.items() if k != "sigs"}
     if body.get("log_id") != a["watch"]["community"]:
         sys.exit(f"this head is from {body.get('log_id')!r}, not the community I anchor")
     if not any(sig_ok(a["watch"]["log_pub"], s, body) for s in head.get("sigs", [])):
-        sys.exit("the head is not signed by the log key I was given — refusing to lodge")
+        sys.exit("the head is not signed by the log key I was given, refusing to lodge")
     prior = a["lodged"].get(body["log_id"])
     if prior and (prior["size"] != body["size"] or prior["root"] != body["root"]):
         sys.exit(f"REFUSED: I already lodged this log's closing head (size {prior['size']}, "
                  f"root {prior['root'][:23]}…) and this is a DIFFERENT one (size "
-                 f"{body['size']}). History is trying to change after the close — "
+                 f"{body['size']}). History is trying to change after the close, "
                  "refusing to reprint it is my entire job.")
     receipt = {"log_id": body["log_id"], "size": body["size"], "root": body["root"],
                "published": f"public notices archive, lodged copy ({a['key_id']})"}
@@ -1603,11 +1603,11 @@ def anchor_lodge(adir: Path, request_path: Path):
 def agm_anchor_import(d: Path, receipt_paths: list[Path]):
     pub, log = agm_load(d)
     if "decision.tally-proof" not in agm_by_type(log):
-        sys.exit("the tally is not in the log yet — there is no closing head to anchor")
+        sys.exit("the tally is not in the log yet, there is no closing head to anchor")
     agm_require_witnessed(d, "anchor the close")
     head = log.heads[-1]
     if head["size"] != len(log.entries):
-        sys.exit("the latest witnessed head does not cover the whole log — nothing to anchor")
+        sys.exit("the latest witnessed head does not cover the whole log, nothing to anchor")
     trust = json.loads((pub / "trust.json").read_text())
     receipts = (json.loads((pub / "anchor.json").read_text()).get("receipts", [])
                 if (pub / "anchor.json").exists() else [])
@@ -1620,11 +1620,11 @@ def agm_anchor_import(d: Path, receipt_paths: list[Path]):
             sys.exit(f"{p}: {kid!r} is not one of this election's required anchors")
         if r.get("size") != head["size"] or r.get("root") != head["root"]:
             sys.exit(f"{p}: the receipt covers size {r.get('size')}, not this log's closing "
-                     f"head (size {head['size']}) — the world's copy must be THIS history")
+                     f"head (size {head['size']}), the world's copy must be THIS history")
         if not sig_ok(trust["keys"][kid], r["sig"], {k: v for k, v in r.items() if k != "sig"}):
             sys.exit(f"{p}: the receipt's signature does not verify against {kid}'s card")
         if any(x.get("sig", {}).get("key_id") == kid for x in receipts):
-            print(f"  {p}: a receipt from {kid} is already lodged — skipping duplicate")
+            print(f"  {p}: a receipt from {kid} is already lodged, skipping duplicate")
             continue
         receipts.append(r)
     (pub / "anchor.json").write_text(json.dumps({"receipts": receipts}, indent=1) + "\n")
@@ -1635,18 +1635,18 @@ def agm_anchor_import(d: Path, receipt_paths: list[Path]):
         print(f"receipt(s) recorded; still waiting on {', '.join(waiting)}")
         return
     (d / "anchor-request.json").unlink(missing_ok=True)
-    print("every required anchor holds this exact history — the election is complete")
+    print("every required anchor holds this exact history, the election is complete")
     print(f"  publish {pub} and let anyone judge it:")
     print(f"  python3 {Path(__file__).parent / 'verify.py'} {pub}")
 
 
 # ---------------------------------------------------------------- the issuer
-# A fifth party — the register, on its own machine: the plot book, the membership
+# A fifth party, the register, on its own machine: the plot book, the membership
 # ledger, whatever a community's "who belongs" actually is. It certifies a member's
 # public key with its own pen; the committee can verify and file a credential but can
 # write none, so a phantom member needs the registrar, not the log-keeper. Sybil
 # resistance is exactly as strong as this register's judgment, and the manifest says
-# so — the tool is the pen, the register is the person holding it.
+# so, the tool is the pen, the register is the person holding it.
 
 def issuer_new(idir: Path, key_id: str):
     if idir.exists():
@@ -1665,7 +1665,7 @@ def issuer_new(idir: Path, key_id: str):
         {"issuer": key_id, "pub": pub_b64(priv)}, indent=1) + "\n")
     print(f"issuer {key_id} -> {idir}")
     print(f"  hand {idir / 'card.json'} to the committee; issuer.json stays here (0600)")
-    print("  certifying is YOUR judgment — the register is the person, this is only the pen")
+    print("  certifying is YOUR judgment, the register is the person, this is only the pen")
 
 
 def issuer_certify(idir: Path, name: str, pub_hex: str):
@@ -1675,7 +1675,7 @@ def issuer_certify(idir: Path, name: str, pub_hex: str):
     except ValueError:
         sys.exit("that is not a hex public key")
     if not (1 < y < P and pow(y, Q, P) == 1):
-        sys.exit("that public key is not a prime-order subgroup element — refused at the "
+        sys.exit("that public key is not a prime-order subgroup element, refused at the "
                  "door; hand the member back to cast.html to generate a proper one")
     cred = {"member": name, "voter_pub": hx(y)}
     priv = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(i["priv"]))
@@ -1694,7 +1694,7 @@ def tamper(src: Path, dst: Path, mode: str):
     shutil.copytree(src, dst)
     if mode == "log":
         # An INSIDER rewrites history: the committee holds the log key, edits the recorded
-        # question after the fact and re-signs it validly. Every signature still verifies —
+        # question after the fact and re-signs it validly. Every signature still verifies,
         # but the entry's Merkle leaf changed, so the already-published heads no longer
         # root the log they claim to. This is caught by consistency alone, and needs no
         # witnesses; the insider who thinks to regenerate the heads is mode "rehead".
@@ -1706,7 +1706,7 @@ def tamper(src: Path, dst: Path, mode: str):
         (dst / "log.jsonl").write_text("".join(json.dumps(x) + "\n" for x in entries))
     elif mode == "rehead":
         # The insider's BEST move against a witnessed log. Editing an entry alone (mode
-        # "log") breaks the head roots and is caught by plain Merkle consistency — no
+        # "log") breaks the head roots and is caught by plain Merkle consistency, no
         # witnesses required. So the insider goes further: edit the entry AND regenerate
         # every head to match, re-signing each with the log key they hold. They cannot
         # forge the federation's and Meersbrook's co-signatures, so their only move is to
@@ -1720,7 +1720,7 @@ def tamper(src: Path, dst: Path, mode: str):
         # ...and the insider's follow-up, once told the manifest is what declares the
         # witnesses: rewrite the manifest to declare none, repair the logged manifest
         # digest, and regenerate the heads. Now nothing INSIDE the transcript is
-        # inconsistent — the manifest, signed by the log key the insider holds, simply
+        # inconsistent, the manifest, signed by the log key the insider holds, simply
         # says this log never had witnesses. Only a bar set outside the transcript (the
         # verifier's trust anchors) can still catch it. A manifest cannot be its own standard.
         manifest = json.loads((dst / "manifest.json").read_text())
@@ -1736,7 +1736,7 @@ def tamper(src: Path, dst: Path, mode: str):
         reforge(dst, entries)
     elif mode == "roster":
         # The committee rewrites the eligibility RULE in the published register after the
-        # fact — "one vote per plot", so a member holding two plots may vote twice. Every
+        # fact, "one vote per plot", so a member holding two plots may vote twice. Every
         # credential still verifies, the ring is untouched, and every ballot still proves
         # membership. What pins the register as it stood when the decision opened is the
         # digest the witnessed log recorded. Until this tamper existed nothing exercised
@@ -1745,12 +1745,12 @@ def tamper(src: Path, dst: Path, mode: str):
         doc["eligibility"] = "plot-register/2026: one vote per plot"
         (dst / "roster.json").write_text(json.dumps(doc, indent=1) + "\n")
     elif mode == "box":
-        # Total collusion re-aims a sealed ballot — Sandra's own, which takes her 8-6 win to
+        # Total collusion re-aims a sealed ballot, Sandra's own, which takes her 8-6 win to
         # a 7-7 tie. The committee replaces her ciphertext with its own encryption of Keith
         # and, since it chose the randomness, a perfectly valid fresh 0-or-1 proof to match;
         # repairs the box digest; re-decrypts the sum honestly; and both witnesses co-sign.
         # Nothing about the ballot is malformed any more. It is simply not the ballot its
-        # author signed — and its author is one of sixty people the committee cannot
+        # author signed, and its author is one of sixty people the committee cannot
         # identify, never mind impersonate. (Here it can: it holds the seed. A real one
         # could not even find her ballot in the box.)
         def swap(ballots):
@@ -1761,8 +1761,8 @@ def tamper(src: Path, dst: Path, mode: str):
         rewrite_box(dst, swap, collude=True)
     elif mode == "stuff":
         # Total collusion mints a vote. The committee builds a flawless extra ballot for
-        # Keith — a real encryption of 0, a real 0-or-1 proof, a well-formed linking tag
-        # nobody has used — repairs the box digest, re-decrypts the sum honestly, and both
+        # Keith, a real encryption of 0, a real 0-or-1 proof, a well-formed linking tag
+        # nobody has used, repairs the box digest, re-decrypts the sum honestly, and both
         # witnesses co-sign the rewritten history. Everything a signature or a hash could
         # certify, they certified. The one artifact they cannot produce is a proof of
         # membership in a ring they hold no key to. Eligibility is proven here, not
@@ -1781,11 +1781,11 @@ def tamper(src: Path, dst: Path, mode: str):
     elif mode == "doublevote":
         # The attack unlinkability invites, and the reason the nullifier's subgroup check is
         # not decoration. Derek cannot derive two tags from one secret: the ring signature
-        # binds the tag to the key. But p is a safe prime, so -1 is a non-residue — the
+        # binds the tag to the key. But p is a safe prime, so -1 is a non-residue, the
         # NEGATED tag -T lies outside the prime-order subgroup, and the signature still
         # closes whenever the challenge at Derek's own ring index comes out even. He grinds
-        # his nonce until it does (two tries, on average), and his second ballot — same
-        # secret, same ring, a tag that links to nothing — reads as a different voter. The
+        # his nonce until it does (two tries, on average), and his second ballot, same
+        # secret, same ring, a tag that links to nothing, reads as a different voter. The
         # corrupt committee counts both. Only `nullifier in the subgroup` says otherwise.
         def doublevote(ballots):
             ring, index, rd = ring_of(dst)
@@ -1811,13 +1811,13 @@ def tamper(src: Path, dst: Path, mode: str):
         # spare for the CDS proof beside it. A saboteur (Derek) smuggles a malformed group
         # element into the box: c2 negated to -c2, which lies outside the prime-order
         # subgroup, wrapped in a FRESH 0-or-1 proof forged through the even-challenge grind
-        # above — so the CDS check accepts it — and a valid ring signature over his own key.
+        # above, so the CDS check accepts it, and a valid ring signature over his own key.
         # He gives it a low seq under his real ballot, so it is superseded and never counted:
         # the tally decrypts honestly, the announced result is exactly right, and only the
         # box itself now contains an element that is not a group element. The committee and
         # witnesses collude to log it consistently. Every other check passes. Turn off the
         # subgroup line and the verifier CERTIFIES a transcript carrying malformed
-        # ciphertext — the small-subgroup foothold this check exists to deny.
+        # ciphertext, the small-subgroup foothold this check exists to deny.
         def smuggle(ballots):
             x = nym_secret("Derek Wainwright")
             ring, index, rd = ring_of(dst)
@@ -1833,8 +1833,8 @@ def tamper(src: Path, dst: Path, mode: str):
             ballots.append(b)
         rewrite_box(dst, smuggle, collude=True)
     elif mode == "overvote":
-        # An enrolled voter (Derek again) encrypts m=2 — two votes for Sandra in one
-        # ballot — proves membership validly, and the corrupt committee ACCEPTS it: box
+        # An enrolled voter (Derek again) encrypts m=2, two votes for Sandra in one
+        # ballot, proves membership validly, and the corrupt committee ACCEPTS it: box
         # digest repaired, sum re-decrypted honestly, witnesses co-sign the history. Every
         # hash, signature and trustee proof in the transcript now agrees. The only thing
         # that cannot be manufactured is the 0-or-1 proof for a ballot that encrypts 2.
@@ -1846,7 +1846,7 @@ def tamper(src: Path, dst: Path, mode: str):
     elif mode == "share":
         # Total signature collusion: the committee AND both witnesses rewrite the tally to
         # make Keith win, regenerating heads with all three signatures. The counts, the
-        # combined decryption and one share are arithmetically consistent with the lie —
+        # combined decryption and one share are arithmetically consistent with the lie,
         # but a Chaum-Pedersen proof for the rigged share requires a secret the committee
         # does not hold. The tally survives even those who sign the history.
         entries = load_entries(dst)
@@ -1863,8 +1863,8 @@ def tamper(src: Path, dst: Path, mode: str):
         reforge(dst, entries, with_witnesses=True)
     elif mode == "count":
         # Same total collusion, lazier lie: honest shares, honest proofs, rigged counts.
-        # Anyone redoing the recount — combine the proven shares, brute-force the small
-        # exponent — gets the true numbers and the announcement refutes itself.
+        # Anyone redoing the recount, combine the proven shares, brute-force the small
+        # exponent, gets the true numbers and the announcement refutes itself.
         entries = load_entries(dst)
         body = entry(entries, "decision.tally-proof")["body"]
         a, b = body["counts"][OPTIONS[0]], body["counts"][OPTIONS[1]]
@@ -1872,8 +1872,8 @@ def tamper(src: Path, dst: Path, mode: str):
         reforge(dst, entries, with_witnesses=True)
     elif mode == "drop":
         # The end of the escalation, and the one tamper that forges NOTHING. The committee
-        # and both witnesses erase Plot-holder 23's kiosk recast — the ballot that repaired
-        # her compromised phone's lie — repair the box digest, re-decrypt the shortened sum
+        # and both witnesses erase Plot-holder 23's kiosk recast, the ballot that repaired
+        # her compromised phone's lie, repair the box digest, re-decrypt the shortened sum
         # honestly, and re-sign history end to end. Her phone's sealed vote for Keith
         # quietly becomes her vote, and Sandra's 8-6 win a 7-7 tie. Every hash, signature
         # and proof now agrees, because every artifact is genuine: this is the true record

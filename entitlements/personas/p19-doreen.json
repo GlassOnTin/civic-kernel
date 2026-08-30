@@ -1,6 +1,6 @@
 {
-  "name": "Doreen — 78, cares 40 hours a week for a friend on Attendance Allowance",
-  "note": "The pension-age carer's classic: her £190 State Pension swallows the £86.45 rate, so Carer's Allowance pays nothing — and is still worth claiming, because the underlying entitlement adds £48.15 to her Pension Credit. The two cards teach it together.",
+  "name": "Doreen: 78, cares 40 hours a week for a friend on Attendance Allowance",
+  "note": "The pension-age carer's classic: her £190 State Pension swallows the £86.45 rate, so Carer's Allowance pays nothing, and is still worth claiming, because the underlying entitlement adds £48.15 to her Pension Credit. The two cards teach it together.",
   "as_of": "2026-07-12",
   "checked": "Overlap against gov.uk/carers-allowance/eligibility ('increased Pension Credit instead') and S.I. 1979/597; PC carer addition against SPC Regs reg 6(8). 2026-07-12.",
   "answers": {
@@ -40,7 +40,7 @@
     "carers-allowance": {
       "verdict": "appears-eligible",
       "weekly": null,
-      "because": "Entitled — but not paid: your State Pension is at least the £86.45 rate, and the two overlap. Claim anyway. An underlying entitlement is exactly what the Pension Credit carer question above means: it adds the £48.15 carer addition and raises the earnings disregard to £20 — in gov.uk's own words, people with higher pensions get increased Pension Credit instead. And unpaid entitlement does not touch the cared-for person's own benefits."
+      "because": "Entitled, but not paid: your State Pension is at least the £86.45 rate, and the two overlap. Claim anyway. An underlying entitlement is exactly what the Pension Credit carer question above means: it adds the £48.15 carer addition and raises the earnings disregard to £20, in gov.uk's own words, people with higher pensions get increased Pension Credit instead. And unpaid entitlement does not touch the cared-for person's own benefits."
     }
   }
 }

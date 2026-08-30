@@ -1,6 +1,6 @@
 {
-  "name": "Ahmed — 80, needs help day and night, income just above the guarantee",
-  "note": "The simulation case: today his £245.00 income means no Pension Credit. But his answers point at higher-rate Attendance Allowance — and if awarded, AA is not counted as income and would open the severe-disability amount, flipping the Pension Credit answer. Change one answer, watch it move.",
+  "name": "Ahmed: 80, needs help day and night, income just above the guarantee",
+  "note": "The simulation case: today his £245.00 income means no Pension Credit. But his answers point at higher-rate Attendance Allowance, and if awarded, AA is not counted as income and would open the severe-disability amount, flipping the Pension Credit answer. Change one answer, watch it move.",
   "as_of": "2026-07-12",
   "checked": "AA conditions checked against SSCBA 1992 s.64(2)-(3), s.65 and gov.uk rates (£114.60 higher), 2026-07-12; PC arithmetic against SPC Regs reg 6.",
   "answers": {

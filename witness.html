@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Witness an election — Civic Kernel</title>
+<title>Witness an election, Civic Kernel</title>
 <style>
   /* The gov.uk discipline, shared with owed.html: white page, near-black large
      type, underlined links, the yellow focus state, 2px input borders, square
@@ -35,7 +35,7 @@
   p  { margin: .6rem 0; }
   .sub { color: var(--muted); }
   a { color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
-  a:focus, .skip:focus {
+  a:focus.skip:focus {
     background: var(--focus); color: var(--focus-fg);
     outline: 3px solid var(--focus); outline-offset: 0;
     box-shadow: 0 3px 0 var(--focus-fg); text-decoration: none;
@@ -72,7 +72,7 @@
   input[type=text]:focus {
     outline: 3px solid var(--focus); outline-offset: 0; box-shadow: inset 0 0 0 2px var(--fg);
   }
-  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+  code.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
   .small { font-size: 1rem; }
   .secretbox {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em;
@@ -95,33 +95,33 @@
 <h1>Witness an election</h1>
 <p class="sub">A club nearby has asked you to help keep their election honest. The favour is
 small: a few times a season, this page checks that the record they show you is the same one
-you saw last time — nothing rewritten, nothing quietly missing — and adds your signature to
+you saw last time, nothing rewritten, nothing quietly missing, and adds your signature to
 its fingerprint. That signature is what stops anyone, their own committee included, from
 changing the past. Five minutes, nothing to install, and nothing you do here is sent
 anywhere.</p>
 
 <div id="nosign" class="status warn" style="display:none"><b>CANNOT SIGN HERE.</b> This browser
-does not support Ed25519 signing (WebCrypto). Use a current Firefox, Chrome or Safari — or the
+does not support Ed25519 signing (WebCrypto). Use a current Firefox, Chrome or Safari, or the
 same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
 
 <div class="panel">
   <h2>1 · Your witness file</h2>
   <p class="small">Being a witness needs one small file. It is two things at once: your
-  signature stamp, and your memory of what you have signed so far. Make one here — the page
+  signature stamp, and your memory of what you have signed so far. Make one here, the page
   gives you two downloads: a <b>card</b> to hand to the club's committee (that part is public),
   and your <b>witness file</b> to keep (that part is yours alone).</p>
   <div class="dropzone" id="statedrop">
-    Done this before? Drop your <code>witness.json</code> here — or
+    Done this before? Drop your <code>witness.json</code> here, or
     <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="statepicker"></label>.
   </div>
-  <p class="small" style="margin-top:.8rem">First time? Just type your society's name — the
+  <p class="small" style="margin-top:.8rem">First time? Just type your society's name, the
   page turns it into the technical form the tools share, so you never have to:</p>
   <div class="q">
     <label for="socname">Your society's name</label>
     <input type="text" id="socname" placeholder="e.g. Meersbrook Allotments" spellcheck="false" autocomplete="off">
   </div>
   <div class="q">
-    <label for="socsite">Your society's website, if it has one <span class="sub" style="font-weight:400">(optional — makes the name tidier)</span></label>
+    <label for="socsite">Your society's website, if it has one <span class="sub" style="font-weight:400">(optional, makes the name tidier)</span></label>
     <input type="text" id="socsite" placeholder="e.g. meersbrook-allotments.org.uk" spellcheck="false" autocomplete="off">
   </div>
   <details class="small">
@@ -134,9 +134,9 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
     <button id="dlstate" style="display:none">Download my witness file</button>
   </p>
   <div id="genout" class="small" style="display:none">Two files just downloaded. Hand
-  <code>card.json</code> to the club's committee — it is public, and it is how their election
+  <code>card.json</code> to the club's committee; it is public, and it is how their election
   learns to require your signature. Keep <code>witness.json</code> private: anyone who holds
-  it can sign as you. Your signing name is <code id="madeid"></code> — just a unique name on
+  it can sign as you. Your signing name is <code id="madeid"></code>, just a unique name on
   the paperwork; nothing on the internet looks it up.</div>
   <div id="generr" class="status bad small" style="display:none"></div>
   <p id="statebox" class="small" style="display:none; margin-top:.9rem"><b>This witness:</b>
@@ -144,10 +144,10 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
 </div>
 
 <div class="panel">
-  <h2>2 · The handshake — once, in person or by phone</h2>
+  <h2>2 · The handshake, once, in person or by phone</h2>
   <p class="small">The committee gives you two lines to paste in: their club's name (in the same
   address-like form as yours) and their record's public key. Take them <b>face to face, by
-  phone, or on paper</b> — never from the email that asks you to sign something. The reason is
+  phone, or on paper</b>, never from the email that asks you to sign something. The reason is
   simple: a request that could introduce its own judge would always pass. This handshake happens
   once; everything after it is checking.</p>
   <input type="text" id="community" class="mono" placeholder="their club's name, e.g. did:web:heeley-bank-allotments.example" spellcheck="false" autocomplete="off">
@@ -163,10 +163,10 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
   it really is the club from your handshake; it really was sent with their key; the fingerprint
   really matches the record that came with it; and today's record still contains everything you
   signed before, unchanged. If all four hold, you get a <b>signed slip</b> to email back and an
-  <b>updated witness file</b> to keep. If any of them fails, nothing is signed — and the page
+  <b>updated witness file</b> to keep. If any of them fails, nothing is signed, and the page
   tells you exactly which one, because that refusal is the whole job.</p>
   <div class="dropzone" id="reqdrop">
-    Drop the request file here — or
+    Drop the request file here, or
     <label style="text-decoration: underline; cursor: pointer;">choose it<input type="file" id="reqpicker"></label>.
   </div>
   <p>
@@ -177,24 +177,24 @@ same witness in a terminal: <code>proto/clubvote.py witness</code>.</div>
 </div>
 
 <div class="panel">
-  <h2>What this page cannot protect you from — said plainly</h2>
+  <h2>What this page cannot protect you from, said plainly</h2>
   <p class="small">
   <b>Losing the file:</b> your witness file is the stamp <em>and</em> the memory. Lose it and
-  this witness is gone — tell the committee, make a new one, redo the handshake. And anyone who
+  this witness is gone, tell the committee, make a new one, redo the handshake. And anyone who
   holds a copy can sign as you: treat it like the society's chequebook.
   <b>An old copy:</b> after signing, keep the <em>newest</em> file. An old one still refuses
-  rewrites — but it remembers less than you have actually vouched for.
+  rewrites, but it remembers less than you have actually vouched for.
   <b>This machine:</b> a compromised browser could sign something other than what it shows you.
   The request and the signed slip are small files anyone can re-check with the command-line
-  witness (<code>proto/clubvote.py witness</code> — the same witness) — and two witnesses on
+  witness (<code>proto/clubvote.py witness</code>, the same witness), and two witnesses on
   two machines is the whole point of asking two societies.</p>
 </div>
 
 <footer>
-  Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype —
+  Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype,
   <a href="architecture.html">the architecture</a> · <a href="verifier.html">check the election</a> ·
   <a href="cast.html">cast a ballot</a>. Interchangeable with <code>proto/clubvote.py witness</code>:
-  the same file, the same co-signature, the same refusals — a parity test in CI holds this page
+  the same file, the same co-signature, the same refusals, a parity test in CI holds this page
   to the Python witness across a whole election.
 </footer>
 </main>
@@ -220,7 +220,7 @@ function render() {
   $("statebox").style.display = "block";
   $("statesummary").textContent =
     state.key_id
-    + (state.watch ? " — watching " + state.watch.community : " — not watching anyone yet; do the handshake below")
+    + (state.watch ? ", watching " + state.watch.community : ", not watching anyone yet; do the handshake below")
     + (state.last
         ? ". You have signed their record up to " + state.last.size + " entries."
         : ". Nothing signed yet.");
@@ -234,7 +234,7 @@ function render() {
 // --- step 1: make or load the witness file
 // The signing name is composed FOR the user: a plain society name (or its
 // website domain) becomes the did:web form the tools share. Nothing resolves
-// it — it only has to be unique and stable — so the machine format is the
+// it; it only has to be unique and stable, so the machine format is the
 // page's job, never the secretary's. A committee-supplied exact line wins.
 function composeKeyId() {
   const exact = $("keyid").value.trim();
@@ -289,9 +289,9 @@ $("pin").onclick = () => {
   try {
     state = CivicWitness.watch(state, $("community").value, $("logpub").value.trim());
     render();
-    out.innerHTML = "<div class='status ok small'>Handshake saved — you are now watching <b></b>. "
+    out.innerHTML = "<div class='status ok small'>Handshake saved, you are now watching <b></b>. "
       + "Your witness file changed, so a fresh copy just downloaded: keep that one. And remember "
-      + "the rule the handshake exists for — those two lines come from a person, never from a "
+      + "the rule the handshake exists for, those two lines come from a person, never from a "
       + "request.</div>";
     out.querySelector("b").textContent = state.watch.community;
     download("witness.json", stateText());
@@ -315,10 +315,10 @@ async function handleRequest(text) {
     downloads.cosig = { name, text: JSON.stringify(r.cosig, null, 1) + "\n" };
     $("dlcosig").style.display = "inline-block";
     $("dlstate2").style.display = "inline-block";
-    out.innerHTML = "<div class='status ok small'><b>Signed — their record checks out.</b> "
+    out.innerHTML = "<div class='status ok small'><b>Signed, their record checks out.</b> "
       + "It is the same story you saw before, now " + r.cosig.head.size + " entries long. "
       + "Two downloads: email <code>" + name + "</code> back to the committee, and <b>keep the "
-      + "new <code>witness.json</code></b> — your memory now includes today, and the old copy "
+      + "new <code>witness.json</code></b>, your memory now includes today, and the old copy "
       + "has already forgotten it.</div>";
     download(name, downloads.cosig.text);
     download("witness.json", stateText());

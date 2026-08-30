@@ -1,6 +1,6 @@
 {
-  "name": "Cyril — 72, comfortable income, the clawback case",
-  "note": "Winter Fuel Payment is paid to him automatically like everyone else — and recovered in full by HMRC because his own taxable income is over £35,000. The verdict says both halves, and that opting out exists. His income also puts Pension Credit out of reach, which the card confirms.",
+  "name": "Cyril: 72, comfortable income, the clawback case",
+  "note": "Winter Fuel Payment is paid to him automatically like everyone else, and recovered in full by HMRC because his own taxable income is over £35,000. The verdict says both halves, and that opting out exists. His income also puts Pension Credit out of reach, which the card confirms.",
   "as_of": "2026-07-12",
   "checked": "Recovery rule against gov.uk/winter-fuel-payment (individual £35,000 threshold, partner income not counted; opt-out exists), 2026-07-12.",
   "answers": {
@@ -39,7 +39,7 @@
     },
     "winter-fuel-payment": {
       "verdict": "appears-eligible",
-      "because": "£200 for your household this winter, paid automatically — but HMRC recovers the share of anyone whose own taxable income is over £35,000, through PAYE or Self Assessment. You can opt out of receiving it instead."
+      "because": "£200 for your household this winter, paid automatically, but HMRC recovers the share of anyone whose own taxable income is over £35,000, through PAYE or Self Assessment. You can opt out of receiving it instead."
     },
     "council-tax-reduction": {
       "verdict": "not-eligible",

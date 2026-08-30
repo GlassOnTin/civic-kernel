@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Owed parity: the two entitlement engines — owed.js (the page's) and
-// entitlements/judge.py (the independent judge) — must produce identical
+// Owed parity: the two entitlement engines, owed.js (the page's) and
+// entitlements/judge.py (the independent judge), must produce identical
 // claim-traces over the persona battery, and every persona's hand-checked
 // expectations must hold in BOTH. Also the structural honesty checks the
 // plan (docs/wedge-one-v0.md) demands: the corpus embedded in owed.html is
@@ -59,7 +59,7 @@ for (const ent of ents) {
     ent.id + ": tax year " + eff.tax_year
     + (eff.tax_year === currentTaxYear ? " is current (" + currentTaxYear + ")"
       : (eff.stale_acknowledged ? " is stale but acknowledged: " + eff.stale_acknowledged
-        : " is STALE (current is " + currentTaxYear + ") and unacknowledged — re-check the amounts and re-pin")));
+        : " is STALE (current is " + currentTaxYear + ") and unacknowledged, re-check the amounts and re-pin")));
 }
 
 // --- the corpus embedded in owed.html equals the files (generated, never trusted)
@@ -77,7 +77,7 @@ if (m) {
 }
 
 // --- the circumstances file: what the page saves, the page and the judge reload
-// identically — persona-shaped on purpose
+// identically, persona-shaped on purpose
 const PERSONAS = path.join(ROOT, "entitlements", "personas");
 {
   let rt = true, why = "";
@@ -106,21 +106,21 @@ for (const f of readdirSync(PERSONAS).sort()) {
       }
     }
   }
-  say(expectOk, persona.name + " — owed.js meets every expectation" + detail);
+  say(expectOk, persona.name + ", owed.js meets every expectation" + detail);
   let py = null;
   try {
     py = JSON.parse(execFileSync("python3",
       [path.join(ROOT, "entitlements", "judge.py"), UK, "--persona", path.join(PERSONAS, f), "--json"],
       { stdio: "pipe" }).toString());
   } catch (e) {
-    say(false, persona.name + " — judge.py ran :: " + (e.stderr || e.message).toString().slice(0, 120));
+    say(false, persona.name + ", judge.py ran :: " + (e.stderr || e.message).toString().slice(0, 120));
     continue;
   }
-  say(canon(js) === canon(py), persona.name + " — the two engines' full traces are identical");
+  say(canon(js) === canon(py), persona.name + ", the two engines' full traces are identical");
 }
 
 if (failures) {
-  console.log(failures + " owed-parity failure(s) — the page and the judge do not agree");
+  console.log(failures + " owed-parity failure(s), the page and the judge do not agree");
   process.exit(1);
 }
-console.log("owed parity: two engines, one corpus, identical traces — and no way to phone home");
+console.log("owed parity: two engines, one corpus, identical traces, and no way to phone home");

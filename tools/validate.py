@@ -130,8 +130,8 @@ def main() -> int:
         page.write_text(new)
         print(f"preview-data injected: {len(plains)} sections, {len(threats)} threats")
 
-    # the glossary lives twice — README.md (the linkable canon) and the essay's
-    # Appendix — so the two term sets must not drift
+    # the glossary lives twice, README.md (the linkable canon) and the essay's
+    # Appendix, so the two term sets must not drift
     gloss = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "README.md").read_text())
     essay = re.findall(r'id="(w-[a-z0-9-]+)"', (ROOT / "architecture.html").read_text())
     if set(gloss) != set(essay) or len(gloss) != len(set(gloss)):
@@ -139,7 +139,7 @@ def main() -> int:
         return 1
     print(f"glossary parity: {len(gloss)} terms, README.md == architecture.html appendix")
 
-    # KERNEL.md's §-links carry the essay's Plainly lines as hover titles —
+    # KERNEL.md's §-links carry the essay's Plainly lines as hover titles,
     # same anti-drift discipline as the glossary
     total = 0
     for name in ("KERNEL.md", "proto/README.md", "docs/functional-model.md", "docs/uk-trajectory.md", "docs/eu-trajectory.md", "docs/cn-trajectory.md", "docs/de-trajectory.md", "docs/us-trajectory.md", "docs/wedge-one-v0.md"):
@@ -190,7 +190,7 @@ def main() -> int:
     print("verifier previews: 5 cross-document tips match their sources' own openers")
 
     # the entitlement rules validate against their schema, and owed.html's
-    # embedded corpus is regenerated from them — generated, never trusted
+    # embedded corpus is regenerated from them, generated, never trusted
     # (string splice, never re.sub: replacement-escape processing once
     # corrupted an embedded schema)
     rules_schema = json.loads((ROOT / "entitlements" / "rules.schema.json").read_text())

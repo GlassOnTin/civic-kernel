@@ -1,20 +1,20 @@
-/* Civic Kernel — the entitlement engine, in JavaScript.
+/* Civic Kernel, the entitlement engine, in JavaScript.
  *
  * Runs an entitlements/*.json rules file against one household's answers,
  * entirely on the device: evaluates the little expression language the
  * corpus is written in (integer pence throughout; booleans are 0/1), fires
  * the gates in order, computes every named value as a trace step, and
- * returns a claim-trace — verdict, weekly amount, which rules fired, what
+ * returns a claim-trace, verdict, weekly amount, which rules fired, what
  * was demanded and under what authority, and what was deliberately not
  * asked.
  *
  * The corpus is the whole logic: this file knows no benefit rules, no
- * amounts, no thresholds. Change the law, change the JSON — this file does
+ * amounts, no thresholds. Change the law, change the JSON, this file does
  * not change. entitlements/judge.py is the independent second engine,
  * sharing these rules files and nothing else; tools/owed-parity.mjs holds
  * the two to identical outputs over the persona battery in CI.
  *
- * No network anywhere in this file, by construction — the parity test
+ * No network anywhere in this file, by construction, the parity test
  * greps for the absence of every request API. Dates: ages are attained on
  * the anniversary of birth; month arithmetic preserves the day, clamped to
  * the month's length (a one-day generosity for 29 February births, noted
@@ -134,7 +134,7 @@
   }
 
   /* Which questions apply to this household (their `when` holds)? The form
-   * and the trace's `demanded` both come from here — a question the rules
+   * and the trace's `demanded` both come from here, a question the rules
    * did not demand is never asked and never listed. */
   function demanded(ent, spa, answers, asOf) {
     const { ev } = makeEval(ent, spa, answers, asOf);
@@ -183,7 +183,7 @@
         return trace;
       }
     }
-    throw new Error(ent.id + ": no verdict matched — the corpus must end with a catch-all");
+    throw new Error(ent.id + ": no verdict matched, the corpus must end with a catch-all");
   }
 
   function poundsFromPence(p) {
@@ -191,7 +191,7 @@
   }
 
   // ------------------------------------------------------ circumstances file
-  /* The household's answers as a small file the person keeps — a file, not
+  /* The household's answers as a small file the person keeps, a file, not
    * an account (the witness.json pattern). Deliberately the same shape as a
    * persona: entitlements/judge.py runs a saved circumstances file
    * unchanged. The page always recomputes against today; `as_of` is kept in
@@ -201,7 +201,7 @@
     return {
       v: "civic-kernel/circumstances/v0",
       name: "my circumstances",
-      note: "KEEP PRIVATE. This file holds what you told the page — date of birth, "
+      note: "KEEP PRIVATE. This file holds what you told the page, date of birth, "
         + "income, savings, care needs. It is yours: nothing was stored anywhere else. "
         + "Drop it back on the page after a rule change and everything recomputes; "
         + "entitlements/judge.py accepts it as a persona, unchanged.",

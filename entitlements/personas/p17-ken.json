@@ -1,5 +1,5 @@
 {
-  "name": "Ken — on Pension Credit, renting, adult son at home",
+  "name": "Ken: on Pension Credit, renting, adult son at home",
   "note": "Maximum Housing Benefit applies, but the page shows no amount: a non-dependant deduction for his son (sized by the son's income) is real and not encoded, so any number would overstate. The verdict says so instead.",
   "as_of": "2026-07-12",
   "checked": "Non-dependant deduction existence against HB (SPC) Regs 2006 reg 55 (amounts not encoded by design), 2026-07-12.",

@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """Independent verifier for a clubvote transcript: `python3 verify.py <outdir>`.
 
-Shares NO code with clubvote.py — it reimplements canonicalization, the Merkle tree,
+Shares NO code with clubvote.py; it reimplements canonicalization, the Merkle tree,
 the group arithmetic, all three zero-knowledge proof verifications, and every check from
 the published artifacts plus the waist schemas in ../schema/. Trust anchors come from
 trust.json (in a real deployment: DID resolution and the witness ecosystem; here, a file
-you choose to trust) — including which external parties must hold a receipt for the
+you choose to trust), including which external parties must hold a receipt for the
 closing log head, the one defence against a history that was quietly shortened rather
 than forged. The ballot group is pinned BY NAME to this verifier's own
-constants — a transcript that could supply its own group could supply a smooth one.
+constants, a transcript that could supply its own group could supply a smooth one.
 
 The ballots are anonymous, and this verifier never learns who cast one. It checks that
-each carries a linkable ring signature over the published roster — proof that SOME
+each carries a linkable ring signature over the published roster, proof that SOME
 plot-holder cast it, bound to a per-decision linking tag that is the only thing
 distinguishing one voter from another.
 
@@ -30,7 +30,7 @@ from jsonschema import Draft202012Validator
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES = []
 
-# The verifier's own copy of RFC 3526 group 14 — parameters come from the verifier,
+# The verifier's own copy of RFC 3526 group 14, parameters come from the verifier,
 # never from the transcript under audit.
 KNOWN_GROUPS = {"rfc3526-modp-2048": int(
     "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129024E088A67CC74"
@@ -128,7 +128,7 @@ def main(outdir: Path) -> int:
     # A head is only as good as WHO co-signed it. Checking that the signatures PRESENT
     # verify is not enough: an insider who rewrites an entry can regenerate every head,
     # re-sign each with the log key they hold, and simply drop the witnesses they cannot
-    # forge — the heads then pass consistency and signature checks alike. Nor can the
+    # forge, the heads then pass consistency and signature checks alike. Nor can the
     # standard be the manifest's own witness list: the manifest is signed by the log key,
     # so the same insider can lower their own bar to zero. The standard is therefore the
     # verifier's trust anchors, which name the witnesses independently (in reality: DID
@@ -156,7 +156,7 @@ def main(outdir: Path) -> int:
           + ("" if required_witnesses else " :: the trust anchors name no witness, and an "
              "unwitnessed log cannot defeat a records rewrite")
           + ("" if not missing else f" :: head(s) at size {missing} lack a valid co-signature from "
-             f"every witness — the log key alone re-signed this history"))
+             f"every witness, the log key alone re-signed this history"))
 
     check(set(required_witnesses) <= set(declared),
           "the manifest declares every witness the trust anchors require (the manifest is signed "
@@ -178,7 +178,7 @@ def main(outdir: Path) -> int:
     check(closed.get("ballot_box_digest") == sha256_hex(canon(box_doc)),
           "logged ballot-box digest matches the published box")
 
-    print("[4] eligibility: the ring — one issuer-signed nym key per enrolled member")
+    print("[4] eligibility: the ring, one issuer-signed nym key per enrolled member")
     issuer_key = trust.get(roster_doc["members"][0]["issuer_sig"]["key_id"], "") if roster_doc["members"] else ""
     creds_ok = all(sig_ok(issuer_key, c["issuer_sig"],
                           {k: v for k, v in c.items() if k != "issuer_sig"}) for c in roster_doc["members"])
@@ -197,7 +197,7 @@ def main(outdir: Path) -> int:
     q, g = (p - 1) // 2, 2
     # DKG: every trustee published their own Feldman commitment vector; the joint
     # commitments are their product, the election key is the joint constant term, and
-    # every trustee key h_i derives from them — nothing about the key is ever asserted,
+    # every trustee key h_i derives from them, nothing about the key is ever asserted,
     # and no single party's contribution determines it.
     A = [1, 1]
     for tr in trustees_doc["trustees"]:
@@ -253,7 +253,7 @@ def main(outdir: Path) -> int:
 
     def lsag_ok(b: dict) -> bool:
         """The ring closes only if some ring key signed THIS ballot with THIS tag. Which
-        key, the signature does not say — and there is no other way to ask."""
+        key, the signature does not say, and there is no other way to ask."""
         sig = b.get("ring_sig") or {}
         s = [int(v, 16) for v in sig.get("s", [])]
         if len(s) != len(ring):
@@ -294,7 +294,7 @@ def main(outdir: Path) -> int:
     # Stage gate. Sections [1]–[5] are cheap; verifying a ballot is O(roster), and there
     # are as many ballots as voters. If the log, its witnesses, or the digests committing
     # to the box and the roster have already failed, the ballots would be checked against
-    # artifacts this transcript has not earned the right to assert — so decline here rather
+    # artifacts this transcript has not earned the right to assert, so decline here rather
     # than spend the ring on a box the log does not vouch for. Same verdict, sooner.
     if FAILURES:
         print("[6-7] not checked: the artifacts that commit to the ballots did not verify (above)")
@@ -335,7 +335,7 @@ def main(outdir: Path) -> int:
         print("[7] not checked: the ballots did not verify, so neither can their tally")
         return finish(None, roster_doc, None)
 
-    print("[7] the tally: threshold-decrypted from the sum alone — no ballot is ever opened")
+    print("[7] the tally: threshold-decrypted from the sum alone, no ballot is ever opened")
     tally = by_type.get("decision.tally-proof", {}).get("body", {})
     latest = {}
     for b in sorted(ballots, key=lambda b: b["seq"]):
@@ -348,7 +348,7 @@ def main(outdir: Path) -> int:
           f"the logged sum ciphertext is the homomorphic product of the {len(latest)} counted ballots")
 
     # Each share carries a Chaum-Pedersen proof against a trustee key DERIVED from the
-    # Feldman commitments (h_i = A0 * A1^i) — the setup cannot assert keys it cannot
+    # Feldman commitments (h_i = A0 * A1^i), the setup cannot assert keys it cannot
     # prove, and the committee cannot manufacture a share for a secret it does not hold.
     shares = tally.get("trustee_shares", [])
     required = trustees_doc["threshold"]["required"]
@@ -398,7 +398,7 @@ def main(outdir: Path) -> int:
 
     # A transcript in which every proof verifies can still be a lie of omission: total
     # signature collusion cannot forge a ballot (everything above), but it can erase one
-    # and re-sign the shortened history — every artifact then genuine, nothing inside the
+    # and re-sign the shortened history, every artifact then genuine, nothing inside the
     # transcript left to object. So the last check is against something outside it: the
     # closing head, republished beyond the collusion's reach, by parties the trust anchors
     # name (here a newspaper's pinned key stands in for its printed archive). The receipt
@@ -408,7 +408,7 @@ def main(outdir: Path) -> int:
         print("[8] not checked: the transcript did not verify, so no anchor can vouch for it")
         return finish(None, roster_doc, None)
 
-    print("[8] the anchor: the world's copy of the closing head — history cannot quietly shorten")
+    print("[8] the anchor: the world's copy of the closing head, history cannot quietly shorten")
     anchor_file = outdir / "anchor.json"
     receipts = json.loads(anchor_file.read_text()).get("receipts", []) if anchor_file.exists() else []
     required_anchors = anchors.get("anchors", [])
@@ -429,7 +429,7 @@ def main(outdir: Path) -> int:
           + ("" if required_anchors else " :: the trust anchors name no external anchor, and an "
              "unanchored log cannot refute a quietly erased ballot")
           + ("" if not unanchored else f" :: no valid receipt from {unanchored} matches this log's "
-             "closing head — the history under audit is not the history the world saw"))
+             "closing head, the history under audit is not the history the world saw"))
 
     return finish(counts_dec, roster_doc, latest)
 
@@ -437,7 +437,7 @@ def main(outdir: Path) -> int:
 def finish(counts, roster_doc, latest) -> int:
     print()
     if FAILURES:
-        print(f"NOT VERIFIED — {len(FAILURES)} failure(s):")
+        print(f"NOT VERIFIED, {len(FAILURES)} failure(s):")
         for f in FAILURES:
             print("  - " + f)
         return 1
@@ -451,10 +451,10 @@ def finish(counts, roster_doc, latest) -> int:
 
 if __name__ == "__main__":
     # A verifier is a trust boundary: it is handed bytes by whoever wants them believed.
-    # Malformed input is a verdict, not a crash — "I could not check this" and "this checks
+    # Malformed input is a verdict, not a crash, "I could not check this" and "this checks
     # out" must never be told apart by reading a stack trace.
     try:
         sys.exit(main(Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).parent / "out"))
     except Exception as e:
-        print(f"\nNOT VERIFIED — the transcript is malformed: {type(e).__name__}: {e}")
+        print(f"\nNOT VERIFIED, the transcript is malformed: {type(e).__name__}: {e}")
         sys.exit(1)

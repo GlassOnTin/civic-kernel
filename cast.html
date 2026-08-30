@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cast a ballot — Civic Kernel</title>
+<title>Cast a ballot, Civic Kernel</title>
 <style>
   /* The gov.uk discipline, shared with owed.html: white page, near-black large
      type, underlined links, the yellow focus state, 2px input borders, big
@@ -35,7 +35,7 @@
   p  { margin: .6rem 0; }
   .sub { color: var(--muted); }
   a { color: var(--accent); text-decoration: underline; text-underline-offset: .12em; }
-  a:focus, .skip:focus, label:focus-within input[type=file] {
+  a:focus.skip:focus, label:focus-within input[type=file] {
     background: var(--focus); color: var(--focus-fg);
     outline: 3px solid var(--focus); outline-offset: 0;
     box-shadow: 0 3px 0 var(--focus-fg); text-decoration: none;
@@ -71,7 +71,7 @@
   input[type=text]:focus, input[type=number]:focus {
     outline: 3px solid var(--focus); outline-offset: 0; box-shadow: inset 0 0 0 2px var(--fg);
   }
-  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+  code.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
   .small { font-size: 1rem; }
   .secretbox {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em;
@@ -103,16 +103,15 @@
 <main id="main">
 
 <h1>Cast a ballot</h1>
-<p class="sub">The voter's side of the vote: generate your enrolment secret, seal your choice,
-challenge the device that sealed it, and build the anonymous ballot file — in your browser.
-Your secret never leaves this page; nothing you type is sent anywhere — no network request is
+<p class="sub">The voter's interface: generate enrolment credentials, seal your ballot, test the encryption with a challenge, and export the anonymous ballot directly in your browser.
+Your secret never leaves this page; nothing you type is sent anywhere, no network request is
 made except, if you press the button, to fetch the published election files from this same
 site. The ballot you build is a file: hand it to whoever collects them, then check it landed
 with the <a href="verifier.html">verifier page</a>.</p>
 
 <div class="panel">
   <h2>1 · Enrol: make your voting secret</h2>
-  <p class="small">Your device makes two linked numbers. The <b>secret</b> stays with you — it is
+  <p class="small">Your device makes two linked numbers. The <b>secret</b> stays with you; it is
   how you sign anonymously and how you later find your own ballot in the public box. The
   <b>public key</b> is the only thing the club secretary gets: they certify it onto the member
   roster without ever seeing the secret, so not even the enrolment office can tell which ballot
@@ -122,9 +121,9 @@ with the <a href="verifier.html">verifier page</a>.</p>
     <button id="dlcred" style="display:none">Download credential file</button>
   </p>
   <div id="credout" style="display:none">
-    <div class="small">Your secret — save it; anyone who has it can vote as you and see how you voted:</div>
+    <div class="small">Your secret, save it; anyone who has it can vote as you and see how you voted:</div>
     <div class="secretbox" id="secrethex"></div>
-    <div class="small">Your public key — give <b>only this line</b> to the secretary:</div>
+    <div class="small">Your public key, give <b>only this line</b> to the secretary:</div>
     <div class="secretbox" id="pubhex"></div>
   </div>
 </div>
@@ -133,11 +132,11 @@ with the <a href="verifier.html">verifier page</a>.</p>
   <h2>2 · Load the election</h2>
   <p class="small">Casting needs three published files: the member roster (the anonymity set your
   ballot hides in), the trustee setup (the key your choice is sealed to), and the log (which
-  decision is open). From them this page rebuilds everything itself — the election key is derived
+  decision is open). From them this page rebuilds everything itself, the election key is derived
   from the trustees' own commitments, never taken on someone's word.</p>
   <p><button id="loadref" class="primary">Load the reference election</button></p>
   <div id="drop">
-    Or drop <code>roster.json</code>, <code>trustees.json</code> and <code>log.jsonl</code> here —
+    Or drop <code>roster.json</code>, <code>trustees.json</code> and <code>log.jsonl</code> here,
     or <label style="text-decoration: underline; cursor: pointer;">choose files<input type="file" id="picker" multiple></label>.
     <div id="filestate"></div>
   </div>
@@ -147,25 +146,25 @@ with the <a href="verifier.html">verifier page</a>.</p>
   <h2>3 · Seal and cast</h2>
   <p class="small">Paste your secret (or use the one you just generated). The page checks you are
   on the roster, seals your choice to the election key, and shows the sealed envelope <em>before</em>
-  asking whether to cast it — so you may instead demand it open the envelope as a test. A page
+  asking whether to cast it, so you may instead demand it open the envelope as a test. A page
   that meant to cheat cannot tell the test from a real cast.</p>
   <input type="text" id="secret" class="mono" placeholder="your nym secret (hex)" spellcheck="false" autocomplete="off">
-  <div class="small sub">The reference election is deliberately reproducible, so its "secrets" are public —
+  <div class="small sub">The reference election is deliberately reproducible, so its "secrets" are public,
   try <button id="try-derek" class="small">Derek's secret</button> against it. In a real election only you hold yours.</div>
   <div id="eligible"></div>
   <div id="ballotui" style="display:none">
     <div id="question" style="margin:.6rem 0 .2rem; font-weight:600"></div>
     <div id="choices"></div>
-    <p class="small">If you have cast before in this decision, use a higher attempt number — your
+    <p class="small">If you have cast before in this decision, use a higher attempt number, your
     later ballot silently replaces the earlier one, and nobody can tell you re-voted.
     <br>attempt number <input type="number" id="seq" value="1" min="1"></p>
     <p><button id="sealbtn" class="primary">Seal my choice</button></p>
     <div id="sealed" style="display:none">
-      <div class="small">Sealed — your choice is now a number nobody can read anything from.</div>
+      <div class="small">Sealed, your choice is now a number nobody can read anything from.</div>
       <details class="small"><summary>Show the sealed number</summary><div class="secretbox" id="cthex"></div></details>
       <p>
         <button id="castbtn" class="primary">Cast it</button>
-        <button id="chalbtn">No — open it: challenge this device</button>
+        <button id="chalbtn">No, open it: challenge this device</button>
       </p>
     </div>
     <div id="progress"></div>
@@ -174,27 +173,27 @@ with the <a href="verifier.html">verifier page</a>.</p>
 </div>
 
 <div class="panel">
-  <h2>What this page cannot protect you from — said plainly</h2>
+  <h2>What this page cannot protect you from, said plainly</h2>
   <p class="small">
-  <b>The device itself:</b> a compromised browser could display one choice and seal another —
+  <b>The device itself:</b> a compromised browser could display one choice and seal another,
   that is exactly what the challenge button is for; check an opened test on a different device,
   and cast from a clean one if it lies (a public reference implementation of the check is
   <code>proto/verify.py</code>).
-  <b>Someone watching you cast:</b> the record cannot prove how you voted — there is nothing to
-  show them afterwards — but a shoulder is a shoulder; cast again later, alone: the later ballot
+  <b>Someone watching you cast:</b> the record cannot prove how you voted, there is nothing to
+  show them afterwards, but a shoulder is a shoulder; cast again later, alone: the later ballot
   counts and the re-vote is invisible.
   <b>The collector:</b> if you hand or email your ballot file to the committee, <em>the person
   collecting it sees who sent which file</em>. The published record still never names you, and
-  nobody can read your choice from the file — but the postman knows which sealed envelope was
+  nobody can read your choice from the file, but the postman knows which sealed envelope was
   yours. A shadow-mode run accepts this and says so in its manifest; a full deployment uses an
   anonymous drop.</p>
 </div>
 
 <footer>
-  Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype —
+  Part of the <a href="https://github.com/GlassOnTin/civic-kernel">Civic Kernel</a> prototype,
   <a href="architecture.html">the architecture</a> · <a href="verifier.html">check the election</a>.
   A ballot built by this page is held to the independent Python verifier by a parity test in CI:
-  what this page produces, <code>proto/verify.py</code> must accept — or the build goes red.
+  what this page produces, <code>proto/verify.py</code> must accept, or the build goes red.
 </footer>
 </main>
 
@@ -217,7 +216,7 @@ $("gen").onclick = () => {
   refreshEligibility();
 };
 $("dlcred").onclick = () => {
-  download("credential.json", JSON.stringify({ v: "civic-kernel/credential/v0", ...cred,
+  download("credential.json", JSON.stringify({ v: "civic-kernel/credential/v0"...cred,
     note: "KEEP PRIVATE. nym_secret signs your anonymous ballots; voter_pub is the only line the issuer should ever see." }, null, 1));
 };
 
@@ -235,7 +234,7 @@ function setFileState() {
   const missing = NEEDED.filter(f => !(f in files));
   filestate.textContent = Object.keys(files).length
     ? "Loaded " + (NEEDED.length - missing.length) + "/" + NEEDED.length +
-      (missing.length ? " — still missing: " + missing.join(", ") : "")
+      (missing.length ? ", still missing: " + missing.join(", ") : "")
     : "";
 }
 function addFile(name, text) {
@@ -295,12 +294,12 @@ async function refreshEligibility() {
   const secret = $("secret").value.trim().replace(/^0x/, "");
   if (!secret) { out.innerHTML = ""; return; }
   if (NEEDED.some(f => !(f in files))) {
-    out.innerHTML = "<div class='status warn small'>Load the election first (step 2) — eligibility is checked against the published roster.</div>";
+    out.innerHTML = "<div class='status warn small'>Load the election first (step 2), eligibility is checked against the published roster.</div>";
     return;
   }
   try {
     ctx = await CivicCast.prepare(files, secret);
-    out.innerHTML = "<div class='status ok small'>Enrolled. This demo roster openly names its members — you are <b></b>. " +
+    out.innerHTML = "<div class='status ok small'>Enrolled. This demo roster openly names its members, you are <b></b>. " +
       "Your ballot will prove only “some member of the " + ctx.ring.length + "-key roster”.</div>";
     out.querySelector("b").textContent = ctx.member;
     $("question").textContent = ctx.question;
@@ -339,9 +338,9 @@ $("castbtn").onclick = async () => {
     $("progress").textContent = "";
     const name = "ballot-" + ballot.nullifier.slice(0, 8) + "-seq" + seq + ".json";
     download(name, JSON.stringify(ballot, null, 1));
-    $("result").innerHTML = "<div class='status ok small'><b>Cast built: <code></code></b> — hand this file to " +
+    $("result").innerHTML = "<div class='status ok small'><b>Cast built: <code></code></b>, hand this file to " +
       "whoever collects ballots. It proves an enrolled member voted, exactly once, without naming you; " +
-      "nobody — including you — can prove from it what the choice was. On the demo election you can be " +
+      "nobody, including you, can prove from it what the choice was. On the demo election you can be " +
       "the committee too: <a href='verifier.html#handpanel'>hand the file in on the verifier page</a> and " +
       "watch the count move. After a box is published, find your ballot there by its tag (paste your " +
       "secret). Its linking tag: <span class='mono'></span>…</div>";
@@ -359,12 +358,12 @@ $("chalbtn").onclick = () => {
   try {
     const rec = CivicCast.challengeOpen(ctx, envelope);
     download("challenge-opened.json", JSON.stringify(rec, null, 1));
-    $("result").innerHTML = "<div class='status warn small'><b>Envelope opened — it is now spoiled and can never " +
+    $("result").innerHTML = "<div class='status warn small'><b>Envelope opened; it is now spoiled and can never " +
       "be cast.</b> Check it on a <em>different</em> device or implementation: the opened randomness must " +
-      "re-encrypt the claimed choice to exactly this ciphertext (Enc(m; r) — five lines of code, or " +
+      "re-encrypt the claimed choice to exactly this ciphertext (Enc(m; r), five lines of code, or " +
       "<code>proto/verify.py</code>'s audit check). If it does not match, this device just got caught cheating: " +
       "report it to the committee for the public log, and cast from a clean device. " +
-      "If it matches, seal again to actually vote — this run was the test.</div>";
+      "If it matches, seal again to actually vote, this run was the test.</div>";
     $("sealed").style.display = "none";
     envelope = null;
   } catch (e) {

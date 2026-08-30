@@ -1,6 +1,6 @@
 {
-  "name": "Arthur — born 10 May 1960, reached State Pension age two days ago",
-  "note": "The same table, other side: 66 years 2 months lands on 10 July 2026 — two days before this battery's as-of date. The gate opens.",
+  "name": "Arthur: born 10 May 1960, reached State Pension age two days ago",
+  "note": "The same table, other side: 66 years 2 months lands on 10 July 2026, two days before this battery's as-of date. The gate opens.",
   "as_of": "2026-07-12",
   "checked": "Pensions Act 1995 Sch 4 para 1 Table 3 row (66y2m for 6 May–5 Jun 1960 births), legislation.gov.uk revised text, 2026-07-11.",
   "answers": {
@@ -39,7 +39,7 @@
     },
     "winter-fuel-payment": {
       "verdict": "appears-eligible",
-      "because": "£200 for your household this winter, paid automatically in November or December — no claim needed for most people, and nothing is recovered at your incomes."
+      "because": "£200 for your household this winter, paid automatically in November or December, no claim needed for most people, and nothing is recovered at your incomes."
     }
   }
 }

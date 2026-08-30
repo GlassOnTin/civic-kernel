@@ -1,6 +1,6 @@
 {
-  "name": "Derek and Lin — mixed-age couple",
-  "note": "Derek is 67; Lin is 56. Since 15 May 2019 a couple cannot get Pension Credit until both reach State Pension age — the s.4(1A) gate fires before any arithmetic.",
+  "name": "Derek and Lin: mixed-age couple",
+  "note": "Derek is 67; Lin is 56. Since 15 May 2019 a couple cannot get Pension Credit until both reach State Pension age, the s.4(1A) gate fires before any arithmetic.",
   "as_of": "2026-07-12",
   "checked": "Gate checked against SPC Act 2002 s.4(1A) (legislation.gov.uk revised text) and gov.uk/pension-credit/eligibility, 2026-07-12.",
   "answers": {

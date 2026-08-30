@@ -1,6 +1,6 @@
 {
   "v": "civic-kernel/triage-corpus/v0",
-  "note": "A seed corpus for the triage pass (see docs/triage.md and tools/triage.py). Each entry is a real-world harm scored by a human's structured reading, made reproducible. This is a SCOUT, not a judge: it ranks which wrongs are worth encoding as full scenarios next; it decides nothing. Precedents here are LEADS at institution level — the full cited-precedent verification the scenario schema demands happens at encode time, not triage time. reach and leverage are 1 (low) to 3 (high); see docs/triage.md for what each axis means.",
+  "note": "A seed corpus for the triage pass (see docs/triage.md and tools/triage.py). Each entry is a real-world harm scored by a human's structured reading, made reproducible. This is a SCOUT, not a judge: it ranks which wrongs are worth encoding as full scenarios next; it decides nothing. Precedents here are LEADS at institution level, the full cited-precedent verification the scenario schema demands happens at encode time, not triage time. reach and leverage are 1 (low) to 3 (high); see docs/triage.md for what each axis means.",
   "cases": [
     {
       "id": "procurement-vip-lane",
@@ -8,7 +8,10 @@
       "lead": "R (Good Law Project & EveryDoctor) v SoS Health (High Court, 2022); NAO, PPE contracts (2022)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "record_absent"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -21,7 +24,10 @@
       "lead": "openDemocracy v Cabinet Office FOI Clearing House (FTT, 2021); R (Good Law Project) v SSHSC (reg 50, contract publication)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["access_gated", "record_absent"],
+      "signature": [
+        "access_gated",
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 3,
       "remedy_caveat": false,
@@ -34,7 +40,10 @@
       "lead": "Office for Environmental Protection sewage-oversight findings (2023); Environment Agency prosecution gap",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "inaction_no_artifact"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "inaction_no_artifact"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -47,7 +56,9 @@
       "lead": "UK Covid-19 Inquiry (records not retained, some deliberately); Foxglove / Good Law Project",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_destroyed"],
+      "signature": [
+        "record_destroyed"
+      ],
       "reach": 3,
       "leverage": 1,
       "remedy_caveat": true,
@@ -60,7 +71,9 @@
       "lead": "Electoral Commission, Voter ID at the May 2023 local elections",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["documentary_gate"],
+      "signature": [
+        "documentary_gate"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
@@ -70,10 +83,13 @@
     {
       "id": "revolving-door-lobbying",
       "harm": "Privileged access to ministers via informal lobbying and revolving-door appointments, invisible until reconstructed after the fact.",
-      "lead": "Greensill lobbying — Treasury Committee & Boardman Review (2021); ACOBA's lack of teeth",
+      "lead": "Greensill lobbying, Treasury Committee & Boardman Review (2021); ACOBA's lack of teeth",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "record_absent"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 3,
       "remedy_caveat": true,
@@ -86,7 +102,10 @@
       "lead": "Electoral Commission enforcement; PPERA 2000; unincorporated-association donation routes",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "record_absent"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 3,
       "remedy_caveat": false,
@@ -99,7 +118,9 @@
       "lead": "DWP algorithmic fraud-risk scoring; Carer's Allowance overpayments; Big Brother Watch reporting",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": false,
@@ -108,11 +129,13 @@
     },
     {
       "id": "removal-without-legible-warrant",
-      "harm": "A coercive act — detention or removal — carried out without an accessible, cited legal basis the subject can point to and challenge.",
+      "harm": "A coercive act, detention or removal, carried out without an accessible, cited legal basis the subject can point to and challenge.",
       "lead": "Immigration detention/removals litigation; the coercive.act warrant-citation analogue",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
@@ -124,7 +147,7 @@
       "harm": "A court rules a rape survivor's child must keep the rapist father's surname; the mother appeals under Article 8.",
       "lead": "Good Law Project crowdfunder (the case that opened this thread)",
       "scope": "offstage",
-      "offstage_reason": "A substantive judgment about a child's best interests under Article 8 — who is right. The kernel refuses to decide substance (refusal 11); this belongs to a court, and the protocol has no business weighing it.",
+      "offstage_reason": "A substantive judgment about a child's best interests under Article 8, who is right. The kernel refuses to decide substance (refusal 11); this belongs to a court, and the protocol has no business weighing it.",
       "signature": [],
       "reach": 1,
       "leverage": 0,
@@ -137,7 +160,7 @@
       "harm": "A complaint that a doctor spread public-health misinformation and the GMC should act.",
       "lead": "GMC professional-conduct complaint over public misinformation",
       "scope": "offstage",
-      "offstage_reason": "Deciding whether a claim is misinformation is a judgment of truth — a ministry of truth is exactly what the kernel refuses to build (T11, refusal 11). Whether the GMC then acts is its substantive professional judgment.",
+      "offstage_reason": "Deciding whether a claim is misinformation is a judgment of truth, a ministry of truth is exactly what the kernel refuses to build (T11, refusal 11). Whether the GMC then acts is its substantive professional judgment.",
       "signature": [],
       "reach": 2,
       "leverage": 0,
@@ -147,10 +170,10 @@
     },
     {
       "id": "policy-wisdom",
-      "harm": "A claim that a policy was simply the wrong call — unwise, not unlawful.",
+      "harm": "A claim that a policy was simply the wrong call, unwise, not unlawful.",
       "lead": "generic; recurs across the archive",
       "scope": "offstage",
-      "offstage_reason": "Whether a policy is wise is a political judgment, not a process defect. There is no record to make, rule to cite, or pattern to surface — only a disagreement, which elections and argument settle, not infrastructure.",
+      "offstage_reason": "Whether a policy is wise is a political judgment, not a process defect. There is no record to make, rule to cite, or pattern to surface, only a disagreement, which elections and argument settle, not infrastructure.",
       "signature": [],
       "reach": 2,
       "leverage": 0,
@@ -164,7 +187,10 @@
       "lead": "Bates v Post Office (2019, Fraser J); Post Office Horizon IT Inquiry (Sir Wyn Williams)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent", "pattern_of_lawful_acts"],
+      "signature": [
+        "record_absent",
+        "pattern_of_lawful_acts"
+      ],
       "reach": 3,
       "leverage": 3,
       "remedy_caveat": false,
@@ -177,7 +203,10 @@
       "lead": "care.data (scrapped 2016); NHS Federated Data Platform / Palantir; medConfidential",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["access_gated", "record_absent"],
+      "signature": [
+        "access_gated",
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": false,
@@ -190,7 +219,9 @@
       "lead": "R (Bridges) v South Wales Police (Court of Appeal, 2020); Big Brother Watch",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
@@ -203,7 +234,10 @@
       "lead": "Local Government & Social Care Ombudsman SEND reports; IPSEA",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "inaction_no_artifact"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "inaction_no_artifact"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -216,7 +250,9 @@
       "lead": "Resignations of successive Independent Advisers on Ministers' Interests (Allan 2020, Geidt 2022); PACAC",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["inaction_no_artifact"],
+      "signature": [
+        "inaction_no_artifact"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -229,7 +265,9 @@
       "lead": "Public Order Act 2023; Liberty; protest-conditions litigation",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
@@ -238,10 +276,10 @@
     },
     {
       "id": "planning-merits",
-      "harm": "A claim that a specific development — a tower, a green-belt release — should never have been approved.",
+      "harm": "A claim that a specific development, a tower, a green-belt release, should never have been approved.",
       "lead": "generic; recurs across planning challenges",
       "scope": "offstage",
-      "offstage_reason": "The merits of a planning decision are substantive and political — whether this was the right call — for the planning system and the courts, not a process defect a record can settle. The kernel can make the decision and its reasons legible; it cannot decide whether the decision was right.",
+      "offstage_reason": "The merits of a planning decision are substantive and political, whether this was the right call, for the planning system and the courts, not a process defect a record can settle. The kernel can make the decision and its reasons legible; it cannot decide whether the decision was right.",
       "signature": [],
       "reach": 2,
       "leverage": 0,
@@ -254,7 +292,7 @@
       "harm": "Whether assisted dying should be lawful.",
       "lead": "Terminally Ill Adults (End of Life) Bill 2024-25",
       "scope": "offstage",
-      "offstage_reason": "A substantive moral and political question the kernel refuses on principle (refusal 11). It can run a fair, verifiable, receipt-free vote on the matter and hold the rights floor around it; it must never decide the answer — the line that keeps it from becoming a machine worth capturing.",
+      "offstage_reason": "A substantive moral and political question the kernel refuses on principle (refusal 11). It can run a fair, verifiable, receipt-free vote on the matter and hold the rights floor around it; it must never decide the answer, the line that keeps it from becoming a machine worth capturing.",
       "signature": [],
       "reach": 3,
       "leverage": 0,
@@ -268,7 +306,10 @@
       "lead": "Ofqual 2020 A-level algorithm (downgrades, then U-turn); Royal Statistical Society critique",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent", "pattern_of_lawful_acts"],
+      "signature": [
+        "record_absent",
+        "pattern_of_lawful_acts"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -277,11 +318,13 @@
     },
     {
       "id": "drc-medical-detention",
-      "harm": "Hospitals detain medically-cleared patients — and hold the bodies of the deceased — until unpaid bills are settled, with no lawful warrant and no route to contest the confinement.",
-      "lead": "Transnational Justice Initiative / 9BR Chambers; UN Working Group Against Arbitrary Detention (DRC debt-detention, 2025); via CrowdJustice — non-UK",
+      "harm": "Hospitals detain medically-cleared patients, and hold the bodies of the deceased, until unpaid bills are settled, with no lawful warrant and no route to contest the confinement.",
+      "lead": "Transnational Justice Initiative / 9BR Chambers; UN Working Group Against Arbitrary Detention (DRC debt-detention, 2025); via CrowdJustice, non-UK",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 1,
       "remedy_caveat": true,
@@ -294,7 +337,10 @@
       "lead": "Grenfell Tower Inquiry; Grenfell Action Group warnings (pre-2017)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["inaction_no_artifact", "record_absent"],
+      "signature": [
+        "inaction_no_artifact",
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -307,7 +353,10 @@
       "lead": "R v Liam Allan (2017, collapsed); HMCPSI / CJI disclosure reviews",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["access_gated", "record_absent"],
+      "signature": [
+        "access_gated",
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -320,7 +369,9 @@
       "lead": "Ruth Perry inquest (2023); Ofsted single-word grades abolished (2024)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -333,7 +384,9 @@
       "lead": "British Nationality Act s.40; deprivation cases; closed-material procedure",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -346,7 +399,9 @@
       "lead": "Infected Blood Inquiry (Langstaff, final report 2024)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_destroyed"],
+      "signature": [
+        "record_destroyed"
+      ],
       "reach": 3,
       "leverage": 1,
       "remedy_caveat": true,
@@ -355,7 +410,7 @@
     },
     {
       "id": "clinical-best-interests",
-      "harm": "A dispute over the best interests of a critically ill child — whether to continue treatment.",
+      "harm": "A dispute over the best interests of a critically ill child, whether to continue treatment.",
       "lead": "Charlie Gard (2017); Archie Battersbee (2022)",
       "scope": "offstage",
       "offstage_reason": "The best interests of a critically ill patient are a substantive medical and ethical judgment for clinicians and a court, weighing evidence the protocol cannot and must not adjudicate. The kernel can make the decision and its reasons legible; it has no business deciding whether treatment should continue.",
@@ -385,7 +440,10 @@
       "lead": "DWP Carer's Allowance overpayments (Guardian investigation 2024); NAO; Work and Pensions Committee",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["inaction_no_artifact", "record_absent"],
+      "signature": [
+        "inaction_no_artifact",
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -398,7 +456,10 @@
       "lead": "Angiolini Inquiry (Couzens); David Carrick case; HMICFRS vetting super-complaint",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["inaction_no_artifact", "record_absent"],
+      "signature": [
+        "inaction_no_artifact",
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -411,7 +472,11 @@
       "lead": "Ockenden Review (Shrewsbury & Telford); East Kent (Kirkup); Nottingham maternity review",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "inaction_no_artifact", "record_single_authored"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "inaction_no_artifact",
+        "record_single_authored"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -420,11 +485,14 @@
     },
     {
       "id": "single-justice-procedure-opaque",
-      "harm": "Hundreds of thousands are convicted in private under the Single Justice Procedure — TV licence, DVLA, rail fares — with no hearing, no legible reasons, and often no real chance to respond.",
+      "harm": "Hundreds of thousands are convicted in private under the Single Justice Procedure, TV licence, DVLA, rail fares, with no hearing, no legible reasons, and often no real chance to respond.",
       "lead": "Single Justice Procedure; Post Office SJP prosecutions; Transform Justice; Magistrates' Association concerns",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["documentary_gate", "record_absent"],
+      "signature": [
+        "documentary_gate",
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -437,7 +505,10 @@
       "lead": "DWP Internal Process Reviews (FOI disclosures); Independent Case Examiner; NAO",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["access_gated", "record_absent"],
+      "signature": [
+        "access_gated",
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -447,10 +518,13 @@
     {
       "id": "us-civil-asset-forfeiture",
       "harm": "Police seize cash and property from people never charged with a crime; to get it back the owner must prove the property's innocence, a burden many cannot meet.",
-      "lead": "US civil asset forfeiture; Institute for Justice 'Policing for Profit'; Timbs v Indiana (2019) — non-UK",
+      "lead": "US civil asset forfeiture; Institute for Justice 'Policing for Profit'; Timbs v Indiana (2019), non-UK",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent", "documentary_gate"],
+      "signature": [
+        "record_absent",
+        "documentary_gate"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -462,7 +536,7 @@
       "harm": "Deciding whether a specific online post is harmful or illegal enough to remove, at platform scale, under threat of penalty.",
       "lead": "Online Safety Act 2023; Ofcom illegal-harms duties",
       "scope": "offstage",
-      "offstage_reason": "Deciding whether a particular post is harmful or unlawful is a judgment of truth and speech — the ministry of truth the kernel refuses to build (refusal 11, T11). The legibility of a takedown process (was a rule cited, is there an appeal) is a separate, onstage question; the merits are not the kernel's.",
+      "offstage_reason": "Deciding whether a particular post is harmful or unlawful is a judgment of truth and speech, the ministry of truth the kernel refuses to build (refusal 11, T11). The legibility of a takedown process (was a rule cited, is there an appeal) is a separate, onstage question; the merits are not the kernel's.",
       "signature": [],
       "reach": 2,
       "leverage": 0,
@@ -476,7 +550,10 @@
       "lead": "Fathers4Justice campaign territory (user-flagged); Family Justice Review; HMCTS enforcement statistics",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "inaction_no_artifact"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "inaction_no_artifact"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -485,11 +562,14 @@
     },
     {
       "id": "family-court-secrecy",
-      "harm": "Family courts decide childhoods in closed hearings: judgments largely unpublished, parties silenced by contempt rules, no way for anyone to check a pattern across cases — while the children's privacy that justifies the sealing is real, and cuts against the obvious fix.",
+      "harm": "Family courts decide childhoods in closed hearings: judgments largely unpublished, parties silenced by contempt rules, no way for anyone to check a pattern across cases, while the children's privacy that justifies the sealing is real, and cuts against the obvious fix.",
       "lead": "Fathers4Justice campaign territory (user-flagged); President of the Family Division's Transparency Review (2021); reporting pilots from 2023",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["access_gated", "pattern_of_lawful_acts"],
+      "signature": [
+        "access_gated",
+        "pattern_of_lawful_acts"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -501,7 +581,7 @@
       "harm": "The campaign's central claim: that family-court contact and custody outcomes are systematically unjust to fathers, and the discretion itself is the wrong.",
       "lead": "Fathers4Justice campaign territory (user-flagged)",
       "scope": "offstage",
-      "offstage_reason": "A substantive judgment about a child's best interests and how judicial discretion should fall — who is right. The kernel refuses to decide substance (refusal 11), exactly as it refused the child-surname Article 8 case. What it can reach is the process around the judgment: the unpublished pattern (family-court-secrecy) and the unenforced order (family-contact-order-unenforced) — the two onstage halves of this campaign.",
+      "offstage_reason": "A substantive judgment about a child's best interests and how judicial discretion should fall, who is right. The kernel refuses to decide substance (refusal 11), exactly as it refused the child-surname Article 8 case. What it can reach is the process around the judgment: the unpublished pattern (family-court-secrecy) and the unenforced order (family-contact-order-unenforced), the two onstage halves of this campaign.",
       "signature": [],
       "reach": 1,
       "leverage": 0,
@@ -515,7 +595,10 @@
       "lead": "In re Dole Food Co. Stockholder Litigation (Del. Ch. 2017); Procter & Gamble/Trian proxy contest recount (2017)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent", "pattern_of_lawful_acts"],
+      "signature": [
+        "record_absent",
+        "pattern_of_lawful_acts"
+      ],
       "reach": 3,
       "leverage": 3,
       "remedy_caveat": false,
@@ -528,7 +611,9 @@
       "lead": "Drivers v Uber BV and Ola Cabs (Amsterdam Court of Appeal, 2023), GDPR art 22",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": false,
@@ -537,11 +622,13 @@
     },
     {
       "id": "union-ballot-employer-interference",
-      "harm": "Workplace recognition ballots run inside the employer's power — mandatory meetings, watched infrastructure, retaliation outside the booth — and a rerun arrives only after a regulator finds the interference, against a fear no rerun removes.",
+      "harm": "Workplace recognition ballots run inside the employer's power, mandatory meetings, watched infrastructure, retaliation outside the booth, and a rerun arrives only after a regulator finds the interference, against a fear no rerun removes.",
       "lead": "NLRB, Amazon Bessemer rerun order (2021); TULR(C)A Sch A1 recognition ballots (CAC)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts"],
+      "signature": [
+        "pattern_of_lawful_acts"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": true,
@@ -554,7 +641,9 @@
       "lead": "Platform-to-Business Regulation (EU) 2019/1150, arts 4-5; CMA, Mobile ecosystems market study (2022)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent"],
+      "signature": [
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
@@ -567,7 +656,10 @@
       "lead": "Myners, Report of the Independent Governance Review, Co-operative Group (2014)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts", "record_absent"],
+      "signature": [
+        "pattern_of_lawful_acts",
+        "record_absent"
+      ],
       "reach": 2,
       "leverage": 2,
       "remedy_caveat": false,
@@ -576,11 +668,13 @@
     },
     {
       "id": "minutes-written-by-the-winner",
-      "harm": "The meeting's only record is written by the side that won it — contemporaneous, signed, complete in form — and no other participant's account has anywhere to attach, so the archive is the victor's memo.",
+      "harm": "The meeting's only record is written by the side that won it, contemporaneous, signed, complete in form, and no other participant's account has anywhere to attach, so the archive is the victor's memo.",
       "lead": "Butler Review (2004) on informal, unminuted decision-taking; Crossman, Diaries of a Cabinet Minister; Hillsborough Independent Panel (2012), 164 police statements altered; UK Covid-19 Inquiry Module 2 records evidence",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_single_authored"],
+      "signature": [
+        "record_single_authored"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -593,7 +687,10 @@
       "lead": "Infected Blood Inquiry final report (2024); Post Office Horizon IT Inquiry, ministerial-knowledge phases; FOI Act 2000 s.35; Butler Review (2004)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["record_absent", "record_single_authored"],
+      "signature": [
+        "record_absent",
+        "record_single_authored"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
@@ -602,17 +699,26 @@
     },
     {
       "id": "consultation-long-grass",
-      "harm": "A wrong is answered with process about process — a consultation, a review, an inquiry with no deadline — until the implicated have retired and the remedy is an apology to the dead.",
+      "harm": "A wrong is answered with process about process, a consultation, a review, an inquiry with no deadline, until the implicated have retired and the remedy is an apology to the dead.",
       "lead": "Lords Statutory Inquiries Committee (2014; 2024 follow-up); Hillsborough (27 years); Infected Blood (harms from the 1970s, report 2024)",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["inaction_no_artifact", "access_gated"],
+      "signature": [
+        "inaction_no_artifact",
+        "access_gated"
+      ],
       "reach": 3,
       "leverage": 2,
       "remedy_caveat": true,
       "status": "covered",
-      "covered_by": ["foi-slow-walking", "dwp-death-reviews-secret", "regulator-inaction", "family-contact-order-unenforced", "send-ehcp-refusals"],
-      "covered_reason": "The long grass is the clock family, already encoded four ways: the holder running the clock (foi-slow-walking), time quietly becoming the ruling (family-contact-order-unenforced), the review that learns nothing (dwp-death-reviews-secret), forbearance with no artifact (regulator-inaction), rationing by attrition (send-ehcp-refusals). The one new sliver — an inquiry owing its own deadline — is the timed-inbound-duty extension the corpus has already named and deferred. A sixth scenario would re-walk the five.",
+      "covered_by": [
+        "foi-slow-walking",
+        "dwp-death-reviews-secret",
+        "regulator-inaction",
+        "family-contact-order-unenforced",
+        "send-ehcp-refusals"
+      ],
+      "covered_reason": "The long grass is the clock family, already encoded four ways: the holder running the clock (foi-slow-walking), time quietly becoming the ruling (family-contact-order-unenforced), the review that learns nothing (dwp-death-reviews-secret), forbearance with no artifact (regulator-inaction), rationing by attrition (send-ehcp-refusals). The one new sliver, an inquiry owing its own deadline, is the timed-inbound-duty extension the corpus has already named and deferred. A sixth scenario would re-walk the five.",
       "scenario": null
     },
     {
@@ -621,21 +727,27 @@
       "lead": "IICSA chair churn (2014-16); Daniel Morgan Independent Panel; Inquiries Act 2005 s.10",
       "scope": "onstage",
       "offstage_reason": null,
-      "signature": ["pattern_of_lawful_acts"],
+      "signature": [
+        "pattern_of_lawful_acts"
+      ],
       "reach": 2,
       "leverage": 1,
       "remedy_caveat": true,
       "status": "covered",
-      "covered_by": ["revolving-door-lobbying", "procurement-vip-lane", "ministerial-standards-unenforced"],
-      "covered_reason": "The checkable part — who appointed, on whose referral, under what terms — is the executive.act appointment with provenance the corpus already carries (revolving-door-lobbying, procurement-vip-lane), and the judge-is-the-defendant shape is ministerial-standards-unenforced. Whether the chair is the wrong chair is substance, refused (refusal 11).",
+      "covered_by": [
+        "revolving-door-lobbying",
+        "procurement-vip-lane",
+        "ministerial-standards-unenforced"
+      ],
+      "covered_reason": "The checkable part, who appointed, on whose referral, under what terms, is the executive.act appointment with provenance the corpus already carries (revolving-door-lobbying, procurement-vip-lane), and the judge-is-the-defendant shape is ministerial-standards-unenforced. Whether the chair is the wrong chair is substance, refused (refusal 11).",
       "scenario": null
     },
     {
       "id": "the-misleading-brief",
-      "harm": "The minister decides on a brief engineered to mislead — options pre-cooked, risks omitted, the courageous choice framed to die — and the decision is formally the minister's own.",
+      "harm": "The minister decides on a brief engineered to mislead, options pre-cooked, risks omitted, the courageous choice framed to die, and the decision is formally the minister's own.",
       "lead": "Westland affair (1986); Butler Review (2004) on intelligence presented to the outer limits; generic across the archive",
       "scope": "offstage",
-      "offstage_reason": "Whether advice was fair, complete or honest is a judgment of substance and truth — grading the quality of counsel is the ministry of truth refused outright (refusal 11). The kernel can make the advice-trail's existence checkable — who-told-the-minister carries that onstage sliver — but it must never mark a brief misleading, and the deeper harm, officials who stop writing candid advice at all, is a culture no schema field reaches.",
+      "offstage_reason": "Whether advice was fair, complete or honest is a judgment of substance and truth, grading the quality of counsel is the ministry of truth refused outright (refusal 11). The kernel can make the advice-trail's existence checkable, who-told-the-minister carries that onstage sliver, but it must never mark a brief misleading, and the deeper harm, officials who stop writing candid advice at all, is a culture no schema field reaches.",
       "signature": [],
       "reach": 3,
       "leverage": 0,

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // Parity test: verifier.js (the in-browser verifier) must reach the same
 // verdicts as proto/verify.py, whose behaviour test.sh already pins tamper by
-// tamper. Three cases cross the gate structure — honest (VERIFIED), a cheap
+// tamper. Three cases cross the gate structure, honest (VERIFIED), a cheap
 // log rewrite (NOT VERIFIED in section 3, ballots never checked), and the
 // erased-ballot drop (internally flawless, NOT VERIFIED by section 8 alone).
 // Also asserts the schemas embedded in verifier.js equal schema/*.schema.json
-// — the page pins its standards, and this is what stops them drifting.
+//, the page pins its standards, and this is what stops them drifting.
 import { createRequire } from "module";
 import { execFileSync } from "child_process";
 import { mkdtempSync, readdirSync, readFileSync, rmSync } from "fs";
@@ -58,7 +58,7 @@ try {
       : badSections.length === 1 && badSections[0] === wantSection;
     say(r.verdict === wantVerdict && sectionOk,
       mode + ": " + r.verdict + (badSections.length ? " (failing section " + badSections.join(",") + ")" : "")
-      + " — expected " + wantVerdict + (wantSection ? " via section " + wantSection + " alone" : "")
+      + ", expected " + wantVerdict + (wantSection ? " via section " + wantSection + " alone" : "")
       + " [" + (r.elapsedMs / 1000).toFixed(1) + "s]");
   }
 } finally {
@@ -66,7 +66,7 @@ try {
 }
 
 if (failures) {
-  console.log(failures + " parity failure(s) — verifier.js does not match the repo");
+  console.log(failures + " parity failure(s), verifier.js does not match the repo");
   process.exit(1);
 }
 console.log("parity: the browser verifier reaches the same verdicts, on the same checks");

@@ -1,17 +1,17 @@
-/* Civic Kernel — the clubvote casting engine, in JavaScript.
+/* Civic Kernel, the clubvote casting engine, in JavaScript.
  *
  * The voter's half of the protocol, in the browser: generate an enrolment
- * secret, and build a ballot — exponential-ElGamal encryption to the election
+ * secret, and build a ballot, exponential-ElGamal encryption to the election
  * key, a CDS 0-or-1 validity proof, a per-decision linking tag, and an LSAG
  * ring signature over the published roster. Runs in a browser (script tag,
  * used by cast.html) or in Node >= 20 (used by tools/cast-parity.mjs, which
  * asserts in CI that a ballot built here verifies in proto/verify.py).
  *
- * Shares no code with verifier.js or verify.py — the same discipline as the
+ * Shares no code with verifier.js or verify.py, the same discipline as the
  * Python pair: the thing that builds artifacts and the things that judge them
  * must not be able to agree by accident.
  *
- * Every scalar comes from crypto.getRandomValues — there is no demo-seed mode
+ * Every scalar comes from crypto.getRandomValues, there is no demo-seed mode
  * in this file; a page that could be seeded could be replayed. The encryption
  * randomness r lives only inside the sealed-envelope object, and finalize()
  * deletes it before the ballot leaves: nothing this engine returns can prove
@@ -121,19 +121,19 @@
     throw new Error("no context generator");
   }
 
-  /* Read the three published files a voter needs — roster.json, trustees.json,
-   * log.jsonl — and return everything casting requires: the ring, the election
+  /* Read the three published files a voter needs, roster.json, trustees.json,
+   * log.jsonl, and return everything casting requires: the ring, the election
    * key derived from the trustees' own Feldman commitments (asserted by
    * nobody), and the open decision. Throws if this secret's public key is not
    * on the roster: an unenrolled key has nothing to sign with, so there is no
-   * ballot to build — the same refusal Cousin Ray meets in clubvote.py. */
+   * ballot to build, the same refusal Cousin Ray meets in clubvote.py. */
   async function prepare(files, secretHex) {
     const rosterDoc = JSON.parse(files["roster.json"]);
     const trusteesDoc = JSON.parse(files["trustees.json"]);
     const entries = files["log.jsonl"].split("\n").filter(l => l.trim()).map(l => JSON.parse(l));
 
     if (!(trusteesDoc.group in KNOWN_GROUPS)) {
-      throw new Error("ballot group '" + trusteesDoc.group + "' is not one this page pins — refusing to cast into unknown arithmetic");
+      throw new Error("ballot group '" + trusteesDoc.group + "' is not one this page pins, refusing to cast into unknown arithmetic");
     }
     const P = KNOWN_GROUPS[trusteesDoc.group];
     const Q = (P - B1) / B2, G = B2;
@@ -141,17 +141,17 @@
     const byType = {};
     for (const e of entries) byType[e.type] = e;
     const opened = (byType["decision.opened"] || {}).body;
-    if (!opened) throw new Error("the log has no decision.opened entry — nothing to vote on");
+    if (!opened) throw new Error("the log has no decision.opened entry, nothing to vote on");
 
     const x = mod(fromHex(secretHex), Q);
     const pub = hx(modpow(G, x, P));
     const idx = rosterDoc.members.findIndex(c => c.voter_pub === pub);
     if (idx < 0) {
-      throw new Error("this secret's public key is not on the roster — an unenrolled key has no membership to prove, so no ballot exists for it");
+      throw new Error("this secret's public key is not on the roster, an unenrolled key has no membership to prove, so no ballot exists for it");
     }
 
     // The election key: the product of the per-trustee commitments' constant
-    // terms — derived, never taken on assertion.
+    // terms, derived, never taken on assertion.
     let h = B1;
     for (const tr of trusteesDoc.trustees) h = (h * fromHex(tr.commitments[0])) % P;
 
@@ -189,9 +189,9 @@
   /* Benaloh challenge: open the envelope. Once opened it is a receipt by
    * construction, so it is spoiled here and can never be cast. The record
    * matches audits.json's shape; the OUTCOME line is the other device's to
-   * judge — a page that graded its own honesty would be theatre. */
+   * judge, a page that graded its own honesty would be theatre. */
   function challengeOpen(ctx, env) {
-    if (env.m === undefined) throw new Error("this envelope was already cast — opening it now would mint a receipt");
+    if (env.m === undefined) throw new Error("this envelope was already cast, opening it now would mint a receipt");
     env.spoiled = true;
     return {
       ciphertext: env.ciphertext,
@@ -203,10 +203,10 @@
 
   /* Prove and sign: the CDS 0-or-1 validity proof, then the LSAG ring
    * signature binding tag and contents to "some roster key, this ballot".
-   * Deletes the envelope's randomness before returning — after this, nothing
+   * Deletes the envelope's randomness before returning, after this, nothing
    * in this engine can prove what the ballot says. */
   async function finalize(ctx, env, seq, onStep) {
-    if (env.spoiled) throw new Error("this envelope was opened by a challenge — it is a receipt, not a ballot; seal again");
+    if (env.spoiled) throw new Error("this envelope was opened by a challenge; it is a receipt, not a ballot; seal again");
     if (!Number.isInteger(seq) || seq < 0) throw new Error("seq must be a non-negative integer");
     const { P, Q, G, h, hl, ring, ringDigest, x, idx } = ctx;
     const step = onStep || (() => {});
@@ -255,7 +255,7 @@
       const z2 = (modpow(hl, s[i], P) * modpow(tag, cs[i], P)) % P;
       cs[(i + 1) % n] = await ringChallenge(z1, z2);
       i = (i + 1) % n;
-      step("signing as one of " + n + " enrolled keys — ring position " + (++done) + " of " + n);
+      step("signing as one of " + n + " enrolled keys, ring position " + (++done) + " of " + n);
     }
     s[idx] = mod(u - x * cs[idx], Q);
     ballot.ring_sig = { c0: hx(cs[0]), s: s.map(hx) };
@@ -266,7 +266,7 @@
 
   // ---------------------------------------------------------------- enrolment
   /* A credential is born on the voter's device: the secret never leaves it.
-   * What the issuer gets — and certifies — is only the public key g^x. */
+   * What the issuer gets, and certifies, is only the public key g^x. */
   function newCredential(files) {
     const trusteesDoc = files && files["trustees.json"] ? JSON.parse(files["trustees.json"]) : null;
     const group = trusteesDoc ? trusteesDoc.group : "rfc3526-modp-2048";

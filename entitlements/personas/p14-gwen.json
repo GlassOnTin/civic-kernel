@@ -1,6 +1,6 @@
 {
-  "name": "Gwen — 80, on Pension Credit, social tenant, £30,000 savings",
-  "note": "Two no-limit rules at once: Pension Credit has no upper capital limit (£30,000 just becomes £40 of tariff income), and on Guarantee Credit the Housing Benefit £16,000 limit is disregarded too — her £120 rent is covered in full. At 80 and on Pension Credit, the TV licence follows.",
+  "name": "Gwen: 80, on Pension Credit, social tenant, £30,000 savings",
+  "note": "Two no-limit rules at once: Pension Credit has no upper capital limit (£30,000 just becomes £40 of tariff income), and on Guarantee Credit the Housing Benefit £16,000 limit is disregarded too, her £120 rent is covered in full. At 80 and on Pension Credit, the TV licence follows.",
   "as_of": "2026-07-12",
   "checked": "HB passport against HB (SPC) Regs 2006 regs 26/50 and gov.uk/housing-benefit/eligibility (Guarantee Credit exception to the £16,000 limit); PC tariff arithmetic against SPC Regs reg 15(6). 2026-07-12.",
   "answers": {

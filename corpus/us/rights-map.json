@@ -1,5 +1,5 @@
 {
-  "$comment": "United States column of the comparative rights-map. Same 30-UDHR-invariant spine; backing = the US Constitution (Bill of Rights + Reconstruction/suffrage amendments), text retrieved verbatim from the National Archives (archives.gov, web). Distinctive shape: strong-but-NARROW negative civil-political liberties — the 1st Amendment is the strongest speech/religion protection of the three columns — with a STRIKE remedy (judicial review, Marbury v. Madison). Yet the US has the FEWEST backed invariants of the three, because it constitutionalises almost no socio-economic rights and, uniquely among the three, no federal right to education (San Antonio v. Rodriguez), no explicit privacy right, and no constitutional asylum. Low coverage, high remedy — the opposite tradeoff from the UK (higher coverage, weakest remedy).",
+  "$comment": "United States column of the comparative rights-map. Same 30-UDHR-invariant spine; backing = the US Constitution (Bill of Rights + Reconstruction/suffrage amendments), text retrieved verbatim from the National Archives (archives.gov, web). Distinctive shape: strong-but-NARROW negative civil-political liberties, the 1st Amendment is the strongest speech/religion protection of the three columns, with a STRIKE remedy (judicial review, Marbury v. Madison). Yet the US has the FEWEST backed invariants of the three, because it constitutionalises almost no socio-economic rights and, uniquely among the three, no federal right to education (San Antonio v. Rodriguez), no explicit privacy right, and no constitutional asylum. Low coverage, high remedy, the opposite tradeoff from the UK (higher coverage, weakest remedy).",
   "meta": {
     "code": "us",
     "name": "United States",
@@ -10,17 +10,17 @@
       "retrieved_via": "National Archives (archives.gov), web"
     },
     "remedy": "strike",
-    "remedy_note": "US courts exercise judicial review (Marbury v. Madison, 1803) and can VOID a law as unconstitutional — a strike remedy like Germany's. But unlike Germany there is NO eternity clause: the Constitution is fully amendable under Article V (a deliberately hard two-thirds + three-quarters bar), so no right is placed beyond amendment. The US also has no militant-democracy doctrine — it protects the anti-democratic speech (Brandenburg v. Ohio) that Germany would forfeit (invariant 30).",
+    "remedy_note": "US courts exercise judicial review (Marbury v. Madison, 1803) and can VOID a law as unconstitutional, a strike remedy like Germany's. But unlike Germany there is NO eternity clause: the Constitution is fully amendable under Article V (a deliberately hard two-thirds + three-quarters bar), so no right is placed beyond amendment. The US also has no militant-democracy doctrine; it protects the anti-democratic speech (Brandenburg v. Ohio) that Germany would forfeit (invariant 30).",
     "scope": "unconditional",
-    "scope_note": "Judicial review (Marbury v. Madison) reaches any federal or state law within constitutional limits — though only in a live case brought by a plaintiff with standing.",
+    "scope_note": "Judicial review (Marbury v. Madison) reaches any federal or state law within constitutional limits, though only in a live case brought by a plaintiff with standing.",
     "entrenchment": "doctrine",
-    "entrenchment_note": "Judicial review is Marbury (1803), case law; this attack's strike is Lukumi (1993), precedent. Both are held by whoever holds the bench — re-readable without a vote, the exposure the measured run's contingency note records. No eternity clause: Article V could re-enact by amendment what the Court struck.",
+    "entrenchment_note": "Judicial review is Marbury (1803), case law; this attack's strike is Lukumi (1993), precedent. Both are held by whoever holds the bench, re-readable without a vote, the exposure the measured run's contingency note records. No eternity clause: Article V could re-enact by amendment what the Court struck.",
     "timing": "post-enforcement",
-    "timing_note": "Case-or-controversy (Art III; Muskrat, 1911): no abstract route — the Act operated, the permit was revoked, and the injury bought the standing. 439 days from enactment to strike; the us-abstract counterfactual measures the pre-enforcement alternative at 152 days, and motivated this field.",
+    "timing_note": "Case-or-controversy (Art III; Muskrat, 1911): no abstract route, the Act operated, the permit was revoked, and the injury bought the standing. 439 days from enactment to strike; the us-abstract counterfactual measures the pre-enforcement alternative at 152 days, and motivated this field.",
     "verdict": "strains",
-    "verdict_plain": "The same attack strains the US and stops: the Court struck the ban with the fewest rights backed of any column here — remedy, not coverage, did the work. The win took an injured plaintiff, funded lawyers, and fourteen months.",
+    "verdict_plain": "The same attack strains the US and stops: the Court struck the ban with the fewest rights backed of any column here, remedy, not coverage, did the work. The win took an injured plaintiff, funded lawyers, and fourteen months.",
     "protection": "the strike remedy",
-    "protection_plain": "Judicial review that voids the offending law — post-hoc, adversarial, and only for a plaintiff with standing.",
+    "protection_plain": "Judicial review that voids the offending law, post-hoc, adversarial, and only for a plaintiff with standing.",
     "coverage": {
       "backed": 14,
       "structural": 7,
@@ -30,7 +30,7 @@
   "invariants": [
     {
       "invariant": 1,
-      "udhr": "Art 1 — free and equal in dignity",
+      "udhr": "Art 1, free and equal in dignity",
       "right": "No textual dignity clause; invoked in 8th-Amendment & substantive-due-process jurisprudence",
       "citation": "US Const (no textual anchor)",
       "status": "structural",
@@ -38,15 +38,15 @@
     },
     {
       "invariant": 2,
-      "udhr": "Art 2 — non-discrimination",
-      "right": "14th Amendment — Equal Protection Clause",
+      "udhr": "Art 2, non-discrimination",
+      "right": "14th Amendment, Equal Protection Clause",
       "citation": "US Const amend. XIV §1",
       "status": "backed",
       "text": "All persons born or naturalized in the United States, and subject to the jurisdiction thereof, are citizens of the United States and of the State wherein they reside... nor shall any State deprive any person of life, liberty, or property, without due process of law; nor deny to any person within its jurisdiction the equal protection of the laws."
     },
     {
       "invariant": 3,
-      "udhr": "Art 3 — life, liberty, security",
+      "udhr": "Art 3, life, liberty, security",
       "right": "5th & 14th Amendment Due Process (life, liberty, property)",
       "citation": "US Const amends. V, XIV",
       "status": "backed",
@@ -54,23 +54,23 @@
     },
     {
       "invariant": 4,
-      "udhr": "Art 4 — no slavery",
-      "right": "13th Amendment — abolition of slavery",
+      "udhr": "Art 4, no slavery",
+      "right": "13th Amendment, abolition of slavery",
       "citation": "US Const amend. XIII §1",
       "status": "backed",
       "text": "Neither slavery nor involuntary servitude, except as a punishment for crime whereof the party shall have been duly convicted, shall exist within the United States, or any place subject to their jurisdiction."
     },
     {
       "invariant": 5,
-      "udhr": "Art 5 — no torture",
-      "right": "8th Amendment — cruel and unusual punishments",
+      "udhr": "Art 5, no torture",
+      "right": "8th Amendment, cruel and unusual punishments",
       "citation": "US Const amend. VIII",
       "status": "backed",
       "text": "Excessive bail shall not be required, nor excessive fines imposed, nor cruel and unusual punishments inflicted."
     },
     {
       "invariant": 6,
-      "udhr": "Art 6 — recognition before the law",
+      "udhr": "Art 6, recognition before the law",
       "right": "14th Amendment ('any person'); no explicit recognition clause",
       "citation": "US Const amend. XIV §1",
       "status": "structural",
@@ -78,15 +78,15 @@
     },
     {
       "invariant": 7,
-      "udhr": "Art 7 — equal protection",
-      "right": "14th Amendment — Equal Protection Clause",
+      "udhr": "Art 7, equal protection",
+      "right": "14th Amendment, Equal Protection Clause",
       "citation": "US Const amend. XIV §1",
       "status": "backed",
       "text": "All persons born or naturalized in the United States, and subject to the jurisdiction thereof, are citizens of the United States and of the State wherein they reside... nor shall any State deprive any person of life, liberty, or property, without due process of law; nor deny to any person within its jurisdiction the equal protection of the laws."
     },
     {
       "invariant": 8,
-      "udhr": "Art 8 — effective remedy",
+      "udhr": "Art 8, effective remedy",
       "right": "Habeas corpus (Art I §9) + due process + judicial review (Marbury); no explicit right-to-remedy clause",
       "citation": "US Const art. I §9; amends. V, XIV",
       "status": "structural",
@@ -94,7 +94,7 @@
     },
     {
       "invariant": 9,
-      "udhr": "Art 9 — no arbitrary arrest",
+      "udhr": "Art 9, no arbitrary arrest",
       "right": "4th Amendment (unreasonable seizures) + due process + habeas",
       "citation": "US Const amend. IV",
       "status": "backed",
@@ -102,15 +102,15 @@
     },
     {
       "invariant": 10,
-      "udhr": "Art 10 — fair and public hearing",
-      "right": "6th Amendment — speedy and public trial by impartial jury",
+      "udhr": "Art 10, fair and public hearing",
+      "right": "6th Amendment, speedy and public trial by impartial jury",
       "citation": "US Const amend. VI",
       "status": "backed",
       "text": "In all criminal prosecutions, the accused shall enjoy the right to a speedy and public trial, by an impartial jury of the State and district wherein the crime shall have been committed..."
     },
     {
       "invariant": 11,
-      "udhr": "Art 11 — presumption of innocence; no retroactive law",
+      "udhr": "Art 11, presumption of innocence; no retroactive law",
       "right": "Due process (presumption of innocence) + Art I §§9-10 (no ex post facto laws)",
       "citation": "US Const art. I §§9-10; amend. V",
       "status": "backed",
@@ -118,7 +118,7 @@
     },
     {
       "invariant": 12,
-      "udhr": "Art 12 — privacy",
+      "udhr": "Art 12, privacy",
       "right": "No explicit privacy right; 4th Amendment covers search/seizure; general privacy judicially derived (Griswold) and contested post-Dobbs",
       "citation": "US Const amend. IV (partial)",
       "status": "structural",
@@ -126,15 +126,15 @@
     },
     {
       "invariant": 13,
-      "udhr": "Art 13 — freedom of movement",
-      "right": "Right to travel — judicially recognized (Saenz v. Roe), not textual",
+      "udhr": "Art 13, freedom of movement",
+      "right": "Right to travel, judicially recognized (Saenz v. Roe), not textual",
       "citation": "US Const (judicial; no textual clause)",
       "status": "structural",
       "text": null
     },
     {
       "invariant": 14,
-      "udhr": "Art 14 — asylum",
+      "udhr": "Art 14, asylum",
       "right": "Statutory only (Immigration and Nationality Act); no constitutional right",
       "citation": null,
       "status": "none",
@@ -142,15 +142,15 @@
     },
     {
       "invariant": 15,
-      "udhr": "Art 15 — nationality",
-      "right": "14th Amendment — birthright citizenship",
+      "udhr": "Art 15, nationality",
+      "right": "14th Amendment, birthright citizenship",
       "citation": "US Const amend. XIV §1",
       "status": "backed",
       "text": "All persons born or naturalized in the United States, and subject to the jurisdiction thereof, are citizens of the United States and of the State wherein they reside... nor shall any State deprive any person of life, liberty, or property, without due process of law; nor deny to any person within its jurisdiction the equal protection of the laws."
     },
     {
       "invariant": 16,
-      "udhr": "Art 16 — marriage and family",
+      "udhr": "Art 16, marriage and family",
       "right": "No explicit text; Obergefell v. Hodges derived it from the 14th Amendment (contested)",
       "citation": "US Const amend. XIV (judicial)",
       "status": "structural",
@@ -158,7 +158,7 @@
     },
     {
       "invariant": 17,
-      "udhr": "Art 17 — property",
+      "udhr": "Art 17, property",
       "right": "5th Amendment (takings / just compensation) + due process",
       "citation": "US Const amend. V",
       "status": "backed",
@@ -166,39 +166,39 @@
     },
     {
       "invariant": 18,
-      "udhr": "Art 18 — thought, conscience, religion",
-      "right": "1st Amendment — free exercise + no establishment",
+      "udhr": "Art 18, thought, conscience, religion",
+      "right": "1st Amendment, free exercise + no establishment",
       "citation": "US Const amend. I",
       "status": "backed",
       "text": "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances."
     },
     {
       "invariant": 19,
-      "udhr": "Art 19 — freedom of expression",
-      "right": "1st Amendment — speech and press (near-absolutist, the strongest of the three)",
+      "udhr": "Art 19, freedom of expression",
+      "right": "1st Amendment, speech and press (near-absolutist, the strongest of the three)",
       "citation": "US Const amend. I",
       "status": "backed",
       "text": "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances."
     },
     {
       "invariant": 20,
-      "udhr": "Art 20 — assembly and association",
-      "right": "1st Amendment — assembly + petition; association (NAACP v. Alabama)",
+      "udhr": "Art 20, assembly and association",
+      "right": "1st Amendment, assembly + petition; association (NAACP v. Alabama)",
       "citation": "US Const amend. I",
       "status": "backed",
       "text": "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances."
     },
     {
       "invariant": 21,
-      "udhr": "Art 21 — participation; free elections",
-      "right": "15th/19th/24th/26th Amendments bar denial of the vote by race/sex/poll-tax/age — but there is NO affirmative textual right to vote",
+      "udhr": "Art 21, participation; free elections",
+      "right": "15th/19th/24th/26th Amendments bar denial of the vote by race/sex/poll-tax/age, but there is NO affirmative textual right to vote",
       "citation": "US Const amends. XV, XIX, XXIV, XXVI",
       "status": "backed",
       "text": "The right of citizens of the United States to vote shall not be denied or abridged by the United States or by any State on account of race, color, or previous condition of servitude."
     },
     {
       "invariant": 22,
-      "udhr": "Art 22 — social security",
+      "udhr": "Art 22, social security",
       "right": "No constitutional right (socio-economic)",
       "citation": null,
       "status": "none",
@@ -206,7 +206,7 @@
     },
     {
       "invariant": 23,
-      "udhr": "Art 23 — work, unions",
+      "udhr": "Art 23, work, unions",
       "right": "No constitutional right; labor rights are statutory (NLRA); only an associational sliver via the 1st Amendment",
       "citation": null,
       "status": "none",
@@ -214,7 +214,7 @@
     },
     {
       "invariant": 24,
-      "udhr": "Art 24 — rest and leisure",
+      "udhr": "Art 24, rest and leisure",
       "right": "No constitutional counterpart",
       "citation": null,
       "status": "none",
@@ -222,7 +222,7 @@
     },
     {
       "invariant": 25,
-      "udhr": "Art 25 — adequate standard of living",
+      "udhr": "Art 25, adequate standard of living",
       "right": "No constitutional right to welfare or health (contrast Germany's derived Existenzminimum)",
       "citation": null,
       "status": "none",
@@ -230,15 +230,15 @@
     },
     {
       "invariant": 26,
-      "udhr": "Art 26 — education",
-      "right": "NO federal constitutional right — San Antonio ISD v. Rodriguez (1973); education is a state-constitution matter",
+      "udhr": "Art 26, education",
+      "right": "NO federal constitutional right, San Antonio ISD v. Rodriguez (1973); education is a state-constitution matter",
       "citation": null,
       "status": "none",
       "text": null
     },
     {
       "invariant": 27,
-      "udhr": "Art 27 — cultural life",
+      "udhr": "Art 27, cultural life",
       "right": "No constitutional counterpart",
       "citation": null,
       "status": "none",
@@ -246,7 +246,7 @@
     },
     {
       "invariant": 28,
-      "udhr": "Art 28 — social and international order",
+      "udhr": "Art 28, social and international order",
       "right": "No constitutional counterpart",
       "citation": null,
       "status": "none",
@@ -254,7 +254,7 @@
     },
     {
       "invariant": 29,
-      "udhr": "Art 29 — duties; limits of rights",
+      "udhr": "Art 29, duties; limits of rights",
       "right": "No textual limits clause; limits are doctrinal (strict/intermediate scrutiny)",
       "citation": "US Const (judicial doctrine)",
       "status": "structural",
@@ -262,8 +262,8 @@
     },
     {
       "invariant": 30,
-      "udhr": "Art 30 — no destruction of rights",
-      "right": "No abuse-of-rights clause; the US protects even anti-democratic speech (Brandenburg v. Ohio) — the opposite of militant democracy",
+      "udhr": "Art 30, no destruction of rights",
+      "right": "No abuse-of-rights clause; the US protects even anti-democratic speech (Brandenburg v. Ohio), the opposite of militant democracy",
       "citation": null,
       "status": "none",
       "text": null

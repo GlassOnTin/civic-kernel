@@ -32,5 +32,5 @@
    ]
   }
  ],
- "note": "distributed key generation in the parish room: each trustee dealt their own polynomial and exchanged Feldman-verified shares; no party \u2014 not the committee, not the ceremony, not any single trustee \u2014 ever held the joint secret. Not defended: a trustee who waits to see the others' commitments before choosing their own could bias the key's distribution (the rushing attack, Gennaro et al.); the fix is a hash-commitment round that a single transcript cannot evidence, so it is declared instead"
+ "note": "distributed key generation in the parish room: each trustee dealt their own polynomial and exchanged Feldman-verified shares; no party, not the committee, not the ceremony, not any single trustee, ever held the joint secret. Not defended: a trustee who waits to see the others' commitments before choosing their own could bias the key's distribution (the rushing attack, Gennaro et al.); the fix is a hash-commitment round that a single transcript cannot evidence, so it is declared instead"
 }

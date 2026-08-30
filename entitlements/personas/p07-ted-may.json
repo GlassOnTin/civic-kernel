@@ -1,6 +1,6 @@
 {
-  "name": "Ted and May — couple; Ted's Carer's Allowance is entitlement without payment",
-  "note": "May gets Attendance Allowance; Ted cares for her 35+ hours. His own State Pension (£160) exceeds the £86.45 rate, so Carer's Allowance is an underlying entitlement — nothing in payment, nothing counted as income, nobody's severe-disability amount blocked — and it still earns the £48.15 carer addition in Pension Credit.",
+  "name": "Ted and May: couple; Ted's Carer's Allowance is entitlement without payment",
+  "note": "May gets Attendance Allowance; Ted cares for her 35+ hours. His own State Pension (£160) exceeds the £86.45 rate, so Carer's Allowance is an underlying entitlement, nothing in payment, nothing counted as income, nobody's severe-disability amount blocked, and it still earns the £48.15 carer addition in Pension Credit.",
   "as_of": "2026-07-12",
   "checked": "Arithmetic hand-worked against SPC Regs 2002 reg 6(8) (£48.15) and SPC Act 2002 s.2(8), 2026-07-12.",
   "answers": {

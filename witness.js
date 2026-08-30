@@ -1,8 +1,8 @@
-/* Civic Kernel — the witness, in JavaScript.
+/* Civic Kernel, the witness, in JavaScript.
  *
  * The neighbouring society's half of witnessing, in the browser: hold one
  * Ed25519 key, remember the last head you co-signed, and sign a new head
- * ONLY if the history you are shown extends the history you remember — so
+ * ONLY if the history you are shown extends the history you remember, so
  * a committee that rewrites the past cannot get its checkpoint witnessed.
  * The log key you check against arrives out of band (the ceremony: two
  * secretaries swapping keys at a federation meeting); it is never taken
@@ -13,10 +13,10 @@
  * same reasons. tools/witness-parity.mjs asserts in CI that a committee
  * running clubvote.py accepts this engine's cards and co-signatures at
  * every checkpoint of a real election, that verify.py certifies the
- * result — and that this engine refuses the same rewrite the Python
+ * result, and that this engine refuses the same rewrite the Python
  * witness refuses, on the same memory.
  *
- * Shares no code with clubvote.py, cast.js or verifier.js — the same
+ * Shares no code with clubvote.py, cast.js or verifier.js, the same
  * discipline as the rest of the family: actors that must agree can only
  * agree because the formats agree.
  *
@@ -35,7 +35,7 @@
 
   // ------------------------------------------------------------ canonical JSON
   // Mirrors Python json.dumps(obj, sort_keys=True, separators=(",",":"),
-  // ensure_ascii=False) — exact for this artifact set (strings/ints/bools).
+  // ensure_ascii=False), exact for this artifact set (strings/ints/bools).
   function canonStr(o) {
     if (o === null) return "null";
     if (typeof o === "boolean" || typeof o === "number") return JSON.stringify(o);
@@ -145,7 +145,7 @@
 
   // ---------------------------------------------------------------- the witness
   /* Make a new witness: one key, born on this device. Returns the state
-   * (the content of witness.json — KEEP PRIVATE: the key and, later, the
+   * (the content of witness.json, KEEP PRIVATE: the key and, later, the
    * memory live in it) and the card (hand it to the committee). Formats
    * are clubvote.py's own. */
   async function newWitness(keyId) {
@@ -162,7 +162,7 @@
   }
 
   /* The ceremony: pin whom this witness watches. The community id and the
-   * log's public key must arrive OUT OF BAND — never from the request you
+   * log's public key must arrive OUT OF BAND, never from the request you
    * are asked to sign. */
   function watch(state, community, logPubB64) {
     if (b64d(logPubB64).length !== 32) {
@@ -174,19 +174,19 @@
     return { ...state, watch: { community: community.trim(), log_pub: String(logPubB64).trim() } };
   }
 
-  /* Co-sign a checkpoint — or refuse. The checks, in clubvote.py's order:
+  /* Co-sign a checkpoint, or refuse. The checks, in clubvote.py's order:
    * the head is from the community I watch; it is signed by the log key I
    * was given at the ceremony; it roots the log that came with it; and the
    * history EXTENDS the one I last co-signed. Returns the co-signature
    * (send it back to the committee) and the updated state (the new memory:
    * replace your old witness file with it). Throws with the refusal reason
-   * otherwise — the same reasons the Python witness gives. */
+   * otherwise, the same reasons the Python witness gives. */
   async function sign(state, request) {
     if (!state || typeof state.priv !== "string" || typeof state.key_id !== "string") {
       throw new Error("not a witness file: it should hold key_id and priv");
     }
     if (!state.watch) {
-      throw new Error("this witness watches nobody yet — complete the ceremony first");
+      throw new Error("this witness watches nobody yet, complete the ceremony first");
     }
     let req = request;
     if (typeof req === "string") {
@@ -205,19 +205,19 @@
       if (await sigOk(state.watch.log_pub, s, body)) { signedByLog = true; break; }
     }
     if (!signedByLog) {
-      throw new Error("the head is not signed by the log key I was given at the ceremony — refusing");
+      throw new Error("the head is not signed by the log key I was given at the ceremony, refusing");
     }
     const leaves = [];
     for (const e of entries) leaves.push(await leafHash(canon(stripKey(e, "sig"))));
     if (body.size !== entries.length
       || body.root !== "sha256:" + bytesToHex(await merkleRoot(leaves))) {
-      throw new Error("the head does not root the log that came with it — refusing");
+      throw new Error("the head does not root the log that came with it, refusing");
     }
     if (state.last) {
       const prefixRoot = "sha256:" + bytesToHex(await merkleRoot(leaves.slice(0, state.last.size)));
       if (body.size < state.last.size || prefixRoot !== state.last.root) {
         throw new Error("REFUSED: this history is not an extension of the history I co-signed "
-          + "at size " + state.last.size + ". Append-only is violated — someone is "
+          + "at size " + state.last.size + ". Append-only is violated, someone is "
           + "asking me to witness a rewrite, and my memory is the defence.");
       }
     }

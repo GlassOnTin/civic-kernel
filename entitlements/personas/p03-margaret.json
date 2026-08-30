@@ -1,6 +1,6 @@
 {
-  "name": "Margaret — 82, single, gets Attendance Allowance, lives alone",
-  "note": "The severe-disability amount at work: AA is not counted as income, but getting it adds £86.05 to her guarantee — £147.60 a week she appears entitled to.",
+  "name": "Margaret: 82, single, gets Attendance Allowance, lives alone",
+  "note": "The severe-disability amount at work: AA is not counted as income, but getting it adds £86.05 to her guarantee, £147.60 a week she appears entitled to.",
   "as_of": "2026-07-12",
   "checked": "Arithmetic hand-worked against SPC Regs 2002 reg 6(5)(a) (£86.05) and Sch 1 Pt I para 1 conditions, 2026-07-12. AA answers restate her existing award (day-time needs).",
   "answers": {
@@ -47,7 +47,7 @@
     },
     "winter-fuel-payment": {
       "verdict": "appears-eligible",
-      "because": "£300 for your household this winter (someone was born before 28 September 1946), paid automatically in November or December — no claim needed for most people, and nothing is recovered at your incomes."
+      "because": "£300 for your household this winter (someone was born before 28 September 1946), paid automatically in November or December, no claim needed for most people, and nothing is recovered at your incomes."
     },
     "pension-age-disability-payment": {
       "verdict": "signpost",

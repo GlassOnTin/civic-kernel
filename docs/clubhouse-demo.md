@@ -1,4 +1,4 @@
-# The clubhouse demonstration — a half-hour run sheet
+# The clubhouse demonstration, a half-hour run sheet
 
 *The demonstration offered at the end of
 [the invitation](shadow-agm-invitation.md), scripted in the open like everything else.
@@ -12,7 +12,7 @@ quoted here.*
 **The night before**
 
 - A laptop with Python 3 and a current browser (the verifier needs a 2025-or-later
-  Chrome, Firefox or Safari — it says so itself rather than pretending).
+  Chrome, Firefox or Safari; it says so itself rather than pretending).
 - Clone the repo and run the success test once; if it ends `ALL GREEN`, everything the
   demo needs works on this machine:
 
@@ -24,11 +24,11 @@ quoted here.*
 
   On newer systems `pip` may refuse with *externally-managed-environment*. Then:
   `python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt`
-  — and keep that terminal (with the venv active) for all the demo commands.
+, and keep that terminal (with the venv active) for all the demo commands.
 
 - **If the clubhouse has wifi:** use the live pages
   ([verifier](https://glassontin.github.io/civic-kernel/verifier.html),
-  [cast](https://glassontin.github.io/civic-kernel/cast.html)) — then volunteers can
+  [cast](https://glassontin.github.io/civic-kernel/cast.html)), then volunteers can
   use their own phones.
 - **If it might not:** serve the repo locally and use the laptop for everything:
 
@@ -36,7 +36,7 @@ quoted here.*
   python3 -m http.server 8000     # then http://localhost:8000/verifier.html
   ```
 
-  (Phones can't reach a local server without network fiddling — offline, just pass the
+  (Phones can't reach a local server without network fiddling, offline, just pass the
   laptop around instead. It demonstrates the same thing.)
 
 **Five minutes before**
@@ -47,86 +47,86 @@ quoted here.*
 
 ## The run sheet
 
-### 0–3 min — the frame
+### 0–3 min, the frame
 
 **Say:** "Your AGM stays exactly as it is: hands go up, hands are counted, that
 decides. What I'm going to show you is the shadow: a sealed ballot that runs alongside
-one vote, decides nothing, and can be checked afterwards by anyone — including people
+one vote, decides nothing, and can be checked afterwards by anyone, including people
 who distrust all of us. I'll run an election, you'll vote in it, and then we'll try to
 rig it and watch what happens."
 
 No slides. The demo is the talk.
 
-### 3–9 min — check a finished election
+### 3–9 min, check a finished election
 
 **Do:** verifier tab → **Load the reference election**.
 
 **Expect:** checks turn green section by section; the whole run takes 8–25 seconds
-depending on the machine (8.4 s at the last rehearsal — be ready for it to finish
-before you do). Narrate over it, one plain line per section as it lands — each section
+depending on the machine (8.4 s at the last rehearsal, be ready for it to finish
+before you do). Narrate over it, one plain line per section as it lands; each section
 heading already carries its own plain-speech line (hover or tap it):
 
 **Say, roughly:** "Sixty members, sealed ballots. It's checking the paperwork is in
 the published format… that every event was signed… that the history was never
-rewritten — those fingerprints are what your federation would countersign… that every
+rewritten, those fingerprints are what your federation would countersign… that every
 voter was a real member, without learning which member cast which ballot… that no
-device cheated… every sealed envelope, one by one — this is the slow bit, each ballot
+device cheated… every sealed envelope, one by one, this is the slow bit, each ballot
 proves it came from *some* member on the list… the count, recomputed without opening a
-single envelope… and finally that this record matches the copy the world saw — that's
+single envelope… and finally that this record matches the copy the world saw, that's
 your newsletter's three lines."
 
 **Land on the verdict line and read it aloud:** *"…nobody had to trust the shed."*
 
-### 9–12 min — find one voter's ballot
+### 9–12 min, find one voter's ballot
 
 **Say:** "Derek is one of the sixty. In a real election only Derek would know his
-secret. This demo publishes its secrets on purpose — so you can play Derek."
+secret. This demo publishes its secrets on purpose, so you can play Derek."
 
 **Do:** in the *Find your own ballot* panel, press **Derek's secret**, then **Look up
 my ballot**.
 
 **Expect:** his linking tag, one ballot, **counted**. Point at the box: "The record
 says *someone* on the roster cast this, exactly once. It will never say Derek. He can
-see his vote counted; he can't prove to anyone else which way he voted — so there's
+see his vote counted; he can't prove to anyone else which way he voted, so there's
 nothing to sell and nothing a bully can demand afterwards."
 
-(If someone asks: press Nalini's too — she re-voted; her first ballot shows
+(If someone asks: press Nalini's too, she re-voted; her first ballot shows
 **superseded**. That's the answer to over-the-shoulder coercion.)
 
-### 12–18 min — a volunteer votes, and the count moves
+### 12–18 min, a volunteer votes, and the count moves
 
-**Say:** "Now one of you votes as Derek — a re-vote, like Nalini's."
+**Say:** "Now one of you votes as Derek, a re-vote, like Nalini's."
 
 **Do (volunteer, on their phone via the live page, or on the laptop):**
 
 1. cast tab → **Load the reference election** → press **Derek's secret**.
 2. The page shows: *Enrolled… you are Derek Wainwright.*
-3. Pick **Sandra Okafor** (Derek originally voted Keith — the count will visibly move).
-4. **Set the attempt number to 6** — Derek has cast before; a later ballot must carry a
+3. Pick **Sandra Okafor** (Derek originally voted Keith, the count will visibly move).
+4. **Set the attempt number to 6**, Derek has cast before; a later ballot must carry a
    higher number, and the page says so. *(Forget this and the hand-in panel will say so
-   out loud — "in the box, but superseded" — and the count won't move.)*
+   out loud, "in the box, but superseded", and the count won't move.)*
 5. **Seal my choice** → the sealed envelope appears. Ask the room: "cast it, or test
-   the device first?" If they say test: **Challenge** — the envelope opens, is spoiled
+   the device first?" If they say test: **Challenge**, the envelope opens, is spoiled
    forever, and you explain a lying phone gets caught exactly here. Seal again.
 6. **Cast it** → a ballot file downloads.
 
 **Do (volunteer, same device):** open the
 [verifier page](https://glassontin.github.io/civic-kernel/verifier.html), **Load the
-reference election**, and give the downloaded ballot file to **Hand in a ballot —
+reference election**, and give the downloaded ballot file to **Hand in a ballot,
 watch the count move** (drop it, or "choose it" on a phone).
 
-**Expect (~2 s):** *Counted. The total was Sandra Okafor 8, Keith Bramall 6 — it is
+**Expect (~2 s):** *Counted. The total was Sandra Okafor 8, Keith Bramall 6; it is
 now Sandra Okafor 9, Keith Bramall 5.* The volunteer's own device just did the
 committee's collect step and the unsealing, alone.
 
-**Say:** "Your envelope replaced Derek's old one. Nobody watching the box — including
-me — can tell which envelope changed, or what either one said. And the total moved by
+**Say:** "Your envelope replaced Derek's old one. Nobody watching the box, including
+me, can tell which envelope changed, or what either one said. And the total moved by
 exactly one. Your phone could unseal that total only because this demo publishes every
-secret on purpose — in your real season, unsealing takes two of the three key-holders,
+secret on purpose, in your real season, unsealing takes two of the three key-holders,
 each on their own machine."
 
 **Fallback (no wifi, or an ancient phone):** get the file to the laptop (email works;
-that's the point — the collection channel can be dumb) and run the committee's real
+that's the point, the collection channel can be dumb) and run the committee's real
 path in the terminal:
 
 ```sh
@@ -138,10 +138,10 @@ python3 proto/verify.py /tmp/demo-yourvote
 **Sandra Okafor 9, Keith Bramall 5** (they were 8–6), and the recast line reading
 *"17 valid ballots, 14 distinct linking tags counted, 3 silently superseded."*
 
-### 18–24 min — now we rig it, twice
+### 18–24 min, now we rig it, twice
 
 **Say:** "I'm the corrupt committee now. I hold every key the committee holds. First
-rig: I take Sandra's sealed ballot and swap it for a forged one — my own envelope,
+rig: I take Sandra's sealed ballot and swap it for a forged one, my own envelope,
 voting Keith."
 
 **Do:**
@@ -157,10 +157,10 @@ Drag the `/tmp/demo-rigged` folder onto the verifier page.
 this nullifier)."*
 
 **Say:** "Every hash and signature I could fake, I faked. The one thing I can't make
-is a member's proof — I'm not on the list. The page that caught me shares no code with
+is a member's proof, I'm not on the list. The page that caught me shares no code with
 me; a stranger's copy would catch it too."
 
-**Say:** "Second rig — the subtle one. I don't forge anything. I *erase* your re-vote
+**Say:** "Second rig, the subtle one. I don't forge anything. I *erase* your re-vote
 from history, re-sign everything honestly, and recount. Every remaining piece is
 genuine."
 
@@ -172,60 +172,60 @@ python3 proto/clubvote.py tamper proto/out /tmp/demo-erased drop
 
 Drag `/tmp/demo-erased` onto the verifier.
 
-**Expect:** every row green — twenty-six of them at the last rehearsal — until the
+**Expect:** every row green, twenty-six of them at the last rehearsal, until the
 single red one at the very end:
 *"no valid receipt from ['did:web:sheffield-star.example'] matches this log's closing
-head — the history under audit is not the history the world saw."*
+head, the history under audit is not the history the world saw."*
 
 Let the green rows land in silence before the red one. That pause is the beat.
 
 **Say:** "Everything inside the record agreed, because everything inside the record
-was genuine — minus one inconvenient ballot. The only thing that objected is the copy
+was genuine, minus one inconvenient ballot. The only thing that objected is the copy
 that lives outside my reach: the newspaper's three lines. *That* is why the invitation
 asks your federation to countersign and your newsletter to print a fingerprint. Those
 two small favours are what just caught me."
 
-### 24–30 min — the season, and questions
+### 24–30 min, the season, and questions
 
 **Say:** "That's the whole machine. For your AGM it looks like: members enrol with
-[whoever keeps your register] in the weeks before — five minutes each, name or plot
+[whoever keeps your register] in the weeks before, five minutes each, name or plot
 number, their choice. Two neighbouring societies countersign three times. Three
-trustees hold the unsealing keys — any two suffice, none can peek alone. At the
+trustees hold the unsealing keys, any two suffice, none can peek alone. At the
 meeting: hands first, as always; then whoever wants casts this shadow ballot. The
 newsletter prints three lines. Everyone gets one link to check the lot."
 
-Close with the honest limits, unprompted — they're in
+Close with the honest limits, unprompted, they're in
 [the invitation](shadow-agm-invitation.md) and they land better said aloud: the record
 is public forever; whoever collects the files sees who handed one in; nobody can prove
 their own vote and that's deliberate; it's a research prototype and they'd be first;
 and if every computer catches fire, the AGM is unaffected.
 
-**Leave behind:** the printed invitation, and the three links written on it — the
+**Leave behind:** the printed invitation, and the three links written on it, the
 verifier, the cast page, the architecture.
 
 ## Rough edges to know about (so they don't know about them first)
 
 - The browser verifier needs a current browser for signature checking; on an old one
-  it says **CANNOT VERIFY HERE** rather than pretending — if the club laptop is
+  it says **CANNOT VERIFY HERE** rather than pretending, if the club laptop is
   ancient, verify in the terminal instead (`python3 proto/verify.py proto/out`).
 - The full browser verification is 15–25 seconds of visible progress. That's the
-  per-ballot membership proof — narrate it; don't apologise for it. The terminal one
+  per-ballot membership proof, narrate it; don't apologise for it. The terminal one
   is similar (~15 s).
 - Casting on phones needs the live (https) pages, hence internet. No internet → laptop
   only; the demonstration is unchanged.
-- If the volunteer forgets attempt number 6, the hand-in panel says so out loud —
-  *"in the box, but superseded — re-cast with a higher attempt number"* — and the count
+- If the volunteer forgets attempt number 6, the hand-in panel says so out loud,
+  *"in the box, but superseded, re-cast with a higher attempt number"*, and the count
   stays 8–6 (seq 5 beats seq 1: last *ballot* counts, not last *timestamp*). That is a
   live demonstration of the re-vote rule; cast again at 6. Re-using exactly 5 is
   refused as a duplicate, on the page and the terminal path alike.
 - Watch the downloads bar after **Cast it**: a browser meeting this site for the first
   time can silently swallow the file. If nothing appeared, allow downloads for the
-  site, then **Seal my choice** and **Cast it** again — the same attempt number is
+  site, then **Seal my choice** and **Cast it** again, the same attempt number is
   fine; only one file gets handed in.
 - Reset between rehearsals: `rm -rf /tmp/demo-*`. Nothing in the demo modifies the
   repo or `proto/out`.
 
-## The hand-over — one list
+## The hand-over, one list
 
 Everything above is built and rehearsed; what remains needs a person. In order:
 
@@ -234,7 +234,7 @@ Everything above is built and rehearsed; what remains needs a person. In order:
 - [ ] Pick the club and the vote (the treasurer race, or one motion). If it really is
   Heeley Bank, re-read the invitation's admission about the borrowed name first.
 - [ ] Print [the invitation](shadow-agm-invitation.md). On the printed copy, write the
-  three links (verifier / cast / architecture) and your direct contact details — they
+  three links (verifier / cast / architecture) and your direct contact details, they
   are deliberately not in the repo.
 - [ ] Read the run sheet above once, end to end.
 
@@ -243,7 +243,7 @@ Everything above is built and rehearsed; what remains needs a person. In order:
 - [ ] `./proto/test.sh` on the demo laptop ends `ALL GREEN`.
 - [ ] One full rehearsal, both riggings included; `rm -rf /tmp/demo-*` afterwards.
 - [ ] Decide wifi or offline. If members' phones will cast, confirm the live pages
-  load at the clubhouse — or bring a hotspot; offline, the laptop path shows the same
+  load at the clubhouse, or bring a hotspot; offline, the laptop path shows the same
   thing.
 
 **On the day**
@@ -252,11 +252,11 @@ Everything above is built and rehearsed; what remains needs a person. In order:
   `/tmp/demo-*` clean.
 - [ ] Leave behind the printed invitation, links and contact on it.
 
-**Afterwards — the part that is the actual experiment**
+**Afterwards, the part that is the actual experiment**
 
 - [ ] The same evening, write down what confused people, what broke, and what they
-  asked. Those notes are what the season is *for* — file them as
+  asked. Those notes are what the season is *for*, file them as
   [issues](https://github.com/GlassOnTin/civic-kernel/issues), including the
   embarrassing ones.
 - [ ] If the committee says no: ask why, and write that down too. The invitation calls
-  a no a finding — mean it.
+  a no a finding, mean it.

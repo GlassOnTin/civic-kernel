@@ -2,61 +2,151 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://glassontin.github.io/civic-kernel/scenarios/scenario.schema.json",
   "title": "Civic Kernel stress-test scenario",
-  "description": "One imagined real-life human situation walked through the protocol. Test-harness format, not part of the waist. The embedded manifest and log-entry artifacts must additionally validate against the two waist schemas in ../schema/ — that cross-check is the test: can the waist express this situation? Enforced by tools/validate.py.",
+  "description": "One imagined real-life human situation walked through the protocol. Test-harness format, not part of the waist. The embedded manifest and log-entry artifacts must additionally validate against the two waist schemas in ../schema/, that cross-check is the test: can the waist express this situation? Enforced by tools/validate.py.",
   "type": "object",
-  "required": ["id", "title", "setting", "threats", "doc_refs", "precedents", "manifest", "walkthrough", "verdict", "verdict_plain", "protection", "protection_plain", "findings"],
+  "required": [
+    "id",
+    "title",
+    "setting",
+    "threats",
+    "doc_refs",
+    "precedents",
+    "manifest",
+    "walkthrough",
+    "verdict",
+    "verdict_plain",
+    "protection",
+    "protection_plain",
+    "findings"
+  ],
   "additionalProperties": false,
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
-    "title": { "type": "string" },
-    "setting": { "type": "string", "description": "The scene: named people, a real place, what is at stake. General-reader prose." },
-    "threats": { "type": "array", "items": { "type": "string", "pattern": "^T[0-9]+$" }, "description": "Threat-register IDs under test (§2)." },
-    "doc_refs": { "type": "array", "items": { "type": "string" } },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "setting": {
+      "type": "string",
+      "description": "The scene: named people, a real place, what is at stake. General-reader prose."
+    },
+    "threats": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^T[0-9]+$"
+      },
+      "description": "Threat-register IDs under test (§2)."
+    },
+    "doc_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "precedents": {
       "type": "array",
       "minItems": 1,
       "description": "Documented real-world events the fiction is modeled on: the people are invented, the attack pattern is not. Same discipline the kernel demands of a form field (no demand without a cited rule): no attack without a cited precedent.",
       "items": {
         "type": "object",
-        "required": ["event", "year", "source", "url", "shows"],
+        "required": [
+          "event",
+          "year",
+          "source",
+          "url",
+          "shows"
+        ],
         "additionalProperties": false,
         "properties": {
-          "event": { "type": "string", "description": "Short name of the documented event, case, or statistic." },
-          "year": { "type": "integer" },
-          "source": { "type": "string", "description": "Publisher or institution behind the url." },
-          "url": { "type": "string", "pattern": "^https?://" },
-          "shows": { "type": "string", "description": "One sentence: which of this scenario's attack patterns the event documents." }
+          "event": {
+            "type": "string",
+            "description": "Short name of the documented event, case, or statistic."
+          },
+          "year": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string",
+            "description": "Publisher or institution behind the url."
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^https?://"
+          },
+          "shows": {
+            "type": "string",
+            "description": "One sentence: which of this scenario's attack patterns the event documents."
+          }
         }
       }
     },
-    "manifest": { "type": "object", "description": "The community's conformance manifest; must validate against ../schema/manifest.schema.json." },
+    "manifest": {
+      "type": "object",
+      "description": "The community's conformance manifest; must validate against ../schema/manifest.schema.json."
+    },
     "walkthrough": {
       "type": "array",
       "minItems": 6,
       "maxItems": 14,
       "items": {
         "type": "object",
-        "required": ["actor", "verb", "narrative"],
+        "required": [
+          "actor",
+          "verb",
+          "narrative"
+        ],
         "additionalProperties": false,
         "properties": {
-          "actor": { "type": "string" },
-          "verb": { "enum": ["prove", "cast", "challenge", "verify", "read", "offstage"], "description": "One of the four citizen verbs (§8; cast/challenge split), or 'offstage' for the parts of life the kernel deliberately does not touch." },
-          "narrative": { "type": "string" },
-          "artifact": { "type": "object", "description": "The log entry this step appends, if any; must validate against ../schema/log-entry.schema.json." }
+          "actor": {
+            "type": "string"
+          },
+          "verb": {
+            "enum": [
+              "prove",
+              "cast",
+              "challenge",
+              "verify",
+              "read",
+              "offstage"
+            ],
+            "description": "One of the four citizen verbs (§8; cast/challenge split), or 'offstage' for the parts of life the kernel deliberately does not touch."
+          },
+          "narrative": {
+            "type": "string"
+          },
+          "artifact": {
+            "type": "object",
+            "description": "The log entry this step appends, if any; must validate against ../schema/log-entry.schema.json."
+          }
         }
       }
     },
-    "verdict": { "enum": ["holds", "strains", "breaks"] },
+    "verdict": {
+      "enum": [
+        "holds",
+        "strains",
+        "breaks"
+      ]
+    },
     "protection": {
-      "type": "string", "minLength": 3, "maxLength": 60,
-      "description": "The protection under test, as a short subject phrase that reads grammatically before the verdict: '<protection> <verdict>' — e.g. 'the silent re-vote breaks'."
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 60,
+      "description": "The protection under test, as a short subject phrase that reads grammatically before the verdict: '<protection> <verdict>', e.g. 'the silent re-vote breaks'."
     },
     "protection_plain": {
-      "type": "string", "minLength": 40, "maxLength": 300,
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 300,
       "description": "What the protection under test is, in one plain line - shown as the popover on the protection title."
     },
     "verdict_plain": {
-      "type": "string", "minLength": 40, "maxLength": 420,
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 420,
       "description": "The verdict in plain speech, one or two sentences: where the design lands and why. Rendered as the story's opening line and its card text."
     },
     "findings": {
@@ -64,13 +154,32 @@
       "minItems": 2,
       "items": {
         "type": "object",
-        "required": ["protection", "severity", "observation"],
+        "required": [
+          "protection",
+          "severity",
+          "observation"
+        ],
         "additionalProperties": false,
         "properties": {
-          "protection": { "type": "string", "minLength": 3, "maxLength": 60, "description": "This finding's subject, read before its severity badge." },
-          "severity": { "enum": ["note", "strain", "break"] },
-          "observation": { "type": "string" },
-          "doc_ref": { "type": "string" }
+          "protection": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "description": "This finding's subject, read before its severity badge."
+          },
+          "severity": {
+            "enum": [
+              "note",
+              "strain",
+              "break"
+            ]
+          },
+          "observation": {
+            "type": "string"
+          },
+          "doc_ref": {
+            "type": "string"
+          }
         }
       }
     }

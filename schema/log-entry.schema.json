@@ -2,9 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://glassontin.github.io/civic-kernel/schema/log-entry.schema.json",
   "title": "Civic Kernel transparency-log entry",
-  "description": "One kernel event, appended to a community's Merkle transparency log (§3.4). The Merkle leaf is SHA-256 over the JCS (RFC 8785) canonical form of this object minus `sig`. Log heads/checkpoints are NOT redefined here: they use the existing signed-note checkpoint format (RFC 9162 / Sigstore witness ecosystem), co-signed by independent witnesses. Payloads must stay kilobyte-scale and self-contained — valid whenever they arrive, over any transport (§4).",
+  "description": "One kernel event, appended to a community's Merkle transparency log (§3.4). The Merkle leaf is SHA-256 over the JCS (RFC 8785) canonical form of this object minus `sig`. Log heads/checkpoints are NOT redefined here: they use the existing signed-note checkpoint format (RFC 9162 / Sigstore witness ecosystem), co-signed by independent witnesses. Payloads must stay kilobyte-scale and self-contained, valid whenever they arrive, over any transport (§4).",
   "type": "object",
-  "required": ["v", "type", "community", "timestamp", "body", "sig"],
+  "required": [
+    "v",
+    "type",
+    "community",
+    "timestamp",
+    "body",
+    "sig"
+  ],
   "additionalProperties": false,
   "properties": {
     "v": {
@@ -12,7 +19,7 @@
       "description": "Format identifier and version. The waist is versioned like any other artifact (§5)."
     },
     "type": {
-      "description": "Kernel event type. Namespaced; the enum below is the set named in the architecture document — extensions use an `x-` prefix rather than diluting the core vocabulary (§6).",
+      "description": "Kernel event type. Namespaced; the enum below is the set named in the architecture document, extensions use an `x-` prefix rather than diluting the core vocabulary (§6).",
       "anyOf": [
         {
           "enum": [
@@ -32,7 +39,10 @@
             "executive.act"
           ]
         },
-        { "type": "string", "pattern": "^x-[a-z0-9-]+(\\.[a-z0-9-]+)*$" }
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+(\\.[a-z0-9-]+)*$"
+        }
       ]
     },
     "community": {
@@ -47,128 +57,261 @@
     },
     "body": {
       "type": "object",
-      "description": "Type-specific payload. E.g. decision.opened carries the decision id, question hash, eligibility-rule version and deliberation window; rights.classification carries the tripped invariant articles and reasons (§3.3); process.cost-aggregate carries anonymous aggregate metrics only — measure the process, never the person (§8)."
+      "description": "Type-specific payload. E.g. decision.opened carries the decision id, question hash, eligibility-rule version and deliberation window; rights.classification carries the tripped invariant articles and reasons (§3.3); process.cost-aggregate carries anonymous aggregate metrics only, measure the process, never the person (§8)."
     },
     "sealed": {
       "type": "object",
-      "description": "Subject-readable / commit-now-reveal-later at the entry level — the general form of the sealed_until/sealed_body_digest fields on coercive.act and executive.act. The entry's existence, order and this digest sit in the public Merkle tree (an auditor proves inclusion and completeness), while the content it commits to is sealed and openable only by the parties in readable_by. This is how a transparency_log with mode 'subject-readable' keeps a private record auditable (nhs-data-access-opaque): who accessed a medical record is readable by that patient and verifiable-complete by an auditor, yet invisible to the world. Honest caveat: the unseal key is a trusted party, not a cryptographic guarantee — the same witness-recursion problem as §6's anchor.",
-      "required": ["sealed_body_digest", "readable_by"],
+      "description": "Subject-readable / commit-now-reveal-later at the entry level, the general form of the sealed_until/sealed_body_digest fields on coercive.act and executive.act. The entry's existence, order and this digest sit in the public Merkle tree (an auditor proves inclusion and completeness), while the content it commits to is sealed and openable only by the parties in readable_by. This is how a transparency_log with mode 'subject-readable' keeps a private record auditable (nhs-data-access-opaque): who accessed a medical record is readable by that patient and verifiable-complete by an auditor, yet invisible to the world. Honest caveat: the unseal key is a trusted party, not a cryptographic guarantee, the same witness-recursion problem as §6's anchor.",
+      "required": [
+        "sealed_body_digest",
+        "readable_by"
+      ],
       "additionalProperties": false,
       "properties": {
-        "sealed_body_digest": { "type": "string", "description": "Hash commitment to the sealed content, published now so a later reveal cannot be altered." },
+        "sealed_body_digest": {
+          "type": "string",
+          "description": "Hash commitment to the sealed content, published now so a later reveal cannot be altered."
+        },
         "readable_by": {
           "type": "array",
           "minItems": 1,
-          "items": { "enum": ["subject", "authorized-auditor", "court-order"] },
+          "items": {
+            "enum": [
+              "subject",
+              "authorized-auditor",
+              "court-order"
+            ]
+          },
           "description": "Who may open the seal. 'subject' = the data subject's own key, the record theirs to read and not the world's; 'authorized-auditor' = an independent auditor verifying completeness under authorisation; 'court-order' = disclosure compelled by a court."
         },
-        "sealed_until": { "type": "string", "format": "date-time", "description": "Optional: the content also becomes public after this time (commit-now-reveal-later); absent for a permanently subject-readable entry." }
+        "sealed_until": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional: the content also becomes public after this time (commit-now-reveal-later); absent for a permanently subject-readable entry."
+        }
       }
     },
-    "sig": { "$ref": "#/$defs/signature" }
+    "sig": {
+      "$ref": "#/$defs/signature"
+    }
   },
   "allOf": [
     {
-      "if": { "properties": { "type": { "const": "coercive.act" } } },
+      "if": {
+        "properties": {
+          "type": {
+            "const": "coercive.act"
+          }
+        }
+      },
       "then": {
-        "description": "A coercive.act entry logs an exercise of the state's monopoly on force — an arrest, search, surveillance authorization, sanction, use of force (§ law-and-order). It must cite its authority: an act with no authorizing_rule is a schema violation, not a policy dispute — §8's 'every demanded field cites its authorizing rule' generalised to 'every coercive act cites its warrant'. The kernel does not wield this power; it makes its exercise legible and appealable.",
-        "properties": { "body": { "$ref": "#/$defs/coercive_body" } }
+        "description": "A coercive.act entry logs an exercise of the state's monopoly on force, an arrest, search, surveillance authorization, sanction, use of force (§ law-and-order). It must cite its authority: an act with no authorizing_rule is a schema violation, not a policy dispute, §8's 'every demanded field cites its authorizing rule' generalised to 'every coercive act cites its warrant'. The kernel does not wield this power; it makes its exercise legible and appealable.",
+        "properties": {
+          "body": {
+            "$ref": "#/$defs/coercive_body"
+          }
+        }
       }
     },
     {
-      "if": { "properties": { "type": { "const": "executive.act" } } },
+      "if": {
+        "properties": {
+          "type": {
+            "const": "executive.act"
+          }
+        }
+      },
       "then": {
-        "description": "An executive.act entry logs an exercise of delegated administrative or spending power — a contract award, grant, appointment, licence, or disposal of public assets. Like a coercive.act it must cite its authority: an act with no authorizing_rule is a schema violation — §8's 'every demanded field cites its authorizing rule' generalised to 'every executive act cites its power', the purse-and-patronage counterpart to the warrant. A native provenance field makes a referral or privileged lane legible per act (procurement-vip-lane). The type compels the citation, never the entry: a decision kept off the log entirely still evades it (government-by-whatsapp), closed only by a governance rule that an unlogged act is void.",
-        "properties": { "body": { "$ref": "#/$defs/executive_body" } }
+        "description": "An executive.act entry logs an exercise of delegated administrative or spending power, a contract award, grant, appointment, licence, or disposal of public assets. Like a coercive.act it must cite its authority: an act with no authorizing_rule is a schema violation, §8's 'every demanded field cites its authorizing rule' generalised to 'every executive act cites its power', the purse-and-patronage counterpart to the warrant. A native provenance field makes a referral or privileged lane legible per act (procurement-vip-lane). The type compels the citation, never the entry: a decision kept off the log entirely still evades it (government-by-whatsapp), closed only by a governance rule that an unlogged act is void.",
+        "properties": {
+          "body": {
+            "$ref": "#/$defs/executive_body"
+          }
+        }
       }
     }
   ],
   "$defs": {
     "coercive_body": {
       "type": "object",
-      "required": ["act_class", "authorizing_rule"],
+      "required": [
+        "act_class",
+        "authorizing_rule"
+      ],
       "additionalProperties": false,
       "properties": {
         "act_class": {
-          "enum": ["warrant", "search", "arrest", "detention", "seizure", "surveillance", "sanction", "use-of-force"],
+          "enum": [
+            "warrant",
+            "search",
+            "arrest",
+            "detention",
+            "seizure",
+            "surveillance",
+            "sanction",
+            "use-of-force"
+          ],
           "description": "The kind of coercive act."
         },
         "authorizing_rule": {
           "type": "string",
-          "description": "Citation of the rule/warrant/statute that authorizes this act. REQUIRED — an unwarranted coercive act cannot be logged validly, which is the point."
+          "description": "Citation of the rule/warrant/statute that authorizes this act. REQUIRED, an unwarranted coercive act cannot be logged validly, which is the point."
         },
-        "issuing_authority": { "type": "string", "description": "Who authorized the act (court, magistrate, tribunal)." },
+        "issuing_authority": {
+          "type": "string",
+          "description": "Who authorized the act (court, magistrate, tribunal)."
+        },
         "subject_ref": {
           "type": "string",
-          "description": "Opaque reference to the subject IN THE ENFORCEMENT IDENTITY DOMAIN. MUST NOT be a civic unlinkable pseudonym — the kernel refuses to bridge civic anonymity to enforcement attribution (T6, T1). Attribution lives in the state's separate legal-identity system, walled off from the civic layer."
+          "description": "Opaque reference to the subject IN THE ENFORCEMENT IDENTITY DOMAIN. MUST NOT be a civic unlinkable pseudonym, the kernel refuses to bridge civic anonymity to enforcement attribution (T6, T1). Attribution lives in the state's separate legal-identity system, walled off from the civic layer."
         },
         "sealed_until": {
           "type": "string",
           "format": "date-time",
-          "description": "Commit-now-reveal-later: the act's existence and timing are logged immediately (tamper-evident), but sealed_body_digest commits to content revealed only after this time or by court order. Honest caveat: the unseal key is a trusted party — the same witness-recursion problem as §6's anchor, not a cryptographic guarantee."
+          "description": "Commit-now-reveal-later: the act's existence and timing are logged immediately (tamper-evident), but sealed_body_digest commits to content revealed only after this time or by court order. Honest caveat: the unseal key is a trusted party, the same witness-recursion problem as §6's anchor, not a cryptographic guarantee."
         },
-        "sealed_body_digest": { "type": "string", "description": "Hash commitment to the sealed content, published now so the later reveal cannot be altered." },
-        "rights_guard_ref": { "type": "string", "description": "If the act tripped a UDHR invariant (Art. 5, 9, 11, 12…), the rights.classification entry that escalated it (§3.3)." },
-        "appeal_trace": { "type": "string", "description": "Pointer to the appealable computation trace — the right to reasons and to challenge, made machine-checkable (§8, §11)." }
+        "sealed_body_digest": {
+          "type": "string",
+          "description": "Hash commitment to the sealed content, published now so the later reveal cannot be altered."
+        },
+        "rights_guard_ref": {
+          "type": "string",
+          "description": "If the act tripped a UDHR invariant (Art. 5, 9, 11, 12…), the rights.classification entry that escalated it (§3.3)."
+        },
+        "appeal_trace": {
+          "type": "string",
+          "description": "Pointer to the appealable computation trace, the right to reasons and to challenge, made machine-checkable (§8, §11)."
+        }
       }
     },
     "executive_body": {
       "type": "object",
-      "required": ["act_class", "authorizing_rule"],
+      "required": [
+        "act_class",
+        "authorizing_rule"
+      ],
       "additionalProperties": false,
       "properties": {
         "act_class": {
-          "enum": ["award", "contract", "grant", "appointment", "licence", "disposal", "payment", "direction"],
-          "description": "The kind of executive act — an exercise of delegated administrative or spending power, distinct from a coercive.act (the monopoly on force) and a decision.* (a ballot)."
+          "enum": [
+            "award",
+            "contract",
+            "grant",
+            "appointment",
+            "licence",
+            "disposal",
+            "payment",
+            "direction"
+          ],
+          "description": "The kind of executive act, an exercise of delegated administrative or spending power, distinct from a coercive.act (the monopoly on force) and a decision.* (a ballot)."
         },
         "authorizing_rule": {
           "type": "string",
-          "description": "Citation of the power, rule, or delegation that authorizes this act. REQUIRED — an executive act with no cited authority cannot be logged validly: §8's warrant rule generalised from force to the purse."
+          "description": "Citation of the power, rule, or delegation that authorizes this act. REQUIRED, an executive act with no cited authority cannot be logged validly: §8's warrant rule generalised from force to the purse."
         },
-        "issuing_authority": { "type": "string", "description": "The body or office exercising the power." },
+        "issuing_authority": {
+          "type": "string",
+          "description": "The body or office exercising the power."
+        },
         "counterparty": {
           "type": "object",
           "additionalProperties": false,
-          "description": "The named beneficiary or supplier — public, unlike a coercive.act's walled-off subject: a company awarded a public contract is a matter of record.",
+          "description": "The named beneficiary or supplier, public, unlike a coercive.act's walled-off subject: a company awarded a public contract is a matter of record.",
           "properties": {
-            "name": { "type": "string" },
-            "ref": { "type": "string", "description": "Stable public reference, e.g. a companies-register id." }
+            "name": {
+              "type": "string"
+            },
+            "ref": {
+              "type": "string",
+              "description": "Stable public reference, e.g. a companies-register id."
+            }
           }
         },
         "provenance": {
           "type": "object",
           "additionalProperties": false,
-          "description": "How this act came to be considered — its route and, where there was one, the referral that initiated it. A privileged lane is a pattern in this field made legible per act (procurement-vip-lane); 'open-competition' when there was none.",
+          "description": "How this act came to be considered, its route and, where there was one, the referral that initiated it. A privileged lane is a pattern in this field made legible per act (procurement-vip-lane); 'open-competition' when there was none.",
           "properties": {
-            "route": { "type": "string", "description": "The channel, e.g. 'open-competition', 'high-priority', 'direct-award'." },
-            "referred_by": { "type": ["string", "null"], "description": "Who initiated or referred the act, in the administrative identity domain — never a civic unlinkable pseudonym (T6, T1)." },
-            "referrer_role": { "type": ["string", "null"], "description": "The referrer's role, e.g. 'ministerial-office'." },
-            "referred_on": { "type": "string", "format": "date" }
+            "route": {
+              "type": "string",
+              "description": "The channel, e.g. 'open-competition', 'high-priority', 'direct-award'."
+            },
+            "referred_by": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Who initiated or referred the act, in the administrative identity domain, never a civic unlinkable pseudonym (T6, T1)."
+            },
+            "referrer_role": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The referrer's role, e.g. 'ministerial-office'."
+            },
+            "referred_on": {
+              "type": "string",
+              "format": "date"
+            }
           }
         },
         "value": {
           "type": "object",
           "additionalProperties": false,
-          "description": "The quantum of the act, if it has one — a contract value, a grant amount.",
+          "description": "The quantum of the act, if it has one, a contract value, a grant amount.",
           "properties": {
-            "amount": { "type": "number" },
-            "currency": { "type": "string" }
+            "amount": {
+              "type": "number"
+            },
+            "currency": {
+              "type": "string"
+            }
           }
         },
-        "sealed_until": { "type": "string", "format": "date-time", "description": "Commit-now-reveal-later, as coercive_body: existence and timing logged immediately, terms revealed after this time or by order — for genuine commercial confidentiality, not to hide the act. The unseal key is a trusted party, not a cryptographic guarantee." },
-        "sealed_body_digest": { "type": "string", "description": "Hash commitment to the sealed terms, published now so the later reveal cannot be altered." },
-        "rights_guard_ref": { "type": "string", "description": "If the act tripped a UDHR invariant, the rights.classification entry that escalated it (§3.3)." },
-        "appeal_trace": { "type": "string", "description": "Pointer to the appealable computation trace — the right to reasons and to challenge (§8, §11)." }
+        "sealed_until": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Commit-now-reveal-later, as coercive_body: existence and timing logged immediately, terms revealed after this time or by order, for genuine commercial confidentiality, not to hide the act. The unseal key is a trusted party, not a cryptographic guarantee."
+        },
+        "sealed_body_digest": {
+          "type": "string",
+          "description": "Hash commitment to the sealed terms, published now so the later reveal cannot be altered."
+        },
+        "rights_guard_ref": {
+          "type": "string",
+          "description": "If the act tripped a UDHR invariant, the rights.classification entry that escalated it (§3.3)."
+        },
+        "appeal_trace": {
+          "type": "string",
+          "description": "Pointer to the appealable computation trace, the right to reasons and to challenge (§8, §11)."
+        }
       }
     },
     "signature": {
       "type": "object",
-      "required": ["key_id", "alg", "value"],
+      "required": [
+        "key_id",
+        "alg",
+        "value"
+      ],
       "additionalProperties": false,
       "properties": {
-        "key_id": { "type": "string", "description": "Identifier of the signing key. Key rotations are themselves log entries (credential.authority-key-rotated)." },
-        "alg": { "type": "string", "examples": ["ed25519"] },
-        "value": { "type": "string", "contentEncoding": "base64url", "description": "Detached signature over the JCS canonical form of the entry minus `sig`." }
+        "key_id": {
+          "type": "string",
+          "description": "Identifier of the signing key. Key rotations are themselves log entries (credential.authority-key-rotated)."
+        },
+        "alg": {
+          "type": "string",
+          "examples": [
+            "ed25519"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "contentEncoding": "base64url",
+          "description": "Detached signature over the JCS canonical form of the entry minus `sig`."
+        }
       }
     }
   },
@@ -182,7 +325,10 @@
         "decision_id": "2026-agm-treasurer",
         "question_hash": "sha256:9f2b7c1a0d4e8f3b6a5c2e1d7f0a9b8c3d6e5f4a1b2c3d4e5f6a7b8c9d0e1f2a",
         "eligibility_rules": "roster/v3",
-        "window": { "deliberation_ends": "2026-07-14T18:00:00Z", "cast_ends": "2026-07-21T18:00:00Z" }
+        "window": {
+          "deliberation_ends": "2026-07-14T18:00:00Z",
+          "cast_ends": "2026-07-21T18:00:00Z"
+        }
       },
       "sig": {
         "key_id": "did:web:allotment-society.example#log-1",

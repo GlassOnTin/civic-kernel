@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 // Collect parity: the verifier page's "hand in a ballot" step (collectBallot
-// in verifier.js) must reach the same outcomes as the committee's real path —
-// `clubvote.py collect` followed by verify.py, the Python judge — on the same
+// in verifier.js) must reach the same outcomes as the committee's real path,
+// `clubvote.py collect` followed by verify.py, the Python judge, on the same
 // ballots. Four ballots cross the outcome space: a proper re-cast (counted,
 // 8-6 -> 9-5), a stale attempt number (accepted but superseded, count frozen),
 // an exact duplicate (refused before judging), and a forged ballot (refused by
 // the ring signature on both sides). Also asserts the page's pinned demo joint
 // secret matches the election key the transcript's own trustee commitments
-// derive — the gate that keeps the page from ever claiming to unseal a real
+// derive, the gate that keeps the page from ever claiming to unseal a real
 // election.
 import { createRequire } from "module";
 import { execFileSync } from "child_process";
@@ -117,7 +117,7 @@ say(browser.after.counts["Sandra Okafor"] === 8 && browser.after.superseded === 
 say(python.collected && python.verified, "stale case: the Python side accepts it too");
 say(python.output.includes("{" + fmt(browser.after.counts) + "}")
   && python.output.includes(browser.after.superseded + " silently superseded"),
-  "stale case: verify.py agrees — same counts, same superseded tally");
+  "stale case: verify.py agrees, same counts, same superseded tally");
 
 // 3. duplicate: both sides refuse before judging, same reason
 browser = await V.collectBallot(files, JSON.stringify(dup), pin);
@@ -136,7 +136,7 @@ say(python.collected && !python.verified && /ring signature does not verify/.tes
   "forged case: collect takes it, verify.py convicts it on the same check");
 
 if (failures) {
-  console.log(failures + " collect-parity failure(s) — the page's hand-in step does not match the Python judge");
+  console.log(failures + " collect-parity failure(s), the page's hand-in step does not match the Python judge");
   process.exit(1);
 }
 console.log("collect parity: what the page counts, refuses or convicts, the Python judge does too");

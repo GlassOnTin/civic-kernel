@@ -1,21 +1,21 @@
-# Make this page yourself — the rebuild recipe
+# Make this page yourself, the rebuild recipe
 
 *The honest answer to "who maintains this, and what if they stop?" is that the tool is
-not the asset — the rules are. The rules are public data files, the acceptance test is
+not the asset, the rules are. The rules are public data files, the acceptance test is
 an independent program, and the page itself can be rebuilt from scratch by anyone with
 access to a capable AI model, in one sitting, without reading our code. This document
-is the recipe: a prompt you can paste into a leading model — Claude, ChatGPT, Kimi,
-whatever is strongest when you read this — plus the test that tells you whether what
+is the recipe: a prompt you can paste into a leading model, Claude, ChatGPT, Kimi,
+whatever is strongest when you read this, plus the test that tells you whether what
 came back is right. If the rebuild agrees with the independent judge on every test
 case, you never needed to trust us; if ours disappears tomorrow, yours works.*
 
 Rebuilding is the proof; **owning is the practice**. If what you want is your own
-running copy — your name, your address, and the April uprating routine that keeps it
-true — the step-by-step guide is [docs/own](own/README.md).
+running copy, your name, your address, and the April uprating routine that keeps it
+true, the step-by-step guide is [docs/own](own/README.md).
 
 ## What you need
 
-- The rule files (public, plain JSON — the only source of truth):
+- The rule files (public, plain JSON, the only source of truth):
   `https://github.com/GlassOnTin/civic-kernel/tree/master/entitlements/uk`
   (eight entitlement files plus `spa.json`, the statutory pensionable-age table).
 - The independent judge (for checking the result, not for building it):
@@ -29,7 +29,7 @@ Paste the following, attaching or linking the rule files:
 
 ---
 
-Build a single-file HTML page — one `.html`, no build step, no dependencies — that
+Build a single-file HTML page, one `.html`, no build step, no dependencies, that
 tells a person what UK benefits they appear entitled to, computed entirely on their
 device from the attached rule files. Requirements, all of them binding:
 
@@ -39,14 +39,14 @@ form from what the rules demand: a question that no rule demands must not exist,
 every question must display, beneath it, the legal rule it is asked under and a link
 to its source (both are in the data). Do not invent, simplify, or "improve" any rule.
 
-**Zero network.** After the page loads, it must make no network request of any kind —
+**Zero network.** After the page loads, it must make no network request of any kind,
 no analytics, no fonts, no APIs, nothing. A user opening the browser's network panel
 must see silence. It must work opened from a local file with the internet off. It
 stores nothing: no cookies, no localStorage; when the tab closes, everything is gone.
 
 **Live and honest.** Recompute on every change, so "what if" costs nothing. Verdicts
 use this vocabulary and no stronger: appears eligible / assessment-gated / different
-door / appears not eligible — with weekly amounts where computable. Every amount must
+door / appears not eligible, with weekly amounts where computable. Every amount must
 expand to show its working: each step with its result and the rule it applied. Each
 entitlement must also show what its rules deliberately do not encode. Include a
 plainly-worded section on what the page cannot do (it does not decide claims; the
@@ -69,7 +69,7 @@ that carries no meaning.
 
 ---
 
-## The test — do not skip it
+## The test, do not skip it
 
 The rebuild is correct only if it agrees with the independent judge. For any set of
 answers, save the circumstances file from your rebuilt page and run:
@@ -78,7 +78,7 @@ answers, save the circumstances file from your rebuilt page and run:
 python3 entitlements/judge.py entitlements/uk --persona circumstances.json --json
 ```
 
-Same verdicts, same weekly amounts, for every entitlement, on every case you try —
+Same verdicts, same weekly amounts, for every entitlement, on every case you try,
 including awkward ones: a carer over State Pension age (the overlap rule), earnings
 just under and just over the Carer's Allowance limit, capital straddling the Pension
 Credit thresholds. Disagreement means one of the two is wrong, and finding out which
@@ -88,22 +88,22 @@ is exactly the kind of contribution the
 ## Has this been tried?
 
 Yes, once, honestly. A strong frontier model (OpenAI's Codex, `gpt-5.6-sol`, highest
-reasoning setting) was given the rule files and the prompt above — and nothing else: no
+reasoning setting) was given the rule files and the prompt above, and nothing else: no
 access to this project's own page or code. In one pass it produced a single, self-contained,
 genuinely offline page (no network request of any kind; it stores nothing). Driven through
-all of this repository's test personas — twenty-two people, eight entitlements each — its
+all of this repository's test personas, twenty-two people, eight entitlements each, its
 displayed verdicts and weekly amounts **agreed with the independent judge on every one of
 the 176 checks**, matching our own page exactly.
 
 It also did what the last line of the prompt asks, and reported back four genuine
 ambiguities it found in the rules themselves (Savings-Credit-only cases, a missing Wales
 route in Council Tax Reduction, a mixed-age condition, Winter Fuel recovery with a partner)
-— which is the recipe working as intended: a fresh reader auditing the rules on the way past.
+,  which is the recipe working as intended: a fresh reader auditing the rules on the way past.
 
 Not proven: this was one model and one run, and the accessibility wiring was checked
-structurally rather than with a real screen reader. But the core claim held under test —
+structurally rather than with a real screen reader. But the core claim held under test,
 a stranger's rebuild, from the rules alone, matched the judge.
 
-*Part of the [Civic Kernel](https://github.com/GlassOnTin/civic-kernel) — the same
+*Part of the [Civic Kernel](https://github.com/GlassOnTin/civic-kernel), the same
 discipline as the rest of it: the artifact is checkable, the recipe is public, and
 nobody has to trust the shed.*

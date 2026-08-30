@@ -64,7 +64,7 @@ def main() -> int:
             print(f"FAIL rights-map {code}: where a remedy exists, meta.entrenchment must be one of {sorted(ENTRENCHMENTS)} and meta.timing one of {sorted(TIMINGS)}", file=sys.stderr)
         elif rmap["meta"].get("remedy") == "none" and ("entrenchment" in rmap["meta"] or "timing" in rmap["meta"]):
             errs += 1
-            print(f"FAIL rights-map {code}: entrenchment/timing are vacuous where remedy is 'none' — omit the value fields (the _note fields may explain the absence)", file=sys.stderr)
+            print(f"FAIL rights-map {code}: entrenchment/timing are vacuous where remedy is 'none', omit the value fields (the _note fields may explain the absence)", file=sys.stderr)
         elif rmap["meta"].get("verdict") not in ("holds", "strains", "breaks") or len(rmap["meta"].get("verdict_plain", "")) < 40 or len(rmap["meta"].get("protection", "")) < 3:
             errs += 1
             print(f"FAIL rights-map {code}: meta.verdict must be holds/strains/breaks with verdict_plain (40+ chars) and protection", file=sys.stderr)
@@ -85,7 +85,7 @@ def main() -> int:
             print(f"FAIL rights-map {code}: meta.verdict/protection/entrenchment/timing contradict the measured scenario majority-vs-minority-{code}.json", file=sys.stderr)
         else:
             cov = rmap["meta"]["coverage"]
-            axes = f"remedy '{rmap['meta']['remedy']}' · scope '{scope}' · entrenchment '{rmap['meta'].get('entrenchment', '—')}' · timing '{rmap['meta'].get('timing', '—')}'"
+            axes = f"remedy '{rmap['meta']['remedy']}' · scope '{scope}' · entrenchment '{rmap['meta'].get('entrenchment', 'none')}' · timing '{rmap['meta'].get('timing', 'none')}'"
             print(f"ok   rights-map {code}  backed {cov['backed']} · structural {cov['structural']} · none {cov['none']} · {axes}")
             jurisdictions.append(rmap)
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 // Cast parity: a ballot built by cast.js (the browser casting engine) must be
 // accepted by proto/verify.py (the independent Python verifier) inside a real
-// transcript — and must actually COUNT. Derek's demo secret re-casts for
+// transcript, and must actually COUNT. Derek's demo secret re-casts for
 // Sandra; after `clubvote.py collect` the verified tally must read 9-5 where
 // the reference reads 8-6: one voter switched, nothing was stuffed.
 //
 // This test also plays the "other device" of cast-or-audit: it re-encrypts a
 // challenged envelope's opened (choice, r) with its own arithmetic and checks
-// the ciphertext matches — the check a voter would do away from the page.
+// the ciphertext matches, the check a voter would do away from the page.
 import { createRequire } from "module";
 import { execFileSync } from "child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "fs";
@@ -25,7 +25,7 @@ const say = (ok, what) => {
   if (!ok) failures++;
 };
 
-// Derek's nym secret is derivable from the public demo seed — the declared
+// Derek's nym secret is derivable from the public demo seed, the declared
 // zero-privacy property of the reference run (and a button on verifier.html).
 const DEREK = "d4b128310c83f38cc4f3c64ae534757c90a7719d00c1126660debc2e2a17bec6c8c4e15ff338b8837d03bcf85c289a6709434f818abeee434ea2c812029715b8";
 
@@ -107,7 +107,7 @@ try {
 }
 
 if (failures) {
-  console.log(failures + " cast-parity failure(s) — cast.js does not produce what verify.py accepts");
+  console.log(failures + " cast-parity failure(s), cast.js does not produce what verify.py accepts");
   process.exit(1);
 }
 console.log("cast parity: what the page builds, the independent verifier counts");

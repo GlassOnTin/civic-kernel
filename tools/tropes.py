@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Regenerate tropes.html's trope-web from the corpus — a field guide to how
-public power goes wrong, built from the data so it cannot drift.
+"""Regenerate tropes.html from the corpus: a guide to structural failure modes
+built directly from data.
 
-Two finite vocabularies of failure, and the cases under each:
-  - the STRUCTURAL SHAPES (triage signatures, tools/triage.py) over the triaged cases;
-  - the kernel's own fourteen THREATS (§2), tagged on every scenario.
+Two vocabularies of failure and the cases under each:
+  - the structural shapes (triage signatures, tools/triage.py) over the triaged cases;
+  - the kernel's fourteen threats (§2), tagged on every scenario.
 
 Run: python3 tools/tropes.py   (fills the <!--TROPES-START-->..<!--TROPES-END--> region)
 """
@@ -50,7 +50,7 @@ out = []
 # ---- The shapes ----
 out.append('<h2>The shapes</h2>')
 NUMBER_WORDS = {6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine'}
-out.append(f'<p class="lede2">{NUMBER_WORDS.get(len(SIGNATURES), len(SIGNATURES))} structural forms the institutional-failure cases keep taking — the cross-cutting tropes the triage engine sorts by. Most wrongs wear more than one.</p>')
+out.append(f'<p class="lede2">{NUMBER_WORDS.get(len(SIGNATURES), len(SIGNATURES))} structural forms observed across the failure cases, sorted by the triage engine. Most cases exhibit more than one.</p>')
 sig_cases = collections.defaultdict(list)
 for c in cases:
     for s in c.get("signature", []):
@@ -71,7 +71,7 @@ for sig, desc in SIGNATURES.items():
         out.append('<p class="cand">Awaiting a scenario: ' + ", ".join(esc(c["id"]) for c in cand) + '.</p>')
     out.append('</section>')
 
-# intersections — where two shapes co-occur across >=2 built cases (the web made literal)
+# intersections: where two shapes co-occur across >=2 built cases
 pair = collections.defaultdict(list)
 for c in cases:
     if c.get("status") != "encoded" or not c.get("scenario"):
@@ -82,23 +82,23 @@ inter = sorted([(p, cs) for p, cs in pair.items() if len(cs) >= 2], key=lambda x
 if inter:
     out.append('<section class="trope inter">')
     out.append('<h3>Where the shapes meet</h3>')
-    out.append('<p>The intersections — where two forms co-occur, the web made literal:</p>')
+    out.append('<p>Co-occurring structural shapes across multiple scenarios:</p>')
     out.append('<ul class="cases">')
     for (a, b), cs in inter:
-        out.append(f'<li><b>{esc(a)} × {esc(b)}</b> — ' + ", ".join(case_link(c["scenario"]) for c in cs) + '</li>')
+        out.append(f'<li><b>{esc(a)} × {esc(b)}</b>: ' + ", ".join(case_link(c["scenario"]) for c in cs) + '</li>')
     out.append('</ul>')
     out.append('</section>')
 
 # ---- The threats ----
 out.append('<h2>The threats</h2>')
-out.append("<p class=\"lede2\">The kernel's own vocabulary: fourteen enumerated ways power fails, named before the design was drawn (§2). Every stress-test carries the threats it exercises.</p>")
+out.append("<p class=\"lede2\">The kernel's framework: fourteen enumerated ways governance fails, identified prior to architecture design (§2). Every scenario tests specific threats.</p>")
 threat_scen = collections.defaultdict(list)
 for sid, s in scen.items():
     for t in s["threats"]:
         threat_scen[t].append(sid)
 for t in sorted(threat_scen, key=lambda x: int(x[1:])):
     out.append('<section class="trope">')
-    out.append(f'<h3>{esc(t)} — {esc(threat_name.get(t, ""))} <span style="color:var(--muted)">· {len(threat_scen[t])}</span></h3>')
+    out.append(f'<h3>{esc(t)}: {esc(threat_name.get(t, ""))} <span style="color:var(--muted)">· {len(threat_scen[t])}</span></h3>')
     out.append('<ul class="cases">')
     for sid in sorted(threat_scen[t]):
         out.append(f'<li>{case_link(sid)}</li>')
@@ -106,7 +106,7 @@ for t in sorted(threat_scen, key=lambda x: int(x[1:])):
     out.append('</section>')
 
 # live count line at the top, so the page never hardcodes a total that drifts
-out.insert(0, f'<p class="stat">{len(scen)} scenarios &middot; {len(SIGNATURES)} shapes &middot; {len(threat_scen)} threats in play &middot; nothing cherry-picked</p>')
+out.insert(0, f'<p class="stat">{len(scen)} scenarios &middot; {len(SIGNATURES)} shapes &middot; {len(threat_scen)} threats in play &middot; all cases included</p>')
 
 fragment = "\n".join(out)
 

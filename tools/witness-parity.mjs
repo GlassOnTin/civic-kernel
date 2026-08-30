@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Witness parity: the browser witness engine (witness.js, used by
-// witness.html) must be interchangeable with `clubvote.py witness` — same
+// witness.html) must be interchangeable with `clubvote.py witness`, same
 // card, same witness file, same co-signature, same refusals. A real agm
 // election runs with one CLI witness and one browser witness: the committee
 // must accept the browser witness's card at `agm new` and its co-signatures
@@ -38,14 +38,14 @@ const refuses = async (fn, wantRe) => {
 };
 
 if (!(await W.edSupported())) {
-  console.log("  FAIL this Node lacks WebCrypto Ed25519 — the witness engine cannot run");
+  console.log("  FAIL this Node lacks WebCrypto Ed25519, the witness engine cannot run");
   process.exit(1);
 }
 
 const tmp = mkdtempSync(path.join(tmpdir(), "witnessparity-"));
 const DIR = path.join(tmp, "agm"), PUB = path.join(DIR, "public");
 const W1 = path.join(tmp, "w-fed");     // clubvote.py witness
-const W2 = path.join(tmp, "w-meers");   // witness.js — the browser engine
+const W2 = path.join(tmp, "w-meers");   // witness.js, the browser engine
 const A1 = path.join(tmp, "a-star");
 const REG = path.join(tmp, "register");
 const T = i => path.join(tmp, "t" + i);
@@ -114,7 +114,7 @@ try {
   say(true, "witness-import accepted the browser co-signature next to the CLI one (head 2 published)");
 
   // --- enrolment and open: checkpoint 2 (size 4). The browser-written witness
-  // file is handed to the CLI IMPLEMENTATION this round — same file, same memory.
+  // file is handed to the CLI IMPLEMENTATION this round, same file, same memory.
   const voters = ["Asha Okonkwo", "Bill Feathers"].map(name => {
     const cred = Cast.newCredential();
     py([CLUBVOTE, "issuer", "certify", REG, name, cred.voter_pub]);
@@ -155,7 +155,7 @@ try {
 
   // --- THE defence, in the browser: the committee rewrites the question,
   // re-signs the entry AND a fresh head with the GENUINE log key. Every
-  // signature verifies; only the witness's memory objects — and it must.
+  // signature verifies; only the witness's memory objects, and it must.
   const rewritten = path.join(tmp, "rewritten-request.json");
   execFileSync("python3", ["-c", `
 import json, sys
@@ -202,7 +202,7 @@ Path(${JSON.stringify(rewritten)}).write_text(json.dumps(req))
   const done = py([CLUBVOTE, "agm", "witness-import", DIR, path.join(W1, "cosig-6.json"), c6]);
   say(/closing head/.test(done),
     "the browser witness co-signed the closing head, reading the memory the CLI last wrote");
-  say(loadState().last.size === 6, "its memory moved to size 6 — the file the page tells you to keep");
+  say(loadState().last.size === 6, "its memory moved to size 6, the file the page tells you to keep");
 
   // --- anchor, and the judge
   py([CLUBVOTE, "anchor", "lodge", A1, path.join(DIR, "anchor-request.json")]);
@@ -222,7 +222,7 @@ Path(${JSON.stringify(rewritten)}).write_text(json.dumps(req))
 }
 
 if (failures) {
-  console.log(failures + " witness-parity failure(s) — witness.js is not interchangeable with clubvote.py witness");
+  console.log(failures + " witness-parity failure(s), witness.js is not interchangeable with clubvote.py witness");
   process.exit(1);
 }
 console.log("witness parity: the browser witness and the Python witness are the same witness");

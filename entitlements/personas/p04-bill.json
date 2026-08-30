@@ -1,6 +1,6 @@
 {
-  "name": "Bill — single, savings one penny over £10,000",
-  "note": "The tariff boundary: reg 15(6)'s 'or part of £500' means one penny of excess counts as £1 a week — ceil, not floor.",
+  "name": "Bill: single, savings one penny over £10,000",
+  "note": "The tariff boundary: reg 15(6)'s 'or part of £500' means one penny of excess counts as £1 a week, ceil, not floor.",
   "as_of": "2026-07-12",
   "checked": "Arithmetic hand-worked against SPC Regs 2002 reg 15(6) ('£1 for any excess which is not a complete £500'), 2026-07-12.",
   "answers": {

@@ -1,6 +1,6 @@
 {
-  "name": "Priti — 67, cares for her husband, earns a penny over the limit",
-  "note": "The cliff edge: £204.01 of weekly earnings loses the whole allowance — no taper, no shortfall, nothing. The verdict names the cliff and the deductions worth checking before giving up. Her carer answer to Pension Credit is honestly no: over the limit there is no entitlement, underlying or otherwise.",
+  "name": "Priti: 67, cares for her husband, earns a penny over the limit",
+  "note": "The cliff edge: £204.01 of weekly earnings loses the whole allowance, no taper, no shortfall, nothing. The verdict names the cliff and the deductions worth checking before giving up. Her carer answer to Pension Credit is honestly no: over the limit there is no entitlement, underlying or otherwise.",
   "as_of": "2026-07-12",
   "checked": "Earnings limit (£204, cliff-edge, allowable deductions) against gov.uk/carers-allowance/eligibility, 2026-07-12.",
   "answers": {
@@ -45,7 +45,7 @@
     "carers-allowance": {
       "verdict": "not-eligible",
       "weekly": null,
-      "because": "Your earnings are over the £204 weekly limit — and it is a cliff edge: a penny over loses the whole allowance. Before giving up, check what counts: the test is after tax, National Insurance, half of any pension contributions, and some care costs while you work."
+      "because": "Your earnings are over the £204 weekly limit, and it is a cliff edge: a penny over loses the whole allowance. Before giving up, check what counts: the test is after tax, National Insurance, half of any pension contributions, and some care costs while you work."
     }
   }
 }
