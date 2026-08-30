@@ -1,0 +1,252 @@
+{
+  "v": "civic-kernel/entitlement-rules/v0",
+  "id": "carer-support-payment",
+  "title": "Carer Support Payment (Scotland)",
+  "jurisdiction": "Scotland (in England and Wales this is Carer's Allowance)",
+  "kind": "computable",
+  "effective": {
+    "tax_year": "2026-27",
+    "uprating": "The Carer's Assistance (Carer Support Payment) (Scotland) Regulations 2023 (S.S.I. 2023/302) and annual up-rating; earnings limit pegged to 16 hours at National Living Wage (16 × £12.75 = £204)",
+    "checked": "2026-07-12"
+  },
+  "plainly": "Scotland's replacement for Carer's Allowance: £86.45 a week for caring 35 hours or more for someone receiving a qualifying disability benefit. Entitlement also unlocks the twice-yearly Carer's Allowance Supplement in Scotland.",
+  "questions": [
+    {
+      "id": "dob",
+      "label": "Your date of birth",
+      "help": "Only used against the age condition; it never leaves this page.",
+      "type": "date",
+      "rule": "Carer's Assistance (Carer Support Payment) (Scotland) Regulations 2023 (S.S.I. 2023/302) reg 13: aged 16 or over",
+      "uri": "https://www.legislation.gov.uk/ssi/2023/302"
+    },
+    {
+      "id": "scotland",
+      "label": "Do you live in Scotland?",
+      "type": "bool",
+      "rule": "S.S.I. 2023/302 regs 5–12 (residence and presence in Scotland)",
+      "uri": "https://www.legislation.gov.uk/ssi/2023/302"
+    },
+    {
+      "id": "cares_35h",
+      "label": "Do you spend 35 hours or more a week caring for someone?",
+      "help": "Add up practical support including personal care, meals, medication, emotional support, and keeping them safe.",
+      "type": "bool",
+      "rule": "S.S.I. 2023/302 reg 14 (regular and substantial caring: 35 hours per week)",
+      "uri": "https://www.legislation.gov.uk/ssi/2023/302"
+    },
+    {
+      "id": "cared_for_gets_qualifying",
+      "label": "Does the person you care for get Attendance Allowance, PIP or ADP daily living, DLA care (middle or higher), Pension Age Disability Payment, or Child Disability Payment (middle or higher)?",
+      "help": "If they have not claimed a qualifying benefit yet, that claim comes first, as Carer Support Payment depends on it.",
+      "type": "bool",
+      "rule": "S.S.I. 2023/302 reg 4 (qualifying disability benefits)",
+      "uri": "https://www.legislation.gov.uk/ssi/2023/302"
+    },
+    {
+      "id": "own_earnings",
+      "label": "Your own weekly earnings, after tax, National Insurance and allowable expenses (not your partner's)",
+      "help": "Enter 0 if none. Allowable expenses such as 50% of pension contributions and certain childcare or replacement care costs can be deducted.",
+      "type": "money",
+      "rule": "S.S.I. 2023/302 reg 15 (the earnings limit: £204 for 2026–27)",
+      "uri": "https://www.mygov.scot/carer-support-payment/eligibility"
+    },
+    {
+      "id": "own_state_pension",
+      "label": "Your own weekly State Pension (not your partner's)",
+      "help": "The same figure as your State Pension if you are single; 0 if you do not receive one yet.",
+      "type": "money",
+      "rule": "Social Security (Overlapping Benefits) Regulations 1979 (S.I. 1979/597) and S.S.I. 2023/302: overlapping benefit rules apply to State Pension",
+      "uri": "https://www.legislation.gov.uk/uksi/1979/597"
+    }
+  ],
+  "values": [
+    {
+      "id": "csp_rate",
+      "plainly": "The Carer Support Payment rate (2026–27: £86.45 a week).",
+      "rule": "S.S.I. 2023/302 reg 19 (weekly rate), parity with Carer's Allowance",
+      "uri": "https://www.mygov.scot/carer-support-payment",
+      "expr": {
+        "num": 8645
+      }
+    },
+    {
+      "id": "csp_payable",
+      "plainly": "What would be paid directly: the standard rate less your own State Pension due to overlapping benefit rules.",
+      "rule": "S.I. 1979/597 reg 4 (overlapping benefits adjustment)",
+      "uri": "https://www.legislation.gov.uk/uksi/1979/597",
+      "expr": {
+        "max": [
+          {
+            "num": 0
+          },
+          {
+            "sub": [
+              {
+                "val": "csp_rate"
+              },
+              {
+                "get": "own_state_pension"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "gates": [
+    {
+      "when": {
+        "not": {
+          "get": "scotland"
+        }
+      },
+      "verdict": "signpost",
+      "because": "In England and Wales this benefit is Carer's Allowance, claimed from the Department for Work and Pensions.",
+      "rule": "Social Security Contributions and Benefits Act 1992 s.70",
+      "uri": "https://www.gov.uk/carers-allowance"
+    },
+    {
+      "when": {
+        "not": {
+          "age_at_least": {
+            "dob": {
+              "get": "dob"
+            },
+            "years": 16
+          }
+        }
+      },
+      "verdict": "not-eligible",
+      "because": "Carer Support Payment requires you to be aged 16 or over.",
+      "rule": "S.S.I. 2023/302 reg 13",
+      "uri": "https://www.legislation.gov.uk/ssi/2023/302"
+    }
+  ],
+  "verdicts": [
+    {
+      "when": {
+        "and": [
+          {
+            "get": "cares_35h"
+          },
+          {
+            "get": "cared_for_gets_qualifying"
+          },
+          {
+            "lte": [
+              {
+                "get": "own_earnings"
+              },
+              {
+                "num": 20400
+              }
+            ]
+          },
+          {
+            "gt": [
+              {
+                "val": "csp_payable"
+              },
+              {
+                "num": 0
+              }
+            ]
+          }
+        ]
+      },
+      "verdict": "appears-eligible",
+      "weekly": {
+        "val": "csp_payable"
+      },
+      "because": "The amount shown is payable weekly after offsetting your State Pension against the £86.45 standard rate. In Scotland, receiving Carer Support Payment on qualifying dates also qualifies you for the Carer's Allowance Supplement paid twice a year by Social Security Scotland.",
+      "rule": "S.S.I. 2023/302 regs 14, 15, and 19",
+      "uri": "https://www.mygov.scot/carer-support-payment"
+    },
+    {
+      "when": {
+        "and": [
+          {
+            "get": "cares_35h"
+          },
+          {
+            "get": "cared_for_gets_qualifying"
+          },
+          {
+            "lte": [
+              {
+                "get": "own_earnings"
+              },
+              {
+                "num": 20400
+              }
+            ]
+          }
+        ]
+      },
+      "verdict": "appears-eligible",
+      "because": "You meet all eligibility conditions. Although your State Pension equals or exceeds the £86.45 weekly rate so direct payments are zero, establishing underlying entitlement unlocks the £48.15 carer addition in Pension Credit and qualifies you for carer premiums in local council tax reduction.",
+      "rule": "S.I. 1979/597; S.S.I. 2023/302; State Pension Credit Act 2002 s.2(8)",
+      "uri": "https://www.mygov.scot/carer-support-payment/eligibility"
+    },
+    {
+      "when": {
+        "and": [
+          {
+            "get": "cares_35h"
+          },
+          {
+            "get": "cared_for_gets_qualifying"
+          }
+        ]
+      },
+      "verdict": "not-eligible",
+      "because": "Your weekly earnings exceed the £204 limit. Deductions for income tax, National Insurance, half of pension contributions, and necessary care costs while working can be subtracted before applying the test.",
+      "rule": "S.S.I. 2023/302 reg 15",
+      "uri": "https://www.mygov.scot/carer-support-payment/eligibility"
+    },
+    {
+      "when": {
+        "num": 1
+      },
+      "verdict": "not-eligible",
+      "because": "Carer Support Payment requires providing at least 35 hours of care per week to a person in receipt of a qualifying disability benefit.",
+      "rule": "S.S.I. 2023/302 reg 14",
+      "uri": "https://www.legislation.gov.uk/ssi/2023/302"
+    }
+  ],
+  "not_asked": [
+    "your name",
+    "your National Insurance number",
+    "the identity of the person you care for",
+    "your bank account details"
+  ],
+  "not_encoded": [
+    "Carer's Allowance Supplement exact payment dates and amounts (paid automatically in June and December to recipients on qualifying dates)",
+    "cross-border moves between Scotland and England/Wales (13-week transition run-on)",
+    "education conditions for young carers (unlike Carer's Allowance, Carer Support Payment allows certain students in full-time advanced education)",
+    "short breaks in care and hospital stays (up to 4 weeks in a 26-week period)",
+    "care-home accommodation rules"
+  ],
+  "passports": [
+    {
+      "name": "Pension Credit carer addition (£48.15 a week)",
+      "note": "Earned by having underlying entitlement to Carer Support Payment, whether or not direct weekly benefit is payable."
+    },
+    {
+      "name": "Carer's Allowance Supplement",
+      "note": "An extra payment made twice a year by the Scottish Government to people living in Scotland receiving Carer Support Payment."
+    }
+  ],
+  "sources_checked": [
+    {
+      "what": "Carer Support Payment regulations and rates for 2026-27; earnings threshold £204 per week",
+      "where": "legislation.gov.uk/ssi/2023/302 and mygov.scot/carer-support-payment",
+      "date": "2026-07-12"
+    },
+    {
+      "what": "Carer's Allowance Supplement entitlement criteria and interaction with devolved disability benefits",
+      "where": "mygov.scot/carers-allowance-supplement",
+      "date": "2026-07-12"
+    }
+  ]
+}

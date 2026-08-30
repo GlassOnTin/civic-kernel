@@ -754,6 +754,40 @@
       "remedy_caveat": false,
       "status": "out-of-scope",
       "scenario": null
+    },
+    {
+      "id": "social-housing-priority-banding-downgrade",
+      "harm": "Local housing authorities silently downgrade medical or homelessness priority bands on bidding registers during automated batch reviews, with no written reasons or contemporaneous log entry.",
+      "lead": "Local Government and Social Care Ombudsman public interest reports on housing allocation delays (Birmingham, Lambeth, Southwark, 2023-2025)",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": [
+        "inaction_no_artifact",
+        "access_gated",
+        "record_absent"
+      ],
+      "reach": 3,
+      "leverage": 3,
+      "remedy_caveat": false,
+      "status": "candidate",
+      "scenario": null
+    },
+    {
+      "id": "asylum-move-on-evictions",
+      "harm": "Recognized refugees face immediate eviction and destitute cliff-edges under the 28-day move-on notice rule due to absence of automated data transfer between Home Office status grant and local authority homelessness duties.",
+      "lead": "British Red Cross / Refugee Council, Keys to the City (2024); High Court judicial reviews on move-on notice period failures",
+      "scope": "onstage",
+      "offstage_reason": null,
+      "signature": [
+        "inaction_no_artifact",
+        "documentary_gate",
+        "record_absent"
+      ],
+      "reach": 2,
+      "leverage": 3,
+      "remedy_caveat": false,
+      "status": "candidate",
+      "scenario": null
     }
   ]
 }

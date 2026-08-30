@@ -82,7 +82,7 @@ def md(cases):
     out.append("\n### Recommended to encode next\n")
     out.append("The highest-leverage cases not yet built as scenarios:\n")
     for c in nexts:
-        out.append(f"- **{c['id']}** (score {score(c)}): {c['harm']}  \n  _Lead: {c['lead']}_")
+        out.append(f"- **{c['id']}** (score {score(c)}): {c['harm']}\n\n  _Lead: {c['lead']}_")
 
     if covered:
         out.append("\n### Closed as covered: already on the map\n")
