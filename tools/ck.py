@@ -88,6 +88,30 @@ def cmd_status(args):
     return 0
 
 
+def cmd_test(args):
+    cmds = [
+        ["python3", "tools/validate.py"],
+        ["python3", "tools/validate-corpus.py"],
+        ["python3", "tools/triage.py", "--check"],
+        ["node", "tools/verify-parity.mjs"],
+        ["node", "tools/cast-parity.mjs"],
+        ["node", "tools/collect-parity.mjs"],
+        ["node", "tools/witness-parity.mjs"],
+        ["node", "tools/owed-parity.mjs"],
+        ["node", "tools/agm-flow.mjs"],
+        ["proto/test.sh"],
+        ["proto/waist-boundary.sh"],
+    ]
+    for cmd in cmds:
+        print(f"==> Running {' '.join(cmd)}...")
+        res = subprocess.run(cmd, cwd=str(ROOT))
+        if res.returncode != 0:
+            print(f"FAIL: {' '.join(cmd)} exited with code {res.returncode}", file=sys.stderr)
+            return res.returncode
+    print("\nALL SUITES PASSED: Full parity, validation, and boundary verification successful.")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="Civic Kernel CLI Inspector")
     subparsers = parser.add_subparsers(dest="command")
@@ -109,6 +133,9 @@ def main():
     # status
     subparsers.add_parser("status", help="Show corpus and test statistics")
 
+    # test
+    subparsers.add_parser("test", help="Run full test suite (validation, parity, and proto tests)")
+
     args = parser.parse_args()
     if not args.command:
         parser.print_help()
@@ -122,6 +149,8 @@ def main():
         return cmd_triage(args)
     elif args.command == "status":
         return cmd_status(args)
+    elif args.command == "test":
+        return cmd_test(args)
     return 0
 
 

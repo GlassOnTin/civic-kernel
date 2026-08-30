@@ -2,8 +2,8 @@
 
 [![test](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml/badge.svg)](https://github.com/GlassOnTin/civic-kernel/actions/workflows/test.yml)
 
-> **Sixty-one documented institutional failures, Horizon, the deleted WhatsApps, the
-> carer prosecuted for a debt the state watched grow, and in fifty-two of them the
+> **Sixty-two documented institutional failures, Horizon, the deleted WhatsApps, the
+> carer prosecuted for a debt the state watched grow, and in fifty-three of them the
 > harm ran through a record: one that was quietly absent, quietly altered, or quietly
 > ignored.** The fix that repeats is not a new power or a new regulator. It is a record
 > of each act of power that **cannot be quietly absent**; it must exist at the moment
@@ -66,7 +66,7 @@ same project, from the source side.
   Democracy restated as an engineering problem, and the smallest honest answer to it.
   Every section opens as one plain line; expand for the full argument. Then watch
   [real life run against the protocol →](https://glassontin.github.io/civic-kernel/scenarios.html)
-, 61 stress-test stories, each machine-validated against the schemas.
+, 62 stress-test stories, each machine-validated against the schemas.
 
 Or run everything locally, the election, its verification, and twelve attempts to rig
 it, in about a minute: [`proto/test.sh`](proto/).
@@ -114,7 +114,7 @@ first real communities teach will revise it again.
 
 ## Next
 
-The outward build is finished. The corpus is 61 cases and seven recurring shapes; the
+The outward build is finished. The corpus is 62 cases and seven recurring shapes; the
 [map](https://glassontin.github.io/civic-kernel/map.html) states the one conclusion they
 reach, and [the order of repair](https://glassontin.github.io/civic-kernel/roadmap.html)
 sets out what it implies for UK law. The ways to act on it now exist, in the open:

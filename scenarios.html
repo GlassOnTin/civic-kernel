@@ -15781,6 +15781,225 @@
   ]
  },
  {
+  "id": "social-housing-priority-banding-downgrade",
+  "title": "The Disappearing Priority Band: Administrative Downgrades on Housing Registers",
+  "setting": "Khadija Al-Hassan and her two children have lived in temporary accommodation for four years following a no-fault eviction. Under her council's allocations scheme, she was placed in Priority Band 1 (Urgent Homelessness with Severe Medical Need), reflecting her daughter's chronic respiratory illness aggravated by damp temporary housing. Bidding each week on the council's choice-based lettings portal, she was consistently in the top three for local two-bedroom tenancies. Then, overnight, her portal position dropped to 140th: an automated data clean-up job downgraded her application to Band 3 (General Need) without a written notification, reasoned decision, or statutory review offer.\n\nIn the real system, local authorities under immense housing pressures conduct periodic batch re-assessments and automated purging of priority queues. Tens of thousands of vulnerable households discover priority downgrades only when bids fail. Because the downgrade occurs quietly as a database update rather than a formal decision letter, statutory review deadlines (Housing Act 1996 s.202) elapse before families know there is anything to challenge.\n\nOakhaven Housing Authority pilots a transparency log where every change in applicant banding, priority points, or queue status must be committed as a signed event citing the statutory medical assessment or housing review. This scenario follows Khadija's challenge to an automated batch downgrade, demonstrating how a verifiable log makes administrative rationing legible while acknowledging the unyielding physical limit: a protocol can guarantee fair queuing, but cannot build more homes.",
+  "threats": [
+   "T12",
+   "T8",
+   "T13"
+  ],
+  "doc_refs": [
+   "§8",
+   "§3.4",
+   "§1",
+   "§12",
+   "T12",
+   "T8",
+   "T13"
+  ],
+  "precedents": [
+   {
+    "event": "Housing Act 1996 Part VI, statutory reasonable preference and review rights",
+    "year": 1996,
+    "source": "Housing Act 1996 ss.166A, 202 (as amended by Localism Act 2011)",
+    "url": "https://www.legislation.gov.uk/ukpga/1996/52/part/VI",
+    "shows": "Local authorities must secure reasonable preference for homeless and medical-need applicants and provide written reasons and statutory review rights on adverse allocation decisions."
+   },
+   {
+    "event": "Local Government and Social Care Ombudsman housing allocation backlog and band-removal investigations",
+    "year": 2024,
+    "source": "Local Government and Social Care Ombudsman Public Interest Reports",
+    "url": "https://www.lgo.org.uk/information-centre/reports/investigation-reports",
+    "shows": "Ombudsman investigations into major urban councils revealed thousands of applicants silently stuck or downgraded during IT migrations and backlog clearances without required individual statutory notifications."
+   },
+   {
+    "event": "R (Nur) v Birmingham City Council, failure to maintain lawful allocation scheme records",
+    "year": 2023,
+    "source": "High Court of Justice (Administrative Court) [2023] EWHC 1801 (Admin)",
+    "url": "https://www.bailii.org/ew/cases/EWHC/Admin/2023/1801.html",
+    "shows": "The High Court found unlawful systemic administration where a council failed to operate its published allocation policy transparently, leaving applicants in severe housing need unable to track or enforce their rightful priority banding."
+   }
+  ],
+  "manifest": {
+   "v": "civic-kernel/manifest/v0",
+   "community": {
+    "id": "did:web:oakhaven-housing.example",
+    "name": "Oakhaven Housing Authority (Allocations Register Pilot)",
+    "parent": "did:web:oakhaven.example"
+   },
+   "services": {
+    "personhood": false,
+    "decisions": false,
+    "rights_guard": false,
+    "transparency_log": true
+   },
+   "transparency_log": {
+    "log_id": "did:web:oakhaven-housing.example",
+    "witnesses": [
+     "did:web:oakhaven-tenants-union.example",
+     "did:web:oakhaven-law-centre.example"
+    ],
+    "anchors": [
+     "opentimestamps:bitcoin-mainnet",
+     "eth:base-mainnet:0xC1v1cAnch0rRegistry"
+    ]
+   },
+   "interaction_cost": [
+    {
+     "process": "view-allocation-standing-and-history",
+     "steps": 1,
+     "fields": 0,
+     "median_seconds": 25,
+     "abandonment_rate": 0.01
+    }
+   ],
+   "sig": {
+    "key_id": "did:web:oakhaven-housing.example#manifest-1",
+    "alg": "ed25519",
+    "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+   }
+  },
+  "walkthrough": [
+   {
+    "actor": "Khadija Al-Hassan, and the silent queue downgrade",
+    "verb": "offstage",
+    "narrative": "Under traditional municipal housing databases, priority points and banding levels are internal database fields updated during routine administrative maintenance, data migrations, or automated review sweeps. When a family's priority band is removed or lowered without notice, no paper trail is delivered to the applicant; the discovery only occurs weeks or months later when portal bids fail to register near the top of shortlist queues. Because Housing Act 1996 section 202 review requests must strictly be lodged within twenty-one days of decision notification, silent administrative updates effectively extinguish the statutory right to review before the family realizes an adverse decision has been made."
+   },
+   {
+    "actor": "Oakhaven Housing Authority",
+    "verb": "cast",
+    "narrative": "Oakhaven commits its housing allocations register to an append-only transparency log. The authority establishes a strict operational invariant: every assignment of an applicant reference, allocation band, priority award, or re-assessment must be published as a signed log entry referencing the statutory criteria under Housing Act 1996 section 166A.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "decision.opened",
+     "community": "did:web:oakhaven-housing.example",
+     "timestamp": "2026-03-01T09:00:00Z",
+     "body": {
+      "decision_id": "2026-housing-allocation-scheme",
+      "title": "Oakhaven Housing Allocation Register Scheme 2026",
+      "rules": "Housing Act 1996 Part VI; Oakhaven Allocations Policy v4",
+      "provenance": {
+       "statute": "https://www.legislation.gov.uk/ukpga/1996/52/part/VI",
+       "policy": "https://oakhaven.example/housing-allocations-2026"
+      }
+     },
+     "sig": {
+      "key_id": "did:web:oakhaven-housing.example#log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+     }
+    }
+   },
+   {
+    "actor": "Khadija Al-Hassan",
+    "verb": "prove",
+    "narrative": "Khadija submits a medical assessment report from her daughter's NHS pediatric consultant certifying severe chronic asthma worsened by damp temporary accommodation, meeting the statutory threshold for medical priority under the published policy."
+   },
+   {
+    "actor": "Oakhaven Housing Authority",
+    "verb": "cast",
+    "narrative": "The medical assessment officer confirms Khadija's entitlement to Band 1 (Urgent Medical Priority). The authority logs the priority band assignment on the transparency log, providing Khadija with a cryptographic receipt that records the exact date, assessment citation, and awarded priority band.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-housing.priority-band",
+     "community": "did:web:oakhaven-housing.example",
+     "timestamp": "2026-03-15T14:30:00Z",
+     "body": {
+      "act_id": "alloc-rec-2026-88192",
+      "applicant_ref": "urn:pseudonym:app-88192",
+      "action": "priority-band-assigned",
+      "band": "Band-1-Urgent-Medical",
+      "statutory_basis": "Housing Act 1996 s.166A(3)(b) (medical and welfare grounds)",
+      "effective_date": "2026-03-15"
+     },
+     "sig": {
+      "key_id": "did:web:oakhaven-housing.example#log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+     }
+    }
+   },
+   {
+    "actor": "Oakhaven Automated Batch System",
+    "verb": "cast",
+    "narrative": "Six months later, an automated IT batch clean-up job reviews all open cases older than ninety days and attempts to downgrade applications without logged re-assessments to Band 3. Because the system is bound to the append-only log, it cannot alter Khadija's records in place; it must publish an explicit transition event stating the downgrade and triggering an immediate notification to the applicant and independent witnesses.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-housing.priority-band",
+     "community": "did:web:oakhaven-housing.example",
+     "timestamp": "2026-09-15T02:00:00Z",
+     "body": {
+      "act_id": "alloc-downgrade-2026-88192",
+      "applicant_ref": "urn:pseudonym:app-88192",
+      "action": "priority-band-modified",
+      "previous_band": "Band-1-Urgent-Medical",
+      "new_band": "Band-3-General-Need",
+      "trigger": "automated-batch-review",
+      "review_deadline": "2026-10-06T23:59:59Z"
+     },
+     "sig": {
+      "key_id": "did:web:oakhaven-housing.example#log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+     }
+    }
+   },
+   {
+    "actor": "Khadija Al-Hassan",
+    "verb": "challenge",
+    "narrative": "Khadija's client application detects the logged downgrade event on the transparency log and alerts her immediately, before the twenty-one-day statutory review window under Housing Act 1996 section 202 has elapsed. With support from the local law centre, she submits a formal challenge citing the verified medical evidence from the log and demanding reinstatement."
+   },
+   {
+    "actor": "Oakhaven Housing Authority",
+    "verb": "cast",
+    "narrative": "The senior housing manager reviews the case, identifies that the automated batch downgrade occurred without an updated clinical reassessment, and logs a corrective determination reinstating Khadija to Band 1 with full backdated queue priority.",
+    "artifact": {
+     "v": "civic-kernel/log-entry/v0",
+     "type": "x-housing.priority-band",
+     "community": "did:web:oakhaven-housing.example",
+     "timestamp": "2026-09-22T11:00:00Z",
+     "body": {
+      "act_id": "alloc-reinstate-2026-88192",
+      "applicant_ref": "urn:pseudonym:app-88192",
+      "action": "priority-band-reinstated",
+      "band": "Band-1-Urgent-Medical",
+      "reason": "Administrative review upheld: medical priority criteria sustained under Housing Act 1996 s.202 review",
+      "backdated_queue_date": "2026-03-15"
+     },
+     "sig": {
+      "key_id": "did:web:oakhaven-housing.example#log-1",
+      "alg": "ed25519",
+      "value": "UGxhY2Vob2xkZXJTaWdOb3RSZWFsQ3J5cHRv"
+     }
+    }
+   },
+   {
+    "actor": "Oakhaven Law Centre and Tenant Representatives",
+    "verb": "verify",
+    "narrative": "The law centre independently audits the public transparency log. By analyzing the published event chain without viewing private medical data, auditors verify that all batch modifications are visible, that unreasoned downgrades are flagged, and that queue positions are calculated from unalterable cryptographic commitments. The protocol successfully eliminates silent administrative attrition, though structural housing scarcity remains."
+   }
+  ],
+  "verdict": "strains",
+  "protection": "silent priority banding downgrade",
+  "protection_plain": "Every modification of applicant banding or housing queue standing must cite statutory grounds and be committed to an append-only log with contemporaneous written reasons.",
+  "verdict_plain": "An append-only log prevents silent automated downgrades and enforces review rights, but cannot manufacture social housing stock to eliminate structural waiting times.",
+  "findings": [
+   {
+    "protection": "silent administrative downgrade",
+    "severity": "note",
+    "observation": "An unreasoned batch update cannot be committed secretly when all status transitions require a cited rule and a signed log entry, protecting statutory review windows.",
+    "doc_ref": "§8"
+   },
+   {
+    "protection": "physical housing shortage",
+    "severity": "strain",
+    "observation": "The protocol guarantees that queue ordering and priority awards are incorruptible and auditable, but cannot solve the structural scarcity of available homes (refusal 11).",
+    "doc_ref": "§12"
+   }
+  ]
+ },
+ {
   "id": "stolen-phone",
   "title": "Snatched on Rua da Prata: The Strike Vote That Almost Went Ahead Without the Man Who Called It",
   "setting": "Tomás Ferreira, 31, has delivered food by e-bike in Lisbon for six years, the last three as a member of Cooperativa Pedal Livre, a 94-rider co-operative that contracts collectively with the delivery platforms. When the largest platform, Zip, cut the per-drop rate by 22 cents in June, it was Tomás who stood up at the Tuesday assembly in Arroios and demanded a strike ballot. The board agreed: a formal, verifiable vote of the whole membership, opening for casting on 29 June, closing 3 July, strike on the 8th if it carries. Two years earlier, at the co-op's enrolment ceremony, Tomás had tapped through a screen he barely read: choose three guardians in case you lose your phone. He picked his sister Marta, a nurse at Santa Maria hospital; Bruno Cardoso, his rep at the Sindicato dos Estafetas; and the Junta de Freguesia de Arroios, the municipal parish office. Any two of the three could help him recover. He never thought about it again.\n\nOn the evening of 22 June, waiting at a light on Rua da Prata with the phone in his hand, unlocked, the delivery app open, a kid on a scooter took it in one clean movement and was gone toward Terreiro do Paço. In that phone's secure enclave sits the private key behind Tomás's co-op credential: the thing that proves, without naming him, that he is one of the 94 people entitled to vote in the ballot he himself forced onto the agenda. Also in that phone: his banking app, a week of undelivered earnings, his photos. The ballot opens in seven days.\n\nThe stakes are not abstract. If Tomás cannot vote, the loudest voice for the strike is silent in its own ballot. If the thief can somehow vote as Tomás, a stranger holds a rider's voice in a decision about riders' wages. And Pedal Livre is exactly the kind of small, honest, mid-lattice community the Civic Kernel says it serves: physical enrolment at assemblies but no biometric deduplication, verifiable receipt-free ballots but no paper channel, a transparency log witnessed by the union, the co-op federation, and a university lab, and no rights guard at all, a subtraction its manifest declares in the open. What follows is seven days in which the protocol's social-recovery machinery is raced against a casting window, and wins, but only with luck, an emergency patch, and a union hardship fund the protocol knows nothing about.",
